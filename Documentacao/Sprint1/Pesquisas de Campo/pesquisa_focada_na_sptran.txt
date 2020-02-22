@@ -1,0 +1,116 @@
+# SPTRANS
+
+## Cenário
+
+A SPTrans é responsável [...] pelo atendimento por ônibus na cidade [..] onde são transportados, em média, 10 milhões de passageiros por dia, em uma frota que compreende 14.500 coletivos cadastrados, que percorrem, em dias úteis, 3 milhões de quilômetros, isso significa 74 voltas ao redor da terra. Esses ônibus realizam 200mil viagens programadas nos dias uteis e estão distribuídos em 1.300 linhas, sendo que 150 delas fazem parte do Noturno – Rede de ônibus da Madrugada, das 0 à 4h.
+
+Dados abaixo com referência de Setembro/19.
+
+Média de passageiros transportados em dia útil
+8.91 mil
+
+Total de passageiros transportados no mês
+219,24mil
+
+
+[Fonte: http://www.sptrans.com.br/sptrans]
+
+----------
+
+Em 2017 a quarta maior reclamação dos usuários foi o descumprimento de partida no ponto inicial/final.
+
+[Fonte: https://diariodotransporte.com.br/2018/02/19/sptrans-afirma-que-ampliacao-da-fiscalizacao-do-sistema-de-transporte-publico-em-2017-foi-eficaz/]
+
+[Fonte: https://www.prefeitura.sp.gov.br/cidade/secretarias/transportes/noticias/?p=250157]
+
+
+---
+
+
+* Terminal de Ônibus é a mesma coisa que ponto terminal?
+
+São equipamentos diferentes em estrutura, tamanho e objetivos. No setor de transporte coletivo o Ponto Terminal é definido como o local ou ponto de controle de onde começa ou termina o trajeto de uma determinada linha de ônibus. Os terminais de ônibus recebem várias linhas de ônibus e possui um ponto de controle para cada uma delas. 
+
+
+
+* Por que nos terminais de ônibus junto às estações do Metrô e da CPTM não tem a presença agentes de fiscalização da SPTrans?
+
+Estes terminais de ônibus são de responsabilidade do Metrô (Companhia do Metropolitano de São Paulo) e da CPTM (Companhia Paulista de Trens Metropolitanos), os técnicos da SPTrans não podem atuar nessas dependências. Entretanto, por intermédio da equipe de fiscalização e do Sistema Integrado de Monitoramento – SIM, a SPTrans acompanha a operação das linhas de ônibus municipais.
+
+* Existe fiscalização nos terminais de ônibus?
+
+Todos os serviços gerenciados pela SPTrans seguem padrões baseados nos conceitos de qualidade, eficiência e segurança. Nos terminais de ônibus, de responsabilidade da SPTrans, há fiscalização diária para garantir a operação do sistema conforme programação, o atendimento adequado por parte dos operadores e na prestação de serviço (como limpeza, administração, vigilância, infraestrutura). As informações sobre os terminais estão em: http://www.sptrans.com.br/terminais
+
+
+* Quantos agentes fiscalizadores a SPTrans possui?
+
+A SPTrans atua em toda a cidade durante 24 horas por dia e sete dias por semana e tem um quadro de mais de 880 técnicos para a fiscalização o sistema. Mas, além da presença dos técnicos em campo, a SPTrans possui modernos sistemas de controle para acompanhamento da frota, dos terminais e corredores. Temos, ainda, o Sistema Integrado de Monitoramento – SIM, ferramenta especialmente desenvolvida para monitorar todo o sistema de forma eletrônica.
+
+
+[Fonte: http://sptrans.com.br/perguntas-e-respostas/?sobre=fiscalizacao#29849]
+
+
+---
+
+Sobre o sistema Olho Vivo de monitoração por GPS 
+
+[https://www.prefeitura.sp.gov.br/cidade/secretarias/transportes/noticias/?p=8920]
+
+---
+
+Fonte: https://diariodotransporte.com.br/2014/12/17/auditoria-evidencia-mais-falhas-de-fiscalizacao-da-sptrans/
+
+
+---
+
+AVALIAÇÃO DO DESEMPENHO DOS SERVIÇOS DE TRANSPORTE
+
+Entre os indicadores do IQT está a pontualidade das partidas realizadas (IPP)
+
+IPP = (Quantidade de Partidas Pontuais monitoradas / total de partidas programadas) * 100
+
+Fonte de coleta desses dados: Sistema Integrado de Monitoramento, Centro de Operações - Orgão Gestor
+
+
+[Fonte: https://www.prefeitura.sp.gov.br/cidade/secretarias/transportes/institucional/sptrans/acesso_a_informacao/index.php?p=212432]
+
+----
+
+Perfil dos Usuários do Transporte Coletivo
+
+https://www.prefeitura.sp.gov.br/cidade/secretarias/transportes/institucional/sptrans/acesso_a_informacao/index.php?p=212432
+
+----
+
+[..] a SPTrans vai multar justamente os descumprimentos de viagens programadas. Cada partida que não sair no horário determinado em contrato ocasionará multa de R$ 80. “Tem hora que ele (operador da linha) demora 20 minutos para liberar uma saída. Para compensar (os veículos que não saíram), ele libera um monte de ônibus de uma vez para não levar multa”, explicou Tatto.
+
+
+[Fonte: https://www.tribunapr.com.br/noticias/brasil/prefeitura-vai-ampliar-fiscalizacao-de-onibus-em-sp/]
+
+---
+
+Empresas de ônibus de São Paulo não fizeram 2 milhões de viagens, diz tribunal
+
+O problema é citado em relatório do TCM (Tribunal de Contas do Município) após auditoria em 2018.
+
+Nas contas do órgão fiscalizador, isso corresponde a 38,6 milhões de km que deixaram de ser operados pelas empresas, somente em dias úteis no período.
+
+Segundo a SPTrans, que gerencia o transporte por ônibus na capital, são feitas 200 mil viagens diárias na cidade. Ou seja, o número apontado pelo TCM equivale a dez dias de todos os embarques em São paulo.
+
+O prejuízo aos cofres da Prefeitura, gestão Bruno Covas (PSDB), que subsidia parte das passagens, chega a R$ 145 milhões.
+
+[Fonte: https://agora.folha.uol.com.br/sao-paulo/2019/07/empresas-de-onibus-nao-fizeram-2-milhoes-de-viagens-diz-tcm.shtml]
+
+---
+
+Funções do fiscal 
+(Vaga de emprego no infojobs)
+
+
+    Atividades: Acompanhar o andamento das linhas junto ao cliente, fiscalizar os horários de chegada e saídas dos ônibus, coordenar o embarque dos passageiros; vistoria em todos os veículos que entram e saem da empresa, identificando se existe avaria (raladas, batidas, algo quebrado) e elaborando relatórios.
+    Experiência com controle de ônibus e motoristas em empresas de fretamento ou turismo;
+    Saiba trabalhar sobre pressão, pessoa calma e paciente para lidar com situações de confronto, comunicativa, e com boa escrita.
+
+
+[Fonte: https://www.infojobs.com.br/vaga-de-fiscal-linha-vistoriador-jaragua-zona-oeste-em-sao-paulo__6679102.aspx]
+
