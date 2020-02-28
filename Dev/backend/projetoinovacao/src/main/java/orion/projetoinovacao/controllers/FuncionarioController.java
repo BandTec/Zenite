@@ -23,8 +23,12 @@ public class FuncionarioController {
 
 
     @PostMapping("/cadastro")
-    public ResponseEntity cadastrar(@Valid @RequestBody Funcionario funcionario) {
-
+    public ResponseEntity cadastrar(/*@Valid*/ @RequestBody Funcionario funcionario) {
+        if(funcionario.getEmail() == null || funcionario.getName() == null || funcionario.getPassword() == null){
+            return new ResponseEntity(
+                    new ApiResponse(false, "Please send all the parameters."),
+                    HttpStatus.BAD_REQUEST);
+        }
         Boolean userExists = repository.existsByEmail(funcionario.getEmail());
         if(userExists) {
             return new ResponseEntity(
