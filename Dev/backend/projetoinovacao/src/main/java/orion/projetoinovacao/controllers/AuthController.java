@@ -26,7 +26,7 @@ public class AuthController {
 
         if (loginRequest.getEmail() == null || loginRequest.getPassword() == null) {
             return new ResponseEntity(
-                    new ApiResponse(false,"Preencha o email e a senha"),
+                    new ApiResponse(false,"Send all the parameters, email and password."),
                     HttpStatus.BAD_REQUEST);
         }
 
@@ -34,7 +34,7 @@ public class AuthController {
 
         if(usuario == null) {
             return new ResponseEntity(
-                    new ApiResponse(false, "Credencias inválidas"),
+                    new ApiResponse(false, "Invalid email or password"),
                     HttpStatus.OK);
         }
 
@@ -49,7 +49,7 @@ public class AuthController {
     public ResponseEntity logout(){
 
         return new ResponseEntity(
-                new ApiResponse(true, "Request Completed"),
+                new ApiResponse(true, "Logout Completed"),
                 HttpStatus.OK);
     }
 
