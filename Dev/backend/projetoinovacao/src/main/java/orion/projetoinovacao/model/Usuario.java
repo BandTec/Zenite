@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Funcionario {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +22,11 @@ public class Funcionario {
     @Email
     private String email;
 
-    public Funcionario() {}
+    public Usuario() {}
 
-    public Funcionario(@NotBlank String name,
-                       @NotBlank String password,
-                       @NotBlank @Email String email) {
+    public Usuario(@NotBlank String name,
+                   @NotBlank String password,
+                   @NotBlank @Email String email) {
         this.id = id;
         this.name = name;
         this.password = password;

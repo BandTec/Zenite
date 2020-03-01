@@ -1,7 +1,5 @@
 package orion.projetoinovacao.payload;
 
-import orion.projetoinovacao.model.Funcionario;
-
 public class ApiResponse {
     private Boolean sucess;
     private String message;

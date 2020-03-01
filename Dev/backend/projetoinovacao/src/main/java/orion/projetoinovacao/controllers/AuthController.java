@@ -2,28 +2,22 @@ package orion.projetoinovacao.controllers;
 
 //import io.jsonwebtoken.Jwts;
 //import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import orion.projetoinovacao.model.Funcionario;
+import orion.projetoinovacao.model.Usuario;
 import orion.projetoinovacao.payload.ApiResponse;
 import orion.projetoinovacao.payload.LoginRequest;
-import orion.projetoinovacao.repository.FuncionarioRepository;
+import orion.projetoinovacao.repository.UsuarioRepository;
 import orion.projetoinovacao.security.AuthJwt;
-
-import javax.servlet.ServletException;
-import javax.validation.Valid;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
-    FuncionarioRepository funcionarioRepository;
+    UsuarioRepository usuarioRepository;
 
     private AuthJwt jwt = new AuthJwt();
 
@@ -36,16 +30,11 @@ public class AuthController {
                     HttpStatus.BAD_REQUEST);
         }
 
-        Funcionario funcionario = funcionarioRepository.findByEmail(loginRequest.getEmail());
-        if(funcionario == null) {
-            return new ResponseEntity(
-                    new ApiResponse(false, "Credencias não encontradas"),
-                    HttpStatus.OK);
-        }
+        Usuario usuario = usuarioRepository.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
 
-        if(!loginRequest.getPassword().equals(funcionario.getPassword())){
+        if(usuario == null) {
             return new ResponseEntity(
-                    new ApiResponse(false, "Credencias inválidas."),
+                    new ApiResponse(false, "Credencias inválidas"),
                     HttpStatus.OK);
         }
 
