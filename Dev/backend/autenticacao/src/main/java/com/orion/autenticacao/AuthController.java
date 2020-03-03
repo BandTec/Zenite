@@ -2,9 +2,11 @@ package com.orion.autenticacao;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/autenticacao")
 public class AuthController {
 
         Usuario user = new Usuario("raissa123", "123456", "Raissa", false);

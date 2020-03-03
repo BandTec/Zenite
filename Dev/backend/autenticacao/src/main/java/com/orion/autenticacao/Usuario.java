@@ -6,6 +6,13 @@ public class Usuario {
     private String senha, nome;
     private boolean isLogged;
 
+    public Usuario(String login, String senha, String nome, boolean isLogged) {
+        this.login = login;
+        this.senha = senha;
+        this.nome = nome;
+        this.isLogged = isLogged;
+    }
+
     @Override
     public String toString() {
         return "com.example.demo.Usuario: " +
@@ -49,12 +56,5 @@ public class Usuario {
         return isLogged;
     }
 
-    public Usuario(String login, String senha, String nome, boolean isLogged) {
-        this.login = login;
-        this.senha = senha;
-        this.nome = nome;
-        this.isLogged = isLogged;
 
-
-    }
 }

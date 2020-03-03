@@ -12,12 +12,17 @@ import orion.projetoinovacao.payload.LoginRequest;
 import orion.projetoinovacao.repository.UsuarioRepository;
 import orion.projetoinovacao.security.AuthJwt;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
-    UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
+
+    private boolean isLooged;
 
     private AuthJwt jwt = new AuthJwt();
 
@@ -39,7 +44,7 @@ public class AuthController {
         }
 
         String jwtToken = jwt.createToken(loginRequest.getEmail());
-
+        isLooged = true;
         return new ResponseEntity(
                 new ApiResponse(true, "Bearer " + jwtToken),
                 HttpStatus.OK);
@@ -47,10 +52,16 @@ public class AuthController {
 
     @GetMapping("/logout")
     public ResponseEntity logout(){
-
-        return new ResponseEntity(
-                new ApiResponse(true, "Logout Completed"),
-                HttpStatus.OK);
+        if(isLooged) {
+            isLooged = false;
+            return new ResponseEntity(
+                    new ApiResponse(true, "Logout completado!"),
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity(
+                    new ApiResponse(false, "Usuário não estava Logado"),
+                    HttpStatus.OK);
+        }
     }
 
 
