@@ -47,5 +47,13 @@ public abstract class Conta {
         return isLogged;
     }
 
+    public boolean logar(String email, String senha) {
+        if(this.senha.equals(senha) && this.email.equals(email)){
+            setLogged(true);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

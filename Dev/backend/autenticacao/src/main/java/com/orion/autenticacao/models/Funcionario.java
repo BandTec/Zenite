@@ -2,7 +2,7 @@ package com.orion.autenticacao.models;
 
 import java.util.Date;
 
-public class Funcionario extends Conta {
+public abstract class Funcionario extends Conta {
 
     private int id;
     private String nome;
@@ -11,15 +11,17 @@ public class Funcionario extends Conta {
     private String ddd;
     private String numeroTelefone;
     private Endereco endereco;
-    private Cargo cargo;
 
 
-    public Funcionario(String senha, String email,
-                       boolean isLogged, Endereco endereco,
-                       Cargo cargo) {
+    public Funcionario(String senha, String email, boolean isLogged, int id, String nome, String cpf, String dataNascimento, String ddd, String numeroTelefone, Endereco endereco) {
         super(senha, email, isLogged);
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.ddd = ddd;
+        this.numeroTelefone = numeroTelefone;
         this.endereco = endereco;
-        this.cargo = cargo;
     }
 
     public int getId() {
@@ -76,13 +78,5 @@ public class Funcionario extends Conta {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
-    }
-
-    public Cargo getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(Cargo cargo) {
-        this.cargo = cargo;
     }
 }
