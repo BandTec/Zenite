@@ -1,0 +1,23 @@
+https://spring.io/guides/gs/accessing-data-jpa/
+
+https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.2.4.RELEASE&packaging=jar&jvmVersion=1.8&groupId=orion&artifactId=projetoinovacao&name=projetoinovacao&description=Projeto%20de%20automatiza%C3%A7%C3%A3o%20da%20fiscaliza%C3%A7%C3%A3o%20do%20transporte%20p%C3%BAblico&packageName=orion.projetoinovacao&dependencies=web,devtools,security,sqlserver,data-jpa
+
+https://github.com/callicoder/spring-security-react-ant-design-polls-app
+
+https://www.callicoder.com/spring-boot-spring-security-jwt-mysql-react-app-part-2/
+
+--
+
+https://www.baeldung.com/spring-boot-bean-validation
+
+
+https://spring.io/guides/gs/securing-web/
+
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference
+
+---
+
+DIAGRAMAS 
+==> https://www.javainuse.com/spring/boot-jwt
+
+~~> https://aboullaite.me/spring-boot-token-authentication-using-jwt/
