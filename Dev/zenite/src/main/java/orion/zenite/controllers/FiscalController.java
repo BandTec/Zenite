@@ -13,10 +13,7 @@ public class FiscalController {
 
     @GetMapping("testandojwt")
     public String testar(ServletRequest req) {
-
         HttpServletRequest request = (HttpServletRequest) req;
-        String email = request.getAttribute("email").toString();
-
-        return email;
+        return request.getAttribute("email").toString();
     }
 }
