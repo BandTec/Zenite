@@ -17,7 +17,7 @@ import orion.zenite.security.AuthJwt;
  */
 @RestController
 @RequestMapping("/autentica")
-public class AutentificacaoController {
+public class AutenticacaoController {
 
     // Classe que gera JWToken
     private AuthJwt jwt = new AuthJwt();
