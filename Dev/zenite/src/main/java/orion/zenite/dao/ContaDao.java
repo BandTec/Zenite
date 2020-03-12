@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import orion.zenite.mappers.ContaMapper;
 import orion.zenite.models.Conta;
+import orion.zenite.models.Nivel;
 import orion.zenite.payload.LoginRequest;
 
 import java.util.List;
@@ -45,6 +46,27 @@ public class ContaDao {
             );
 
             return conta;
+        }  catch (Exception e){
+            System.out.println("Erro: " + e.getMessage());
+            return null;
+        }
+    }
+
+    // getNivel
+    public Nivel buscarNivelPorEmail(String email) {
+        try {
+            this.consulta = "SELECT c.*, n.descricao " +
+                    "FROM tblConta as c inner join tblNivel as n " +
+                    "on n.idNivel = c.fkNivel " +
+                    "WHERE email = ?";
+
+            Conta conta = jdbcTemplate.queryForObject(
+                    consulta,
+                    new ContaMapper(),
+                    email
+            );
+
+            return conta.getNivel();
         }  catch (Exception e){
             System.out.println("Erro: " + e.getMessage());
             return null;
@@ -121,7 +143,6 @@ public class ContaDao {
             return false;
         }
     }
-
 
     public boolean alterar(Conta conta) {
         try {

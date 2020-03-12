@@ -39,9 +39,14 @@ public class FiscalController {
         HttpServletRequest request = (HttpServletRequest) req;
 
         String email = request.getAttribute("email").toString();
-        boolean existe = contaBD.verificarSeExistePorEmail(email);
+        Nivel existe = contaBD.buscarNivelPorEmail(email);
 
-        if (existe) {
+        if (existe == null || existe != Nivel.GERENTE) {
+            return new ResponseEntity<>(
+                    new ApiResponse(false, "Não autorizado, verifique sua credenciais/nível."),
+                    HttpStatus.UNAUTHORIZED);
+        } else {
+
             Fiscal novoFiscal = fiscal;
             Conta novaConta = new Conta();
             novaConta.setSenha(novoFiscal.getSenha());
@@ -66,10 +71,6 @@ public class FiscalController {
                         new ApiResponse(false, "Erro no cadastro do funcionario", novoFiscal),
                         HttpStatus.OK);
             }
-        } else {
-            return new ResponseEntity<>(
-                    new ApiResponse(false, "Não autorizado, verifique sua credenciais/nível."),
-                    HttpStatus.UNAUTHORIZED);
         }
     }
 
