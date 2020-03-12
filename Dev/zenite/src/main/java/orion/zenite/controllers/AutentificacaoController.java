@@ -4,102 +4,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.dao.UsuarioDao;
-import orion.zenite.models.Usuario;
+import orion.zenite.dao.ContaDao;
+import orion.zenite.models.Conta;
+import orion.zenite.models.Nivel;
 import orion.zenite.payload.ApiResponse;
+import orion.zenite.payload.CadastroRequest;
 import orion.zenite.payload.LoginRequest;
 import orion.zenite.security.AuthJwt;
 
+import javax.validation.Valid;
 import java.util.List;
 
+
+/*
+    * Essa rota não é protegida pelo JWToken
+ */
 @RestController
-@RequestMapping("/autentificacao")
+@RequestMapping("/autentica")
 public class AutentificacaoController {
 
+    // Classe que gera JWToken
     private AuthJwt jwt = new AuthJwt();
 
+    // Classe que realiza consulta no banco de dados
     @Autowired
-    private UsuarioDao usuarioBD = new UsuarioDao();
-
-    @GetMapping("/usuario")
-    public ResponseEntity<?> getAll(){
-        List<Usuario> usuarios = usuarioBD.buscarTodos();
-
-        if(usuarios != null) {
-            return new ResponseEntity<>(
-                    new ApiResponse(true, "uau", usuarios),
-                    HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(
-                    new ApiResponse(false, "Invalid email or password"),
-                    HttpStatus.OK);
-        }
-    }
-
-    @GetMapping("/usuario/{id}")
-    public ResponseEntity<?> getById(@PathVariable("id") int id){
-        Usuario usuario = usuarioBD.buscarPorId(id);
-
-        if(usuario != null) {
-            return new ResponseEntity<>(
-                    new ApiResponse(true, "uau uau", usuario),
-                    HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(
-                    new ApiResponse(false, "Invalid email or password"),
-                    HttpStatus.OK);
-        }
-    }
-
-    @PostMapping("/usuario")
-    public ResponseEntity<?> inserir(@RequestBody Usuario usuario){
-        usuarioBD.inserir(usuario);
-
-        if(usuario != null) {
-            return new ResponseEntity<>(
-                    new ApiResponse(true, "inserido", usuario),
-                    HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(
-                    new ApiResponse(false, "Invalid email or password"),
-                    HttpStatus.OK);
-        }
-    }
-
-    @PutMapping("/usuario")
-    public ResponseEntity<?> alterar(@RequestBody Usuario usuario){
-        usuarioBD.alterar(usuario);
-
-        return new ResponseEntity<>(
-                new ApiResponse(true, "alterado"),
-                HttpStatus.OK);
-    }
-
-    @DeleteMapping("/usuario/{id}")
-    public ResponseEntity<?> deletar(@PathVariable("id") int id){
-        usuarioBD.deletar(id);
-
-
-         return new ResponseEntity<>(
-            new ApiResponse(true, "deletado"),
-            HttpStatus.OK);
-    }
+    private ContaDao contaBD = new ContaDao();
 
 
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
 
-        if (loginRequest.getEmail() == null || loginRequest.getPassword() == null) {
+        if (loginRequest.getEmail() == null || loginRequest.getSenha() == null) {
             return new ResponseEntity<>(
-                    new ApiResponse(false, "Send all the parameters, email and password."),
+                    new ApiResponse(false, "Necessário os parâmetros email e senha."),
                     HttpStatus.BAD_REQUEST);
         }
 
-        Usuario usuario = usuarioBD.buscarPorEmailSenha(loginRequest);
+        Conta usuario = contaBD.buscarPorEmailSenha(loginRequest);
 
         if(usuario == null) {
             return new ResponseEntity<>(
-                    new ApiResponse(false, "Invalid email or password"),
+                    new ApiResponse(false, "Email ou/e senha inválidos"),
                     HttpStatus.OK);
         }
 
@@ -108,4 +53,29 @@ public class AutentificacaoController {
                 new ApiResponse(true, "Bearer " + jwtToken),
                 HttpStatus.OK);
     }
+
+
+
+    @PostMapping("teste-cadastro-conta")
+    public ResponseEntity<?> testeCadastroConta(@RequestBody CadastroRequest conta) {
+
+        Nivel n = Nivel.escolherPorId(conta.getIdNivel());
+        Conta novaConta = new Conta();
+        novaConta.setSenha(conta.getSenha());
+        novaConta.setEmail(conta.getEmail());
+        novaConta.setNivel(n);
+
+        boolean resultado = contaBD.inserir(novaConta);
+        if(resultado) {
+            return new ResponseEntity<>(
+                    new ApiResponse(true, "Teste"),
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(
+                    new ApiResponse(false, "Erro ao inserir no banco", novaConta),
+                    HttpStatus.OK);
+        }
+    }
+
+
 }

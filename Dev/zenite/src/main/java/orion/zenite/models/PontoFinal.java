@@ -5,6 +5,8 @@ public class PontoFinal {
     private int id;
     private String nome;
 
+    public PontoFinal() {};
+
     public PontoFinal(int id, String nome) {
         this.id = id;
         this.nome = nome;
@@ -28,5 +30,13 @@ public class PontoFinal {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "PontoFinal{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                '}';
     }
 }

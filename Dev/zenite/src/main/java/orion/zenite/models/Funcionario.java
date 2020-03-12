@@ -11,7 +11,9 @@ public abstract class Funcionario extends Conta {
     private String numeroTelefone;
     private Endereco endereco;
 
-    public Funcionario(int id, String senha, String email, Nivel nivel, String nome, String cpf, String dataNascimento, String numeroTelefone, Endereco endereco) {
+    public Funcionario() {};
+
+    public Funcionario(int id, String senha, String email, String nivel, String nome, String cpf, String dataNascimento, String numeroTelefone, Endereco endereco) {
         super(senha, email, nivel);
         this.id = id;
         this.nome = nome;
@@ -21,7 +23,7 @@ public abstract class Funcionario extends Conta {
         this.endereco = endereco;
     }
 
-    public Funcionario(String senha, String email, Nivel nivel, String nome, String cpf, String dataNascimento, String numeroTelefone, Endereco endereco) {
+    public Funcionario(String senha, String email, String nivel, String nome, String cpf, String dataNascimento, String numeroTelefone, Endereco endereco) {
         super(senha, email, nivel);
         this.nome = nome;
         this.cpf = cpf;
@@ -76,5 +78,17 @@ public abstract class Funcionario extends Conta {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", dataNascimento='" + dataNascimento + '\'' +
+                ", numeroTelefone='" + numeroTelefone + '\'' +
+                ", endereco=" + endereco +
+                '}';
     }
 }

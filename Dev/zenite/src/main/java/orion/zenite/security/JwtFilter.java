@@ -16,6 +16,17 @@ import io.jsonwebtoken.SignatureException;
 
 public class JwtFilter extends GenericFilterBean {
 
+    /*
+     * Método que intercepta as requisições das rotas
+     * o método verifica se está sendo mandado o header de autenticação
+     * e se esse está mandando o token no formato certo e no tipo certo
+     * se o token for válido ele é decodificado utilizando o jwtSecret
+     * que está no arquivo:
+     *                        ~/main/resources/application.properties
+     * com o token decodificado o email do usuário é adicionado a requisição
+     * como um atributo que pode ser acessado nos métodos do Controller
+     * usando o nome do atributo que é email (em minúsculo).
+     */
     public void doFilter(final ServletRequest req, final ServletResponse res, final FilterChain chain)
             throws IOException, ServletException {
 
@@ -47,6 +58,7 @@ public class JwtFilter extends GenericFilterBean {
             }
 
             try {
+                // DECODIFICAÇÃO DO TOKEN
                 final Claims tokenOpen = Jwts.parser()
                         .setSigningKey("jwtSecret")
                         .parseClaimsJws(jwtTokenParts[1])
@@ -54,7 +66,9 @@ public class JwtFilter extends GenericFilterBean {
 
                 String email = tokenOpen.getSubject();
 
+                // ADICIONANDO ATRIBUTO A REQUISIÇÃO
                 request.setAttribute("email", email);
+
             } catch (final SignatureException e) {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,"Invalid token");
                 return ;

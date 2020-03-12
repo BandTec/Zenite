@@ -1,16 +1,22 @@
 package orion.zenite.payload;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 
-/*
-    * Classe usada para ser o padrão do corpo da requisição da rota /autentica/login
- */
-public class LoginRequest {
+public class CadastroRequest {
 
     private String email;
 
     private String senha;
+
+    private int idNivel;
+
+    public int getIdNivel() {
+        return idNivel;
+    }
+
+    public void setIdNivel(int idNivel) {
+        this.idNivel = idNivel;
+    }
 
     public String getEmail() {
         return email;
@@ -24,15 +30,16 @@ public class LoginRequest {
         return senha;
     }
 
-    public void setPassword(String senha) {
+    public void setSenha(String senha) {
         this.senha = senha;
     }
 
     @Override
     public String toString() {
-        return "LoginRequest{" +
+        return "CadastroRequest{" +
                 "email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
+                ", idNivel=" + idNivel +
                 '}';
     }
 }

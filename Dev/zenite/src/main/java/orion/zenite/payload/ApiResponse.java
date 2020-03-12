@@ -1,5 +1,13 @@
 package orion.zenite.payload;
 
+/*
+    * Classe utilizada para retornar ao usuário da api
+    * o resultado de sua requisição, mandar uma mensagem explicativa
+    * um campo booleano, e for o caso um objeto com os dados requisitados.
+    *
+    * Como a classe Object é classe mãe de todas as classes no Java pode ser
+    * adicionado então qualquer uma das classes da pasta /models
+ */
 public class ApiResponse {
     private Boolean sucess;
     private String message;

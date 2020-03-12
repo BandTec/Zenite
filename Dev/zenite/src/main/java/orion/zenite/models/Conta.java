@@ -1,33 +1,36 @@
 package orion.zenite.models;
 
-public abstract class Conta {
+public class Conta {
 
     private int id;
     private String senha;
     private String email;
     private Nivel nivel;
 
-    public Conta(String senha, String email, Nivel nivel) {
+    public Conta() { } ;
+
+    public Conta(String senha, String email, String nivel) {
         this.senha = senha;
         this.email = email;
-        this.nivel = nivel;
+        this.nivel = Nivel.valueOf(nivel.toUpperCase());
     }
 
-    public Conta(int id, String senha, String email, Nivel nivel) {
+    public Conta(int id, String senha, String email, String nivel) {
         this.id = id;
         this.senha = senha;
         this.email = email;
-        this.nivel = nivel;
+        this.nivel = Nivel.valueOf(nivel.toUpperCase());
     }
 
     @Override
     public String toString() {
-        return "Usuario: " +
-                "senha='" + senha + '\'' +
-                ", email='" + email +
+        return "Conta{" +
+                "id=" + id +
+                ", senha='" + senha + '\'' +
+                ", email='" + email + '\'' +
+                ", nivel=" + nivel +
                 '}';
     }
-
 
     public void setSenha(String senha) {
         this.senha = senha;

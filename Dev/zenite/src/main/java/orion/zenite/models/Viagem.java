@@ -17,10 +17,14 @@ public class Viagem {
     private Motorista motorista;
     private Fiscal fiscal;
 
+    // Qual o tipo ??
     // private ? horaSaida;
     // private ? horaCheagada;
+
     private int qtdPassageiros;
 
+    // construtor
 
+    // getters e setters
 
 }

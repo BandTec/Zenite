@@ -4,12 +4,14 @@ public class Fiscal extends Funcionario {
     private String registroFiscal;
     private Dispositivo dispositivo;
 
-    public Fiscal(int id, String senha, String email, Nivel nivel, String nome, String cpf, String dataNascimento, String numeroTelefone, Endereco endereco, String registroFiscal) {
+    public Fiscal() { super(); };
+
+    public Fiscal(int id, String senha, String email, String nivel, String nome, String cpf, String dataNascimento, String numeroTelefone, Endereco endereco, String registroFiscal) {
         super(id, senha, email, nivel, nome, cpf, dataNascimento, numeroTelefone, endereco);
         this.registroFiscal = registroFiscal;
     }
 
-    public Fiscal(String senha, String email, Nivel nivel, String nome, String cpf, String dataNascimento, String numeroTelefone, Endereco endereco, String registroFiscal) {
+    public Fiscal(String senha, String email, String nivel, String nome, String cpf, String dataNascimento, String numeroTelefone, Endereco endereco, String registroFiscal) {
         super(senha, email, nivel, nome, cpf, dataNascimento, numeroTelefone, endereco);
         this.registroFiscal = registroFiscal;
     }
@@ -28,5 +30,13 @@ public class Fiscal extends Funcionario {
 
     public void setDispositivo(Dispositivo dispositivo) {
         this.dispositivo = dispositivo;
+    }
+
+    @Override
+    public String toString() {
+        return "Fiscal{" +
+                "registroFiscal='" + registroFiscal + '\'' +
+                ", dispositivo=" + dispositivo +
+                '}';
     }
 }

@@ -6,6 +6,8 @@ public class Dispositivo {
     private String codigo;
     private TipoDispositivo tipoDispositivo;
 
+    public Dispositivo() {};
+
     public Dispositivo(int id, String codigo, TipoDispositivo tipoDispositivo) {
         this.id = id;
         this.codigo = codigo;
@@ -39,5 +41,14 @@ public class Dispositivo {
 
     public void setTipoDispositivo(TipoDispositivo tipoDispositivo) {
         this.tipoDispositivo = tipoDispositivo;
+    }
+
+    @Override
+    public String toString() {
+        return "Dispositivo{" +
+                "id=" + id +
+                ", codigo='" + codigo + '\'' +
+                ", tipoDispositivo=" + tipoDispositivo +
+                '}';
     }
 }

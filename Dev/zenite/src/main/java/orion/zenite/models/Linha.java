@@ -8,6 +8,8 @@ public class Linha {
     private PontoFinal pontoIda;
     private PontoFinal pontoVolta;
 
+    public Linha() {};
+
     public Linha(int id, String numero, PontoFinal pontoIda, PontoFinal pontoVolta) {
         this.id = id;
         this.numero = numero;

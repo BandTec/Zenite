@@ -6,12 +6,14 @@ public class Carro {
     private String numero;
     private Linha Linha;
 
+    public Carro() { }
+
     public Carro(String numero, Linha linha) {
         this.numero = numero;
         Linha = linha;
     }
 
-    public Carro(int id, String numero, orion.zenite.models.Linha linha) {
+    public Carro(int id, String numero, Linha linha) {
         this.id = id;
         this.numero = numero;
         Linha = linha;
@@ -39,5 +41,14 @@ public class Carro {
 
     public void setLinha(Linha linha) {
         Linha = linha;
+    }
+
+    @Override
+    public String toString() {
+        return "Carro{" +
+                "id=" + id +
+                ", numero='" + numero + '\'' +
+                ", Linha=" + Linha +
+                '}';
     }
 }
