@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import orion.zenite.dao.ContaDao;
 import orion.zenite.dao.EnderecoDao;
-import orion.zenite.models.Endereco;
+import orion.zenite.models.*;
 import orion.zenite.payload.ApiResponse;
 
 import javax.servlet.ServletRequest;
@@ -14,12 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /*
-    * Todas as rotas que começam com /api/alguma-coisa
-    * estão protegidas pelo JWToken.
-    * Todas as URI então recebem o token decodificado
-    * como um atributo email da requisição
-    *
-    * a decodificação ocorre na classe /security/JwtFilter
+ * Todas as rotas que começam com /api/alguma-coisa
+ * estão protegidas pelo JWToken.
+ * Todas as URI então recebem o token decodificado
+ * como um atributo email da requisição
+ *
+ * a decodificação ocorre na classe /security/JwtFilter
  */
 @RestController
 @RequestMapping("/api/fiscal")
@@ -32,25 +32,38 @@ public class FiscalController {
     @Autowired
     private ContaDao contaBD = new ContaDao();
 
+    @PostMapping("cadastro")
+    public ResponseEntity<?> cadastro(ServletRequest req, @RequestBody Fiscal fiscal) {
 
-    //    * Rota de exemplo pegando email da requsição
-    @GetMapping("/teste")
-    public ResponseEntity<?> getAll(ServletRequest req){
-
+        // Na requisição possui o email que foi decodificado do token
         HttpServletRequest request = (HttpServletRequest) req;
+
         String email = request.getAttribute("email").toString();
         boolean existe = contaBD.verificarSeExistePorEmail(email);
 
-        if(existe) {
-            List<Endereco> enderecos = enderecoBD.buscarTodos();
+        if (existe) {
+            Fiscal novoFiscal = fiscal;
+            Conta novaConta = new Conta();
+            novaConta.setSenha(novoFiscal.getSenha());
+            novaConta.setEmail(novoFiscal.getEmail());
+            novaConta.setNivel(novoFiscal.getNivel());
 
-            if (enderecos != null) {
+            // inserir conta
+            boolean resultado = contaBD.inserir(novaConta);
+
+            // inserir endereco
+
+            // inserir dispositivo
+
+            //  inserir funcionario
+
+            if (resultado) {
                 return new ResponseEntity<>(
-                        new ApiResponse(true, "Requisição concluída", enderecos),
+                        new ApiResponse(true, "Fiscal cadastrado"),
                         HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(
-                        new ApiResponse(false, "Sua requisição não teve retorno"),
+                        new ApiResponse(false, "Erro no cadastro do funcionario", novoFiscal),
                         HttpStatus.OK);
             }
         } else {
@@ -59,6 +72,5 @@ public class FiscalController {
                     HttpStatus.UNAUTHORIZED);
         }
     }
-
 
 }

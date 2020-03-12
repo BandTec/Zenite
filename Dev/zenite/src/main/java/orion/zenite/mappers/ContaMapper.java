@@ -20,7 +20,7 @@ public class ContaMapper implements RowMapper<Conta> {
 
         conta.setEmail(linha.getString("email"));
         conta.setId(linha.getInt("idConta"));
-        conta.setNivel(Nivel.valueOf(linha.getString("descricao").toUpperCase()));
+        conta.setNivel(linha.getString("descricao"));
         conta.setSenha(linha.getString("senha"));
 
         return conta;

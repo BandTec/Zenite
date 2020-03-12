@@ -6,14 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import orion.zenite.dao.ContaDao;
 import orion.zenite.models.Conta;
-import orion.zenite.models.Nivel;
 import orion.zenite.payload.ApiResponse;
-import orion.zenite.payload.CadastroRequest;
 import orion.zenite.payload.LoginRequest;
 import orion.zenite.security.AuthJwt;
 
-import javax.validation.Valid;
-import java.util.List;
 
 
 /*
@@ -53,29 +49,5 @@ public class AutentificacaoController {
                 new ApiResponse(true, "Bearer " + jwtToken),
                 HttpStatus.OK);
     }
-
-
-
-    @PostMapping("teste-cadastro-conta")
-    public ResponseEntity<?> testeCadastroConta(@RequestBody CadastroRequest conta) {
-
-        Nivel n = Nivel.escolherPorId(conta.getIdNivel());
-        Conta novaConta = new Conta();
-        novaConta.setSenha(conta.getSenha());
-        novaConta.setEmail(conta.getEmail());
-        novaConta.setNivel(n);
-
-        boolean resultado = contaBD.inserir(novaConta);
-        if(resultado) {
-            return new ResponseEntity<>(
-                    new ApiResponse(true, "Teste"),
-                    HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(
-                    new ApiResponse(false, "Erro ao inserir no banco", novaConta),
-                    HttpStatus.OK);
-        }
-    }
-
 
 }

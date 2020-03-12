@@ -9,11 +9,18 @@ public class Conta {
 
     public Conta() { } ;
 
+    public Conta(String senha, String email, int nivel) {
+        this.senha = senha;
+        this.email = email;
+        this.nivel = Nivel.escolherPorId(nivel);
+    }
+
     public Conta(String senha, String email, String nivel) {
         this.senha = senha;
         this.email = email;
         this.nivel = Nivel.valueOf(nivel.toUpperCase());
     }
+
 
     public Conta(int id, String senha, String email, String nivel) {
         this.id = id;
@@ -58,6 +65,14 @@ public class Conta {
 
     public Nivel getNivel() {
         return nivel;
+    }
+
+    public void setNivel(String nivel) {
+       this.nivel = Nivel.valueOf(nivel.toUpperCase());
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = Nivel.escolherPorId(nivel);
     }
 
     public void setNivel(Nivel nivel) {

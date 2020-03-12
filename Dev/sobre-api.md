@@ -16,55 +16,35 @@ Corpo da Requisição:
 
 ## Rotas de TESTE
 
-### Teste de Cadastro só da conta
+### Teste de Cadastro do fiscal
+*Só cadastra a no momento conta*
 
-**POST** http://localhost:8080/autentica/teste-cadastro-conta
+**POST** http://localhost:8080/api/fiscal/cadastro
 
 Corpo da Requisição:
 
 ```
 {
-      "senha": "senha4",
-      "email": "email4",
-      "idNivel": 2
-}
-```
-
------
-
-### Teste de consulta de rota protegida com jwt
-
-
-[GET] http://localhost:8080/autentica/teste-cadastro-conta
-
-Header de Autentificação tipo **Bearer** recebe token gerado na rota de login.
-
-
-Exemplo de Retorno:
-
-```
-{
-  "sucess": true,
-  "message": "Requisição concluída",
-  "value": [
-    {
-      "id": 1,
-      "cep": "1231-09",
-      "logradouro": "rua de teste",
-      "numero": "12",
-      "complemento": "apt 3",
-      "cidade": "São Paulo",
-      "estado": "SP"
+    "senha": "senha6",
+    "email": "email6",
+    "nivel": 1,
+    "nome": "teste",
+    "cpf": "123-123-123",
+    "dataNascimento": "9879879",
+    "numeroTelefone": "23424324",
+    "endereco": {
+      "id": 0,
+      "cep": "234234",
+      "logradouro": "rua tal",
+      "numero": "12s",
+      "complemento": "ola",
+      "cidade": "teste",
+      "estado": "tt"
     },
-    {
-      "id": 2,
-      "cep": "1231-09",
-      "logradouro": "rua de teste",
-      "numero": "12",
-      "complemento": "apt 3",
-      "cidade": "São Paulo",
-      "estado": "SP"
+    "registroFiscal": "123123",
+    "dispositivo": {
+      "codigo": "13",
+      "tipoDispositivo": 2
     }
-  ]
 }
 ```

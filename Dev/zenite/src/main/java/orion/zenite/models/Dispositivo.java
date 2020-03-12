@@ -43,6 +43,14 @@ public class Dispositivo {
         this.tipoDispositivo = tipoDispositivo;
     }
 
+    public void setTipoDispositivo(int tipoDispositivo) {
+        this.tipoDispositivo = TipoDispositivo.escolherPorId(tipoDispositivo);
+    }
+
+    public void setTipoDispositivo(String tipoDispositivo) {
+        this.tipoDispositivo = TipoDispositivo.valueOf(tipoDispositivo.toUpperCase());
+    }
+
     @Override
     public String toString() {
         return "Dispositivo{" +

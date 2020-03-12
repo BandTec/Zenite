@@ -23,7 +23,9 @@ public abstract class Funcionario extends Conta {
         this.endereco = endereco;
     }
 
-    public Funcionario(String senha, String email, String nivel, String nome, String cpf, String dataNascimento, String numeroTelefone, Endereco endereco) {
+    public Funcionario(String senha, String email, int nivel, String nome,
+                       String cpf, String dataNascimento, String numeroTelefone,
+                       Endereco endereco) {
         super(senha, email, nivel);
         this.nome = nome;
         this.cpf = cpf;

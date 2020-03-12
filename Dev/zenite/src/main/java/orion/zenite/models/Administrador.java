@@ -13,7 +13,7 @@ public class Administrador extends Conta {
         this.nome = nome;
     }
 
-    public Administrador(String senha, String email, String nivel, String nome) {
+    public Administrador(String senha, String email, int nivel, String nome) {
         super(senha, email, nivel);
         this.nome = nome;
     }

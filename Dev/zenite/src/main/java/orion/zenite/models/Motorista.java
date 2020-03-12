@@ -7,14 +7,20 @@ public class Motorista extends Funcionario {
 
     public Motorista() {};
 
-    public Motorista(int id, String senha, String email, String nivel, String nome, String cpf, String dataNascimento, String numeroTelefone, Endereco endereco, String cnh) {
+    public Motorista(int id, String senha, String email, String nivel, String nome,
+                     String cpf, String dataNascimento, String numeroTelefone,
+                     Endereco endereco, String cnh, Dispositivo rfid) {
         super(id, senha, email, nivel, nome, cpf, dataNascimento, numeroTelefone, endereco);
+        this.rfid = rfid;
         this.cnh = cnh;
     }
 
-    public Motorista(String senha, String email, String nivel, String nome, String cpf, String dataNascimento, String numeroTelefone, Endereco endereco, String cnh) {
+    public Motorista(String senha, String email, int nivel, String nome, String cpf,
+                     String dataNascimento, String numeroTelefone, Endereco endereco,
+                     String cnh, Dispositivo rfid) {
         super(senha, email, nivel, nome, cpf, dataNascimento, numeroTelefone, endereco);
         this.cnh = cnh;
+        this.rfid = rfid;
     }
 
     public String getCnh() {
