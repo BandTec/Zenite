@@ -1,9 +1,11 @@
 package orion.zenite.models;
 
 public enum Nivel {
-    ADM(1),
+    ADMIN(1),
     GERENTE(2),
-    USUARIO(3);
+    FISCAL(3),
+    MOTORISTA(4),
+    PASSAGEIRO(5);
 
     private int id;
 

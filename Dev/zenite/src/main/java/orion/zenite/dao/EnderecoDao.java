@@ -67,15 +67,31 @@ public class EnderecoDao {
         }
     }
 
+    public int ultimoId(){
+        try {
+            this.consulta = "SELECT TOP 1 idEndereco FROM tblEndereco ORDER BY idEndereco DESC";
+
+            int ultimoId = jdbcTemplate.queryForObject(
+                    consulta, Integer.class);
+
+            return ultimoId;
+
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     public boolean inserir(Endereco endereco) {
         try {
             this.consulta = "INSERT INTO tblEndereco (" +
                     "CEP, logradouro, numero, complemento, cidade, estado" +
-                    ") values (?, ?, ?)";
+                    ") values (?, ?, ?, ?, ?, ?)";
 
             jdbcTemplate.update(
                     consulta,
-                    endereco
+                    endereco.getCep(), endereco.getLogradouro(), endereco.getNumero(),
+                    endereco.getComplemento(), endereco.getCidade(), endereco.getEstado()
             );
 
             return true;
@@ -90,12 +106,14 @@ public class EnderecoDao {
     public boolean alterar(Endereco endereco) {
         try {
             this.consulta = "UPDATE tblEndereco SET CEP = ?, " +
-                    "logradouro = ?, numero = ? complemento = ? cidade = ? " +
-                    "estado = ? WHERE idEndereco=?";
+                    "logradouro = ?, numero = ?, complemento = ?, cidade = ?, " +
+                    "estado = ? WHERE idEndereco = ?";
 
             jdbcTemplate.update(
                     consulta,
-                    endereco
+                    endereco.getCep(), endereco.getLogradouro(), endereco.getNumero(),
+                    endereco.getComplemento(), endereco.getCidade(), endereco.getEstado(),
+                    endereco.getId()
             );
 
             return true;

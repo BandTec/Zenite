@@ -11,7 +11,6 @@ import orion.zenite.payload.ApiResponse;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /*
  * Todas as rotas que começam com /api/alguma-coisa
@@ -48,21 +47,23 @@ public class FiscalController {
         } else {
 
             Fiscal novoFiscal = fiscal;
-            Conta novaConta = new Conta();
-            novaConta.setSenha(novoFiscal.getSenha());
-            novaConta.setEmail(novoFiscal.getEmail());
-            novaConta.setNivel(novoFiscal.getNivel());
 
             // inserir conta
-            boolean resultado = contaBD.inserir(novaConta);
+            boolean resultadoConta = contaBD.inserir(fiscal);
+            fiscal.setIdConta(contaBD.ultimoId());
 
             // inserir endereco
+            boolean resultadoEnd = enderecoBD.inserir(fiscal.getEndereco());
+            Endereco endereco = fiscal.getEndereco();
+            endereco.setId(enderecoBD.ultimoId());
+            fiscal.setEndereco(endereco);
 
             // inserir dispositivo
 
             //  inserir funcionario
 
-            if (resultado) {
+
+            if (resultadoConta && resultadoEnd) {
                 return new ResponseEntity<>(
                         new ApiResponse(true, "Fiscal cadastrado"),
                         HttpStatus.OK);

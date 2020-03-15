@@ -1,7 +1,5 @@
 package orion.zenite.models;
 
-import java.util.Date;
-
 public abstract class Funcionario extends Conta {
 
     private int id;

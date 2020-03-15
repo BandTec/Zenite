@@ -2,7 +2,7 @@ package orion.zenite.models;
 
 public class Conta {
 
-    private int id;
+    private int idConta;
     private String senha;
     private String email;
     private Nivel nivel;
@@ -22,8 +22,8 @@ public class Conta {
     }
 
 
-    public Conta(int id, String senha, String email, String nivel) {
-        this.id = id;
+    public Conta(int idConta, String senha, String email, String nivel) {
+        this.idConta = idConta;
         this.senha = senha;
         this.email = email;
         this.nivel = Nivel.valueOf(nivel.toUpperCase());
@@ -32,7 +32,7 @@ public class Conta {
     @Override
     public String toString() {
         return "Conta{" +
-                "id=" + id +
+                "id=" + idConta +
                 ", senha='" + senha + '\'' +
                 ", email='" + email + '\'' +
                 ", nivel=" + nivel +
@@ -55,12 +55,12 @@ public class Conta {
         return email;
     }
 
-    public int getId() {
-        return id;
+    public int getIdConta() {
+        return idConta;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdConta(int idConta) {
+        this.idConta = idConta;
     }
 
     public Nivel getNivel() {

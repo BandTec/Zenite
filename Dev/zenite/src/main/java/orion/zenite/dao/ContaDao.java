@@ -127,6 +127,21 @@ public class ContaDao {
         }
     }
 
+    public int ultimoId(){
+        try {
+            this.consulta = "SELECT TOP 1 idConta FROM tblConta ORDER BY idConta DESC";
+
+            int ultimoId = jdbcTemplate.queryForObject(
+                    consulta, Integer.class);
+
+            return ultimoId;
+
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     public boolean inserir(Conta conta) {
         try {
             this.consulta = "INSERT INTO tblConta (email, senha, fkNivel) values (?, ?, ?)";
