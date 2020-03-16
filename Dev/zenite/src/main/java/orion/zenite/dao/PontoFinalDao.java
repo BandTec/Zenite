@@ -3,6 +3,7 @@ package orion.zenite.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import orion.zenite.mappers.PontoFinalMapper;
 import orion.zenite.models.Conta;
 import orion.zenite.models.PontoFinal;
 
@@ -26,7 +27,7 @@ public class PontoFinalDao implements Dao {
         try {
             PontoFinal ponto = (PontoFinal) obj;
 
-            this.consulta = "INSERT INTO tblPontoFinal (nomeTerminals) values (?)";
+            this.consulta = "INSERT INTO tblPontoFinal (nomeTerminal) values (?)";
 
             jdbcTemplate.update(consulta, ponto.getNome());
 
@@ -40,26 +41,70 @@ public class PontoFinalDao implements Dao {
 
     @Override
     public Object buscarPorId(int id) {
-        return null;
+        try {
+            this.consulta = "SELECT FROM tblPontoFinal WHERE idPontoFinal = ?";
+
+            return jdbcTemplate.queryForObject(consulta, new PontoFinalMapper(), id);
+
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public List<?> buscarTodos() {
-        return null;
+        try {
+            this.consulta = "SELECT * FROM tblPontoFinal";
+
+            return jdbcTemplate.query(consulta, new PontoFinalMapper());
+
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public int ultimoId() {
-        return 0;
+        try {
+            this.consulta = "SELECT TOP 1 idPontoFinal FROM tblPontoFinal ORDER BY idPontoFinal DESC";
+
+            return jdbcTemplate.queryForObject(consulta, Integer.class);
+
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+            return 0;
+        }
     }
 
     @Override
     public boolean alterar(Object obj) {
-        return false;
+        try {
+            PontoFinal ponto = (PontoFinal) obj;
+
+            this.consulta = "UPDATE tblPontoFinal SET nomeTerminal = ? WHERE idPontoFinal = ?";
+
+            jdbcTemplate.update(consulta, ponto.getNome(), ponto.getId());
+
+            return true;
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
     public boolean deletar(int id) {
-        return false;
+        try {
+            this.consulta = "DELETE FROM tblPontoFinal WHERE idPontoFinal = ?";
+
+            jdbcTemplate.update(consulta, new PontoFinalMapper(), id);
+
+            return true;
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+            return false;
+        }
     }
 }

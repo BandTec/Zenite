@@ -4,19 +4,23 @@ public class Carro {
 
     private int id;
     private String numero;
-    private Linha Linha;
+    private Linha linha;
+    private Dispositivo dispositivo;
 
     public Carro() { }
 
-    public Carro(String numero, Linha linha) {
+    public Carro(String numero, Linha linha, Dispositivo dispositivo) {
         this.numero = numero;
-        Linha = linha;
+        this.linha = linha;
+        this.dispositivo = dispositivo;
+
     }
 
-    public Carro(int id, String numero, Linha linha) {
+    public Carro(int id, String numero, Linha linha, Dispositivo dispositivo) {
         this.id = id;
         this.numero = numero;
-        Linha = linha;
+        this.linha = linha;
+        this.dispositivo = dispositivo;
     }
 
     public int getId() {
@@ -36,11 +40,19 @@ public class Carro {
     }
 
     public Linha getLinha() {
-        return Linha;
+        return linha;
     }
 
     public void setLinha(Linha linha) {
-        Linha = linha;
+        this.linha = linha;
+    }
+
+    public Dispositivo getDispositivo() {
+        return dispositivo;
+    }
+
+    public void setDispositivo(Dispositivo dispositivo) {
+        this.dispositivo = dispositivo;
     }
 
     @Override
@@ -48,7 +60,8 @@ public class Carro {
         return "Carro{" +
                 "id=" + id +
                 ", numero='" + numero + '\'' +
-                ", Linha=" + Linha +
+                ", linha=" + linha + '\'' +
+                ", dispositivo=" + dispositivo + '\'' +
                 '}';
     }
 }
