@@ -17,12 +17,13 @@ import java.util.List;
  * ~/main/resources/application.properties
  */
 @Repository
-public class EnderecoDao {
+public class EnderecoDao implements Dao{
     private String consulta;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Override
     public Endereco buscarPorId(int id) {
         try {
             this.consulta = "SELECT * FROM tblEndereco WHERE idEndereco = ?";
@@ -57,6 +58,7 @@ public class EnderecoDao {
         }
     }
 
+    @Override
     public List<Endereco> buscarTodos() {
         try {
             this.consulta = "SELECT * FROM tblEndereco";
@@ -67,6 +69,7 @@ public class EnderecoDao {
         }
     }
 
+    @Override
     public int ultimoId(){
         try {
             this.consulta = "SELECT TOP 1 idEndereco FROM tblEndereco ORDER BY idEndereco DESC";
@@ -82,8 +85,10 @@ public class EnderecoDao {
         }
     }
 
-    public boolean inserir(Endereco endereco) {
+    @Override
+    public boolean inserir(Object obj) {
         try {
+            Endereco endereco = (Endereco) obj;
             this.consulta = "INSERT INTO tblEndereco (" +
                     "CEP, logradouro, numero, complemento, cidade, estado" +
                     ") values (?, ?, ?, ?, ?, ?)";
@@ -103,8 +108,10 @@ public class EnderecoDao {
         }
     }
 
-    public boolean alterar(Endereco endereco) {
+    @Override
+    public boolean alterar(Object obj) {
         try {
+            Endereco endereco = (Endereco) obj;
             this.consulta = "UPDATE tblEndereco SET CEP = ?, " +
                     "logradouro = ?, numero = ?, complemento = ?, cidade = ?, " +
                     "estado = ? WHERE idEndereco = ?";
@@ -125,6 +132,7 @@ public class EnderecoDao {
         }
     }
 
+    @Override
     public boolean deletar(int id) {
         try {
             this.consulta = "DELETE FROM tblEndereco WHERE idEndereco = ?";

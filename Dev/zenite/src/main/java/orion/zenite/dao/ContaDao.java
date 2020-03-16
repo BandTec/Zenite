@@ -2,7 +2,6 @@ package orion.zenite.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import orion.zenite.mappers.ContaMapper;
@@ -19,7 +18,7 @@ import java.util.List;
     * ~/main/resources/application.properties
  */
 @Repository
-public class ContaDao {
+public class ContaDao implements Dao{
 
     private String consulta;
 
@@ -32,7 +31,8 @@ public class ContaDao {
      * aos atributos da classe
      */
 
-    public Conta buscarPorId(int id) {
+    @Override
+    public Object buscarPorId(int id) {
         try {
             this.consulta = "SELECT c.*, n.descricao " +
                     "FROM tblConta as c inner join tblNivel as n " +
@@ -52,7 +52,6 @@ public class ContaDao {
         }
     }
 
-    // getNivel
     public Nivel buscarNivelPorEmail(String email) {
         try {
             this.consulta = "SELECT c.*, n.descricao " +
@@ -114,13 +113,16 @@ public class ContaDao {
         }
     }
 
+    @Override
     public List<Conta> buscarTodos() {
         try {
             this.consulta = "SELECT c.*, n.descricao " +
                     "FROM tblConta as c inner join tblNivel as n " +
                     "on n.idNivel = c.fkNivel";
 
-            return jdbcTemplate.query(consulta, new ContaMapper());
+            List<Conta> contas = jdbcTemplate.query(consulta, new ContaMapper());
+
+            return contas;
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
             return null;
@@ -142,8 +144,10 @@ public class ContaDao {
         }
     }
 
-    public boolean inserir(Conta conta) {
+    @Override
+    public boolean inserir(Object obj) {
         try {
+            Conta conta = (Conta) obj;
             this.consulta = "INSERT INTO tblConta (email, senha, fkNivel) values (?, ?, ?)";
 
             jdbcTemplate.update(
@@ -159,8 +163,10 @@ public class ContaDao {
         }
     }
 
-    public boolean alterar(Conta conta) {
+    @Override
+    public boolean alterar(Object obj) {
         try {
+            Conta conta = (Conta) obj;
             this.consulta = "UPDATE tblConta SET email = ?, senha = ? fkNivel = ? WHERE idConta = ?";
 
             jdbcTemplate.update(
@@ -176,6 +182,7 @@ public class ContaDao {
         }
     }
 
+    @Override
     public boolean deletar(int id) {
         try {
             this.consulta = "DELETE FROM tblConta WHERE idConta = ?";
@@ -188,5 +195,4 @@ public class ContaDao {
             return false;
         }
     }
-
 }

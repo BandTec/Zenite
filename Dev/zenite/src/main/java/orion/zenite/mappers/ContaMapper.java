@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 import orion.zenite.models.Conta;
-import orion.zenite.models.Nivel;
 
 /*
     * Essa classe mapper filtra o resultado do banco
@@ -16,7 +15,6 @@ public class ContaMapper implements RowMapper<Conta> {
     @Override
     public Conta mapRow(ResultSet linha, int linhaNum) throws SQLException {
         Conta conta = new Conta();
-        Nivel nivel;
 
         conta.setEmail(linha.getString("email"));
         conta.setIdConta(linha.getInt("idConta"));
