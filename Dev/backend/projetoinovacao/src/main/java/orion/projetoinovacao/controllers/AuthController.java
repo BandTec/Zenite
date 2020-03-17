@@ -26,7 +26,7 @@ public class AuthController {
 
     private AuthJwt jwt = new AuthJwt();
 
-    @PostMapping
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
 
         if (loginRequest.getEmail() == null || loginRequest.getPassword() == null) {
