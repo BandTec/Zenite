@@ -703,9 +703,9 @@ END
 
 
 
-DROP PROCEDURE IF EXISTS spConta_buscarNivelPorEmail
+DROP PROCEDURE IF EXISTS spConta_BuscarNivelPorEmail
 GO
-CREATE PROCEDURE spConta_buscarNivelPorEmail(
+CREATE PROCEDURE spConta_BuscarNivelPorEmail(
 	@email varchar(60)
 )
 --------------------------------------------------------
@@ -723,7 +723,7 @@ BEGIN
 	
 	SELECT n.descricao from tblConta c
 		INNER JOIN tblNivel n on c.fkNivel = n.idNivel
-	WHERE C.idConta = @email
+	WHERE c.email = @email
 
 END
 
@@ -755,9 +755,9 @@ END
 
 
 
-DROP PROCEDURE IF EXISTS spConta_BuscaTodosEmails
+DROP PROCEDURE IF EXISTS spConta_BuscaTodos
 GO
-CREATE PROCEDURE spConta_BuscaTodosEmails
+CREATE PROCEDURE spConta_BuscaTodos
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
@@ -765,7 +765,7 @@ CREATE PROCEDURE spConta_BuscaTodosEmails
 ||	DATA: 17/03/2020
 ||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
 ||	
-||	EXEMPLO: EXEC spConta_BuscaTodosEmails @email = 'emailteste@orion.com'
+||	EXEMPLO: EXEC spConta_BuscaTodos
 */
 ---------------------------------------------------------
 AS
