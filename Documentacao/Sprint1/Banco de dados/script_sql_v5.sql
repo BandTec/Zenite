@@ -221,6 +221,7 @@ BEGIN
 END
 
 
+
 DROP PROCEDURE IF EXISTS spLogin
 GO
 CREATE PROCEDURE spLogin(
@@ -695,7 +696,7 @@ AS
 BEGIN
 	
 	SELECT c.*, n.descricao from tblConta c
-	INNER JOIN tblNivel n on c.fkNivel = n.idNivel
+		INNER JOIN tblNivel n on c.fkNivel = n.idNivel
 	WHERE C.idConta = @idConta
 
 END
@@ -721,7 +722,7 @@ AS
 BEGIN
 	
 	SELECT n.descricao from tblConta c
-	INNER JOIN tblNivel n on c.fkNivel = n.idNivel
+		INNER JOIN tblNivel n on c.fkNivel = n.idNivel
 	WHERE C.idConta = @email
 
 END
@@ -747,7 +748,7 @@ AS
 BEGIN
 	
 	SELECT c.*, n.descricao from tblConta c
-	INNER JOIN tblNivel n on c.fkNivel = n.idNivel
+		INNER JOIN tblNivel n on c.fkNivel = n.idNivel
 	WHERE C.idConta = @email
 
 END
@@ -775,3 +776,443 @@ BEGIN
 
 
 END
+
+
+DROP PROCEDURE IF EXISTS spConta_BuscaUltimoId
+GO
+CREATE PROCEDURE spConta_BuscaUltimoId(
+	@idConta int
+)
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA BUSCAR O ID DA ULTIMA CONTA ADICIONADA
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spConta_BuscaUltimoId @idConta = 74
+*/
+---------------------------------------------------------
+AS
+BEGIN
+	
+	SELECT MAX(idConta) as idConta from tblConta
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spConta_Inserir
+GO
+CREATE PROCEDURE spConta_Inserir(
+	@email varchar(60),
+	@senha varchar(255),
+	@fkNivel int
+)
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA INSERIR UMA NOVA CONTA
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spConta_Inserir @email = 'fulano.ciclano@beltrano.com', @senha = '51656154158696153aa', @fkNivel = 3
+*/
+---------------------------------------------------------
+AS
+BEGIN
+	
+	INSERT INTO tblConta values (
+		@email, @senha, @fkNivel
+	)
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spConta_Alterar
+GO
+CREATE PROCEDURE spConta_Alterar(
+	@email varchar(60),
+	@senha varchar(255),
+	@fkNivel int,
+	@idConta int
+)
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA INSERIR UMA NOVA CONTA
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spConta_Alterar @email = 'fulano.ciclano@beltrano.com', @senha = '51656154158696153aa', @fkNivel = 3, @idConta = 2
+*/
+---------------------------------------------------------
+AS
+BEGIN
+	
+	UPDATE tblConta SET
+		email = @email,
+		senha = @senha,
+		fkNivel = @fkNivel
+	WHERE idConta = @idConta
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spConta_Deletar
+GO
+CREATE PROCEDURE spConta_Deletar(
+	@idConta int
+)
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA DELETAR UMA CONTA
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spConta_Deletar @idConta = 2
+*/
+---------------------------------------------------------
+AS
+BEGIN
+	
+	DELETE FROM tblConta
+	WHERE idConta = @idConta
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spCarro_BuscaPorId
+GO
+CREATE PROCEDURE spCarro_BuscaPorId(
+	@idCarro int
+)
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA BUSCAR UM CARRO PELO ID ESPECIFICO
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spCarro_BuscaPorId @idCarro = 87
+*/
+---------------------------------------------------------
+AS
+BEGIN
+	
+	SELECT carro.idCarro, carro.numeroCarro, carro.fkDispositivo,
+		   d.idDispositivo, d.codigoDispositivo, d.fkTipo
+	FROM tblCarro as carro
+		INNER JOIN tblDispositivo d ON carro.fkDispositivo = d.idDispositivo
+	WHERE carro.idCarro = @idCarro
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spCarro_BuscarPorNumeroCarro
+GO
+CREATE PROCEDURE spCarro_BuscaPorNumeroCarro(
+	@numeroCarro varchar(10)
+)
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA BUSCAR UM CARRO PELO NUMERO ESPECIFICO
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spCarro_BuscaPorNumeroCarro @numeroCarro = 1784621
+*/
+---------------------------------------------------------
+AS
+BEGIN
+	
+	SELECT carro.idCarro, carro.numeroCarro, carro.fkDispositivo,
+		   d.idDispositivo, d.codigoDispositivo, d.fkTipo
+	FROM tblCarro as carro
+		INNER JOIN tblDispositivo d ON carro.fkDispositivo = d.idDispositivo
+	WHERE carro.numeroCarro = @numeroCarro
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spCarro_BuscarTodos
+GO
+CREATE PROCEDURE spCarro_BuscarTodos
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA BUSCAR TODOS OS CARROS
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spCarro_BuscarTodos
+*/
+---------------------------------------------------------
+AS
+BEGIN
+	
+	SELECT carro.idCarro, carro.numeroCarro, carro.fkDispositivo,
+		   d.idDispositivo, d.codigoDispositivo, d.fkTipo
+	FROM tblCarro as carro
+		INNER JOIN tblDispositivo d ON carro.fkDispositivo = d.idDispositivo
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spCarro_BuscaUltimoId
+GO
+CREATE PROCEDURE spCarro_BuscaUltimoId
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA BUSCAR TODOS OS CARROS
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spCarro_BuscaUltimoId
+*/
+---------------------------------------------------------
+AS
+BEGIN
+	
+	SELECT MAX(idCarro) AS idCarro from tblCarro
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spCarro_Inserir
+GO
+CREATE PROCEDURE spCarro_Inserir(
+	@numeroCarro varchar(10),
+	@fkDispositivo int
+)
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA INSERIR UM ONIBUS
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spCarro_Inserir @numeroCarro = '14785236', @fkDispositivo = '3'
+*/
+---------------------------------------------------------
+AS
+BEGIN
+	
+	INSERT INTO tblCarro values (
+		@numeroCarro, @fkDispositivo
+	)
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spCarro_Alterar
+GO
+CREATE PROCEDURE spCarro_Alterar(
+	@numeroCarro varchar(10),
+	@fkDispositivo int,
+	@IdCarro int
+)
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA ALTERAR UM ONIBUS ESPECIFICO
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spCarro_Alterar @numeroCarro = '14785236', @fkDispositivo = '3', @idCarro = 745
+*/
+---------------------------------------------------------
+AS
+BEGIN
+	
+	UPDATE tblCarro SET
+		numeroCarro = @numeroCarro,
+		fkDispositivo = @fkDispositivo
+	WHERE idCarro = @IdCarro
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spCarro_Deletar
+GO
+CREATE PROCEDURE spCarro_Deletar(
+	@IdCarro int
+)
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA DELETAR UM ONIBUS ESPECIFICO
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spCarro_Deletar @idCarro = 745
+*/
+---------------------------------------------------------
+AS
+BEGIN
+	
+	DELETE FROM tblCarro
+	WHERE idCarro = @IdCarro
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spPontoFinal_Inserir
+GO
+CREATE PROCEDURE spPontoFinal_Inserir(
+	@nomeTerminal varchar(80)
+)
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA INSERIR UM PONTO FINAL/TERMINAL
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spPontoFinal_Inserir @nomeTerminal = 'Jd. Camargo Novo'
+*/
+---------------------------------------------------------
+AS
+BEGIN
+
+	INSERT INTO tblPontoFinal values (
+		@nomeTerminal
+	)
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spPontoFinal_Alterar
+GO
+CREATE PROCEDURE spPontoFinal_Alterar(
+	@nomeTerminal varchar(80),
+	@idPontoFinal int
+)
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA ALTERAR UM PONTO FINAL/TERMINAL ESPECIFICO
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spPontoFinal_Alterar @nomeTerminal = 'Jd. Camargo Velho', @idPontoFinal = 4563
+*/
+---------------------------------------------------------
+AS
+BEGIN
+
+	UPDATE tblPontoFinal SET
+		nomeTerminal = @nomeTerminal
+	WHERE idPontoFinal = @idPontoFinal
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spPontoFinal_Deletar
+GO
+CREATE PROCEDURE spPontoFinal_Deletar(
+	@idPontoFinal int
+)
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA DELETAR UM PONTO FINAL/TERMINAL ESPECIFICO
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spPontoFinal_Alterar @idPontoFinal = 4563
+*/
+---------------------------------------------------------
+AS
+BEGIN
+
+	DELETE FROM tblPontoFinal
+	WHERE idPontoFinal = @idPontoFinal
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spPontoFinal_BuscaPorId
+GO
+CREATE PROCEDURE spPontoFinal_BuscaPorId(
+	@idPontoFinal int
+)
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA BUSCAR UM PONTO FINAL/TERMINAL ESPECIFICO
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spPontoFinal_BuscaPorId @idPontoFinal = 4563
+*/
+---------------------------------------------------------
+AS
+BEGIN
+
+	SELECT * FROM tblPontoFinal
+	WHERE idPontoFinal = @idPontoFinal
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spPontoFinal_BuscaTodos
+GO
+CREATE PROCEDURE spPontoFinal_BuscaTodos
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA BUSCAR TODOS PONTOS FINAIS/TERMINAIS ESPECIFICOS
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spPontoFinal_BuscaTodos
+*/
+---------------------------------------------------------
+AS
+BEGIN
+
+	SELECT * FROM tblPontoFinal
+
+END
+
+
+
+DROP PROCEDURE IF EXISTS spPontoFinal_BuscaUltimoId
+GO
+CREATE PROCEDURE spPontoFinal_BuscaUltimoId
+--------------------------------------------------------
+/*
+||	PROC CRIADA POR: ALEX GUSMAO
+||	DESCRI플O: PROC PARA BUSCAR O ULTIMO PONTO FINAL/TERMINAL INSERIDO
+||	DATA: 17/03/2020
+||	ATUALIZA합ES: CRIA플O (17/03/2020)
+||	
+||	EXEMPLO: EXEC spPontoFinal_BuscaUltimoId
+*/
+---------------------------------------------------------
+AS
+BEGIN
+
+	SELECT MAX(idPontoFinal) AS idPontoFinal FROM tblPontoFinal
+
+END
+
+
