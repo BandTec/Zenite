@@ -703,9 +703,9 @@ END
 
 
 
-DROP PROCEDURE IF EXISTS spConta_BuscarNivelPorEmail
+DROP PROCEDURE IF EXISTS spConta_BuscarPorEmail
 GO
-CREATE PROCEDURE spConta_BuscarNivelPorEmail(
+CREATE PROCEDURE spConta_BuscarPorEmail(
 	@email varchar(60)
 )
 --------------------------------------------------------
@@ -721,35 +721,9 @@ CREATE PROCEDURE spConta_BuscarNivelPorEmail(
 AS
 BEGIN
 	
-	SELECT n.descricao from tblConta c
-		INNER JOIN tblNivel n on c.fkNivel = n.idNivel
-	WHERE c.email = @email
-
-END
-
-
-
-DROP PROCEDURE IF EXISTS spConta_verificarSeExistePorEmail
-GO
-CREATE PROCEDURE spConta_verificarSeExistePorEmail(
-	@email varchar(60)
-)
---------------------------------------------------------
-/*
-||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA VERIFICAR SE UMA CONTA ESPECIFICA EXISTE PELO E-MAIL
-||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
-||	
-||	EXEMPLO: EXEC spConta_verificarSeExistePorEmail @email = 'emailteste@orion.com'
-*/
----------------------------------------------------------
-AS
-BEGIN
-	
 	SELECT c.*, n.descricao from tblConta c
 		INNER JOIN tblNivel n on c.fkNivel = n.idNivel
-	WHERE C.idConta = @email
+	WHERE c.email = @email
 
 END
 
