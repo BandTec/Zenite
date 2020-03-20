@@ -18,7 +18,8 @@ public class ContaMapper implements RowMapper<Conta> {
 
         conta.setEmail(linha.getString("email"));
         conta.setIdConta(linha.getInt("idConta"));
-        conta.setNivel(linha.getString("descricao"));
+        //conta.setNivel(linha.getString("descricao"));
+        conta.setNivel(linha.getInt("fkNivel"));
         conta.setSenha(linha.getString("senha"));
 
         return conta;

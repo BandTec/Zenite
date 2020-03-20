@@ -9,14 +9,14 @@ public class Carro {
 
     public Carro() { }
 
-    public Carro(String numero, Linha linha, Dispositivo dispositivo) {
+    public Carro(String numero, Dispositivo dispositivo) {
         this.numero = numero;
         this.linha = linha;
         this.dispositivo = dispositivo;
 
     }
 
-    public Carro(int id, String numero, Linha linha, Dispositivo dispositivo) {
+    public Carro(int id, String numero, Dispositivo dispositivo) {
         this.id = id;
         this.numero = numero;
         this.linha = linha;

@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import orion.zenite.mappers.CarroMapper;
 import orion.zenite.models.Carro;
-import orion.zenite.models.Linha;
 
 import java.util.List;
 
@@ -20,12 +19,7 @@ public class CarroDao implements Dao {
     @Override
     public Object buscarPorId(int id) {
         try {
-            this.consulta = "SELECT c.idCarro, c.numeroCarro, c.fkLinha, " +
-                    "d.idDispositivo, d.codigoDispostivo, d.fkTipo " +
-                    "FROM tblCarro AS c " +
-                    "INNER JOIN tblDispositivo AS d " +
-                    "ON c.fkDispositivo = d.idDispositivo " +
-                    "WHERE idCarro = ?";
+            this.consulta = "EXEC spCarro_BuscaPorId @idCarro = ?";
 
             return jdbcTemplate.queryForObject(this.consulta, new CarroMapper(), id);
 
@@ -37,12 +31,7 @@ public class CarroDao implements Dao {
 
     public Object buscarPorNumeroCarro(String numeroCarro) {
         try {
-            this.consulta = "SELECT c.idCarro, c.numeroCarro, c.fkLinha, " +
-                    "d.idDispositivo, d.codigoDispostivo, d.fkTipo " +
-                    "FROM tblCarro AS c " +
-                    "INNER JOIN tblDispositivo AS d " +
-                    "ON c.fkDispositivo = d.idDispositivo " +
-                    "WHERE numeroCarro = ?";
+            this.consulta = "EXEC spCarro_BuscaPorNumeroCarro @numeroCarro = ?";
 
             return jdbcTemplate.queryForObject(this.consulta, new CarroMapper(), numeroCarro);
 
@@ -69,11 +58,7 @@ public class CarroDao implements Dao {
     @Override
     public List<?> buscarTodos() {
         try {
-            this.consulta = "SELECT c.idCarro, c.numeroCarro, c.fkLinha, " +
-                    "d.idDispositivo, d.codigoDispostivo, d.fkTipo " +
-                    "FROM tblCarro AS c " +
-                    "INNER JOIN tblDispositivo AS d " +
-                    "ON c.fkDispositivo = d.idDispositivo";
+            this.consulta = "EXEC spCarro_BuscarTodos";
 
             return jdbcTemplate.query(this.consulta, new CarroMapper());
 
@@ -86,7 +71,7 @@ public class CarroDao implements Dao {
     @Override
     public int ultimoId() {
         try {
-            this.consulta = "SELECT TOP 1 idCarro FROM tblCarro ORDER BY idCarro DESC";
+            this.consulta = "EXEC spCarro_BuscaUltimoId";
             return jdbcTemplate.queryForObject(this.consulta, Integer.class);
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
@@ -98,10 +83,9 @@ public class CarroDao implements Dao {
     public boolean inserir(Object obj) {
         try {
             Carro carro = (Carro) obj;
-            this.consulta = "INSERT INTO tblCarro (numeroCarro, fkLinha, fkDispositivo) values (?, ?, ?)";
+            this.consulta = "EXEC spCarro_Inserir @numeroCarro = ?, @fkDispositivo = ?";
             jdbcTemplate.update(this.consulta,
                     carro.getNumero(),
-                    carro.getLinha().getId(),
                     carro.getDispositivo().getId()
                     );
             return true;
@@ -115,13 +99,10 @@ public class CarroDao implements Dao {
     public boolean alterar(Object obj) {
         try {
             Carro carro = (Carro) obj;
-            this.consulta = "UPDATE tblCarro " +
-                    "SET numeroCarro = ?, fkLinha = ?, fkDispositivo = ? " +
-                    "WHERE idCarro = ?";
+            this.consulta = "EXEC spCarro_Alterar @numeroCarro = ?, @fkDispositivo = ?, @idCarro = ?";
 
             jdbcTemplate.update(this.consulta,
                     carro.getNumero(),
-                    carro.getLinha().getId(),
                     carro.getDispositivo().getId(),
                     carro.getId()
             );
@@ -135,8 +116,7 @@ public class CarroDao implements Dao {
     @Override
     public boolean deletar(int id) {
         try {
-            this.consulta = "DELETE FROM tblCarro " +
-                    "WHERE idCarro = ?";
+            this.consulta = "EXEC spCarro_Deletar @idCarro = ?";
 
             jdbcTemplate.update(this.consulta, id);
             return true;

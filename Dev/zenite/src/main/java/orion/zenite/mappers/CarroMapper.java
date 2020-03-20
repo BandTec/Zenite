@@ -16,9 +16,9 @@ public class CarroMapper implements RowMapper<Carro> {
         carro.setId(resultSet.getInt("idCarro"));
         carro.setNumero(resultSet.getString("numeroCarro"));
 
-        Linha linha = new Linha();
-        linha.setId(resultSet.getInt("fkLinha"));
-        carro.setLinha(linha);
+      //  Linha linha = new Linha();
+      //  linha.setId(resultSet.getInt("fkLinha"));
+      //  carro.setLinha(linha);
 
         Dispositivo dispositivo = new Dispositivo();
         dispositivo.setTipoDispositivo(resultSet.getInt("fkTipo"));

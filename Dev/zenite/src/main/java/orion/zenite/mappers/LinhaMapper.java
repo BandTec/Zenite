@@ -23,12 +23,12 @@ public class LinhaMapper implements RowMapper<Linha>{
 
         PontoFinal pontoIda = new PontoFinal();
         pontoIda.setId(resultSet.getInt("idPontoIda"));
-        pontoIda.setNome(resultSet.getString("nomeIda"));
+        pontoIda.setNome(resultSet.getString("terminalIda"));
         linha.setPontoIda(pontoIda);
 
         PontoFinal pontoVolta = new PontoFinal();
-        pontoVolta.setId(resultSet.getInt("idPontoVolta"));
-        pontoVolta.setNome(resultSet.getString("nomeVolta"));
+        pontoVolta.setId(resultSet.getInt("idPontoFinal"));
+        pontoVolta.setNome(resultSet.getString("terminalVolta"));
         linha.setPontoVolta(pontoVolta);
 
         return linha;

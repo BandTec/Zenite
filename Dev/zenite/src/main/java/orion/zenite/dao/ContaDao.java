@@ -34,10 +34,7 @@ public class ContaDao implements Dao{
     @Override
     public Object buscarPorId(int id) {
         try {
-            this.consulta = "SELECT c.*, n.descricao " +
-                    "FROM tblConta as c inner join tblNivel as n " +
-                    "on n.idNivel = c.fkNivel " +
-                    "WHERE idConta = ?";
+            this.consulta = "EXEC spConta_BuscaPorId @idConta = ?";
 
             Conta conta = jdbcTemplate.queryForObject(
                     consulta,
@@ -54,18 +51,8 @@ public class ContaDao implements Dao{
 
     public Nivel buscarNivelPorEmail(String email) {
         try {
-            this.consulta = "SELECT c.*, n.descricao " +
-                    "FROM tblConta as c inner join tblNivel as n " +
-                    "on n.idNivel = c.fkNivel " +
-                    "WHERE email = ?";
-
-            Conta conta = jdbcTemplate.queryForObject(
-                    consulta,
-                    new ContaMapper(),
-                    email
-            );
-
-            return conta.getNivel();
+            Conta conta = this.buscarPorEmail(email);
+            return conta != null ? conta.getNivel() : null;
         }  catch (Exception e){
             System.out.println("Erro: " + e.getMessage());
             return null;
@@ -74,10 +61,17 @@ public class ContaDao implements Dao{
 
     public boolean verificarSeExistePorEmail(String email) {
         try {
-            this.consulta = "SELECT c.*, n.descricao " +
-                    "FROM tblConta as c inner join tblNivel as n " +
-                    "on n.idNivel = c.fkNivel " +
-                    "WHERE email = ?";
+            return this.buscarPorEmail(email) != null ? true : false;
+        }  catch (Exception e){
+            System.out.println("Erro: " + e.getMessage());
+            return false;
+        }
+    }
+
+
+    public Conta buscarPorEmail(String email) {
+        try {
+            this.consulta = "EXEC spConta_BuscarPorEmail @email = ?";
 
             Conta conta = jdbcTemplate.queryForObject(
                     consulta,
@@ -85,19 +79,16 @@ public class ContaDao implements Dao{
                     email
             );
 
-            return true;
+            return conta;
         }  catch (Exception e){
             System.out.println("Erro: " + e.getMessage());
-            return false;
+            return null;
         }
     }
 
     public Conta buscarPorEmailSenha(LoginRequest loginRequest) {
         try {
-            this.consulta = "SELECT c.*, n.descricao " +
-                    "FROM tblConta as c inner join tblNivel as n " +
-                    "on n.idNivel = c.fkNivel " +
-                    "WHERE email = ? AND senha = ?";
+            this.consulta = "EXEC spLogin @email = ?, @senha = ?";
 
             Conta conta = jdbcTemplate.queryForObject(
                     consulta,
@@ -116,9 +107,7 @@ public class ContaDao implements Dao{
     @Override
     public List<Conta> buscarTodos() {
         try {
-            this.consulta = "SELECT c.*, n.descricao " +
-                    "FROM tblConta as c inner join tblNivel as n " +
-                    "on n.idNivel = c.fkNivel";
+            this.consulta = "EXEC spConta_BuscaTodos";
 
             List<Conta> contas = jdbcTemplate.query(consulta, new ContaMapper());
 
@@ -131,7 +120,7 @@ public class ContaDao implements Dao{
 
     public int ultimoId(){
         try {
-            this.consulta = "SELECT TOP 1 idConta FROM tblConta ORDER BY idConta DESC";
+            this.consulta = "EXEC spConta_BuscaUltimoId";
 
             int ultimoId = jdbcTemplate.queryForObject(
                     consulta, Integer.class);
@@ -148,7 +137,7 @@ public class ContaDao implements Dao{
     public boolean inserir(Object obj) {
         try {
             Conta conta = (Conta) obj;
-            this.consulta = "INSERT INTO tblConta (email, senha, fkNivel) values (?, ?, ?)";
+            this.consulta = "EXEC spConta_Inserir @email = ?, @senha = ?, @fkNivel = ?";
 
             jdbcTemplate.update(
                     consulta,
@@ -167,11 +156,11 @@ public class ContaDao implements Dao{
     public boolean alterar(Object obj) {
         try {
             Conta conta = (Conta) obj;
-            this.consulta = "UPDATE tblConta SET email = ?, senha = ? fkNivel = ? WHERE idConta = ?";
+            this.consulta = "EXEC spConta_Alterar @email = ?, @senha = ?, @fkNivel = ?, @idConta = ?";
 
             jdbcTemplate.update(
                     consulta,
-                    conta.getEmail(), conta.getSenha(), conta.getNivel().getId()
+                    conta.getEmail(), conta.getSenha(), conta.getNivel().getId(), conta.getIdConta()
                     );
 
             return true;
@@ -185,7 +174,7 @@ public class ContaDao implements Dao{
     @Override
     public boolean deletar(int id) {
         try {
-            this.consulta = "DELETE FROM tblConta WHERE idConta = ?";
+            this.consulta = "EXEC spConta_Deletar @idConta = ?";
             jdbcTemplate.update(consulta, id);
 
             return true;

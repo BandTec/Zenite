@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 public class LinhaDao implements Dao {
 
-    // super("tblLinha", new String[]{"idLinha", "fkPontoIda", "fkPontoVolta", "numeroLinha"});
-
     private String consulta;
 
     @Autowired
@@ -22,15 +20,7 @@ public class LinhaDao implements Dao {
     @Override
     public Object buscarPorId(int id) {
         try {
-            this.consulta = "SELECT linha.idLinha, linha.numeroLinha, " +
-                    "pontoIda.idPontoFinal AS 'idPontoIda', pontoIda.nomeTerminal AS 'nomeIda', " +
-                    "pontoVolta.idPontoFinal AS 'idPontoVolta', pontoVolta.nomeTerminal AS 'nomeVolta' " +
-                    "FROM tblLinha AS linha " +
-                    "INNER JOIN tblPontoFinal AS pontoIda " +
-                    "ON pontoIda.idPontoFinal = linha.fkPontoIda " +
-                    "INNER JOIN tblPontoFinal AS pontoVolta " +
-                    "ON pontoVolta.idPontoFinal = linha.fkPontoVolta " +
-                    "WHERE idLinha = ?";
+            this.consulta = "EXEC spLinha_BuscaPorId @idLinha = ?";
 
             return jdbcTemplate.queryForObject(this.consulta,
                     new LinhaMapper(),
@@ -46,14 +36,7 @@ public class LinhaDao implements Dao {
     @Override
     public List<?> buscarTodos() {
         try {
-            this.consulta = "SELECT linha.idLinha, linha.numeroLinha, " +
-                    "pontoIda.idPontoFinal AS 'idPontoIda', pontoIda.nomeTerminal AS 'nomeIda', " +
-                    "pontoVolta.idPontoFinal AS 'idPontoVolta', pontoVolta.nomeTerminal AS 'nomeVolta' " +
-                    "FROM tblLinha AS linha " +
-                    "INNER JOIN tblPontoFinal AS pontoIda " +
-                    "ON pontoIda.idPontoFinal = linha.fkPontoIda " +
-                    "INNER JOIN tblPontoFinal AS pontoVolta " +
-                    "ON pontoVolta.idPontoFinal = linha.fkPontoVolta";
+            this.consulta = "EXEC spLinha_BuscaTodos";
 
             return jdbcTemplate.query(this.consulta, new LinhaMapper());
 
@@ -65,15 +48,7 @@ public class LinhaDao implements Dao {
 
     public List<?> buscarTodosPorPontoVolta(PontoFinal pontoVolta) {
         try {
-            this.consulta = "SELECT linha.idLinha, linha.numeroLinha, " +
-                    "pontoIda.idPontoFinal AS 'idPontoIda', pontoIda.nomeTerminal AS 'nomeIda', " +
-                    "pontoVolta.idPontoFinal AS 'idPontoVolta', pontoVolta.nomeTerminal AS 'nomeVolta' " +
-                    "FROM tblLinha AS linha " +
-                    "INNER JOIN tblPontoFinal AS pontoIda " +
-                    "ON pontoIda.idPontoFinal = linha.fkPontoIda " +
-                    "INNER JOIN tblPontoFinal AS pontoVolta " +
-                    "ON pontoVolta.idPontoFinal = linha.fkPontoVolta " +
-                    "WHERE fkPontoVolta = ? OR pontoVolta.nomeTerminal like ?";
+            this.consulta = "EXEC spLinha_BuscaTodosPorPontoIda @idPontoIda = ?, @pontoIda = ?";
 
             return jdbcTemplate.query(this.consulta,
                     new LinhaMapper(), pontoVolta.getId(), pontoVolta.getNome());
@@ -86,15 +61,7 @@ public class LinhaDao implements Dao {
 
     public List<?> buscarTodosPorPontoIda(PontoFinal pontoIda) {
         try {
-            this.consulta = "SELECT linha.idLinha, linha.numeroLinha, " +
-                    "pontoIda.idPontoFinal AS 'idPontoIda', pontoIda.nomeTerminal AS 'nomeIda', " +
-                    "pontoVolta.idPontoFinal AS 'idPontoVolta', pontoVolta.nomeTerminal AS 'nomeVolta' " +
-                    "FROM tblLinha AS linha " +
-                    "INNER JOIN tblPontoFinal AS pontoIda " +
-                    "ON pontoIda.idPontoFinal = linha.fkPontoIda " +
-                    "INNER JOIN tblPontoFinal AS pontoVolta " +
-                    "ON pontoVolta.idPontoFinal = linha.fkPontoVolta " +
-                    "WHERE fkPontoIda = ? OR pontoIda.nomeTerminal like ?";
+            this.consulta = "EXEC spLinha_BuscaTodosPorPontoVolta @idPontoVolta = ?, @pontoVolta = ?";
 
             return jdbcTemplate.query(this.consulta,
                     new LinhaMapper(), pontoIda.getId(), pontoIda.getNome());
@@ -108,7 +75,7 @@ public class LinhaDao implements Dao {
     @Override
     public int ultimoId() {
         try {
-            this.consulta = "SELECT TOP 1 idLinha FROM tblLinha ORDER BY idLinha DESC";
+            this.consulta = "EXEC spLinha_BuscaUltimoId";
             return jdbcTemplate.queryForObject(this.consulta, Integer.class);
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
@@ -120,7 +87,7 @@ public class LinhaDao implements Dao {
     public boolean inserir(Object obj) {
         try {
             Linha linha = (Linha) obj;
-            this.consulta = "INSERT INTO tblLinha (numeroLinha, fkPontoIda, fkPontoVolta) values (?, ?, ?)";
+            this.consulta = "EXEC spLinha_Inserir @numeroLinha = ?, @fkPontoIda = ?, @fkPontoVolta = ?";
             jdbcTemplate.update(this.consulta,
                     linha.getNumero(),
                     linha.getPontoIda().getId(),
@@ -136,9 +103,9 @@ public class LinhaDao implements Dao {
     public boolean alterar(Object obj) {
         try {
             Linha linha = (Linha) obj;
-            this.consulta = "UPDATE tblLinha " +
-                    "SET numeroLinha = ?, fkPontoIda = ?, fkPontoVolta = ? " +
-                    "WHERE idLinha = ?";
+            this.consulta = "EXEC spLinha_Alterar " +
+                    "@numeroLinha = ?, @fkPontoIda = ?, @fkPontoVolta = ?, " +
+                    "@idLinha = ?";
 
             jdbcTemplate.update(this.consulta,
                     linha.getNumero(),
@@ -157,7 +124,7 @@ public class LinhaDao implements Dao {
     @Override
     public boolean deletar(int id) {
         try {
-            this.consulta = "DELETE FROM tblLinha WHERE idLinha = ?";
+            this.consulta = "EXEC spLinha_Deletar @idLinha = ?";
 
             jdbcTemplate.update(this.consulta,
                     id

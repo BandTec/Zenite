@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import orion.zenite.mappers.PontoFinalMapper;
-import orion.zenite.models.Conta;
 import orion.zenite.models.PontoFinal;
 
 import java.util.List;
@@ -14,11 +13,6 @@ public class PontoFinalDao implements Dao {
 
     private String consulta;
 
-
-    //  tblPontoFinal
-    //  "idPontoFinal", "nomeTerminal";
-
-
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -27,7 +21,7 @@ public class PontoFinalDao implements Dao {
         try {
             PontoFinal ponto = (PontoFinal) obj;
 
-            this.consulta = "INSERT INTO tblPontoFinal (nomeTerminal) values (?)";
+            this.consulta = "EXEC spPontoFinal_Inserir @nomeTerminal = ?";
 
             jdbcTemplate.update(consulta, ponto.getNome());
 
@@ -42,7 +36,7 @@ public class PontoFinalDao implements Dao {
     @Override
     public Object buscarPorId(int id) {
         try {
-            this.consulta = "SELECT FROM tblPontoFinal WHERE idPontoFinal = ?";
+            this.consulta = "EXEC spPontoFinal_BuscaPorId @idPontoFinal = ?";
 
             return jdbcTemplate.queryForObject(consulta, new PontoFinalMapper(), id);
 
@@ -55,7 +49,7 @@ public class PontoFinalDao implements Dao {
     @Override
     public List<?> buscarTodos() {
         try {
-            this.consulta = "SELECT * FROM tblPontoFinal";
+            this.consulta = "EXEC spPontoFinal_BuscaTodos";
 
             return jdbcTemplate.query(consulta, new PontoFinalMapper());
 
@@ -68,7 +62,7 @@ public class PontoFinalDao implements Dao {
     @Override
     public int ultimoId() {
         try {
-            this.consulta = "SELECT TOP 1 idPontoFinal FROM tblPontoFinal ORDER BY idPontoFinal DESC";
+            this.consulta = "EXEC spPontoFinal_BuscaUltimoId";
 
             return jdbcTemplate.queryForObject(consulta, Integer.class);
 
@@ -83,7 +77,7 @@ public class PontoFinalDao implements Dao {
         try {
             PontoFinal ponto = (PontoFinal) obj;
 
-            this.consulta = "UPDATE tblPontoFinal SET nomeTerminal = ? WHERE idPontoFinal = ?";
+            this.consulta = "EXEC spPontoFinal_Alterar @nomeTerminal = ?, @idPontoFinal = ?";
 
             jdbcTemplate.update(consulta, ponto.getNome(), ponto.getId());
 
@@ -97,7 +91,7 @@ public class PontoFinalDao implements Dao {
     @Override
     public boolean deletar(int id) {
         try {
-            this.consulta = "DELETE FROM tblPontoFinal WHERE idPontoFinal = ?";
+            this.consulta = "EXEC spPontoFinal_Deletar @idPontoFinal = ?";
 
             jdbcTemplate.update(consulta, new PontoFinalMapper(), id);
 

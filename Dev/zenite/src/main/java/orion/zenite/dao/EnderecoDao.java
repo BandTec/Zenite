@@ -4,11 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
+import orion.zenite.mappers.CarroMapper;
 import orion.zenite.mappers.EnderecoMapper;
+import orion.zenite.models.Carro;
 import orion.zenite.models.Endereco;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /*
  * Classe que realiza consultas no banco de dados com o JDBC
@@ -26,15 +33,15 @@ public class EnderecoDao implements Dao{
     @Override
     public Endereco buscarPorId(int id) {
         try {
-            this.consulta = "SELECT * FROM tblEndereco WHERE idEndereco = ?";
+            this.consulta = "EXEC spEndereco_BuscaPorId @idEndereco = ?";
 
             Endereco endereco = jdbcTemplate.queryForObject(
                     consulta,
                     new BeanPropertyRowMapper<Endereco>(Endereco.class),
                     id
             );
-
             return endereco;
+
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
             return null;
@@ -43,7 +50,7 @@ public class EnderecoDao implements Dao{
 
     public Endereco buscarPorCep(String cep) {
         try {
-            this.consulta = "SELECT * FROM tblEndereco WHERE CEP = ?";
+            this.consulta = "EXEC spEndereco_BuscaPorCep @cep = ?";
 
             Endereco endereco = jdbcTemplate.queryForObject(
                     consulta,
@@ -61,7 +68,7 @@ public class EnderecoDao implements Dao{
     @Override
     public List<Endereco> buscarTodos() {
         try {
-            this.consulta = "SELECT * FROM tblEndereco";
+            this.consulta = "EXEC spEndereco_BuscaTodosEnderecos";
             return jdbcTemplate.query(consulta, new EnderecoMapper());
         }catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
@@ -72,7 +79,7 @@ public class EnderecoDao implements Dao{
     @Override
     public int ultimoId(){
         try {
-            this.consulta = "SELECT TOP 1 idEndereco FROM tblEndereco ORDER BY idEndereco DESC";
+            this.consulta = "EXEC spEndereco_BuscaUltimoId";
 
             int ultimoId = jdbcTemplate.queryForObject(
                     consulta, Integer.class);
@@ -89,9 +96,8 @@ public class EnderecoDao implements Dao{
     public boolean inserir(Object obj) {
         try {
             Endereco endereco = (Endereco) obj;
-            this.consulta = "INSERT INTO tblEndereco (" +
-                    "CEP, logradouro, numero, complemento, cidade, estado" +
-                    ") values (?, ?, ?, ?, ?, ?)";
+            this.consulta = "EXEC spEndereco_Inserir @CEP = ?, @logradouro = ?, @numero = ?, " +
+                    "@complemento = ?, @cidade = ?, @estado = ?";
 
             jdbcTemplate.update(
                     consulta,
@@ -112,9 +118,8 @@ public class EnderecoDao implements Dao{
     public boolean alterar(Object obj) {
         try {
             Endereco endereco = (Endereco) obj;
-            this.consulta = "UPDATE tblEndereco SET CEP = ?, " +
-                    "logradouro = ?, numero = ?, complemento = ?, cidade = ?, " +
-                    "estado = ? WHERE idEndereco = ?";
+            this.consulta = "EXEC spEndereco_Alterar @CEP = ?, @logradouro = ?, @numero = ?, " +
+                    "@complemento = ?, @cidade = ?, @estado = ?, @idEndereco = ?";
 
             jdbcTemplate.update(
                     consulta,
@@ -135,7 +140,7 @@ public class EnderecoDao implements Dao{
     @Override
     public boolean deletar(int id) {
         try {
-            this.consulta = "DELETE FROM tblEndereco WHERE idEndereco = ?";
+            this.consulta = "EXEC spEndereco_Deletar @idEndereco = ?";
             jdbcTemplate.update(consulta, id);
 
             return true;
