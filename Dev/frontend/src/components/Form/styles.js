@@ -1,7 +1,30 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  border: 1px solid #C1C1C1;
-  height: 300px;
-  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 35%;
+  height: 637px;
+  background: #FFF;
 `;
+
+
+export const LogoZenite = styled.img`
+  width: 150px;
+  
+  margin-bottom: 16px;
+`;
+
+export const RecuperarSenha = styled.a`
+  margin-left: 21px;
+
+  color: #0285C0;
+`;
+
+export const OpcoesAdicionais = styled.div`
+  flex-direction:row
+`;
+

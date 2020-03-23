@@ -9,8 +9,11 @@ export default function Login() {
   return (
     <Container>
       <Form>
+        Email
         <Input />
-        <Button />
+        Senha
+        <Input />
+        <Button text='Entrar'/>
       </Form>
     </Container>
   );

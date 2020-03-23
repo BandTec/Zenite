@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 * {
     margin: 0;
     padding: 0;
     outline: 0;
+    border: 0;
     box-sizing: border-box;
 }
 
@@ -10,12 +12,13 @@ html, body, #root {
 }
 
 body {
-    background: #000 url('./assets/img/background.jpg') no-repeat;
+    background: linear-gradient(134.1deg, #0066AC 42.24%, #0B478D 82.32%), #0B478D;
     background-size: cover;
     -webkit-font-smoothing: antialiased !important;   
 }
 
 body, input, button {
-    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 14px;
+    font-weight: 600;
 }
