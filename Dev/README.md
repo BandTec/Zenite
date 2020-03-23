@@ -8,7 +8,7 @@ Corpo da Requisição:
 
 ```
 {
-	"password": "senha2",
+	"senha": "senha2",
 	"email": "email2"
 }
 ```
@@ -25,26 +25,35 @@ Corpo da Requisição:
 
 ```
 {
-    "senha": "senha6",
-    "email": "email6",
-    "nivel": 1,
-    "nome": "teste",
-    "cpf": "123-123-123",
-    "dataNascimento": "9879879",
-    "numeroTelefone": "23424324",
-    "endereco": {
-      "id": 0,
-      "cep": "234234",
-      "logradouro": "rua tal",
-      "numero": "12s",
-      "complemento": "ola",
-      "cidade": "teste",
-      "estado": "tt"
-    },
-    "registroFiscal": "123123",
-    "dispositivo": {
-      "codigo": "13",
-      "tipoDispositivo": 2
-    }
+ "id": 0,
+ "nome": "Fatima Bernades",
+ "cpf": "123-123-123",
+ "dataNascimento": "1990-09-20",
+ "numeroTelefone": "2342 4324",
+ "endereco": {
+	"id": 5,
+	"cep": "1234-43",
+	"logradouro": "Rua Maria Antonieta",
+	"numero": "12",
+	"complemento": "APT 2",
+	"cidade": "São Paulo",
+	"estado": "SP"
+ },
+ "registroFiscal": "123123",
+ "dispositivo": {
+ 	"id": 0,
+	"codigo": "9080",
+	"tipoDispositivo": {
+		"id": 1
+	}
+ },
+ "conta": {
+	"idConta": 0,
+	"senha": "senha6",
+	"email": "email6",
+ 	"nivel": { 
+		"id": 3
+ 	}
+ }
 }
 ```

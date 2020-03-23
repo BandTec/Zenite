@@ -1,27 +1,27 @@
 package orion.zenite.models;
 
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="tblLinha")
 public class Linha {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idLinha")
     private int id;
+
+    @Column(length = 7, nullable = false)
     private String numero;
+
+    @ManyToOne
+    @JoinColumn(name = "fkPontoIda")
     private PontoFinal pontoIda;
+
+    @ManyToOne
+    @JoinColumn(name = "fkPontoVolta")
     private PontoFinal pontoVolta;
-
-    public Linha() {};
-
-    public Linha(int id, String numero, PontoFinal pontoIda, PontoFinal pontoVolta) {
-        this.id = id;
-        this.numero = numero;
-        this.pontoIda = pontoIda;
-        this.pontoVolta = pontoVolta;
-    }
-
-    public Linha(String numero, PontoFinal pontoIda, PontoFinal pontoVolta) {
-        this.numero = numero;
-        this.pontoIda = pontoIda;
-        this.pontoVolta = pontoVolta;
-    }
 
     public String getNumero() {
         return numero;

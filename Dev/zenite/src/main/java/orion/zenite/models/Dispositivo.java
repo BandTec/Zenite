@@ -1,23 +1,30 @@
 package orion.zenite.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name="tblDispositivo")
 public class Dispositivo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="idDispositivo")
     private int id;
+
+    @Column(name = "codigoDispositivo", nullable = false)
     private String codigo;
+
+    @ManyToOne
+    @JoinColumn(name="fkTipo")
     private TipoDispositivo tipoDispositivo;
 
-    public Dispositivo() {};
-
-    public Dispositivo(int id, String codigo, TipoDispositivo tipoDispositivo) {
-        this.id = id;
-        this.codigo = codigo;
-        this.tipoDispositivo = tipoDispositivo;
-    }
-
-    public Dispositivo(String codigo, TipoDispositivo tipoDispositivo) {
-        this.codigo = codigo;
-        this.tipoDispositivo = tipoDispositivo;
-    }
+     /*@JsonIgnore
+    @OneToOne(mappedBy = "dispositivo")
+    private Carro carro;
+      */
 
     public int getId() {
         return id;
@@ -41,22 +48,5 @@ public class Dispositivo {
 
     public void setTipoDispositivo(TipoDispositivo tipoDispositivo) {
         this.tipoDispositivo = tipoDispositivo;
-    }
-
-    public void setTipoDispositivo(int tipoDispositivo) {
-        this.tipoDispositivo = TipoDispositivo.escolherPorId(tipoDispositivo);
-    }
-
-    public void setTipoDispositivo(String tipoDispositivo) {
-        this.tipoDispositivo = TipoDispositivo.valueOf(tipoDispositivo.toUpperCase());
-    }
-
-    @Override
-    public String toString() {
-        return "Dispositivo{" +
-                "id=" + id +
-                ", codigo='" + codigo + '\'' +
-                ", tipoDispositivo=" + tipoDispositivo +
-                '}';
     }
 }

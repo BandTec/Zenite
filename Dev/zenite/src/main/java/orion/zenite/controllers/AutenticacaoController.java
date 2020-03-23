@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.dao.*;
 import orion.zenite.models.*;
 import orion.zenite.payload.ApiResponse;
 import orion.zenite.payload.LoginRequest;
+import orion.zenite.repository.ContaDao;
 import orion.zenite.security.AuthJwt;
 
 
@@ -24,7 +24,7 @@ public class AutenticacaoController {
 
     // Classe que realiza consulta no banco de dados
     @Autowired
-    private ContaDao contaBD = new ContaDao();
+    private ContaDao contaBD;
 
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
@@ -35,7 +35,7 @@ public class AutenticacaoController {
                     HttpStatus.BAD_REQUEST);
         }
 
-        Conta usuario = contaBD.buscarPorEmailSenha(loginRequest);
+        Conta usuario = contaBD.findByEmailAndSenha(loginRequest.getEmail(), loginRequest.getSenha());
 
         if(usuario == null) {
             return new ResponseEntity<>(

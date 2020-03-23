@@ -1,28 +1,19 @@
 package orion.zenite.models;
 
-public enum Nivel {
-    ADMIN(1),
-    GERENTE(2),
-    FISCAL(3),
-    MOTORISTA(4),
-    PASSAGEIRO(5);
+import javax.persistence.*;
+import java.util.List;
 
+@Entity
+@Table(name="tblNivel")
+public class Nivel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idNivel")
     private int id;
 
-    Nivel(int id){
-        this.id = id;
-    }
-
-    public static Nivel escolherPorId(int id){
-        Nivel encontrada = null;
-        for(Nivel atual : values()){
-            if(atual.getId() == id){
-                encontrada = atual;
-            }
-        }
-
-        return encontrada;
-    }
+    @Column(name="descricao", nullable = false)
+    private String tipoNivel;
 
     public int getId() {
         return id;
@@ -32,4 +23,11 @@ public enum Nivel {
         this.id = id;
     }
 
+    public String getTipoNivel() {
+        return tipoNivel;
+    }
+
+    public void setTipoNivel(String tipoNivel) {
+        this.tipoNivel = tipoNivel;
+    }
 }

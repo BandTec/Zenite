@@ -1,27 +1,26 @@
 package orion.zenite.models;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name="tblCarro")
 public class Carro {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="idCarro")
     private int id;
+
+    @Column(name="numeroCarro")
     private String numero;
-    private Linha linha;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="fkDispositivo", referencedColumnName = "idDispositivo")
     private Dispositivo dispositivo;
 
-    public Carro() { }
-
-    public Carro(String numero, Dispositivo dispositivo) {
-        this.numero = numero;
-        this.linha = linha;
-        this.dispositivo = dispositivo;
-
-    }
-
-    public Carro(int id, String numero, Dispositivo dispositivo) {
-        this.id = id;
-        this.numero = numero;
-        this.linha = linha;
-        this.dispositivo = dispositivo;
-    }
+    @OneToMany(mappedBy = "carro")
+    private List<CarroLinha> carroLinhas;
 
     public int getId() {
         return id;
@@ -39,14 +38,6 @@ public class Carro {
         this.numero = numero;
     }
 
-    public Linha getLinha() {
-        return linha;
-    }
-
-    public void setLinha(Linha linha) {
-        this.linha = linha;
-    }
-
     public Dispositivo getDispositivo() {
         return dispositivo;
     }
@@ -55,13 +46,11 @@ public class Carro {
         this.dispositivo = dispositivo;
     }
 
-    @Override
-    public String toString() {
-        return "Carro{" +
-                "id=" + id +
-                ", numero='" + numero + '\'' +
-                ", linha=" + linha + '\'' +
-                ", dispositivo=" + dispositivo + '\'' +
-                '}';
+    public List<CarroLinha> getCarroLinhas() {
+        return carroLinhas;
+    }
+
+    public void setCarroLinhas(List<CarroLinha> carroLinhas) {
+        this.carroLinhas = carroLinhas;
     }
 }

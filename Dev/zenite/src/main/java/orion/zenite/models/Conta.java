@@ -1,43 +1,25 @@
 package orion.zenite.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "tblConta")
 public class Conta {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idConta")
     private int idConta;
+
+    @Column(length = 255, nullable = false)
     private String senha;
+
+    @Column(length = 60,nullable = false)
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name="fkNivel")
     private Nivel nivel;
-
-    public Conta() { } ;
-
-    public Conta(String senha, String email, int nivel) {
-        this.senha = senha;
-        this.email = email;
-        this.nivel = Nivel.escolherPorId(nivel);
-    }
-
-    public Conta(String senha, String email, String nivel) {
-        this.senha = senha;
-        this.email = email;
-        this.nivel = Nivel.valueOf(nivel.toUpperCase());
-    }
-
-
-    public Conta(int idConta, String senha, String email, String nivel) {
-        this.idConta = idConta;
-        this.senha = senha;
-        this.email = email;
-        this.nivel = Nivel.valueOf(nivel.toUpperCase());
-    }
-
-    @Override
-    public String toString() {
-        return "Conta{" +
-                "id=" + idConta +
-                ", senha='" + senha + '\'' +
-                ", email='" + email + '\'' +
-                ", nivel=" + nivel +
-                '}';
-    }
 
     public void setSenha(String senha) {
         this.senha = senha;
@@ -65,14 +47,6 @@ public class Conta {
 
     public Nivel getNivel() {
         return nivel;
-    }
-
-    public void setNivel(String nivel) {
-       this.nivel = Nivel.valueOf(nivel.toUpperCase());
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = Nivel.escolherPorId(nivel);
     }
 
     public void setNivel(Nivel nivel) {

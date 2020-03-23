@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.dao.ContaDao;
-import orion.zenite.dao.EnderecoDao;
 import orion.zenite.models.*;
 import orion.zenite.payload.ApiResponse;
+import orion.zenite.repository.*;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -26,53 +25,49 @@ public class FiscalController {
 
     // Classes que realiza consulta no banco de dados
     @Autowired
-    private EnderecoDao enderecoBD = new EnderecoDao();
+    private EnderecoDao enderecoBD;
 
     @Autowired
-    private ContaDao contaBD = new ContaDao();
+    private ContaDao contaBD;
 
     @PostMapping("cadastro")
     public ResponseEntity<?> cadastro(ServletRequest req, @RequestBody Fiscal fiscal) {
 
-        // Na requisição possui o email que foi decodificado do token
-        HttpServletRequest request = (HttpServletRequest) req;
+        try {
+            // Na requisição possui o email que foi decodificado do token
+            HttpServletRequest request = (HttpServletRequest) req;
 
-        String email = request.getAttribute("email").toString();
-        Nivel existe = contaBD.buscarNivelPorEmail(email);
+            String email = request.getAttribute("email").toString();
+            Conta conta = contaBD.findByEmail(email);
 
-        if (existe == null || existe != Nivel.GERENTE) {
-            return new ResponseEntity<>(
-                    new ApiResponse(false, "Não autorizado, verifique sua credenciais/nível."),
-                    HttpStatus.UNAUTHORIZED);
-        } else {
-
-            Fiscal novoFiscal = fiscal;
-
-            // inserir conta
-            boolean resultadoConta = contaBD.inserir(fiscal);
-            fiscal.setIdConta(contaBD.ultimoId());
-
-            // inserir endereco
-            boolean resultadoEnd = enderecoBD.inserir(fiscal.getEndereco());
-            Endereco endereco = fiscal.getEndereco();
-            endereco.setId(enderecoBD.ultimoId());
-            fiscal.setEndereco(endereco);
-
-            // inserir dispositivo
-
-            //  inserir funcionario
-
-
-            if (resultadoConta && resultadoEnd) {
+            if (conta == null) {
                 return new ResponseEntity<>(
-                        new ApiResponse(true, "Fiscal cadastrado"),
-                        HttpStatus.OK);
+                        new ApiResponse(false, "Não autorizado, verifique sua credenciais/nível."),
+                        HttpStatus.UNAUTHORIZED);
             } else {
+                // inserir conta
+                contaBD.save(fiscal.getConta());
+                fiscal.getConta().setIdConta(contaBD.lastId());
+
+                // inserir endereco
+                Endereco endereco = fiscal.getEndereco();
+                enderecoBD.save(endereco);
+                endereco.setId(enderecoBD.lastId());
+                fiscal.setEndereco(endereco);
+
+                //Dispositivo
+
+                // Fiscal
+
                 return new ResponseEntity<>(
-                        new ApiResponse(false, "Erro no cadastro do funcionario", novoFiscal),
+                        new ApiResponse(true, "Fiscal cadastrado", fiscal),
                         HttpStatus.OK);
             }
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    new ApiResponse(false, "Erro no cadastro do funcionario: " + e.getMessage()),
+                    HttpStatus.OK);
         }
-    }
 
+    }
 }

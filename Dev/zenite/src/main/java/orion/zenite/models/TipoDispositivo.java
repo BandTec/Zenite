@@ -1,25 +1,18 @@
 package orion.zenite.models;
 
-public enum TipoDispositivo {
-    ARDUINO(1),
-    CARTAO(2);
+import javax.persistence.*;
 
+@Entity
+@Table(name="tblTipoDispositivo")
+public class TipoDispositivo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idTipoDispositivo")
     private int id;
 
-    TipoDispositivo(int id){
-        this.id = id;
-    }
-
-    public static TipoDispositivo escolherPorId(int id){
-        TipoDispositivo encontrada = null;
-        for(TipoDispositivo atual : values()){
-            if(atual.getId() == id){
-                encontrada = atual;
-            }
-        }
-
-        return encontrada;
-    }
+    @Column(nullable = false, length = 10)
+    private String descricao;
 
     public int getId() {
         return id;
@@ -27,5 +20,13 @@ public enum TipoDispositivo {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
