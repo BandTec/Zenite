@@ -36,6 +36,58 @@ public class FiscalController {
     @Autowired
     private DispositivoDao dispositivoBD;
 
+    @GetMapping("consulta")
+    public ResponseEntity<?> consulta(ServletRequest req) {
+        try {
+            HttpServletRequest request = (HttpServletRequest) req;
+
+            String email = request.getAttribute("email").toString();
+            Conta conta = contaBD.findByEmail(email);
+
+            if (conta == null) {
+                return new ResponseEntity<>(
+                        new ApiResponse(false, "Não autorizado, verifique sua credenciais/nível."),
+                        HttpStatus.UNAUTHORIZED);
+            } else {
+                return new ResponseEntity<>(
+                        new ApiResponse(true, "Requisição concluída com sucesso.", fiscalBD.findAll()),
+                        HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    new ApiResponse(false, "Erro na consulta do funcionario: " + e.getMessage()),
+                    HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("consulta/{id}")
+    public ResponseEntity<?> consulta(ServletRequest req, @PathVariable("id") int id) {
+        try {
+            HttpServletRequest request = (HttpServletRequest) req;
+
+            String email = request.getAttribute("email").toString();
+            Conta conta = contaBD.findByEmail(email);
+
+            if (conta == null) {
+                return new ResponseEntity<>(
+                        new ApiResponse(false, "Não autorizado, verifique sua credenciais/nível."),
+                        HttpStatus.UNAUTHORIZED);
+            } else {
+                return new ResponseEntity<>(
+                        new ApiResponse(
+                                true,
+                                "Requisição concluída com sucesso.",
+                                fiscalBD.findById(id)
+                        ),
+                        HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    new ApiResponse(false, "Erro na consulta do funcionario: " + e.getMessage()),
+                    HttpStatus.OK);
+        }
+    }
+
     @PostMapping("cadastro")
     public ResponseEntity<?> cadastro(ServletRequest req, @RequestBody Fiscal fiscal) {
 
@@ -46,7 +98,7 @@ public class FiscalController {
             String email = request.getAttribute("email").toString();
             Conta conta = contaBD.findByEmail(email);
 
-            if (conta == null) {
+            if (conta == null /*&& conta.getNivel().getId() != 2*/) {
                 return new ResponseEntity<>(
                         new ApiResponse(false, "Não autorizado, verifique sua credenciais/nível."),
                         HttpStatus.UNAUTHORIZED);

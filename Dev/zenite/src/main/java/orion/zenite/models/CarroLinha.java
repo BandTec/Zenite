@@ -1,5 +1,7 @@
 package orion.zenite.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,7 @@ public class CarroLinha {
     @JoinColumn(name = "idLinha")
     private Linha linha;
 
+    @JsonIgnore
     @ManyToOne
     @MapsId("idCarro")
     @JoinColumn(name = "idCarro")

@@ -1,5 +1,7 @@
 package orion.zenite.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +18,7 @@ public class MotoristaCarro {
    // @EmbeddedId
    // MotoristaCarroId id;
 
+    @JsonIgnore
     @ManyToOne
     @MapsId("idMotorista")
     @JoinColumn(name = "idMotorista")
