@@ -2,9 +2,9 @@ package orion.zenite.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import orion.zenite.models.Nivel;
+import orion.zenite.models.Viagem;
 
-public interface NivelDao extends JpaRepository<Nivel, Integer> {
-    @Query(value = "select max(n.id) from Nivel n")
+public interface ViagemDao extends JpaRepository<Viagem, Integer> {
+    @Query(value = "select max(v.id) from Viagem v")
     int lastId();
 }

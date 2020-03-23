@@ -30,6 +30,12 @@ public class FiscalController {
     @Autowired
     private ContaDao contaBD;
 
+    @Autowired
+    private FiscalDao fiscalBD;
+
+    @Autowired
+    private DispositivoDao dispositivoBD;
+
     @PostMapping("cadastro")
     public ResponseEntity<?> cadastro(ServletRequest req, @RequestBody Fiscal fiscal) {
 
@@ -56,8 +62,12 @@ public class FiscalController {
                 fiscal.setEndereco(endereco);
 
                 //Dispositivo
+                dispositivoBD.save(fiscal.getDispositivo());
+                fiscal.getDispositivo().setId(dispositivoBD.lastId());
 
                 // Fiscal
+                fiscalBD.save(fiscal);
+                fiscal.setId(fiscalBD.lastId());
 
                 return new ResponseEntity<>(
                         new ApiResponse(true, "Fiscal cadastrado", fiscal),

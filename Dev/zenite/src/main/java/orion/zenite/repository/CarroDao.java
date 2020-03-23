@@ -1,7 +1,11 @@
 package orion.zenite.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import orion.zenite.models.Endereco;
+import org.springframework.data.jpa.repository.Query;
+import orion.zenite.models.Carro;
 
-public interface CarroDao extends JpaRepository<Endereco, Integer> {
+public interface CarroDao extends JpaRepository<Carro, Integer> {
+
+    @Query(value = "select max(c.id) from Carro c")
+    int lastId();
 }

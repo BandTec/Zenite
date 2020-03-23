@@ -1,7 +1,10 @@
 package orion.zenite.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import orion.zenite.models.Endereco;
+import org.springframework.data.jpa.repository.Query;
+import orion.zenite.models.Gerente;
 
-public interface GerenteDao extends JpaRepository<Endereco, Integer> {
+public interface GerenteDao extends JpaRepository<Gerente, Integer> {
+    @Query(value = "select max(g.id) from Gerente g")
+    int lastId();
 }
