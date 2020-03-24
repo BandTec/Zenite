@@ -1214,5 +1214,3 @@ BEGIN
 	SELECT MAX(idPontoFinal) AS idPontoFinal FROM tblPontoFinal
 
 END
-
-
