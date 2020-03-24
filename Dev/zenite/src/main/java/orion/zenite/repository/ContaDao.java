@@ -3,6 +3,9 @@ package orion.zenite.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import orion.zenite.models.Conta;
+import orion.zenite.models.Nivel;
+
+import java.util.List;
 
 public interface ContaDao extends JpaRepository<Conta, Integer> {
     
@@ -10,7 +13,9 @@ public interface ContaDao extends JpaRepository<Conta, Integer> {
 
     Conta findByEmail(String email);
 
-    Boolean existsByNivel(String tipoNivel);
+    List<Conta> findByNivel(Nivel nivel);
+
+    boolean existsByNivel(Nivel nivel);
 
     @Query(value = "select max(c.idConta) from Conta c")
     int lastId();

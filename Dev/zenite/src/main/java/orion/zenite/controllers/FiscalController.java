@@ -3,6 +3,7 @@ package orion.zenite.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import orion.zenite.models.*;
 import orion.zenite.payload.ApiResponse;
@@ -89,6 +90,7 @@ public class FiscalController {
     }
 
     @PostMapping("cadastro")
+    @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
     public ResponseEntity<?> cadastro(ServletRequest req, @RequestBody Fiscal fiscal) {
 
         try {

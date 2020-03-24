@@ -1,7 +1,6 @@
 package orion.zenite.models;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name="tblNivel")
@@ -13,7 +12,7 @@ public class Nivel {
     private int id;
 
     @Column(name="descricao", nullable = false)
-    private String tipoNivel;
+    private String descricao;
 
     public int getId() {
         return id;
@@ -23,11 +22,11 @@ public class Nivel {
         this.id = id;
     }
 
-    public String getTipoNivel() {
-        return tipoNivel;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setTipoNivel(String tipoNivel) {
-        this.tipoNivel = tipoNivel;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

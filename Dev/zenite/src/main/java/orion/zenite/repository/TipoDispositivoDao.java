@@ -7,4 +7,6 @@ import orion.zenite.models.TipoDispositivo;
 public interface TipoDispositivoDao extends JpaRepository<TipoDispositivo, Integer> {
     @Query(value = "select max(t.id) from TipoDispositivo t")
     int lastId();
+
+    TipoDispositivo findByDescricao(String descricao);
 }

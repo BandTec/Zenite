@@ -2,8 +2,8 @@ package orion.zenite.models;
 
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name="tblDadosViagem")
@@ -31,9 +31,9 @@ public class Viagem {
     private Fiscal fiscal;
 
     @Column(nullable = false)
-    private LocalDateTime horaSaida;
+    private LocalTime horaSaida;
 
-    private LocalDateTime horaChegada;
+    private LocalTime horaChegada;
 
     private int qtdPassageiros;
 
@@ -77,19 +77,19 @@ public class Viagem {
         this.fiscal = fiscal;
     }
 
-    public LocalDateTime getHoraSaida() {
+    public LocalTime getHoraSaida() {
         return horaSaida;
     }
 
-    public void setHoraSaida(LocalDateTime horaSaida) {
+    public void setHoraSaida(LocalTime horaSaida) {
         this.horaSaida = horaSaida;
     }
 
-    public LocalDateTime getHoraChegada() {
+    public LocalTime getHoraChegada() {
         return horaChegada;
     }
 
-    public void setHoraChegada(LocalDateTime horaChegada) {
+    public void setHoraChegada(LocalTime horaChegada) {
         this.horaChegada = horaChegada;
     }
 
