@@ -104,7 +104,7 @@ CREATE TABLE tblGerente(
 	fkEndereco int foreign key references tblEndereco(idEndereco)
 )
 
---Não estamos mais de um telefone mais caso isso seja preciso essa será a estrutura da tabela de associação
+--Nï¿½o estamos mais de um telefone mais caso isso seja preciso essa serï¿½ a estrutura da tabela de associaï¿½ï¿½o
 --DROP TABLE IF EXISTS tblTelefone_Funcionario
 --GO
 --CREATE TABLE tblTelefone_Funcionario(
@@ -166,7 +166,7 @@ CREATE TABLE tblDadosViagem(
 	qtdPassageiros int
 )
 
----Pensar na tabela de organização por arduino/rfid/dados viagem....
+---Pensar na tabela de organizaï¿½ï¿½o por arduino/rfid/dados viagem....
 
 --------------------------------------------------------------------FIM TABELAS--------------------------------------------------------------------
 
@@ -195,11 +195,11 @@ CREATE PROCEDURE spCadastroAdmin_i(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA CADASTRO DE ADMINS
+||	DESCRIï¿½ï¿½O: PROC PARA CADASTRO DE ADMINS
 ||	DATA: 07/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (07/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (07/03/2020)
 ||	
-||	EXEMPLO: EXEC spCadastroAdmin_i @email = 'alexbuarque20@gmail.com', @senha = '123456789', @nome = 'Alex Buarque da Silva Gusmão'
+||	EXEMPLO: EXEC spCadastroAdmin_i @email = 'alexbuarque20@gmail.com', @senha = '123456789', @nome = 'Alex Buarque da Silva Gusmï¿½o'
 */
 ---------------------------------------------------------
 
@@ -231,9 +231,9 @@ CREATE PROCEDURE spLogin(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA LOGIN DE USUARIO
+||	DESCRIï¿½ï¿½O: PROC PARA LOGIN DE USUARIO
 ||	DATA: 07/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (07/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (07/03/2020)
 ||	
 ||	EXEMPLO: EXEC spLogin @email = 'alexbuarque20@gmail.com', @senha = '123456789'
 */
@@ -257,9 +257,9 @@ CREATE PROCEDURE spNivel_s(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCA DOS NIVEIS DE USUÁRIOS DO SISTEMA
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCA DOS NIVEIS DE USUï¿½RIOS DO SISTEMA
 ||	DATA: 07/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (07/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (07/03/2020)
 ||	
 ||	EXEMPLO: EXEC spNivel_s @idNivel = null, @descricao = null
 */
@@ -287,9 +287,9 @@ CREATE PROCEDURE spLinha_BuscaPorId(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCA DOS DADOS DE UMA LINHA ESPECIFICA
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCA DOS DADOS DE UMA LINHA ESPECIFICA
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spLinha_BuscaPorId @idLinha = 1
 */
@@ -314,9 +314,9 @@ CREATE PROCEDURE spLinha_BuscaTodos
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCA DOS DADOS DE TODAS AS LINHAS
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCA DOS DADOS DE TODAS AS LINHAS
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spLinha_BuscaTodos
 */
@@ -342,9 +342,9 @@ CREATE PROCEDURE spLinha_BuscaTodosPorPontoVolta(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCA DOS DADOS DE TODAS AS LINHAS QUE TEM UM PONTO VOLTA EM COMUM
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCA DOS DADOS DE TODAS AS LINHAS QUE TEM UM PONTO VOLTA EM COMUM
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spLinha_BuscaTodosPorPontoVolta @idPontoVolta = 1, @pontoVolta = null
 */
@@ -372,9 +372,9 @@ CREATE PROCEDURE spLinha_BuscaTodosPorPontoIda(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCA DOS DADOS DE TODAS AS LINHAS QUE TEM UM PONTO IDA EM COMUM
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCA DOS DADOS DE TODAS AS LINHAS QUE TEM UM PONTO IDA EM COMUM
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spLinha_BuscaTodosPorPontoIda @idPontoIda = 1, @pontoIda = null
 */
@@ -399,9 +399,9 @@ CREATE PROCEDURE spLinha_BuscaUltimoId
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCA DOS DADOS DA ULTIMA LINHA ADICIONADA
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCA DOS DADOS DA ULTIMA LINHA ADICIONADA
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spLinha_BuscaUltimoId @idPontoIda = 1, @pontoIda = null
 */
@@ -424,9 +424,9 @@ CREATE PROCEDURE spLinha_Inserir(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA INSERIR UMA NOVA LINHA DE ÔNIBUS
+||	DESCRIï¿½ï¿½O: PROC PARA INSERIR UMA NOVA LINHA DE ï¿½NIBUS
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spLinha_Inserir @numeroLinha = 2341-12, @fkPontoIda = 47, @fkPontoVolta = 12
 */
@@ -451,9 +451,9 @@ CREATE PROCEDURE spLinha_Alterar(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA ALTERAR UMA LINHA DE ÔNIBUS
+||	DESCRIï¿½ï¿½O: PROC PARA ALTERAR UMA LINHA DE ï¿½NIBUS
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spLinha_Alterar @numeroLinha = 2341-12, @fkPontoIda = 47, @fkPontoVolta = 12, @idLinha = 35
 */
@@ -478,9 +478,9 @@ CREATE PROCEDURE spLinha_Deletar(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA DELETAR UMA LINHA DE ÔNIBUS
+||	DESCRIï¿½ï¿½O: PROC PARA DELETAR UMA LINHA DE ï¿½NIBUS
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spLinha_Deletar @idLinha = 35
 */
@@ -501,9 +501,9 @@ CREATE PROCEDURE spEndereco_BuscaPorId(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR UM ENDEREÇO ESPECIFICO PELO ID
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR UM ENDEREï¿½O ESPECIFICO PELO ID
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spEndereco_BuscaPorId @idEndereco = 2
 */
@@ -525,9 +525,9 @@ CREATE PROCEDURE spEndereco_BuscaPorCep(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR UM ENDEREÇO ESPECIFICO PELO CEP
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR UM ENDEREï¿½O ESPECIFICO PELO CEP
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spEndereco_BuscaPorCep @CEP = '08140060'
 */
@@ -547,9 +547,9 @@ CREATE PROCEDURE spEndereco_BuscaTodosEnderecos
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR TODOS OS ENDEREÇOS
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR TODOS OS ENDEREï¿½OS
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spEndereco_BuscaTodosEnderecos
 */
@@ -568,9 +568,9 @@ CREATE PROCEDURE spEndereco_BuscaUltimoId
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR O ULTIMO ENDEREÇO ADICIONADO
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR O ULTIMO ENDEREï¿½O ADICIONADO
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spEndereco_BuscaUltimoId
 */
@@ -597,9 +597,9 @@ CREATE PROCEDURE spEndereco_Inserir(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA INSERIR UM NOVO ENDERECO
+||	DESCRIï¿½ï¿½O: PROC PARA INSERIR UM NOVO ENDERECO
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spEndereco_Inserir @cep = '08140060', @logradouro = 'Rua 2', @numero = '178', @complemento = null, @cidade = 'Guarulhos', @estado = 'SP'
 */
@@ -629,9 +629,9 @@ CREATE PROCEDURE spEndereco_Alterar(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA ALTERAR UM ENDERECO EXISTENTE
+||	DESCRIï¿½ï¿½O: PROC PARA ALTERAR UM ENDERECO EXISTENTE
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spEndereco_Alterar @cep = '08140060', @logradouro = 'Rua 2', @numero = '178', @complemento = null, @cidade = 'Guarulhos', @estado = 'SP', @idEndereco = 4
 */
@@ -660,9 +660,9 @@ CREATE PROCEDURE spEndereco_Deletar(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA DELETAR UM ENDEREÇO EXISTENTE
+||	DESCRIï¿½ï¿½O: PROC PARA DELETAR UM ENDEREï¿½O EXISTENTE
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spEndereco_Deletar @idEndereco = 4
 */
@@ -685,9 +685,9 @@ CREATE PROCEDURE spConta_BuscaPorId(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR UMA CONTA ESPECIFICA PELO ID
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR UMA CONTA ESPECIFICA PELO ID
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spConta_BuscaPorId @idConta = 110
 */
@@ -703,17 +703,17 @@ END
 
 
 
-DROP PROCEDURE IF EXISTS spConta_buscarNivelPorEmail
+DROP PROCEDURE IF EXISTS spConta_BuscarPorEmail
 GO
-CREATE PROCEDURE spConta_buscarNivelPorEmail(
+CREATE PROCEDURE spConta_BuscarPorEmail(
 	@email varchar(60)
 )
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR O NIVEL DE UMA CONTA ESPECIFICA PELO E-MAIL
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR O NIVEL DE UMA CONTA ESPECIFICA PELO E-MAIL
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spConta_buscarNivelPorEmail @email = 'emailteste@orion.com'
 */
@@ -721,51 +721,25 @@ CREATE PROCEDURE spConta_buscarNivelPorEmail(
 AS
 BEGIN
 	
-	SELECT n.descricao from tblConta c
-		INNER JOIN tblNivel n on c.fkNivel = n.idNivel
-	WHERE C.idConta = @email
-
-END
-
-
-
-DROP PROCEDURE IF EXISTS spConta_verificarSeExistePorEmail
-GO
-CREATE PROCEDURE spConta_verificarSeExistePorEmail(
-	@email varchar(60)
-)
---------------------------------------------------------
-/*
-||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA VERIFICAR SE UMA CONTA ESPECIFICA EXISTE PELO E-MAIL
-||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
-||	
-||	EXEMPLO: EXEC spConta_verificarSeExistePorEmail @email = 'emailteste@orion.com'
-*/
----------------------------------------------------------
-AS
-BEGIN
-	
 	SELECT c.*, n.descricao from tblConta c
 		INNER JOIN tblNivel n on c.fkNivel = n.idNivel
-	WHERE C.idConta = @email
+	WHERE c.email = @email
 
 END
 
 
 
-DROP PROCEDURE IF EXISTS spConta_BuscaTodosEmails
+DROP PROCEDURE IF EXISTS spConta_BuscaTodos
 GO
-CREATE PROCEDURE spConta_BuscaTodosEmails
+CREATE PROCEDURE spConta_BuscaTodos
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR TODAS AS CONTAS
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR TODAS AS CONTAS
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
-||	EXEMPLO: EXEC spConta_BuscaTodosEmails @email = 'emailteste@orion.com'
+||	EXEMPLO: EXEC spConta_BuscaTodos
 */
 ---------------------------------------------------------
 AS
@@ -780,15 +754,13 @@ END
 
 DROP PROCEDURE IF EXISTS spConta_BuscaUltimoId
 GO
-CREATE PROCEDURE spConta_BuscaUltimoId(
-	@idConta int
-)
+CREATE PROCEDURE spConta_BuscaUltimoId()
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR O ID DA ULTIMA CONTA ADICIONADA
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR O ID DA ULTIMA CONTA ADICIONADA
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spConta_BuscaUltimoId @idConta = 74
 */
@@ -812,9 +784,9 @@ CREATE PROCEDURE spConta_Inserir(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA INSERIR UMA NOVA CONTA
+||	DESCRIï¿½ï¿½O: PROC PARA INSERIR UMA NOVA CONTA
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spConta_Inserir @email = 'fulano.ciclano@beltrano.com', @senha = '51656154158696153aa', @fkNivel = 3
 */
@@ -841,9 +813,9 @@ CREATE PROCEDURE spConta_Alterar(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA INSERIR UMA NOVA CONTA
+||	DESCRIï¿½ï¿½O: PROC PARA INSERIR UMA NOVA CONTA
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spConta_Alterar @email = 'fulano.ciclano@beltrano.com', @senha = '51656154158696153aa', @fkNivel = 3, @idConta = 2
 */
@@ -869,9 +841,9 @@ CREATE PROCEDURE spConta_Deletar(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA DELETAR UMA CONTA
+||	DESCRIï¿½ï¿½O: PROC PARA DELETAR UMA CONTA
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spConta_Deletar @idConta = 2
 */
@@ -894,9 +866,9 @@ CREATE PROCEDURE spCarro_BuscaPorId(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR UM CARRO PELO ID ESPECIFICO
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR UM CARRO PELO ID ESPECIFICO
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spCarro_BuscaPorId @idCarro = 87
 */
@@ -904,7 +876,7 @@ CREATE PROCEDURE spCarro_BuscaPorId(
 AS
 BEGIN
 	
-	SELECT carro.idCarro, carro.numeroCarro, carro.fkDispositivo,
+	SELECT carro.idCarro, carro.numeroCarro,
 		   d.idDispositivo, d.codigoDispositivo, d.fkTipo
 	FROM tblCarro as carro
 		INNER JOIN tblDispositivo d ON carro.fkDispositivo = d.idDispositivo
@@ -922,9 +894,9 @@ CREATE PROCEDURE spCarro_BuscaPorNumeroCarro(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR UM CARRO PELO NUMERO ESPECIFICO
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR UM CARRO PELO NUMERO ESPECIFICO
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spCarro_BuscaPorNumeroCarro @numeroCarro = 1784621
 */
@@ -932,7 +904,7 @@ CREATE PROCEDURE spCarro_BuscaPorNumeroCarro(
 AS
 BEGIN
 	
-	SELECT carro.idCarro, carro.numeroCarro, carro.fkDispositivo,
+	SELECT carro.idCarro, carro.numeroCarro, 
 		   d.idDispositivo, d.codigoDispositivo, d.fkTipo
 	FROM tblCarro as carro
 		INNER JOIN tblDispositivo d ON carro.fkDispositivo = d.idDispositivo
@@ -948,9 +920,9 @@ CREATE PROCEDURE spCarro_BuscarTodos
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR TODOS OS CARROS
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR TODOS OS CARROS
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spCarro_BuscarTodos
 */
@@ -958,7 +930,7 @@ CREATE PROCEDURE spCarro_BuscarTodos
 AS
 BEGIN
 	
-	SELECT carro.idCarro, carro.numeroCarro, carro.fkDispositivo,
+	SELECT carro.idCarro, carro.numeroCarro,
 		   d.idDispositivo, d.codigoDispositivo, d.fkTipo
 	FROM tblCarro as carro
 		INNER JOIN tblDispositivo d ON carro.fkDispositivo = d.idDispositivo
@@ -973,9 +945,9 @@ CREATE PROCEDURE spCarro_BuscaUltimoId
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR TODOS OS CARROS
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR TODOS OS CARROS
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spCarro_BuscaUltimoId
 */
@@ -998,9 +970,9 @@ CREATE PROCEDURE spCarro_Inserir(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA INSERIR UM ONIBUS
+||	DESCRIï¿½ï¿½O: PROC PARA INSERIR UM ONIBUS
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spCarro_Inserir @numeroCarro = '14785236', @fkDispositivo = '3'
 */
@@ -1021,14 +993,14 @@ GO
 CREATE PROCEDURE spCarro_Alterar(
 	@numeroCarro varchar(10),
 	@fkDispositivo int,
-	@IdCarro int
+	@idCarro int
 )
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA ALTERAR UM ONIBUS ESPECIFICO
+||	DESCRIï¿½ï¿½O: PROC PARA ALTERAR UM ONIBUS ESPECIFICO
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spCarro_Alterar @numeroCarro = '14785236', @fkDispositivo = '3', @idCarro = 745
 */
@@ -1039,7 +1011,7 @@ BEGIN
 	UPDATE tblCarro SET
 		numeroCarro = @numeroCarro,
 		fkDispositivo = @fkDispositivo
-	WHERE idCarro = @IdCarro
+	WHERE idCarro = @idCarro
 
 END
 
@@ -1048,14 +1020,14 @@ END
 DROP PROCEDURE IF EXISTS spCarro_Deletar
 GO
 CREATE PROCEDURE spCarro_Deletar(
-	@IdCarro int
+	@idCarro int
 )
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA DELETAR UM ONIBUS ESPECIFICO
+||	DESCRIï¿½ï¿½O: PROC PARA DELETAR UM ONIBUS ESPECIFICO
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spCarro_Deletar @idCarro = 745
 */
@@ -1064,7 +1036,7 @@ AS
 BEGIN
 	
 	DELETE FROM tblCarro
-	WHERE idCarro = @IdCarro
+	WHERE idCarro = @idCarro
 
 END
 
@@ -1078,9 +1050,9 @@ CREATE PROCEDURE spPontoFinal_Inserir(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA INSERIR UM PONTO FINAL/TERMINAL
+||	DESCRIï¿½ï¿½O: PROC PARA INSERIR UM PONTO FINAL/TERMINAL
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spPontoFinal_Inserir @nomeTerminal = 'Jd. Camargo Novo'
 */
@@ -1105,9 +1077,9 @@ CREATE PROCEDURE spPontoFinal_Alterar(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA ALTERAR UM PONTO FINAL/TERMINAL ESPECIFICO
+||	DESCRIï¿½ï¿½O: PROC PARA ALTERAR UM PONTO FINAL/TERMINAL ESPECIFICO
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spPontoFinal_Alterar @nomeTerminal = 'Jd. Camargo Velho', @idPontoFinal = 4563
 */
@@ -1131,9 +1103,9 @@ CREATE PROCEDURE spPontoFinal_Deletar(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA DELETAR UM PONTO FINAL/TERMINAL ESPECIFICO
+||	DESCRIï¿½ï¿½O: PROC PARA DELETAR UM PONTO FINAL/TERMINAL ESPECIFICO
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spPontoFinal_Alterar @idPontoFinal = 4563
 */
@@ -1156,9 +1128,9 @@ CREATE PROCEDURE spPontoFinal_BuscaPorId(
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR UM PONTO FINAL/TERMINAL ESPECIFICO
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR UM PONTO FINAL/TERMINAL ESPECIFICO
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spPontoFinal_BuscaPorId @idPontoFinal = 4563
 */
@@ -1179,9 +1151,9 @@ CREATE PROCEDURE spPontoFinal_BuscaTodos
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR TODOS PONTOS FINAIS/TERMINAIS ESPECIFICOS
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR TODOS PONTOS FINAIS/TERMINAIS ESPECIFICOS
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spPontoFinal_BuscaTodos
 */
@@ -1201,9 +1173,9 @@ CREATE PROCEDURE spPontoFinal_BuscaUltimoId
 --------------------------------------------------------
 /*
 ||	PROC CRIADA POR: ALEX GUSMAO
-||	DESCRIÇÃO: PROC PARA BUSCAR O ULTIMO PONTO FINAL/TERMINAL INSERIDO
+||	DESCRIï¿½ï¿½O: PROC PARA BUSCAR O ULTIMO PONTO FINAL/TERMINAL INSERIDO
 ||	DATA: 17/03/2020
-||	ATUALIZAÇÕES: CRIAÇÃO (17/03/2020)
+||	ATUALIZAï¿½ï¿½ES: CRIAï¿½ï¿½O (17/03/2020)
 ||	
 ||	EXEMPLO: EXEC spPontoFinal_BuscaUltimoId
 */
