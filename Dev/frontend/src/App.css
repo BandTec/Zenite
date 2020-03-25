@@ -5,20 +5,13 @@
     outline: 0;
     border: 0;
     box-sizing: border-box;
-}
-
-html, body, #root {
-    min-height: 100%;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 body {
     background: linear-gradient(134.1deg, #0066AC 42.24%, #0B478D 82.32%), #0B478D;
     background-size: cover;
-    -webkit-font-smoothing: antialiased !important;   
-}
-
-body, input, button {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
+    -webkit-font-smoothing: antialiased !important;
 }

@@ -7,7 +7,7 @@ export const Container = styled.div`
   align-items: center;
 
   width: 35%;
-  height: 637px;
+  height: 100vh;
   background: #FFF;
 `;
 
