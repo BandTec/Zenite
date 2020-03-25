@@ -1,9 +1,8 @@
 import React from 'react';
 
 import { Container, Row, BotaoRelatorio ,BotaoNovoFiscal, Tela, Acoes, Cabecalho } from './styles';
-import MenuLateral from '../../components/MenuLateral'
-import BotaoClaro from '../../components/BotaoClaro'
-import BotaoEscuro from '../../components/BotaoEscuro'
+import MenuLateral from '../../components/MenuLateral';
+import Botao from '../../components/Botao';
 
 import Titulo from '../../components/Titulo'
 
@@ -19,12 +18,15 @@ export default function CadastroFiscal() {
           </Row>
           <Row>
             <Acoes>
+
               <BotaoNovoFiscal>
-                <BotaoEscuro descricao='Novo Fiscal'/>
+                <Botao descricao='Novo Fiscal' estiloEscuro={true}/>
               </BotaoNovoFiscal>
+
               <BotaoRelatorio>
-                <BotaoClaro descricao='relatório'/>
+                <Botao descricao='relatório'/>
               </BotaoRelatorio>
+
             </Acoes>
           </Row>
         </Tela>
