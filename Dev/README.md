@@ -1,15 +1,15 @@
 ## API ZENITE
 
-
 ## Rota de Login
 
 **POST** http://localhost:8080/autentica/login
-Corpo da Requisição:
+Corpo da Requisição: 
+(abaixo credenciasi do adm)
 
 ```
 {
-	"senha": "senha2",
-	"email": "email2"
+ "senha": "12345678",
+ "email": "adm@adm.com"
 }
 ```
 

@@ -6,12 +6,13 @@ import orion.zenite.models.Conta;
 import orion.zenite.models.Nivel;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ContaDao extends JpaRepository<Conta, Integer> {
-    
+
     Conta findByEmailAndSenha(String email, String senha);
 
-    Conta findByEmail(String email);
+    Optional<Conta> findByEmail(String email);
 
     List<Conta> findByNivel(Nivel nivel);
 

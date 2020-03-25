@@ -4,77 +4,65 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.web.filter.GenericFilterBean;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 
-public class JwtFilter extends GenericFilterBean {
+import org.springframework.web.filter.OncePerRequestFilter;
 
-    /*
-     * Método que intercepta as requisições das rotas
-     * o método verifica se está sendo mandado o header de autenticação
-     * e se esse está mandando o token no formato certo e no tipo certo
-     * se o token for válido ele é decodificado utilizando o jwtSecret
-     * que está no arquivo:
-     *                        ~/main/resources/application.properties
-     * com o token decodificado o email do usuário é adicionado a requisição
-     * como um atributo que pode ser acessado nos métodos do Controller
-     * usando o nome do atributo que é email (em minúsculo).
-     */
-    public void doFilter(final ServletRequest req, final ServletResponse res, final FilterChain chain)
-            throws IOException, ServletException {
 
-        final HttpServletRequest request = (HttpServletRequest) req;
-        final HttpServletResponse response = (HttpServletResponse) res;
-        final String authHeader = request.getHeader("authorization");
+/*
+ * Classe que intercepta as requisições das rotas
+ *
+ * O método doFilterInternal verifica se está sendo mandado o header de autenticação
+ * e se o token é do tipo e formato certo.
+ *
+ * Se o token for válido ele é decodificado utilizando a classe JwtService
+ * e pegando o email do usuário que é então passado pelo método da classe UsuarioService
+ * que retorna um objeto UserDetails que pode ser enviado para o contexto do Spring Security
+ * implementado na classe SecurityConfig
+ *
+ */
+public class JwtFilter extends OncePerRequestFilter {
 
-        if ("OPTIONS".equals(request.getMethod())) {
-            response.setStatus(HttpServletResponse.SC_OK);
+    private JwtService jwtService;
+    private LoginService loginService;
 
-            chain.doFilter(req, res);
-        } else {
+    public JwtFilter(JwtService jwtService, LoginService loginService) {
+        this.jwtService = jwtService;
+        this.loginService = loginService;
+    }
 
-            if (authHeader == null) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST,"Authorization header needed");
-                return ;
-            }
+    @Override
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain)
+            throws ServletException, IOException {
 
+        String authHeader = request.getHeader("Authorization");
+
+        if (authHeader != null && authHeader.startsWith("Bearer")) {
             String[] jwtTokenParts = authHeader.split(" ");
 
-            if (jwtTokenParts.length != 2) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST,"Invalid Token format");
-                return ;
+            boolean isValid = jwtService.tokenValido(jwtTokenParts[1]);
+            if (isValid) {
+
+                String emailUsuario = jwtService.obterEmailDoToken(jwtTokenParts[1]);
+                UserDetails usuario = loginService.loadUserByUsername(emailUsuario);
+
+                UsernamePasswordAuthenticationToken usuarioAutenticado =
+                        new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+
+                usuarioAutenticado.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(usuarioAutenticado);
             }
-
-            if (authHeader.equals("Bearer")) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST,"Invalid Token type");
-                return ;
-            }
-
-            try {
-                // DECODIFICAÇÃO DO TOKEN
-                final Claims tokenOpen = Jwts.parser()
-                        .setSigningKey("jwtSecret")
-                        .parseClaimsJws(jwtTokenParts[1])
-                        .getBody();
-
-                String email = tokenOpen.getSubject();
-
-                // ADICIONANDO ATRIBUTO A REQUISIÇÃO
-                request.setAttribute("email", email);
-
-            } catch (final SignatureException e) {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,"Invalid token");
-                return ;
-            }
-
-            chain.doFilter(req, res);
         }
+
+        filterChain.doFilter(request, response);
     }
+
 }

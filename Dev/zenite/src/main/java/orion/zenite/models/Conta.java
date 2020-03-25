@@ -11,10 +11,10 @@ public class Conta {
     @Column(name = "idConta")
     private int idConta;
 
-    @Column(length = 255, nullable = false)
+    @Column(nullable = false)
     private String senha;
 
-    @Column(length = 60,nullable = false)
+    @Column(length = 100, nullable = false, unique = true)
     private String email;
 
     @ManyToOne
