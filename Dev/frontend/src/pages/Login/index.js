@@ -2,18 +2,16 @@ import React from 'react';
 
 import { Container } from './styles';
 import Form from '../../components/Form';
-// import Button from '../../components/Button';
-import Input from '../../components/Input';
+import Botao from '../../components/Botao';
+import Input from '../../components/InputComRotulo';
 
 export default function Login() {
   return (
     <Container>
       <Form>
-        Email
-        <Input />
-        Senha
-        <Input />
-        {/* <Button text='Entrar'/> */}
+        <Input texto="Email" tamanho={330}/>
+        <Input texto="Senha" type="password" tamanho={330}/>
+        <Botao descricao="Entrar" estiloEscuro={true} tamanho={330}/>
       </Form>
     </Container>
   );
