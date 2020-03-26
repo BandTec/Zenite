@@ -10,7 +10,7 @@ import Paginacao from '../../components/Paginacao';
 export default function CadastroFiscal() {
   return (
     <Container>
-        <MenuLateral />
+        <MenuLateral itemAtivo="fiscal" />
         <Tela>
           <Row>
             <Cabecalho>

@@ -13,7 +13,7 @@ export default function Login() {
         <Input />
         Senha
         <Input />
-        <Botao text='Entrar' estiloEscuro='false'/>
+        <Botao descricao='Entrar' estiloEscuro={true}/>
       </Form>
     </Container>
   );
