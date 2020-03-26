@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   Container,
@@ -20,8 +21,12 @@ export default function MenuLateral() {
   return (
     <Container>
         <MainMenu>
-          <img src={Logo} alt="Logo do Software Zenite"/>
-          <Icone src={Fiscal} title="Fiscal"/>
+          <Link to="/dashboard">
+            <img src={Logo} alt="Logo do Software Zenite"/>
+          </Link>
+          <Link to="/fiscal">
+            <Icone src={Fiscal} title="Fiscal"/>
+          </Link>
           <Icone src={Linha} title="Linha"/>
           <Icone src={Motorista} title="Motorista"/>
           <Icone src={Onibus} title="Ônibus"/>

@@ -4,9 +4,9 @@ export const Container = styled.div`
 `;
 
 export const Card = styled.div`
-    --grande: 300px;
+    --grande: 400px;
     --medio: 230px;
-    --pequeno: 130px;
+    --pequeno: 150px;
 
     --claro: #CCEAFA;
     --suave: #5CB9E9; 
