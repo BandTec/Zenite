@@ -11,7 +11,7 @@ var data = new Date()
 export default function Dashboard() {
   return (
     <Container>
-        <MenuLateral />
+        <MenuLateral itemAtivo='inicio'/>
         <Tela>
           <Row>
             <Titulo textoMenor={`Atualizado em ${data.getHours()}:${data.getMinutes()}`} textoMaior='Dashboard'/>

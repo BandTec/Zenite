@@ -1,7 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap');
 
 :root{
-    --cardGrande: 20vw;
+    --azulBemEscuro: #0B478D;
+    --azulEscuro:#005391;
+    --azul :#0066AC;
+    --azulClaro:#0285C0;
+    --azulMenuHover:#5CB9E9;
+    --azulMenu:#A1CFE7;
+    --preto:#282828;
 }
 
 * {
@@ -13,6 +19,7 @@
     font-family: 'Open Sans',sans-serif;
     font-size: 14px;
     font-weight: 600;
+    color: var(--preto);
 }
 
 body {
@@ -20,4 +27,13 @@ body {
     background-color: #FFF;
     background-size: cover;
     -webkit-font-smoothing: antialiased !important;
+}
+
+
+button {
+    background-color: transparent;
+}
+
+a {
+    text-decoration: none;
 }

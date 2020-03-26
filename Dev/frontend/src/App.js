@@ -10,6 +10,9 @@ const App = () => {
 
   return (
     <Router>
+      <Route path="/home">
+         <Dashboard/>
+      </Route>
       <Route path="/login">
          <Login/>
       </Route>

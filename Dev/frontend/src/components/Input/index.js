@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { Container, InputTeste } from './styles';
+import { InputTeste } from './styles';
 
 export default function Input() {
   return (
-    <Container>
         <InputTeste/>
-    </Container>
   );
 }
