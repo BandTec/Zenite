@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container } from './styles';
 import Form from '../../components/Form';
-import Button from '../../components/Button';
+// import Button from '../../components/Button';
 import Input from '../../components/Input';
 
 export default function Login() {
@@ -13,7 +13,7 @@ export default function Login() {
         <Input />
         Senha
         <Input />
-        <Button text='Entrar'/>
+        {/* <Button text='Entrar'/> */}
       </Form>
     </Container>
   );
