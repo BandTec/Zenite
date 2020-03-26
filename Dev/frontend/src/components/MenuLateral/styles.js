@@ -11,6 +11,7 @@ export const Container = styled.div`
   justify-content: space-between;
   padding: 30px 0px;
   position: fixed;
+  z-index: 10;
   
   :hover {
     width: 200px;
