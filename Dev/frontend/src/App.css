@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap');
 
+:root{
+    --azulBemEscuro: #0B478D;
+    --azulEscuro:#005391;
+    --azul :#0066AC;
+    --azulClaro:#0285C0;
+    --azulMenuHover:#5CB9E9;
+    --azulMenu:#A1CFE7;
+    --preto:#282828;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -9,10 +19,20 @@
     font-family: 'Open Sans',sans-serif;
     font-size: 14px;
     font-weight: 600;
+    color: var(--preto);
 }
 
 body {
     background: linear-gradient(134.1deg, #0066AC 42.24%, #0B478D 82.32%), #0B478D;
     background-size: cover;
     -webkit-font-smoothing: antialiased !important;
+}
+
+
+button {
+    background-color: transparent;
+}
+
+a {
+    text-decoration: none;
 }

@@ -1,42 +1,31 @@
 import styled from 'styled-components';
+import {Texto} from './BotaoMenu/styles';
 
 export const Container = styled.div`
-  background-color: #A1CFE7;
+  background-color: var(--azulMenu);
   height: 100vh;
   width: 70px;
   display:flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 0px;
+  padding: 30px 0px;
+  position: fixed;
+  
+  :hover {
+    width: 200px;
+  }
+
+  :hover ${Texto} {
+    display: block;
+    padding-left: 25px;
+  }
 `;
 
 export const MainMenu = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
+  width: 100%;
 `;
 
-export const Titulo = styled.p`
-  color: #0B478D;
-  font-size: 20px;
-`;
-
-export const Icone = styled.img`
-  width: 35px;
-  color: #fff;
-  cursor:pointer; 
-  margin: 15px 0px;
-`
-
-/*
- #0B478D
-  #005391
-  #0066AC
-  #0285C0
-  #5CB9E9
-  #A1CFE7
-  #282828
-
-*/

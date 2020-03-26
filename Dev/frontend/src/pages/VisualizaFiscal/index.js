@@ -9,7 +9,7 @@ import Titulo from '../../components/Titulo'
 export default function CadastroFiscal() {
   return (
     <Container>
-        <MenuLateral />
+        <MenuLateral itemAtivo="fiscal" />
         <Tela>
           <Row>
             <Cabecalho>
