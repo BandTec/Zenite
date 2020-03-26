@@ -4,7 +4,8 @@ import { Container, Row, BotaoRelatorio ,BotaoNovoFiscal, Tela, Acoes, Cabecalho
 import MenuLateral from '../../components/MenuLateral';
 import Botao from '../../components/Botao';
 
-import Titulo from '../../components/Titulo'
+import Titulo from '../../components/Titulo';
+import Paginacao from '../../components/Paginacao';
 
 export default function CadastroFiscal() {
   return (
@@ -28,6 +29,9 @@ export default function CadastroFiscal() {
               </BotaoRelatorio>
 
             </Acoes>
+          </Row>
+          <Row>
+            <Paginacao/>
           </Row>
         </Tela>
     </Container>

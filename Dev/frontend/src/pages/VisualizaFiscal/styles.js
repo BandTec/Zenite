@@ -35,5 +35,5 @@ export const Tela = styled.div`
 export const Acoes = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%
-`
+  width: 100%;
+`;
