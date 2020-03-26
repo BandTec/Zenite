@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+:root{
+    --cardGrande: 20vw;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +16,8 @@
 }
 
 body {
-    background: linear-gradient(134.1deg, #0066AC 42.24%, #0B478D 82.32%), #0B478D;
+    /* background: linear-gradient(134.1deg, #0066AC 42.24%, #0B478D 82.32%), #0B478D; */
+    background-color: #FFF;
     background-size: cover;
     -webkit-font-smoothing: antialiased !important;
 }
