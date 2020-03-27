@@ -1,13 +1,15 @@
 package orion.zenite.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import orion.zenite.exceptions.SenhaInvalidaExcepton;
-import orion.zenite.payload.ApiResponse;
-import orion.zenite.payload.LoginRequest;
-import orion.zenite.repository.ContaDao;
+import orion.zenite.dto.LoginRequest;
+import orion.zenite.dao.ContaDao;
+import orion.zenite.dto.ApiResponse;
 import orion.zenite.security.JwtService;
 import orion.zenite.security.LoginService;
 
@@ -33,16 +35,16 @@ public class AutenticacaoController {
     private LoginService loginService;
 
     @PostMapping("login")
+    @ResponseStatus(HttpStatus.OK)
     public ApiResponse login(@RequestBody @Valid LoginRequest loginRequest) {
         try {
             UserDetails usuarioAutenticado = loginService.autenticar(loginRequest);
             String jwtToken = jwt.codificarToken(loginRequest.getEmail());
 
-            return new ApiResponse(true, "Bearer " + jwtToken);
+            return new ApiResponse("Bearer " + jwtToken);
         }
         catch (SenhaInvalidaExcepton | UsernameNotFoundException e) {
-             return new ApiResponse(false, e.getMessage());
-            //throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
 

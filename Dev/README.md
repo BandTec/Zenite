@@ -13,47 +13,69 @@ Corpo da Requisição:
 }
 ```
 
+---
 
-## Rotas de TESTE
+## Rotas Fiscal
 
-### Teste de Cadastro do fiscal
-*Só cadastra a no momento conta*
-
-**POST** http://localhost:8080/api/fiscal/cadastro
+### Cadastro 
+**POST** http://localhost:8080/api/fiscal
+-> Requer token
 
 Corpo da Requisição:
 
 ```
-{
- "id": 0,
- "nome": "Fatima Bernades",
- "cpf": "123-123-123",
- "dataNascimento": "1990-09-20",
- "numeroTelefone": "2342 4324",
- "endereco": {
-	"id": 5,
-	"cep": "1234-43",
-	"logradouro": "Rua Maria Antonieta",
-	"numero": "12",
-	"complemento": "APT 2",
-	"cidade": "São Paulo",
-	"estado": "SP"
- },
- "registroFiscal": "123123",
- "dispositivo": {
- 	"id": 0,
-	"codigo": "9080",
-	"tipoDispositivo": {
-		"id": 1
-	}
- },
- "conta": {
-	"idConta": 0,
-	"senha": "senha6",
-	"email": "email6",
- 	"nivel": { 
-		"id": 3
- 	}
- }
-}
+
 ```
+
+### Consulta Todos 
+**GET** http://localhost:8080/api/fiscal
+-> Requer token
+
+### Consulta por ID
+**GET** http://localhost:8080/api/fiscal/{id}
+-> Requer token
+
+---
+
+## Rota Administrador
+
+### Consulta Todos 
+**GET** http://localhost:8080/api/administrador
+-> Requer token
+
+### Consulta por ID
+**GET** http://localhost:8080/api/administrador/{id}
+-> Requer token
+
+---
+
+## Rota Motorista
+
+### Consulta Todos 
+**GET** http://localhost:8080/api/motorista
+-> Requer token
+
+---
+
+## Rota PontoFinal
+
+### Consulta Todos 
+**GET** http://localhost:8080/api/pontofinal
+-> Requer token
+
+---
+
+## Rota Viagem
+
+### Consulta Todos 
+**GET** http://localhost:8080/api/viagem
+-> Requer token
+
+---
+
+## Rota Linha
+
+### Consulta Todos 
+**GET** http://localhost:8080/api/linha
+-> Requer token
+

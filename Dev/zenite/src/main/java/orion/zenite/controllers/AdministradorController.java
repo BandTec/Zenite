@@ -2,24 +2,17 @@ package orion.zenite.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import orion.zenite.models.Administrador;
-import orion.zenite.models.Conta;
-import orion.zenite.models.Endereco;
-import orion.zenite.models.Fiscal;
-import orion.zenite.payload.ApiResponse;
-import orion.zenite.repository.AdministradorDao;
-import orion.zenite.repository.ContaDao;
-import orion.zenite.repository.DispositivoDao;
-import orion.zenite.repository.FiscalDao;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import orion.zenite.models.*;
+import orion.zenite.dao.AdministradorDao;
+import orion.zenite.dao.ContaDao;
+
+import java.util.List;
 
 /*
  * Todas as rotas que começam com /api/alguma-coisa
@@ -28,6 +21,9 @@ import orion.zenite.repository.FiscalDao;
  * como um atributo email da requisição
  *
  * a decodificação ocorre na classe /security/JwtFilter
+
+ *
+ * *  ALTERAÇÃO
  */
 @RestController
 @RequestMapping("/api/administrador")
@@ -42,9 +38,44 @@ public class AdministradorController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PostMapping("cadastro")
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<Administrador> consultar(){
+        List<Administrador> lista = administradorBD.findAll();
+        if(!lista.isEmpty()){
+            return lista;
+        }
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lista vazia");
+    }
+
+    @GetMapping("{id}")
+    public Administrador consultar(@PathVariable("id") int id){
+        return administradorBD
+                .findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                "Administrador não encontrado"));
+    }
+
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletar(@PathVariable("id") int id){
+        administradorBD.findById(id)
+                .map( cliente -> {
+                    administradorBD.delete(cliente );
+                    return cliente;
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Administrador não encontrado") );
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public ResponseEntity<?> cadastro(@RequestBody Administrador administrador) {
+    public Administrador cadastrar(@RequestBody Administrador administrador) {
 
         // PEGANDO INFORMAÇÕES DO USUÁRIO LOGADO
         Authentication user = SecurityContextHolder.getContext().getAuthentication();
@@ -53,8 +84,14 @@ public class AdministradorController {
 
         // inserir conta
         Conta novaConta = administrador.getConta();
+        Nivel nivelAdm = new Nivel();
+        nivelAdm.setId(1);
+        novaConta.setNivel(nivelAdm);
+
+        // Encriptar senha
         String senhaCriptografada = passwordEncoder.encode(novaConta.getSenha());
         novaConta.setSenha(senhaCriptografada);
+
         contaBD.save(novaConta);
         administrador.getConta().setIdConta(contaBD.lastId());
 
@@ -62,8 +99,6 @@ public class AdministradorController {
         administradorBD.save(administrador);
         administrador.setId(administradorBD.lastId());
 
-        return new ResponseEntity<>(
-                new ApiResponse(true, "Administrador cadastrado", administrador),
-                HttpStatus.OK);
+        return administrador;
     }
 }

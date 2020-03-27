@@ -1,7 +1,4 @@
-package orion.zenite.payload;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+package orion.zenite.dto;
 
 /*
     * Classe usada para ser o padrão do corpo da requisição da rota /autentica/login

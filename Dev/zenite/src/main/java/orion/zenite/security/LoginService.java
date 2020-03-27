@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import orion.zenite.exceptions.SenhaInvalidaExcepton;
 import orion.zenite.models.Conta;
 import orion.zenite.models.Nivel;
-import orion.zenite.payload.LoginRequest;
-import orion.zenite.repository.ContaDao;
+import orion.zenite.dto.LoginRequest;
+import orion.zenite.dao.ContaDao;
 
 /*
     * Essa classe recebe o email do usuário da classe JwtFilter e faz a pesquisa

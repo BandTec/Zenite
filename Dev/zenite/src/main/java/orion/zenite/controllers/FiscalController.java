@@ -2,17 +2,20 @@ package orion.zenite.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.models.*;
-import orion.zenite.payload.ApiResponse;
-import orion.zenite.repository.*;
+import org.springframework.web.server.ResponseStatusException;
+import orion.zenite.dao.ContaDao;
+import orion.zenite.dao.DispositivoDao;
+import orion.zenite.dao.EnderecoDao;
+import orion.zenite.dao.FiscalDao;
+import orion.zenite.models.Conta;
+import orion.zenite.models.Endereco;
+import orion.zenite.models.Fiscal;
+import orion.zenite.models.Nivel;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
+import java.util.List;
 
 /*
  * Todas as rotas que começam com /api/alguma-coisa
@@ -42,37 +45,43 @@ public class FiscalController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<Fiscal> consulta() {
 
-    @GetMapping("consulta")
-    public ResponseEntity<?> consulta(ServletRequest req) {
+        List<Fiscal> lista = fiscalBD.findAll();
+        if(!lista.isEmpty()){
+            return lista;
+        }
 
-        return new ResponseEntity<>(
-                new ApiResponse(true, "Requisição concluída com sucesso.", fiscalBD.findAll()),
-                HttpStatus.OK);
-
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lista vazia");
     }
 
-    @GetMapping("consulta/{id}")
-    public ResponseEntity<?> consulta(ServletRequest req, @PathVariable("id") int id) {
-
-        return new ResponseEntity<>(
-                new ApiResponse(
-                        true,
-                        "Requisição concluída com sucesso.",
-                        fiscalBD.findById(id)
-                ),
-                HttpStatus.OK);
+    @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Fiscal consulta(@PathVariable("id") int id) {
+        return fiscalBD
+                .findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                "Administrador não encontrado"));
 
     }
 
     @PostMapping("cadastro")
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public ResponseEntity<?> cadastro(@RequestBody Fiscal fiscal) {
+    public Fiscal cadastro(@RequestBody Fiscal fiscal) {
 
         // inserir conta
         Conta novaConta = fiscal.getConta();
+        Nivel nivelAdm = new Nivel();
+        nivelAdm.setId(3);
+        novaConta.setNivel(nivelAdm);
+
+        // Encriptar senha
         String senhaCriptografada = passwordEncoder.encode(novaConta.getSenha());
         novaConta.setSenha(senhaCriptografada);
+
         contaBD.save(novaConta);
         fiscal.getConta().setIdConta(contaBD.lastId());
 
@@ -90,8 +99,6 @@ public class FiscalController {
         fiscalBD.save(fiscal);
         fiscal.setId(fiscalBD.lastId());
 
-        return new ResponseEntity<>(
-                new ApiResponse(true, "Fiscal cadastrado", fiscal),
-                HttpStatus.OK);
+        return fiscal;
     }
 }

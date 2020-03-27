@@ -1,4 +1,4 @@
-package orion.zenite.repository;
+package orion.zenite.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,4 +11,6 @@ public interface AdministradorDao extends JpaRepository<Administrador, Integer> 
     int lastId();
 
     Administrador findByConta(Conta conta);
+
+    //Administrador findById(int id);
 }
