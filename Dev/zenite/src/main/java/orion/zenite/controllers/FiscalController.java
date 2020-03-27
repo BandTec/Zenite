@@ -10,12 +10,11 @@ import orion.zenite.dao.ContaDao;
 import orion.zenite.dao.DispositivoDao;
 import orion.zenite.dao.EnderecoDao;
 import orion.zenite.dao.FiscalDao;
-import orion.zenite.models.Conta;
-import orion.zenite.models.Endereco;
-import orion.zenite.models.Fiscal;
-import orion.zenite.models.Nivel;
+import orion.zenite.dto.FiscalRequest;
+import orion.zenite.models.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /*
  * Todas as rotas que começam com /api/alguma-coisa
@@ -68,37 +67,59 @@ public class FiscalController {
 
     }
 
-    @PostMapping("cadastro")
-    @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public Fiscal cadastro(@RequestBody Fiscal fiscal) {
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void alterar(@RequestBody Fiscal novoFiscal){
+        Conta conta = novoFiscal.getConta();
+        String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
+        conta.setSenha(senhaCriptografada);
 
-        // inserir conta
-        Conta novaConta = fiscal.getConta();
-        Nivel nivelAdm = new Nivel();
-        nivelAdm.setId(3);
-        novaConta.setNivel(nivelAdm);
+        contaBD.save(conta);
+        novoFiscal.setConta(conta);
+
+        enderecoBD.save(novoFiscal.getEndereco());
+        dispositivoBD.save(novoFiscal.getDispositivo());
+        fiscalBD.save(novoFiscal);
+    }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletar(@PathVariable("id") int id){
+        fiscalBD.findById(id)
+                .map( fiscal -> {
+                    fiscalBD.delete(fiscal );
+                    return fiscal;
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Fiscal não encontrado") );
+    }
+
+    @PostMapping()
+    @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
+    public Fiscal cadastro(@RequestBody Fiscal novoFiscal) {
+Conta conta = novoFiscal.getConta();
 
         // Encriptar senha
-        String senhaCriptografada = passwordEncoder.encode(novaConta.getSenha());
-        novaConta.setSenha(senhaCriptografada);
-
-        contaBD.save(novaConta);
-        fiscal.getConta().setIdConta(contaBD.lastId());
+        String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
+        conta.setSenha(senhaCriptografada);
+        contaBD.save(conta);
+        conta.setIdConta(contaBD.lastId());
+        novoFiscal.setConta(conta);
 
         // inserir endereco
-        Endereco endereco = fiscal.getEndereco();
+        Endereco endereco = novoFiscal.getEndereco();
         enderecoBD.save(endereco);
         endereco.setId(enderecoBD.lastId());
-        fiscal.setEndereco(endereco);
+        novoFiscal.setEndereco(endereco);
 
         //Dispositivo
-        dispositivoBD.save(fiscal.getDispositivo());
-        fiscal.getDispositivo().setId(dispositivoBD.lastId());
+        dispositivoBD.save(novoFiscal.getDispositivo());
+        novoFiscal.getDispositivo().setId(dispositivoBD.lastId());
 
         // Fiscal
-        fiscalBD.save(fiscal);
-        fiscal.setId(fiscalBD.lastId());
+        fiscalBD.save(novoFiscal);
+        novoFiscal.setId(fiscalBD.lastId());
 
-        return fiscal;
+        return novoFiscal;
     }
 }

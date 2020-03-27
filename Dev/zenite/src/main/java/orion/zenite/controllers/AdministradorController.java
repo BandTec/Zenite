@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import orion.zenite.dto.AdminRequest;
+import orion.zenite.dto.FiscalRequest;
 import orion.zenite.models.*;
 import orion.zenite.dao.AdministradorDao;
 import orion.zenite.dao.ContaDao;
@@ -21,9 +23,6 @@ import java.util.List;
  * como um atributo email da requisição
  *
  * a decodificação ocorre na classe /security/JwtFilter
-
- *
- * *  ALTERAÇÃO
  */
 @RestController
 @RequestMapping("/api/administrador")
@@ -38,6 +37,13 @@ public class AdministradorController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /*
+        // PEGANDO INFORMAÇÕES DO USUÁRIO LOGADO
+        Authentication user = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(user.getAuthorities().toArray()[0]); // pegando nivel do usuário
+        System.out.println(user.getName()); // pegando email do usuário
+
+     */
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -64,41 +70,43 @@ public class AdministradorController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable("id") int id){
         administradorBD.findById(id)
-                .map( cliente -> {
-                    administradorBD.delete(cliente );
-                    return cliente;
+                .map( adm -> {
+                    administradorBD.delete(adm);
+                    return adm;
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Administrador não encontrado") );
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void alterar(@RequestBody Administrador administrador){
+        Conta conta = administrador.getConta();
+        String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
+        conta.setSenha(senhaCriptografada);
+        contaBD.save(conta);
+        contaBD.save(administrador.getConta());
+        administradorBD.save(administrador);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
     public Administrador cadastrar(@RequestBody Administrador administrador) {
-
-        // PEGANDO INFORMAÇÕES DO USUÁRIO LOGADO
-        Authentication user = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(user.getAuthorities().toArray()[0]); // pegando nivel do usuário
-        System.out.println(user.getName()); // pegando email do usuário
-
-        // inserir conta
-        Conta novaConta = administrador.getConta();
-        Nivel nivelAdm = new Nivel();
-        nivelAdm.setId(1);
-        novaConta.setNivel(nivelAdm);
+        Conta conta = administrador.getConta();
 
         // Encriptar senha
-        String senhaCriptografada = passwordEncoder.encode(novaConta.getSenha());
-        novaConta.setSenha(senhaCriptografada);
+        String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
+        conta.setSenha(senhaCriptografada);
+        contaBD.save(conta);
+        conta.setIdConta(contaBD.lastId());
+        administrador.setConta(conta);
 
-        contaBD.save(novaConta);
-        administrador.getConta().setIdConta(contaBD.lastId());
-
-        // Fiscal
         administradorBD.save(administrador);
         administrador.setId(administradorBD.lastId());
 
         return administrador;
     }
+
+
 }

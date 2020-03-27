@@ -1,6 +1,9 @@
 package orion.zenite.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,6 +22,7 @@ public class Carro {
     @JoinColumn(name="fkDispositivo", referencedColumnName = "idDispositivo")
     private Dispositivo dispositivo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "carro")
     private List<CarroLinha> carroLinhas;
 
@@ -48,6 +52,14 @@ public class Carro {
 
     public List<CarroLinha> getCarroLinhas() {
         return carroLinhas;
+    }
+
+    public List getLinhasId() {
+        ArrayList linhasId = new ArrayList();
+        for (CarroLinha carro : carroLinhas) {
+            linhasId.add(carro.getIdLinha());
+        }
+        return linhasId;
     }
 
     public void setCarroLinhas(List<CarroLinha> carroLinhas) {

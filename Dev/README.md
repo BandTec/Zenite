@@ -24,7 +24,66 @@ Corpo da Requisição:
 Corpo da Requisição:
 
 ```
+{
+    "nome": "Carolina Ribeiro Esteves da Silva Machado",
+    "cpf": "815.436.148-50",
+    "dataNascimento": "1993-09-23",
+    "numeroTelefone": "9 1123-4321",
+		"senha": "12345678",
+		"email": "emailnovissimo@fiscal.com.br",
+    "endereco": {
+      "cep": "09878023",
+      "logradouro": "Rua Antonieta",
+      "numero": "78",
+      "complemento": "APT 1",
+      "cidade": "São Paulo",
+      "estado": "SP"
+    },	
+    "registroFiscal": "12.123.123",
+    "dispositivo": {
+      "codigo": "542-345",
+      "tipoDispositivo": {
+        "id": 2
+      }
+    }
+}
+```
 
+### Edição 
+**PUT** http://localhost:8080/api/fiscal
+-> Requer token
+
+Corpo da Requisição:
+
+```
+{
+  "nome": "Carolina Ribeiro Esteves da Silva Machado",
+  "cpf": "815.436.148-50",
+  "dataNascimento": "1993-09-23",
+  "numeroTelefone": "9 1123-4321",
+  "endereco": {
+    "cep": "09878023",
+    "logradouro": "Rua Antonieta",
+    "numero": "78",
+    "complemento": "APT 1",
+    "cidade": "São Paulo",
+    "estado": "SP"
+  },
+  "registroFiscal": "12.123.123",
+  "dispositivo": {
+    "codigo": "542-345",
+    "tipoDispositivo": {
+      "id": 1
+    }
+  },
+  "conta": {
+    "senha": "senha213",
+    "email": "emailnovo@fiscal.com.br",
+    "nivel": {
+      "id": 3
+    }
+  }
+}
 ```
 
 ### Consulta Todos 
@@ -35,6 +94,47 @@ Corpo da Requisição:
 **GET** http://localhost:8080/api/fiscal/{id}
 -> Requer token
 
+### Deletar por ID
+**DELETE** http://localhost:8080/api/fiscal/{id}
+-> Requer token
+
+
+### Alterar 
+**PUT** http://localhost:8080/api/fiscal
+```
+{
+  "id": 4,
+  "nome": "Carolina Ribeiro da Silva Machado",
+  "cpf": "815.436.148-50",
+  "dataNascimento": "1993-09-23",
+  "numeroTelefone": "9 1123-4321",
+  "endereco": {
+    "id": 6,
+    "cep": "09878023",
+    "logradouro": "Rua Antonieta",
+    "numero": "78",
+    "complemento": "APT 1",
+    "cidade": "São Paulo",
+    "estado": "SP"
+  },
+  "registroFiscal": "12.123.123",
+  "dispositivo": {
+    "id": 7,
+    "codigo": "542-345",
+    "tipoDispositivo": {
+      "id": 1
+    }
+  },
+  "conta": {
+    "idConta": 38,
+    "senha": "mudandosenha",
+    "email": "mudandoemail@fiscal.com.br",
+    "nivel": {
+      "id": 3
+    }
+  }
+}
+```
 ---
 
 ## Rota Administrador
@@ -46,6 +146,38 @@ Corpo da Requisição:
 ### Consulta por ID
 **GET** http://localhost:8080/api/administrador/{id}
 -> Requer token
+
+### Inserir 
+**POST** http://localhost:8080/api/administrador
+```
+{
+    "nome": "admin",
+    "conta": {
+      "senha": "senha",
+      "email": "maisum@admin.com",
+      "nivel": {
+        "id": 1
+      }
+    }
+}
+```
+
+### Alterar 
+**PUT** http://localhost:8080/api/administrador
+```
+{
+  "id": 20,
+  "nome": "vitoriana",
+  "conta": {
+    "idConta": 42,
+    "senha": "senha1",
+    "email": "vitoriana@admin.com",
+    "nivel": {
+      "id": 1
+    }
+  }
+}
+```
 
 ---
 
