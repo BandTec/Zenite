@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 
-export const Container = styled.button`
+export const Container = styled.a`
   display: flex;
   flex-direction: ${props => props.ladoDireito ? "row" : "row-reverse"};
   justify-content: space-around;
   align-items: center;
-  background: transparent;
   cursor: pointer;
+  
+  :hover  {
+    opacity: .7;
+  }
 `;
 
 export const Icone = styled.img`
@@ -14,7 +17,7 @@ export const Icone = styled.img`
 `;
 
 export const Texto = styled.p`
-
+  
   font-size: 24px;
   font-weight: bold;
   color: #223F61;

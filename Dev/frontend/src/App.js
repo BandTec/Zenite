@@ -5,7 +5,9 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import Login from "./pages/Login";
 import Fiscal from "./pages/VisualizaFiscal";
-import CadastroFiscal from "./pages/CadastroFiscal";
+import FiscalCadastro1 from "./pages/CadastroFiscal/dadosPessoais";
+import FiscalCadastro2 from "./pages/CadastroFiscal/endereco";
+// import FiscalCadastro3 from "./pages/CadastroFiscal/dadosAcesso";
 
 const App = () => {
 
@@ -19,9 +21,17 @@ const App = () => {
         <Fiscal/>
       </Route>
 
-      <Route path="/cadastro">
-        <CadastroFiscal/>
+      <Route path="/cadastro1">
+        <FiscalCadastro1/>
       </Route>
+
+      <Route path="/cadastro2">
+        <FiscalCadastro2 />
+      </Route>
+
+      {/* <Route path="/cadastro3">
+        <FiscalCadastro3 />
+      </Route> */}
 
     </Router>
   );

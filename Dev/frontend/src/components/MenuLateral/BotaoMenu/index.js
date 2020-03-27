@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 import Onibus from '../../../assets/icons/onibus.svg';
 import Linha from '../../../assets/icons/linha.svg';
 import Fiscal from '../../../assets/icons/fiscal.svg';
@@ -23,9 +23,11 @@ export default function BotaoMenu({ iconeNome, descricao, url, alt, ativo=false 
   }
 
   return (
-   <Botao href={url} ativo={ativo}>
-      <Icone src={iconesLib[iconeNome]} alt={alt} />
-     <Texto>{descricao}</Texto>
-    </Botao>
+    <Link to={url}>
+      <Botao ativo={ativo}>
+        <Icone src={iconesLib[iconeNome]} alt={alt} />
+        <Texto>{descricao}</Texto>
+      </Botao>
+    </Link>
   );
 }

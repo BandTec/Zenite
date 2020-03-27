@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div`  
     display: flex;
     flex-direction: row;
 `;
 
 export const CorpoPagina = styled.article`
-    padding: 54px;
+    margin-left: 70px;
+    padding: 40px;
     background-color: #FFF;
-    width: 100vw;    
+    width: 100vw;  
+    height: 100%;  
 `;
 
 export const Titulo = styled.h1`
