@@ -19,7 +19,7 @@ export const Row = styled.div`
 
 export const Cabecalho = styled.div`
   display: block;
-  margin-left: 110px;
+  margin-left: 22vh;
   display: flex;
   justify-content: space-between;
 `;
@@ -30,12 +30,18 @@ export const BotaoEditarFiscal = styled.div`
      margin-top: 12px;
 `;
 
-/*export const DadosPessoaisDiv = styled.div`
-    position: absolute;
-    width: 260px;
-    height: 422px;
-    left: 146px;
-    top: 186px;
+export const CorpoRelatorio = styled.div`
+  display: flex;
+  width: 100%;
+`;
 
+export const CaixaDados = styled.div`
+  display: block;
+  margin-left: 22vh;
+  width: 260px;
+  height: 422px;
+`;
 
-`;*/
+export const CaixaTabela = styled.div`
+  margin-top: 3vh;
+`;
