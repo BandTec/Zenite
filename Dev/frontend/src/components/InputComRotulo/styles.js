@@ -8,7 +8,9 @@ export const Input = styled.input`
   width: ${props => props.pequeno ? 230 : 500}px;
   width: ${props => props.tamanho}px;
   height: 40px;
-  border: 1.5px solid #C4C4C4;
+  border-width: 1.5px;
+  border-style: solid;
+  border-color: ${props => props.invalido ? "red" : "#C4C4C4"};
   border-radius: 10px;
   padding: 11px 15px 11px 15px;
   color: #282828;
@@ -17,7 +19,7 @@ export const Input = styled.input`
   transition: all ease-in-out .3s;
 
   :focus {
-    border: 1.5px solid #223F61;
+    border-color: ${props => props.invalido ? "red" : "#223F61"};
   }
 `
 
@@ -30,3 +32,12 @@ export const Rotulo = styled.label`
   text-transform: uppercase;
 `;
 
+
+export const TextoAlerta = styled.p `
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  line-height: 12px;
+  color: #282828;
+  padding-bottom: 10px;
+`

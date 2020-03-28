@@ -10,7 +10,7 @@ export default function BotaoForm({texto, url, ladoDireito = true, concluir = fa
     <Link to={url}>
       <Container ladoDireito={ladoDireito}>
         <Texto>{texto}</Texto>
-        <Icone src={concluir == true ? Check : Seta} ladoDireito={ladoDireito} />
+        <Icone src={Check} ladoDireito={ladoDireito} />
       </Container>
     </Link>
   );

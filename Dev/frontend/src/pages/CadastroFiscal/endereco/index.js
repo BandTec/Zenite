@@ -6,24 +6,14 @@ import StatusPage from './../../../components/StatusPage';
 import MenuLateral from './../../../components/MenuLateral';
 import InputComRotulo from './../../../components/InputComRotulo';
 
-import { cpfMask, telefoneMask, dataMask } from "./../../../functions/Mascaras/mask";
+import { cepMask } from "./../../../functions/Mascaras/mask";
 
 export default function CadastroEndereco() {
 
-  const [valorCpf, setValorCpf] = useState("");
-  const [valorData, setValorData] = useState("");
-  const [valorTelefone, setValorTelefone] = useState("");
+  const [valorCep, setValorCep] = useState("");
 
-  const mascararCpf = (e) => {
-    setValorCpf(cpfMask(e.target.value));
-  }
-
-  const mascararData = (e) => {
-    setValorData(dataMask(e.target.value));
-  }
-
-  const mascararTelefone = (e) => {
-    setValorTelefone(telefoneMask(e.target.value));
+  const mascararCep = (e) => {
+    setValorCep(cepMask(e.target.value));
   }
 
   return (
@@ -48,40 +38,52 @@ export default function CadastroEndereco() {
             <Titulo>Endereço</Titulo>
 
             <InputComRotulo
-              texto="Nome"
-              maxLength='100'
+              texto="CEP"
+              maxLength='9'
+              name="cep"
+              value={valorCep}
+              onChange={mascararCep}
+              required
             />
 
             <InputComRotulo
-              texto="CPF"
-              maxLength='14'
-              name='cpf'
-              value={valorCpf}
-              onChange={mascararCpf}
-            />
-
-            <InputComRotulo
-              texto="Registro Fiscal"
-              maxLength='20'
+              texto="Logradouro"
+              maxLength='120'
+              name='logradouro'
+              required
             />
 
             <CaixaHorizontal>
               <InputComRotulo
                 pequeno={true}
-                texto="Data de Nascimento"
-                maxLength='10'
-                name='datadenascimento'
-                value={valorData}
-                onChange={mascararData}
+                texto="Número"
+                maxLength='16'
+                name='numero'
+                required
               />
 
               <InputComRotulo
-                texto="Telefone"
+                texto="Complemento"
                 pequeno={true}
-                maxLength='10'
-                name='telefone'
-                value={valorTelefone}
-                onChange={mascararTelefone}
+                maxLength='60'
+                name='complemento'
+              />
+
+            </CaixaHorizontal>
+ 
+            <CaixaHorizontal>
+              <InputComRotulo
+                pequeno={true}
+                texto="Cidade"
+                maxLength='40'
+                name='cidade'
+              />
+
+              <InputComRotulo
+                texto="Estado"
+                pequeno={true}
+                maxLength='2'
+                name='estado'
               />
 
             </CaixaHorizontal>

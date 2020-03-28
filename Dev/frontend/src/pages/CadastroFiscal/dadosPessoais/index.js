@@ -47,7 +47,9 @@ export default function CadastroFiscal() {
 
               <InputComRotulo 
                 texto="Nome"
+                name='nome'
                 maxLength='100'
+                required
                />
 
               <InputComRotulo 
@@ -56,11 +58,13 @@ export default function CadastroFiscal() {
                 name='cpf'
                 value={valorCpf}
                 onChange={mascararCpf}
+                required
               />
 
               <InputComRotulo 
                 texto="Registro Fiscal"
                 maxLength='20'
+                required
                />
 
               <CaixaHorizontal>
@@ -71,6 +75,7 @@ export default function CadastroFiscal() {
                 name='datadenascimento'
                 value={valorData}
                 onChange={mascararData}
+                required
               />
 
               <InputComRotulo 
@@ -80,6 +85,7 @@ export default function CadastroFiscal() {
                 name='telefone'
                 value={valorTelefone}
                 onChange={mascararTelefone}
+                required
               />
 
               </CaixaHorizontal>

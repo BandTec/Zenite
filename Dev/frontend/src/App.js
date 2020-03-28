@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import Fiscal from "./pages/VisualizaFiscal";
 import FiscalCadastro1 from "./pages/CadastroFiscal/dadosPessoais";
 import FiscalCadastro2 from "./pages/CadastroFiscal/endereco";
-// import FiscalCadastro3 from "./pages/CadastroFiscal/dadosAcesso";
+ import FiscalCadastro3 from "./pages/CadastroFiscal/dadosAcesso";
 
 const App = () => {
 
@@ -29,9 +29,9 @@ const App = () => {
         <FiscalCadastro2 />
       </Route>
 
-      {/* <Route path="/cadastro3">
+      <Route path="/cadastro3">
         <FiscalCadastro3 />
-      </Route> */}
+      </Route>
 
     </Router>
   );

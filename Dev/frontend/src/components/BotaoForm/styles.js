@@ -13,7 +13,7 @@ export const Container = styled.a`
 `;
 
 export const Icone = styled.img`
-  transform: ${props => props.ladoDireito ? "rotate(0deg) " : "rotate(180deg)"};
+  transform: ${props => props.ladoDireito ? "rotate(-90deg) " : "rotate(90deg)"};
 `;
 
 export const Texto = styled.p`

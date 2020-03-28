@@ -1,14 +1,16 @@
 import React from 'react';
 
-import { Container, Rotulo, Input } from './styles';
+import { Container, Rotulo, Input, TextoAlerta } from './styles';
 
 export default function InputComRotulo(props) {
-  const {texto, pequeno} = props;
+  const {texto, pequeno, invalido, textoAlerta} = props;
 
   return (
     <Container>
       <Rotulo>{texto}</Rotulo>
-      <Input pequeno={pequeno} {...props} />
+      {textoAlerta && <TextoAlerta>{textoAlerta}</TextoAlerta>}
+      <Input pequeno={pequeno} invalido={invalido} {...props} />
+      <p>{invalido}</p>
     </Container>
   );
 }
