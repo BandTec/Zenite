@@ -14,19 +14,19 @@ public class Viagem {
     @Column(name="idDadosViagem")
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="idCarro")
     private Carro carro;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="idLinha")
     private Linha linha;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="idMotorista")
     private Motorista motorista;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="idFiscal")
     private Fiscal fiscal;
 

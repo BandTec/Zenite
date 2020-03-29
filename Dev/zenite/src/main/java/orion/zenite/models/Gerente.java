@@ -27,11 +27,11 @@ public class Gerente{
     @Column(name = "telefone", length = 11, nullable = false)
     private String numeroTelefone;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fkEndereco")
     private Endereco endereco;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fkConta")
     private Conta conta;
 

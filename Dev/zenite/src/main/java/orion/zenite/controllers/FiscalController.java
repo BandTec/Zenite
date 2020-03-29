@@ -10,11 +10,9 @@ import orion.zenite.dao.ContaDao;
 import orion.zenite.dao.DispositivoDao;
 import orion.zenite.dao.EnderecoDao;
 import orion.zenite.dao.FiscalDao;
-import orion.zenite.dto.FiscalRequest;
 import orion.zenite.models.*;
 
 import java.util.List;
-import java.util.Optional;
 
 /*
  * Todas as rotas que começam com /api/alguma-coisa
@@ -73,12 +71,7 @@ public class FiscalController {
         Conta conta = novoFiscal.getConta();
         String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
         conta.setSenha(senhaCriptografada);
-
-        contaBD.save(conta);
         novoFiscal.setConta(conta);
-
-        enderecoBD.save(novoFiscal.getEndereco());
-        dispositivoBD.save(novoFiscal.getDispositivo());
         fiscalBD.save(novoFiscal);
     }
 
@@ -97,24 +90,12 @@ public class FiscalController {
     @PostMapping()
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
     public Fiscal cadastro(@RequestBody Fiscal novoFiscal) {
-Conta conta = novoFiscal.getConta();
 
         // Encriptar senha
+        Conta conta = novoFiscal.getConta();
         String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
         conta.setSenha(senhaCriptografada);
-        contaBD.save(conta);
-        conta.setIdConta(contaBD.lastId());
         novoFiscal.setConta(conta);
-
-        // inserir endereco
-        Endereco endereco = novoFiscal.getEndereco();
-        enderecoBD.save(endereco);
-        endereco.setId(enderecoBD.lastId());
-        novoFiscal.setEndereco(endereco);
-
-        //Dispositivo
-        dispositivoBD.save(novoFiscal.getDispositivo());
-        novoFiscal.getDispositivo().setId(dispositivoBD.lastId());
 
         // Fiscal
         fiscalBD.save(novoFiscal);

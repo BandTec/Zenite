@@ -23,7 +23,7 @@ public class Carro {
     private Dispositivo dispositivo;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "carro")
+    @OneToMany(mappedBy = "carro", cascade = CascadeType.ALL)
     private List<CarroLinha> carroLinhas;
 
     public int getId() {

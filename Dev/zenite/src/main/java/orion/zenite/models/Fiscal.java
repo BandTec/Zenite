@@ -27,18 +27,18 @@ public class Fiscal  {
     @Column(name = "telefone", length = 11, nullable = false)
     private String numeroTelefone;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fkEndereco")
     private Endereco endereco;
 
     @Column(length = 20, nullable = false, unique = true)
     private String registroFiscal;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fkDispositivo")
     private Dispositivo dispositivo;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fkConta")
     private Conta conta;
 

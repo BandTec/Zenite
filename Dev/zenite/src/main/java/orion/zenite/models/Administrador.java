@@ -14,7 +14,7 @@ public class Administrador {
     @Column(length = 100, nullable = false)
     private String nome;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fkConta")
     private Conta conta;
 

@@ -2,19 +2,16 @@ package orion.zenite.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import orion.zenite.dto.AdminRequest;
-import orion.zenite.dto.FiscalRequest;
 import orion.zenite.models.*;
 import orion.zenite.dao.AdministradorDao;
 import orion.zenite.dao.ContaDao;
 
 import java.util.List;
+import java.util.Optional;
 
 /*
  * Todas as rotas que começam com /api/alguma-coisa
@@ -81,11 +78,14 @@ public class AdministradorController {
     @PutMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void alterar(@RequestBody Administrador administrador){
+        // Devido a implementação na classe Adminsitrador da propriedade CascadeType.ALL
+        // ao usar o método save()
+        // para salvar o administrador ele automaticamente
+        // salve a conta associada a ele
         Conta conta = administrador.getConta();
         String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
         conta.setSenha(senhaCriptografada);
-        contaBD.save(conta);
-        contaBD.save(administrador.getConta());
+        administrador.getConta();
         administradorBD.save(administrador);
     }
 
@@ -98,8 +98,6 @@ public class AdministradorController {
         // Encriptar senha
         String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
         conta.setSenha(senhaCriptografada);
-        contaBD.save(conta);
-        conta.setIdConta(contaBD.lastId());
         administrador.setConta(conta);
 
         administradorBD.save(administrador);
@@ -107,6 +105,4 @@ public class AdministradorController {
 
         return administrador;
     }
-
-
 }

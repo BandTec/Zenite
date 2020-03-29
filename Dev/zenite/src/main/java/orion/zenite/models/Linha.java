@@ -15,11 +15,11 @@ public class Linha {
     @Column(length = 7, nullable = false)
     private String numero;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fkPontoIda")
     private PontoFinal pontoIda;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fkPontoVolta")
     private PontoFinal pontoVolta;
 

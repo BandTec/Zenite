@@ -17,7 +17,7 @@ public class Dispositivo {
     @Column(name = "codigoDispositivo", nullable = false)
     private String codigo;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fkTipo")
     private TipoDispositivo tipoDispositivo;
 
