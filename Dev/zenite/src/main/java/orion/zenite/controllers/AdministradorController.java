@@ -1,5 +1,9 @@
 package orion.zenite.controllers;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,8 +23,9 @@ import java.util.Optional;
  * Todas as URI então recebem o token decodificado
  * como um atributo email da requisição
  *
- * a decodificação ocorre na classe /security/JwtFilter
+ * a decodificação ocorre na classe config/security/JwtFilter
  */
+@Api(description = "Operações relacionados ao administrador", tags = "administrador")
 @RestController
 @RequestMapping("/api/administrador")
 public class AdministradorController {
@@ -42,8 +47,13 @@ public class AdministradorController {
 
      */
 
+    @ApiOperation("Lista todos os administradores")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
+    })
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     public List<Administrador> consultar(){
         List<Administrador> lista = administradorBD.findAll();
         if(!lista.isEmpty()){
@@ -53,6 +63,12 @@ public class AdministradorController {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lista vazia");
     }
 
+    @ApiOperation("Buscar um administrador por seu id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 404, message = "Administrador não encontrado.")
+    })
     @GetMapping("{id}")
     public Administrador consultar(@PathVariable("id") int id){
         return administradorBD
@@ -62,7 +78,12 @@ public class AdministradorController {
                                 "Administrador não encontrado"));
     }
 
-
+    @ApiOperation("Deleta um administrador por seu id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 404, message = "Administrador não encontrado.")
+    })
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable("id") int id){
@@ -75,6 +96,12 @@ public class AdministradorController {
                         "Administrador não encontrado") );
     }
 
+    @ApiOperation("Altera um administrador")
+    @ApiResponses({
+            @ApiResponse(code = 204, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 404, message = "Administrador não encontrado.")
+    })
     @PutMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void alterar(@RequestBody Administrador administrador){
@@ -89,6 +116,12 @@ public class AdministradorController {
         administradorBD.save(administrador);
     }
 
+    @ApiOperation("Cadastra um administrador")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Administrador cadastrado."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 400, message = "Necessário ajustes no corpo da requisição.")
+    })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback

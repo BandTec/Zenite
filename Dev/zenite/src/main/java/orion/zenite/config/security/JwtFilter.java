@@ -1,4 +1,4 @@
-package orion.zenite.security;
+package orion.zenite.config.security;
 
 import java.io.IOException;
 

@@ -1,5 +1,7 @@
 package orion.zenite.controllers;
 
+
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,9 +11,9 @@ import org.springframework.web.server.ResponseStatusException;
 import orion.zenite.exceptions.SenhaInvalidaExcepton;
 import orion.zenite.dto.LoginRequest;
 import orion.zenite.dao.ContaDao;
-import orion.zenite.dto.ApiResponse;
-import orion.zenite.security.JwtService;
-import orion.zenite.security.LoginService;
+import orion.zenite.dto.ResponstaApi;
+import orion.zenite.config.security.JwtService;
+import orion.zenite.config.security.LoginService;
 
 import javax.validation.Valid;
 
@@ -19,6 +21,7 @@ import javax.validation.Valid;
 /*
  * Essa rota não é protegida pelo JWToken
  */
+@Api(description = "Autentificacao para as outras rotas", tags = "Autentificacao")
 @RestController
 @RequestMapping("/autentica")
 public class AutenticacaoController {
@@ -35,13 +38,17 @@ public class AutenticacaoController {
     private LoginService loginService;
 
     @PostMapping("login")
-    @ResponseStatus(HttpStatus.OK)
-    public ApiResponse login(@RequestBody @Valid LoginRequest loginRequest) {
+    @ApiOperation("Autenticar credenticiais no sistema")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Usuário autenticado"),
+            @ApiResponse(code = 401, message = "Usuário não encontrado / Senha Inválida.")
+    })
+    public ResponstaApi login(@RequestBody @Valid LoginRequest loginRequest) {
         try {
             UserDetails usuarioAutenticado = loginService.autenticar(loginRequest);
             String jwtToken = jwt.codificarToken(loginRequest.getEmail());
 
-            return new ApiResponse("Bearer " + jwtToken);
+            return new ResponstaApi("Bearer " + jwtToken);
         }
         catch (SenhaInvalidaExcepton | UsernameNotFoundException e) {
              throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());

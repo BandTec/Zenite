@@ -1,9 +1,10 @@
-package orion.zenite.security;
+package orion.zenite.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -11,8 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-// https://github.com/cursodsousa/curso-spring-boot-especialista/blob/master/src/main/java/io/github/dougllasfps/config/SecurityConfig.java
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -57,21 +56,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/administrador/**")
                     .hasAnyRole("ADMIN")
                 .antMatchers("/api/fiscal/**")
-                    .hasAnyRole("ADMIN", "GERENTE")
+                    .hasAnyRole( "GERENTE")
                 .antMatchers("/api/motorista**")
                     .hasAnyRole("ADMIN", "GERENTE")
                 .antMatchers("/api/gerente/**")
-                    .hasAnyRole("ADMIN", "GERENTE", "MOTORISTA", "PASSAGEIRO")
+                    .hasAnyRole("ADMIN", "GERENTE")
                 .antMatchers("/api/viagem/**")
                 .hasAnyRole("ADMIN", "GERENTE", "FISCAL", "MOTORISTA", "PASSAGEIRO")
                 .antMatchers("/autentica/**")
                     .permitAll()
-               // .anyRequest()
-               //    .authenticated()
             .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(
+          "/v2/api-docs",
+          "/configuration/ui",
+          "/swagger-resources/**",
+          "/configuration/security",
+          "/swagger-ui.html",
+          "/webjars/**"
+        );
     }
 }

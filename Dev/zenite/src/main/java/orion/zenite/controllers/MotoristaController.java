@@ -1,5 +1,6 @@
 package orion.zenite.controllers;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +15,8 @@ import orion.zenite.models.Motorista;
 
 import java.util.List;
 
-/*
- * Todas as rotas que começam com /api/alguma-coisa
- * estão protegidas pelo JWToken.
- * Todas as URI então recebem o token decodificado
- * como um atributo email da requisição
- *
- * a decodificação ocorre na classe /security/JwtFilter
- */
+
+@Api(description = "Operações relacionadas ao motorista", tags = "motorista")
 @RestController
 @RequestMapping("/api/motorista")
 public class MotoristaController {

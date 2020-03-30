@@ -1,5 +1,6 @@
 package orion.zenite.controllers;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import orion.zenite.models.PontoFinal;
 
 import java.util.List;
 
+@Api(description = "Operações relacionadas ao ponto final", tags = "ponto final")
 @RestController
 @RequestMapping("/api/pontofinal")
 public class PontoController {

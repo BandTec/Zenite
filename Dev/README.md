@@ -1,5 +1,8 @@
 ## API ZENITE
 
+## Rota do Swagger UI
+-> http://localhost:8080/swagger-ui.html#/
+
 ## Rota de Login
 
 **POST** http://localhost:8080/autentica/login

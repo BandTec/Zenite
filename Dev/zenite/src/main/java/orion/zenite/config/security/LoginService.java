@@ -1,4 +1,4 @@
-package orion.zenite.security;
+package orion.zenite.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;

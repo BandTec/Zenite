@@ -8,16 +8,16 @@ package orion.zenite.dto;
     * Como a classe Object é classe mãe de todas as classes no Java pode ser
     * adicionado então qualquer uma das classes da pasta /models
  */
-public class ApiResponse {
+public class ResponstaApi {
     private String message;
     private Object value;
 
-    public ApiResponse(String message, Object value) {
+    public ResponstaApi(String message, Object value) {
         this.message = message;
         this.value = value;
     }
 
-    public ApiResponse(String message) {
+    public ResponstaApi(String message) {
         this.message = message;
     }
 
