@@ -43,7 +43,7 @@ export default function Tabela() {
 
     const classes = useStyles();
 
-  return (
+    return (
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simples table">
                 <TableHead>
@@ -69,8 +69,12 @@ export default function Tabela() {
                         <StyledTableCell component="th" scope="row">8004-10</StyledTableCell>
                         <StyledTableCell align="left">Santa</StyledTableCell>
                     </StyledTableRow>
+                    <StyledTableRow>
+                        <StyledTableCell component="th" scope="row">8005-10</StyledTableCell>
+                        <StyledTableCell align="left">Itaim Paulista</StyledTableCell>
+                    </StyledTableRow>
                 </TableBody>
             </Table>
         </TableContainer>
-  );
+    );
 }

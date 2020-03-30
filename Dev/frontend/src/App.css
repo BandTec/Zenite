@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap');
 
 :root{
+    --azulBemMaisEscuro: #223F61;
     --azulBemEscuro: #0B478D;
     --azulEscuro:#005391;
     --azul :#0066AC;
@@ -22,15 +23,9 @@
     color: var(--preto);
 }
 
-body {
-    background: linear-gradient(134.1deg, #0066AC 42.24%, #0B478D 82.32%), #0B478D;
-    background-size: cover;
-    -webkit-font-smoothing: antialiased !important;
-}
-
-
 button {
     background-color: transparent;
+    cursor: pointer;
 }
 
 a {
