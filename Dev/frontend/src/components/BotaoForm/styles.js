@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.a`
+export const Container = styled.div`
   display: flex;
   flex-direction: ${props => props.ladoDireito ? "row" : "row-reverse"};
   justify-content: space-around;
