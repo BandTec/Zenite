@@ -1,28 +1,44 @@
 package orion.zenite.models;
 
-public class Administrador extends Conta {
+import javax.persistence.*;
 
+@Entity
+@Table(name="tblAdmin")
+public class Administrador {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idAdmin")
     private int id;
+
+    @Column(length = 100, nullable = false)
     private String nome;
 
-    public Administrador() {}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="fkConta")
+    private Conta conta;
 
-    public Administrador(String senha, String email, String nivel, int id, String nome) {
-        super(senha, email, nivel);
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public Administrador(String senha, String email, int nivel, String nome) {
-        super(senha, email, nivel);
-        this.nome = nome;
+    public Conta getConta() {
+        return conta;
     }
 
-    @Override
-    public String toString() {
-        return "Administrador{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                '}';
+    public void setConta(Conta conta) {
+        this.conta = conta;
     }
 }

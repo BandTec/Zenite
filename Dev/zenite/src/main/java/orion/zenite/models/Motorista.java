@@ -1,26 +1,110 @@
 package orion.zenite.models;
 
 
-public class Motorista extends Funcionario {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.br.CPF;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name="tblMotorista")
+public class Motorista {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idMotorista")
+    private int id;
+
+    @Column(name = "nomeMotorista", length = 100, nullable = false)
+    private String nome;
+
+    @CPF
+    @Column(name = "cpf", length = 14, nullable = false, unique = true)
+    private String cpf;
+
+    @Column(name = "dtNasc", nullable = false)
+    private LocalDate dataNascimento;
+
+    @Column(name = "telefone", length = 11, nullable = false)
+    private String numeroTelefone;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="fkEndereco")
+    private Endereco endereco;
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="fkConta")
+    private Conta conta;
+
+    @Column(length = 11, nullable = false, unique = true)
     private String cnh;
-    private Dispositivo rfid;
 
-    public Motorista() {};
+    @JsonIgnore
+    @OneToMany(mappedBy = "motorista", cascade = CascadeType.ALL)
+    List<MotoristaCarro> motoristaCarroList;
 
-    public Motorista(int id, String senha, String email, String nivel, String nome,
-                     String cpf, String dataNascimento, String numeroTelefone,
-                     Endereco endereco, String cnh, Dispositivo rfid) {
-        super(id, senha, email, nivel, nome, cpf, dataNascimento, numeroTelefone, endereco);
-        this.rfid = rfid;
-        this.cnh = cnh;
+    public int getId() {
+        return id;
     }
 
-    public Motorista(String senha, String email, int nivel, String nome, String cpf,
-                     String dataNascimento, String numeroTelefone, Endereco endereco,
-                     String cnh, Dispositivo rfid) {
-        super(senha, email, nivel, nome, cpf, dataNascimento, numeroTelefone, endereco);
-        this.cnh = cnh;
-        this.rfid = rfid;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getNumeroTelefone() {
+        return numeroTelefone;
+    }
+
+    public void setNumeroTelefone(String numeroTelefone) {
+        this.numeroTelefone = numeroTelefone;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
+    }
+
+    public Conta getConta() {
+        return conta;
+    }
+
+    public String getEmail() {
+        return conta.getEmail();
     }
 
     public String getCnh() {
@@ -31,19 +115,19 @@ public class Motorista extends Funcionario {
         this.cnh = cnh;
     }
 
-    public Dispositivo getRfid() {
-        return rfid;
+    public List<MotoristaCarro> getMotoristaCarroList() {
+        return motoristaCarroList;
     }
 
-    public void setRfid(Dispositivo rfid) {
-        this.rfid = rfid;
+    public List getCarrosId() {
+        ArrayList carrosId = new ArrayList();
+        for (MotoristaCarro carro : motoristaCarroList) {
+            carrosId.add(carro.getIdCarro());
+        }
+        return carrosId;
     }
 
-    @Override
-    public String toString() {
-        return "Motorista{" +
-                "cnh='" + cnh + '\'' +
-                ", rfid=" + rfid +
-                '}';
+    public void setMotoristaCarroList(List<MotoristaCarro> motoristaCarroList) {
+        this.motoristaCarroList = motoristaCarroList;
     }
 }

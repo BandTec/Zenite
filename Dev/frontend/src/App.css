@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap');
 
 :root{
+    --azulBemMaisEscuro: #223F61;
     --azulBemEscuro: #0B478D;
     --azulEscuro:#005391;
     --azul :#0066AC;
@@ -29,9 +30,9 @@ body {
     -webkit-font-smoothing: antialiased !important;
 }
 
-
 button {
     background-color: transparent;
+    cursor: pointer;
 }
 
 a {

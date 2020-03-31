@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Botao = styled.a`
+export const Botao = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -8,6 +8,7 @@ export const Botao = styled.a`
   padding: 20px;
   cursor:pointer; 
   background-color: ${props => props.ativo ? "var(--azulMenuHover)" : "transparent"};
+  transition: all ease-in-out .5s;
 
   :hover {
     background-color: var(--azulMenuHover);

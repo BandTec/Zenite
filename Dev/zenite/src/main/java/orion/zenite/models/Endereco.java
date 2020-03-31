@@ -1,35 +1,34 @@
 package orion.zenite.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="tblEndereco")
 public class Endereco  {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idEndereco")
     private int id;
+
+    @Column(name = "CEP", length = 8, nullable = false)
     private String cep;
+
+    @Column(length = 120, nullable = false)
     private String logradouro;
+
+    @Column(length = 16, nullable = false)
     private String numero;
+
+    @Column(length = 60)
     private String complemento;
+
+    @Column(length = 40)
     private String cidade;
+
+    @Column(length = 2)
     private String estado;
 
-    public Endereco(){};
-
-    public Endereco(String cep, String logradouro, String numero, String complemento, String cidade, String estado) {
-        this.cep = cep;
-        this.logradouro = logradouro;
-        this.numero = numero;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.estado = estado;
-    }
-
-    public Endereco(int id, String cep, String logradouro, String numero, String complemento, String cidade, String estado) {
-        this.id = id;
-        this.cep = cep;
-        this.logradouro = logradouro;
-        this.numero = numero;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.estado = estado;
-    }
 
     public int getId() {
         return id;

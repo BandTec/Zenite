@@ -26,7 +26,7 @@ export default function BotaoMenu({ iconeNome, descricao, url, alt, ativo=false 
   return (
     <Link to={url}>
       <Botao ativo={ativo}>
-          <Icone src={iconesLib[iconeNome]} alt={alt} />
+        <Icone src={iconesLib[iconeNome]} alt={alt} />
         <Texto>{descricao}</Texto>
       </Botao>
     </Link>
