@@ -20,11 +20,9 @@ export const Perfil = styled.a`
 `;
 
 export const Corpo = styled.section`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   margin-top: 20px;
-  width: 100%;
 `;
 
 export const Cabecalho = styled.header`

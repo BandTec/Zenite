@@ -29,6 +29,7 @@ export default function Dashboard() {
             <Card tamanho='grande' cor='claro' />
             <Card tamanho='medio' cor='suave'/>
             <Card tamanho='pequeno' cor='escuro'/>
+            <Card tamanho='pequeno' cor='escuro'/>
           </Corpo>
         </Tela>
     </Container>

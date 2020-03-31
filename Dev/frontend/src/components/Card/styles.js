@@ -12,7 +12,7 @@ export const Card = styled.div`
     --suave: #5CB9E9; 
     --escuro: #0285C0;
 
-    width: 49%;
+    width: 100%;
     height: var(--${props => props.tamanho});
     background: var(--${props => props.cor});
     margin-top: 20px;
