@@ -1,20 +1,18 @@
 package orion.zenite.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="tblPontoFinal")
 public class PontoFinal {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idPontoFinal")
     private int id;
+
+    @Column(name = "nomeTerminal", length = 80, nullable = false)
     private String nome;
-
-    public PontoFinal() {};
-
-    public PontoFinal(int id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
-
-    public PontoFinal(String nome) {
-        this.nome = nome;
-    }
 
     public int getId() {
         return id;

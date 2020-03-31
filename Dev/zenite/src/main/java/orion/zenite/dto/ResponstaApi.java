@@ -1,4 +1,4 @@
-package orion.zenite.payload;
+package orion.zenite.dto;
 
 /*
     * Classe utilizada para retornar ao usuário da api
@@ -8,19 +8,16 @@ package orion.zenite.payload;
     * Como a classe Object é classe mãe de todas as classes no Java pode ser
     * adicionado então qualquer uma das classes da pasta /models
  */
-public class ApiResponse {
-    private Boolean sucess;
+public class ResponstaApi {
     private String message;
     private Object value;
 
-    public ApiResponse(Boolean sucess, String message, Object value) {
-        this.sucess = sucess;
+    public ResponstaApi(String message, Object value) {
         this.message = message;
         this.value = value;
     }
 
-    public ApiResponse(Boolean sucess, String message) {
-        this.sucess = sucess;
+    public ResponstaApi(String message) {
         this.message = message;
     }
 
@@ -30,14 +27,6 @@ public class ApiResponse {
 
     public void setValue(Object value) {
         this.value = value;
-    }
-
-    public Boolean getSucess() {
-        return sucess;
-    }
-
-    public void setSucess(Boolean sucess) {
-        this.sucess = sucess;
     }
 
     public String getMessage() {

@@ -1,53 +1,58 @@
 package orion.zenite.controllers;
 
+
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import orion.zenite.exceptions.SenhaInvalidaExcepton;
+import orion.zenite.dto.LoginRequest;
 import orion.zenite.dao.ContaDao;
-import orion.zenite.models.Conta;
-import orion.zenite.payload.ApiResponse;
-import orion.zenite.payload.LoginRequest;
-import orion.zenite.security.AuthJwt;
+import orion.zenite.dto.ResponstaApi;
+import orion.zenite.config.security.JwtService;
+import orion.zenite.config.security.LoginService;
 
+import javax.validation.Valid;
 
 
 /*
-    * Essa rota não é protegida pelo JWToken
+ * Essa rota não é protegida pelo JWToken
  */
+@Api(description = "Autentificacao para as outras rotas", tags = "Autentificacao")
 @RestController
 @RequestMapping("/autentica")
 public class AutenticacaoController {
 
     // Classe que gera JWToken
-    private AuthJwt jwt = new AuthJwt();
+    @Autowired
+    private JwtService jwt;
 
     // Classe que realiza consulta no banco de dados
     @Autowired
-    private ContaDao contaBD = new ContaDao();
+    private ContaDao contaBD;
 
+    @Autowired
+    private LoginService loginService;
 
     @PostMapping("login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+    @ApiOperation("Autenticar credenticiais no sistema")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Usuário autenticado"),
+            @ApiResponse(code = 401, message = "Usuário não encontrado / Senha Inválida.")
+    })
+    public ResponstaApi login(@RequestBody @Valid LoginRequest loginRequest) {
+        try {
+            UserDetails usuarioAutenticado = loginService.autenticar(loginRequest);
+            String jwtToken = jwt.codificarToken(loginRequest.getEmail());
 
-        if (loginRequest.getEmail() == null || loginRequest.getSenha() == null) {
-            return new ResponseEntity<>(
-                    new ApiResponse(false, "Necessário os parâmetros email e senha."),
-                    HttpStatus.BAD_REQUEST);
+            return new ResponstaApi("Bearer " + jwtToken);
         }
-
-        Conta usuario = contaBD.buscarPorEmailSenha(loginRequest);
-
-        if(usuario == null) {
-            return new ResponseEntity<>(
-                    new ApiResponse(false, "Email ou/e senha inválidos"),
-                    HttpStatus.OK);
+        catch (SenhaInvalidaExcepton | UsernameNotFoundException e) {
+             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
-
-        String jwtToken = jwt.createToken(loginRequest.getEmail());
-        return new ResponseEntity<>(
-                new ApiResponse(true, "Bearer " + jwtToken),
-                HttpStatus.OK);
     }
 
 }
