@@ -3,17 +3,17 @@ import styled from 'styled-components';
 export const Container = styled.div`
 `;
 
-export const Card = styled.div`
-    --grande: 400px;
-    --medio: 230px;
-    --pequeno: 150px;
+const tamanhos = {
+    1: "1 / 3",
+    2: "2 / 4",
+}
 
+export const Card = styled.div`
     --claro: #CCEAFA;
     --suave: #5CB9E9; 
     --escuro: #0285C0;
-
-    width: 100%;
-    height: var(--${props => props.tamanho});
     background: var(--${props => props.cor});
-    margin-top: 20px;
+
+    border-radius: 6px;
+    grid-row: ${props => tamanhos[props.tamanho]};
 `;

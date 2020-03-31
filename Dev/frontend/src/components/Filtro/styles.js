@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.button`
-  display:flex;
+  display: flex;
   height: 50px;
-  width: 300px;
+  width: 24%;
   background-color: #CCEAFA;
   color: #0066AC;
   justify-content: center;

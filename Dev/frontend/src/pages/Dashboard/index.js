@@ -26,10 +26,10 @@ export default function Dashboard() {
             <Filtro titulo='Fiscal/Motorista'/>
           </Cabecalho>
           <Corpo>
-            <Card tamanho='grande' cor='claro' />
-            <Card tamanho='medio' cor='suave'/>
-            <Card tamanho='pequeno' cor='escuro'/>
-            <Card tamanho='pequeno' cor='escuro'/>
+            <Card tamanho={1} cor='claro' />
+            <Card cor='suave'/>
+            <Card cor='escuro'/>
+            <Card tamanho={2} cor='escuro'/>
           </Corpo>
         </Tela>
     </Container>

@@ -19,12 +19,13 @@ export const Perfil = styled.a`
 
 export const Corpo = styled.section`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 20vh);
+  grid-gap: 15px;
 `;
 
 export const Cabecalho = styled.header`
-  margin-top: 20px; 
+  margin: 20px 0px; 
   display: flex;
   justify-content: space-between;
 `;
