@@ -9,6 +9,22 @@ import React from 'react';
  import Tabela from '../../components/Tabela';
 
 export default function DetalhesFiscal() {
+
+  function criaDados(name, dados1){
+    return {name, dados1}
+  }
+
+  const dadosCabecalho = [
+    criaDados('Código Linha', 'Destino')
+  ];
+
+  const dadosCorpo = [
+    criaDados('917H-10', 'Vila Mariana'),
+    criaDados('8001-10', 'Vila Piaui'),
+    criaDados('8002-10', 'Pirituba'),
+    criaDados('8004-10', 'Santa'),
+  ];
+
   return (
     <Container>
       <MenuLateral/>
@@ -55,7 +71,7 @@ export default function DetalhesFiscal() {
                   <TituloTipoDado texto="Linhas Gerenciadas"/>
 
                   <CaixaTabela>
-                    <Tabela/>
+                    <Tabela tabela={1} dadosCabecalho={dadosCabecalho} dadosCorpo={dadosCorpo}/>
                   </CaixaTabela>
                   
 
