@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import {Texto} from './BotaoMenu/styles';
 
 export const Container = styled.div`
+  position: fixed;
   background-color: var(--azulMenu);
   height: 100vh;
   width: 70px;
@@ -12,6 +13,7 @@ export const Container = styled.div`
   padding: 30px 0px;
   position: fixed;
   z-index: 10;
+
   :hover {
     width: 200px;
   }

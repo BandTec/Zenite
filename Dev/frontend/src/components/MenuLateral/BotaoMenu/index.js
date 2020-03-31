@@ -1,5 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import Onibus from '../../../assets/icons/onibus.svg';
 import Linha from '../../../assets/icons/linha.svg';
 import Fiscal from '../../../assets/icons/fiscal.svg';

@@ -11,20 +11,19 @@ export default function MenuLateral({itemAtivo}) {
 
   return (
     <Container>
-      <MainMenu>      
-        <BotaoMenu 
-          descricao="Início" 
-          iconeNome="logo" alt="Logo do Software Zenite" 
-          url={"/"}
-          ativo={itemAtivo == "inicio" ? true : false}
-        />
-
+      <MainMenu>
+          <BotaoMenu 
+            descricao="Início" 
+            iconeNome="logo" alt="Logo do Software Zenite" 
+            url={"/home"}
+            ativo={itemAtivo === "inicio" ? true : false}
+          />
 
         <BotaoMenu 
           descricao="Fiscal" 
           iconeNome="fiscal"
           url={"/fiscal"}
-          ativo={itemAtivo == "fiscal" ? true : false}
+          ativo={itemAtivo === "fiscal" ? true : false}
          />
 
 
@@ -32,7 +31,7 @@ export default function MenuLateral({itemAtivo}) {
           descricao="Linha" 
           iconeNome="linha"
           url={"/linha"}
-          ativo={itemAtivo == "linha" ? true : false}
+          ativo={itemAtivo === "linha" ? true : false}
          />
 
 
@@ -40,7 +39,7 @@ export default function MenuLateral({itemAtivo}) {
           descricao="Motorista" 
           iconeNome="motorista"
           url={"/motorista"}
-          ativo={itemAtivo == "motorista" ? true : false}
+          ativo={itemAtivo === "motorista" ? true : false}
          />
 
 
@@ -48,7 +47,7 @@ export default function MenuLateral({itemAtivo}) {
           descricao="Ônibus" 
           iconeNome="onibus"
           url={"/onibus"}
-          ativo={itemAtivo == "onibus" ? true : false}
+          ativo={itemAtivo === "onibus" ? true : false}
          />
 
 
@@ -56,7 +55,7 @@ export default function MenuLateral({itemAtivo}) {
           descricao="Perfil" 
           url={"/perfil"}
           iconeNome="perfil"
-          ativo={itemAtivo == "perfil" ? true : false}
+          ativo={itemAtivo === "perfil" ? true : false}
          />
 
       </MainMenu>
