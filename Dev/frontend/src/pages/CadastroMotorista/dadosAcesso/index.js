@@ -36,20 +36,13 @@ export default function CadastroAcesso() {
         </CaixaHorizontal>
 
         <FormContainer>
-          <BotaoForm texto="Voltar" ladoDireito={false} url="/cadastro2" />
+          <BotaoForm texto="Voltar" ladoDireito={false} url="/cadastroMotorista2" />
 
           <Caixa>
 
-            <Subtitulo>CADASTRO DO FISCAL</Subtitulo>
+            <Subtitulo>CADASTRO DO MOTORISTA</Subtitulo>
             <Titulo>Dados de Acesso</Titulo>
 
-            <InputComRotulo
-              texto="Código do Dispositivo"
-              maxLength='20'
-              name="codigoDispositivo"
-              required
-            />
-            
             <InputComRotulo
               texto="Email"
               maxLength='60'
@@ -84,7 +77,7 @@ export default function CadastroAcesso() {
             />
           </Caixa>
 
-          <BotaoForm texto="Finalizar" concluir={true}  url="/cadastro3" />
+          <BotaoForm texto="Finalizar" concluir={true} url="/cadastroMotorista3" />
         </FormContainer>
       </CorpoPagina>
 

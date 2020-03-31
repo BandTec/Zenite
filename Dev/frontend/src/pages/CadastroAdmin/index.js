@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
-import BotaoForm from './../../../components/BotaoForm';
-import StatusPage from './../../../components/StatusPage';
-import MenuLateral from './../../../components/MenuLateral';
-import InputComRotulo from './../../../components/InputComRotulo';
+import BotaoForm from './../../components/BotaoForm';
+import StatusPage from './../../components/StatusPage';
+import MenuLateral from './../../components/MenuLateral';
+import InputComRotulo from './../../components/InputComRotulo';
 
-import { cepMask } from "./../../../functions/Mascaras/mask";
-
-export default function CadastroAcesso() {
+export default function CadastroAdmin() {
 
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");
@@ -27,29 +25,21 @@ export default function CadastroAcesso() {
       <MenuLateral />
 
       <CorpoPagina>
-        <CaixaHorizontal center={true}>
-          <StatusPage ativo={false} texto="Dados Pessoais" temProximoPasso={true} />
-
-          <StatusPage ativo={false} texto="Endereço" temProximoPasso={true} />
-
-          <StatusPage ativo={true} texto="Dados de Acesso" temProximoPasso={false} />
-        </CaixaHorizontal>
-
         <FormContainer>
-          <BotaoForm texto="Voltar" ladoDireito={false} url="/cadastro2" />
 
           <Caixa>
 
-            <Subtitulo>CADASTRO DO FISCAL</Subtitulo>
+            <Subtitulo>CADASTRO DO ADMINISTRADOR</Subtitulo>
             <Titulo>Dados de Acesso</Titulo>
 
             <InputComRotulo
-              texto="Código do Dispositivo"
-              maxLength='20'
-              name="codigoDispositivo"
+              texto="Nome"
+              maxLength='100'
+              name="nome"
+              type="text"
               required
             />
-            
+
             <InputComRotulo
               texto="Email"
               maxLength='60'
@@ -84,7 +74,7 @@ export default function CadastroAcesso() {
             />
           </Caixa>
 
-          <BotaoForm texto="Finalizar" concluir={true}  url="/cadastro3" />
+          <BotaoForm texto="Finalizar" concluir={true}  url="/cadastroAdmin" />
         </FormContainer>
       </CorpoPagina>
 
