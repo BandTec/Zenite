@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const Row = styled.div`
   display: block;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 20px;
   `;
 
 export const Cabecalho = styled.div`
@@ -20,7 +20,7 @@ export const Cabecalho = styled.div`
 
 export const BotaoRelatorio = styled.div`
   display: block;
-  margin-right: 15vh;
+  margin-right: 5vh;
 `;
 
 export const BotaoNovoFiscal = styled.div`
@@ -35,5 +35,11 @@ export const Tela = styled.div`
 export const Acoes = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%
-`
+  width: 100%;
+`;
+
+export const CaixaTabela = styled.div`
+  display: block;
+  margin-left: 15vh;
+  margin-right: 5vh;
+`;
