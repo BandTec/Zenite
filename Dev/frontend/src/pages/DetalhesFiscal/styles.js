@@ -32,14 +32,11 @@ export const BotaoEditarFiscal = styled.div`
 
 export const CorpoRelatorio = styled.div`
   display: flex;
-  width: 100%;
+  justify-content: space-around;
+  padding: 0px 70px;
 `;
 
 export const CaixaDados = styled.div`
-  display: block;
-  margin-left: 22vh;
-  width: 260px;
-  height: 422px;
 `;
 
 export const CaixaTabela = styled.div`
