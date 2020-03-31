@@ -22,15 +22,31 @@ export default function CadastroEndereco() {
 
       <CorpoPagina>
         <CaixaHorizontal center={true}>
-          <StatusPage ativo={false} texto="Dados Pessoais" temProximoPasso={true} />
+          <StatusPage 
+            ativo={false} 
+            texto="Dados Pessoais" 
+            temProximoPasso={true} 
+          />
 
-          <StatusPage ativo={true} texto="Endereço" temProximoPasso={true} />
+          <StatusPage 
+            ativo={true} 
+            texto="Endereço" 
+            temProximoPasso={true} 
+          />
 
-          <StatusPage ativo={false} texto="Dados de Acesso" temProximoPasso={false} />
+          <StatusPage 
+            ativo={false} 
+            texto="Dados de Acesso" 
+            temProximoPasso={false} 
+            />
         </CaixaHorizontal>
 
         <FormContainer>
-          <BotaoForm texto="Voltar" ladoDireito={false} url="/cadastro1" />
+          <BotaoForm 
+            texto="Voltar" 
+            ladoDireito={false} 
+            url="/cadastroMotorista1" 
+          />
 
           <Caixa>
 

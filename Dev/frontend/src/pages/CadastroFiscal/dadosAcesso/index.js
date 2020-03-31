@@ -60,7 +60,6 @@ export default function CadastroAcesso() {
 
             <InputComRotulo
               texto="Senha"
-              min
               maxLength='255'
               name='senha'
               type="password"

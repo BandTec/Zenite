@@ -41,7 +41,11 @@ export default function CadastroFiscal() {
             <Acoes>
 
               <BotaoNovoFiscal>
-                <Botao descricao='Novo Fiscal' estiloEscuro={true}/>
+                <Botao 
+                  descricao='Novo Fiscal' 
+                  estiloEscuro={true}
+                  url="/cadastro1"
+                />
               </BotaoNovoFiscal>
 
               <BotaoRelatorio>

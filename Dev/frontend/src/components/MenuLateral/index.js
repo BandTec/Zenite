@@ -15,7 +15,7 @@ export default function MenuLateral({itemAtivo}) {
           <BotaoMenu 
             descricao="Início" 
             iconeNome="logo" alt="Logo do Software Zenite" 
-            url={"/home"}
+            url={"/dashboard"}
             ativo={itemAtivo === "inicio" ? true : false}
           />
 

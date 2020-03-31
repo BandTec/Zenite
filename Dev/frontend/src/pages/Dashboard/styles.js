@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display:flex;
 `;
 
 export const Tela = styled.div`
-  width:100%;
-  margin: 50px 75px 50px 150px;
+    margin-left: 70px;
+    padding: 40px;
 `;
 
 export const Row = styled.div`
@@ -14,7 +13,6 @@ export const Row = styled.div`
   justify-content: space-between;
 `
 export const Perfil = styled.a`
-  font-family: Open;
   color: #0066AC;
   font-size: 16px;
 `;

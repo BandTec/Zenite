@@ -16,7 +16,7 @@ import CadastroMotorista2 from "./pages/CadastroMotorista/endereco";
 import CadastroMotorista3 from "./pages/CadastroMotorista/dadosAcesso";
 import CadastroGerente1 from "./pages/CadastroGerente/dadosPessoais";
 import CadastroGerente2 from "./pages/CadastroGerente/endereco";
-import CadastroGerente3 from "./pages/CadastroMotorista/dadosAcesso";
+import CadastroGerente3 from "./pages/CadastroGerente/dadosAcesso";
 import CadastroAdmin from "./pages/CadastroAdmin";
 import CadastroParadaLinha from "./pages/CadastroParadaLinha";
 import CadastroOnibus from "./pages/CadastroOnibus";
