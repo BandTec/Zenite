@@ -113,5 +113,5 @@ Partindo então deste contexto planejamos nosso sistema de gerenciamento de tran
 
 ### Equipe
 
-| **@alexbuarque** | **@esteves-esta** | **@jPedroSoares** | **@Laissilvaa** | **@Rayssawoods** | **@vitorsilv** |
+| [**Alex Buarque**](https://github.com/alexbuarque) | [**Fernanda Esteves**](https://github.com/esteves-esta) | [**João Pedro Soares**](https://github.com/jPedroSoares) | [**Lais Silva**](https://github.com/Laissilvaa) | [**Raissa Arantes**](https://github.com/Rayssawoods) | [**Vitor Silva**](https://github.com/vitorsilv) |
 
