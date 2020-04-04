@@ -51,18 +51,20 @@ async function autenticar() {
 app.get("/cadastrarlinhas", async (req, res) => {
     try{
         await autenticar();
-        const linhas = [];
+        var linhasPorTerminal = []
 
-        await terminais.map(async item => {
+        terminais.forEach(async item => {
             const response = await axios.get(`${url}/Linha/Buscar?termosBusca=${item}`, 
-            {headers: {Cookie: cookie}});
-            linhas.push(response.data)
-            console.log(response.data)
+            { headers: { Cookie: cookie } });
+            
+            response.data.map(element => {
+                linhasPorTerminal.push(element);
+            });
         });
-        res.json(linhas);
+        res.status(200).json(linhasPorTerminal)
     }catch(err){
         console.log(err);
-        res.json(err.message);
+        res.status(500).json(err.message);
     }
 });
 

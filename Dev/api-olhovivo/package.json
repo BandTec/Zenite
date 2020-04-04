@@ -16,6 +16,7 @@
     "mssql": "^6.2.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "sucrase": "^3.13.0"
   }
 }
