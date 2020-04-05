@@ -5,10 +5,10 @@ import { Container, Icone, Texto } from './styles';
 // import Seta from "../../assets/icons/setaOval.png";
 import Check from "../../assets/icons/check.png";
 
-export default function BotaoForm({texto, url, ladoDireito = true, concluir = false}) {
+export default function BotaoForm({texto, url, ladoDireito = true, concluir = false, invisivel= false}) {
   return (
     <Link to={url}>
-      <Container ladoDireito={ladoDireito}>
+      <Container ladoDireito={ladoDireito} invisivel={invisivel}>
         <Texto>{texto}</Texto>
         <Icone src={Check} ladoDireito={ladoDireito} />
       </Container>

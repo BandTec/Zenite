@@ -1,27 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
+import { Container, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 import BotaoForm from '../../components/BotaoForm';
-import StatusPage from '../../components/StatusPage';
 import MenuLateral from '../../components/MenuLateral';
 import InputComRotulo from '../../components/InputComRotulo';
 
 export default function CadastroOnibus() {
   return (
     <Container>
-      <MenuLateral />
+      <MenuLateral itemAtivo="onibus" />
 
       <CorpoPagina>
         <FormContainer>
+          <BotaoForm texto="VOLTAR" url="/onibus" ladoDireito={false} />
 
           <Caixa>
-
             <Subtitulo>CADASTRO DO ÔNIBUS</Subtitulo>
             <Titulo>Dados</Titulo>
 
             <InputComRotulo
               texto="NÚMERO DO ÔNINUS"
-              maxLength='10'
+              maxLength="10"
               name="numeroOnibus"
               type="text"
               required
@@ -29,16 +28,15 @@ export default function CadastroOnibus() {
 
             <InputComRotulo
               texto="Código do Dispositivo"
-              maxLength='20'
+              maxLength="20"
               name="codigoDispositivo"
               required
             />
           </Caixa>
 
-          <BotaoForm texto="Finalizar" concluir={true}  url="/cadastroOnibus" />
+          <BotaoForm texto="Finalizar" concluir={true} url="/onibus/cadastro" />
         </FormContainer>
       </CorpoPagina>
-
     </Container>
   );
 }

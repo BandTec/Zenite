@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, EstiloTitulo } from './styles';
+import {Link} from 'react-router-dom';
+import { EstiloTitulo } from './styles';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -42,7 +43,7 @@ export default function Tabela( { tabela, dadosCabecalho, dadosCorpo } ) {
 
     const classes = useStyles();
 
-    if(tabela==1){
+    if(tabela === 1){
         return (
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simples table">
@@ -73,40 +74,57 @@ export default function Tabela( { tabela, dadosCabecalho, dadosCorpo } ) {
         );
     }else{
         return (
-            <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="simples table">
-                    <TableHead>
-    
-                        {dadosCabecalho.map((linha) => (
-                            <StyledTableRow key={linha.registro}>
-                                <StyledTableCell><EstiloTitulo>{linha.registro}</EstiloTitulo></StyledTableCell>
-                                <StyledTableCell><EstiloTitulo>{linha.nome}</EstiloTitulo></StyledTableCell>
-                                <StyledTableCell><EstiloTitulo>{linha.dataNasc}</EstiloTitulo></StyledTableCell>
-                                <StyledTableCell><EstiloTitulo>{linha.telefone}</EstiloTitulo></StyledTableCell>
-                                <StyledTableCell><EstiloTitulo>{linha.supervisor}</EstiloTitulo></StyledTableCell>
-                                <StyledTableCell><EstiloTitulo>{linha.acoes}</EstiloTitulo></StyledTableCell>
-                            </StyledTableRow>
-                        ))}
-    
-                    </TableHead>
-                    <TableBody>
-    
-                        {dadosCorpo.map((linha) => (
-                            <StyledTableRow key={linha.registro}>
-                                <StyledTableCell component="th" scope="row">
-                                    {linha.registro}
-                                </StyledTableCell>
-                                <StyledTableCell align="left">{linha.nome}</StyledTableCell>
-                                <StyledTableCell align="left">{linha.dataNasc}</StyledTableCell>
-                                <StyledTableCell align="left">{linha.telefone}</StyledTableCell>
-                                <StyledTableCell align="left">{linha.supervisor}</StyledTableCell>
-                                <StyledTableCell align="left">{linha.acoes}</StyledTableCell>
-                            </StyledTableRow>
-                        ))}
-    
-                    </TableBody>
-                </Table>
-            </TableContainer>
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simples table">
+              <TableHead>
+                {dadosCabecalho.map((linha) => (
+                  <StyledTableRow key={linha.registro}>
+                    <StyledTableCell>
+                      <EstiloTitulo>{linha.registro}</EstiloTitulo>
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      <EstiloTitulo>{linha.nome}</EstiloTitulo>
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      <EstiloTitulo>{linha.dataNasc}</EstiloTitulo>
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      <EstiloTitulo>{linha.telefone}</EstiloTitulo>
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      <EstiloTitulo>{linha.supervisor}</EstiloTitulo>
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      <EstiloTitulo>{linha.acoes}</EstiloTitulo>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableHead>
+              <TableBody>
+                {dadosCorpo.map((linha) => (
+                  <StyledTableRow key={linha.registro}>
+                    <StyledTableCell component="th" scope="row">
+                      {linha.registro}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">{linha.nome}</StyledTableCell>
+                    <StyledTableCell align="left">
+                      {linha.dataNasc}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {linha.telefone}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {linha.supervisor}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <Link to={`/fiscal/editar/${linha.registro}`}>excluir</Link>
+                      <Link to={`/fiscal/editar/1/${linha.registro}`}>editar</Link>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         );
     }
 

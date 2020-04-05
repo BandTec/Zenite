@@ -7,7 +7,6 @@ import Login from "./pages/Login";
 import Fiscal from "./pages/VisualizaFiscal";
 import Dashboard from "./pages/Dashboard";
 import DetalhesFiscal from "./pages/DetalhesFiscal";
-// import FiscalEditar from "./pages/EditarFiscal/dadosPessoais";
 import FiscalCadastro1 from "./pages/CadastroFiscal/dadosPessoais";
 import FiscalCadastro2 from "./pages/CadastroFiscal/endereco";
 import FiscalCadastro3 from "./pages/CadastroFiscal/dadosAcesso";
@@ -26,73 +25,41 @@ const App = () => {
 
   return (
     <Router>
-      <Route path="/login">
-         <Login/>
-      </Route>
-      
-      <Route path='/dashboard'>
-        <Dashboard/>
-      </Route>  
-      
-      <Route path='/fiscal'>
-        <Fiscal/>
-      </Route>
+      <Route path="/login" component={Login} />
 
-      <Route path='/fiscal-detalhes'>
-        <DetalhesFiscal/>
-      </Route>
+      <Route exact path="/dashboard" component={Dashboard} />
 
-    {/*   <Route path='/fiscal-editar'>
-        <FiscalEditar/>
-      </Route> */}
+      <Route exact path="/fiscal" component={Fiscal} />
 
-      <Route path="/cadastro1">
-        <FiscalCadastro1/>
-      </Route>
+      <Route path="/fiscal/detalhes/:id" component={DetalhesFiscal} />
 
-      <Route path="/cadastro2">
-        <FiscalCadastro2 />
-      </Route>
+      <Route path="/fiscal/editar/1/:id" component={FiscalCadastro1} />
 
-      <Route path="/cadastro3">
-        <FiscalCadastro3 />
-      </Route>
-      <Route path="/cadastroMotorista1">
-        <CadastroMotorista1 />
-      </Route>
+      <Route path="/fiscal/cadastro/1" component={FiscalCadastro1} />
 
-      <Route path="/cadastroMotorista2">
-        <CadastroMotorista2 />
-      </Route>
+      <Route path="/fiscal/cadastro/2" component={FiscalCadastro2} />
 
-      <Route path="/cadastroMotorista3">
-        <CadastroMotorista3 />
-      </Route>
-      
-      <Route path="/cadastroGerente1">
-        <CadastroGerente1 />
-      </Route>
+      <Route path="/fiscal/cadastro/3" component={FiscalCadastro3} />
 
-      <Route path="/cadastroGerente2">
-        <CadastroGerente2 />
-      </Route>
+      <Route path="/fiscal/cadastro/3" component={FiscalCadastro3} />
 
-      <Route path="/cadastroGerente3">
-        <CadastroGerente3 />
-      </Route>
-      
-      <Route path="/cadastroAdmin">
-        <CadastroAdmin />
-      </Route>
-    
-      <Route path="/cadastroParadaLinha">
-        <CadastroParadaLinha />
-      </Route>
+      <Route path="/motorista/cadastro/1" component={CadastroMotorista1} />
 
-      <Route path="/cadastroOnibus">
-        <CadastroOnibus />
-      </Route>
+      <Route path="/motorista/cadastro/2" component={CadastroMotorista2} />
 
+      <Route path="/motorista/cadastro/3" component={CadastroMotorista3} />
+
+      <Route path="/gerente/cadastro/1" component={CadastroGerente1} />
+
+      <Route path="/gerente/cadastro/2" component={CadastroGerente2} />
+
+      <Route path="/gerente/cadastro/3" component={CadastroGerente3} />
+
+      <Route path="/admin/cadastro" component={CadastroAdmin} />
+
+      <Route path="/linha/cadastro" component={CadastroParadaLinha} />
+
+      <Route path="/onibus/cadastro" component={CadastroOnibus} />
     </Router>
   );
 }

@@ -28,68 +28,70 @@ export default function CadastroGerente() {
   }
 
   return (
-   <Container>
-        <MenuLateral />
+    <Container>
+      <MenuLateral item="gerente" />
 
-        <CorpoPagina>
-          <CaixaHorizontal center={true}>
-              <StatusPage ativo={true} texto="Dados Pessoais" temProximoPasso={true} />
-            
-              <StatusPage ativo={false} texto="Endereço" temProximoPasso={true} />
-            
-              <StatusPage ativo={false} texto="Dados de Acesso" temProximoPasso={false} />
-          </CaixaHorizontal>
+      <CorpoPagina>
+        <CaixaHorizontal center={true}>
+          <StatusPage
+            ativo={true}
+            texto="Dados Pessoais"
+            temProximoPasso={true}
+          />
 
-          <FormContainer>
-            <Caixa>
-              
-              <Subtitulo>CADASTRO DO GERENTE</Subtitulo>
-              <Titulo>DADOS CADASTRAIS</Titulo>  
+          <StatusPage ativo={false} texto="Endereço" temProximoPasso={true} />
 
-              <InputComRotulo 
-                texto="Nome"
-                name='nome'
-                maxLength='100'
-                required
-               />
+          <StatusPage
+            ativo={false}
+            texto="Dados de Acesso"
+            temProximoPasso={false}
+          />
+        </CaixaHorizontal>
 
-              <InputComRotulo 
-                texto="CPF"
-                maxLength='14'
-                name='cpf'
-                value={valorCpf}
-                onChange={mascararCpf}
-                required
-              />
+        <FormContainer>
+          <BotaoForm texto="VOLTAR" url="/gerente" ladoDireito={false} />
 
-              <CaixaHorizontal>
-                <InputComRotulo 
+          <Caixa>
+            <Subtitulo>CADASTRO DO GERENTE</Subtitulo>
+            <Titulo>DADOS CADASTRAIS</Titulo>
+
+            <InputComRotulo texto="Nome" name="nome" maxLength="100" required />
+
+            <InputComRotulo
+              texto="CPF"
+              maxLength="14"
+              name="cpf"
+              value={valorCpf}
+              onChange={mascararCpf}
+              required
+            />
+
+            <CaixaHorizontal>
+              <InputComRotulo
                 pequeno={true}
                 texto="Data de Nascimento"
-                maxLength='10'
-                name='datadenascimento'
+                maxLength="10"
+                name="datadenascimento"
                 value={valorData}
                 onChange={mascararData}
                 required
               />
 
-              <InputComRotulo 
-                texto="Telefone" 
-                pequeno={true} 
-                maxLength='10'
-                name='telefone'
+              <InputComRotulo
+                texto="Telefone"
+                pequeno={true}
+                maxLength="10"
+                name="telefone"
                 value={valorTelefone}
                 onChange={mascararTelefone}
                 required
               />
+            </CaixaHorizontal>
+          </Caixa>
 
-              </CaixaHorizontal>
-            </Caixa>
-
-            <BotaoForm texto="Próximo" url="/cadastroGerente2"  />
-          </FormContainer>
+          <BotaoForm texto="Próximo" url="/gerente/cadastro/2" />
+        </FormContainer>
       </CorpoPagina>
-
-     </Container>
+    </Container>
   );
 }

@@ -2,13 +2,15 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: ${props => props.ladoDireito ? "row" : "row-reverse"};
+  visibility: ${(props) => props.invisivel ? 'hidden' : 'visible' };
+  flex-direction: ${(props) =>
+    props.ladoDireito ? "row" : "row-reverse"};
   justify-content: space-around;
   align-items: center;
-  cursor: pointer;
-  
-  :hover  {
-    opacity: .7;
+  cursor: ${(props) => props.invisivel ? 'default' : 'cursor' };
+
+  :hover {
+    opacity: 0.7;
   }
 `;
 

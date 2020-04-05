@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 import BotaoForm from '../../components/BotaoForm';
-import StatusPage from '../../components/StatusPage';
 import MenuLateral from '../../components/MenuLateral';
 import InputComRotulo from '../../components/InputComRotulo';
 import ComboBoxComRotulo from '../../components/ComboBoxComRotulo';
@@ -18,30 +17,29 @@ export default function CadastroLinha() {
 
   return (
     <Container>
-      <MenuLateral />
+      <MenuLateral itemAtivo="linha" />
 
       <CorpoPagina>
-
         <FormContainer>
+          <BotaoForm texto="VOLTAR" url="/linha" ladoDireito={false} />
 
           <Caixa>
-
             <Subtitulo>CADASTRO DA LINHA</Subtitulo>
             <Titulo>Dados de Acesso</Titulo>
 
             <CaixaHorizontal>
               <InputComRotulo
                 texto="Número da Linha"
-                maxLength='7'
+                maxLength="7"
                 name="numeroLinha"
                 type="text"
                 required
                 pequeno={true}
               />
 
-              <ComboBoxComRotulo 
-                texto="Linhas" 
-                conteudoCombo={teste} 
+              <ComboBoxComRotulo
+                texto="Linhas"
+                conteudoCombo={teste}
                 pequeno={true}
               />
             </CaixaHorizontal>
@@ -49,7 +47,7 @@ export default function CadastroLinha() {
             <CaixaHorizontal>
               <InputComRotulo
                 texto="Nome Parada Ida"
-                maxLength='80'
+                maxLength="80"
                 name="paradaIda"
                 type="text"
                 required
@@ -66,7 +64,7 @@ export default function CadastroLinha() {
             <CaixaHorizontal>
               <InputComRotulo
                 texto="Nome Parada Volta"
-                maxLength='7'
+                maxLength="7"
                 name="numeroLinha"
                 type="text"
                 required
@@ -79,13 +77,15 @@ export default function CadastroLinha() {
                 pequeno={true}
               />
             </CaixaHorizontal>
-
           </Caixa>
 
-          <BotaoForm texto="Finalizar" concluir={true}  url="/cadastroParadaLinha" />
+          <BotaoForm
+            texto="Finalizar"
+            concluir={true}
+            url="/cadastroParadaLinha"
+          />
         </FormContainer>
       </CorpoPagina>
-
     </Container>
   );
 }

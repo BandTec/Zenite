@@ -6,8 +6,6 @@ import StatusPage from './../../../components/StatusPage';
 import MenuLateral from './../../../components/MenuLateral';
 import InputComRotulo from './../../../components/InputComRotulo';
 
-import { cepMask } from "./../../../functions/Mascaras/mask";
-
 export default function CadastroAcesso() {
 
   const [valorSenha, setValorSenha] = useState("");
@@ -24,28 +22,39 @@ export default function CadastroAcesso() {
 
   return (
     <Container>
-      <MenuLateral />
+      <MenuLateral itemAtivo="motorista" />
 
       <CorpoPagina>
         <CaixaHorizontal center={true}>
-          <StatusPage ativo={false} texto="Dados Pessoais" temProximoPasso={true} />
+          <StatusPage
+            ativo={false}
+            texto="Dados Pessoais"
+            temProximoPasso={true}
+          />
 
           <StatusPage ativo={false} texto="Endereço" temProximoPasso={true} />
 
-          <StatusPage ativo={true} texto="Dados de Acesso" temProximoPasso={false} />
+          <StatusPage
+            ativo={true}
+            texto="Dados de Acesso"
+            temProximoPasso={false}
+          />
         </CaixaHorizontal>
 
         <FormContainer>
-          <BotaoForm texto="Voltar" ladoDireito={false} url="/cadastroMotorista2" />
+          <BotaoForm
+            texto="Voltar"
+            ladoDireito={false}
+            url="/motorista/cadastro/2"
+          />
 
           <Caixa>
-
             <Subtitulo>CADASTRO DO MOTORISTA</Subtitulo>
             <Titulo>Dados de Acesso</Titulo>
 
             <InputComRotulo
               texto="Email"
-              maxLength='60'
+              maxLength="60"
               name="email"
               type="email"
               required
@@ -53,8 +62,8 @@ export default function CadastroAcesso() {
 
             <InputComRotulo
               texto="Senha"
-              maxLength='255'
-              name='senha'
+              maxLength="255"
+              name="senha"
               type="password"
               value={valorSenha}
               onChange={(e) => setValorSenha(e.target.value)}
@@ -62,24 +71,28 @@ export default function CadastroAcesso() {
               textoAlerta="Sua senha deve conter no mínimo 8 letras."
             />
 
-
-
-          <InputComRotulo
+            <InputComRotulo
               texto="Confirmar Senha"
-              maxLength='255'
-              name='confirmarSenha'
+              maxLength="255"
+              name="confirmarSenha"
               type="password"
               value={valorConfirmarSenha}
-              onChange={(e) => { setValorConfirmarSenha(e.target.value); verificarSenha();}}
+              onChange={(e) => {
+                setValorConfirmarSenha(e.target.value);
+                verificarSenha();
+              }}
               required
               invalido={validacaoSenha}
             />
           </Caixa>
 
-          <BotaoForm texto="Finalizar" concluir={true} url="/cadastroMotorista3" />
+          <BotaoForm
+            texto="Finalizar"
+            concluir={true}
+            url="/motorista/cadastro/3"
+          />
         </FormContainer>
       </CorpoPagina>
-
     </Container>
   );
 }

@@ -18,7 +18,7 @@ export const Bolinha = styled.div`
   height: 30px;  /* 35 */
   border-radius: 50px;
   border: 5px solid #223F61;
-  background-color: ${props => props.ativo == true ? "#223F61" : "#FFF"};
+  background-color: ${props => props.ativo === true ? "#223F61" : "#FFF"};
 `;
 
 export const Linha = styled.div`

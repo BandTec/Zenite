@@ -5,7 +5,7 @@ export const Container = styled.div`
 `;
 
 export const Input = styled.input`
-  width: ${props => props.pequeno ? 230 : 500}px;
+  width: ${props => props.pequeno ? 240 : 500}px;
   width: ${props => props.tamanho}px;
   height: 40px;
   border-width: 1.5px;

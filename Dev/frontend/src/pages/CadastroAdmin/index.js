@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
-import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
+import { Container, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 import BotaoForm from './../../components/BotaoForm';
-import StatusPage from './../../components/StatusPage';
 import MenuLateral from './../../components/MenuLateral';
 import InputComRotulo from './../../components/InputComRotulo';
 
@@ -22,19 +21,19 @@ export default function CadastroAdmin() {
 
   return (
     <Container>
-      <MenuLateral />
+      <MenuLateral item="admin" />
 
       <CorpoPagina>
         <FormContainer>
+          <BotaoForm texto="VOLTAR" url="/admin" ladoDireito={false} />
 
           <Caixa>
-
             <Subtitulo>CADASTRO DO ADMINISTRADOR</Subtitulo>
             <Titulo>Dados de Acesso</Titulo>
 
             <InputComRotulo
               texto="Nome"
-              maxLength='100'
+              maxLength="100"
               name="nome"
               type="text"
               required
@@ -42,7 +41,7 @@ export default function CadastroAdmin() {
 
             <InputComRotulo
               texto="Email"
-              maxLength='60'
+              maxLength="60"
               name="email"
               type="email"
               required
@@ -50,8 +49,8 @@ export default function CadastroAdmin() {
 
             <InputComRotulo
               texto="Senha"
-              maxLength='255'
-              name='senha'
+              maxLength="255"
+              name="senha"
               type="password"
               value={valorSenha}
               onChange={(e) => setValorSenha(e.target.value)}
@@ -59,24 +58,24 @@ export default function CadastroAdmin() {
               textoAlerta="Sua senha deve conter no mínimo 8 letras."
             />
 
-
-
-          <InputComRotulo
+            <InputComRotulo
               texto="Confirmar Senha"
-              maxLength='255'
-              name='confirmarSenha'
+              maxLength="255"
+              name="confirmarSenha"
               type="password"
               value={valorConfirmarSenha}
-              onChange={(e) => { setValorConfirmarSenha(e.target.value); verificarSenha();}}
+              onChange={(e) => {
+                setValorConfirmarSenha(e.target.value);
+                verificarSenha();
+              }}
               required
               invalido={validacaoSenha}
             />
           </Caixa>
 
-          <BotaoForm texto="Finalizar" concluir={true}  url="/cadastroAdmin" />
+          <BotaoForm texto="Finalizar" concluir={true} url="/admin/cadastro" />
         </FormContainer>
       </CorpoPagina>
-
     </Container>
   );
 }
