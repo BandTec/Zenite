@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Logo from '../../assets/logos/logo4.png';
+import Logo from '~/assets/logos/logo4.png';
 import { Container, LogoZenite ,RecuperarSenha, OpcoesAdicionais } from './styles';
 
 export default function Form({children}) {

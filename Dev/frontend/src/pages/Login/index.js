@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { Container } from './styles';
-import Form from '../../components/Form';
-import Botao from '../../components/Botao';
-import Input from '../../components/InputComRotulo';
+import Form from '~/components/Form';
+import Botao from '~/components/Botao';
+import Input from '~/components/InputComRotulo';
 
 export default function Login() {
   return (

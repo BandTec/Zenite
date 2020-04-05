@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
-import BotaoForm from '../../components/BotaoForm';
-import MenuLateral from '../../components/MenuLateral';
-import InputComRotulo from '../../components/InputComRotulo';
-import ComboBoxComRotulo from '../../components/ComboBoxComRotulo';
+import BotaoForm from '~/components/BotaoForm';
+import MenuLateral from '~/components/MenuLateral';
+import InputComRotulo from '~/components/InputComRotulo';
+import ComboBoxComRotulo from '~/components/ComboBoxComRotulo';
 
 export default function CadastroLinha() {
 

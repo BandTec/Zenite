@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Container, Tela, Corpo, Cabecalho, Row, Perfil } from './styles';
-import MenuLateral from '../../components/MenuLateral'
-import Card from '../../components/Card';
-import Titulo from '../../components/Titulo';
-import Filtro from '../../components/Filtro';
+import MenuLateral from '~/components/MenuLateral'
+import Card from '~/components/Card';
+import Titulo from '~/components/Titulo';
+import Filtro from '~/components/Filtro';
 
 var data = new Date()
 

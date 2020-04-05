@@ -1,12 +1,12 @@
 import React from 'react';
 
  import { Container, Tela, Row, Cabecalho, BotaoEditarFiscal, CorpoRelatorio, CaixaDados, CaixaTabela } from './styles';
- import MenuLateral from './../../components/MenuLateral';
- import Titulo from  '../../components/Titulo';
- import TituloTipoDado from '../../components/TituloTipoDado';
- import TituloDado from '../../components/TituloDado';
- import Botao from '../../components/Botao';
- import Tabela from '../../components/Tabela';
+ import MenuLateral from '~/components/MenuLateral';
+ import Titulo from  '~/components/Titulo';
+ import TituloTipoDado from '~/components/TituloTipoDado';
+ import TituloDado from '~/components/TituloDado';
+ import Botao from '~/components/Botao';
+ import Tabela from '~/components/Tabela';
 
 export default function DetalhesFiscal() {
 

@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { Container, Row, BotaoRelatorio ,BotaoNovoFiscal, Tela, Acoes, Cabecalho, CaixaTabela } from './styles';
-import MenuLateral from '../../components/MenuLateral';
-import Botao from '../../components/Botao';
-import Tabela from '../../components/Tabela';
-import Titulo from '../../components/Titulo';
-import Paginacao from '../../components/Paginacao';
+import MenuLateral from '~/components/MenuLateral';
+import Botao from '~/components/Botao';
+import Tabela from '~/components/Tabela';
+import Titulo from '~/components/Titulo';
+import Paginacao from '~/components/Paginacao';
 
 export default function CadastroFiscal() {
 
