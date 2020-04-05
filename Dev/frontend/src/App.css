@@ -28,6 +28,14 @@ button {
     cursor: pointer;
 }
 
+.activeLink {
+    background-color: var(--azulMenuHover);
+}
+
 a {
     text-decoration: none;
+}
+
+.conteudo {
+    margin-left: 70px;
 }

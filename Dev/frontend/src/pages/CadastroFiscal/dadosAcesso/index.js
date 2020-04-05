@@ -4,7 +4,7 @@ import { Container,CaixaHorizontal,CorpoPagina,FormContainer,Titulo,Subtitulo,Ca
 
 import BotaoForm from "~/components/BotaoForm";
 import StatusPage from "~/components/StatusPage";
-import MenuLateral from "~/components/MenuLateral";
+ 
 import InputComRotulo from "~/components/InputComRotulo";
 
 export default function CadastroAcesso() {
@@ -22,7 +22,7 @@ export default function CadastroAcesso() {
 
   return (
     <Container>
-      <MenuLateral itemAtivo="fiscal" />
+       
 
       <CorpoPagina>
         <CaixaHorizontal center={true}>

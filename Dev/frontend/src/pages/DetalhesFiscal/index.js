@@ -1,7 +1,7 @@
 import React from 'react';
 
  import { Container, Tela, Row, Cabecalho, BotaoEditarFiscal, CorpoRelatorio, CaixaDados, CaixaTabela } from './styles';
- import MenuLateral from '~/components/MenuLateral';
+  
  import Titulo from  '~/components/Titulo';
  import TituloTipoDado from '~/components/TituloTipoDado';
  import TituloDado from '~/components/TituloDado';
@@ -27,7 +27,7 @@ export default function DetalhesFiscal() {
 
   return (
     <Container>
-      <MenuLateral/>
+  
         <Tela>
             <Row>
                 <Cabecalho>

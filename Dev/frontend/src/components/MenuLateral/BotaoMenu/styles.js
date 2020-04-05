@@ -7,7 +7,6 @@ export const Botao = styled.div`
   width: 100%;
   padding: 20px;
   cursor:pointer; 
-  background-color: ${props => props.ativo ? "var(--azulMenuHover)" : "transparent"};
   transition: all ease-in-out .5s;
 
   :hover {

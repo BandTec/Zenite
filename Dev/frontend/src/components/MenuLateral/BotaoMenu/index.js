@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Onibus from '~/assets/icons/onibus.svg';
 import Linha from '~/assets/icons/linha.svg';
@@ -20,15 +20,26 @@ export default function BotaoMenu({ iconeNome, descricao, url, alt, ativo=false 
     motorista: Motorista,
     perfil: Perfil,
     logout: Logout,
-    logo: LogoIcone
+    dashboard: LogoIcone
   }
 
+    const linkEstaAtivo = (match, location) => {
+      const url = location.pathname.replace(/\/(\w*)/, "$1");
+      const urlCaminho = url.replace(/(\w*)\/.*/, "$1");
+      return urlCaminho === iconeNome;
+    };
+
   return (
-    <Link to={url}>
+    <NavLink
+      to={url}
+      exact
+      activeClassName="activeLink"
+      isActive={linkEstaAtivo}
+    >
       <Botao ativo={ativo}>
         <Icone src={iconesLib[iconeNome]} alt={alt} />
         <Texto>{descricao}</Texto>
       </Botao>
-    </Link>
+    </NavLink>
   );
 }

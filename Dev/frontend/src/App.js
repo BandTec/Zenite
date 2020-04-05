@@ -18,99 +18,105 @@ import CadastroGerente3 from "~/pages/CadastroGerente/dadosAcesso";
 import CadastroAdmin from "~/pages/CadastroAdmin";
 import CadastroParadaLinha from "~/pages/CadastroParadaLinha";
 import CadastroOnibus from "~/pages/CadastroOnibus";
+import MenuLateral from "~/components/MenuLateral";
 
 const App = () => {
   return (
     <Router>
+      <MenuLateral />
+
       <Route path="/login" component={Login} />
 
-      <Route exact path="/dashboard" component={Dashboard} />
+      <div className="conteudo">
 
-      {/* FISCAL */}
+        <Route exact path="/dashboard" component={Dashboard} />
 
-      <Route exact path="/fiscal" component={Fiscal} />
+        {/* FISCAL */}
 
-      <Route path="/fiscal/detalhes/:id" component={DetalhesFiscal} />
+        <Route exact path="/fiscal" component={Fiscal} />
 
-      <Route path="/fiscal/editar/1/:id" component={FiscalCadastro1} />
+        <Route path="/fiscal/detalhes/:id" component={DetalhesFiscal} />
 
-      <Route path="/fiscal/editar/2/:id" component={FiscalCadastro2} />
+        <Route path="/fiscal/editar/1/:id" component={FiscalCadastro1} />
 
-      <Route path="/fiscal/editar/3/:id" component={FiscalCadastro3} />
+        <Route path="/fiscal/editar/2/:id" component={FiscalCadastro2} />
 
-      <Route path="/fiscal/cadastro/1" component={FiscalCadastro1} />
+        <Route path="/fiscal/editar/3/:id" component={FiscalCadastro3} />
 
-      <Route path="/fiscal/cadastro/2" component={FiscalCadastro2} />
+        <Route path="/fiscal/cadastro/1" component={FiscalCadastro1} />
 
-      <Route path="/fiscal/cadastro/3" component={FiscalCadastro3} />
+        <Route path="/fiscal/cadastro/2" component={FiscalCadastro2} />
 
-      <Route path="/fiscal/cadastro/3" component={FiscalCadastro3} />
+        <Route path="/fiscal/cadastro/3" component={FiscalCadastro3} />
 
-      {/* MOTORISTA */}
+        <Route path="/fiscal/cadastro/3" component={FiscalCadastro3} />
 
-      {/* <Route exact path="/motorista" component={} /> */}
+        {/* MOTORISTA */}
 
-      {/* <Route path="/motorista/detalhes/:id" component={} /> */}
+        {/* <Route exact path="/motorista" component={} /> */}
 
-      <Route path="/motorista/editar/1/:id" component={CadastroMotorista1} />
+        {/* <Route path="/motorista/detalhes/:id" component={} /> */}
 
-      <Route path="/motorista/editar/2/:id" component={CadastroMotorista2} />
+        <Route path="/motorista/editar/1/:id" component={CadastroMotorista1} />
 
-      <Route path="/motorista/editar/3/:id" component={CadastroMotorista3} />
+        <Route path="/motorista/editar/2/:id" component={CadastroMotorista2} />
 
-      <Route path="/motorista/cadastro/1" component={CadastroMotorista1} />
+        <Route path="/motorista/editar/3/:id" component={CadastroMotorista3} />
 
-      <Route path="/motorista/cadastro/2" component={CadastroMotorista2} />
+        <Route path="/motorista/cadastro/1" component={CadastroMotorista1} />
 
-      <Route path="/motorista/cadastro/3" component={CadastroMotorista3} />
+        <Route path="/motorista/cadastro/2" component={CadastroMotorista2} />
 
-      {/* GERENTE */}
+        <Route path="/motorista/cadastro/3" component={CadastroMotorista3} />
 
-      {/* <Route exact path="/gerente" component={} /> */}
+        {/* GERENTE */}
 
-      {/* <Route path="/gerente/detalhes/:id" component={} /> */}
+        {/* <Route exact path="/gerente" component={} /> */}
 
-      <Route path="/gerente/editar/1/:id" component={CadastroGerente1} />
+        {/* <Route path="/gerente/detalhes/:id" component={} /> */}
 
-      <Route path="/gerente/editar/2/:id" component={CadastroGerente2} />
+        <Route path="/gerente/editar/1/:id" component={CadastroGerente1} />
 
-      <Route path="/gerente/editar/3/:id" component={CadastroGerente3} />
+        <Route path="/gerente/editar/2/:id" component={CadastroGerente2} />
 
-      <Route path="/gerente/cadastro/1" component={CadastroGerente1} />
+        <Route path="/gerente/editar/3/:id" component={CadastroGerente3} />
 
-      <Route path="/gerente/cadastro/2" component={CadastroGerente2} />
+        <Route path="/gerente/cadastro/1" component={CadastroGerente1} />
 
-      <Route path="/gerente/cadastro/3" component={CadastroGerente3} />
+        <Route path="/gerente/cadastro/2" component={CadastroGerente2} />
 
-      {/* ADMIN */}
+        <Route path="/gerente/cadastro/3" component={CadastroGerente3} />
 
-      {/* <Route exact path="/admin" component={} /> */}
+        {/* ADMIN */}
 
-      {/* <Route path="/admin/detalhes/:id" component={} /> */}
+        {/* <Route exact path="/admin" component={} /> */}
 
-      {/* <Route path="/admin/editar/:id" component={} /> */}
+        {/* <Route path="/admin/detalhes/:id" component={} /> */}
 
-      <Route path="/admin/cadastro" component={CadastroAdmin} />
+        {/* <Route path="/admin/editar/:id" component={} /> */}
 
-      {/* LINHA */}
+        <Route path="/admin/cadastro" component={CadastroAdmin} />
 
-      {/* <Route exact path="/linha" component={} /> */}
+        {/* LINHA */}
 
-      {/* <Route path="/linha/detalhes/:id" component={} /> */}
+        {/* <Route exact path="/linha" component={} /> */}
 
-      {/* <Route path="/linha/editar/:id" component={} /> */}
+        {/* <Route path="/linha/detalhes/:id" component={} /> */}
 
-      <Route path="/linha/cadastro" component={CadastroParadaLinha} />
+        {/* <Route path="/linha/editar/:id" component={} /> */}
 
-      {/* ONIBUS */}
+        <Route path="/linha/cadastro" component={CadastroParadaLinha} />
 
-      {/* <Route exact path="/onibus" component={} /> */}
+        {/* ONIBUS */}
 
-      {/* <Route path="/onibus/detalhes/:id" component={} /> */}
+        {/* <Route exact path="/onibus" component={} /> */}
 
-      {/* <Route path="/onibus/editar/:id" component={} /> */}
+        {/* <Route path="/onibus/detalhes/:id" component={} /> */}
 
-      <Route path="/onibus/cadastro" component={CadastroOnibus} />
+        {/* <Route path="/onibus/editar/:id" component={} /> */}
+
+        <Route path="/onibus/cadastro" component={CadastroOnibus} />
+      </div>
     </Router>
   );
 };

@@ -9,7 +9,7 @@ import {
   Caixa,
 } from "./styles";
 import BotaoForm from "~/components/BotaoForm";
-import MenuLateral from "~/components/MenuLateral";
+ 
 import InputComRotulo from "~/components/InputComRotulo";
 
 export default function CadastroAdmin() {
@@ -27,7 +27,7 @@ export default function CadastroAdmin() {
 
   return (
     <Container>
-      <MenuLateral item="admin" />
+      
 
       <CorpoPagina>
         <FormContainer>

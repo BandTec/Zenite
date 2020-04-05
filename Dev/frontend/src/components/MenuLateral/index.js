@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useLocation } from 'react-router-dom';
+
 import {
   Container,
   MainMenu
@@ -8,63 +10,37 @@ import {
 import BotaoMenu from './BotaoMenu';
 
 export default function MenuLateral({itemAtivo}) {
-
+const {pathname} = useLocation();
+const mostrar = pathname === "/login" ? false : true;
   return (
-    <Container>
+    <>
+    { mostrar && (
+      <Container>
       <MainMenu>
-          <BotaoMenu 
-            descricao="Início" 
-            iconeNome="logo" alt="Logo do Software Zenite" 
-            url={"/dashboard"}
-            ativo={itemAtivo === "inicio" ? true : false}
-          />
+        <BotaoMenu
+          descricao="Início"
+          iconeNome="dashboard"
+          alt="Logo do Software Zenite"
+          url={"/dashboard"}
+        />
 
-        <BotaoMenu 
-          descricao="Fiscal" 
-          iconeNome="fiscal"
-          url={"/fiscal"}
-          ativo={itemAtivo === "fiscal" ? true : false}
-         />
+        <BotaoMenu descricao="Fiscal" iconeNome="fiscal" url={"/fiscal"} />
 
+        <BotaoMenu descricao="Linha" iconeNome="linha" url={"/linha"} />
 
-        <BotaoMenu 
-          descricao="Linha" 
-          iconeNome="linha"
-          url={"/linha"}
-          ativo={itemAtivo === "linha" ? true : false}
-         />
-
-
-        <BotaoMenu 
-          descricao="Motorista" 
+        <BotaoMenu
+          descricao="Motorista"
           iconeNome="motorista"
           url={"/motorista"}
-          ativo={itemAtivo === "motorista" ? true : false}
-         />
+        />
 
+        <BotaoMenu descricao="Ônibus" iconeNome="onibus" url={"/onibus"} />
 
-        <BotaoMenu 
-          descricao="Ônibus" 
-          iconeNome="onibus"
-          url={"/onibus"}
-          ativo={itemAtivo === "onibus" ? true : false}
-         />
-
-
-        <BotaoMenu 
-          descricao="Perfil" 
-          url={"/perfil"}
-          iconeNome="perfil"
-          ativo={itemAtivo === "perfil" ? true : false}
-         />
-
+        <BotaoMenu descricao="Perfil" url={"/perfil"} iconeNome="perfil" />
       </MainMenu>
 
-      <BotaoMenu 
-        descricao="Sair" 
-        url={"/login"}
-        iconeNome="logout" 
-      />
-    </Container>
+      <BotaoMenu descricao="Sair" url={"/login"} iconeNome="logout" />
+    </Container>)}
+    </>
   );
 }

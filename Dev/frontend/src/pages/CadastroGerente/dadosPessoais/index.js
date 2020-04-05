@@ -4,7 +4,7 @@ import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitu
 from './styles';
 import BotaoForm from '~/components/BotaoForm';
 import StatusPage from '~/components/StatusPage';
-import MenuLateral from '~/components/MenuLateral';
+ 
 import InputComRotulo from '~/components/InputComRotulo';
 
 import { cpfMask, telefoneMask, dataMask } from "~/functions/Mascaras/mask";
@@ -29,7 +29,7 @@ export default function CadastroGerente() {
 
   return (
     <Container>
-      <MenuLateral item="gerente" />
+      
 
       <CorpoPagina>
         <CaixaHorizontal center={true}>

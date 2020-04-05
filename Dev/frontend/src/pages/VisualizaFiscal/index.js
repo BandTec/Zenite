@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Container, Row, BotaoRelatorio ,BotaoNovoFiscal, Tela, Acoes, Cabecalho, CaixaTabela } from './styles';
-import MenuLateral from '~/components/MenuLateral';
+ 
 import Botao from '~/components/Botao';
 import Tabela from '~/components/Tabela';
 import Titulo from '~/components/Titulo';
@@ -30,7 +30,7 @@ export default function CadastroFiscal() {
 
   return (
     <Container>
-        <MenuLateral itemAtivo="fiscal" />
+         
         <Tela>
           <Row>
             <Cabecalho>

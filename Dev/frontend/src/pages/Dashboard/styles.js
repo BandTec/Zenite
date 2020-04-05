@@ -4,7 +4,7 @@ export const Container = styled.div`
 `;
 
 export const Tela = styled.div`
-    margin-left: 70px;
+     
     padding: 40px;
 `;
 

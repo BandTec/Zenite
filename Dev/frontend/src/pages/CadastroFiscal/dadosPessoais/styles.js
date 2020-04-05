@@ -6,7 +6,7 @@ export const Container = styled.div`
 `;
 
 export const CorpoPagina = styled.article`
-    margin-left: 70px;
+     
     padding: 40px;
     background-color: #FFF;
     width: 100vw;  

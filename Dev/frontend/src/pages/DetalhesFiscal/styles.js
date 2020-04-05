@@ -5,6 +5,7 @@ export const Container = styled.div`
   width: 100%;
   background-color: #ffffff;
   display: flex;
+  padding: 40px;
 `;
 
 export const Tela = styled.div`
@@ -14,12 +15,10 @@ export const Tela = styled.div`
 export const Row = styled.div`
   display: block;
   width: 100%;
-  margin-top: 40px;
+  margin-bottom: 40px;
 `;
 
 export const Cabecalho = styled.div`
-  display: block;
-  margin-left: 22vh;
   display: flex;
   justify-content: space-between;
 `;
@@ -32,8 +31,7 @@ export const BotaoEditarFiscal = styled.div`
 
 export const CorpoRelatorio = styled.div`
   display: flex;
-  justify-content: space-around;
-  padding: 0px 70px;
+  justify-content: space-between;
 `;
 
 export const CaixaDados = styled.div`

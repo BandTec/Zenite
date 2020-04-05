@@ -2,13 +2,13 @@ import React from 'react';
 
 import { Container, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 import BotaoForm from '~/components/BotaoForm';
-import MenuLateral from '~/components/MenuLateral';
+ 
 import InputComRotulo from '~/components/InputComRotulo';
 
 export default function CadastroOnibus() {
   return (
     <Container>
-      <MenuLateral itemAtivo="onibus" />
+       
 
       <CorpoPagina>
         <FormContainer>
