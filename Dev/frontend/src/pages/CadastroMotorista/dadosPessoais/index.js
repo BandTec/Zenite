@@ -2,12 +2,11 @@ import React, {useState} from 'react';
 
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } 
 from './styles';
-import BotaoForm from '~/components/BotaoForm';
-import StatusPage from '~/components/StatusPage';
- 
-import InputComRotulo from '~/components/InputComRotulo';
+import BotaoForm from './../../../components/BotaoForm';
+import StatusPage from './../../../components/StatusPage';
+import InputComRotulo from './../../../components/InputComRotulo';
 
-import { cpfMask, telefoneMask, dataMask } from "~/functions/Mascaras/mask";
+import { cpfMask, telefoneMask, dataMask } from "./../../../functions/Mascaras/mask";
 
 export default function CadastroFiscal() {
 
@@ -29,7 +28,7 @@ export default function CadastroFiscal() {
 
   return (
     <Container>
-       
+      
 
       <CorpoPagina>
         <CaixaHorizontal center={true}>

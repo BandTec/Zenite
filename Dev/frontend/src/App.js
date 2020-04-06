@@ -1,23 +1,24 @@
-import React from "react";
+
+import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import "~/App.css";
-import Login from "~/pages/Login";
-import Fiscal from "~/pages/VisualizaFiscal";
-import Dashboard from "~/pages/Dashboard";
-import DetalhesFiscal from "~/pages/DetalhesFiscal";
-import FiscalCadastro1 from "~/pages/CadastroFiscal/dadosPessoais";
-import FiscalCadastro2 from "~/pages/CadastroFiscal/endereco";
-import FiscalCadastro3 from "~/pages/CadastroFiscal/dadosAcesso";
-import CadastroMotorista1 from "~/pages/CadastroMotorista/dadosPessoais";
-import CadastroMotorista2 from "~/pages/CadastroMotorista/endereco";
-import CadastroMotorista3 from "~/pages/CadastroMotorista/dadosAcesso";
-import CadastroGerente1 from "~/pages/CadastroGerente/dadosPessoais";
-import CadastroGerente2 from "~/pages/CadastroGerente/endereco";
-import CadastroGerente3 from "~/pages/CadastroGerente/dadosAcesso";
-import CadastroAdmin from "~/pages/CadastroAdmin";
-import CadastroParadaLinha from "~/pages/CadastroParadaLinha";
-import CadastroOnibus from "~/pages/CadastroOnibus";
+import './App.css';
+import Login from "./pages/Login";
+import Fiscal from "./pages/VisualizaFiscal";
+import Dashboard from "./pages/Dashboard";
+import DetalhesFiscal from "./pages/DetalhesFiscal";
+import FiscalCadastro1 from "./pages/CadastroFiscal/dadosPessoais";
+import FiscalCadastro2 from "./pages/CadastroFiscal/endereco";
+import FiscalCadastro3 from "./pages/CadastroFiscal/dadosAcesso";
+import CadastroMotorista1 from "./pages/CadastroMotorista/dadosPessoais";
+import CadastroMotorista2 from "./pages/CadastroMotorista/endereco";
+import CadastroMotorista3 from "./pages/CadastroMotorista/dadosAcesso";
+import CadastroGerente1 from "./pages/CadastroGerente/dadosPessoais";
+import CadastroGerente2 from "./pages/CadastroGerente/endereco";
+import CadastroGerente3 from "./pages/CadastroGerente/dadosAcesso";
+import CadastroAdmin from "./pages/CadastroAdmin";
+import CadastroParadaLinha from "./pages/CadastroParadaLinha";
+import CadastroOnibus from "./pages/CadastroOnibus";
 import MenuLateral from "~/components/MenuLateral";
 
 const App = () => {
@@ -28,7 +29,6 @@ const App = () => {
       <Route path="/login" component={Login} />
 
       <div className="conteudo">
-
         <Route exact path="/dashboard" component={Dashboard} />
 
         {/* FISCAL */}

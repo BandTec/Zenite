@@ -1,12 +1,11 @@
 import React from 'react';
 
  import { Container, Tela, Row, Cabecalho, BotaoEditarFiscal, CorpoRelatorio, CaixaDados, CaixaTabela } from './styles';
-  
- import Titulo from  '~/components/Titulo';
- import TituloTipoDado from '~/components/TituloTipoDado';
- import TituloDado from '~/components/TituloDado';
- import Botao from '~/components/Botao';
- import Tabela from '~/components/Tabela';
+ import Titulo from  '../../components/Titulo';
+ import TituloTipoDado from '../../components/TituloTipoDado';
+ import TituloDado from '../../components/TituloDado';
+ import Botao from '../../components/Botao';
+ import Tabela from '../../components/Tabela';
 
 export default function DetalhesFiscal() {
 
@@ -27,7 +26,7 @@ export default function DetalhesFiscal() {
 
   return (
     <Container>
-  
+      
         <Tela>
             <Row>
                 <Cabecalho>

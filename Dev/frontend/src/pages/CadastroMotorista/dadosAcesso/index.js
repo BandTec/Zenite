@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
-import BotaoForm from '~/components/BotaoForm';
-import StatusPage from '~/components/StatusPage';
- 
-import InputComRotulo from '~/components/InputComRotulo';
+import BotaoForm from './../../../components/BotaoForm';
+import StatusPage from './../../../components/StatusPage';
+
+import InputComRotulo from './../../../components/InputComRotulo';
 
 export default function CadastroAcesso() {
 
@@ -22,7 +22,7 @@ export default function CadastroAcesso() {
 
   return (
     <Container>
-       
+      
 
       <CorpoPagina>
         <CaixaHorizontal center={true}>

@@ -1,29 +1,28 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { Container,CaixaHorizontal,CorpoPagina,FormContainer,Titulo,Subtitulo,Caixa} from "./styles";
-
-import BotaoForm from "~/components/BotaoForm";
-import StatusPage from "~/components/StatusPage";
- 
-import InputComRotulo from "~/components/InputComRotulo";
+import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
+import BotaoForm from './../../../components/BotaoForm';
+import StatusPage from './../../../components/StatusPage';
+import InputComRotulo from './../../../components/InputComRotulo';
 
 export default function CadastroAcesso() {
+
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");
   const [validacaoSenha, setValidacaoSenha] = useState("");
 
   const verificarSenha = () => {
-    // verificao
+      // verificao
     setValidacaoSenha(valorSenha === valorConfirmarSenha ? true : false);
     console.log(validacaoSenha);
     console.log(valorSenha);
     console.log(valorConfirmarSenha);
-  };
+  }
+
+  
 
   return (
     <Container>
-       
-
       <CorpoPagina>
         <CaixaHorizontal center={true}>
           <StatusPage
