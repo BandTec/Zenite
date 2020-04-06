@@ -16,6 +16,7 @@ O sistema Zênite é um automatizador e gerenciador do processo de fiscalizaçã
 * ProtoPersona
 * UserStories
 * StoryBoard
+* Jornada do Usuário
 * Banco de Dados
 * Equipe
 
@@ -25,7 +26,7 @@ O sistema Zênite é um automatizador e gerenciador do processo de fiscalizaçã
 
 Segundo a SPTrans, que gerencia o transporte por ônibus na capital, são feitas 200 mil viagens diárias na cidade. Dessas viagens 2 milhões de viagens não foram cumpridas segundo o órgão fiscalizador TCM(Tribunal de Contas do Município), isso corresponde a 38,6 milhões de km que deixaram de ser operados pelas empresas, somente em dias úteis no período auditado. Essa problemática chamou atenção pois impacta diretamente a população que depende do bom funcionamento deste serviço é crucial para o cotidiano dos moradores da cidade e redondezas.
 
-Partindo então deste contexto planejamos nosso sistema de gerenciamento de transporte urbano. Nosso plano é auxiliar no processo de fiscalizar a chegada e saída dos ônibus, onde os principais atores são o fiscal e o motorista; e tambêm auxiliar na tomada de decisão dos gestores das linhas com os dados que serão informatizados.
+Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte urbano. Nosso plano é auxiliar no processo de fiscalizar a chegada e saída dos ônibus, onde os principais atores são o fiscal e o motorista; e também auxiliar nas tomadas de decisões dos gestores das linhas com os dados que serão informatizados.
 
 ---
 
@@ -45,8 +46,8 @@ Partindo então deste contexto planejamos nosso sistema de gerenciamento de tran
       - [ ] Gráfico com início e fim de viagem
       - [ ] Gráfico mostrando tempo percorrido na viagem
       - [ ] Gráfico com média de tempo de viagem por linha
-      - [ ] Gráfico com horário do dia em qua as linhas mais demoram em suas viagens
-      - [ ] Gráfico mostrando quantidade de ônibus circulando por linha em um determinado perído
+      - [ ] Gráfico com horários dos dias em que as linhas mais demoram em suas viagens
+      - [ ] Gráfico mostrando quantidade de ônibus circulando por linha em um determinado período
       - [ ] Gráfico com outliers
     - [ ] Filtros no dashboard
     - [ ] Gerar relatórios a partir dos dados da dashboard
@@ -55,7 +56,7 @@ Partindo então deste contexto planejamos nosso sistema de gerenciamento de tran
   - [ ] Ícone de HelDesk
   - [ ] Logoff
 - [ ] IOT
-  - [ ] Módulo RFID (RC522) para transportas dados das viagens.
+  - [ ] Módulo RFID (RC522) para transportar dados das viagens.
   - [ ] Case para o equipamento do arduíno
 - [x] Banco de dados hospedados na nuvem AZURE
 
@@ -71,10 +72,10 @@ Partindo então deste contexto planejamos nosso sistema de gerenciamento de tran
 ## ProtoPersona
 
 <div style="display: flex; flex-direction: row;">
-<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint1/ProtoPersonas/ProtoPersonaFiscal.png" width="30%">
+<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint1/ProtoPersonas/ProtoPersonaFiscal.png" width="40%">
 
 
-<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint1/ProtoPersonas/ProtoPersonaGerente.png" width="30%">
+<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint1/ProtoPersonas/ProtoPersonaGerente.png" width="40%">
 </div>
 
 ---
@@ -82,12 +83,12 @@ Partindo então deste contexto planejamos nosso sistema de gerenciamento de tran
 ## UserStories
 
 **Fiscal**
-> Eu fiscalizo várias linhas e faço anotações nos relatórios de papel dos motoristas como horário de saída e chegada, assim controlo todos os ônibus
+> Eu fiscalizo várias linhas e faço anotações nos relatórios de papel dos motoristas com o horário de saída e chegada, assim controlo todos os ônibus
 
-> Preciso tomar decisões baseadas no tempo de espera, números de viagens e quantidade de veículos, todas essas informações são que mudam diáriamente porém eu tenho que ser cuidadoso e rápido.
+> Preciso tomar decisões baseadas no tempo de espera, números de viagens e quantidade de veículos, todas essas informações mudam diariamente,porém eu tenho que ser cuidadoso e rápido.
 
 **Gerente**
-> Preciso ser informado quando há atrasos recorrentes em um trajeto especifico, para relatar a necessidade de aumento da frota
+> Preciso ser informado quando há atrasos recorrentes em um trajeto especifico, para relatar a necessidade de aumento na frota
 
 > Necessito determinar padrões de serviço prestado e  mostrar resultados para meus superiores
 
@@ -101,7 +102,13 @@ Partindo então deste contexto planejamos nosso sistema de gerenciamento de tran
 
 ## StoryBoard
 
-<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint2/storyboard/storyboard-fiscal.jpg" width="60%">
+<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint2/storyboard/storyboard-fiscal.jpg" width="70%">
+
+---
+
+## Jornada do Usuário 
+
+<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint1/Mapa%20de%20Empatia/Jornada%20do%20Usu%C3%A1rio.png">
 
 ---
 
