@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import api from '../../services/api';
 
 import { Container, Row, BotaoRelatorio ,BotaoNovoFiscal, Tela, Acoes, Cabecalho, CaixaTabela } from './styles';
 import Botao from '../../components/Botao';
@@ -7,7 +8,17 @@ import Titulo from '../../components/Titulo';
 import Paginacao from '../../components/Paginacao';
 
 export default function CadastroFiscal() {
-
+  async function dadosCorpos() {
+    const token = localStorage.getItem('token');
+    
+    const response = await api.get('/api/fiscal',{
+      headers: {'Authorization': token}
+    })
+    console.log(response.data);
+  }
+  // dadosCorpos();
+  useEffect(dadosCorpos,[])
+  
   function criaDados(registro, nome, dataNasc, telefone, supervisor, acoes){
     return {registro, nome, dataNasc, telefone, supervisor, acoes}
   }
@@ -47,7 +58,7 @@ export default function CadastroFiscal() {
               </BotaoNovoFiscal>
 
               <BotaoRelatorio>
-                <Botao descricao='relatório'/>
+                <Botao descricao='relatório' url="/fiscal"/>
               </BotaoRelatorio>
 
             </Acoes>

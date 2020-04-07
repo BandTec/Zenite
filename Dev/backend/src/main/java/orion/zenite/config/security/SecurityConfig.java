@@ -51,12 +51,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                      * qualquer outra rota precisa ter sido pelo menos autenticada (o usuario deve existir no banco)
         */
         http
+            .cors().disable()
             .csrf().disable()
             .authorizeRequests()
                 .antMatchers("/api/administrador/**")
                     .hasAnyRole("ADMIN")
                 .antMatchers("/api/fiscal/**")
-                    .hasAnyRole( "GERENTE")
+                    .hasAnyRole( "ADMIN", "GERENTE")
                 .antMatchers("/api/motorista**")
                     .hasAnyRole("ADMIN", "GERENTE")
                 .antMatchers("/api/gerente/**")
