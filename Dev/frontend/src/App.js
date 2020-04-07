@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import Login from "./pages/Login";
 import Fiscal from "./pages/VisualizaFiscal";
+import Linha from "./pages/VisualizaLinha";
 import Dashboard from "./pages/Dashboard";
 import DetalhesFiscal from "./pages/DetalhesFiscal";
 import FiscalCadastro1 from "./pages/CadastroFiscal/dadosPessoais";
@@ -106,6 +107,7 @@ const App = () => {
         {/* <Route path="/linha/editar/:id" component={} /> */}
 
         <Route path="/linha/cadastro" component={CadastroParadaLinha} />
+        <Route path="/linha" component={Linha} />
 
         {/* ONIBUS */}
 
