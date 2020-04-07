@@ -51,7 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                      * qualquer outra rota precisa ter sido pelo menos autenticada (o usuario deve existir no banco)
         */
         http
-            .cors().disable()
             .csrf().disable()
             .authorizeRequests()
                 .antMatchers("/api/administrador/**")
@@ -71,6 +70,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
+
+         http.cors();
     }
 
     @Override
