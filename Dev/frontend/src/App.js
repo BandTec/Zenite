@@ -19,7 +19,7 @@ import CadastroGerente3 from "./pages/CadastroGerente/dadosAcesso";
 import CadastroAdmin from "./pages/CadastroAdmin";
 import CadastroParadaLinha from "./pages/CadastroParadaLinha";
 import CadastroOnibus from "./pages/CadastroOnibus";
-import MenuLateral from "~/components/MenuLateral";
+import MenuLateral from "./components/MenuLateral";
 
 const App = () => {
   return (
