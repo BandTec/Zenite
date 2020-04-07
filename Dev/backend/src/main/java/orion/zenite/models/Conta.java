@@ -17,7 +17,7 @@ public class Conta {
     @Column(length = 100, nullable = false, unique = true)
     private String email;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name="fkNivel")
     private Nivel nivel;
 
