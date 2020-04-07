@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 
 import { Container, Row, BotaoRelatorio ,BotaoNovoFiscal, Tela, Acoes, Cabecalho, CaixaTabela } from './styles';
@@ -8,6 +8,9 @@ import Titulo from '../../components/Titulo';
 import Paginacao from '../../components/Paginacao';
 
 export default function CadastroFiscal() {
+  let dados = [];
+  let [corpo, setCorpo] = useState([]);
+
   async function dadosCorpos() {
     const token = localStorage.getItem('token');
     
@@ -15,16 +18,32 @@ export default function CadastroFiscal() {
       headers: {'Authorization': token}
     })
     console.log(response.data);
+    dados = response.data;
+
+     let temp = [];
+     dados.map((item) => {
+       temp.push(
+         criaDados(
+           item.registroFiscal,
+           item.nome,
+           item.numeroTelefone,
+           item.cpf
+         )
+       );
+     });
+     setCorpo(temp);
   }
-  // dadosCorpos();
-  useEffect(dadosCorpos,[])
   
-  function criaDados(registro, nome, dataNasc, telefone, supervisor, acoes){
-    return {registro, nome, dataNasc, telefone, supervisor, acoes}
+  useEffect(() => {
+    dadosCorpos();
+  }, []);
+  
+  function criaDados(registro, nome, telefone, cpf, acoes){
+    return {registro, nome, telefone, cpf, acoes}
   }
 
   const dadosCabecalho = [
-    criaDados('Registro Fiscal', 'Nome', 'Data Nasc.', 'Telefone', 'Supervisor', 'Ações')
+    criaDados('Registro Fiscal', 'Nome', 'Telefone', 'CPF', 'Ações')
   ];
 
   const dadosCorpo = [
@@ -40,40 +59,42 @@ export default function CadastroFiscal() {
 
   return (
     <Container>
-        <Tela>
-          <Row>
-            <Cabecalho>
-              <Titulo textoMenor='consulta do fiscal' textoMaior=''/>
-            </Cabecalho>
-          </Row>
-          <Row>
-            <Acoes>
+      <Tela>
+        <Row>
+          <Cabecalho>
+            <Titulo textoMenor="consulta do fiscal" textoMaior="" />
+          </Cabecalho>
+        </Row>
+        <Row>
+          <Acoes>
+            <BotaoNovoFiscal>
+              <Botao
+                descricao="Novo Fiscal"
+                estiloEscuro={true}
+                url="/fiscal/cadastro/1"
+              />
+            </BotaoNovoFiscal>
 
-              <BotaoNovoFiscal>
-                <Botao 
-                  descricao='Novo Fiscal' 
-                  estiloEscuro={true}
-                  url="/fiscal/cadastro/1"
-                />
-              </BotaoNovoFiscal>
+            <BotaoRelatorio>
+              <Botao descricao="relatório" url="/fiscal" />
+            </BotaoRelatorio>
+          </Acoes>
+        </Row>
 
-              <BotaoRelatorio>
-                <Botao descricao='relatório' url="/fiscal"/>
-              </BotaoRelatorio>
+        <Row>
+          <CaixaTabela>
+            <Tabela
+              tabela={2}
+              dadosCabecalho={dadosCabecalho}
+              dadosCorpo={corpo}
+            />
+          </CaixaTabela>
+        </Row>
 
-            </Acoes>
-          </Row>
-
-          <Row>
-            <CaixaTabela>
-              <Tabela Tabela={2} dadosCabecalho={dadosCabecalho} dadosCorpo={dadosCorpo} />
-            </CaixaTabela>
-          </Row>
-
-          <Row>
-            <Paginacao/>
-          </Row>
-        </Tela>
+        <Row>
+          <Paginacao />
+        </Row>
+      </Tela>
     </Container>
   );
 }

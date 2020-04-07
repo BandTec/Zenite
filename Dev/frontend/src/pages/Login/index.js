@@ -6,16 +6,20 @@ import Form from '../../components/Form';
 import Botao from './Botao';
 import Input from '../../components/InputComRotulo';
 
-export default function Login() {
+export default function Login(props) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const response = await api.post('/autentica/login', { email, senha })
-    const { message } = response.data;
-    localStorage.setItem('token', message);
+    const response = await api.post('/autentica/login', { email, senha });
+    if(response.status){
+      const { message } = response.data;
+      localStorage.setItem('token', message);
+      props.history.push("/dashboard");
+    }
   }
+
   return (
     <Container>
       <Form handleSubmit={handleSubmit}>
