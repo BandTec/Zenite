@@ -48,21 +48,89 @@ async function autenticar() {
     }
 }
 
+function verificarDuplicatasLinhas(value, index, array){
+    let NaoExiste = true;
+    for (let i = index ;i > 0 ; i--) {
+        if(value.NumeroLinha==array[i-1].NumeroLinha){
+            NaoExiste=false;
+        }
+    }
+
+    if(NaoExiste){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function verificarDuplicatasPontos(value , index, array){
+    let NaoExiste = true;
+    for (let i = index ;i > 0 ; i--) {
+        if(value.terminal==array[i-1].terminal){
+            NaoExiste=false;
+        }
+    }
+    if(NaoExiste){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 app.get("/cadastrarlinhas", async (req, res) => {
     try{
         await autenticar();
         let linhasPorTerminal = []
-        for(var i = 0; i < terminais.length; i++){
-             let response = await axios.get(
-               `${url}/Linha/Buscar?termosBusca=${terminais[i]}`,
-               { headers: { Cookie: cookie } }
-             );
+        let filtroLinha = [];
+        let filtroTerminal = [];
 
-             response.data.map((element) => {
-               linhasPorTerminal.push(element);
-             });
+        for(let i = 0; i < terminais.length; i++){
+            
+            let response = await axios.get(
+               `${url}/Linha/Buscar?termosBusca=${terminais[i]}`,
+                { headers: { Cookie: cookie } }
+            );
+
+            let nroLinha;
+            let terminal1;
+            let terminal2;
+
+            response.data.forEach((element) => {
+                //linhasPorTerminal.push(element);
+                nroLinha = `${element.lt}-${element.tl}`;
+
+                if(element.tp=="CIRCULAR" || element.lc==true){
+                    terminal1=null;
+                }else{
+                    terminal1=element.tp
+                }
+
+                terminal2 = element.ts;
+                linhasPorTerminal.push({
+                    NumeroLinha: nroLinha,
+                    Circular: element.lc,
+                    terminalPrincipal: terminal1,
+                    terminalSecundario: terminal2
+                })
+            });  
         }
-        res.status(200).json(linhasPorTerminal);
+
+        filtroLinha = linhasPorTerminal.filter(verificarDuplicatasLinhas);
+        
+        let auxiliar = [];
+
+        filtroLinha.forEach(item => {
+            if(item.terminalPrincipal!=null){
+                auxiliar.push(item.terminalPrincipal);
+            }
+            auxiliar.push(item.terminalSecundario);
+        });
+
+        let objetoTeminal = auxiliar.map(item => ({terminal: item}))
+
+        filtroTerminal = objetoTeminal.filter(verificarDuplicatasPontos)
+        
+        res.status(200).json(filtroTerminal);
     }catch(err){
         console.log(err);
         res.status(500).json(err.message);
@@ -72,9 +140,42 @@ app.get("/cadastrarlinhas", async (req, res) => {
 app.get("/teste", async (req, res) => {
     try{
         await autenticar();
-        const response = await axios.get(`${url}/Linha/Buscar?termosBusca=VL PRUDENTE`, 
-            {headers: {Cookie: cookie}});
-        res.status(200).json(response.data);
+        let linhasPorTerminal = []
+        let filtroLinha = [];
+        let filtroTerminal = [];
+
+        for(let i = 0; i < terminais.length; i++){
+            
+            let response = await axios.get(
+               `${url}/Linha/Buscar?termosBusca=${terminais[i]}`,
+                { headers: { Cookie: cookie } }
+            );
+
+            let nroLinha;
+            let terminal1;
+            let terminal2;
+
+            response.data.forEach((element) => {
+                //linhasPorTerminal.push(element);
+                nroLinha = `${element.lt}-${element.tl}`;
+
+                if(element.tp=="CIRCULAR" || element.lc==true){
+                    terminal1=null;
+                }else{
+                    terminal1=element.tp
+                }
+
+                terminal2 = element.ts;
+                linhasPorTerminal.push({
+                    NumeroLinha: nroLinha,
+                    Circular: element.lc,
+                    terminalPrincipal: terminal1,
+                    terminalSecundario: terminal2
+                })
+            });  
+        }
+
+        res.status(200).json(linhasPorTerminal);
     }catch(err){
         console.log(err);
         res.status(500).json(err.message);
