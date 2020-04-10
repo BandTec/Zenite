@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 import DadosPessoais from './dadosPessoais';
@@ -6,24 +7,29 @@ import DadosEndereco from './endereco';
 import DadosAcesso from './dadosAcesso';
 
 export default function CadastroFiscal(props) {
-    const { id } = props.match.params;
-    const [pagina, setPagina] = useState(id);
+
+    const [pagina, setPagina] = useState(1);
     const caminho = props.match.path;
     const tipoPagina = caminho.includes("editar") ? "Edição" : "Cadastro";
-    const tipoUrl = caminho.includes("editar") ? "editar" : "cadastro";
+    
+    const mudarPagina = isProximo => {
+        isProximo ? setPagina(pagina+1) : setPagina(pagina-1);
+    }
+
+    const cadastrar = () =>{
+        console.log("Aqui vai o cadastro")
+    }
     
     return (
         <Container>
-            {   
-                id === 1 ?
-                <DadosPessoais pagina={pagina} setPagina={setPagina} tipoPagina={tipoPagina} 
-                tipoUrl={tipoUrl}/>
-                : id === 2 ?
-                <DadosEndereco pagina={pagina} setPagina={setPagina} tipoPagina={tipoPagina} 
-                tipoUrl={tipoUrl}/>
-                : id === 3 ?
-                <DadosAcesso   pagina={pagina} setPagina={setPagina} tipoPagina={tipoPagina} 
-                tipoUrl={tipoUrl}/>
+            {   pagina === 1 ?
+                <DadosPessoais mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
+                : pagina === 2 ?
+                <DadosEndereco mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
+                : pagina === 3 ?
+                <DadosAcesso mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
+                : pagina === 4 ?
+                cadastrar().bind
                 : <h1>Pagina não encontrada</h1>
             }
         </Container>

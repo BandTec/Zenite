@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 import BotaoForm from './../../../components/BotaoForm';
@@ -8,7 +9,7 @@ import InputComRotulo from './../../../components/InputComRotulo';
 
 import { cpfMask, telefoneMask, dataMask } from "./../../../functions/Mascaras/mask";
 
-export default function DadosPessoais({ pagina, setPagina, tipoUrl, tipoPagina }) {
+export default function DadosPessoais({ mudarPagina, tipoUrl, tipoPagina }) {
   
   const [nome, setNome ] = useState("");
   const [valorCpf, setValorCpf] = useState("");
@@ -27,8 +28,6 @@ export default function DadosPessoais({ pagina, setPagina, tipoUrl, tipoPagina }
   const mascararTelefone = (e) => {
     setValorTelefone(telefoneMask(e.target.value));
   }
-
-
 
   return (
     <Container>
@@ -51,7 +50,9 @@ export default function DadosPessoais({ pagina, setPagina, tipoUrl, tipoPagina }
         </CaixaHorizontal>
 
         <FormContainer>
-          <BotaoForm texto="VOLTAR" url="/fiscal" ladoDireito={false} />
+          <Link to="/fiscal">
+            <BotaoForm texto="VOLTAR" mudarPagina={mudarPagina} ladoDireito={false} />
+          </Link>
 
           <Caixa>
             <Subtitulo>{tipoPagina} DO FISCAL</Subtitulo>
@@ -93,7 +94,7 @@ export default function DadosPessoais({ pagina, setPagina, tipoUrl, tipoPagina }
             </CaixaHorizontal>
           </Caixa>
 
-          <BotaoForm texto="Próximo" url={`/fiscal/${tipoUrl}/${pagina}`}/>
+          <BotaoForm texto="Próximo" mudarPagina={mudarPagina}/>
         </FormContainer>
       </CorpoPagina>
     </Container>

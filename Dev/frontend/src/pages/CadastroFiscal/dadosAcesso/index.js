@@ -5,7 +5,7 @@ import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
 import InputComRotulo from './../../../components/InputComRotulo';
 
-export default function DadosAcesso() {
+export default function DadosAcesso({ mudarPagina, tipoPagina}) {
 
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");
@@ -44,11 +44,11 @@ export default function DadosAcesso() {
           <BotaoForm
             texto="Voltar"
             ladoDireito={false}
-            url="/fiscal/cadastro/2"
+            mudarPagina={mudarPagina}
           />
 
           <Caixa>
-            <Subtitulo>CADASTRO DO FISCAL</Subtitulo>
+            <Subtitulo>{`${tipoPagina} DO FISCAL`}</Subtitulo>
             <Titulo>Dados de Acesso</Titulo>
 
             <InputComRotulo
@@ -95,7 +95,7 @@ export default function DadosAcesso() {
           <BotaoForm
             texto="Finalizar"
             concluir={true}
-            url="/fiscal/cadastro/3"
+            mudarPagina={mudarPagina}
           />
         </FormContainer>
       </CorpoPagina>
