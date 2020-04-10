@@ -9,7 +9,9 @@ export default function CadastroOnibus() {
     <Container>
       <CorpoPagina>
         <FormContainer>
-          <BotaoForm texto="VOLTAR" url="/onibus" ladoDireito={false} />
+          <Link to="/onibus">
+            <BotaoForm texto="VOLTAR" ladoDireito={false} />
+          </Link>
 
           <Caixa>
             <Subtitulo>CADASTRO DO ÔNIBUS</Subtitulo>
@@ -30,8 +32,9 @@ export default function CadastroOnibus() {
               required
             />
           </Caixa>
-
-          <BotaoForm texto="Finalizar" concluir={true} url="/onibus/cadastro" />
+          <Link to="/onibus">
+            <BotaoForm texto="Finalizar" concluir={true} />
+          </Link>
         </FormContainer>
       </CorpoPagina>
     </Container>
