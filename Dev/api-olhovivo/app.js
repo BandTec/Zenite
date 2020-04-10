@@ -48,6 +48,7 @@ async function autenticar() {
     }
 }
 
+//Função para verificar duplicatas nas linhas que retornaram da API
 function verificarDuplicatasLinhas(value, index, array){
     let NaoExiste = true;
     for (let i = index ;i > 0 ; i--) {
@@ -63,10 +64,11 @@ function verificarDuplicatasLinhas(value, index, array){
     }
 }
 
+//Função para verificar duplicatas nos terminais que retornaram da API
 function verificarDuplicatasPontos(value , index, array){
     let NaoExiste = true;
     for (let i = index ;i > 0 ; i--) {
-        if(value.terminal==array[i-1].terminal){
+        if(value==array[i-1]){
             NaoExiste=false;
         }
     }
@@ -77,13 +79,63 @@ function verificarDuplicatasPontos(value , index, array){
     }
 }
 
+async function insertPontos(array){
+    try{
+        await banco.desconectar();
+        await banco.conectar();
+
+        for (let index = 0; index < array.length; index++) {
+            try {
+                await banco.sql.query(`insert into tblPontoFinal (nomeTerminal)
+                values ('${array[index]}')`)
+                console.log(`Ponto ${array[index]} inserido com sucesso!`);
+            } catch (err) {
+                console.log(`Erro ao inserir ${array[index]}`)
+            }    
+            
+        }
+
+        await banco.desconectar();
+        console.log("************************TUDO INSERIDO***************************")
+    }catch(err){
+        console.log(`Erro na função: ${err.message}`)
+    }
+}
+
+async function insert(array){
+    try{
+        await banco.desconectar();
+        await banco.conectar();
+
+        for (let index = 0; index < array.length; index++) {
+            try {
+                await banco.sql.query(`insert into tblPontoFinal (nomeTerminal)
+                values ('${array[index]}')`)
+                console.log(`Ponto ${array[index]} inserido com sucesso!`);
+            } catch (err) {
+                console.log(`Erro ao inserir ${array[index]}`)
+            }    
+            
+        }
+
+        await banco.desconectar();
+        console.log("************************TUDO INSERIDO***************************")
+    }catch(err){
+        console.log(`Erro na função: ${err.message}`)
+    }
+}
+
 app.get("/cadastrarlinhas", async (req, res) => {
     try{
         await autenticar();
         let linhasPorTerminal = []
         let filtroLinha = [];
         let filtroTerminal = [];
-
+        
+        /*
+        For que percorre o array de terminais da SPTRANS e passa para a API para
+        obter todas as linhas.
+        */
         for(let i = 0; i < terminais.length; i++){
             
             let response = await axios.get(
@@ -115,22 +167,26 @@ app.get("/cadastrarlinhas", async (req, res) => {
             });  
         }
 
+        //Filtra as linhas para que não tenha duplicatas no array
         filtroLinha = linhasPorTerminal.filter(verificarDuplicatasLinhas);
-        
-        let auxiliar = [];
+        //Cria um novo array apenas com as linhas
+        let linhas = filtroLinha.map(item =>(item.NumeroLinha));
 
+        //Popula o array "filtroTerminal" com os terminais e pontos
         filtroLinha.forEach(item => {
             if(item.terminalPrincipal!=null){
-                auxiliar.push(item.terminalPrincipal);
+                filtroTerminal.push(item.terminalPrincipal);
             }
-            auxiliar.push(item.terminalSecundario);
+            filtroTerminal.push(item.terminalSecundario);
         });
-
-        let objetoTeminal = auxiliar.map(item => ({terminal: item}))
-
-        filtroTerminal = objetoTeminal.filter(verificarDuplicatasPontos)
         
-        res.status(200).json(filtroTerminal);
+        //Une terminal principal e terminal secundario em um array auxiliar
+        let auxiliar = filtroTerminal.map(item => (item))
+        //Filtra os terminais para que não tenha duplicatas
+        let pontos = auxiliar.filter(verificarDuplicatasPontos)
+        
+      
+        res.status(200).json({filtroLinha,linhas,pontos});
     }catch(err){
         console.log(err);
         res.status(500).json(err.message);
