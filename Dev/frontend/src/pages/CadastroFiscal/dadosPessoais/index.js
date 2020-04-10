@@ -1,15 +1,14 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
+import { cpfMask, telefoneMask, dataMask } from "./../../../functions/Mascaras/mask";
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
+
 import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
-
 import InputComRotulo from './../../../components/InputComRotulo';
 
-import { cpfMask, telefoneMask, dataMask } from "./../../../functions/Mascaras/mask";
-
-export default function DadosPessoais({ mudarPagina, tipoUrl, tipoPagina }) {
+export default function DadosPessoais({ mudarPagina, tipoPagina }) {
   
   const [nome, setNome ] = useState("");
   const [valorCpf, setValorCpf] = useState("");
@@ -17,31 +16,32 @@ export default function DadosPessoais({ mudarPagina, tipoUrl, tipoPagina }) {
   const [valorData, setValorData] = useState("");
   const [valorTelefone, setValorTelefone] = useState("");
 
-  const mascararCpf = (e) => {
+  const mascararCpf = e => {
     setValorCpf(cpfMask(e.target.value));
   }
 
-  const mascararData = (e) => {
+  const mascararData = e => {
     setValorData(dataMask(e.target.value));
   }
 
-  const mascararTelefone = (e) => {
+  const mascararTelefone = e => {
     setValorTelefone(telefoneMask(e.target.value));
   }
 
   return (
     <Container>
-      
       <CorpoPagina>
         <CaixaHorizontal center={true}>
-          <StatusPage
-            ativo={true}
-            texto="Dados Pessoais"
-            temProximoPasso={true}
+          <StatusPage 
+            ativo={true} 
+            texto="Dados Pessoais" 
+            temProximoPasso={true} 
           />
-
-          <StatusPage ativo={false} texto="Endereço" temProximoPasso={true} />
-
+          <StatusPage 
+            ativo={false} 
+            texto="Endereço" 
+            temProximoPasso={true} 
+          />
           <StatusPage
             ativo={false}
             texto="Dados de Acesso"
@@ -58,8 +58,14 @@ export default function DadosPessoais({ mudarPagina, tipoUrl, tipoPagina }) {
             <Subtitulo>{tipoPagina} DO FISCAL</Subtitulo>
             <Titulo>DADOS CADASTRAIS</Titulo>
 
-            <InputComRotulo value={nome} onChange={e => setNome(e.target.value)} texto="Nome" name="nome" maxLength="100" required />
-
+            <InputComRotulo 
+              value={nome} 
+              onChange={e => setNome(e.target.value)} 
+              texto="Nome" 
+              name="nome" 
+              maxLength="100" 
+              required 
+            />
             <InputComRotulo
               texto="CPF"
               maxLength="14"
@@ -68,9 +74,13 @@ export default function DadosPessoais({ mudarPagina, tipoUrl, tipoPagina }) {
               onChange={mascararCpf}
               required
             />
-
-            <InputComRotulo value={registro} onChange={e => setRegistro(e.target.value)} texto="Registro Fiscal" maxLength="20" required />
-
+            <InputComRotulo 
+              value={registro} 
+              onChange={e => setRegistro(e.target.value)} 
+              texto="Registro Fiscal" 
+              maxLength="20" 
+              required 
+            />
             <CaixaHorizontal>
               <InputComRotulo
                 pequeno={true}
@@ -81,7 +91,6 @@ export default function DadosPessoais({ mudarPagina, tipoUrl, tipoPagina }) {
                 onChange={mascararData}
                 required
               />
-
               <InputComRotulo
                 texto="Telefone"
                 pequeno={true}
@@ -93,7 +102,6 @@ export default function DadosPessoais({ mudarPagina, tipoUrl, tipoPagina }) {
               />
             </CaixaHorizontal>
           </Caixa>
-
           <BotaoForm texto="Próximo" mudarPagina={mudarPagina}/>
         </FormContainer>
       </CorpoPagina>

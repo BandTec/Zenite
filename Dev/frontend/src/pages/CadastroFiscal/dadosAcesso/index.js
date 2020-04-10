@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
+
 import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
 import InputComRotulo from './../../../components/InputComRotulo';
 
-export default function DadosAcesso({ mudarPagina, tipoPagina}) {
+export default function DadosAcesso({ mudarPagina, tipoPagina }) {
 
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");
@@ -17,9 +18,7 @@ export default function DadosAcesso({ mudarPagina, tipoPagina}) {
     console.log(validacaoSenha);
     console.log(valorSenha);
     console.log(valorConfirmarSenha);
-  }
-
-  
+  }  
 
   return (
     <Container>
@@ -31,7 +30,11 @@ export default function DadosAcesso({ mudarPagina, tipoPagina}) {
             temProximoPasso={true}
           />
 
-          <StatusPage ativo={false} texto="Endereço" temProximoPasso={true} />
+          <StatusPage 
+            ativo={false}
+            texto="Endereço" 
+            temProximoPasso={true} 
+          />
 
           <StatusPage
             ativo={true}
@@ -48,7 +51,7 @@ export default function DadosAcesso({ mudarPagina, tipoPagina}) {
           />
 
           <Caixa>
-            <Subtitulo>{`${tipoPagina} DO FISCAL`}</Subtitulo>
+            <Subtitulo>{tipoPagina} DO FISCAL</Subtitulo>
             <Titulo>Dados de Acesso</Titulo>
 
             <InputComRotulo

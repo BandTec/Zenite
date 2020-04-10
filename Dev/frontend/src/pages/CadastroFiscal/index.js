@@ -22,13 +22,13 @@ export default function CadastroFiscal(props) {
     return (
         <Container>
             {   pagina === 1 ?
-                <DadosPessoais mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
+                    <DadosPessoais mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
                 : pagina === 2 ?
-                <DadosEndereco mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
+                    <DadosEndereco mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
                 : pagina === 3 ?
-                <DadosAcesso mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
+                    <DadosAcesso   mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
                 : pagina === 4 ?
-                cadastrar()
+                    cadastrar()
                 : <h1>Pagina não encontrada</h1>
             }
         </Container>
