@@ -6,6 +6,7 @@ import './App.css';
 import Login from "./pages/Login";
 import Fiscal from "./pages/VisualizaFiscal";
 import Linha from "./pages/VisualizaLinha";
+import Motorista from "./pages/VisualizaMotorista";
 import Dashboard from "./pages/Dashboard";
 import DetalhesFiscal from "./pages/DetalhesFiscal";
 import CadastroFiscal from "./pages/CadastroFiscal";
@@ -55,7 +56,7 @@ const App = () => {
 
         {/* MOTORISTA */}
 
-        {/* <Route exact path="/motorista" component={} /> */}
+         <Route exact path="/motorista" component={Motorista} /> 
 
         {/* <Route path="/motorista/detalhes/:id" component={} /> */}
 

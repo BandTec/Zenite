@@ -56,14 +56,14 @@ export default function CadastroLinha() {
       <Tela>
         <Row>
           <Cabecalho>
-            <Titulo textoMenor="consulta do linha" textoMaior="" />
+            <Titulo textoMenor="consulta de linha" textoMaior="" />
           </Cabecalho>
         </Row>
         <Row>
           <Acoes>
             <BotaoNovaLinha>
               <Botao
-                descricao="Novo Linha"
+                descricao="Nova Linha"
                 estiloEscuro={true}
                 url="/linha/cadastro/1"
               />
