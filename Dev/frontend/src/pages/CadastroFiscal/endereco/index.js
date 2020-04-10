@@ -8,8 +8,7 @@ import InputComRotulo from './../../../components/InputComRotulo';
 
 import { cepMask } from "./../../../functions/Mascaras/mask";
 
-export default function CadastroEndereco() {
-
+export default function DadosEndereco({ pagina, setPagina, tipoUrl, tipoPagina }) {
   const [valorCep, setValorCep] = useState("");
 
   const mascararCep = (e) => {
@@ -41,11 +40,11 @@ export default function CadastroEndereco() {
           <BotaoForm
             texto="Voltar"
             ladoDireito={false}
-            url="/fiscal/cadastro/1"
+            url={`/fiscal/${tipoUrl}/${pagina}`}
           />
 
           <Caixa>
-            <Subtitulo>CADASTRO DO FISCAL</Subtitulo>
+            <Subtitulo>{tipoPagina} DO FISCAL</Subtitulo>
             <Titulo>Endereço</Titulo>
 
             <InputComRotulo
@@ -98,7 +97,7 @@ export default function CadastroEndereco() {
             </CaixaHorizontal>
           </Caixa>
 
-          <BotaoForm texto="Próximo" url="/fiscal/cadastro/3" />
+          <BotaoForm texto="Próximo" url={`/fiscal/${tipoUrl}/${pagina}`}/>
         </FormContainer>
       </CorpoPagina>
     </Container>

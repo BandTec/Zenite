@@ -5,7 +5,7 @@ import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
 import InputComRotulo from './../../../components/InputComRotulo';
 
-export default function CadastroAcesso() {
+export default function DadosAcesso() {
 
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");

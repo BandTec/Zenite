@@ -8,9 +8,11 @@ import InputComRotulo from './../../../components/InputComRotulo';
 
 import { cpfMask, telefoneMask, dataMask } from "./../../../functions/Mascaras/mask";
 
-export default function CadastroFiscal(props) {
-
+export default function DadosPessoais({ pagina, setPagina, tipoUrl, tipoPagina }) {
+  
+  const [nome, setNome ] = useState("");
   const [valorCpf, setValorCpf] = useState("");
+  const [registro, setRegistro] = useState("");
   const [valorData, setValorData] = useState("");
   const [valorTelefone, setValorTelefone] = useState("");
 
@@ -26,15 +28,11 @@ export default function CadastroFiscal(props) {
     setValorTelefone(telefoneMask(e.target.value));
   }
 
-  const caminho = props.match.path;
-  const {id} = props.match.params;
-  const tipoPagina = caminho.includes("editar") ? "Edição" : "Cadastro";
-  const tipoUrl = caminho.includes("editar") ? "editar" : "cadastro";
+
 
   return (
     <Container>
       
-
       <CorpoPagina>
         <CaixaHorizontal center={true}>
           <StatusPage
@@ -59,7 +57,7 @@ export default function CadastroFiscal(props) {
             <Subtitulo>{tipoPagina} DO FISCAL</Subtitulo>
             <Titulo>DADOS CADASTRAIS</Titulo>
 
-            <InputComRotulo texto="Nome" name="nome" maxLength="100" required />
+            <InputComRotulo value={nome} onChange={e => setNome(e.target.value)} texto="Nome" name="nome" maxLength="100" required />
 
             <InputComRotulo
               texto="CPF"
@@ -70,7 +68,7 @@ export default function CadastroFiscal(props) {
               required
             />
 
-            <InputComRotulo texto="Registro Fiscal" maxLength="20" required />
+            <InputComRotulo value={registro} onChange={e => setRegistro(e.target.value)} texto="Registro Fiscal" maxLength="20" required />
 
             <CaixaHorizontal>
               <InputComRotulo
@@ -95,7 +93,7 @@ export default function CadastroFiscal(props) {
             </CaixaHorizontal>
           </Caixa>
 
-          <BotaoForm texto="Próximo" url={`/fiscal/${tipoUrl}/2/${id}`} />
+          <BotaoForm texto="Próximo" url={`/fiscal/${tipoUrl}/${pagina}`}/>
         </FormContainer>
       </CorpoPagina>
     </Container>

@@ -8,6 +8,7 @@ import Fiscal from "./pages/VisualizaFiscal";
 import Linha from "./pages/VisualizaLinha";
 import Dashboard from "./pages/Dashboard";
 import DetalhesFiscal from "./pages/DetalhesFiscal";
+import CadastroFiscal from "./pages/CadastroFiscal";
 import FiscalCadastro1 from "./pages/CadastroFiscal/dadosPessoais";
 import FiscalCadastro2 from "./pages/CadastroFiscal/endereco";
 import FiscalCadastro3 from "./pages/CadastroFiscal/dadosAcesso";
@@ -43,14 +44,14 @@ const App = () => {
         <Route path="/fiscal/editar/2/:id" component={FiscalCadastro2} />
 
         <Route path="/fiscal/editar/3/:id" component={FiscalCadastro3} />
-
+{/* 
         <Route path="/fiscal/cadastro/1" component={FiscalCadastro1} />
 
         <Route path="/fiscal/cadastro/2" component={FiscalCadastro2} />
 
-        <Route path="/fiscal/cadastro/3" component={FiscalCadastro3} />
+        <Route path="/fiscal/cadastro/3" component={FiscalCadastro3} /> */}
 
-        <Route path="/fiscal/cadastro/3" component={FiscalCadastro3} />
+        <Route path="/fiscal/cadastro/:id" component={CadastroFiscal} />
 
         {/* MOTORISTA */}
 
