@@ -2,19 +2,15 @@ package orion.zenite.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import orion.zenite.models.*;
-import orion.zenite.dao.AdministradorDao;
-import orion.zenite.dao.ContaDao;
+import orion.zenite.entidades.Administrador;
+import orion.zenite.entidades.Conta;
+import orion.zenite.repositorios.AdministradorRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 /*
@@ -31,10 +27,7 @@ import java.util.Optional;
 public class AdministradorController {
 
     @Autowired
-    private ContaDao contaBD;
-
-    @Autowired
-    private AdministradorDao administradorBD;
+    private AdministradorRepository repository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -48,84 +41,59 @@ public class AdministradorController {
      */
 
     @ApiOperation("Lista todos os administradores")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
-            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
-            @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
-    })
     @GetMapping
-    public List<Administrador> consultar(){
-        List<Administrador> lista = administradorBD.findAll();
-        if(!lista.isEmpty()){
-            return lista;
+    public ResponseEntity consultar(){
+        if (this.repository.count() > 0) {
+            return ResponseEntity.ok(this.repository.findAll());
+        } else {
+            return ResponseEntity.noContent().build();
         }
-
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lista vazia");
     }
 
     @ApiOperation("Buscar um administrador por seu id")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
-            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
-            @ApiResponse(code = 404, message = "Administrador não encontrado.")
-    })
     @GetMapping("{id}")
-    public Administrador consultar(@PathVariable("id") int id){
-        return administradorBD
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.NOT_FOUND,
-                                "Administrador não encontrado"));
+    public ResponseEntity consultar(@PathVariable("id") int id){
+        Optional<Administrador> adm = this.repository.findById(id);
+        if (adm.isPresent()) {
+            return ResponseEntity.ok(adm);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @ApiOperation("Deleta um administrador por seu id")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
-            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
-            @ApiResponse(code = 404, message = "Administrador não encontrado.")
-    })
     @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletar(@PathVariable("id") int id){
-        administradorBD.findById(id)
-                .map( adm -> {
-                    administradorBD.delete(adm);
-                    return adm;
-                })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Administrador não encontrado") );
+    public ResponseEntity deletar(@PathVariable("id") int id){
+        if (this.repository.existsById(id)) {
+            this.repository.deleteById(id);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @ApiOperation("Altera um administrador")
-    @ApiResponses({
-            @ApiResponse(code = 204, message = "Requisição realizada com sucesso."),
-            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
-            @ApiResponse(code = 404, message = "Administrador não encontrado.")
-    })
     @PutMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void alterar(@RequestBody Administrador administrador){
-        // Devido a implementação na classe Adminsitrador da propriedade CascadeType.ALL
-        // ao usar o método save()
-        // para salvar o administrador ele automaticamente
-        // salve a conta associada a ele
-        Conta conta = administrador.getConta();
-        String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
-        conta.setSenha(senhaCriptografada);
-        administrador.getConta();
-        administradorBD.save(administrador);
+    public ResponseEntity alterar(@RequestBody Administrador administrador){
+        if (this.repository.existsById(administrador.getId())) {
+            // encriptar senha
+            Conta conta = administrador.getConta();
+            String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
+            conta.setSenha(senhaCriptografada);
+            administrador.setConta(conta);
+
+            // altera adm
+            this.repository.save(administrador);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @ApiOperation("Cadastra um administrador")
-    @ApiResponses({
-            @ApiResponse(code = 201, message = "Administrador cadastrado."),
-            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
-            @ApiResponse(code = 400, message = "Necessário ajustes no corpo da requisição.")
-    })
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public Administrador cadastrar(@RequestBody Administrador administrador) {
+    public ResponseEntity cadastrar(@RequestBody Administrador administrador) {
         Conta conta = administrador.getConta();
 
         // Encriptar senha
@@ -133,9 +101,9 @@ public class AdministradorController {
         conta.setSenha(senhaCriptografada);
         administrador.setConta(conta);
 
-        administradorBD.save(administrador);
-        administrador.setId(administradorBD.lastId());
+        // salvar adm
+        this.repository.save(administrador);
 
-        return administrador;
+        return ResponseEntity.created(null).build();
     }
 }

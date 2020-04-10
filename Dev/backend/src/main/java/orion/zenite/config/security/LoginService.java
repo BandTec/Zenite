@@ -8,10 +8,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import orion.zenite.exceptions.SenhaInvalidaExcepton;
-import orion.zenite.models.Conta;
-import orion.zenite.models.Nivel;
+import orion.zenite.entidades.Conta;
+import orion.zenite.entidades.Nivel;
 import orion.zenite.dto.LoginRequest;
-import orion.zenite.dao.ContaDao;
+import orion.zenite.repositorios.ContaRepository;
 
 /*
     * Essa classe recebe o email do usuário da classe JwtFilter e faz a pesquisa
@@ -25,7 +25,7 @@ public class LoginService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private ContaDao contaBD;
+    private ContaRepository contaBD;
 
     public UserDetails autenticar(LoginRequest conta){
         UserDetails usuario = loadUserByUsername(conta.getEmail());

@@ -1,15 +1,15 @@
 package orion.zenite.controllers;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import orion.zenite.dao.LinhaDao;
-import orion.zenite.models.Linha;
-import orion.zenite.models.PontoFinal;
-
-import java.util.List;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import orion.zenite.entidades.PontoFinal;
+import orion.zenite.repositorios.LinhaRepository;
 
 @Api(description = "Operações relacionadas ao linha", tags = "linha")
 @RestController
@@ -17,32 +17,31 @@ import java.util.List;
 public class LinhaController {
 
     @Autowired
-    private LinhaDao linhaBD;
+    private LinhaRepository repository;
 
-    @GetMapping()
-    @ResponseStatus(HttpStatus.OK)
-    public List<Linha> consulta() {
+    @ApiOperation("Lista todas as linhas de ônibus")
+    @GetMapping
+    public ResponseEntity consulta() {
 
-        List<Linha> lista = linhaBD.findAll();
-        if(!lista.isEmpty()){
-            return lista;
+        if (this.repository.count() > 0) {
+            return ResponseEntity.ok(this.repository.findAll());
+        } else {
+            return ResponseEntity.noContent().build();
         }
 
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não foi encontrado nenhum dado na base de dados.");
     }
 
-
+    @ApiOperation("Lista todas as linhas de ônibus de um determinada parada inicial")
     @GetMapping("/pontoIda/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Linha> consultaPonto(@PathVariable int id) {
-        PontoFinal p = new PontoFinal();
-        p.setId(id);
-        List<Linha> lista = linhaBD.findAllByPontoIda(p);
-        if(!lista.isEmpty()){
-            return lista;
+    public ResponseEntity consultaPonto(@PathVariable int id) {
+        PontoFinal pontoInicial = new PontoFinal();
+        pontoInicial.setId(id);
+        if (this.repository.count() > 0) {
+            return ResponseEntity.ok(this.repository.findAllByPontoIda(pontoInicial));
+        } else {
+            return ResponseEntity.noContent().build();
         }
-
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrada nenhuma linha com este ponto inicial.");
     }
+
 
 }

@@ -1,19 +1,13 @@
 package orion.zenite.controllers;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
-import orion.zenite.dao.ContaDao;
-import orion.zenite.dao.LinhaDao;
-import orion.zenite.dao.MotoristaDao;
-import orion.zenite.models.Motorista;
-
-import java.util.List;
+import orion.zenite.repositorios.MotoristaRepository;
 
 
 @Api(description = "Operações relacionadas ao motorista", tags = "motorista")
@@ -22,24 +16,17 @@ import java.util.List;
 public class MotoristaController {
 
     @Autowired
-    private LinhaDao linhaBD;
+    private MotoristaRepository repository;
 
-    @Autowired
-    private ContaDao contaBD;
+    @ApiOperation("Lista todos os fiscais")
+    @GetMapping
+    public ResponseEntity consulta() {
 
-    @Autowired
-    private MotoristaDao motoristaBD;
-
-    @GetMapping()
-    @ResponseStatus(HttpStatus.OK)
-    public List<Motorista> consulta() {
-
-        List<Motorista> lista = motoristaBD.findAll();
-        if(!lista.isEmpty()){
-            return lista;
+        if (this.repository.count() > 0) {
+            return ResponseEntity.ok(this.repository.findAll());
+        } else {
+            return ResponseEntity.noContent().build();
         }
-
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lista vazia");
 
     }
 
