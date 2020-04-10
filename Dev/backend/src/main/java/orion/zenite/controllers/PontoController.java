@@ -1,17 +1,13 @@
 package orion.zenite.controllers;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
-import orion.zenite.dao.PontoFinalDao;
-import orion.zenite.models.PontoFinal;
-
-import java.util.List;
+import orion.zenite.repositorios.PontoFinalRepository;
 
 @Api(description = "Operações relacionadas ao ponto final", tags = "ponto final")
 @RestController
@@ -19,18 +15,17 @@ import java.util.List;
 public class PontoController {
 
     @Autowired
-    private PontoFinalDao pontoBD;
+    private PontoFinalRepository repository;
 
-    @GetMapping()
-    @ResponseStatus(HttpStatus.OK)
-    public List<PontoFinal> consulta() {
+    @ApiOperation("Lista todos os paradas de ônibus")
+    @GetMapping
+    public ResponseEntity consulta() {
 
-        List<PontoFinal> lista = pontoBD.findAll();
-        if(!lista.isEmpty()){
-            return lista;
+        if (this.repository.count() > 0) {
+            return ResponseEntity.ok(this.repository.findAll());
+        } else {
+            return ResponseEntity.noContent().build();
         }
-
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lista vazia");
 
     }
 }
