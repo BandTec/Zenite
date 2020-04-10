@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
+
 import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
-
 import InputComRotulo from './../../../components/InputComRotulo';
 
-export default function CadastroAcesso() {
+export default function DadosAcesso({ mudarPagina, tipoPagina }) {
 
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");
@@ -22,8 +22,6 @@ export default function CadastroAcesso() {
 
   return (
     <Container>
-      
-
       <CorpoPagina>
         <CaixaHorizontal center={true}>
           <StatusPage
@@ -32,7 +30,11 @@ export default function CadastroAcesso() {
             temProximoPasso={true}
           />
 
-          <StatusPage ativo={false} texto="Endereço" temProximoPasso={true} />
+          <StatusPage 
+            ativo={false}
+            texto="Endereço"
+            temProximoPasso={true}
+          />
 
           <StatusPage
             ativo={true}
@@ -45,11 +47,11 @@ export default function CadastroAcesso() {
           <BotaoForm
             texto="Voltar"
             ladoDireito={false}
-            url="/gerente/cadastro/2"
+            mudarPagina={mudarPagina}
           />
 
           <Caixa>
-            <Subtitulo>CADASTRO DO GERENTE</Subtitulo>
+            <Subtitulo>{tipoPagina} DO GERENTE</Subtitulo>
             <Titulo>Dados de Acesso</Titulo>
 
             <InputComRotulo
@@ -89,7 +91,7 @@ export default function CadastroAcesso() {
           <BotaoForm
             texto="Finalizar"
             concluir={true}
-            url="/gerente/cadastro/3"
+            mudarPagina={mudarPagina}
           />
         </FormContainer>
       </CorpoPagina>

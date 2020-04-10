@@ -8,7 +8,7 @@ import InputComRotulo from './../../../components/InputComRotulo';
 
 import { cepMask } from "./../../../functions/Mascaras/mask";
 
-export default function CadastroEndereco() {
+export default function DadosEndereco({ mudarPagina, tipoPagina }) {
 
   const [valorCep, setValorCep] = useState("");
 
@@ -18,8 +18,6 @@ export default function CadastroEndereco() {
 
   return (
     <Container>
-      
-
       <CorpoPagina>
         <CaixaHorizontal center={true}>
           <StatusPage
@@ -28,7 +26,11 @@ export default function CadastroEndereco() {
             temProximoPasso={true}
           />
 
-          <StatusPage ativo={true} texto="Endereço" temProximoPasso={true} />
+          <StatusPage
+            ativo={true}
+            texto="Endereço"
+            temProximoPasso={true}
+          />
 
           <StatusPage
             ativo={false}
@@ -41,11 +43,11 @@ export default function CadastroEndereco() {
           <BotaoForm
             texto="Voltar"
             ladoDireito={false}
-            url="/gerente/cadastro/1"
+            mudarPagina={mudarPagina}
           />
 
           <Caixa>
-            <Subtitulo>CADASTRO DO GERENTE</Subtitulo>
+            <Subtitulo>{tipoPagina} DO GERENTE</Subtitulo>
             <Titulo>Endereço</Titulo>
 
             <InputComRotulo
@@ -98,7 +100,7 @@ export default function CadastroEndereco() {
             </CaixaHorizontal>
           </Caixa>
 
-          <BotaoForm texto="Próximo" url="/gerente/cadastro/3" />
+          <BotaoForm texto="Próximo" mudarPagina={mudarPagina} />
         </FormContainer>
       </CorpoPagina>
     </Container>

@@ -9,7 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
+//Adicionei esse componente, dentro da visualiza Linha
 const useStyles = makeStyles({
     table: {
       minWidth: 260,
@@ -48,22 +48,22 @@ export default function Tabela( { tabela, dadosCabecalho, dadosCorpo } ) {
                 <Table className={classes.table} aria-label="simples table">
                     <TableHead>
     
-                        {dadosCabecalho.map((linha) => (
-                            <StyledTableRow key={linha.name}>
-                                <StyledTableCell><EstiloTitulo>{linha.name}</EstiloTitulo></StyledTableCell>
-                                <StyledTableCell><EstiloTitulo>{linha.dados1}</EstiloTitulo></StyledTableCell>
+                        {dadosCabecalho.map((motorista) => (
+                            <StyledTableRow key={motorista.name}>
+                                <StyledTableCell><EstiloTitulo>{motorista.name}</EstiloTitulo></StyledTableCell>
+                                <StyledTableCell><EstiloTitulo>{motorista.dados1}</EstiloTitulo></StyledTableCell>
                             </StyledTableRow>
                         ))}
     
                     </TableHead>
                     <TableBody>
     
-                        {dadosCorpo.map((linha) => (
-                            <StyledTableRow key={linha.name}>
+                        {dadosCorpo.map((motorista) => (
+                            <StyledTableRow key={motorista.name}>
                                 <StyledTableCell component="th" scope="row">
-                                    {linha.name}
+                                    {motorista.name}
                                 </StyledTableCell>
-                                <StyledTableCell align="left">{linha.dados1}</StyledTableCell>
+                                <StyledTableCell align="left">{motorista.dados1}</StyledTableCell>
                             </StyledTableRow>
                         ))}
     
@@ -72,52 +72,46 @@ export default function Tabela( { tabela, dadosCabecalho, dadosCorpo } ) {
             </TableContainer>
         );
     }else{
+      console.log(dadosCorpo)
+      //Aqui vai as configurações da tabela
         return (
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simples table">
               <TableHead>
-                {dadosCabecalho.map((linha) => (
-                  <StyledTableRow key={linha.registro}>
-                    <StyledTableCell>
-                      <EstiloTitulo>{linha.registro}</EstiloTitulo>
+                {dadosCabecalho.map((motorista) => (
+                  <StyledTableRow key={motorista.nome}>
+                     <StyledTableCell>
+                      <EstiloTitulo>{motorista.nome}</EstiloTitulo>
                     </StyledTableCell>
                     <StyledTableCell>
-                      <EstiloTitulo>{linha.nome}</EstiloTitulo>
-                    </StyledTableCell>
-{/*                     <StyledTableCell>
-                      <EstiloTitulo>{linha.dataNasc}</EstiloTitulo>
-                    </StyledTableCell> */}
-                    <StyledTableCell>
-                      <EstiloTitulo>{linha.telefone}</EstiloTitulo>
+                      <EstiloTitulo>{motorista.numeroTelefone}</EstiloTitulo>
                     </StyledTableCell>
                     <StyledTableCell>
-                      <EstiloTitulo>{linha.cpf}</EstiloTitulo>
+                      <EstiloTitulo>{motorista.cpf}</EstiloTitulo>
                     </StyledTableCell>
                     <StyledTableCell>
-                      <EstiloTitulo>{linha.acoes}</EstiloTitulo>
+                      <EstiloTitulo>{motorista.cnh}</EstiloTitulo>
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      <EstiloTitulo>{motorista.acoes}</EstiloTitulo>
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableHead>
               <TableBody>
-                {dadosCorpo.map((linha) => (
-                  <StyledTableRow key={linha.registro}>
+                {dadosCorpo.map((motorista) => (
+                  <StyledTableRow key={motorista.nome}>
                     <StyledTableCell component="th" scope="row">
-                      {linha.registro}
+                      {motorista.numeroTelefone}
                     </StyledTableCell>
-                    <StyledTableCell align="left">{linha.nome}</StyledTableCell>
-                    {/* <StyledTableCell align="left">
-                      {linha.dataNasc}
-                    </StyledTableCell> */}
+                    <StyledTableCell align="left">{motorista.cpf}</StyledTableCell>
+                   
                     <StyledTableCell align="left">
-                      {linha.telefone}
+                      {motorista.cnh}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {linha.cpf}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <Link to={`/fiscal/editar/${linha.registro}`}>excluir</Link>
-                      <Link to={`/fiscal/editar/1/${linha.registro}`}>editar</Link>
+                      <Link to={`/motorista/editar/${motorista.numero}`}>excluir</Link>
+                      <Link to={`/motorista/editar/1/${motorista.numero}`}>editar</Link>
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}

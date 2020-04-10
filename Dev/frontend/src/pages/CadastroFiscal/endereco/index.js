@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 
+import { cepMask } from "./../../../functions/Mascaras/mask";
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
+
 import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
-
 import InputComRotulo from './../../../components/InputComRotulo';
 
-import { cepMask } from "./../../../functions/Mascaras/mask";
-
-export default function CadastroEndereco() {
-
+export default function DadosEndereco({ mudarPagina, tipoPagina }) {
   const [valorCep, setValorCep] = useState("");
 
   const mascararCep = (e) => {
@@ -18,7 +16,6 @@ export default function CadastroEndereco() {
 
   return (
     <Container>
-      
 
       <CorpoPagina>
         <CaixaHorizontal center={true}>
@@ -28,7 +25,11 @@ export default function CadastroEndereco() {
             temProximoPasso={true}
           />
 
-          <StatusPage ativo={true} texto="Endereço" temProximoPasso={true} />
+          <StatusPage 
+            ativo={true} 
+            texto="Endereço" 
+            temProximoPasso={true} 
+          />
 
           <StatusPage
             ativo={false}
@@ -41,11 +42,11 @@ export default function CadastroEndereco() {
           <BotaoForm
             texto="Voltar"
             ladoDireito={false}
-            url="/fiscal/cadastro/1"
+            mudarPagina={mudarPagina}
           />
 
           <Caixa>
-            <Subtitulo>CADASTRO DO FISCAL</Subtitulo>
+            <Subtitulo>{tipoPagina} DO FISCAL</Subtitulo>
             <Titulo>Endereço</Titulo>
 
             <InputComRotulo
@@ -98,7 +99,7 @@ export default function CadastroEndereco() {
             </CaixaHorizontal>
           </Caixa>
 
-          <BotaoForm texto="Próximo" url="/fiscal/cadastro/3" />
+          <BotaoForm texto="Próximo" mudarPagina={mudarPagina}/>
         </FormContainer>
       </CorpoPagina>
     </Container>

@@ -23,6 +23,7 @@ import javax.validation.Valid;
  */
 @Api(description = "Autentificacao para as outras rotas", tags = "Autentificacao")
 @RestController
+//@CrossOrigin("http://localhost:3000")
 @RequestMapping("/autentica")
 public class AutenticacaoController {
 
