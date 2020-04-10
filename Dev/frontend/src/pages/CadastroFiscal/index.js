@@ -28,7 +28,7 @@ export default function CadastroFiscal(props) {
                 : pagina === 3 ?
                 <DadosAcesso mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
                 : pagina === 4 ?
-                cadastrar().bind
+                cadastrar()
                 : <h1>Pagina não encontrada</h1>
             }
         </Container>
