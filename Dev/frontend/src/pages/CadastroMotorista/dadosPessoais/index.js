@@ -11,6 +11,7 @@ import InputComRotulo from './../../../components/InputComRotulo';
 
   export default function DadosPessoais({ mudarPagina, tipoPagina }){
 
+  const [nome, setNome ] = useState("");  
   const [valorCpf, setValorCpf] = useState("");
   const [valorData, setValorData] = useState("");
   const [valorTelefone, setValorTelefone] = useState("");
@@ -64,7 +65,14 @@ import InputComRotulo from './../../../components/InputComRotulo';
             <Subtitulo>{tipoPagina} DO MOTORISTA</Subtitulo>
             <Titulo>DADOS CADASTRAIS</Titulo>
 
-            <InputComRotulo texto="Nome" name="nome" maxLength="100" required />
+            <InputComRotulo 
+             value={nome}
+             onChange={e => setNome(e.target.value)} 
+             texto="Nome"
+             name="nome" 
+             maxLength="100" 
+             required 
+            />
 
             <InputComRotulo
               texto="CPF"

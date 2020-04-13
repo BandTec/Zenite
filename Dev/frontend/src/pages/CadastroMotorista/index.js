@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 import DadosPessoais from './dadosPessoais';
@@ -30,7 +29,7 @@ export default function CadastroFiscal(props) {
                 : pagina === 3 ?
                 <DadosAcesso mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
                 : pagina === 4 ?
-                cadastrar().bind
+                cadastrar()
                 : <h1>Pagina não encontrada</h1>
             }
         </Container>
