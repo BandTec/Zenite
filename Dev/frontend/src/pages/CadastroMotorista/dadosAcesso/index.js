@@ -6,7 +6,7 @@ import StatusPage from './../../../components/StatusPage';
 
 import InputComRotulo from './../../../components/InputComRotulo';
 
-export default function CadastroAcesso() {
+export default function DadosAcesso({ mudarPagina, tipoPagina}) {
 
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");
@@ -45,11 +45,11 @@ export default function CadastroAcesso() {
           <BotaoForm
             texto="Voltar"
             ladoDireito={false}
-            url="/motorista/cadastro/2"
+            mudarPagina={mudarPagina}
           />
 
           <Caixa>
-            <Subtitulo>CADASTRO DO MOTORISTA</Subtitulo>
+          <Subtitulo>{`${tipoPagina} DO MOTORISTA`}</Subtitulo>
             <Titulo>Dados de Acesso</Titulo>
 
             <InputComRotulo
@@ -89,7 +89,7 @@ export default function CadastroAcesso() {
           <BotaoForm
             texto="Finalizar"
             concluir={true}
-            url="/motorista/cadastro/3"
+            mudarPagina={mudarPagina}
           />
         </FormContainer>
       </CorpoPagina>

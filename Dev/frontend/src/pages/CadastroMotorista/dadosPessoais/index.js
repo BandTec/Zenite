@@ -1,18 +1,21 @@
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 
-import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } 
-from './styles';
+import { cpfMask, telefoneMask, dataMask } from "./../../../functions/Mascaras/mask";
+import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
+
 import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
 import InputComRotulo from './../../../components/InputComRotulo';
 
-import { cpfMask, telefoneMask, dataMask } from "./../../../functions/Mascaras/mask";
 
-export default function CadastroFiscal() {
+  export default function DadosPessoais({ mudarPagina, tipoPagina }){
 
   const [valorCpf, setValorCpf] = useState("");
   const [valorData, setValorData] = useState("");
   const [valorTelefone, setValorTelefone] = useState("");
+
+  
 
   const mascararCpf = (e) => {
     setValorCpf(cpfMask(e.target.value));
@@ -38,7 +41,11 @@ export default function CadastroFiscal() {
             temProximoPasso={true}
           />
 
-          <StatusPage ativo={false} texto="Endereço" temProximoPasso={true} />
+          <StatusPage 
+          ativo={false} 
+          texto="Endereço" 
+          temProximoPasso={true} 
+          />
 
           <StatusPage
             ativo={false}
@@ -48,10 +55,13 @@ export default function CadastroFiscal() {
         </CaixaHorizontal>
 
         <FormContainer>
-          <BotaoForm texto="VOLTAR" url="/motorista" ladoDireito={false} />
+          
+          <Link to="/motorista">          
+            <BotaoForm texto="VOLTAR" mudarPagina={mudarPagina} ladoDireito={false} />
+          </Link>
 
           <Caixa>
-            <Subtitulo>CADASTRO DO MOTORISTA</Subtitulo>
+            <Subtitulo>{tipoPagina} DO MOTORISTA</Subtitulo>
             <Titulo>DADOS CADASTRAIS</Titulo>
 
             <InputComRotulo texto="Nome" name="nome" maxLength="100" required />
@@ -90,7 +100,7 @@ export default function CadastroFiscal() {
             </CaixaHorizontal>
           </Caixa>
 
-          <BotaoForm texto="Próximo" url="/motorista/cadastro/2" />
+          <BotaoForm texto="Próximo" mudarPagina={mudarPagina} />
         </FormContainer>
       </CorpoPagina>
     </Container>
