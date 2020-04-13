@@ -30,6 +30,7 @@ app.get('/', async (req, res) =>{
     res.send("Olá essa é a API de Consumo.");
 })
 
+//Autentica API OlhoVivo com o Token fornecido pelos mesmos
 async function autenticar() {
     try{
         let autenticado = false;
@@ -47,7 +48,6 @@ async function autenticar() {
         console.log(err.message)
     }
 }
-
 //Função para verificar duplicatas nas linhas que retornaram da API
 function verificarDuplicatasLinhas(value, index, array){
     let NaoExiste = true;
@@ -63,7 +63,6 @@ function verificarDuplicatasLinhas(value, index, array){
         return false;
     }
 }
-
 //Função para verificar duplicatas nos terminais que retornaram da API
 function verificarDuplicatasPontos(value , index, array){
     let NaoExiste = true;
@@ -78,7 +77,7 @@ function verificarDuplicatasPontos(value , index, array){
         return false;
     }
 }
-
+//Insere os pontos no banco de dados
 async function insertPontos(array){
     try{
         await banco.desconectar();
@@ -101,19 +100,71 @@ async function insertPontos(array){
         console.log(`Erro na função: ${err.message}`)
     }
 }
+//Procura as FKs dos pontos no banco de dados
+async function procurarForeignKeys(array){
+    try{
+        await banco.desconectar();
+        await banco.conectar();
 
-async function insert(array){
+        let retorno = [];
+
+        for (let index = 0; index < array.length; index++) {
+            try {
+                let respostaQuery = await banco.sql.query(`select * from tblPontoFinal 
+                where nomeTerminal like '${array[index]}'`)
+                retorno.push(respostaQuery.recordset[0]);
+                console.log(`Achei o ponto ${respostaQuery.recordset[0].nomeTerminal} !`);
+            } catch (err) {
+                console.log(`Erro ao achar ${array[index]}`)
+                console.log(err.message)
+            }    
+            
+        }
+        await banco.desconectar();
+        return retorno;
+    }catch(err){
+        console.log(`Erro na função: ${err.message}`)
+    }
+}
+//Compara o array com a linha e os seus pontos para achar qual a FK dos pontos
+function acharFK(array, arrayFKs){
+    try{
+    for (let index = 0; index < array.length; index++) { 
+
+        for (let i = 0; i < arrayFKs.length; i++) {
+            if(array[index].terminalPrincipal==null){
+                if(array[index].terminalSecundario == arrayFKs[i].nomeTerminal){
+                    array[index].terminalPFK = arrayFKs[i].idPontoFinal;
+                    array[index].terminalSFK = arrayFKs[i].idPontoFinal;
+                }
+            }else{
+                if(array[index].terminalPrincipal == arrayFKs[i].nomeTerminal){
+                    array[index].terminalPFK = arrayFKs[i].idPontoFinal;
+                }
+                if(array[index].terminalSecundario == arrayFKs[i].nomeTerminal){
+                    array[index].terminalSFK = arrayFKs[i].idPontoFinal;
+                }
+            }
+        }
+        console.log(`Linha ${JSON.stringify(array[index])} resolvido`)
+    }
+    }catch(err){
+        console.log(`Erro: ${err.message}`)
+    }
+}
+//Insere a linha com as FKs de seus pontos
+async function insertLinhas(array){
     try{
         await banco.desconectar();
         await banco.conectar();
 
         for (let index = 0; index < array.length; index++) {
             try {
-                await banco.sql.query(`insert into tblPontoFinal (nomeTerminal)
-                values ('${array[index]}')`)
-                console.log(`Ponto ${array[index]} inserido com sucesso!`);
+                await banco.sql.query(`insert into tblLinha (numeroLinha, fkPontoIda, fkPontoVolta)
+                values ('${array[index].NumeroLinha}', ${array[index].terminalPFK}, ${array[index].terminalSFK})`)
+                console.log(`Linha ${array[index].NumeroLinha} inserido com sucesso!`);
             } catch (err) {
-                console.log(`Erro ao inserir ${array[index]}`)
+                console.log(`Erro ao inserir: ${array[index].NumeroLinha}\nErro: ${err.message}`)
             }    
             
         }
@@ -142,15 +193,15 @@ app.get("/cadastrarlinhas", async (req, res) => {
                `${url}/Linha/Buscar?termosBusca=${terminais[i]}`,
                 { headers: { Cookie: cookie } }
             );
-
+            
+            //Variaveis complementares para formular o JSON
             let nroLinha;
             let terminal1;
             let terminal2;
 
             response.data.forEach((element) => {
-                //linhasPorTerminal.push(element);
                 nroLinha = `${element.lt}-${element.tl}`;
-
+                //Verifica a linha é uma circular
                 if(element.tp=="CIRCULAR" || element.lc==true){
                     terminal1=null;
                 }else{
@@ -162,7 +213,9 @@ app.get("/cadastrarlinhas", async (req, res) => {
                     NumeroLinha: nroLinha,
                     Circular: element.lc,
                     terminalPrincipal: terminal1,
-                    terminalSecundario: terminal2
+                    terminalPFK: -1,
+                    terminalSecundario: terminal2,
+                    terminalSFK: -1
                 })
             });  
         }
@@ -184,54 +237,14 @@ app.get("/cadastrarlinhas", async (req, res) => {
         let auxiliar = filtroTerminal.map(item => (item))
         //Filtra os terminais para que não tenha duplicatas
         let pontos = auxiliar.filter(verificarDuplicatasPontos)
-        
-      
+        //Procura as FKs dos pontos no Banco de dados
+        //let pontosComFKBanco = await procurarForeignKeys(pontos)
+        //Verifica qual FK condiz com os pontos que a linha tem
+        //await acharFK(filtroLinha, pontosComFKBanco);
+        //Insere a linha com as FK de seus pontos
+        //await insertLinhas(filtroLinha);
+
         res.status(200).json({filtroLinha,linhas,pontos});
-    }catch(err){
-        console.log(err);
-        res.status(500).json(err.message);
-    }
-});
-
-app.get("/teste", async (req, res) => {
-    try{
-        await autenticar();
-        let linhasPorTerminal = []
-        let filtroLinha = [];
-        let filtroTerminal = [];
-
-        for(let i = 0; i < terminais.length; i++){
-            
-            let response = await axios.get(
-               `${url}/Linha/Buscar?termosBusca=${terminais[i]}`,
-                { headers: { Cookie: cookie } }
-            );
-
-            let nroLinha;
-            let terminal1;
-            let terminal2;
-
-            response.data.forEach((element) => {
-                //linhasPorTerminal.push(element);
-                nroLinha = `${element.lt}-${element.tl}`;
-
-                if(element.tp=="CIRCULAR" || element.lc==true){
-                    terminal1=null;
-                }else{
-                    terminal1=element.tp
-                }
-
-                terminal2 = element.ts;
-                linhasPorTerminal.push({
-                    NumeroLinha: nroLinha,
-                    Circular: element.lc,
-                    terminalPrincipal: terminal1,
-                    terminalSecundario: terminal2
-                })
-            });  
-        }
-
-        res.status(200).json(linhasPorTerminal);
     }catch(err){
         console.log(err);
         res.status(500).json(err.message);
