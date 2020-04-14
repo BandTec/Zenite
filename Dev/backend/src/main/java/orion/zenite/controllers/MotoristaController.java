@@ -14,6 +14,7 @@ import orion.zenite.dao.*;
 import orion.zenite.models.Conta;
 import orion.zenite.models.Gerente;
 import orion.zenite.models.Motorista;
+import orion.zenite.models.Nivel;
 
 import java.util.List;
 
@@ -115,11 +116,9 @@ public class MotoristaController {
     public Motorista cadastro(@RequestBody Motorista novoMotorista){
         Conta conta = novoMotorista.getConta();
         String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
-        conta.setSenha((senhaCriptografada));
+        conta.setSenha(senhaCriptografada);
         novoMotorista.setConta(conta);
         motoristaBD.save(novoMotorista);
-        novoMotorista.setId(motoristaBD.lastId());
-
 
         return novoMotorista;
     }
