@@ -3,9 +3,9 @@ import React from 'react';
 import Logo from '../../assets/logos/logo4.png';
 import { Container, LogoZenite ,RecuperarSenha, OpcoesAdicionais } from './styles';
 
-export default function Form({children}) {
+export default function Form({children, handleSubmit}) {
   return (      
-    <Container>
+    <Container onSubmit={handleSubmit}>
       <LogoZenite src={Logo} />
         {children}
         <OpcoesAdicionais>

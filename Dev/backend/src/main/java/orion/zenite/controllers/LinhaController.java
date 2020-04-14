@@ -9,13 +9,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import orion.zenite.dao.LinhaDao;
-import orion.zenite.models.Conta;
-import orion.zenite.models.Linha;
-import orion.zenite.models.Motorista;
-import orion.zenite.models.PontoFinal;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import orion.zenite.entidades.Linha;
+import orion.zenite.entidades.PontoFinal;
+import orion.zenite.repositorios.LinhaRepository;
 
 import java.util.List;
+
 
 @Api(description = "Operações relacionadas ao linha", tags = "linha")
 @RestController
@@ -23,23 +27,21 @@ import java.util.List;
 public class LinhaController {
 
     @Autowired
-    private LinhaDao linhaBD;
+    private LinhaRepository linhaBD;
 
-    @ApiOperation("Lista todos as linhas")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
             @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
+    @ApiOperation("Lista todas as linhas de ônibus")
     @GetMapping
-    public List<Linha> consulta() {
-
-        List<Linha> lista = linhaBD.findAll();
-        if(!lista.isEmpty()){
-            return lista;
+    public ResponseEntity consulta() {
+        if (this.linhaBD.count() > 0) {
+            return ResponseEntity.ok(this.linhaBD.findAll());
+        } else {
+            return ResponseEntity.noContent().build();
         }
-
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sua requisição não retornou dados");
     }
 
 
@@ -139,6 +141,7 @@ public class LinhaController {
         novaLinha.setId(linhaBD.lastId());
 
         return novaLinha;
+
     }
 
 }

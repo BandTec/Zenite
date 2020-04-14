@@ -42,7 +42,6 @@ const StyledTableCell = withStyles(theme => ({
 export default function Tabela( { tabela, dadosCabecalho, dadosCorpo } ) {
 
     const classes = useStyles();
-
     if(tabela === 1){
         return (
             <TableContainer component={Paper}>
@@ -85,14 +84,14 @@ export default function Tabela( { tabela, dadosCabecalho, dadosCorpo } ) {
                     <StyledTableCell>
                       <EstiloTitulo>{linha.nome}</EstiloTitulo>
                     </StyledTableCell>
-                    <StyledTableCell>
+{/*                     <StyledTableCell>
                       <EstiloTitulo>{linha.dataNasc}</EstiloTitulo>
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell>
                       <EstiloTitulo>{linha.telefone}</EstiloTitulo>
                     </StyledTableCell>
                     <StyledTableCell>
-                      <EstiloTitulo>{linha.supervisor}</EstiloTitulo>
+                      <EstiloTitulo>{linha.cpf}</EstiloTitulo>
                     </StyledTableCell>
                     <StyledTableCell>
                       <EstiloTitulo>{linha.acoes}</EstiloTitulo>
@@ -107,14 +106,14 @@ export default function Tabela( { tabela, dadosCabecalho, dadosCorpo } ) {
                       {linha.registro}
                     </StyledTableCell>
                     <StyledTableCell align="left">{linha.nome}</StyledTableCell>
-                    <StyledTableCell align="left">
+                    {/* <StyledTableCell align="left">
                       {linha.dataNasc}
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell align="left">
                       {linha.telefone}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {linha.supervisor}
+                      {linha.cpf}
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       <Link to={`/fiscal/editar/${linha.registro}`}>excluir</Link>

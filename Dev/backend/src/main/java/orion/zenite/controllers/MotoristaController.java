@@ -10,13 +10,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import orion.zenite.dao.*;
-import orion.zenite.models.Conta;
-import orion.zenite.models.Gerente;
-import orion.zenite.models.Motorista;
-import orion.zenite.models.Nivel;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import orion.zenite.entidades.Conta;
+import orion.zenite.entidades.Motorista;
+import orion.zenite.repositorios.MotoristaRepository;
 
-import java.util.List;
 
 
 @Api(description = "Operações relacionadas ao motorista", tags = "motorista")
@@ -25,16 +26,8 @@ import java.util.List;
 public class MotoristaController {
 
     @Autowired
-    private EnderecoDao enderecoBD;
+    private MotoristaRepository motoristaBD;
 
-    @Autowired
-    private ContaDao contaBD;
-
-    @Autowired
-    private MotoristaDao motoristaBD;
-
-    @Autowired
-    private NivelDao nivelBD;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -46,15 +39,14 @@ public class MotoristaController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping
-    public List<Motorista> consulta() {
-
-        List<Motorista> lista = motoristaBD.findAll();
-        if(!lista.isEmpty()){
-            return lista;
+    public ResponseEntity consulta() {
+        if (this.motoristaBD.count() > 0) {
+            return ResponseEntity.ok(this.motoristaBD.findAll());
+        } else {
+            return ResponseEntity.noContent().build();
         }
 
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sua requisição não retornou dados");
-    }
+ }
 
     @ApiOperation("Busca motorista pelo ID")
     @ApiResponses({
@@ -82,7 +74,7 @@ public class MotoristaController {
     public void alterar(@RequestBody Motorista novoMotorista){
         Conta conta = novoMotorista.getConta();
         String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
-        conta.setSenha((senhaCriptografada));
+        conta.setSenha(senhaCriptografada);
         novoMotorista.setConta(conta);
         motoristaBD.save(novoMotorista);
     }

@@ -10,35 +10,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import orion.zenite.dao.ContaDao;
-import orion.zenite.dao.EnderecoDao;
-import orion.zenite.dao.GerenteDao;
-import orion.zenite.dao.NivelDao;
-import orion.zenite.models.Carro;
-import orion.zenite.models.Conta;
-import orion.zenite.models.Fiscal;
-import orion.zenite.models.Gerente;
+import orion.zenite.entidades.Conta;
+import orion.zenite.entidades.Gerente;
+import orion.zenite.repositorios.GerenteRepository;
 
 import java.util.List;
-
 
 @Api(description = "Operações relacionadas ao gerente", tags = "gerente")
 @RestController
 @RequestMapping("/api/gerente")
 public class GerenteController {
 
-
     @Autowired
-    private EnderecoDao enderecoBD;
-
-    @Autowired
-    private ContaDao contaBD;
-
-    @Autowired
-    private NivelDao nivelBD;
-
-    @Autowired
-    private GerenteDao gerenteDB;
+    private GerenteRepository gerenteDB;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

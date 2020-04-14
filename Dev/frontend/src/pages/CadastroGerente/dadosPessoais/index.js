@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
-
-import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } 
-from './styles';
-import BotaoForm from '../../../components/BotaoForm';
-import StatusPage from '../../../components/StatusPage';
-
-import InputComRotulo from '../../../components/InputComRotulo';
+import { Link } from 'react-router-dom';
 
 import { cpfMask, telefoneMask, dataMask } from "../../../functions/Mascaras/mask";
+import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 
-export default function CadastroGerente() {
+import BotaoForm from '../../../components/BotaoForm';
+import StatusPage from '../../../components/StatusPage';
+import InputComRotulo from '../../../components/InputComRotulo';
+
+
+export default function DadosPessoais({ mudarPagina, tipoPagina }) {
 
   const [valorCpf, setValorCpf] = useState("");
   const [valorData, setValorData] = useState("");
@@ -39,7 +39,11 @@ export default function CadastroGerente() {
             temProximoPasso={true}
           />
 
-          <StatusPage ativo={false} texto="Endereço" temProximoPasso={true} />
+          <StatusPage
+            ativo={false}
+            texto="Endereço"
+            temProximoPasso={true}
+          />
 
           <StatusPage
             ativo={false}
@@ -49,10 +53,12 @@ export default function CadastroGerente() {
         </CaixaHorizontal>
 
         <FormContainer>
-          <BotaoForm texto="VOLTAR" url="/gerente" ladoDireito={false} />
+          <Link to="/gerente">          
+            <BotaoForm texto="VOLTAR" ladoDireito={false} />
+          </Link>
 
           <Caixa>
-            <Subtitulo>CADASTRO DO GERENTE</Subtitulo>
+            <Subtitulo>{tipoPagina} DO GERENTE</Subtitulo>
             <Titulo>DADOS CADASTRAIS</Titulo>
 
             <InputComRotulo texto="Nome" name="nome" maxLength="100" required />
@@ -89,7 +95,7 @@ export default function CadastroGerente() {
             </CaixaHorizontal>
           </Caixa>
 
-          <BotaoForm texto="Próximo" url="/gerente/cadastro/2" />
+          <BotaoForm texto="Próximo" mudarPagina={mudarPagina} />
         </FormContainer>
       </CorpoPagina>
     </Container>

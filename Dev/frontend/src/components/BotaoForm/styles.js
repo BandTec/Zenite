@@ -7,7 +7,7 @@ export const Container = styled.div`
     props.ladoDireito ? "row" : "row-reverse"};
   justify-content: space-around;
   align-items: center;
-  cursor: ${(props) => props.invisivel ? 'default' : 'cursor' };
+  cursor: ${(props) => props.invisivel ? 'default' : 'pointer' };
 
   :hover {
     opacity: 0.7;
