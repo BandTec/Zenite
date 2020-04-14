@@ -10,9 +10,7 @@ import Motorista from "./pages/VisualizaMotorista";
 import Dashboard from "./pages/Dashboard";
 import DetalhesFiscal from "./pages/DetalhesFiscal";
 import CadastroFiscal from "./pages/CadastroFiscal";
-import CadastroMotorista1 from "./pages/CadastroMotorista/dadosPessoais";
-import CadastroMotorista2 from "./pages/CadastroMotorista/endereco";
-import CadastroMotorista3 from "./pages/CadastroMotorista/dadosAcesso";
+import CadastroMotorista from "./pages/CadastroMotorista";
 import CadastroGerente from "./pages/CadastroGerente";
 import CadastroAdmin from "./pages/CadastroAdmin";
 import CadastroParadaLinha from "./pages/CadastroParadaLinha";
@@ -45,17 +43,9 @@ const App = () => {
 
         {/* <Route path="/motorista/detalhes/:id" component={} /> */}
 
-        <Route path="/motorista/editar/1/:id" component={CadastroMotorista1} />
+        <Route path="/motorista/editar/:id" component={CadastroMotorista} />
 
-        <Route path="/motorista/editar/2/:id" component={CadastroMotorista2} />
-
-        <Route path="/motorista/editar/3/:id" component={CadastroMotorista3} />
-
-        <Route path="/motorista/cadastro/1" component={CadastroMotorista1} />
-
-        <Route path="/motorista/cadastro/2" component={CadastroMotorista2} />
-
-        <Route path="/motorista/cadastro/3" component={CadastroMotorista3} />
+        <Route path="/motorista/cadastro/:id" component={CadastroMotorista} />
 
         {/* GERENTE */}
 
