@@ -1,4 +1,4 @@
-## API ZENITE
+﻿## API ZENITE
 
 ## Rota do Swagger UI
 -> http://localhost:8080/swagger-ui.html#/
@@ -190,24 +190,89 @@ Corpo da Requisição:
 **GET** http://localhost:8080/api/motorista
 -> Requer token
 
----
+----------------------------------------------
 
 ## Rota PontoFinal
 
 ### Consulta Todos 
 **GET** http://localhost:8080/api/pontofinal
--> Requer token
 
----
+### Inserir 
+**Post**
+localhost:8080/api/pontofinal/
+{
+        "id": 6,
+        "nome": "Vila Iorio"
+    },
+
+### Alterar 
+**Put**
+localhost:8080/api/pontofinal/
+{
+        "id": 6,
+        "nome": "Vila Maria"
+    },
+--------------------------------------
 
 ## Rota Viagem
 
 ### Consulta Todos 
 **GET** http://localhost:8080/api/viagem
--> Requer token
 
----
+### Inserir 
+***Post**
+localhost:8080/api/viagem/
 
+
+### Alterar
+***Put**
+localhost:8080/api/viagem/
+
+--------------------------------------------
+
+## Rota Carro
+
+###Consulta Todos
+*** GET** http://localhost:8080/api/onibus
+
+### Inserir 
+***Post**
+localhost:8080/api/onibus/
+{
+        "id": 6,
+        "numero": "123456",
+        "dispositivo": {
+            "id": 2,
+            "codigo": "542345",
+            "tipoDispositivo": {
+                "id": 2,
+                "descricao": "ARDUINO"
+            }
+           
+        }
+        
+}
+
+### Alterar
+***Put**
+localhost:8080/api/onibus/
+
+{
+        "id": 6,
+        "numero": "123333",
+        "dispositivo": {
+            "id": 2,
+            "codigo": "542345",
+            "tipoDispositivo": {
+                "id": 2,
+                "descricao": "ARDUINO"
+            }
+           
+        }
+        
+}
+
+------------------------------------------------
 ## Rota Linha
 
 ### Consulta Todos 
