@@ -35,17 +35,12 @@ public class Motorista {
     @JoinColumn(name="fkEndereco")
     private Endereco endereco;
 
-    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fkConta")
     private Conta conta;
 
     @Column(length = 11, nullable = false, unique = true)
     private String cnh;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "motorista", cascade = CascadeType.ALL)
-    List<MotoristaCarro> motoristaCarroList;
 
     public int getId() {
         return id;
@@ -103,31 +98,11 @@ public class Motorista {
         return conta;
     }
 
-    public String getEmail() {
-        return conta.getEmail();
-    }
-
     public String getCnh() {
         return cnh;
     }
 
     public void setCnh(String cnh) {
         this.cnh = cnh;
-    }
-
-    public List<MotoristaCarro> getMotoristaCarroList() {
-        return motoristaCarroList;
-    }
-
-    public List getCarrosId() {
-        ArrayList carrosId = new ArrayList();
-        for (MotoristaCarro carro : motoristaCarroList) {
-            carrosId.add(carro.getIdCarro());
-        }
-        return carrosId;
-    }
-
-    public void setMotoristaCarroList(List<MotoristaCarro> motoristaCarroList) {
-        this.motoristaCarroList = motoristaCarroList;
     }
 }
