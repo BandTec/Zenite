@@ -4,10 +4,10 @@ import { Container, Icone, Texto } from './styles';
 // import Seta from "../../assets/icons/setaOval.png";
 import Check from "../../assets/icons/check.png";
 
-export default function BotaoForm({texto, ladoDireito = true, concluir = false, invisivel= false, mudarPagina = () => {} }) {
+export default function BotaoForm({texto, ladoDireito = true, concluir = false, invisivel= false, mudarPagina = () => {}, criarJson = () => {} }) {
   return (
     <Container ladoDireito={ladoDireito} invisivel={invisivel} 
-      onClick={() => mudarPagina(ladoDireito)}>
+      onClick={async () => {await criarJson(); mudarPagina(ladoDireito)}}>
       <Texto>{texto}</Texto>
       <Icone src={Check} ladoDireito={ladoDireito} />
     </Container>

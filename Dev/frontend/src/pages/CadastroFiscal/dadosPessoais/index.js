@@ -8,7 +8,7 @@ import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
 import InputComRotulo from './../../../components/InputComRotulo';
 
-export default function DadosPessoais({ mudarPagina, tipoPagina }) {
+export default function DadosPessoais({ mudarPagina, tipoPagina, adicionarDados }) {
   
   const [nome, setNome ] = useState("");
   const [valorCpf, setValorCpf] = useState("");
@@ -21,11 +21,21 @@ export default function DadosPessoais({ mudarPagina, tipoPagina }) {
   }
 
   const mascararData = e => {
-    setValorData(dataMask(e.target.value));
+    setValorData(e.target.value);
   }
 
   const mascararTelefone = e => {
     setValorTelefone(telefoneMask(e.target.value));
+  }
+
+  const criarJson = () => {
+    adicionarDados({
+      nome,
+      "cpf": valorCpf,
+      "dataNascimento": valorData,
+      "numeroTelefone": valorTelefone,
+      "registroFiscal": registro,
+    })
   }
 
   return (
@@ -102,7 +112,7 @@ export default function DadosPessoais({ mudarPagina, tipoPagina }) {
               />
             </CaixaHorizontal>
           </Caixa>
-          <BotaoForm texto="Próximo" mudarPagina={mudarPagina}/>
+          <BotaoForm texto="Próximo" mudarPagina={mudarPagina} criarJson={criarJson}/>
         </FormContainer>
       </CorpoPagina>
     </Container>
