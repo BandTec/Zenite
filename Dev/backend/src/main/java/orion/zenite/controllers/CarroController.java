@@ -47,8 +47,8 @@ public class CarroController {
     @ApiOperation("Inserir pontos de ônibus")
     @PostMapping
     @Transactional
-    public ResponseEntity criarCarro(@RequestBody Carro novoCarro) {
-        this.repository.save(novoCarro);
+    public ResponseEntity criarCarro(@RequestBody Carro onibus) {
+        this.repository.save(onibus);
         return ResponseEntity.created(null).build();
 
     }

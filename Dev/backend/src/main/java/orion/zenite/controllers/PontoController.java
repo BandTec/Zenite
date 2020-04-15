@@ -49,7 +49,7 @@ public class PontoController {
     @Transactional
     public ResponseEntity criarPonto(@RequestBody PontoFinal novoPonto) {
         this.repository.save(novoPonto);
-        novoPonto.setId(repository.lastId());
+
         return ResponseEntity.created(null).build();
 
     }
