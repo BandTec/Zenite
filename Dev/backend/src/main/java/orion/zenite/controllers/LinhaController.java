@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.parameters.P;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,11 +15,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import orion.zenite.entidades.Carro;
+import orion.zenite.entidades.CarroLinha;
 import orion.zenite.entidades.Linha;
 import orion.zenite.entidades.PontoFinal;
+import orion.zenite.repositorios.CarroLinhaRepository;
+import orion.zenite.repositorios.CarroRepository;
 import orion.zenite.repositorios.LinhaRepository;
 
+import javax.xml.ws.Response;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Api(description = "Operações relacionadas ao linha", tags = "linha")
@@ -28,6 +36,12 @@ public class LinhaController {
 
     @Autowired
     private LinhaRepository linhaBD;
+
+    @Autowired
+    private CarroLinhaRepository repository;
+
+    @Autowired
+    private CarroRepository carroRepository;
 
     @ApiResponses({
             @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
@@ -136,12 +150,28 @@ public class LinhaController {
     })
     @PostMapping()
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public Linha cadastro(@RequestBody Linha novaLinha){
+    public ResponseEntity cadastro(@RequestBody Linha novaLinha){
         linhaBD.save(novaLinha);
         novaLinha.setId(linhaBD.lastId());
 
-        return novaLinha;
+        return ResponseEntity.created(null).build();
+    }
 
+    @ApiOperation("Consultar todos os ônibus que atendem linha")
+    @GetMapping("/{id}/onibus")
+    @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
+    public ResponseEntity cadastro(@PathVariable("id") int id){
+        List<CarroLinha> onibusLinhas = this.repository.findByIdLinha(id);
+        List<Carro> onibus = new ArrayList<>();
+
+        for (CarroLinha c : onibusLinhas) {
+            Optional<Carro> carro = carroRepository.findById(c.getIdCarro());
+            if(carro.isPresent()){
+                onibus.add(carro.get());
+            }
+        }
+
+        return onibus.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(onibus);
     }
 
 }

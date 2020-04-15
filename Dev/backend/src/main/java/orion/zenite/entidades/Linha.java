@@ -1,7 +1,11 @@
 package orion.zenite.entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="tblLinha")
@@ -22,6 +26,10 @@ public class Linha {
     @ManyToOne
     @JoinColumn(name = "fkPontoVolta")
     private PontoFinal pontoVolta;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "linha", cascade = CascadeType.ALL)
+    private List<CarroLinha> carroLinhas;
 
     public String getNumero() {
         return numero;
@@ -53,5 +61,13 @@ public class Linha {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public List getCarrosId() {
+        ArrayList carrosId = new ArrayList();
+        for (CarroLinha carro : carroLinhas) {
+            carrosId.add(carro.getIdCarro());
+        }
+        return carrosId;
     }
 }

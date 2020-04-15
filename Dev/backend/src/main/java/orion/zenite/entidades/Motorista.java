@@ -42,6 +42,10 @@ public class Motorista {
     @Column(length = 11, nullable = false, unique = true)
     private String cnh;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "motorista", cascade = CascadeType.ALL)
+    List<MotoristaCarro> motoristaCarroList;
+
     public int getId() {
         return id;
     }
@@ -104,5 +108,13 @@ public class Motorista {
 
     public void setCnh(String cnh) {
         this.cnh = cnh;
+    }
+
+    public List getCarrosId() {
+        ArrayList carrosId = new ArrayList();
+        for (MotoristaCarro carro : motoristaCarroList) {
+            carrosId.add(carro.getIdCarro());
+        }
+        return carrosId;
     }
 }

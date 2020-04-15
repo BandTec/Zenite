@@ -7,6 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import orion.zenite.entidades.Carro;
+import orion.zenite.entidades.CarroLinha;
+import orion.zenite.entidades.MotoristaCarro;
+import orion.zenite.repositorios.CarroLinhaRepository;
 import orion.zenite.repositorios.CarroRepository;
 
 import java.util.Optional;
@@ -18,6 +21,9 @@ public class CarroController {
 
     @Autowired
     private CarroRepository repository;
+
+    @Autowired
+    private CarroLinhaRepository carroLinhaRepository;
 
     @ApiOperation("Listar todos os ônibus")
     @GetMapping
@@ -73,7 +79,25 @@ public class CarroController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
 
+
+    @ApiOperation("Cadastrar linha do ônibus")
+    @PostMapping("/linhas")
+    @Transactional
+    public ResponseEntity relacionar(@RequestBody CarroLinha novoRelacionamento) {
+        this.carroLinhaRepository.save(novoRelacionamento);
+        return ResponseEntity.created(null).build();
+    }
+
+    @ApiOperation("Listar quais ônibus estão em quais linhas")
+    @GetMapping("/linhas")
+    public ResponseEntity consultarRelacionamento() {
+        if (this.repository.count() > 0) {
+            return ResponseEntity.ok(this.carroLinhaRepository.findAll());
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
 }

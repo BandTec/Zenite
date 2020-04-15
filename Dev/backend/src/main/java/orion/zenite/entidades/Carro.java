@@ -22,6 +22,9 @@ public class Carro {
     @JoinColumn(name="fkDispositivo", referencedColumnName = "idDispositivo")
     private Dispositivo dispositivo;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "carro", cascade = CascadeType.ALL)
+    private List<CarroLinha> carroLinhas;
 
     public int getId() {
         return id;
@@ -45,5 +48,13 @@ public class Carro {
 
     public void setDispositivo(Dispositivo dispositivo) {
         this.dispositivo = dispositivo;
+    }
+
+    public List getLinhasId() {
+        ArrayList linhasId = new ArrayList();
+        for (CarroLinha carro : carroLinhas) {
+            linhasId.add(carro.getIdLinha());
+        }
+        return linhasId;
     }
 }

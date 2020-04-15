@@ -14,10 +14,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import orion.zenite.entidades.Carro;
 import orion.zenite.entidades.Conta;
 import orion.zenite.entidades.Motorista;
+import orion.zenite.entidades.MotoristaCarro;
+import orion.zenite.repositorios.CarroRepository;
+import orion.zenite.repositorios.MotoristaCarroRepository;
 import orion.zenite.repositorios.MotoristaRepository;
 
+import java.util.Optional;
 
 
 @Api(description = "Operações relacionadas ao motorista", tags = "motorista")
@@ -28,6 +33,11 @@ public class MotoristaController {
     @Autowired
     private MotoristaRepository motoristaBD;
 
+    @Autowired
+    private MotoristaCarroRepository repository;
+
+    @Autowired
+    private CarroRepository repositoryCarro;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -105,14 +115,32 @@ public class MotoristaController {
     })
     @PostMapping()
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public Motorista cadastro(@RequestBody Motorista novoMotorista){
+    public ResponseEntity cadastro(@RequestBody Motorista novoMotorista){
         Conta conta = novoMotorista.getConta();
         String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
         conta.setSenha(senhaCriptografada);
         novoMotorista.setConta(conta);
         motoristaBD.save(novoMotorista);
 
-        return novoMotorista;
+        return ResponseEntity.created(null).build();
+    }
+
+    @ApiOperation("Cadastrar ônibus do motorista")
+    @PostMapping("/onibus")
+    @Transactional
+    public ResponseEntity relacionar(@RequestBody MotoristaCarro novoRelacionamento) {
+        this.repository.save(novoRelacionamento);
+        return ResponseEntity.created(null).build();
+    }
+
+    @ApiOperation("Listar quais ônibus estão com quais motoristas")
+    @GetMapping("/onibus")
+    public ResponseEntity consultarRelacionamento() {
+        if (this.repository.count() > 0) {
+            return ResponseEntity.ok(this.repository.findAll());
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
 }
