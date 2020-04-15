@@ -1,5 +1,6 @@
 package orion.zenite.dto;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class ViagemDto {
@@ -16,9 +17,9 @@ public class ViagemDto {
 
     private int qtdPassageiros;
 
-    private LocalTime horaSaida;
+    private LocalDateTime horaSaida;
 
-    private LocalTime horaChegada;
+    private LocalDateTime horaChegada;
 
     public int getViagemId() {
         return viagemId;
@@ -68,19 +69,19 @@ public class ViagemDto {
         this.qtdPassageiros = qtdPassageiros;
     }
 
-    public LocalTime getHoraSaida() {
+    public LocalDateTime getHoraSaida() {
         return horaSaida;
     }
 
-    public void setHoraSaida(LocalTime horaSaida) {
+    public void setHoraSaida(LocalDateTime horaSaida) {
         this.horaSaida = horaSaida;
     }
 
-    public LocalTime getHoraChegada() {
+    public LocalDateTime getHoraChegada() {
         return horaChegada;
     }
 
-    public void setHoraChegada(LocalTime horaChegada) {
+    public void setHoraChegada(LocalDateTime horaChegada) {
         this.horaChegada = horaChegada;
     }
 }

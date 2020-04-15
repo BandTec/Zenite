@@ -6,14 +6,16 @@ import orion.zenite.entidades.Conta;
 import orion.zenite.entidades.Dispositivo;
 import orion.zenite.entidades.Fiscal;
 
+import java.util.Optional;
+
 public interface FiscalRepository extends JpaRepository<Fiscal, Integer> {
 
     @Query(value = "select max(f.id) from Fiscal f")
     int lastId();
 
-    Fiscal findByDispositivo(Dispositivo dispositivo);
+    Optional<Fiscal> findByDispositivo(Dispositivo dispositivo);
 
-    Fiscal findByConta(Conta conta);
+    Optional<Fiscal> findByConta(Conta conta);
 
-    Fiscal findByConta(String cpf);
+    Optional<Fiscal> findByCpf(String cpf);
 }

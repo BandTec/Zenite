@@ -28,28 +28,32 @@ Corpo da Requisição:
 
 ```
 {
-    "nome": "Carolina Ribeiro Esteves da Silva Machado",
-    "cpf": "815.436.148-50",
-    "dataNascimento": "1993-09-23",
-    "numeroTelefone": "9 1123-4321",
-		"senha": "12345678",
-		"email": "emailnovissimo@fiscal.com.br",
-    "endereco": {
-      "cep": "09878023",
-      "logradouro": "Rua Antonieta",
-      "numero": "78",
-      "complemento": "APT 1",
-      "cidade": "São Paulo",
-      "estado": "SP"
-    },	
-    "registroFiscal": "12.123.123",
-    "dispositivo": {
-      "codigo": "542-345",
-      "tipoDispositivo": {
-        "id": 2
-      }
+  "nome": "Lenyra Fracarolli",
+  "cpf": "620.573.110-07",
+  "dataNascimento": "1956-06-13",
+  "numeroTelefone": "9 1134-4351",
+  "endereco": {
+    "cep": "09874023",
+    "logradouro": "Rua Carrão Ramos",
+    "numero": "78",
+    "complemento": "APT 1",
+    "cidade": "São Paulo",
+    "estado": "SP"
+  },
+  "registroFiscal": "33.52.653",
+  "dispositivo": {
+    "codigo": "234-342",
+    "tipoDispositivo": {
+      "id": 1
     }
-}
+  },
+  "conta": {
+    "senha": "1234567",
+    "email": "lenyrafrac@hotmail.com.br",
+    "nivel": {
+      "id": 3
+    }
+  }
 ```
 
 ### Edição 

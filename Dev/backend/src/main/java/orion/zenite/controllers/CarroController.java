@@ -8,9 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import orion.zenite.entidades.Carro;
 import orion.zenite.entidades.CarroLinha;
+import orion.zenite.entidades.Dispositivo;
 import orion.zenite.entidades.MotoristaCarro;
 import orion.zenite.repositorios.CarroLinhaRepository;
 import orion.zenite.repositorios.CarroRepository;
+import orion.zenite.repositorios.DispositivoRepository;
 
 import java.util.Optional;
 
@@ -24,6 +26,9 @@ public class CarroController {
 
     @Autowired
     private CarroLinhaRepository carroLinhaRepository;
+
+    @Autowired
+    private DispositivoRepository dispositivoRepository;
 
     @ApiOperation("Listar todos os ônibus")
     @GetMapping
@@ -50,7 +55,20 @@ public class CarroController {
 
     }
 
-    @ApiOperation("Inserir pontos de ônibus")
+    @ApiOperation("Exibe ônibus pelo código do dispositivo")
+    @GetMapping("/dispositivo/{codigo}")
+    public ResponseEntity consultarPorDispositivo(@PathVariable String codigo) {
+        Optional<Dispositivo> dispositivo = dispositivoRepository.findByCodigo(codigo);
+        if(dispositivo.isPresent()){
+            Optional<Carro> consultaCarro = this.repository.findByDispositivo(dispositivo.get());
+            if (consultaCarro.isPresent()) {
+                return ResponseEntity.ok(consultaCarro);
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @ApiOperation("Inserir ônibus")
     @PostMapping
     @Transactional
     public ResponseEntity criarCarro(@RequestBody Carro onibus) {
@@ -71,6 +89,7 @@ public class CarroController {
         }
     }
 
+    @ApiOperation("Excluir ônibus por id")
     @DeleteMapping("/{id}")
     public ResponseEntity excluirCarro(@PathVariable Integer id) {
         if (this.repository.existsById(id)) {
@@ -82,7 +101,7 @@ public class CarroController {
     }
 
 
-    @ApiOperation("Cadastrar linha do ônibus")
+    @ApiOperation("Cadastrar linha de um ônibus")
     @PostMapping("/linhas")
     @Transactional
     public ResponseEntity relacionar(@RequestBody CarroLinha novoRelacionamento) {

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import orion.zenite.repositorios.DispositivoRepository;
 import orion.zenite.repositorios.FiscalRepository;
 import orion.zenite.entidades.*;
 
@@ -24,6 +25,9 @@ public class FiscalController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private DispositivoRepository dispositivoRepository;
 
     @ApiOperation("Lista todos os fiscais")
     @GetMapping
@@ -94,4 +98,18 @@ public class FiscalController {
 
         return ResponseEntity.created(null).build();
     }
+
+    @ApiOperation("Exibe fiscal pelo código do dispositivo")
+    @GetMapping("/dispositivo/{codigo}")
+    public ResponseEntity consultarPorDispositivo(@PathVariable String codigo) {
+        Optional<Dispositivo> dispositivo = dispositivoRepository.findByCodigo(codigo);
+        if(dispositivo.isPresent()){
+            Optional<Fiscal> fiscal = this.repository.findByDispositivo(dispositivo.get());
+            if (fiscal.isPresent()) {
+                return ResponseEntity.ok(fiscal);
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }

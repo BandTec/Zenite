@@ -1,0 +1,2361 @@
+{
+	"info": {
+		"_postman_id": "496ba413-f56e-4475-953f-432a856392f5",
+		"name": "Zenite API",
+		"description": "Api da aplicação Zenite de gerenciamento de transporte urbano",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "administrador",
+					"item": [
+						{
+							"name": "Lista todos os administradores",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/administrador",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"administrador"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Altera um administrador",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 20,\n  \"nome\": \"vitoriana\",\n  \"conta\": {\n    \"idConta\": 42,\n    \"senha\": \"senha1\",\n    \"email\": \"vitoriana@admin.com\",\n    \"nivel\": {\n      \"id\": 1\n    }\n  }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/administrador",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"administrador"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra um administrador",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"nome\": \"vitoriana\",\n    \"conta\": {\n      \"senha\": \"senha\",\n      \"email\": \"vitoriana@admn.com\",\n      \"nivel\": {\n        \"id\": 1\n      }\n\t\t}\n\t}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/administrador",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"administrador"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar um administrador por seu id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/administrador/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"administrador",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deleta um administrador por seu id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:8080/api/administrador/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"administrador",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "fiscal",
+					"item": [
+						{
+							"name": "Lista todos os fiscais",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/fiscal",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"fiscal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Altera um fiscal",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nome\": \"Lenyra Fracarolli\",\n  \"cpf\": \"620.573.110-07\",\n  \"dataNascimento\": \"1956-06-13\",\n  \"numeroTelefone\": \"9 1134-4351\",\n  \"endereco\": {\n    \"cep\": \"09874023\",\n    \"logradouro\": \"Rua Carrão Ramos\",\n    \"numero\": \"78\",\n    \"complemento\": \"APT 1\",\n    \"cidade\": \"São Paulo\",\n    \"estado\": \"SP\"\n  },\n  \"registroFiscal\": \"33.52.653\",\n  \"dispositivo\": {\n    \"codigo\": \"234-342\",\n    \"tipoDispositivo\": {\n      \"id\": 1\n    }\n  },\n  \"conta\": {\n    \"senha\": \"1234567\",\n    \"email\": \"lenyrafrac@hotmail.com.br\",\n    \"nivel\": {\n      \"id\": 3\n    }\n  }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/fiscal",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"fiscal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra um fiscal",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 4,\n  \"nome\": \"Carolina Ribeiro Machado\",\n  \"cpf\": \"815.436.148-50\",\n  \"dataNascimento\": \"1993-09-23\",\n  \"numeroTelefone\": \"9 1123-4321\",\n  \"endereco\": {\n    \"id\": 6,\n    \"cep\": \"09878023\",\n    \"logradouro\": \"Rua TESTANDO\",\n    \"numero\": \"78\",\n    \"complemento\": \"APT 1\",\n    \"cidade\": \"São Paulo\",\n    \"estado\": \"SP\"\n  },\n  \"registroFiscal\": \"66.123.123\",\n  \"dispositivo\": {\n    \"id\": 7,\n    \"codigo\": \"666-345\",\n    \"tipoDispositivo\": {\n      \"id\": 1\n    }\n  },\n  \"conta\": {\n    \"idConta\": 38,\n    \"senha\": \"mudandosenha\",\n    \"email\": \"m6dandoemail@fiscal.com.br\",\n    \"nivel\": {\n      \"id\": 3\n    }\n  }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/fiscal",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"fiscal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Exibe fiscal pelo código do dispositivo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/fiscal/dispositivo/:codigo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"fiscal",
+										"dispositivo",
+										":codigo"
+									],
+									"variable": [
+										{
+											"key": "codigo",
+											"value": "{{codigo}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar um fiscal por seu id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/fiscal/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"fiscal",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deleta um fiscal por seu id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:8080/api/fiscal/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"fiscal",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "motorista",
+					"item": [
+						{
+							"name": "Lista todos os motoristas",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/motorista",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"motorista"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Altera um motorista",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 4,\n  \"nome\": \"Carolina Ribeiro Machado\",\n  \"cpf\": \"815.436.148-50\",\n  \"dataNascimento\": \"1993-09-23\",\n  \"numeroTelefone\": \"9 1123-4321\",\n  \"endereco\": {\n    \"id\": 6,\n    \"cep\": \"09878023\",\n    \"logradouro\": \"Rua TESTANDO\",\n    \"numero\": \"78\",\n    \"complemento\": \"APT 1\",\n    \"cidade\": \"São Paulo\",\n    \"estado\": \"SP\"\n  },\n  \"registroFiscal\": \"66.123.123\",\n  \"dispositivo\": {\n    \"id\": 7,\n    \"codigo\": \"666-345\",\n    \"tipoDispositivo\": {\n      \"id\": 1\n    }\n  },\n  \"conta\": {\n    \"idConta\": 38,\n    \"senha\": \"mudandosenha\",\n    \"email\": \"m6dandoemail@fiscal.com.br\",\n    \"nivel\": {\n      \"id\": 3\n    }\n  }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/motorista",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"motorista"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra um Motorista",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"nome\": \"Thiago Marcon\",\n\t\"cpf\": \"363.539.830-69\",\n\t\"dataNascimento\": \"1990-09-09\",\n\t\"numeroTelefone\": \"9876 0923\",\n\t\"endereco\": {\n\t\t\"cep\": \"4312\",\n\t\t\"logradouro\": \"Rua aieta\",\n\t\t\"numero\": \"78\",\n\t\t\"complemento\": \"apt 1\",\n\t\t\"cidade\": \"São Paulo\",\n\t\t\"estado\": \"SP\"\n\t},\n\t\"cnh\": \"09236348080\",\n \"conta\": {\n      \"senha\": \"senhaa\",\n      \"email\": \"marcon@hotmail.com.br\",\n\t \"nivel\": {\n      \"id\": 4\n    }\n   }\n}\n"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/motorista",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"motorista"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar ônibus do motorista",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t  \"idMotorista\": 14,\n    \"idCarro\": 8\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/motorista/onibus",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"motorista",
+										"onibus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca motorista pelo ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/motorista/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"motorista",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deleta um motorista por seu ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:8080/api/motorista/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"motorista",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "onibus",
+					"item": [
+						{
+							"name": "Lista todas as linhas de ônibus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/linha",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"linha"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar quais ônibus estão com quais motoristas",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/motorista/onibus",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"motorista",
+										"onibus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar todos os ônibus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/onibus",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"onibus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar ônibus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"id\": 6,\n    \"numero\": \"909333\",\n    \"dispositivo\": {\n      \"id\": 2,\n      \"codigo\": \"542345\",\n      \"tipoDispositivo\": {\n        \"id\": 2,\n        \"descricao\": \"ARDUINO\"\n      }\n    }\n  }"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/onibus",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"onibus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Inserir ônibus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"numero\": \"56640843\",\n    \"dispositivo\": {\n      \"codigo\": \"4999555\",\n      \"tipoDispositivo\": {\n        \"id\": 2\n      }\n    }\n  }"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/onibus",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"onibus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Exibe ônibus pelo código do dispositivo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/onibus/dispositivo/:codigo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"onibus",
+										"dispositivo",
+										":codigo"
+									],
+									"variable": [
+										{
+											"key": "codigo",
+											"value": "{{codigo}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar linha de um ônibus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n    \"idLinha\": 1,\n    \"idCarro\": 9\n  }"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/onibus/linhas",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"onibus",
+										"linhas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Exibe ônibus por id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/onibus/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"onibus",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Excluir ônibus por id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:8080/api/onibus/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"onibus",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lista todos os pontos de ônibus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/pontofinal",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"pontofinal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Exibe ônibus por id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/viagem/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"viagem",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "linhas",
+					"item": [
+						{
+							"name": "Altera uma linha",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n\t \"id\": 1,\n    \"numero\": \"918H\",\n    \"pontoIda\": {\n      \"id\": 1\n    },\n    \"pontoVolta\": {\n      \"id\": 2\n    }\n  }"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/linha",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"linha"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra uma linha",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n    \"numero\": \"918sH\",\n    \"pontoIda\": {\n      \"id\": 1\n    },\n    \"pontoVolta\": {\n      \"id\": 2\n    }\n  }"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/linha",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"linha"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca ponto ida pelo ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/linha/pontoIda/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"linha",
+										"pontoIda",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca ponto volta pelo ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/linha/pontoVolta/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"linha",
+										"pontoVolta",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca linha pelo ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/linha/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"linha",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deleta uma linha por seu ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:8080/api/linha/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"linha",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consultar todos os ônibus que atendem linha",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/linha/:id/onibus",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"linha",
+										":id",
+										"onibus"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar quais ônibus estão em quais linhas",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/onibus/linhas",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"onibus",
+										"linhas"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "viagem",
+					"item": [
+						{
+							"name": "Lista todos as viagens",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/viagem",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"viagem"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Altera uma viagem",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n\t\t\"viagemId\": 6,\n\t\t\"linhaId\": 1,\n\t\t\"fiscalId\": 10,\n\t\t\"carroId\": 1,\n    \"motoristaId\": 1,\n    \"horaSaida\": \"09:10:00\",\n    \"horaChegada\": \"07:30:00\",\n    \"qtdPassageiros\": 200\n  }"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/viagem",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"viagem"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra uma viagem",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n\t\t\"linhaId\": 1,\n\t\t\"fiscalId\": 10,\n\t\t\"carroId\": 1,\n    \"motoristaId\": 1,\n    \"horaSaida\": \"03:30:00\",\n    \"horaChegada\": \"04:30:00\",\n    \"qtdPassageiros\": 560\n  }"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/viagem",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"viagem"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pesquisar viagem pelo id da linha",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/viagem/linha/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"viagem",
+										"linha",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pesquisar viagem pelo id do motorista",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/viagem/motorista/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"viagem",
+										"motorista",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pesquisar viagem pelo id do ônibus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/viagem/onibus/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"viagem",
+										"onibus",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "excluirViagem",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:8080/api/viagem/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"viagem",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "pontoFinal",
+					"item": [
+						{
+							"name": "Atualizar Pontos",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 6,\n  \"nome\": \"Vila IorioA\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/pontofinal",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"pontofinal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Inserir pontos de ônibus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"nome\": \"Vila Carina\"\n  }"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/pontofinal",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"pontofinal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Exibe pontos por id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/pontofinal/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"pontofinal",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "excluirPonto",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:8080/api/pontofinal/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"pontofinal",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "gerente",
+					"item": [
+						{
+							"name": "Lista todos os gerentes",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/gerente",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"gerente"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Altera um gerente",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 4,\n  \"nome\": \"Carolina Ribeiro Machado\",\n  \"cpf\": \"815.436.148-50\",\n  \"dataNascimento\": \"1993-09-23\",\n  \"numeroTelefone\": \"9 1123-4321\",\n  \"endereco\": {\n    \"id\": 6,\n    \"cep\": \"09878023\",\n    \"logradouro\": \"Rua TESTANDO\",\n    \"numero\": \"78\",\n    \"complemento\": \"APT 1\",\n    \"cidade\": \"São Paulo\",\n    \"estado\": \"SP\"\n  },\n  \"registroFiscal\": \"66.123.123\",\n  \"dispositivo\": {\n    \"id\": 7,\n    \"codigo\": \"666-345\",\n    \"tipoDispositivo\": {\n      \"id\": 1\n    }\n  },\n  \"conta\": {\n    \"idConta\": 38,\n    \"senha\": \"mudandosenha\",\n    \"email\": \"m6dandoemail@fiscal.com.br\",\n    \"nivel\": {\n      \"id\": 3\n    }\n  }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/gerente",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"gerente"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca gerente pelo ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/gerente/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"gerente",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deleta um gerente por seu ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:8080/api/gerente/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"gerente",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra um gerente",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbSIsImV4cCI6Mzc4NzQ0ODE0OTV9.0aY9sN3jy0WerXWSZFrArZJOAcHhDh4Lk51oKdmAq2Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nome\": \"asdfasdf Marcone Silveira\",\n  \"cpf\": \"266.778.760-98\",\n  \"dataNascimento\": [\n    1961,\n    2,\n    28\n  ],\n  \"numeroTelefone\": \"97845-3265\",\n  \"endereco\": {\n    \"cep\": \"08145060\",\n    \"logradouro\": \"Rua Dorinha Tapajos\",\n    \"numero\": \"13\",\n    \"complemento\": null,\n    \"cidade\": \"São Paulo\",\n    \"estado\": \"SP\"\n  },\n  \"conta\": {\n    \"senha\": \"asdf\",\n    \"email\": \"gdadsfs@sptrddans.com.br\",\n    \"nivel\": {\n      \"id\": 2\n    }\n  }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/gerente",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"gerente"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			],
+			"description": "Folder for api"
+		},
+		{
+			"name": "autentica",
+			"item": [
+				{
+					"name": "Autenticar credenticiais no sistema",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"senha\": \"12345678\",\n\t\"email\": \"adm@adm.com\"\n}\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/autentica/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"autentica",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for autentica"
+		}
+	]
+}
