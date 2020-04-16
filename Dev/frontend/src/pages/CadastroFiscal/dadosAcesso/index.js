@@ -6,8 +6,10 @@ import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
 import InputComRotulo from './../../../components/InputComRotulo';
 
-export default function DadosAcesso({ mudarPagina, tipoPagina }) {
+export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados }) {
 
+  const [codDispositivo, setCodDispositivo] = useState("");
+  const [email, setEmail] = useState("");
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");
   const [validacaoSenha, setValidacaoSenha] = useState("");
@@ -18,7 +20,25 @@ export default function DadosAcesso({ mudarPagina, tipoPagina }) {
     console.log(validacaoSenha);
     console.log(valorSenha);
     console.log(valorConfirmarSenha);
-  }  
+  } 
+
+  const criarJson = () => {
+      adicionarDados({
+        "conta": {
+          "senha":valorSenha,
+          email,
+          "nivel": {
+            "id": 3
+          }
+        },
+        "dispositivo": {
+          "codigo": codDispositivo,
+          "tipoDispositivo":{
+            "id": 1
+          }
+        },
+      })
+  }
 
   return (
     <Container>
@@ -58,6 +78,8 @@ export default function DadosAcesso({ mudarPagina, tipoPagina }) {
               texto="Código do Dispositivo"
               maxLength="20"
               name="codigoDispositivo"
+              value={codDispositivo}
+              onChange={e => setCodDispositivo(e.target.value)}
               required
             />
 
@@ -66,6 +88,8 @@ export default function DadosAcesso({ mudarPagina, tipoPagina }) {
               maxLength="60"
               name="email"
               type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
               required
             />
 
@@ -99,6 +123,7 @@ export default function DadosAcesso({ mudarPagina, tipoPagina }) {
             texto="Finalizar"
             concluir={true}
             mudarPagina={mudarPagina}
+            criarJson={criarJson}
           />
         </FormContainer>
       </CorpoPagina>
