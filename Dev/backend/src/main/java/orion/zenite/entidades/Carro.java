@@ -50,19 +50,11 @@ public class Carro {
         this.dispositivo = dispositivo;
     }
 
-    public List<CarroLinha> getCarroLinhas() {
-        return carroLinhas;
-    }
-
     public List getLinhasId() {
         ArrayList linhasId = new ArrayList();
         for (CarroLinha carro : carroLinhas) {
             linhasId.add(carro.getIdLinha());
         }
         return linhasId;
-    }
-
-    public void setCarroLinhas(List<CarroLinha> carroLinhas) {
-        this.carroLinhas = carroLinhas;
     }
 }

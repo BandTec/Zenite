@@ -1,4 +1,4 @@
-## API ZENITE
+﻿## API ZENITE
 
 ## Rota do Swagger UI
 -> http://localhost:8080/swagger-ui.html#/
@@ -28,28 +28,32 @@ Corpo da Requisição:
 
 ```
 {
-    "nome": "Carolina Ribeiro Esteves da Silva Machado",
-    "cpf": "815.436.148-50",
-    "dataNascimento": "1993-09-23",
-    "numeroTelefone": "9 1123-4321",
-		"senha": "12345678",
-		"email": "emailnovissimo@fiscal.com.br",
-    "endereco": {
-      "cep": "09878023",
-      "logradouro": "Rua Antonieta",
-      "numero": "78",
-      "complemento": "APT 1",
-      "cidade": "São Paulo",
-      "estado": "SP"
-    },	
-    "registroFiscal": "12.123.123",
-    "dispositivo": {
-      "codigo": "542-345",
-      "tipoDispositivo": {
-        "id": 2
-      }
+  "nome": "Lenyra Fracarolli",
+  "cpf": "620.573.110-07",
+  "dataNascimento": "1956-06-13",
+  "numeroTelefone": "9 1134-4351",
+  "endereco": {
+    "cep": "09874023",
+    "logradouro": "Rua Carrão Ramos",
+    "numero": "78",
+    "complemento": "APT 1",
+    "cidade": "São Paulo",
+    "estado": "SP"
+  },
+  "registroFiscal": "33.52.653",
+  "dispositivo": {
+    "codigo": "234-342",
+    "tipoDispositivo": {
+      "id": 1
     }
-}
+  },
+  "conta": {
+    "senha": "1234567",
+    "email": "lenyrafrac@hotmail.com.br",
+    "nivel": {
+      "id": 3
+    }
+  }
 ```
 
 ### Edição 
@@ -190,24 +194,89 @@ Corpo da Requisição:
 **GET** http://localhost:8080/api/motorista
 -> Requer token
 
----
+----------------------------------------------
 
 ## Rota PontoFinal
 
 ### Consulta Todos 
 **GET** http://localhost:8080/api/pontofinal
--> Requer token
 
----
+### Inserir 
+**Post**
+localhost:8080/api/pontofinal/
+{
+        "id": 6,
+        "nome": "Vila Iorio"
+    },
+
+### Alterar 
+**Put**
+localhost:8080/api/pontofinal/
+{
+        "id": 6,
+        "nome": "Vila Maria"
+    },
+--------------------------------------
 
 ## Rota Viagem
 
 ### Consulta Todos 
 **GET** http://localhost:8080/api/viagem
--> Requer token
 
----
+### Inserir 
+***Post**
+localhost:8080/api/viagem/
 
+
+### Alterar
+***Put**
+localhost:8080/api/viagem/
+
+--------------------------------------------
+
+## Rota Carro
+
+###Consulta Todos
+*** GET** http://localhost:8080/api/onibus
+
+### Inserir 
+***Post**
+localhost:8080/api/onibus/
+{
+        "id": 6,
+        "numero": "123456",
+        "dispositivo": {
+            "id": 2,
+            "codigo": "542345",
+            "tipoDispositivo": {
+                "id": 2,
+                "descricao": "ARDUINO"
+            }
+           
+        }
+        
+}
+
+### Alterar
+***Put**
+localhost:8080/api/onibus/
+
+{
+        "id": 6,
+        "numero": "123333",
+        "dispositivo": {
+            "id": 2,
+            "codigo": "542345",
+            "tipoDispositivo": {
+                "id": 2,
+                "descricao": "ARDUINO"
+            }
+           
+        }
+        
+}
+
+------------------------------------------------
 ## Rota Linha
 
 ### Consulta Todos 

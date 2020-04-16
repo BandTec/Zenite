@@ -24,6 +24,7 @@ public class MotoristaCarro {
     @JoinColumn(name = "idMotorista")
     private Motorista motorista;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("idCarro")
     @JoinColumn(name = "idCarro")

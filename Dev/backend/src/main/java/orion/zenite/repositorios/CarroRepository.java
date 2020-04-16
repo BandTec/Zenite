@@ -6,13 +6,14 @@ import orion.zenite.entidades.Carro;
 import orion.zenite.entidades.Dispositivo;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CarroRepository extends JpaRepository<Carro, Integer> {
 
     @Query(value = "select max(c.id) from Carro c")
     int lastId();
 
-    Carro findByDispositivo(Dispositivo dispositivo);
+    Optional<Carro> findByDispositivo(Dispositivo dispositivo);
 
     List<Carro> findByNumeroIgnoreCase(String numero);
 }

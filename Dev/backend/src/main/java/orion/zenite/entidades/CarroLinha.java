@@ -17,6 +17,7 @@ public class CarroLinha {
     // @EmbeddedId
     // MotoristaCarroId id;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("idLinha")
     @JoinColumn(name = "idLinha")
