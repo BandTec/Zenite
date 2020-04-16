@@ -7,11 +7,29 @@ import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
 import InputComRotulo from './../../../components/InputComRotulo';
 
-export default function DadosEndereco({ mudarPagina, tipoPagina }) {
+export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados }) {
   const [valorCep, setValorCep] = useState("");
+  const [logradouro, setLogradouro] = useState("");
+  const [numero, setNumero] = useState("");
+  const [complemento, setComplemento] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [estado, setEstado] = useState("");
 
-  const mascararCep = (e) => {
-    setValorCep(cepMask(e.target.value));
+  const mascararCep = e => {
+    setValorCep(e.target.value);
+  }
+
+  const criarJson = () => {
+    adicionarDados({
+      "endereco": {
+      "cep": valorCep,
+      logradouro,
+      numero,
+      complemento,
+      cidade,
+      estado
+    }
+    })
   }
 
   return (
@@ -62,6 +80,8 @@ export default function DadosEndereco({ mudarPagina, tipoPagina }) {
               texto="Logradouro"
               maxLength="120"
               name="logradouro"
+              value={logradouro}
+              onChange={event => setLogradouro(event.target.value)}
               required
             />
 
@@ -71,6 +91,8 @@ export default function DadosEndereco({ mudarPagina, tipoPagina }) {
                 texto="Número"
                 maxLength="16"
                 name="numero"
+                value={numero}
+                onChange={event => setNumero(event.target.value)}
                 required
               />
 
@@ -79,6 +101,8 @@ export default function DadosEndereco({ mudarPagina, tipoPagina }) {
                 pequeno={true}
                 maxLength="60"
                 name="complemento"
+                value={complemento}
+                onChange={event => setComplemento(event.target.value)}
               />
             </CaixaHorizontal>
 
@@ -88,6 +112,8 @@ export default function DadosEndereco({ mudarPagina, tipoPagina }) {
                 texto="Cidade"
                 maxLength="40"
                 name="cidade"
+                value={cidade}
+                onChange={event => setCidade(event.target.value)}
               />
 
               <InputComRotulo
@@ -95,11 +121,13 @@ export default function DadosEndereco({ mudarPagina, tipoPagina }) {
                 pequeno={true}
                 maxLength="2"
                 name="estado"
+                value={estado}
+                onChange={event => setEstado(event.target.value)}
               />
             </CaixaHorizontal>
           </Caixa>
 
-          <BotaoForm texto="Próximo" mudarPagina={mudarPagina}/>
+          <BotaoForm texto="Próximo" mudarPagina={mudarPagina} criarJson={criarJson}/>
         </FormContainer>
       </CorpoPagina>
     </Container>

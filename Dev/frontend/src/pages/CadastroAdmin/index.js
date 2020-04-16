@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Container, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 import BotaoForm from './../../components/BotaoForm';
@@ -22,7 +23,9 @@ export default function CadastroAdmin() {
     <Container>
       <CorpoPagina>
         <FormContainer>
-          <BotaoForm texto="VOLTAR" url="/admin" ladoDireito={false} />
+          <Link to="/admin">
+            <BotaoForm texto="VOLTAR" ladoDireito={false} />
+          </Link>
 
           <Caixa>
             <Subtitulo>CADASTRO DO ADMINISTRADOR</Subtitulo>
@@ -69,8 +72,9 @@ export default function CadastroAdmin() {
               invalido={validacaoSenha}
             />
           </Caixa>
-
-          <BotaoForm texto="Finalizar" concluir={true} url="/admin/cadastro" />
+          <Link to="/admin">
+            <BotaoForm texto="Finalizar" concluir={true} />
+          </Link>
         </FormContainer>
       </CorpoPagina>
     </Container>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 import BotaoForm from '../../components/BotaoForm';
@@ -20,7 +21,9 @@ export default function CadastroLinha() {
 
       <CorpoPagina>
         <FormContainer>
-          <BotaoForm texto="VOLTAR" url="/linha" ladoDireito={false} />
+          <Link to="/linha">
+            <BotaoForm texto="VOLTAR" ladoDireito={false} />
+          </Link>
 
           <Caixa>
             <Subtitulo>CADASTRO DA LINHA</Subtitulo>
@@ -77,12 +80,12 @@ export default function CadastroLinha() {
               />
             </CaixaHorizontal>
           </Caixa>
-
-          <BotaoForm
-            texto="Finalizar"
-            concluir={true}
-            url="/cadastroParadaLinha"
-          />
+          <Link to="/linha">
+            <BotaoForm
+              texto="Finalizar"
+              concluir={true}
+            />
+          </Link>
         </FormContainer>
       </CorpoPagina>
     </Container>
