@@ -47,21 +47,7 @@ const App = () => {
 
         <Route exact path="motorista/cadastro/:id" component={CadastroMotorista}/>
 
-
-        {/* <Route path="/motorista/detalhes/:id" component={} /> */}
-
-         {/* <Route path="/motorista/editar/1/:id" component={CadastroMotorista1} />
-
-        <Route path="/motorista/editar/2/:id" component={CadastroMotorista2} />
-
-        <Route path="/motorista/editar/3/:id" component={CadastroMotorista3} />
-
-        <Route path="/motorista/cadastro/1" component={CadastroMotorista1} />
-
-        <Route path="/motorista/cadastro/2" component={CadastroMotorista2} />
-
-        <Route path="/motorista/cadastro/3" component={CadastroMotorista3} />  */}
-
+        
         {/* GERENTE */}
 
         {/* <Route exact path="/gerente" component={} /> */}
