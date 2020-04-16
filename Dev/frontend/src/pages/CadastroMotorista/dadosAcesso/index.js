@@ -32,7 +32,11 @@ export default function DadosAcesso({ mudarPagina, tipoPagina}) {
             temProximoPasso={true}
           />
 
-          <StatusPage ativo={false} texto="Endereço" temProximoPasso={true} />
+          <StatusPage 
+          ativo={false} 
+          texto="Endereço" 
+          temProximoPasso={true}
+           />
 
           <StatusPage
             ativo={true}
@@ -49,7 +53,7 @@ export default function DadosAcesso({ mudarPagina, tipoPagina}) {
           />
 
           <Caixa>
-          <Subtitulo>{`${tipoPagina} DO MOTORISTA`}</Subtitulo>
+          <Subtitulo>{tipoPagina} DO MOTORISTA}</Subtitulo>
             <Titulo>Dados de Acesso</Titulo>
 
             <InputComRotulo

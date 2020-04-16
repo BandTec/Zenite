@@ -5,7 +5,7 @@ import DadosPessoais from './dadosPessoais';
 import DadosEndereco from './endereco';
 import DadosAcesso from './dadosAcesso';
 
-export default function CadastroFiscal(props) {
+export default function CadastroMotorista(props) {
     
     const [pagina, setPagina] = useState(1);
     const caminho = props.match.path;

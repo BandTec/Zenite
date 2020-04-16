@@ -8,7 +8,6 @@ import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
 import InputComRotulo from './../../../components/InputComRotulo';
 
-
   export default function DadosPessoais({ mudarPagina, tipoPagina }){
 
   const [nome, setNome ] = useState("");  
@@ -16,7 +15,6 @@ import InputComRotulo from './../../../components/InputComRotulo';
   const [valorData, setValorData] = useState("");
   const [valorTelefone, setValorTelefone] = useState("");
 
-  
 
   const mascararCpf = (e) => {
     setValorCpf(cpfMask(e.target.value));
