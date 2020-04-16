@@ -3,7 +3,7 @@ import api from '../../services/api';
 
 import { Container, Row, BotaoRelatorio ,BotaoNovoFiscal, Tela, Acoes, Cabecalho, CaixaTabela } from './styles';
 import Botao from '../../components/Botao';
-import Tabela from '../../components/Tabela';
+import Tabela from '../../components/Tabela2'
 import Titulo from '../../components/Titulo';
 import Paginacao from '../../components/Paginacao';
 
@@ -17,7 +17,6 @@ export default function CadastroFiscal() {
     const response = await api.get('/api/fiscal',{
       headers: {'Authorization': token}
     })
-    console.log(response.data);
     dados = response.data;
 
      let temp = [];
@@ -37,13 +36,9 @@ export default function CadastroFiscal() {
 
   useEffect(dadosCorpos, []);
   
-  function criaDados(registro, nome, telefone, cpf, acoes){
-    return {registro, nome, telefone, cpf, acoes}
+  function criaDados(registro, nome, telefone, cpf){
+    return {registro, nome, telefone, cpf}
   }
-
-  const dadosCabecalho = [
-    criaDados('Registro Fiscal', 'Nome', 'Telefone', 'CPF', 'Ações')
-  ];
 
   return (
     <Container>
@@ -71,11 +66,7 @@ export default function CadastroFiscal() {
 
         <Row>
           <CaixaTabela>
-            <Tabela
-              tabela={2}
-              dadosCabecalho={dadosCabecalho}
-              dadosCorpo={corpo}
-            />
+            <Tabela dados={corpo} />
           </CaixaTabela>
         </Row>
 
