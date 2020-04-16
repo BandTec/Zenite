@@ -102,7 +102,7 @@ const App = () => {
         {/* <Route path="/onibus/editar/:id" component={} /> */}
 
         <Route path="/onibus/cadastro" component={CadastroOnibus} />
-      </div>
+        </div>
     </Router>
   );
 };
