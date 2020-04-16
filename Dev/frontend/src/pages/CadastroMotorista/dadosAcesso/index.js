@@ -53,7 +53,7 @@ export default function DadosAcesso({ mudarPagina, tipoPagina}) {
           />
 
           <Caixa>
-          <Subtitulo>{tipoPagina} DO MOTORISTA}</Subtitulo>
+          <Subtitulo>{tipoPagina} DO MOTORISTA</Subtitulo>
             <Titulo>Dados de Acesso</Titulo>
 
             <InputComRotulo

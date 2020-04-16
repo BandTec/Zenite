@@ -43,9 +43,9 @@ const App = () => {
 
         {/* <Route path="/motorista/detalhes/:id" component={DetalhesMotorista} />  */}
 
-        <Route exact path="motorista/editar/:id" component={CadastroMotorista}/>
+        <Route path="/motorista/editar/:id" component={CadastroMotorista}/>
 
-        <Route exact path="motorista/cadastro/:id" component={CadastroMotorista}/>
+        <Route path="/motorista/cadastro/:id" component={CadastroMotorista}/>
 
         
         {/* GERENTE */}
