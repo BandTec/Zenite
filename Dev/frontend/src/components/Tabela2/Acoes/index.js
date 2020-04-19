@@ -1,12 +1,47 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import { StyledTableCell } from '../styles';
+import { Img, Alinhar } from "./styles";
+import EditarIcon from './../../../assets/icons/editar.svg'
+import DetalhesIcon from "./../../../assets/icons/detalhes.svg";
+import ExcluirIcon from "./../../../assets/icons/excluir.svg";
+import api from "./../../../services/api";
 
-export default function Acoes({ id }) {
+export default function Acoes({ id, tipo }) {
+
+  const excluir = async () => {
+     const continuar = window.confirm("Deseja realmente excluir dado? ");  
+     if (continuar) {
+      const token = localStorage.getItem('token');     
+      const response = await api.delete(`/api/${tipo}/${id}`,
+        {
+          headers: {'Authorization': token}
+        }
+      );
+
+        if (response.status === 200) {
+          alert("Dado excluido com sucesso!");
+        }
+     }
+  }
+
   return (
     <StyledTableCell align="left">
-        <Link to={`/fiscal/excluir/${id}`}>excluir</Link>
-        <Link to={`/fiscal/editar/${id}`}>editar</Link>
-  </StyledTableCell>
+      <Alinhar>
+
+        <Link to={`/fiscal/detalhes/${id}`}>
+          <Img src={DetalhesIcon} title="Ver detalhes"/>
+        </Link>
+
+        <Link to={`/fiscal/editar/${id}`}>
+          <Img src={EditarIcon} title="Editar" />
+        </Link>
+
+      <button onClick={excluir}>
+          <Img src={ExcluirIcon} title="Excluir dado" />
+        </button>
+
+      </Alinhar>
+    </StyledTableCell>
   );
 }

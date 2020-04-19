@@ -39,7 +39,7 @@ const App = () => {
 
         {/* MOTORISTA */}
 
-         <Route exact path="/motorista" component={Motorista} /> 
+        <Route exact path="/motorista" component={Motorista} />
 
         {/* <Route path="/motorista/detalhes/:id" component={DetalhesMotorista} />  */}
 
@@ -47,7 +47,7 @@ const App = () => {
 
         <Route path="/motorista/cadastro/:id" component={CadastroMotorista}/>
 
-        
+
         {/* GERENTE */}
 
         {/* <Route exact path="/gerente" component={} /> */}
@@ -70,14 +70,13 @@ const App = () => {
 
         {/* LINHA */}
 
-        {/* <Route exact path="/linha" component={} /> */}
-
         {/* <Route path="/linha/detalhes/:id" component={} /> */}
 
         {/* <Route path="/linha/editar/:id" component={} /> */}
 
         <Route path="/linha/cadastro" component={CadastroParadaLinha} />
-        <Route path="/linha" component={Linha} />
+       
+        <Route exact path="/linha" component={Linha} />
 
         {/* ONIBUS */}
 
@@ -88,7 +87,7 @@ const App = () => {
         {/* <Route path="/onibus/editar/:id" component={} /> */}
 
         <Route path="/onibus/cadastro" component={CadastroOnibus} />
-        </div>
+      </div>
     </Router>
   );
 };
