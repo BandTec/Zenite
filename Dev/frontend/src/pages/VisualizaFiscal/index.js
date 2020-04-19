@@ -43,7 +43,7 @@ export default function VisualizaFiscal() {
   return (
     <Container>
       <Row>
-        <Titulo textoMenor="consulta do fiscal" textoMaior="asdfdsa" />
+        <Titulo textoMenor="consulta do fiscal" textoMaior="" />
       </Row>
 
       <Acoes>
