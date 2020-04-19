@@ -11,11 +11,6 @@ export const Row = styled.div`
   margin-top: 20px;
 `;
 
-export const Cabecalho = styled.div`
-  display: flex;
-  padding: 20px 60px;
-`;
-
 export const Acoes = styled.div`
   display: flex;
   justify-content: space-between;

@@ -28,19 +28,17 @@ export default function Acoes({ id, tipo }) {
   return (
     <StyledTableCell align="left">
       <Alinhar>
-
-        <Link to={`/fiscal/detalhes/${id}`}>
-          <Img src={DetalhesIcon} title="Ver detalhes"/>
+        <Link to={`/${tipo}/detalhes/${id}`}>
+          <Img src={DetalhesIcon} title="Ver detalhes" />
         </Link>
 
-        <Link to={`/fiscal/editar/${id}`}>
+        <Link to={`/${tipo}/editar/${id}`}>
           <Img src={EditarIcon} title="Editar" />
         </Link>
 
-      <button onClick={excluir}>
+        <button onClick={excluir}>
           <Img src={ExcluirIcon} title="Excluir dado" />
         </button>
-
       </Alinhar>
     </StyledTableCell>
   );

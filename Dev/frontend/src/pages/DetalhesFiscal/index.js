@@ -1,6 +1,6 @@
 import React from 'react';
 
- import { Container, Tela, Row, Cabecalho, CorpoRelatorio, CaixaDados, CaixaTabela } from './styles';
+ import { Container, Row, Cabecalho, CorpoRelatorio, CaixaDados, CaixaTabela } from './styles';
  import Titulo from  '../../components/Titulo';
  import TituloTipoDado from '../../components/TituloTipoDado';
  import TituloDado from '../../components/TituloDado';
