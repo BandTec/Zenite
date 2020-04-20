@@ -23,8 +23,16 @@ public class Carro {
     private Dispositivo dispositivo;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "carro", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "carro", cascade = CascadeType.REMOVE)
     private List<CarroLinha> carroLinhas;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "carro", cascade = CascadeType.REMOVE)
+    private List<MotoristaCarro> motoristaCarro;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "carro", cascade = CascadeType.REMOVE)
+    private List<Viagem> viagem;
 
     public int getId() {
         return id;

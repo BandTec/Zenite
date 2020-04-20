@@ -1,9 +1,11 @@
 package orion.zenite.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="tblFiscal")
@@ -41,6 +43,10 @@ public class Fiscal  {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fkConta")
     private Conta conta;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "fiscal", cascade = CascadeType.REMOVE)
+    private List<Viagem> viagem;
 
     public Conta getConta() {
         return conta;
