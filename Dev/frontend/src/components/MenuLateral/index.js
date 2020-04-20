@@ -14,33 +14,36 @@ const {pathname} = useLocation();
 const mostrar = pathname === "/login" ? false : true;
   return (
     <>
-    { mostrar && (
-      <Container>
-      <MainMenu>
-        <BotaoMenu
-          descricao="Início"
-          iconeNome="dashboard"
-          alt="Logo do Software Zenite"
-          url={"/dashboard"}
-        />
+      {mostrar && (
+        <Container>
+          <MainMenu>
+            <BotaoMenu
+              descricao="Início"
+              iconeNome="dashboard"
+              alt="Logo do Software Zenite"
+              url={"/dashboard"}
+            />
 
-        <BotaoMenu descricao="Fiscal" iconeNome="fiscal" url={"/fiscal"} />
+            <BotaoMenu descricao="Fiscal" iconeNome="fiscal" url={"/fiscal"} />
 
-        <BotaoMenu descricao="Linha" iconeNome="linha" url={"/linha"} />
+            <BotaoMenu descricao="Linha" iconeNome="linha" url={"/linha"} />
 
-        <BotaoMenu
-          descricao="Motorista"
-          iconeNome="motorista"
-          url={"/motorista"}
-        />
+            <BotaoMenu
+              descricao="Motorista"
+              iconeNome="motorista"
+              url={"/motorista"}
+            />
 
-        <BotaoMenu descricao="Ônibus" iconeNome="onibus" url={"/onibus"} />
+            <BotaoMenu descricao="Ônibus" iconeNome="onibus" url={"/onibus"} />
 
-        <BotaoMenu descricao="Perfil" url={"/perfil"} iconeNome="perfil" />
-      </MainMenu>
+            <BotaoMenu descricao="Perfil" url={"/perfil"} iconeNome="perfil" />
 
-      <BotaoMenu descricao="Sair" url={"/login"} iconeNome="logout" />
-    </Container>)}
+            <BotaoMenu descricao="Admin" url={"/administrador"} iconeNome="admin" />
+          </MainMenu>
+
+          <BotaoMenu descricao="Sair" url={"/login"} iconeNome="logout" />
+        </Container>
+      )}
     </>
   );
 }

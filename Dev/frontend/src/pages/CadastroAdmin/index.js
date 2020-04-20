@@ -1,23 +1,117 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import api from "../../services/api";
 
-import { Container, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
-import BotaoForm from './../../components/BotaoForm';
-import InputComRotulo from './../../components/InputComRotulo';
+import {
+  Container,
+  CorpoPagina,
+  FormContainer,
+  Titulo,
+  Subtitulo,
+  Caixa,
+} from "./styles";
+import BotaoForm from "./../../components/BotaoForm";
+import InputComRotulo from "./../../components/InputComRotulo";
 
-export default function CadastroAdmin() {
-
+export default function CadastroAdmin(props) {
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");
   const [validacaoSenha, setValidacaoSenha] = useState("");
+  const [email, setEmail] = useState("");
+  const [nome, setNome] = useState("");
+
+   const caminho = props.match.path;
+   const id = props.match.params.id;
+   const isEdicao = caminho.includes("editar");
+   const tipoPagina = isEdicao ? "Edição" : "Cadastro";
 
   const verificarSenha = () => {
-      // verificao
-    setValidacaoSenha(valorSenha === valorConfirmarSenha ? true : false);
-    console.log(validacaoSenha);
-    console.log(valorSenha);
-    console.log(valorConfirmarSenha);
-  }
+
+    if(valorSenha.length >= 8){
+      setValidacaoSenha(valorSenha === valorConfirmarSenha);
+    }
+  };
+
+    useEffect(() => {
+      async function consultarEdicao() {
+        const token = localStorage.getItem("token");
+
+        const response = await api.get(`/api/administrador/${id}`, {
+          headers: { Authorization: token },
+        });
+
+        const dados = response.data;
+
+        setNome(dados.nome);
+        setEmail(dados.conta.email);
+      }
+
+      consultarEdicao();
+    }, [id]);
+
+  const cadastrar = async () => {
+    const dados = {
+      nome: nome,
+      conta: {
+        senha: valorSenha,
+        email: email,
+        nivel: {
+          id: 1,
+        },
+      },
+    };
+
+    verificarSenha();
+    if (validacaoSenha) {
+      const token = await localStorage.getItem("token");
+
+      const response = await api.post("/api/administrador", dados, {
+        headers: { Authorization: token },
+      });
+
+      if (response.status === 201) {
+        props.history.push("/administrador");
+      }else {
+        alert("Ocorreu um erro. Tente de novo");
+      }
+
+    } else {
+      alert("Senhas não batem. Redigite a senha");
+    }
+  };
+
+    const editar = async () => {
+      const dados = {
+        id,
+        nome: nome,
+        conta: {
+          senha: valorSenha,
+          email: email,
+          nivel: {
+            id: 1,
+          },
+        },
+      };
+       verificarSenha();
+    if (validacaoSenha) {
+      const token = await localStorage.getItem("token");
+      const response = await api.put("/api/administrador", dados, {
+        headers: { Authorization: token },
+      });
+      console.log(response);
+        if (response.status === 200) {
+          props.history.push("/administrador");
+        } else {
+          alert("Ocorreu um erro. Tente de novo");
+        }
+      } else {
+        alert("Senhas não batem. Redigite a senha");
+      }
+    };
+
+    const concluir = () => {
+      isEdicao ? editar() : cadastrar();
+    };
 
   return (
     <Container>
@@ -28,7 +122,7 @@ export default function CadastroAdmin() {
           </Link>
 
           <Caixa>
-            <Subtitulo>CADASTRO DO ADMINISTRADOR</Subtitulo>
+            <Subtitulo>{tipoPagina} DO ADMINISTRADOR</Subtitulo>
             <Titulo>Dados de Acesso</Titulo>
 
             <InputComRotulo
@@ -36,6 +130,8 @@ export default function CadastroAdmin() {
               maxLength="100"
               name="nome"
               type="text"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
               required
             />
 
@@ -44,6 +140,8 @@ export default function CadastroAdmin() {
               maxLength="60"
               name="email"
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
 
@@ -64,17 +162,12 @@ export default function CadastroAdmin() {
               name="confirmarSenha"
               type="password"
               value={valorConfirmarSenha}
-              onChange={(e) => {
-                setValorConfirmarSenha(e.target.value);
-                verificarSenha();
-              }}
+              onChange={(e) => setValorConfirmarSenha(e.target.value)}
               required
-              invalido={validacaoSenha}
             />
           </Caixa>
-          <Link to="/admin">
-            <BotaoForm texto="Finalizar" concluir={true} />
-          </Link>
+
+          <BotaoForm texto="Finalizar" concluir={true} criarJson={concluir} />
         </FormContainer>
       </CorpoPagina>
     </Container>

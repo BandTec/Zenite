@@ -14,6 +14,7 @@ import CadastroFiscal from "./pages/CadastroFiscal";
 import CadastroMotorista from "./pages/CadastroMotorista";
 import CadastroGerente from "./pages/CadastroGerente";
 import CadastroAdmin from "./pages/CadastroAdmin";
+import ConsultaAdmin from "./pages/VisualizaAdmin";
 import CadastroParadaLinha from "./pages/CadastroParadaLinha";
 import CadastroOnibus from "./pages/CadastroOnibus";
 
@@ -59,15 +60,13 @@ const App = () => {
 
         <Route path="/gerente/cadastro" component={CadastroGerente} />
 
-        {/* ADMIN */}
+        {/* administrador */}
 
-        {/* <Route exact path="/admin" component={} /> */}
+        <Route exact path="/administrador" component={ConsultaAdmin} />
 
-        {/* <Route path="/admin/detalhes/:id" component={} /> */}
+        <Route path="/administrador/editar/:id" component={CadastroAdmin} />
 
-        {/* <Route path="/admin/editar/:id" component={} /> */}
-
-        <Route path="/admin/cadastro" component={CadastroAdmin} />
+        <Route path="/administrador/cadastro" component={CadastroAdmin} />
 
         {/* LINHA */}
 
