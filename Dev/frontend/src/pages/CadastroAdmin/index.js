@@ -34,16 +34,20 @@ export default function CadastroAdmin(props) {
 
     useEffect(() => {
       async function consultarEdicao() {
-        const token = localStorage.getItem("token");
+        try {
+          const token = localStorage.getItem("token");
 
-        const response = await api.get(`/api/administrador/${id}`, {
-          headers: { Authorization: token },
-        });
+          const response = await api.get(`/api/administrador/${id}`, {
+            headers: { Authorization: token },
+          });
 
-        const dados = response.data;
+          const dados = response.data;
 
-        setNome(dados.nome);
-        setEmail(dados.conta.email);
+          setNome(dados.nome);
+          setEmail(dados.conta.email);
+        } catch (e) {
+          alert("Ocorreu um erro. Tente de novo.");
+        }
       }
 
       consultarEdicao();
@@ -63,16 +67,18 @@ export default function CadastroAdmin(props) {
 
     verificarSenha();
     if (validacaoSenha) {
-      const token = await localStorage.getItem("token");
+      try {
+        const token = await localStorage.getItem("token");
 
-      const response = await api.post("/api/administrador", dados, {
-        headers: { Authorization: token },
-      });
+        const response = await api.post("/api/administrador", dados, {
+          headers: { Authorization: token },
+        });
 
-      if (response.status === 201) {
-        props.history.push("/administrador");
-      }else {
-        alert("Ocorreu um erro. Tente de novo");
+        if (response.status === 201) {
+          props.history.push("/administrador");
+        } 
+      } catch (e) {
+        alert("Ocorreu um erro. Tente de novo.");
       }
 
     } else {
@@ -94,15 +100,17 @@ export default function CadastroAdmin(props) {
       };
        verificarSenha();
     if (validacaoSenha) {
-      const token = await localStorage.getItem("token");
-      const response = await api.put("/api/administrador", dados, {
-        headers: { Authorization: token },
-      });
-      console.log(response);
-        if (response.status === 200) {
-          props.history.push("/administrador");
-        } else {
-          alert("Ocorreu um erro. Tente de novo");
+      try {
+        const token = await localStorage.getItem("token");
+        const response = await api.put("/api/administrador", dados, {
+          headers: { Authorization: token },
+        });
+        console.log(response);
+          if (response.status === 200) {
+            props.history.push("/administrador");
+          }
+        } catch (e) {
+          alert("Ocorreu um erro. Tente de novo.");
         }
       } else {
         alert("Senhas não batem. Redigite a senha");

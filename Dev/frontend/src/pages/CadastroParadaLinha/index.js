@@ -55,20 +55,23 @@ export default function CadastroLinha(props) {
 
     async function consultarEdicao() {
       const token = localStorage.getItem("token");
+      try {
+        const response = await api.get(`/api/linha/${id}`, {
+          headers: { Authorization: token },
+        });
 
-      const response = await api.get(`/api/linha/${id}`, {
-        headers: { Authorization: token },
-      });
+        const dados = response.data;
 
-      const dados = response.data;
+        setParadaVolta(dados.pontoVolta.nome);
+        setParadaIda(dados.pontoIda.nome);
 
-      setParadaVolta(dados.pontoVolta.nome);
-      setParadaIda(dados.pontoIda.nome);
+        setIdParadaIda(dados.pontoIda.id);
+        setIdParadaVolta(dados.pontoVolta.id);
 
-      setIdParadaIda(dados.pontoIda.id);
-      setIdParadaVolta(dados.pontoVolta.id);
-
-      setLinhaNumero(dados.numero);
+        setLinhaNumero(dados.numero);
+      } catch(e) {
+      alert("Ocorreu um erro. Tente de novo.");
+      }
     }
 
       consultarEdicao();
@@ -82,16 +85,19 @@ export default function CadastroLinha(props) {
       pontoIda: ida,
       pontoVolta: volta,
     };
-    
-    const token = await localStorage.getItem("token");
-    const response = await api.post("/api/linha", dados, {
-      headers: { Authorization: token },
-    });
-    
-    if (response.status === 201) {
-      props.history.push("/linha");
-    } else {
-      alert("Ocorreu um erro. Tente de novo");
+    try {
+      const token = await localStorage.getItem("token");
+      const response = await api.post("/api/linha", dados, {
+        headers: { Authorization: token },
+      });
+      
+      if (response.status === 201) {
+        props.history.push("/linha");
+      } else {
+        alert("Ocorreu um erro. Tente de novo");
+      }
+   }catch(e) {
+      alert("Ocorreu um erro. Tente de novo.");
     }
   };
 
@@ -105,15 +111,19 @@ export default function CadastroLinha(props) {
       pontoVolta: volta,
     };
 
-    const token = await localStorage.getItem("token");
-    const response = await api.put("/api/linha", dados, {
-      headers: { Authorization: token },
-    });
-    console.log(response);
-    if (response.status === 200) {
-      props.history.push("/linha");
-    } else {
-      alert("Ocorreu um erro. Tente de novo");
+    try {
+      const token = await localStorage.getItem("token");
+      const response = await api.put("/api/linha", dados, {
+        headers: { Authorization: token },
+      });
+      console.log(response);
+      if (response.status === 200) {
+        props.history.push("/linha");
+      } else {
+        alert("Ocorreu um erro. Tente de novo");
+      }
+    } catch (e) {
+      alert("Ocorreu um erro. Tente de novo.");
     }
   };
 
