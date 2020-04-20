@@ -17,6 +17,7 @@ import CadastroAdmin from "./pages/CadastroAdmin";
 import ConsultaAdmin from "./pages/VisualizaAdmin";
 import CadastroParadaLinha from "./pages/CadastroParadaLinha";
 import CadastroOnibus from "./pages/CadastroOnibus";
+import Perfil from "./pages/PerfilGerente";
 
 import MenuLateral from "./components/MenuLateral";
 
@@ -87,6 +88,11 @@ const App = () => {
         {/* <Route path="/onibus/editar/:id" component={} /> */}
 
         <Route path="/onibus/cadastro" component={CadastroOnibus} />
+
+        {/* Perfil */}
+
+        <Route path="/perfil" component={Perfil} />
+
       </div>
     </Router>
   );
