@@ -6,7 +6,6 @@ export const Container = styled.div`
 `;
 
 export const CorpoPagina = styled.article`
-     
     padding: 40px;
     background-color: #FFF;
     width: 100vw;  
@@ -45,5 +44,7 @@ export const CaixaHorizontal = styled.div`
     justify-content: ${props => props.center ? "center" : "space-between"};
     align-items: center;
 `;
+
+
 
 

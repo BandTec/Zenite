@@ -9,6 +9,8 @@ import {
   Caixa,
   CaixaHorizontal
 } from "./styles";
+
+import Loader from "./../../components/Loader";
 import BotaoForm from "./../../components/BotaoForm";
 import Acesso from './Acesso';
 import Endereco from "./DadosEndereco";
@@ -57,7 +59,7 @@ export default function Perfil(props) {
             headers: { Authorization: token },
           });
       
-        if (response.status === 200) {
+        if (response.status === 204) {
           props.history.push("/dashboard");
         } else {
           alert("Ocorreu um erro. Tente de novo");
@@ -75,61 +77,65 @@ export default function Perfil(props) {
 
   return (
     <Container>
-      <CorpoPagina>
-        <CaixaHorizontal center={true}>
-          <StatusPage
-            ativo={pagina === 1}
-            texto="Dados Pessoais"
-            temProximoPasso={true}
-          />
+      {Object.keys(dados).length === 0 ? (
+        <Loader />
+      ) : (
+        <CorpoPagina>
+          <CaixaHorizontal center={true}>
+            <StatusPage
+              ativo={pagina === 1}
+              texto="Dados Pessoais"
+              temProximoPasso={true}
+            />
 
-          <StatusPage
-            ativo={pagina === 2}
-            texto="Endereço"
-            temProximoPasso={true}
-          />
+            <StatusPage
+              ativo={pagina === 2}
+              texto="Endereço"
+              temProximoPasso={true}
+            />
 
-          <StatusPage
-            ativo={pagina >= 3}
-            texto="Dados de Acesso"
-            temProximoPasso={false}
-          />
-        </CaixaHorizontal>
+            <StatusPage
+              ativo={pagina >= 3}
+              texto="Dados de Acesso"
+              temProximoPasso={false}
+            />
+          </CaixaHorizontal>
 
-        <FormContainer>
-          <BotaoForm
-            texto="VOLTAR"
-            ladoDireito={false}
-            mudarPagina={mudarPagina}
-          />
+          <FormContainer>
+            <BotaoForm
+              texto="VOLTAR"
+              ladoDireito={false}
+              mudarPagina={mudarPagina}
+            />
 
-          <Caixa>
-            <Subtitulo>Editar Perfil</Subtitulo>
-            {pagina === 1 && (
-              <Pessoais adicionarDados={adicionarDados} dados={dados} />
-            )}
+            <Caixa>
+              <Subtitulo>Editar Perfil</Subtitulo>
+              {pagina === 1 && (
+                <Pessoais adicionarDados={adicionarDados} dados={dados} />
+              )}
 
-            {pagina === 2 && (
-              <Endereco adicionarDados={adicionarDados} dados={dados} />
-            )}
+              {pagina === 2 && (
+                <Endereco adicionarDados={adicionarDados} dados={dados} />
+              )}
 
-            {pagina >= 3 && (
-              <Acesso
-                adicionarDados={adicionarDados}
-                dados={dados}
-                validarSenha={setValidacaoSenha}
-              />
-            )}
-          </Caixa>
+              {pagina >= 3 && (
+                <Acesso
+                  adicionarDados={adicionarDados}
+                  dados={dados}
+                  validarSenha={setValidacaoSenha}
+                />
+              )}
+            </Caixa>
 
-          <BotaoForm
-            texto={pagina >= 3 ? "Finalizar" : "Próximo"}
-            mudarPagina={mudarPagina}
-            concluir={pagina >= 3}
-            criarJson={pagina >= 3 ? editar : () => {}}
-          />
-        </FormContainer>
-      </CorpoPagina>
+            <BotaoForm
+              texto={pagina >= 3 ? "Finalizar" : "Próximo"}
+              mudarPagina={mudarPagina}
+              concluir={pagina >= 3}
+              criarJson={pagina >= 3 ? editar : () => {}}
+            />
+          </FormContainer>
+        </CorpoPagina>
+      )}
     </Container>
   );
 }
