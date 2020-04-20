@@ -61,7 +61,7 @@ export default function ConsultaMotorista() {
         <Botao
           descricao="Novo Motorista"
           estiloEscuro={true}
-          url="/motorista/cadastro/1"
+          url="/motorista/cadastro"
         />
 
         <Botao descricao="relatório" url="/motorista" />

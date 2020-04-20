@@ -13,7 +13,7 @@ export const Input = styled.input`
   border-color: ${props => props.invalido ? "red" : "#C4C4C4"};
   border-radius: 10px;
   padding: 11px 15px 11px 15px;
-  margin-right: ${props => props.pequeno ? 20 : 0}px;
+  /* margin-right: ${props => props.pequeno ? 20 : 0}px; */
   color: #282828;
   font-size: 15px;
   letter-spacing: 0.05em;

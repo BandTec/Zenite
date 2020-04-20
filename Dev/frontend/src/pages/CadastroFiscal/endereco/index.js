@@ -69,7 +69,7 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados 
 
             <InputComRotulo
               texto="CEP"
-              maxLength="9"
+              maxLength="8"
               name="cep"
               value={valorCep}
               onChange={mascararCep}

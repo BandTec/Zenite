@@ -34,6 +34,7 @@ export default function ConsultaLinha() {
             item.numero,
             item.pontoIda.nome,
             item.pontoVolta.nome,
+            item.carrosId.length
           )
         );
       });
@@ -43,8 +44,8 @@ export default function ConsultaLinha() {
     dadosCorpos();
   }, []);
   
-  function criaDados(id,numero, pontoIda, pontoVolta){
-    return {id, numero, pontoIda, pontoVolta}
+  function criaDados(id,numero, pontoIda, pontoVolta, qtdonibus){
+    return {id, numero, pontoIda, pontoVolta, qtdonibus}
   }
 
   return (
@@ -57,7 +58,7 @@ export default function ConsultaLinha() {
           <Botao
               descricao="Nova Linha"
               estiloEscuro={true}
-              url="/linha/cadastro/1"
+              url="/linha/cadastro"
             />
         
           <Botao descricao="relatório" url="/linha" />

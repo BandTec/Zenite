@@ -9,12 +9,14 @@ import Linha from "./pages/VisualizaLinha";
 import Motorista from "./pages/VisualizaMotorista";
 import Dashboard from "./pages/Dashboard";
 import DetalhesFiscal from "./pages/DetalhesFiscal";
+import DetalhesLinha from "./pages/DetalhesLinhas";
 import CadastroFiscal from "./pages/CadastroFiscal";
 import CadastroMotorista from "./pages/CadastroMotorista";
 import CadastroGerente from "./pages/CadastroGerente";
 import CadastroAdmin from "./pages/CadastroAdmin";
 import CadastroParadaLinha from "./pages/CadastroParadaLinha";
 import CadastroOnibus from "./pages/CadastroOnibus";
+
 import MenuLateral from "./components/MenuLateral";
 
 const App = () => {
@@ -35,7 +37,7 @@ const App = () => {
 
         <Route path="/fiscal/editar/:id" component={CadastroFiscal} />
 
-        <Route path="/fiscal/cadastro/:id" component={CadastroFiscal} />
+        <Route path="/fiscal/cadastro" component={CadastroFiscal} />
 
         {/* MOTORISTA */}
 
@@ -43,10 +45,9 @@ const App = () => {
 
         {/* <Route path="/motorista/detalhes/:id" component={DetalhesMotorista} />  */}
 
-        <Route path="/motorista/editar/:id" component={CadastroMotorista}/>
+        <Route path="/motorista/editar/:id" component={CadastroMotorista} />
 
-        <Route path="/motorista/cadastro/:id" component={CadastroMotorista}/>
-
+        <Route path="/motorista/cadastro" component={CadastroMotorista} />
 
         {/* GERENTE */}
 
@@ -70,12 +71,12 @@ const App = () => {
 
         {/* LINHA */}
 
-        {/* <Route path="/linha/detalhes/:id" component={} /> */}
+        <Route path="/linha/detalhes/:id" component={DetalhesLinha} />
 
-        {/* <Route path="/linha/editar/:id" component={} /> */}
+        <Route path="/linha/editar/:id" component={CadastroParadaLinha} />
 
         <Route path="/linha/cadastro" component={CadastroParadaLinha} />
-       
+
         <Route exact path="/linha" component={Linha} />
 
         {/* ONIBUS */}
