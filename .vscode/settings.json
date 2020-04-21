@@ -3,6 +3,11 @@
         {
             "name": "feature/olhovivo",
             "base": "master"
+        },
+        {
+            "name": "feature/lista-estatica",
+            "base": "master"
         }
-    ]
+    ],
+    "gitflow4code.releases": []
 }
