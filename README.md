@@ -35,9 +35,11 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
 
 - [ ] Site Institucional
 - [ ] Aplicação
-  - [ ] Tela de Login
+  - [x] Tela de Login
   - [ ] Tela de Esqueci Minha Senha
-  - [ ] CRUD Linha
+  - [x] CRUD Linha
+  - [ ] CRUD Gerente
+  - [ ] CRUD Administrador
   - [ ] CRUD Ônibus
   - [ ] CRUD Fiscal
   - [ ] CRUD Motorista
@@ -56,7 +58,7 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
   - [ ] Ícone de HelDesk
   - [ ] Logoff
 - [ ] IOT
-  - [ ] Módulo RFID (RC522) para transportar dados das viagens.
+  - [x] Módulo RFID (RC522) para transportar dados das viagens.
   - [ ] Case para o equipamento do arduíno
 - [x] Banco de dados hospedados na nuvem AZURE
 
