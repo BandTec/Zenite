@@ -21,8 +21,8 @@ export default function Perfil(props) {
   const [dados, setDados] = useState({});
   const [pagina, setPagina] = useState(0);
   const [validacaoSenha, setValidacaoSenha] = useState(false);
-  // PRECISA PEGAR ID DO USUÁRIO LOGADO
-  const id = 3;
+  const [idUsuario, setIdUsuario] = useState(0);
+  const [rota, setRota] = useState("");
 
   const mudarPagina = (isProximo) => {
     isProximo ? setPagina(pagina + 1) : setPagina(pagina - 1);
@@ -32,19 +32,40 @@ export default function Perfil(props) {
     setDados({ ...dados, ...novoDado });
   };
 
+ function tipoUsuario(dados) {
+   setIdUsuario(dados.id);
+   const nivel = dados.conta.nivel.id;
+   switch (nivel) {
+     case 1:
+       setRota("administrador");
+       break;
+     case 2:
+       setRota("gerente");
+       break;
+     case 3:
+       setRota("fiscal");
+       break;
+     case 4:
+       setRota("motorista");
+       break;
+       default:
+         setRota("");
+         break;
+   }
+ }
 
   useEffect(() => {
     async function consultarEdicao() {
       const token = localStorage.getItem("token");
 
-      const response = await api.get(`/api/gerente/${id}`, {
+      const response = await api.get(`/logado`, {
         headers: { Authorization: token },
       });
       
       
       let dadosConsulta = response.data;
       setDados({...dadosConsulta});
-      console.log(dados);
+      tipoUsuario(dadosConsulta);
       setPagina(1);
     }
 
@@ -55,7 +76,7 @@ export default function Perfil(props) {
     const token = await localStorage.getItem("token");
     try {
       if (validacaoSenha){
-          const response = await api.put(`/api/gerente/`, dados, {
+          const response = await api.put(`/api/${rota}/${idUsuario}`, dados, {
             headers: { Authorization: token },
           });
       

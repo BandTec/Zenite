@@ -9,6 +9,8 @@ export default function DadosPessoais({ adicionarDados, dados }) {
   const [valorCpf, setValorCpf] = useState("");
   const [valorData, setValorData] = useState("");
   const [valorTelefone, setValorTelefone] = useState("");
+  const [cnh, setCnh] = useState("");
+ const [registro, setRegistro] = useState("");
 
   const mascararCpf = e => {
     setValorCpf(cpfMask(e.target.value));
@@ -29,6 +31,8 @@ export default function DadosPessoais({ adicionarDados, dados }) {
         setNome(dados.nome);
         setValorData(dados.dataNascimento);
         setValorTelefone(dados.numeroTelefone);
+        dados.registroFiscal && setRegistro(dados.registroFiscal);
+        dados.cnh && setCnh(dados.cnh);
       }
     }, []);
 
@@ -60,7 +64,27 @@ export default function DadosPessoais({ adicionarDados, dados }) {
         onChange={mascararCpf}
         required
       />
-  
+
+      {dados.registroFiscal && (
+        <InputComRotulo
+          value={registro}
+          onChange={(e) => setRegistro(e.target.value)}
+          texto="Registro Fiscal"
+          maxLength="20"
+          required
+        />
+      )}
+
+      {dados.cnh && (
+        <InputComRotulo
+          texto="CNH"
+          maxLength="11"
+          required
+          value={cnh}
+          onChange={(e) => setCnh(e.target.value)}
+        />
+      )}
+
       <CaixaHorizontal>
         <InputComRotulo
           pequeno={true}
