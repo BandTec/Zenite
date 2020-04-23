@@ -7,14 +7,14 @@ import ProximidadeIcon from '../../assets/img/clientes.svg';
 export default function Sobre() {
   return (
     <Container id="sobrenos">
-      <h4>Sobre</h4>
+      <h4>Sobre Nós</h4>
 
       <section>
         <div>
           <img src={RobustezIcon} alt="Ícone de um notebook com redes" />
           <h3>Robustez</h3>
           <p>
-            Sistemas robustos e escalaveis para melhor atenter os nossos
+            Sistemas robustos e escaláveis para melhor atender os nossos
             clientes.
           </p>
         </div>
