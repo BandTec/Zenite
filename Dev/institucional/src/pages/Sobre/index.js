@@ -24,7 +24,7 @@ export default function Sobre() {
           <h3>Tecnologias Atuais</h3>
           <p>
             Utilizamos tecnologias e metodologias atuais visando oferecer o que
-            á de melhor para o seu projeto.
+            há de melhor para o seu projeto.
           </p>
         </div>
 
