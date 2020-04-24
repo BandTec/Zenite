@@ -5,7 +5,7 @@ export const Container = styled.div`
 `;
 
 export const ComboBox = styled.select`
-  width: ${props => props.pequeno ? 230 : 500}px;
+  width: ${props => props.pequeno ? 240 : 500}px;
   width: ${props => props.tamanho}px;
   height: 40px;
   border-width: 1.5px;
@@ -13,7 +13,7 @@ export const ComboBox = styled.select`
   border-color: ${props => props.invalido ? "red" : "#C4C4C4"};
   border-radius: 10px;
   padding: 0px 15px;
-  margin-right: ${props => props.pequeno ? 20 : 0}px;
+  /* margin-right: ${props => props.pequeno ? 20 : 0}px; */
   color: #282828;
   font-size: 15px;
   letter-spacing: 0.05em;

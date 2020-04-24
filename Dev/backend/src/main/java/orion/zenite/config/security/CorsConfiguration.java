@@ -1,3 +1,4 @@
+/*
 package orion.zenite.config.security;
 
 import org.springframework.context.annotation.Configuration;
@@ -13,4 +14,4 @@ class CorsConfiguration implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**");
     }
-}
+}*/

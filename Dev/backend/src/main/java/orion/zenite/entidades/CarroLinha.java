@@ -18,13 +18,13 @@ public class CarroLinha {
     // MotoristaCarroId id;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @MapsId("idLinha")
     @JoinColumn(name = "idLinha")
     private Linha linha;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @MapsId("idCarro")
     @JoinColumn(name = "idCarro")
     private Carro carro;

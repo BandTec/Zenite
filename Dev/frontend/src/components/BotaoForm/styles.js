@@ -2,12 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  visibility: ${(props) => props.invisivel ? 'hidden' : 'visible' };
   flex-direction: ${(props) =>
     props.ladoDireito ? "row" : "row-reverse"};
   justify-content: space-around;
   align-items: center;
-  cursor: ${(props) => props.invisivel ? 'default' : 'pointer' };
+  cursor: pointer;
 
   :hover {
     opacity: 0.7;

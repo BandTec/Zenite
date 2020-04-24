@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
-//Então, é que agora tá basicamente "pronta"
 
 import { Container, Row, Acoes } from './styles';
 import Botao from '../../components/Botao';
-import Tabela from "./../../components/Tabela2";
+import Tabela from "../../components/Tabela2";
 import Titulo from '../../components/Titulo';
 import Paginacao from '../../components/Paginacao';
 
-export default function ConsultaLinha() {
+export default function ConsultaAdmin() {
   const [corpo, setCorpo] = useState([]);
   
   useEffect(()=> {
@@ -18,9 +17,9 @@ export default function ConsultaLinha() {
       
       //Essa de baixo, faz a chamada GET pra rota /api/linha, passando o token como cabeçalho e passa pra 
       //uma variavel response
-      const response = await api.get('/api/linha',{
-        headers: {'Authorization': token}
-      })
+      const response = await api.get("/api/administrador", {
+        headers: { Authorization: token },
+      });
       
       //aqui pego do response.data que é onde tá os dados da linha e passo pra uma variavel tbm
       let dados = response.data;
@@ -31,10 +30,8 @@ export default function ConsultaLinha() {
         temp.push(
           criaDados(
             item.id,
-            item.numero,
-            item.pontoIda.nome,
-            item.pontoVolta.nome,
-            item.carrosId.length
+            item.nome,
+            item.conta.email
           )
         );
       });
@@ -44,37 +41,33 @@ export default function ConsultaLinha() {
     dadosCorpos();
   }, []);
   
-  function criaDados(id,numero, pontoIda, pontoVolta, qtdonibus){
-    return {id, numero, pontoIda, pontoVolta, qtdonibus}
+  function criaDados(id, nome, email){
+    return {id, nome, email}
   }
 
   return (
     <Container>
-        <Row>
-            <Titulo textoMenor="consulta de linha" textoMaior="" />
-        </Row>
+      <Row>
+        <Titulo textoMenor="consulta de administradores" textoMaior="" />
+      </Row>
 
-        <Acoes>
-          <Botao
-              descricao="Nova Linha"
-              estiloEscuro={true}
-              url="/linha/cadastro"
-            />
-        
-          <Botao descricao="relatório" url="/linha" />
-        </Acoes>
-    
+      <Acoes>
+        <Botao
+          descricao="Novo Administrador"
+          estiloEscuro={true}
+          url="/administrador/cadastro"
+        />
 
-        <Row>
-          <Tabela
-            tipo="linha"
-            dados={corpo}
-          />
-        </Row>
+        <Botao descricao="relatório" url="/administrador" />
+      </Acoes>
 
-        <Row>
-          <Paginacao />
-        </Row>
+      <Row>
+        <Tabela tipo="administrador" dados={corpo} detalhes={false} />
+      </Row>
+
+      <Row>
+        <Paginacao />
+      </Row>
     </Container>
   );
 }

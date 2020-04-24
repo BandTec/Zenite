@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import orion.zenite.repositorios.DispositivoRepository;
 import orion.zenite.repositorios.FiscalRepository;
 import orion.zenite.entidades.*;
+import orion.zenite.repositorios.ViagemRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -22,6 +25,9 @@ public class FiscalController {
     // Classes que realiza consulta no banco de dados
     @Autowired
     private FiscalRepository repository;
+
+    @Autowired
+    private ViagemRepository viagemRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -37,6 +43,23 @@ public class FiscalController {
             return ResponseEntity.ok(this.repository.findAll());
         } else {
             return ResponseEntity.noContent().build();
+        }
+
+    }
+
+    @ApiOperation("Lista as linhas de um fiscal")
+    @GetMapping("{id}/linhas")
+    public ResponseEntity consultaLinha(@PathVariable("id") int id) {
+        Optional<Fiscal> fiscal = this.repository.findById(id);
+        if (fiscal.isPresent()) {
+            List<Viagem> viagem = viagemRepository.findByFiscal(fiscal.get());
+            List<Linha> linha = new ArrayList<>();
+            for(Viagem v : viagem){
+                linha.add(v.getLinha());
+            }
+            return ResponseEntity.ok(linha);
+        } else {
+            return ResponseEntity.notFound().build();
         }
 
     }
