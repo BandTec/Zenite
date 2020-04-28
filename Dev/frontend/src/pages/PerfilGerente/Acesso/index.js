@@ -26,6 +26,7 @@ export default function Acesso({adicionarDados, dados, validarSenha}) {
           idConta: dados.conta.idConta,
           senha: valorSenha,
           email,
+          nivel: dados.conta.nivel
         }
       });
      verificarSenha();
