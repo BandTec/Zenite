@@ -9,6 +9,7 @@ import Linha from "./pages/VisualizaLinha";
 import Motorista from "./pages/VisualizaMotorista";
 import Dashboard from "./pages/Dashboard";
 import DetalhesFiscal from "./pages/DetalhesFiscal";
+import DetalhesMotorista from "./pages/DetalhesMotorista"
 import DetalhesLinha from "./pages/DetalhesLinhas";
 import CadastroFiscal from "./pages/CadastroFiscal";
 import CadastroMotorista from "./pages/CadastroMotorista";
@@ -44,7 +45,7 @@ const App = () => {
 
         <Route exact path="/motorista" component={Motorista} />
 
-        {/* <Route path="/motorista/detalhes/:id" component={DetalhesMotorista} />  */}
+        <Route path="/motorista/detalhes/:id" component={DetalhesMotorista} /> 
 
         <Route path="/motorista/editar/:id" component={CadastroMotorista} />
 

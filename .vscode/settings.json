@@ -3,6 +3,10 @@
         {
             "name": "feature/olhovivo",
             "base": "master"
+        },
+        {
+            "name": "feature/detalhe-motorista",
+            "base": "master"
         }
     ]
 }
