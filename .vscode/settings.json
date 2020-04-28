@@ -5,7 +5,6 @@
             "base": "master"
         },
         {
-            "name": "feature/lista-estatica",
             "base": "master"
         }
     ],

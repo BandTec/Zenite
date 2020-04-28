@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
-import { cpfMask, telefoneMask, dataMask } from "./../../../functions/Mascaras/mask";
+import { cpfMask, telefoneMask, /* dataMask */ } from "./../../../functions/Mascaras/mask";
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 
 import BotaoForm from './../../../components/BotaoForm';

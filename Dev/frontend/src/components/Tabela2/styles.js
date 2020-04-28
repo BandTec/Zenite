@@ -3,10 +3,17 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
-export const EstiloTitulo = styled.div`
-    color: #000000;
-    font-weight: 800px;
+export const Titulo = styled.p`
+    color: #4F4F4F;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
 `;
+
+export const Texto = styled.p`
+    color: #333333;
+`;
+
 
 export const useStyles = makeStyles({
     table: {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { cepMask } from "./../../../functions/Mascaras/mask";
+// import { cepMask } from "./../../../functions/Mascaras/mask";
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 
 import BotaoForm from './../../../components/BotaoForm';
@@ -69,7 +69,7 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados 
 
             <InputComRotulo
               texto="CEP"
-              maxLength="9"
+              maxLength="8"
               name="cep"
               value={valorCep}
               onChange={mascararCep}

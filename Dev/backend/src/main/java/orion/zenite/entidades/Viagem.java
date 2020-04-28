@@ -2,6 +2,7 @@ package orion.zenite.entidades;
 
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -13,26 +14,26 @@ public class Viagem {
     @Column(name="idDadosViagem")
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name="idCarro")
     private Carro carro;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name="idLinha")
     private Linha linha;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name="idMotorista")
     private Motorista motorista;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name="idFiscal")
     private Fiscal fiscal;
 
     @Column(nullable = false)
-    private LocalTime horaSaida;
+    private LocalDateTime horaSaida;
 
-    private LocalTime horaChegada;
+    private LocalDateTime horaChegada;
 
     private int qtdPassageiros;
 
@@ -76,19 +77,19 @@ public class Viagem {
         this.fiscal = fiscal;
     }
 
-    public LocalTime getHoraSaida() {
+    public LocalDateTime getHoraSaida() {
         return horaSaida;
     }
 
-    public void setHoraSaida(LocalTime horaSaida) {
+    public void setHoraSaida(LocalDateTime horaSaida) {
         this.horaSaida = horaSaida;
     }
 
-    public LocalTime getHoraChegada() {
+    public LocalDateTime getHoraChegada() {
         return horaChegada;
     }
 
-    public void setHoraChegada(LocalTime horaChegada) {
+    public void setHoraChegada(LocalDateTime horaChegada) {
         this.horaChegada = horaChegada;
     }
 
@@ -100,3 +101,4 @@ public class Viagem {
         this.qtdPassageiros = qtdPassageiros;
     }
 }
+

@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import orion.zenite.entidades.*;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -20,9 +21,9 @@ public interface ViagemRepository extends JpaRepository<Viagem, Integer> {
 
     List<Viagem> findByFiscal(Fiscal fiscal);
 
-    List<Viagem> findByHoraSaidaBetween(LocalTime horaComeco, LocalTime horaFim);
+    List<Viagem> findByHoraSaidaBetween(LocalDateTime horaComeco, LocalDateTime horaFim);
 
-    List<Viagem> findByHoraChegadaBetween(LocalTime horaComeco, LocalTime horaFim);
+    List<Viagem> findByHoraChegadaBetween(LocalDateTime horaComeco, LocalDateTime horaFim);
 
     List<Viagem> findByQtdPassageirosLessThanEqual(int qtd);
 

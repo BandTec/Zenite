@@ -1,36 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 
-import { Container, Row, BotaoRelatorio ,BotaoNovoMotorista, Tela, Acoes, Cabecalho, CaixaTabela } from './styles';
+import { Container, Row, Acoes} from './styles';
 import Botao from '../../components/Botao';
-import Tabela from './Tabela';
+import Tabela from "./../../components/Tabela2";
 import Titulo from '../../components/Titulo';
 import Paginacao from '../../components/Paginacao';
 
-export default function CadasrtroMotorista() {
-    let dados = [];
+export default function ConsultaMotorista() {
+   
   const [corpo, setCorpo] = useState([]);
 
-  async function dadosCorpos() {
-    //Essa linha de baixo pega o token de autenticação do localStorage
-    const token = localStorage.getItem('token');
-    
-    //Essa de baixo, faz a chamada GET pra rota /api/linha, passando o token como cabeçalho e passa pra 
-    //uma variavel response
-    const response = await api.get('/api/motorista',{
-      headers: {'Authorization': token}
-    })
+  useEffect( ()=> {
+    async function dadosCorpos() {
+      //Essa linha de baixo pega o token de autenticação do localStorage
+      const token = localStorage.getItem('token');
 
-    console.log(response.data);
-    //aqui pego do response.data que é onde tá os dados da linha e passo pra uma variavel tbm
-    dados = response.data;
+      //Essa de baixo, faz a chamada GET pra rota /api/linha, passando o token como cabeçalho e passa pra 
+      //uma variavel response
+      const response = await api.get('/api/motorista',{
+        headers: {'Authorization': token}
+      })
 
-    let temp = [];
-
-    
-    dados.forEach( item => {
+      //aqui pego do response.data que é onde tá os dados da linha e passo pra uma variavel tbm
+      let dados = response.data;
+      let temp = [];
+      dados.forEach( item => {
         temp.push(
           criaDados(
+            item.id,
             item.nome,
             item.numeroTelefone,
             item.cpf,
@@ -38,58 +36,43 @@ export default function CadasrtroMotorista() {
           )
         );
       });
-      console.log(temp)
       setCorpo(temp);
-   }
+    }
  
-   useEffect(dadosCorpos, []);
+   dadosCorpos();
+  }, []);
 
-   function criaDados(nome,numeroTelefone, cpf, cnh, acoes){
-    return {nome,numeroTelefone, cpf, cnh, acoes}
+  function criaDados(id, nome,numeroTelefone, cpf, cnh){
+    return {id, nome,numeroTelefone, cpf, cnh}
   }
-
-  const dadosCabecalho = [
-    criaDados('Nome', 'Telefone','CPF', 'CNH','Ações')
-  ];
 
   return (
     <Container>
-    <Tela>
+
       <Row>
-        <Cabecalho>
           <Titulo textoMenor="consulta de motorista" textoMaior="" />
-        </Cabecalho>
-      </Row>
-      <Row>
-        <Acoes>
-          <BotaoNovoMotorista>
-            <Botao
-              descricao="Novo Motorista"
-              estiloEscuro={true}
-              url="/motorista/cadastro/1"
-            />
-          </BotaoNovoMotorista>
-
-          <BotaoRelatorio>
-            <Botao descricao="relatório" url="/motorista" />
-          </BotaoRelatorio>
-        </Acoes>
       </Row>
 
+      <Acoes>
+        <Botao
+          descricao="Novo Motorista"
+          estiloEscuro={true}
+          url="/motorista/cadastro"
+        />
+
+        <Botao descricao="relatório" url="/motorista" />
+      </Acoes>
+    
       <Row>
-        <CaixaTabela>
           <Tabela
-            tabela={2}
-            dadosCabecalho={dadosCabecalho}
-            dadosCorpo={corpo}
+            tipo="motorista"
+            dados={corpo}
           />
-        </CaixaTabela>
       </Row>
 
       <Row>
         <Paginacao />
       </Row>
-    </Tela>
-  </Container>
+    </Container>
   );
 }
