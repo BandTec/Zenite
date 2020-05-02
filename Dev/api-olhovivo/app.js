@@ -52,7 +52,7 @@ async function autenticar() {
 function verificarDuplicatasLinhas(value, index, array){
     let NaoExiste = true;
     for (let i = index ;i > 0 ; i--) {
-        if(value.NumeroLinha==array[i-1].NumeroLinha){
+        if(value.numero == array[i-1].numero){
             NaoExiste=false;
         }
     }
@@ -85,9 +85,10 @@ async function insertPontos(array){
 
         for (let index = 0; index < array.length; index++) {
             try {
-                await banco.sql.query(`insert into tblPontoFinal (nomeTerminal)
+                array[index] = array[index].replace("'", "''");
+                await banco.sql.query(`insert into tbl_ponto_final (nome_terminal)
                 values ('${array[index]}')`)
-                console.log(`Ponto ${array[index]} inserido com sucesso!`);
+                // console.log(`Ponto ${array[index]} inserido com sucesso!`);
             } catch (err) {
                 console.log(`Erro ao inserir ${array[index]}`)
             }    
@@ -95,7 +96,7 @@ async function insertPontos(array){
         }
 
         await banco.desconectar();
-        console.log("************************TUDO INSERIDO***************************")
+        console.log("************************PONTOS INSERIDO***************************")
     }catch(err){
         console.log(`Erro na função: ${err.message}`)
     }
@@ -110,10 +111,10 @@ async function procurarForeignKeys(array){
 
         for (let index = 0; index < array.length; index++) {
             try {
-                let respostaQuery = await banco.sql.query(`select * from tblPontoFinal 
-                where nomeTerminal like '${array[index]}'`)
+                let respostaQuery = await banco.sql.query(`select * from tbl_ponto_final 
+                where nome_terminal like '${array[index]}'`)
                 retorno.push(respostaQuery.recordset[0]);
-                console.log(`Achei o ponto ${respostaQuery.recordset[0].nomeTerminal} !`);
+                // console.log(`Achei o ponto ${respostaQuery.recordset[0].nome_terminal} !`);
             } catch (err) {
                 console.log(`Erro ao achar ${array[index]}`)
                 console.log(err.message)
@@ -133,20 +134,20 @@ function acharFK(array, arrayFKs){
 
         for (let i = 0; i < arrayFKs.length; i++) {
             if(array[index].terminalPrincipal==null){
-                if(array[index].terminalSecundario == arrayFKs[i].nomeTerminal){
-                    array[index].terminalPFK = arrayFKs[i].idPontoFinal;
-                    array[index].terminalSFK = arrayFKs[i].idPontoFinal;
+                if(array[index].terminalSecundario == arrayFKs[i].nome_terminal){
+                    array[index].terminalPFK = arrayFKs[i].id_ponto_final;
+                    array[index].terminalSFK = arrayFKs[i].id_ponto_final;
                 }
             }else{
-                if(array[index].terminalPrincipal == arrayFKs[i].nomeTerminal){
-                    array[index].terminalPFK = arrayFKs[i].idPontoFinal;
+                if(array[index].terminalPrincipal == arrayFKs[i].nome_terminal){
+                    array[index].terminalPFK = arrayFKs[i].id_ponto_final;
                 }
-                if(array[index].terminalSecundario == arrayFKs[i].nomeTerminal){
-                    array[index].terminalSFK = arrayFKs[i].idPontoFinal;
+                if(array[index].terminalSecundario == arrayFKs[i].nome_terminal){
+                    array[index].terminalSFK = arrayFKs[i].id_ponto_final;
                 }
             }
         }
-        console.log(`Linha ${JSON.stringify(array[index])} resolvido`)
+        // console.log(`Linha ${JSON.stringify(array[index])} resolvido`)
     }
     }catch(err){
         console.log(`Erro: ${err.message}`)
@@ -160,17 +161,17 @@ async function insertLinhas(array){
 
         for (let index = 0; index < array.length; index++) {
             try {
-                await banco.sql.query(`insert into tblLinha (numeroLinha, fkPontoIda, fkPontoVolta)
-                values ('${array[index].NumeroLinha}', ${array[index].terminalPFK}, ${array[index].terminalSFK})`)
-                console.log(`Linha ${array[index].NumeroLinha} inserido com sucesso!`);
+                await banco.sql.query(`insert into tbl_linha (numero, fk_ponto_ida, fk_ponto_volta)
+                values ('${array[index].numero}', ${array[index].terminalPFK}, ${array[index].terminalSFK})`)
+                // console.log(`Linha ${array[index].numero} inserido com sucesso!`);
             } catch (err) {
-                console.log(`Erro ao inserir: ${array[index].NumeroLinha}\nErro: ${err.message}`)
+                console.log(`Erro ao inserir: ${array[index].numero}\nErro: ${err.message}`)
             }    
             
         }
 
         await banco.desconectar();
-        console.log("************************TUDO INSERIDO***************************")
+        console.log("************************LINHAS INSERIDO***************************")
     }catch(err){
         console.log(`Erro na função: ${err.message}`)
     }
@@ -210,7 +211,7 @@ app.get("/cadastrarlinhas", async (req, res) => {
 
                 terminal2 = element.ts;
                 linhasPorTerminal.push({
-                    NumeroLinha: nroLinha,
+                    numero: nroLinha,
                     Circular: element.lc,
                     terminalPrincipal: terminal1,
                     terminalPFK: -1,
@@ -223,7 +224,7 @@ app.get("/cadastrarlinhas", async (req, res) => {
         //Filtra as linhas para que não tenha duplicatas no array
         filtroLinha = linhasPorTerminal.filter(verificarDuplicatasLinhas);
         //Cria um novo array apenas com as linhas
-        let linhas = filtroLinha.map(item =>(item.NumeroLinha));
+        let linhas = filtroLinha.map(item =>(item.numero));
 
         //Popula o array "filtroTerminal" com os terminais e pontos
         filtroLinha.forEach(item => {
@@ -237,12 +238,15 @@ app.get("/cadastrarlinhas", async (req, res) => {
         let auxiliar = filtroTerminal.map(item => (item))
         //Filtra os terminais para que não tenha duplicatas
         let pontos = auxiliar.filter(verificarDuplicatasPontos)
+        
+        // await insertPontos(pontos);
+
         //Procura as FKs dos pontos no Banco de dados
-        //let pontosComFKBanco = await procurarForeignKeys(pontos)
+        let pontosComFKBanco = await procurarForeignKeys(pontos)
         //Verifica qual FK condiz com os pontos que a linha tem
-        //await acharFK(filtroLinha, pontosComFKBanco);
+        await acharFK(filtroLinha, pontosComFKBanco);
         //Insere a linha com as FK de seus pontos
-        //await insertLinhas(filtroLinha);
+        await insertLinhas(filtroLinha);
 
         res.status(200).json({filtroLinha,linhas,pontos});
     }catch(err){
