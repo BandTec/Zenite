@@ -5,12 +5,13 @@ import TextoPaginacao from './TextoPaginacao';
 import Botao from '../Botao';
 
 
-export default function Paginacao() {
+export default function Paginacao({pgAtual, totalPg, voltar, proximo}) {
+  const fim = totalPg - 1;
   return (
     <Container>
-      <Botao descricao="Voltar" estiloEscuro={false} url="" />
-        <TextoPaginacao paginaAtual="1" totalPaginas="10" />
-      <Botao descricao="Próximo" estiloEscuro={false} url="" /> 
+      <Botao descricao="Voltar" estiloEscuro={false} onClick={voltar} disabled={pgAtual === 0} />
+      <TextoPaginacao paginaAtual={pgAtual} totalPaginas={totalPg} />
+      <Botao descricao="Próximo" estiloEscuro={false} onClick={proximo} disabled={pgAtual === fim} />
     </Container>
   );
 }
