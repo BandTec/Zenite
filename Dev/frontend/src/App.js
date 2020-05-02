@@ -11,11 +11,13 @@ import Dashboard from "./pages/Dashboard";
 import DetalhesFiscal from "./pages/DetalhesFiscal";
 import DetalhesMotorista from "./pages/DetalhesMotorista"
 import DetalhesLinha from "./pages/DetalhesLinhas";
+import DetalhesGerente from "./pages/DetalhesGerente";
 import CadastroFiscal from "./pages/CadastroFiscal";
 import CadastroMotorista from "./pages/CadastroMotorista";
 import CadastroGerente from "./pages/CadastroGerente";
 import CadastroAdmin from "./pages/CadastroAdmin";
 import ConsultaAdmin from "./pages/VisualizaAdmin";
+import ConsultaGerente from "./pages/VisualizaGerente";
 import CadastroParadaLinha from "./pages/CadastroParadaLinha";
 import CadastroOnibus from "./pages/CadastroOnibus";
 
@@ -53,9 +55,9 @@ const App = () => {
 
         {/* GERENTE */}
 
-        {/* <Route exact path="/gerente" component={} /> */}
+        <Route exact path="/gerente" component={ConsultaGerente} />
 
-        {/* <Route path="/gerente/detalhes/:id" component={} /> */}
+        <Route path="/gerente/detalhes/:id" component={DetalhesGerente} />
 
         <Route path="/gerente/editar/:id" component={CadastroGerente} />
 

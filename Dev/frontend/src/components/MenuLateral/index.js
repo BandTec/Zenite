@@ -38,7 +38,17 @@ const mostrar = pathname === "/login" ? false : true;
 
             <BotaoMenu descricao="Perfil" url={"/perfil"} iconeNome="perfil" />
 
-            <BotaoMenu descricao="Admin" url={"/administrador"} iconeNome="admin" />
+            <BotaoMenu
+              descricao="Admin"
+              url={"/administrador"}
+              iconeNome="admin"
+            />
+
+            <BotaoMenu
+              descricao="Gerente"
+              url={"/gerente"}
+              iconeNome="admin"
+            />
           </MainMenu>
 
           <BotaoMenu descricao="Sair" url={"/login"} iconeNome="logout" />
