@@ -1,0 +1,18 @@
+{
+  "name": "arduino-local",
+  "version": "1.0.0",
+  "description": "Projeto node para salvar dados recuperados do arduino",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "João Pedro Soares (Zenite)",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mssql": "^6.2.0",
+    "serialport": "^8.0.7"
+  }
+}
