@@ -23,7 +23,7 @@ export default function DetalhesMotorista(props) {
       }
 
       consultar();
-    }, []);
+    }, [id]);
 
   return (
     <Container>

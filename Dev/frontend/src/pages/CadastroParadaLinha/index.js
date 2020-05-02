@@ -74,7 +74,7 @@ export default function CadastroLinha(props) {
       }
     }
 
-      consultarEdicao();
+      id && consultarEdicao();
   }, [id])
 
   const cadastrar = async () => {

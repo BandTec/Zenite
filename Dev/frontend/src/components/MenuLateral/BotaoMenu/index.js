@@ -8,7 +8,6 @@ import Motorista from '../../../assets/icons/motorista.svg';
 import Perfil from '../../../assets/icons/config.svg';
 import Logout from '../../../assets/icons/logout.svg';
 import LogoIcone from '../../../assets/logos/favicon4.png';
-import Admin from "../../../assets/icons/adm2.svg";
 import Adm from "../../../assets/icons/adm1.svg";
 
 import { Botao, Icone, Texto } from './styles';

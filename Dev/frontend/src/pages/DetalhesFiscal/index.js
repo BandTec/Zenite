@@ -41,7 +41,7 @@ export default function DetalhesFiscal(props) {
 
     consultar();
     consultarOnibus();
-  }, []);
+  }, [id]);
 
   function criaDados(id, numero, pontoIda, pontoVolta) {
     return { id, numero, pontoIda, pontoVolta };
