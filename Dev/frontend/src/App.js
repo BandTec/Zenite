@@ -85,7 +85,7 @@ const App = () => {
 
         {/* <Route path="/onibus/detalhes/:id" component={} /> */}
 
-        {/* <Route path="/onibus/editar/:id" component={} /> */}
+        <Route path="/onibus/editar/:id" component={CadastroOnibus} />
 
         <Route path="/onibus/cadastro" component={CadastroOnibus} />
       </div>
