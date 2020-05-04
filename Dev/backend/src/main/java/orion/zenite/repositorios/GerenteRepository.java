@@ -5,11 +5,13 @@ import org.springframework.data.jpa.repository.Query;
 import orion.zenite.entidades.Conta;
 import orion.zenite.entidades.Gerente;
 
+import java.util.Optional;
+
 public interface GerenteRepository extends JpaRepository<Gerente, Integer> {
     @Query(value = "select max(g.id) from Gerente g")
     int lastId();
 
-    Gerente findByConta(Conta conta);
+    Optional<Gerente> findByConta(Conta conta);
 
     Gerente findByConta(String cpf);
 }
