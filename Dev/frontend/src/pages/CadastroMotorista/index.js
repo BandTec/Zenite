@@ -22,16 +22,20 @@ export default function CadastroMotorista(props) {
     }
 
     const cadastrar = async () => {
+        try {
         const token = await localStorage.getItem('token');
 
         const response = await api.post('/api/motorista', dados, {
-            headers: {'Authorization': token}
+            headers: { Authorization: token}
           });
 
-        if(response.status){
+          if (response.status === 201) {
             props.history.push("/motorista");
+          } 
+        } catch (e) {
+          alert("Ocorreu um erro. Tente de novo.");
         }
-
+  
     }
 
     const chamada = () => {cadastrar()}

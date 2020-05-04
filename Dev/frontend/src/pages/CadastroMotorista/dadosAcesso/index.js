@@ -17,6 +17,7 @@ export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados })
 
   const verificarSenha = () => {
     // verificao
+    
     setValidacaoSenha(valorSenha === valorConfirmarSenha ? true : false);
     console.log(validacaoSenha);
     console.log(valorSenha);

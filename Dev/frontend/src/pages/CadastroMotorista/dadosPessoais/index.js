@@ -35,7 +35,7 @@ import InputComRotulo from './../../../components/InputComRotulo';
       "cpf": valorCpf,
       "dataNascimento": valorData,
       "numeroTelefone": valorTelefone,
-      "cnhMotorista": cnh,
+      "cnh": cnh,
       
     })
   }
