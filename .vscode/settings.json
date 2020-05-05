@@ -3,6 +3,10 @@
         {
             "name": "feature/olhovivo",
             "base": "master"
+        },
+        {
+            "base": "master"
         }
-    ]
+    ],
+    "gitflow4code.releases": []
 }

@@ -5,6 +5,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.parameters.P;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import orion.zenite.dto.ConsultaPaginada;
 import orion.zenite.entidades.Carro;
 import orion.zenite.entidades.CarroLinha;
 import orion.zenite.entidades.Linha;
@@ -22,8 +26,7 @@ import orion.zenite.entidades.PontoFinal;
 import orion.zenite.repositorios.CarroLinhaRepository;
 import orion.zenite.repositorios.CarroRepository;
 import orion.zenite.repositorios.LinhaRepository;
-
-import javax.xml.ws.Response;
+import orion.zenite.repositorios.PontoFinalRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +46,9 @@ public class LinhaController {
     @Autowired
     private CarroRepository carroRepository;
 
+    @Autowired
+    private PontoFinalRepository pontoFinalRepository;
+
     @ApiResponses({
             @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
             @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
@@ -50,9 +56,15 @@ public class LinhaController {
     })
     @ApiOperation("Lista todas as linhas de ônibus")
     @GetMapping
-    public ResponseEntity consulta() {
+    public ResponseEntity consulta(
+            @RequestParam(required = false) Integer pagina
+    ) {
         if (this.linhaBD.count() > 0) {
-            return ResponseEntity.ok(this.linhaBD.findAll());
+            pagina = pagina == null ? 0 : pagina;
+            Pageable pageable = PageRequest.of(pagina, 10);
+            Page<Linha> page= linhaBD.findAll(pageable);
+            ConsultaPaginada consulta = new ConsultaPaginada(page);
+            return ResponseEntity.ok(consulta);
         } else {
             return ResponseEntity.noContent().build();
         }
@@ -119,9 +131,24 @@ public class LinhaController {
             @ApiResponse(code = 404, message = "Linha não encontrada.")
     })
     @PutMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void alterar(@RequestBody Linha novaLinha){
+    @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
+    public ResponseEntity alterar(@RequestBody Linha novaLinha){
+        PontoFinal ida = novaLinha.getPontoIda();
+        PontoFinal volta = novaLinha.getPontoVolta();
+        if (ida.getId() == 0){
+            pontoFinalRepository.save(ida);
+            ida.setId(pontoFinalRepository.lastId());
+            novaLinha.setPontoIda(ida);
+        }
+        if(volta.getId() == 0){
+            pontoFinalRepository.save(volta);
+            volta.setId(pontoFinalRepository.lastId());
+            novaLinha.setPontoVolta(volta);
+        }
+
         linhaBD.save(novaLinha);
+
+        return ResponseEntity.ok().build();
     }
 
     @ApiOperation("Deleta uma linha por seu ID")
@@ -131,7 +158,6 @@ public class LinhaController {
             @ApiResponse(code = 404, message = "Linha não encontrado.")
     })
     @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable("id") int id){
         linhaBD.findById(id)
                 .map( carro -> {
@@ -151,8 +177,20 @@ public class LinhaController {
     @PostMapping()
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
     public ResponseEntity cadastro(@RequestBody Linha novaLinha){
+        PontoFinal ida = novaLinha.getPontoIda();
+        PontoFinal volta = novaLinha.getPontoVolta();
+        if (ida.getId() == 0){
+            pontoFinalRepository.save(ida);
+            ida.setId(pontoFinalRepository.lastId());
+            novaLinha.setPontoIda(ida);
+        }
+        if(volta.getId() == 0){
+            pontoFinalRepository.save(volta);
+            volta.setId(pontoFinalRepository.lastId());
+            novaLinha.setPontoVolta(volta);
+        }
+
         linhaBD.save(novaLinha);
-        novaLinha.setId(linhaBD.lastId());
 
         return ResponseEntity.created(null).build();
     }
@@ -160,7 +198,7 @@ public class LinhaController {
     @ApiOperation("Consultar todos os ônibus que atendem linha")
     @GetMapping("/{id}/onibus")
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public ResponseEntity cadastro(@PathVariable("id") int id){
+    public ResponseEntity consultaCarros(@PathVariable("id") int id){
         List<CarroLinha> onibusLinhas = this.repository.findByIdLinha(id);
         List<Carro> onibus = new ArrayList<>();
 

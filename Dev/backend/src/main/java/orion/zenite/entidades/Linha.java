@@ -28,8 +28,12 @@ public class Linha {
     private PontoFinal pontoVolta;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "linha", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "linha", cascade = CascadeType.REMOVE)
     private List<CarroLinha> carroLinhas;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "linha", cascade = CascadeType.REMOVE)
+    private List<Viagem> viagem;
 
     public String getNumero() {
         return numero;

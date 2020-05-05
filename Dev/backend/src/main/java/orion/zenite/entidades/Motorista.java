@@ -43,8 +43,12 @@ public class Motorista {
     private String cnh;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "motorista", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "motorista", cascade = CascadeType.REMOVE)
     List<MotoristaCarro> motoristaCarroList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "motorista", cascade = CascadeType.REMOVE)
+    private List<Viagem> viagem;
 
     public int getId() {
         return id;

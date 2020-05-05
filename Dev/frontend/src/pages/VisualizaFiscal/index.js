@@ -50,7 +50,7 @@ export default function VisualizaFiscal() {
           <Botao
             descricao="Novo Fiscal"
             estiloEscuro={true}
-            url="/fiscal/cadastro/0"
+            url="/fiscal/cadastro"
           />
 
           <Botao descricao="relatório" url="/fiscal" />

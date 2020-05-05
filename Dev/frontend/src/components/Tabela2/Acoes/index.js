@@ -7,7 +7,7 @@ import DetalhesIcon from "./../../../assets/icons/detalhes.svg";
 import ExcluirIcon from "./../../../assets/icons/excluir.svg";
 import api from "./../../../services/api";
 
-export default function Acoes({ id, tipo }) {
+export default function Acoes({ id, tipo, detalhes = true }) {
 
   const excluir = async () => {
      const continuar = window.confirm("Deseja realmente excluir dado? ");  
@@ -28,9 +28,11 @@ export default function Acoes({ id, tipo }) {
   return (
     <StyledTableCell align="left">
       <Alinhar>
-        <Link to={`/${tipo}/detalhes/${id}`}>
+     {detalhes && 
+      <Link to={`/${tipo}/detalhes/${id}`}>
           <Img src={DetalhesIcon} title="Ver detalhes" />
         </Link>
+    }
 
         <Link to={`/${tipo}/editar/${id}`}>
           <Img src={EditarIcon} title="Editar" />
