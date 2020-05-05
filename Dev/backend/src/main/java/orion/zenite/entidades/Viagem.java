@@ -35,7 +35,8 @@ public class Viagem {
 
     private LocalDateTime horaChegada;
 
-    private int qtdPassageiros;
+    @Column(nullable = true)
+    private Integer qtdPassageiros;
 
     public int getId() {
         return id;
