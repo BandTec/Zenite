@@ -10,6 +10,9 @@ import Paginacao from '../../components/Paginacao';
 
 export default function ConsultaLinha() {
   const [corpo, setCorpo] = useState([]);
+  const [pagina, setPagina] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [atual, setAtual] = useState(0);
   
   useEffect(()=> {
     async function dadosCorpos() {
@@ -18,16 +21,18 @@ export default function ConsultaLinha() {
       
       //Essa de baixo, faz a chamada GET pra rota /api/linha, passando o token como cabeçalho e passa pra 
       //uma variavel response
-      const response = await api.get('/api/linha',{
+      const response = await api.get(`/api/linha?pagina=${pagina}`,{
         headers: {'Authorization': token}
       })
       
       //aqui pego do response.data que é onde tá os dados da linha e passo pra uma variavel tbm
       let dados = response.data;
+      setAtual(dados.paginaAtual);
+      setTotal(dados.totalPaginas);
 
       let temp = [];
 
-      dados.forEach( item => {
+      dados.lista.forEach( item => {
         temp.push(
           criaDados(
             item.id,
@@ -42,7 +47,7 @@ export default function ConsultaLinha() {
     }
 
     dadosCorpos();
-  }, []);
+  }, [pagina]);
   
   function criaDados(id,numero, pontoIda, pontoVolta, qtdonibus){
     return {id, numero, pontoIda, pontoVolta, qtdonibus}
@@ -50,31 +55,32 @@ export default function ConsultaLinha() {
 
   return (
     <Container>
-        <Row>
-            <Titulo textoMenor="consulta de linha" textoMaior="" />
-        </Row>
+      <Row>
+        <Titulo textoMenor="consulta de linha" textoMaior="" />
+      </Row>
 
-        <Acoes>
-          <Botao
-              descricao="Nova Linha"
-              estiloEscuro={true}
-              url="/linha/cadastro"
-            />
-        
-          <Botao descricao="relatório" url="/linha" />
-        </Acoes>
-    
+      <Acoes>
+        <Botao
+          descricao="Nova Linha"
+          estiloEscuro={true}
+          url="/linha/cadastro"
+        />
 
-        <Row>
-          <Tabela
-            tipo="linha"
-            dados={corpo}
-          />
-        </Row>
+        <Botao descricao="relatório" url="/linha" />
+      </Acoes>
 
-        <Row>
-          <Paginacao />
-        </Row>
+      <Row>
+        <Tabela tipo="linha" dados={corpo} />
+      </Row>
+
+      <Row>
+        <Paginacao 
+          pgAtual={atual}
+          totalPg={total}
+          voltar={() => setPagina(pagina-1)}
+          proximo={() => setPagina(pagina+1)}
+        />
+      </Row>
     </Container>
   );
 }
