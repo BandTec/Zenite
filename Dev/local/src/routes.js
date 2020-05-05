@@ -4,10 +4,10 @@ const express = require('express')
 
 const routes = express.Router()
 
-const ArduinoController = require('./controllers/arduinoController')
+const DispositivoController = require('./controllers/dispositivoController')
 
 routes.get('/status', async (req, res) => {
-    const respose = await ArduinoController.verificaStatus(req, res)
+    const respose = await DispositivoController.verificaStatus(req, res)
     return respose
 })
 

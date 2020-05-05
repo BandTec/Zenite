@@ -1,5 +1,5 @@
 const DispositivoModel = require('../models/dispositivoModel')
-const { ativarLeitorArduino, numeroSerialArduino } = require('../configs/arduino')
+const { ativarLeitorArduino, getDadosArduino } = require('../configs/arduino')
 
 ativarLeitorArduino().then( leitor => {
 
@@ -13,13 +13,12 @@ ativarLeitorArduino().then( leitor => {
 const registrarViagem = async codigoDispositivo => {
 
     model = new DispositivoModel()
+
+    const { serialNumber: numeroSerialArduino } = await getDadosArduino()
+    const { Resposta: resposta } = await model.registrarViagem(codigoDispositivo, numeroSerialArduino)
     
-    const resposta = await model.registrarViagem(codigoDispositivo, numeroSerialArduino)
-    if(resposta.length){
-        console.log("Dispositivo registrado")
-    }else{
-        console.log("Dispositivo não registrado")
-    }
+    console.log(resposta)
+    
     return resposta
 
 }
