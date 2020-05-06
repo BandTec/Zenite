@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/Zenite/Dev/Institucional/static/css/main.8e739cba.chunk.css",
+    "main.js": "/Zenite/Dev/Institucional/static/js/main.4b781be5.chunk.js",
+    "main.js.map": "/Zenite/Dev/Institucional/static/js/main.4b781be5.chunk.js.map",
+    "runtime-main.js": "/Zenite/Dev/Institucional/static/js/runtime-main.f84886c5.js",
+    "runtime-main.js.map": "/Zenite/Dev/Institucional/static/js/runtime-main.f84886c5.js.map",
+    "static/js/2.e15de205.chunk.js": "/Zenite/Dev/Institucional/static/js/2.e15de205.chunk.js",
+    "static/js/2.e15de205.chunk.js.map": "/Zenite/Dev/Institucional/static/js/2.e15de205.chunk.js.map",
+    "index.html": "/Zenite/Dev/Institucional/index.html",
+    "precache-manifest.319894d64c22f08bf255de09faa050c1.js": "/Zenite/Dev/Institucional/precache-manifest.319894d64c22f08bf255de09faa050c1.js",
+    "service-worker.js": "/Zenite/Dev/Institucional/service-worker.js",
+    "static/css/main.8e739cba.chunk.css.map": "/Zenite/Dev/Institucional/static/css/main.8e739cba.chunk.css.map",
+    "static/js/2.e15de205.chunk.js.LICENSE.txt": "/Zenite/Dev/Institucional/static/js/2.e15de205.chunk.js.LICENSE.txt",
+    "static/media/astronaut.png": "/Zenite/Dev/Institucional/static/media/astronaut.7ca4c015.png",
+    "static/media/clientes.svg": "/Zenite/Dev/Institucional/static/media/clientes.1116f857.svg",
+    "static/media/github.svg": "/Zenite/Dev/Institucional/static/media/github.57cf4271.svg",
+    "static/media/lander.png": "/Zenite/Dev/Institucional/static/media/lander.2c079f56.png",
+    "static/media/linkedin.svg": "/Zenite/Dev/Institucional/static/media/linkedin.f5ca26e6.svg",
+    "static/media/map.png": "/Zenite/Dev/Institucional/static/media/map.00010ef7.png",
+    "static/media/marte.png": "/Zenite/Dev/Institucional/static/media/marte.674de013.png",
+    "static/media/robustez.svg": "/Zenite/Dev/Institucional/static/media/robustez.25c34d20.svg",
+    "static/media/tecnologias.svg": "/Zenite/Dev/Institucional/static/media/tecnologias.357dc737.svg",
+    "static/media/tele.png": "/Zenite/Dev/Institucional/static/media/tele.d2b43177.png",
+    "static/media/venus.png": "/Zenite/Dev/Institucional/static/media/venus.06531ce3.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f84886c5.js",
+    "static/js/2.e15de205.chunk.js",
+    "static/css/main.8e739cba.chunk.css",
+    "static/js/main.4b781be5.chunk.js"
+  ]
+}
