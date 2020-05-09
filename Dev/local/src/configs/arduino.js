@@ -26,13 +26,15 @@ const ativarLeitorArduino = async () => {
     const { path: arduinoCom, serialNumber } = dadosArduino;
     numeroSerialArduino = serialNumber;
 
-    const arduino = new portaSerial(arduinoCom, {
-        baudRate:9600
-    })
-    
-    arduino.pipe(scanner)
+        const arduino = new portaSerial(arduinoCom, {
+            baudRate:9600
+        }, error => {
+            if(error) console.error(error.message)
+        })
 
-    return scanner
+        arduino.pipe(scanner)
+        return scanner
+
 }
 
 module.exports = {

@@ -1,0 +1,12 @@
+@url = http://localhost:3333
+
+GET {{url}}/ HTTP/1.1
+
+###
+POST {{url}}/cadastrar/arduino HTTP/1.1
+
+###
+POST {{url}}/cadastrar/cartao HTTP/1.1
+
+###
+POST {{url}}/iniciar HTTP/1.1

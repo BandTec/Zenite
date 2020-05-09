@@ -4,8 +4,7 @@
   "description": "Projeto node para salvar dados recuperados do arduino",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "author": "João Pedro Soares (Zenite)",
   "license": "ISC",

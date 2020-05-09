@@ -32,7 +32,19 @@ export default function CadastroFiscal(props) {
         }  
     }
 
-    const chamada = () => {cadastrar()}
+    const editar = async () => {
+        const token = await localStorage.getItem('token');
+        
+        const response = await api.put(`/api/fiscal/${id}`, dados, {
+            headers: {'Authorization': token}
+          });
+        
+        if(response.status){
+            props.history.push("/fiscal");
+        }
+    }
+
+    const chamada = () => { tipoPagina =="Edição" ? editar() : cadastrar() }
     
 
     return (
