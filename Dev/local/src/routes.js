@@ -15,11 +15,11 @@ routes.post('/arduino', async (req, res) =>
     await ArduinoController.cadastrar(req, res) 
 )
 
-routes.put('/arduino', async (req, res) =>
+routes.put('/arduino/:id', async (req, res) =>
     await ArduinoController.editar(req, res)    
 )
 
-routes.delete('/arduino', async (req, res) =>
+routes.delete('/arduino/:id', async (req, res) =>
     await ArduinoController.deletar(req, res)
 )
 

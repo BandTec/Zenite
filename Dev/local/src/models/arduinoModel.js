@@ -20,8 +20,7 @@ class arduinoModel {
 
     async update(id) {
         const sql = `            
-        UPDATE 
-          FROM tbl_dispositivo
+        UPDATE tbl_dispositivo
            SET codigo_dispositivo = '${this.numeroSerialArduino}'
          WHERE id_dispositivo = ${id}
         `

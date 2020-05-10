@@ -1,6 +1,6 @@
 const CartaoModel = require('../models/cartaoModel')
 
-const adicionar = async (req, res) => {
+const cadastrar = async (req, res) => {
 
     model = new CartaoModel()
     const resposta = await model.create()
@@ -29,7 +29,7 @@ const deletar = async (req, res) => {
 }
 
 module.exports = {
-    adicionar,
+    cadastrar,
     editar,
     deletar
 }

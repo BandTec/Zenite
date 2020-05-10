@@ -16,7 +16,6 @@ const iniciar = (req, res) => {
 const registrarViagem = async codigoDispositivo => {
 
     const { serialNumber: numeroSerialArduino } = await getDadosArduino()
-    
     model = new DispositivoModel()
     const resposta = await model.registrarViagem(codigoDispositivo, numeroSerialArduino)
 

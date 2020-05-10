@@ -10,7 +10,7 @@ POST {{url}}/arduino HTTP/1.1
 PUT {{url}}/arduino/1 HTTP/1.1
 
 ### Deletar um dispositivo arduino: Arduino deletado com sucesso!
-DELETE  {{url}}/arduino/1 HTTP/1.1
+DELETE  {{url}}/arduino/54 HTTP/1.1
 
 ### Cadastrar um novo cartão: Cartão cadastrado com sucesso!
 POST {{url}}/cartao HTTP/1.1

@@ -1,7 +1,6 @@
 const portaSerial = require('serialport')
 
 const readline = portaSerial.parsers.Readline
-let numeroSerialArduino;
 
 const getDadosArduino = async () => {
     const portas = await portaSerial.list()
@@ -12,8 +11,6 @@ const getDadosArduino = async () => {
 
     if(portaArduino.length !== 1)
         throw new Error("Nenhum arduino conectado ou mais de um arduino conectado")
-    
-    console.log("Arduino conectado na porta %s", portaArduino[0].path)
 
     return portaArduino[0]
 
@@ -23,17 +20,18 @@ const ativarLeitorArduino = async () => {
     const scanner = new readline()
     const dadosArduino = await getDadosArduino()
 
-    const { path: arduinoCom, serialNumber } = dadosArduino;
-    numeroSerialArduino = serialNumber;
+    const { path: arduinoCom } = dadosArduino;
 
-        const arduino = new portaSerial(arduinoCom, {
-            baudRate:9600
-        }, error => {
-            if(error) console.error(error.message)
-        })
+    const arduino = new portaSerial(arduinoCom, {
+        baudRate:9600
+    }, error => {
+        if(error) console.error(error.message)
+    })
 
-        arduino.pipe(scanner)
-        return scanner
+    arduino.pipe(scanner)
+    console.log("Arduino conectado na porta %s", arduinoCom)
+    
+    return scanner
 
 }
 

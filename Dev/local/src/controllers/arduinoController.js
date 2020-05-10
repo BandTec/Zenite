@@ -1,11 +1,12 @@
 const ArduinoModel = require('../models/arduinoModel')
+const { getDadosArduino } = require('../configs/arduino')
 
-const adicionar = async (req, res) => {
+const cadastrar = async (req, res) => {
     const { serialNumber: numeroSerialArduino } = await getDadosArduino()
     model = new ArduinoModel(numeroSerialArduino)
-    const resposta = await model.create()
+    await model.create()
 
-    res.status(201).json(resposta)
+    res.status(201).json()
 }
 
 const editar = async (req, res) => {
@@ -13,10 +14,9 @@ const editar = async (req, res) => {
     const { id } = req.params
 
     model = new ArduinoModel(numeroSerialArduino)
-    
-    const resposta = await model.update(id)
+    await model.update(id)
 
-    res.status(200).json(resposta)
+    res.status(200).json()
 }
 
 const deletar = async (req, res) => {
@@ -24,14 +24,13 @@ const deletar = async (req, res) => {
     const { id } = req.params
 
     model = new ArduinoModel(numeroSerialArduino)
-    
-    const resposta = await model.delete(id)
+    await model.delete(id)
 
-    res.status(200).json(resposta)
+    res.status(200).json()
 }
 
 module.exports = {
-    adicionar,
+    cadastrar,
     editar,
     deletar
 }
