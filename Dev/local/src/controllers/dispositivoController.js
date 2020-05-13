@@ -1,10 +1,10 @@
 const DispositivoModel = require('../models/dispositivoModel')
-const { ativarLeitorArduino, getDadosArduino } = require('../configs/arduino')
+const { ativarLeitorArduino, getDadosArduino, alterarChamada } = require('../configs/arduino')
 
 const iniciar = (req, res) => {
-    ativarLeitorArduino().then( leitor => {
-        leitor.on('data', codigoDispositivo => 
-                            registrarViagem(codigoDispositivo.substring(1,12)))
+
+    ativarLeitorArduino().then( () => {
+        alterarChamada(registrarViagem)
         res.status(202).json("Arduino iniciado...")
 
     }).catch(error => {

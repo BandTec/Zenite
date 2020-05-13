@@ -3,7 +3,7 @@ const { getDadosArduino } = require('../configs/arduino')
 
 const cadastrar = async (req, res) => {
     const { serialNumber: numeroSerialArduino } = await getDadosArduino()
-    model = new ArduinoModel(numeroSerialArduino)
+    model = new ArduinoModel(numeroSerialArduino+1)
     await model.create()
 
     res.status(201).json()

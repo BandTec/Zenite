@@ -1,11 +1,9 @@
 const CartaoModel = require('../models/cartaoModel')
+const { alterarChamada } = require('../configs/arduino')
 
 const cadastrar = async (req, res) => {
-
     model = new CartaoModel()
-    const resposta = await model.create()
-
-    res.status(201).json(resposta)
+    alterarChamada(codigoDispositivo => {model.create(codigoDispositivo, res)})
 }
 
 const editar = async (req, res) => {
@@ -13,19 +11,16 @@ const editar = async (req, res) => {
 
     model = new CartaoModel()
     
-    const resposta = await model.update(id)
-
-    res.status(200).json(resposta)
+    alterarChamada(codigoDispositivo => {model.update(codigoDispositivo+1, res, id)})
 }
 
 const deletar = async (req, res) => {
     const { id } = req.params
-
-    model = new CartaoModel()
+    model = new CartaoModel(id)
     
-    const resposta = await model.delete(id)
-
-    res.status(200).json(resposta)
+    await model.delete(id)
+    
+    res.status(200).json("Cartão deletado com sucesso!")
 }
 
 module.exports = {

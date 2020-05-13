@@ -28,11 +28,11 @@ routes.post('/cartao', async (req, res) =>
     await CartaoController.cadastrar(req, res)
 )
 
-routes.put('/cartao', async (req, res) =>
+routes.put('/cartao/:id', async (req, res) =>
     await CartaoController.editar(req, res)
 )
 
-routes.delete('/cartao', async (req, res) =>
+routes.delete('/cartao/:id', async (req, res) =>
     await CartaoController.deletar(req, res)
 )
 

@@ -7,19 +7,19 @@ GET {{url}}/ HTTP/1.1
 POST {{url}}/arduino HTTP/1.1
 
 ### Editar um dispositivo arduino: Arduino editado com sucesso!
-PUT {{url}}/arduino/1 HTTP/1.1
+PUT {{url}}/arduino/57 HTTP/1.1
 
 ### Deletar um dispositivo arduino: Arduino deletado com sucesso!
-DELETE  {{url}}/arduino/54 HTTP/1.1
+DELETE  {{url}}/arduino/57 HTTP/1.1
 
 ### Cadastrar um novo cartão: Cartão cadastrado com sucesso!
 POST {{url}}/cartao HTTP/1.1
 
 ### Editar um cartão: Cartão editado com sucesso!
-PUT {{url}}/cartao/1 HTTP/1.1
+PUT {{url}}/cartao/60 HTTP/1.1
 
 ### Deletar um cartão: Cartão deletado com sucesso!
-DELETE {{url}}/cartao HTTP/1.1
+DELETE {{url}}/cartao/61 HTTP/1.1
 
 ### Iniciar escuta do arduino: Arduino iniciado
 POST {{url}}/iniciar HTTP/1.1

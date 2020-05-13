@@ -1,32 +1,35 @@
 'use strict';
 
 const connection = require('../configs/connection')
+const { alterarChamada } = require('../configs/arduino')
+const { registrarViagem } = require('../controllers/dispositivoController')
 
 class cartaoModel {
 
-    constructor(codigoCartao){
-        this.codigoCartao = codigoCartao
+    async create(codigoCartao, res) {
+      const sql = `            
+      INSERT
+      INTO tbl_dispositivo(codigo_dispositivo, fk_tipo)
+      VALUES ('${codigoCartao}', 2)
+      `
+
+      await connection.query(sql)
+      alterarChamada(registrarViagem)
+      
+      res.status(200).json("Cartão cadastrado com sucesso!")
     }
 
-    async create() {
+    async update(codigoCartao, res, id) {
         const sql = `            
-        INSERT
-          INTO tbl_dispositivo(codigo_dispositivo, fk_tipo)
-        VALUES ('${this.codigoCartao}', 2)
-        `
-        return await connection.query(sql)
-
-    }
-
-    async update(id) {
-        const sql = `            
-        UPDATE 
-          FROM tbl_dispositivo
-           SET codigo_dispositivo = '${this.codigoCartao}'
+        UPDATE tbl_dispositivo
+           SET codigo_dispositivo = '${codigoCartao}'
          WHERE id_dispositivo = ${id}
         `
-        return await connection.query(sql)
+        await connection.query(sql)
 
+        alterarChamada(registrarViagem)
+      
+        res.status(200).json("Cartão atualizado com sucesso!")
     }
 
     async delete(id) {

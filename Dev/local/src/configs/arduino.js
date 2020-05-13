@@ -1,6 +1,7 @@
 const portaSerial = require('serialport')
 
 const readline = portaSerial.parsers.Readline
+let chamada = () => {}
 
 const getDadosArduino = async () => {
     const portas = await portaSerial.list()
@@ -16,6 +17,8 @@ const getDadosArduino = async () => {
 
 }
 
+const alterarChamada = novaChamada => chamada = novaChamada
+
 const ativarLeitorArduino = async () => {
     const scanner = new readline()
     const dadosArduino = await getDadosArduino()
@@ -27,15 +30,18 @@ const ativarLeitorArduino = async () => {
     }, error => {
         if(error) console.error(error.message)
     })
-
-    arduino.pipe(scanner)
-    console.log("Arduino conectado na porta %s", arduinoCom)
     
+    arduino.pipe(scanner)
+    console.info("Iniciando escuta da porta %s", arduinoCom)
+    
+    scanner.on('data', codigoDispositivo => chamada(codigoDispositivo))
+
     return scanner
 
 }
 
 module.exports = {
     ativarLeitorArduino,
-    getDadosArduino
+    getDadosArduino,
+    alterarChamada
 }
