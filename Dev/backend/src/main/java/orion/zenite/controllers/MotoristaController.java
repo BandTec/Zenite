@@ -79,9 +79,11 @@ public class MotoristaController {
             @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
             @ApiResponse(code = 404, message = "Motorista não encontrado.")
     })
-    @PutMapping
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void alterar(@RequestBody Motorista novoMotorista){
+    public void alterar(@RequestBody Motorista novoMotorista,
+                        @PathVariable int id){
+        novoMotorista.setId(id);
         Conta conta = novoMotorista.getConta();
         String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
         conta.setSenha(senhaCriptografada);

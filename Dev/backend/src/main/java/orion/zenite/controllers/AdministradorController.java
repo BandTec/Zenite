@@ -73,9 +73,12 @@ public class AdministradorController {
     }
 
     @ApiOperation("Altera um administrador")
-    @PutMapping
-    public ResponseEntity alterar(@RequestBody Administrador administrador){
-        if (this.repository.existsById(administrador.getId())) {
+    @PutMapping("{id}")
+    @Transactional
+    public ResponseEntity alterar(@RequestBody Administrador administrador,
+                                  @PathVariable int id){
+        if (this.repository.existsById(id)) {
+            administrador.setId(id);
             // encriptar senha
             Conta conta = administrador.getConta();
             String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
