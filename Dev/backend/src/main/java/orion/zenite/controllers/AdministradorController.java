@@ -13,6 +13,8 @@ import orion.zenite.repositorios.AdministradorRepository;
 
 import java.util.Optional;
 
+import static org.springframework.http.ResponseEntity.*;
+
 /*
  * Todas as rotas que começam com /api/alguma-coisa
  * estão protegidas pelo JWToken.
@@ -44,9 +46,9 @@ public class AdministradorController {
     @GetMapping
     public ResponseEntity consultar(){
         if (this.repository.count() > 0) {
-            return ResponseEntity.ok(this.repository.findAll());
+            return ok(this.repository.findAll());
         } else {
-            return ResponseEntity.noContent().build();
+            return noContent().build();
         }
     }
 
@@ -55,9 +57,9 @@ public class AdministradorController {
     public ResponseEntity consultar(@PathVariable("id") int id){
         Optional<Administrador> adm = this.repository.findById(id);
         if (adm.isPresent()) {
-            return ResponseEntity.ok(adm);
+            return ok(adm);
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -66,9 +68,9 @@ public class AdministradorController {
     public ResponseEntity deletar(@PathVariable("id") int id){
         if (this.repository.existsById(id)) {
             this.repository.deleteById(id);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -87,9 +89,9 @@ public class AdministradorController {
 
             // altera adm
             this.repository.save(administrador);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -107,6 +109,6 @@ public class AdministradorController {
         // salvar adm
         this.repository.save(administrador);
 
-        return ResponseEntity.created(null).build();
+        return created(null).build();
     }
 }

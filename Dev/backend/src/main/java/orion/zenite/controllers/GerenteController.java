@@ -16,6 +16,9 @@ import orion.zenite.entidades.Gerente;
 import orion.zenite.repositorios.GerenteRepository;
 
 import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.http.ResponseEntity.*;
 
 @Api(description = "Operações relacionadas ao gerente", tags = "gerente")
 @RestController
@@ -23,7 +26,7 @@ import java.util.List;
 public class GerenteController {
 
     @Autowired
-    private GerenteRepository gerenteDB;
+    private GerenteRepository repository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -35,14 +38,12 @@ public class GerenteController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping
-    public List<Gerente> consulta() {
-
-        List<Gerente> lista = gerenteDB.findAll();
-        if(!lista.isEmpty()){
-            return lista;
+    public ResponseEntity consulta() {
+        if(this.repository.count() > 0){
+            return ok(this.repository.findAll());
+        }else{
+            return noContent().build();
         }
-
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sua requisição não retornou dados");
     }
 
     @ApiOperation("Busca gerente pelo ID")
@@ -52,12 +53,14 @@ public class GerenteController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("{id}")
-    public Gerente consulta(@PathVariable("id") int id){
-        return gerenteDB
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.NOT_FOUND,
-                                "Gerente não encontrado"));
+    public ResponseEntity consulta(@PathVariable("id") int id){
+        Optional<Gerente> consultaGerente = this.repository.findById(id);
+
+        if(consultaGerente.isPresent()){
+            return ok(consultaGerente);
+        }else{
+            return notFound().build();
+        }
     }
 
     @ApiOperation("Altera um gerente")
@@ -68,15 +71,19 @@ public class GerenteController {
     })
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void alterar(@RequestBody Gerente novoGerente,
+    public ResponseEntity alterar(@RequestBody Gerente novoGerente,
                         @PathVariable int id){
+        if(this.repository.existsById(id)) {
             novoGerente.setId(id);
             Conta conta = novoGerente.getConta();
             String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
             conta.setSenha((senhaCriptografada));
             novoGerente.setConta(conta);
-            gerenteDB.save(novoGerente);
-
+            repository.save(novoGerente);
+            return ok().build();
+        }else{
+            return notFound().build();
+        }
     }
 
     @ApiOperation("Deleta um gerente por seu ID")
@@ -87,14 +94,13 @@ public class GerenteController {
     })
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletar(@PathVariable("id") int id){
-        gerenteDB.findById(id)
-                .map( carro -> {
-                    gerenteDB.delete(carro);
-                    return carro;
-                })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Gerente não encontrado"));
+    public ResponseEntity deletar(@PathVariable("id") int id){
+        if (this.repository.existsById(id)) {
+            this.repository.deleteById(id);
+            return ok().build();
+        } else {
+            return notFound().build();
+        }
     }
 
     @ApiOperation("Cadastra um Motorista")
@@ -105,15 +111,15 @@ public class GerenteController {
     })
     @PostMapping()
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public Gerente cadastro(@RequestBody Gerente novoGerente){
+    public ResponseEntity cadastro(@RequestBody Gerente novoGerente){
         Conta conta = novoGerente.getConta();
         String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
         conta.setSenha((senhaCriptografada));
         novoGerente.setConta(conta);
-        gerenteDB.save(novoGerente);
-        novoGerente.setId(gerenteDB.lastId());
+        repository.save(novoGerente);
+        novoGerente.setId(repository.lastId());
 
-        return novoGerente;
+        return created(null).build();
     }
 
 }

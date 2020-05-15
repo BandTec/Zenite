@@ -16,6 +16,8 @@ import orion.zenite.repositorios.DispositivoRepository;
 
 import java.util.Optional;
 
+import static org.springframework.http.ResponseEntity.*;
+
 @Api(description = "Operações relacionadas ao ônibus", tags = "ônibus")
 @RestController
 @RequestMapping("/api/onibus")
@@ -35,9 +37,9 @@ public class CarroController {
     public ResponseEntity consulta() {
 
         if (this.repository.count() > 0) {
-            return ResponseEntity.ok(this.repository.findAll());
+            return ok(this.repository.findAll());
         } else {
-            return ResponseEntity.noContent().build();
+            return noContent().build();
         }
 
     }
@@ -48,9 +50,9 @@ public class CarroController {
         Optional<Carro> consultaCarro = this.repository.findById(id);
 
         if (consultaCarro.isPresent()) {
-          return   ResponseEntity.ok(consultaCarro);
+          return   ok(consultaCarro);
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
 
     }
@@ -62,10 +64,10 @@ public class CarroController {
         if(dispositivo.isPresent()){
             Optional<Carro> consultaCarro = this.repository.findByDispositivo(dispositivo.get());
             if (consultaCarro.isPresent()) {
-                return ResponseEntity.ok(consultaCarro);
+                return ok(consultaCarro);
             }
         }
-        return ResponseEntity.notFound().build();
+        return notFound().build();
     }
 
     @ApiOperation("Inserir ônibus")
@@ -73,7 +75,7 @@ public class CarroController {
     @Transactional
     public ResponseEntity criarCarro(@RequestBody Carro onibus) {
         this.repository.save(onibus);
-        return ResponseEntity.created(null).build();
+        return created(null).build();
 
     }
 
@@ -85,9 +87,9 @@ public class CarroController {
         if (this.repository.existsById(id)) {
             onibus.setId(id);
             this.repository.save(onibus);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -96,9 +98,9 @@ public class CarroController {
     public ResponseEntity excluirCarro(@PathVariable Integer id) {
         if (this.repository.existsById(id)) {
             this.repository.deleteById(id);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -108,16 +110,16 @@ public class CarroController {
     @Transactional
     public ResponseEntity relacionar(@RequestBody CarroLinha novoRelacionamento) {
         this.carroLinhaRepository.save(novoRelacionamento);
-        return ResponseEntity.created(null).build();
+        return created(null).build();
     }
 
     @ApiOperation("Listar quais ônibus estão em quais linhas")
     @GetMapping("/linhas")
     public ResponseEntity consultarRelacionamento() {
         if (this.repository.count() > 0) {
-            return ResponseEntity.ok(this.carroLinhaRepository.findAll());
+            return ok(this.carroLinhaRepository.findAll());
         } else {
-            return ResponseEntity.noContent().build();
+            return noContent().build();
         }
     }
 
