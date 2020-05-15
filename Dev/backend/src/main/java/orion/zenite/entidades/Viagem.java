@@ -30,6 +30,10 @@ public class Viagem {
     @JoinColumn(name="idFiscal")
     private Fiscal fiscal;
 
+    @ManyToOne//(cascade = CascadeType.ALL)
+    @JoinColumn(name="idFiscalVolta")
+    private Fiscal fiscalVolta;
+
     @Column(nullable = false)
     private LocalDateTime horaSaida;
 

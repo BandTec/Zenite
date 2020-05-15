@@ -2,15 +2,14 @@ package orion.zenite.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.repositorios.DispositivoRepository;
-import orion.zenite.repositorios.FiscalRepository;
+import orion.zenite.repositorios.*;
 import orion.zenite.entidades.*;
-import orion.zenite.repositorios.ViagemRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +33,12 @@ public class FiscalController {
 
     @Autowired
     private DispositivoRepository dispositivoRepository;
+
+    @Autowired
+    private LinhaRepository linhaRepository;
+
+    @Autowired
+    private FiscalLinhaRepository fiscalLinhaRepository;
 
     @ApiOperation("Lista todos os fiscais")
     @GetMapping
@@ -133,6 +138,22 @@ public class FiscalController {
             }
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @ApiOperation("Exibe as linhas que o fiscal trabalha")
+    @GetMapping("/linha/{id}")
+    public ResponseEntity consultarLinhasPorFiscal(@PathVariable int id){
+        List<FiscalLinha> fiscalLinha = fiscalLinhaRepository.findByIdFiscal(id);
+        List<Linha> linhas = new ArrayList<>();
+
+        for(FiscalLinha f : fiscalLinha){
+            Optional<Linha> linha = linhaRepository.findById(f.getIdLinha());
+            if(linha.isPresent()){
+                linhas.add(linha.get());
+            }
+        }
+
+        return linhas.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(linhas);
     }
 
 }

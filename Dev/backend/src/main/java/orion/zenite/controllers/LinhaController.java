@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.parameters.P;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,14 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import orion.zenite.dto.ConsultaPaginada;
-import orion.zenite.entidades.Carro;
-import orion.zenite.entidades.CarroLinha;
-import orion.zenite.entidades.Linha;
-import orion.zenite.entidades.PontoFinal;
-import orion.zenite.repositorios.CarroLinhaRepository;
-import orion.zenite.repositorios.CarroRepository;
-import orion.zenite.repositorios.LinhaRepository;
-import orion.zenite.repositorios.PontoFinalRepository;
+import orion.zenite.entidades.*;
+import orion.zenite.repositorios.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -47,7 +41,13 @@ public class LinhaController {
     private CarroRepository carroRepository;
 
     @Autowired
+    private FiscalRepository fiscalRepository;
+
+    @Autowired
     private PontoFinalRepository pontoFinalRepository;
+
+    @Autowired
+    private FiscalLinhaRepository fiscalLinhaRepository;
 
     @ApiResponses({
             @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
@@ -210,6 +210,22 @@ public class LinhaController {
         }
 
         return onibus.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(onibus);
+    }
+
+    @ApiOperation("Consultar todos os fiscais responsaveis por determinada linha")
+    @GetMapping("/{id}/fiscal")
+    public ResponseEntity consultaFiscais(@PathVariable("id") int id){
+        List<FiscalLinha> fiscalLinhas = fiscalLinhaRepository.findByIdLinha(id);
+        List<Fiscal> fiscal = new ArrayList<>();
+
+        for(FiscalLinha f : fiscalLinhas){
+            Optional<Fiscal> fiscal1 =  fiscalRepository.findById(f.getIdFiscal());
+            if(fiscal1.isPresent()){
+                fiscal.add(fiscal1.get());
+            }
+        }
+
+        return fiscal.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(fiscal);
     }
 
 }
