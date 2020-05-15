@@ -14,15 +14,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import orion.zenite.entidades.Carro;
-import orion.zenite.entidades.Conta;
-import orion.zenite.entidades.Motorista;
-import orion.zenite.entidades.MotoristaCarro;
+import orion.zenite.entidades.*;
 import orion.zenite.repositorios.CarroRepository;
 import orion.zenite.repositorios.MotoristaCarroRepository;
 import orion.zenite.repositorios.MotoristaRepository;
 
 import java.util.Optional;
+
+import static org.springframework.http.ResponseEntity.*;
+import static org.springframework.http.ResponseEntity.notFound;
+import static org.springframework.http.ResponseEntity.ok;
 
 
 @Api(description = "Operações relacionadas ao motorista", tags = "motorista")
@@ -51,9 +52,9 @@ public class MotoristaController {
     @GetMapping
     public ResponseEntity consulta() {
         if (this.motoristaBD.count() > 0) {
-            return ResponseEntity.ok(this.motoristaBD.findAll());
+            return ok(this.motoristaBD.findAll());
         } else {
-            return ResponseEntity.noContent().build();
+            return noContent().build();
         }
 
  }
@@ -65,12 +66,14 @@ public class MotoristaController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("{id}")
-    public Motorista consulta(@PathVariable("id") int id){
-        return motoristaBD
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.NOT_FOUND,
-                                "Motorista não encontrado"));
+    public ResponseEntity consulta(@PathVariable("id") int id){
+        Optional<Motorista> motorista = this.motoristaBD.findById(id);
+
+        if(motorista.isPresent()){
+            return ok(motorista);
+        }else{
+            return notFound().build();
+        }
     }
 
     @ApiOperation("Altera um motorista")
@@ -81,14 +84,19 @@ public class MotoristaController {
     })
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void alterar(@RequestBody Motorista novoMotorista,
-                        @PathVariable int id){
-        novoMotorista.setId(id);
-        Conta conta = novoMotorista.getConta();
-        String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
-        conta.setSenha(senhaCriptografada);
-        novoMotorista.setConta(conta);
-        motoristaBD.save(novoMotorista);
+    public ResponseEntity alterar(@RequestBody Motorista novoMotorista,
+                                          @PathVariable int id){
+        if(this.motoristaBD.existsById(id)) {
+            novoMotorista.setId(id);
+            Conta conta = novoMotorista.getConta();
+            String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
+            conta.setSenha(senhaCriptografada);
+            novoMotorista.setConta(conta);
+            motoristaBD.save(novoMotorista);
+            return ok().build();
+        }else{
+            return notFound().build();
+        }
     }
 
     @ApiOperation("Deleta um motorista por seu ID")
@@ -99,14 +107,13 @@ public class MotoristaController {
     })
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletar(@PathVariable("id") int id){
-        motoristaBD.findById(id)
-                .map( carro -> {
-                    motoristaBD.delete(carro);
-                    return carro;
-                })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Motorista não encontrado"));
+    public ResponseEntity deletar(@PathVariable("id") int id){
+        if (this.motoristaBD.existsById(id)) {
+            this.motoristaBD.deleteById(id);
+            return ok().build();
+        } else {
+            return notFound().build();
+        }
     }
 
     @ApiOperation("Cadastra um Motorista")
@@ -124,7 +131,7 @@ public class MotoristaController {
         novoMotorista.setConta(conta);
         motoristaBD.save(novoMotorista);
 
-        return ResponseEntity.created(null).build();
+        return created(null).build();
     }
 
     @ApiOperation("Cadastrar ônibus do motorista")
@@ -132,16 +139,16 @@ public class MotoristaController {
     @Transactional
     public ResponseEntity relacionar(@RequestBody MotoristaCarro novoRelacionamento) {
         this.repository.save(novoRelacionamento);
-        return ResponseEntity.created(null).build();
+        return created(null).build();
     }
 
     @ApiOperation("Listar quais ônibus estão com quais motoristas")
     @GetMapping("/onibus")
     public ResponseEntity consultarRelacionamento() {
         if (this.repository.count() > 0) {
-            return ResponseEntity.ok(this.repository.findAll());
+            return ok(this.repository.findAll());
         } else {
-            return ResponseEntity.noContent().build();
+            return noContent().build();
         }
     }
 
