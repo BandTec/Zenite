@@ -53,7 +53,7 @@ public class GerenteController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("{id}")
-    public ResponseEntity consulta(@PathVariable("id") int id){
+    public ResponseEntity consulta(@PathVariable("id") Integer id){
         Optional<Gerente> consultaGerente = this.repository.findById(id);
 
         if(consultaGerente.isPresent()){
@@ -72,7 +72,7 @@ public class GerenteController {
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity alterar(@RequestBody Gerente novoGerente,
-                        @PathVariable int id){
+                        @PathVariable Integer id){
         if(this.repository.existsById(id)) {
             novoGerente.setId(id);
             Conta conta = novoGerente.getConta();
@@ -94,7 +94,7 @@ public class GerenteController {
     })
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity deletar(@PathVariable("id") int id){
+    public ResponseEntity deletar(@PathVariable("id") Integer id){
         if (this.repository.existsById(id)) {
             this.repository.deleteById(id);
             return ok().build();

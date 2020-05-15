@@ -59,7 +59,7 @@ public class PontoController {
     @ApiOperation("Atualizar Pontos")
     @PutMapping("{id}")
     public ResponseEntity atualizarPonto( @RequestBody  PontoFinal ponto,
-                                          @PathVariable int id){
+                                          @PathVariable Integer id){
         if (this.repository.existsById(id)) {
             ponto.setId(id);
             this.repository.save(ponto);

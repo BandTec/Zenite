@@ -124,7 +124,7 @@ public class ViagemController {
     @ApiOperation("Altera uma viagem")
     @PutMapping("{id}")
     public ResponseEntity alterar(@RequestBody ViagemDto viagem,
-                                  @PathVariable int id) {
+                                  @PathVariable Integer id) {
         viagem.setViagemId(id);
         Viagem novaViagem = montaViagem(viagem);
         novaViagem.setId(viagem.getViagemId());

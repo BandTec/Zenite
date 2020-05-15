@@ -66,7 +66,7 @@ public class MotoristaController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("{id}")
-    public ResponseEntity consulta(@PathVariable("id") int id){
+    public ResponseEntity consulta(@PathVariable("id") Integer id){
         Optional<Motorista> motorista = this.motoristaBD.findById(id);
 
         if(motorista.isPresent()){
@@ -85,7 +85,7 @@ public class MotoristaController {
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity alterar(@RequestBody Motorista novoMotorista,
-                                          @PathVariable int id){
+                                          @PathVariable Integer id){
         if(this.motoristaBD.existsById(id)) {
             novoMotorista.setId(id);
             Conta conta = novoMotorista.getConta();
@@ -107,7 +107,7 @@ public class MotoristaController {
     })
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity deletar(@PathVariable("id") int id){
+    public ResponseEntity deletar(@PathVariable("id") Integer id){
         if (this.motoristaBD.existsById(id)) {
             this.motoristaBD.deleteById(id);
             return ok().build();

@@ -54,7 +54,7 @@ public class AdministradorController {
 
     @ApiOperation("Buscar um administrador por seu id")
     @GetMapping("{id}")
-    public ResponseEntity consultar(@PathVariable("id") int id){
+    public ResponseEntity consultar(@PathVariable("id") Integer id){
         Optional<Administrador> adm = this.repository.findById(id);
         if (adm.isPresent()) {
             return ok(adm);
@@ -65,7 +65,7 @@ public class AdministradorController {
 
     @ApiOperation("Deleta um administrador por seu id")
     @DeleteMapping("{id}")
-    public ResponseEntity deletar(@PathVariable("id") int id){
+    public ResponseEntity deletar(@PathVariable("id") Integer id){
         if (this.repository.existsById(id)) {
             this.repository.deleteById(id);
             return ok().build();
@@ -78,7 +78,7 @@ public class AdministradorController {
     @PutMapping("{id}")
     @Transactional
     public ResponseEntity alterar(@RequestBody Administrador administrador,
-                                  @PathVariable int id){
+                                  @PathVariable Integer id){
         if (this.repository.existsById(id)) {
             administrador.setId(id);
             // encriptar senha

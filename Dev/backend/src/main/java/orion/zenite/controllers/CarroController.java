@@ -83,7 +83,7 @@ public class CarroController {
     @ApiOperation("Atualizar ônibus")
     @PutMapping("{id}")
     public ResponseEntity atualizarCarro(@RequestBody Carro onibus,
-                                         @PathVariable int id) {
+                                         @PathVariable Integer id) {
         if (this.repository.existsById(id)) {
             onibus.setId(id);
             this.repository.save(onibus);
