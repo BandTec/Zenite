@@ -34,13 +34,15 @@ stages:
       inputs:
         versionSpec: '12.x'
       displayName: 'Install Node.js'
+      
+    - script: |
+        cd Dev/frontend/
+      displayName: 'cd Dev/frontend/'
 
     - script: |
         cd Dev/frontend/
         npm ci
-        npm run build --if-present
-        npm run test --if-present
-      displayName: 'npm ci, build and test'
+      displayName: 'npm ci'
       
     - task: ArchiveFiles@2
       displayName: 'Archive files'
