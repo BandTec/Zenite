@@ -34,12 +34,9 @@ stages:
       inputs:
         versionSpec: '12.x'
       displayName: 'Install Node.js'
-      
+    
     - script: |
         cd Dev/frontend/
-      displayName: 'cd Dev/frontend/'
-
-    - script: |
         npm ci
       displayName: 'npm ci'
       
@@ -69,9 +66,6 @@ stages:
       runOnce:
         deploy:
           steps:
-          - script: |
-              cd Dev/frontend/
-              displayName: 'cd Dev/frontend/'
           - task: AzureWebApp@1
             displayName: 'Azure Web App Deploy: zenite'
             inputs:
