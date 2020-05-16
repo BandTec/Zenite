@@ -40,7 +40,6 @@ stages:
       displayName: 'cd Dev/frontend/'
 
     - script: |
-        cd Dev/frontend/
         npm ci
       displayName: 'npm ci'
       
@@ -69,13 +68,16 @@ stages:
     strategy:
       runOnce:
         deploy:
-          steps:            
+          steps:
+          - script: |
+              cd Dev/frontend/
+              displayName: 'cd Dev/frontend/'
           - task: AzureWebApp@1
             displayName: 'Azure Web App Deploy: zenite'
             inputs:
               azureSubscription: $(azureSubscription)
               appType: webAppLinux
               appName: $(webAppName)
-              runtimeStack: 'NODE|10.10'
+              runtimeStack: 'NODE|12.x'
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
-              startUpCommand: 'npm run start'
+              startUpCommand: 'cd Dev/frontend/ && npm run start'
