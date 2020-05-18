@@ -5,7 +5,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: backendzenite
-  AZURE_WEBAPP_PACKAGE_PATH: './Dev/backend'
+  AZURE_WEBAPP_PACKAGE_PATH: './Dev/backend/target/*.jar'
   JAVA_VERSION: '1.8.x'
 
 jobs:
