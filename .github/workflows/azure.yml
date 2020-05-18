@@ -1,0 +1,35 @@
+name: Build and deploy Node.js app to Azure Web App - zenite
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  AZURE_WEBAPP_NAME_FRONTEND: zenite
+  AZURE_WEBAPP_PACKAGE_PATH_FRONTEND: './Dev/frontend'
+  NODE_VERSION: '12.x'
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy - frontend
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@master
+    - name: Set up Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: npm ci
+      run: |
+        cd ${{ env.AZURE_WEBAPP_PACKAGE_PATH_FRONTEND }}
+        npm ci
+
+    - name: 'Deploy to Azure WebApp - frontend'
+      uses: azure/webapps-deploy@v1
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME_FRONTEND }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_FRONTEND }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH_FRONTEND }}
