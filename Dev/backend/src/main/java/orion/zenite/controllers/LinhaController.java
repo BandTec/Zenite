@@ -130,9 +130,11 @@ public class LinhaController {
             @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
             @ApiResponse(code = 404, message = "Linha não encontrada.")
     })
-    @PutMapping
+    @PutMapping("{id}")
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public ResponseEntity alterar(@RequestBody Linha novaLinha){
+    public ResponseEntity alterar(@RequestBody Linha novaLinha,
+                                  @PathVariable int id){
+        novaLinha.setId(id);
         PontoFinal ida = novaLinha.getPontoIda();
         PontoFinal volta = novaLinha.getPontoVolta();
         if (ida.getId() == 0){

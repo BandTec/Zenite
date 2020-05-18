@@ -76,9 +76,12 @@ public class FiscalController {
     }
 
     @ApiOperation("Altera um fiscal")
-    @PutMapping
-    public ResponseEntity alterar(@RequestBody Fiscal novoFiscal) {
-        if (this.repository.existsById(novoFiscal.getId())) {
+    @PutMapping("{id}")
+    @Transactional
+    public ResponseEntity alterar(@RequestBody Fiscal novoFiscal,
+                                  @PathVariable int id) {
+        if (this.repository.existsById(id)) {
+            novoFiscal.setId(id);
             // Encriptar senha
             Conta conta = novoFiscal.getConta();
             String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
