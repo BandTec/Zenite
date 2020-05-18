@@ -25,6 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.http.ResponseEntity.*;
+import static org.springframework.http.ResponseEntity.notFound;
+import static org.springframework.http.ResponseEntity.ok;
+
 
 @Api(description = "Operações relacionadas ao linha", tags = "linha")
 @RestController
@@ -64,9 +68,9 @@ public class LinhaController {
             Pageable pageable = PageRequest.of(pagina, 10);
             Page<Linha> page= linhaBD.findAll(pageable);
             ConsultaPaginada consulta = new ConsultaPaginada(page);
-            return ResponseEntity.ok(consulta);
+            return ok(consulta);
         } else {
-            return ResponseEntity.noContent().build();
+            return noContent().build();
         }
     }
 
@@ -78,12 +82,14 @@ public class LinhaController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("{id}")
-    public Linha consulta(@PathVariable("id") int id){
-        return linhaBD
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.NOT_FOUND,
-                                "Linha não encontrado"));
+    public ResponseEntity consultaLinha(@PathVariable("id") Integer id){
+        Optional<Linha> consultaLinha = this.linhaBD.findById(id);
+
+        if(consultaLinha.isPresent()){
+            return ok(consultaLinha);
+        }else{
+            return notFound().build();
+        }
     }
 
     @ApiOperation("Busca ponto ida pelo ID")
@@ -93,16 +99,14 @@ public class LinhaController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("/pontoIda/{id}")
-    public List<Linha> consultaPorPontoIda(@PathVariable("id") int id){
+    public ResponseEntity consultaPorPontoIda(@PathVariable("id") Integer id){
         PontoFinal p = new PontoFinal();
         p.setId(id);
         List<Linha> lista = linhaBD.findAllByPontoIda(p);
         if(!lista.isEmpty()){
-            return lista;
+            return ok(lista);
         }
-
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrada nenhuma linha com este ponto inicial.");
-
+        return notFound().build();
     }
 
     @ApiOperation("Busca ponto volta pelo ID")
@@ -112,15 +116,14 @@ public class LinhaController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("/pontoVolta/{id}")
-    public List<Linha> consultaPorPontoVolta(@PathVariable("id") int id){
+    public ResponseEntity consultaPorPontoVolta(@PathVariable("id") Integer id){
         PontoFinal p = new PontoFinal();
         p.setId(id);
         List<Linha> lista = linhaBD.findAllByPontoVolta(p);
         if(!lista.isEmpty()){
-            return lista;
+            return ok(lista);
         }
-
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrada nenhuma linha com este ponto inicial.");
+        return notFound().build();
 
     }
 
@@ -133,7 +136,7 @@ public class LinhaController {
     @PutMapping("{id}")
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
     public ResponseEntity alterar(@RequestBody Linha novaLinha,
-                                  @PathVariable int id){
+                                  @PathVariable Integer id){
         novaLinha.setId(id);
         PontoFinal ida = novaLinha.getPontoIda();
         PontoFinal volta = novaLinha.getPontoVolta();
@@ -150,7 +153,7 @@ public class LinhaController {
 
         linhaBD.save(novaLinha);
 
-        return ResponseEntity.ok().build();
+        return ok().build();
     }
 
     @ApiOperation("Deleta uma linha por seu ID")
@@ -160,14 +163,13 @@ public class LinhaController {
             @ApiResponse(code = 404, message = "Linha não encontrado.")
     })
     @DeleteMapping("{id}")
-    public void deletar(@PathVariable("id") int id){
-        linhaBD.findById(id)
-                .map( carro -> {
-                    linhaBD.delete(carro);
-                    return carro;
-                })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Linha não encontrada"));
+    public ResponseEntity deletar(@PathVariable("id") Integer id){
+        if (this.linhaBD.existsById(id)) {
+            this.linhaBD.deleteById(id);
+            return ok().build();
+        } else {
+            return notFound().build();
+        }
     }
 
     @ApiOperation("Cadastra uma linha")
@@ -194,13 +196,13 @@ public class LinhaController {
 
         linhaBD.save(novaLinha);
 
-        return ResponseEntity.created(null).build();
+        return created(null).build();
     }
 
     @ApiOperation("Consultar todos os ônibus que atendem linha")
     @GetMapping("/{id}/onibus")
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public ResponseEntity consultaCarros(@PathVariable("id") int id){
+    public ResponseEntity consultaCarros(@PathVariable("id") Integer id){
         List<CarroLinha> onibusLinhas = this.repository.findByIdLinha(id);
         List<Carro> onibus = new ArrayList<>();
 
@@ -211,12 +213,12 @@ public class LinhaController {
             }
         }
 
-        return onibus.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(onibus);
+        return onibus.isEmpty() ? notFound().build() : ok(onibus);
     }
 
     @ApiOperation("Consultar todos os fiscais responsaveis por determinada linha")
     @GetMapping("/{id}/fiscal")
-    public ResponseEntity consultaFiscais(@PathVariable("id") int id){
+    public ResponseEntity consultaFiscais(@PathVariable("id") Integer id){
         List<FiscalLinha> fiscalLinhas = fiscalLinhaRepository.findByIdLinha(id);
         List<Fiscal> fiscal = new ArrayList<>();
 
@@ -227,7 +229,7 @@ public class LinhaController {
             }
         }
 
-        return fiscal.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(fiscal);
+        return fiscal.isEmpty() ? notFound().build() : ok(fiscal);
     }
 
 }
