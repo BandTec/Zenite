@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.http.ResponseEntity.*;
+
 
 @Api(description = "Operações relacionadas ao fiscal", tags = "fiscal")
 @RestController
@@ -45,16 +47,16 @@ public class FiscalController {
     public ResponseEntity consulta() {
 
         if (this.repository.count() > 0) {
-            return ResponseEntity.ok(this.repository.findAll());
+            return ok(this.repository.findAll());
         } else {
-            return ResponseEntity.noContent().build();
+            return noContent().build();
         }
 
     }
 
     @ApiOperation("Lista as linhas de um fiscal")
     @GetMapping("{id}/linhas")
-    public ResponseEntity consultaLinha(@PathVariable("id") int id) {
+    public ResponseEntity consultaLinha(@PathVariable("id") Integer id) {
         Optional<Fiscal> fiscal = this.repository.findById(id);
         if (fiscal.isPresent()) {
             List<Viagem> viagem = viagemRepository.findByFiscal(fiscal.get());
@@ -62,21 +64,21 @@ public class FiscalController {
             for(Viagem v : viagem){
                 linha.add(v.getLinha());
             }
-            return ResponseEntity.ok(linha);
+            return ok(linha);
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
 
     }
 
     @ApiOperation("Buscar um fiscal por seu id")
     @GetMapping("{id}")
-    public ResponseEntity consulta(@PathVariable("id") int id) {
+    public ResponseEntity consulta(@PathVariable("id") Integer id) {
         Optional<Fiscal> fiscal = this.repository.findById(id);
         if (fiscal.isPresent()) {
-            return ResponseEntity.ok(fiscal);
+            return ok(fiscal);
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -84,7 +86,7 @@ public class FiscalController {
     @PutMapping("{id}")
     @Transactional
     public ResponseEntity alterar(@RequestBody Fiscal novoFiscal,
-                                  @PathVariable int id) {
+                                  @PathVariable Integer id) {
         if (this.repository.existsById(id)) {
             novoFiscal.setId(id);
             // Encriptar senha
@@ -95,20 +97,20 @@ public class FiscalController {
 
             // alterar fiscal
             this.repository.save(novoFiscal);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
     @ApiOperation("Deleta um fiscal por seu id")
     @DeleteMapping("{id}")
-    public ResponseEntity deletar(@PathVariable("id") int id) {
+    public ResponseEntity deletar(@PathVariable("id") Integer id) {
         if (this.repository.existsById(id)) {
             this.repository.deleteById(id);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -127,7 +129,7 @@ public class FiscalController {
         this.repository.save(novoFiscal);
         novoFiscal.setId(repository.lastId());
 
-        return ResponseEntity.created(null).build();
+        return created(null).build();
     }
 
     @ApiOperation("Exibe fiscal pelo código do dispositivo")
@@ -137,15 +139,15 @@ public class FiscalController {
         if(dispositivo.isPresent()){
             Optional<Fiscal> fiscal = this.repository.findByDispositivo(dispositivo.get());
             if (fiscal.isPresent()) {
-                return ResponseEntity.ok(fiscal);
+                return ok(fiscal);
             }
         }
-        return ResponseEntity.notFound().build();
+        return notFound().build();
     }
 
     @ApiOperation("Exibe as linhas que o fiscal trabalha")
     @GetMapping("/linha/{id}")
-    public ResponseEntity consultarLinhasPorFiscal(@PathVariable int id){
+    public ResponseEntity consultarLinhasPorFiscal(@PathVariable Integer id){
         List<FiscalLinha> fiscalLinha = fiscalLinhaRepository.findByIdFiscal(id);
         List<Linha> linhas = new ArrayList<>();
 
@@ -156,7 +158,7 @@ public class FiscalController {
             }
         }
 
-        return linhas.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(linhas);
+        return linhas.isEmpty() ? notFound().build() : ok(linhas);
     }
 
 }
