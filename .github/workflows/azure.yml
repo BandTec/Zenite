@@ -20,6 +20,7 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
     - name: npm install, build, and test
       run: |
+        cd Dev/frontend
         npm install
         npm run build --if-present
         npm run test --if-present
