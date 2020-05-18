@@ -15,7 +15,7 @@ export default function Dashboard() {
           <Row>
             <Titulo textoMenor={`Atualizado em ${data.getHours()}:${data.getMinutes()}`} textoMaior='Dashboard'/>
             <Perfil>
-              Olá, João Soares
+              Olá, João Pedro Soares
             </Perfil>
           </Row>
           <Cabecalho>
