@@ -1,30 +1,35 @@
+name: Build and deploy Node.js app to Azure Web App - zenite
+
 on:
   push:
-    branches: 
+    branches:
       - master
 
 env:
-  AZURE_WEBAPP_NAME: zenite
-  AZURE_WEBAPP_PACKAGE_PATH: './Dev/frontend'
+  AZURE_WEBAPP_NAME_FRONTEND: zenite
+  AZURE_WEBAPP_PACKAGE_PATH_FRONTEND: './Dev/frontend'
   NODE_VERSION: '12.x'
 
 jobs:
   build-and-deploy:
-    name: Build and Deploy
+    name: Build and Deploy - frontend
     runs-on: ubuntu-latest
+    
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ env.NODE_VERSION }}
+    - uses: actions/checkout@master
+    - name: Set up Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ env.NODE_VERSION }}
-    - name: npm install, build, and test
+
+    - name: npm ci
       run: |
-        cd Dev/frontend
-        npm install
-    - name: 'Deploy to Azure WebApp'
-      uses: azure/webapps-deploy@v2
+        cd ${{ env.AZURE_WEBAPP_PACKAGE_PATH_FRONTEND }}
+        npm ci
+
+    - name: 'Deploy to Azure WebApp - frontend'
+      uses: azure/webapps-deploy@v1
       with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        app-name: ${{ env.AZURE_WEBAPP_NAME_FRONTEND }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_FRONTEND }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH_FRONTEND }}
