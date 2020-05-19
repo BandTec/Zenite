@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
+import AsyncSelect from "react-select/async";
 
 import {
   Container,
@@ -9,50 +10,24 @@ import {
   FormContainer,
   Titulo,
   Subtitulo,
-  Caixa
+  Caixa,
+  Select,
 } from "./styles";
 import BotaoForm from "../../components/BotaoForm";
-import Botao from "../../components/Botao";
 
 import InputComRotulo from "../../components/InputComRotulo";
-import ComboBoxComRotulo from "../../components/ComboBoxComRotulo";
 
 export default function CadastroLinha(props) {
-   const caminho = props.match.path;
-   const id = props.match.params.id;
-   const isEdicao = caminho.includes("editar");
-   const tipoPagina = isEdicao ? "Edição" : "Cadastro";
-   
-  const [linhaNumero, setLinhaNumero] = useState("");
-  const [novaParadaIda, setNovaParadaIda] = useState(false);
-  const [novaParadaVolta, setNovaParadaVolta] = useState(false);
+  const caminho = props.match.path;
+  const id = props.match.params.id;
+  const isEdicao = caminho.includes("editar");
+  const tipoPagina = isEdicao ? "Edição" : "Cadastro";
 
+  const [linhaNumero, setLinhaNumero] = useState("");
   const [paradaIda, setParadaIda] = useState("");
   const [paradaVolta, setParadaVolta] = useState("");
-  const [idParadaIda, setIdParadaIda] = useState("");
-  const [idParadaVolta, setIdParadaVolta] = useState("");
-  const [paradas, setParadas] = useState([]);
 
   useEffect(() => {
-      async function consultaDadosIniciais() {
-        const token = localStorage.getItem("token");
-
-        const response = await api.get("/api/pontofinal", {
-          headers: { Authorization: token },
-        });
-        let temp = [{ value: "", texto: "Escolha uma parada" }];
-        const dados = response.data;
-        dados.forEach((item) => {
-          temp.push({ value: item.id, texto: item.nome });
-        });
-        setParadas(temp);
-      }
-
-      consultaDadosIniciais();
-  }, []);
-
-  useEffect(()=> {
-
     async function consultarEdicao() {
       const token = localStorage.getItem("token");
       try {
@@ -62,61 +37,62 @@ export default function CadastroLinha(props) {
 
         const dados = response.data;
 
-        setParadaVolta(dados.pontoVolta.nome);
-        setParadaIda(dados.pontoIda.nome);
-
-        setIdParadaIda(dados.pontoIda.id);
-        setIdParadaVolta(dados.pontoVolta.id);
-
+        setParadaVolta(option(dados.pontoVolta));
+        setParadaIda(option(dados.pontoIda));
         setLinhaNumero(dados.numero);
-      } catch(e) {
-      alert("Ocorreu um erro. Tente de novo.");
+      } catch (e) {
+        alert("Ocorreu um erro. Tente de novo.");
       }
     }
 
-      id && consultarEdicao();
-  }, [id])
+    id && consultarEdicao();
+  }, [id]);
+
+  const option = (e) => {
+    return {
+      value: e.id,
+      label: e.nome,
+      dados: e,
+    };
+  };
 
   const cadastrar = async () => {
-    let ida = novaParadaIda ? {nome: paradaIda} : { id: idParadaIda} ;
-    let volta = novaParadaVolta ? {nome: paradaVolta} : { id: idParadaVolta};
     let dados = {
       numero: linhaNumero,
-      pontoIda: ida,
-      pontoVolta: volta,
+      pontoIda: { id: paradaIda.dados.id },
+      pontoVolta: { id: paradaVolta.dados.id },
     };
+    
     try {
       const token = await localStorage.getItem("token");
       const response = await api.post("/api/linha", dados, {
         headers: { Authorization: token },
       });
-      
+
       if (response.status === 201) {
         props.history.push("/linha");
       } else {
         alert("Ocorreu um erro. Tente de novo");
       }
-   }catch(e) {
+    } catch (e) {
       alert("Ocorreu um erro. Tente de novo.");
     }
   };
 
   const editar = async () => {
-    let ida = novaParadaIda ? { nome: paradaIda } : { id: idParadaIda };
-    let volta = novaParadaVolta ? { nome: paradaVolta } : { id: idParadaVolta };
     let dados = {
       id: id,
       numero: linhaNumero,
-      pontoIda: ida,
-      pontoVolta: volta,
+      pontoIda: { id: paradaIda.dados.id },
+      pontoVolta: { id: paradaVolta.dados.id },
     };
 
     try {
       const token = await localStorage.getItem("token");
-      const response = await api.put("/api/linha", dados, {
+      const response = await api.put(`/api/linha/${id}`, dados, {
         headers: { Authorization: token },
       });
-      console.log(response);
+   
       if (response.status === 200) {
         props.history.push("/linha");
       } else {
@@ -127,9 +103,25 @@ export default function CadastroLinha(props) {
     }
   };
 
+  const pesquisa = async (inputValue) => {
+    const token = localStorage.getItem("token");
+
+    const response = await api.get(`/api/pontofinal?q=${inputValue}`, {
+      headers: { Authorization: token },
+    });
+
+    let opcoes = response.data.map((item) => ({
+      value: item.id,
+      label: item.nome,
+      dados: item,
+    }));
+
+    return opcoes;
+  };
+
   const concluir = () => {
     isEdicao ? editar() : cadastrar();
-  }
+  };
 
   return (
     <Container>
@@ -154,65 +146,17 @@ export default function CadastroLinha(props) {
             />
 
             <CaixaHorizontal>
-              <Caixa>
-                {novaParadaIda && (
-                  <InputComRotulo
-                    texto="Parada Ida"
-                    maxLength="80"
-                    name="paradaIda"
-                    type="text"
-                    value={paradaIda}
-                    onChange={(e) => setParadaIda(e.target.value)}
-                    required
-                    pequeno={true}
-                  />
-                )}
+              <Select
+                value={paradaIda}
+                onChange={(e) => setParadaIda(e)}
+                loadOptions={(e) => pesquisa(e)}
+              />
 
-                {!novaParadaIda && (
-                  <ComboBoxComRotulo
-                    texto="Parada Ida"
-                    conteudoCombo={paradas}
-                    pequeno={true}
-                    stateSelecionado={idParadaIda}
-                    onchange={(e) => setIdParadaIda(e.target.value)}
-                  />
-                )}
-
-                <Botao
-                  descricao="Nova parada Ida"
-                  onClick={() => setNovaParadaIda(!novaParadaIda)}
-                />
-              </Caixa>
-
-              <Caixa>
-                {novaParadaVolta && (
-                  <InputComRotulo
-                    texto="Parada Volta"
-                    maxLength="7"
-                    name="numeroLinha"
-                    type="text"
-                    required
-                    value={paradaVolta}
-                    onChange={(e) => setParadaVolta(e.target.value)}
-                    pequeno={true}
-                  />
-                )}
-
-                {!novaParadaVolta && (
-                  <ComboBoxComRotulo
-                    texto="Parada Volta"
-                    conteudoCombo={paradas}
-                    pequeno={true}
-                    stateSelecionado={idParadaVolta}
-                    onchange={(e) => setIdParadaVolta(e.target.value)}
-                  />
-                )}
-
-                <Botao
-                  descricao="Nova parada volta"
-                  onClick={() => setNovaParadaVolta(!novaParadaVolta)}
-                />
-              </Caixa>
+              <Select
+                value={paradaVolta}
+                onChange={(e) => setParadaVolta(e)}
+                loadOptions={(e) => pesquisa(e)}
+              />
             </CaixaHorizontal>
           </Caixa>
 

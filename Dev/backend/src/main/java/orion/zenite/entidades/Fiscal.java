@@ -125,11 +125,21 @@ public class Fiscal  {
         this.dispositivo = dispositivo;
     }
 
-    public List getLinhasId() {
+  /*  public List getLinhasId() {
         ArrayList linhasId = new ArrayList();
         for (FiscalLinha linha : fiscalLinha) {
             linhasId.add(linha.getIdLinha());
         }
         return linhasId;
+    }
+
+   */
+
+    public List getLinhas() {
+        ArrayList linhas = new ArrayList();
+        for (FiscalLinha linha : fiscalLinha) {
+            linhas.add(linha.getLinha());
+        }
+        return linhas;
     }
 }

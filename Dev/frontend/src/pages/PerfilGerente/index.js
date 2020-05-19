@@ -21,7 +21,7 @@ export default function Perfil(props) {
   const [dados, setDados] = useState({});
   const [pagina, setPagina] = useState(0);
   const [validacaoSenha, setValidacaoSenha] = useState(false);
-  const [idUsuario, setIdUsuario] = useState(0);
+  // const [idUsuario, setIdUsuario] = useState(0);
   const [rota, setRota] = useState("");
 
   const mudarPagina = (isProximo) => {
@@ -33,7 +33,7 @@ export default function Perfil(props) {
   };
 
  function tipoUsuario(dados) {
-   setIdUsuario(dados.id);
+  //  setIdUsuario(dados.id);
    const nivel = dados.conta.nivel.id;
    switch (nivel) {
      case 1:

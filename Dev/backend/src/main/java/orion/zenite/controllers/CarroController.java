@@ -3,17 +3,19 @@ package orion.zenite.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.entidades.Carro;
-import orion.zenite.entidades.CarroLinha;
-import orion.zenite.entidades.Dispositivo;
-import orion.zenite.entidades.MotoristaCarro;
+import orion.zenite.dto.ConsultaPaginada;
+import orion.zenite.entidades.*;
 import orion.zenite.repositorios.CarroLinhaRepository;
 import orion.zenite.repositorios.CarroRepository;
 import orion.zenite.repositorios.DispositivoRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
@@ -34,14 +36,26 @@ public class CarroController {
 
     @ApiOperation("Listar todos os ônibus")
     @GetMapping
-    public ResponseEntity consulta() {
-
+    public ResponseEntity consultarTodos(
+            @RequestParam(required = false) Integer pagina,
+            @RequestParam(required = false) String q
+    ) {
         if (this.repository.count() > 0) {
-            return ok(this.repository.findAll());
+            if (pagina != null) {
+                Pageable pageable = PageRequest.of(pagina, 10);
+                Page<Carro> page = repository.findAll(pageable);
+                ConsultaPaginada consulta = new ConsultaPaginada(page);
+                return ok(consulta);
+            } else if (q != null) {
+                List<Carro> consulta = repository.findAllByNumeroContaining(q);
+                return ok(consulta);
+            } else {
+                List<Carro> consulta = repository.findAll();
+                return ok(consulta);
+            }
         } else {
             return noContent().build();
         }
-
     }
 
     @ApiOperation("Exibe ônibus por id")

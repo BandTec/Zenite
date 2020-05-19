@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import { Container, Row, Cabecalho, CorpoRelatorio, CaixaDados, CaixaTabela } from './styles';
+import { Container, Row, Cabecalho, CorpoRelatorio, CaixaDados } from './styles';
 import Titulo from  '../../components/Titulo';
 import TituloTipoDado from '../../components/TituloTipoDado';
 import TituloDado from '../../components/TituloDado';
 import Botao from '../../components/Botao';
-import Tabela from "../../components/Tabela2";
 import api from "../../services/api";
 
 export default function DetalhesGerente(props) {
@@ -25,7 +24,7 @@ export default function DetalhesGerente(props) {
     }
 
     consultar();
-  }, []);
+  }, [id]);
 
   return (
     <Container>

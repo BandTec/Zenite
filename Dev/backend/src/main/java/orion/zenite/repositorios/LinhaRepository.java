@@ -11,6 +11,8 @@ public interface LinhaRepository extends JpaRepository<Linha, Integer> {
     @Query(value = "select max(l.id) from Linha l")
     int lastId();
 
+    List<Linha> findAllByNumeroContaining(String numero);
+
     Linha findByPontoIda(PontoFinal pontoIda);
 
     List<Linha> findAllByPontoIda(PontoFinal pontoIda);

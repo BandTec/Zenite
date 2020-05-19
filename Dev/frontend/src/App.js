@@ -17,12 +17,14 @@ import CadastroMotorista from "./pages/CadastroMotorista";
 import CadastroGerente from "./pages/CadastroGerente";
 import CadastroAdmin from "./pages/CadastroAdmin";
 import ConsultaAdmin from "./pages/VisualizaAdmin";
+import VisualizaParada from "./pages/VisualizaParadas";
 import ConsultaGerente from "./pages/VisualizaGerente";
 import CadastroParadaLinha from "./pages/CadastroParadaLinha";
 import CadastroOnibus from "./pages/CadastroOnibus";
 import Perfil from "./pages/PerfilGerente";
 
 import MenuLateral from "./components/MenuLateral";
+import Alocacao from './pages/Alocacao';
 
 const App = () => {
   return (
@@ -33,6 +35,10 @@ const App = () => {
 
       <div className="conteudo">
         <Route exact path="/dashboard" component={Dashboard} />
+
+        <Route exact path="/alocacao" component={Alocacao} />
+
+        <Route exact path="/parada" component={VisualizaParada} />
 
         {/* FISCAL */}
 
@@ -48,7 +54,7 @@ const App = () => {
 
         <Route exact path="/motorista" component={Motorista} />
 
-        <Route path="/motorista/detalhes/:id" component={DetalhesMotorista} /> 
+        <Route path="/motorista/detalhes/:id" component={DetalhesMotorista} />
 
         <Route path="/motorista/editar/:id" component={CadastroMotorista} />
 
@@ -95,7 +101,6 @@ const App = () => {
         {/* Perfil */}
 
         <Route path="/perfil" component={Perfil} />
-
       </div>
     </Router>
   );

@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import api from '../../services/api';
+import React, { useEffect, useState } from "react";
+import api from "../../services/api";
+//Então, é que agora tá basicamente "pronta"
 
-import { Container, Row, Acoes} from './styles';
-import Botao from '../../components/Botao';
-import Tabela from "./../../components/Tabela2";
-import Titulo from '../../components/Titulo';
-import Paginacao from '../../components/Paginacao';
+import { Container, Row, Acoes } from "./styles";
+import Botao from "../../components/Botao";
+import Tabela from "../../components/Tabela2";
+import Titulo from "../../components/Titulo";
+import Paginacao from "../../components/Paginacao";
 
-export default function ConsultaMotorista() {
-   
+export default function ConsultaParada() {
   const [corpo, setCorpo] = useState([]);
   const [pagina, setPagina] = useState(0);
   const [total, setTotal] = useState(0);
-  const [totalItens, setTotalItens] = useState(0);
   const [atual, setAtual] = useState(0);
+  const [totalItens, setTotalItens] = useState(0);
 
   useEffect(() => {
     async function dadosCorpos() {
@@ -22,7 +22,7 @@ export default function ConsultaMotorista() {
 
       //Essa de baixo, faz a chamada GET pra rota /api/linha, passando o token como cabeçalho e passa pra
       //uma variavel response
-      const response = await api.get(`/api/motorista?pagina=${pagina}`, {
+      const response = await api.get(`/api/pontofinal?pagina=${pagina}`, {
         headers: { Authorization: token },
       });
 
@@ -31,10 +31,16 @@ export default function ConsultaMotorista() {
       setAtual(dados.paginaAtual);
       setTotal(dados.totalPaginas);
       setTotalItens(dados.totalItens);
+
       let temp = [];
+
       dados.lista.forEach((item) => {
         temp.push(
-          criaDados(item.id, item.nome, item.numeroTelefone, item.cpf, item.cnh)
+          criaDados(
+            item.id,
+            item.nome,
+            item.totalLinhas
+          )
         );
       });
       setCorpo(temp);
@@ -43,28 +49,33 @@ export default function ConsultaMotorista() {
     dadosCorpos();
   }, [pagina]);
 
-  function criaDados(id, nome,numeroTelefone, cpf, cnh){
-    return {id, nome,numeroTelefone, cpf, cnh}
+  function criaDados(id, nome, totalLinhas) {
+    return { id, nome, totalLinhas };
   }
+
+  const nova = () => {
+    // abrir modal sweet alert e criar nova parada
+  }
+
+  const editar = () => {
+    // abrir modal sweet alert e criar nova parada
+    alert("asdf");
+  };
 
   return (
     <Container>
       <Row>
-        <Titulo textoMenor="consulta de motorista" textoMaior="" />
+        <Titulo textoMenor="consulta de Parada" textoMaior="" />
       </Row>
 
       <Acoes>
-        <Botao
-          descricao="Novo Motorista"
-          estiloEscuro={true}
-          url="/motorista/cadastro"
-        />
+        <Botao descricao="Nova Parada" estiloEscuro={true} onClick={nova} />
 
-        <Botao descricao="relatório" url="/motorista" />
+        {/* <Botao descricao="relatório" url="/parada" /> */}
       </Acoes>
 
       <Row>
-        <Tabela tipo="motorista" dados={corpo} />
+        <Tabela tipo="pontofinal" dados={corpo} detalhes={false} editarFuncao={editar} />
       </Row>
 
       <Row>

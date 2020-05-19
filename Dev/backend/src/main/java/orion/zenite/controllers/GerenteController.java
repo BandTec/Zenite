@@ -5,13 +5,18 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import orion.zenite.dto.ConsultaPaginada;
 import orion.zenite.entidades.Conta;
+import orion.zenite.entidades.Fiscal;
 import orion.zenite.entidades.Gerente;
 import orion.zenite.repositorios.GerenteRepository;
 
@@ -38,10 +43,25 @@ public class GerenteController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping
-    public ResponseEntity consulta() {
-        if(this.repository.count() > 0){
-            return ok(this.repository.findAll());
-        }else{
+    public ResponseEntity consulta( @RequestParam(required = false) Integer pagina,
+                                    @RequestParam(required = false) String q
+    )  {
+        if (this.repository.count() > 0) {
+            if(pagina != null) {
+                Pageable pageable = PageRequest.of(pagina, 10);
+                Page<Gerente> page = repository.findAll(pageable);
+                ConsultaPaginada consulta = new ConsultaPaginada(page);
+                return ok(consulta);
+            }
+            else if(q != null){
+                List<Gerente> consulta = repository.findAllByNomeContaining(q);
+                return ok(consulta);
+            }
+            else {
+                List<Gerente> consulta = repository.findAll();
+                return ok(consulta);
+            }
+        } else {
             return noContent().build();
         }
     }

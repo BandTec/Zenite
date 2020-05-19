@@ -2,12 +2,15 @@ package orion.zenite.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.Response;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import orion.zenite.dto.ConsultaPaginada;
 import orion.zenite.repositorios.*;
 import orion.zenite.entidades.*;
 
@@ -44,31 +47,28 @@ public class FiscalController {
 
     @ApiOperation("Lista todos os fiscais")
     @GetMapping
-    public ResponseEntity consulta() {
-
+    public ResponseEntity  consultarTodos(
+            @RequestParam(required = false) Integer pagina,
+            @RequestParam(required = false) String q
+    )  {
         if (this.repository.count() > 0) {
-            return ok(this.repository.findAll());
+            if(pagina != null) {
+                Pageable pageable = PageRequest.of(pagina, 10);
+                Page<Fiscal> page = repository.findAll(pageable);
+                ConsultaPaginada consulta = new ConsultaPaginada(page);
+                return ok(consulta);
+            }
+            else if(q != null){
+                List<Fiscal> consulta = repository.findAllByNomeContaining(q);
+                return ok(consulta);
+            }
+            else {
+                List<Fiscal> consulta = repository.findAll();
+                return ok(consulta);
+            }
         } else {
             return noContent().build();
         }
-
-    }
-
-    @ApiOperation("Lista as linhas de um fiscal")
-    @GetMapping("{id}/linhas")
-    public ResponseEntity consultaLinha(@PathVariable("id") Integer id) {
-        Optional<Fiscal> fiscal = this.repository.findById(id);
-        if (fiscal.isPresent()) {
-            List<Viagem> viagem = viagemRepository.findByFiscal(fiscal.get());
-            List<Linha> linha = new ArrayList<>();
-            for(Viagem v : viagem){
-                linha.add(v.getLinha());
-            }
-            return ok(linha);
-        } else {
-            return notFound().build();
-        }
-
     }
 
     @ApiOperation("Buscar um fiscal por seu id")
@@ -146,7 +146,7 @@ public class FiscalController {
     }
 
     @ApiOperation("Exibe as linhas que o fiscal trabalha")
-    @GetMapping("/linha/{id}")
+    @GetMapping("{id}/linhas")
     public ResponseEntity consultarLinhasPorFiscal(@PathVariable Integer id){
         List<FiscalLinha> fiscalLinha = fiscalLinhaRepository.findByIdFiscal(id);
         List<Linha> linhas = new ArrayList<>();
@@ -161,4 +161,12 @@ public class FiscalController {
         return linhas.isEmpty() ? notFound().build() : ok(linhas);
     }
 
+    @ApiOperation("Cadastra a linhas que o fiscal trabalha")
+    @PostMapping("/linhas")
+    @Transactional
+    public ResponseEntity consultarLinhasPorFiscal(@RequestBody FiscalLinha fl){
+
+        fiscalLinhaRepository.save(fl);
+        return created(null).build();
+    }
 }
