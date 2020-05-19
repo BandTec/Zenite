@@ -5,7 +5,6 @@ import Titulo from  '../../components/Titulo';
 import TituloTipoDado from '../../components/TituloTipoDado';
 import TituloDado from '../../components/TituloDado';
 import Botao from '../../components/Botao';
-import Tabela from "../../components/Tabela2";
 import api from "../../services/api";
 
 export default function DetalhesGerente(props) {

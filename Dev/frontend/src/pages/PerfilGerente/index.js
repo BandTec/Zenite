@@ -76,12 +76,12 @@ export default function Perfil(props) {
     const token = await localStorage.getItem("token");
     try {
       if (validacaoSenha){
-          const response = await api.put(`/api/${rota}`, dados, {
+          const response = await api.put(`/api/${rota}/${idUsuario}`, dados, {
             headers: { Authorization: token },
           });
       
-        if (response.status === 204) {
-          props.history.push("/login");
+        if (response.status === 200) {
+          props.history.push("/dashboard");
         } else {
           alert("Ocorreu um erro. Tente de novo");
         }
