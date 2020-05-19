@@ -6,6 +6,14 @@
         },
         {
             "base": "master"
+        },
+        {
+            "name": "feature/refactor-backend",
+            "base": "master"
+        },
+        {
+            "name": "feature/backend-refactor",
+            "base": "master"
         }
     ],
     "gitflow4code.releases": []

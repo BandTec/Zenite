@@ -13,6 +13,8 @@ import orion.zenite.repositorios.AdministradorRepository;
 
 import java.util.Optional;
 
+import static org.springframework.http.ResponseEntity.*;
+
 /*
  * Todas as rotas que começam com /api/alguma-coisa
  * estão protegidas pelo JWToken.
@@ -44,38 +46,41 @@ public class AdministradorController {
     @GetMapping
     public ResponseEntity consultar(){
         if (this.repository.count() > 0) {
-            return ResponseEntity.ok(this.repository.findAll());
+            return ok(this.repository.findAll());
         } else {
-            return ResponseEntity.noContent().build();
+            return noContent().build();
         }
     }
 
     @ApiOperation("Buscar um administrador por seu id")
     @GetMapping("{id}")
-    public ResponseEntity consultar(@PathVariable("id") int id){
+    public ResponseEntity consultar(@PathVariable("id") Integer id){
         Optional<Administrador> adm = this.repository.findById(id);
         if (adm.isPresent()) {
-            return ResponseEntity.ok(adm);
+            return ok(adm);
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
     @ApiOperation("Deleta um administrador por seu id")
     @DeleteMapping("{id}")
-    public ResponseEntity deletar(@PathVariable("id") int id){
+    public ResponseEntity deletar(@PathVariable("id") Integer id){
         if (this.repository.existsById(id)) {
             this.repository.deleteById(id);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
     @ApiOperation("Altera um administrador")
-    @PutMapping
-    public ResponseEntity alterar(@RequestBody Administrador administrador){
-        if (this.repository.existsById(administrador.getId())) {
+    @PutMapping("{id}")
+    @Transactional
+    public ResponseEntity alterar(@RequestBody Administrador administrador,
+                                  @PathVariable Integer id){
+        if (this.repository.existsById(id)) {
+            administrador.setId(id);
             // encriptar senha
             Conta conta = administrador.getConta();
             String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
@@ -84,9 +89,9 @@ public class AdministradorController {
 
             // altera adm
             this.repository.save(administrador);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -104,6 +109,6 @@ public class AdministradorController {
         // salvar adm
         this.repository.save(administrador);
 
-        return ResponseEntity.created(null).build();
+        return created(null).build();
     }
 }

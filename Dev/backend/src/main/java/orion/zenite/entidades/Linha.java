@@ -35,6 +35,10 @@ public class Linha {
     @OneToMany(mappedBy = "linha", cascade = CascadeType.REMOVE)
     private List<Viagem> viagem;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "linha", cascade = CascadeType.REMOVE)
+    private List<FiscalLinha> fiscalLinha;
+
     public String getNumero() {
         return numero;
     }
@@ -73,5 +77,13 @@ public class Linha {
             carrosId.add(carro.getIdCarro());
         }
         return carrosId;
+    }
+
+    public List getFiscalId(){
+        ArrayList fiscalId = new ArrayList();
+        for(FiscalLinha fiscalLinha : fiscalLinha){
+            fiscalId.add(fiscalLinha.getIdFiscal());
+        }
+        return fiscalId;
     }
 }

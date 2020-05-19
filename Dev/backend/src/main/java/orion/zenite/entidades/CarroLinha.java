@@ -29,9 +29,7 @@ public class CarroLinha {
     @JoinColumn(name = "idCarro")
     private Carro carro;
 
-    public int getIdLinha() {
-        return idLinha;
-    }
+    public int getIdLinha() {return idLinha; }
 
     public void setIdLinha(int idLinha) {
         this.idLinha = idLinha;
