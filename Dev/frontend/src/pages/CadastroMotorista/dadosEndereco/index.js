@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
-import BotaoForm from './../../../components/BotaoForm';
-import StatusPage from './../../../components/StatusPage';
-import InputComRotulo from './../../../components/InputComRotulo';
+import BotaoForm from '../../../components/BotaoForm';
+import StatusPage from '../../../components/StatusPage';
+import InputComRotulo from '../../../components/InputComRotulo';
 
-import { cepMask } from "./../../../functions/Mascaras/mask";
+import { cepMask } from "../../../functions/Mascaras/mask";
 
-export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados }) {
+export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados, dados }) {
   const [valorCep, setValorCep] = useState("");
   const [logradouro, setLogradouro] = useState("");
   const [numero, setNumero] = useState("");
@@ -19,18 +19,31 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados 
     setValorCep(cepMask(e.target.value));
   }
 
-  const criarJson = () => {
-    adicionarDados({
-      "endereco": {
-      "cep": valorCep,
-      logradouro,
-      numero,
-      complemento,
-      cidade,
-      estado
+  useEffect(() => {
+    if (Object.keys(dados).length !== 0) {
+      setValorCep(dados.endereco.cep);
+      setLogradouro(dados.endereco.logradouro);
+      setNumero(dados.endereco.numero);
+      setComplemento(dados.endereco.complemento);
+      setCidade(dados.endereco.cidade);
+      setEstado(dados.endereco.estado);
     }
-    })
-  }
+  }, []);
+
+  useEffect(() => {
+    adicionarDados({
+      endereco: {
+        id: dados.endereco.id,
+        cep: valorCep,
+        logradouro,
+        numero,
+        complemento,
+        cidade,
+        estado,
+      },
+    });
+  }, [valorCep, logradouro, numero, complemento, cidade, estado]);
+
   return (
     <Container>
 
@@ -125,7 +138,7 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados 
             </CaixaHorizontal>
           </Caixa>
 
-          <BotaoForm texto="Próximo" mudarPagina={mudarPagina} criarJson={criarJson} /> 
+          <BotaoForm texto="Próximo" mudarPagina={mudarPagina} /> 
           
         </FormContainer>
       </CorpoPagina>

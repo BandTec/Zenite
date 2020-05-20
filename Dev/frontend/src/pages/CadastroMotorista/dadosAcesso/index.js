@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 import BotaoForm from './../../../components/BotaoForm';
@@ -6,35 +6,38 @@ import StatusPage from './../../../components/StatusPage';
 
 import InputComRotulo from './../../../components/InputComRotulo';
 
-export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados }) {
+export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados, dados, validarSenha }) {
 
   const [email, setEmail] = useState("");
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");
-  const [validacaoSenha, setValidacaoSenha] = useState("");
-
 
 
   const verificarSenha = () => {
-    // verificao
-    
-    setValidacaoSenha(valorSenha === valorConfirmarSenha ? true : false);
-    console.log(validacaoSenha);
-    console.log(valorSenha);
-    console.log(valorConfirmarSenha);
+    if (valorSenha.length >= 8) {
+      validarSenha(valorSenha === valorConfirmarSenha);
+    }
   }
+  
+  useEffect(() => {
+    if (Object.keys(dados).length !== 0) {
+      setEmail(dados.conta.email);
+    }
+  }, []);
 
-  const criarJson = () => {
+  useEffect(()=> {
     adicionarDados({
-      "conta": {
-        "senha":valorSenha,
+      conta: {
+        idConta: dados.conta.idConta,
+        senha: valorSenha,
         email,
-        "nivel": {
+        nivel: {
           "id": 4
         }
       }
-    })
-}
+    });
+    verificarSenha();
+  }, [valorSenha, valorConfirmarSenha, email]);
 
   return (
     <Container>
@@ -104,7 +107,6 @@ export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados })
                 verificarSenha();
               }}
               required
-              invalido={validacaoSenha}
             />
           </Caixa>
 
@@ -112,7 +114,6 @@ export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados })
             texto="Finalizar"
             concluir={true}
             mudarPagina={mudarPagina}
-            criarJson={criarJson}
           />
         </FormContainer>
       </CorpoPagina>
