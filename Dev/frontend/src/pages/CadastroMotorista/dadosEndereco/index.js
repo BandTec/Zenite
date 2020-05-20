@@ -20,7 +20,7 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados,
   }
 
   useEffect(() => {
-    if (Object.keys(dados).length !== 0) {
+    if (Object.keys(dados).length !== 0 && tipoPagina === "Edição") {
       setValorCep(dados.endereco.cep);
       setLogradouro(dados.endereco.logradouro);
       setNumero(dados.endereco.numero);
@@ -31,17 +31,30 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados,
   }, []);
 
   useEffect(() => {
-    adicionarDados({
-      endereco: {
-        id: dados.endereco.id,
-        cep: valorCep,
-        logradouro,
-        numero,
-        complemento,
-        cidade,
-        estado,
-      },
-    });
+    if(tipoPagina === "Edição"){
+      adicionarDados({
+        endereco: {
+          id: dados.endereco.id,
+          cep: valorCep,
+          logradouro,
+          numero,
+          complemento,
+          cidade,
+          estado,
+        },
+      });
+    }else{
+      adicionarDados({
+        endereco: {
+          cep: valorCep,
+          logradouro,
+          numero,
+          complemento,
+          cidade,
+          estado,
+        },
+      });
+    }
   }, [valorCep, logradouro, numero, complemento, cidade, estado]);
 
   return (
@@ -80,7 +93,7 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados,
 
             <InputComRotulo
               texto="CEP"
-              maxLength="8"
+              maxLength="9"
               name="cep"
               value={valorCep}
               onChange={mascararCep}

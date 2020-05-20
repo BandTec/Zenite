@@ -88,7 +88,8 @@ export default function CadastroMotorista(props) {
    
     return (
         <Container>
-            { Object.keys(dados).length === 0 ? (
+            {
+            isEdicao && Object.keys(dados).length === 0 ? (
                 <Loader />
             ) : (
                 pagina === 1 ?

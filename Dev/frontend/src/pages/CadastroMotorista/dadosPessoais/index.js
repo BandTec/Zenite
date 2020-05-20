@@ -22,7 +22,7 @@ import InputComRotulo from './../../../components/InputComRotulo';
   }
 
   const mascararData = (e) => {
-    setValorData(dataMask(e.target.value));
+    setValorData((e.target.value));
   }
 
   const mascararTelefone = (e) => {
@@ -30,7 +30,7 @@ import InputComRotulo from './../../../components/InputComRotulo';
   }
 
   useEffect(() => {  
-    if (Object.keys(dados).length !== 0) {
+    if (Object.keys(dados).length !== 0 && tipoPagina === "Edição") {
       setNome(dados.nome);
       setValorCpf(dados.cpf);
       setValorData(dados.dataNascimento);

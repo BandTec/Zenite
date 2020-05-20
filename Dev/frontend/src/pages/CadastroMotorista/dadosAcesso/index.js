@@ -20,22 +20,34 @@ export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados, d
   }
   
   useEffect(() => {
-    if (Object.keys(dados).length !== 0) {
+    if (Object.keys(dados).length !== 0 && tipoPagina === "Edição") {
       setEmail(dados.conta.email);
     }
   }, []);
 
   useEffect(()=> {
-    adicionarDados({
-      conta: {
-        idConta: dados.conta.idConta,
-        senha: valorSenha,
-        email,
-        nivel: {
-          "id": 4
+    if(tipoPagina === "Edição"){
+      adicionarDados({
+        conta: {
+          idConta: dados.conta.idConta,
+          senha: valorSenha,
+          email,
+          nivel: {
+            "id": 4
+          }
         }
-      }
-    });
+      });
+    }else{
+      adicionarDados({
+        conta: {
+          senha: valorSenha,
+          email,
+          nivel: {
+            "id": 4
+          }
+        }
+      });
+    }
     verificarSenha();
   }, [valorSenha, valorConfirmarSenha, email]);
 
