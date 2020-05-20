@@ -22,7 +22,7 @@ export default function Login(props) {
       }else{
         Swal.fire({
           title:'Tente novamente',
-          text:`${response.data.message}`,
+          text:`Email ou senha errada.`,
           icon:'error',
           showConfirmButton: true,
         });
@@ -30,7 +30,7 @@ export default function Login(props) {
     }catch(err){
       Swal.fire({
         title:'Tente novamente',
-        text:`${err.message}`,
+        text:`Email ou senha errada.`,
         icon:'error',
         showConfirmButton: true,
       });
