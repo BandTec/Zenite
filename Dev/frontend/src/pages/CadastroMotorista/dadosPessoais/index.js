@@ -22,7 +22,7 @@ import InputComRotulo from './../../../components/InputComRotulo';
   }
 
   const mascararData = (e) => {
-    setValorData(e.target.value);
+    setValorData(dataMask(e.target.value));
   }
 
   const mascararTelefone = (e) => {

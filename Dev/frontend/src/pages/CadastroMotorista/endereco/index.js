@@ -15,8 +15,8 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados 
   const [cidade, setCidade] = useState("");
   const [estado, setEstado] = useState("");
 
-  const mascararCep = e => {
-    setValorCep(e.target.value);
+  const mascararCep = (e) => {
+    setValorCep(cepMask(e.target.value));
   }
 
   const criarJson = () => {
