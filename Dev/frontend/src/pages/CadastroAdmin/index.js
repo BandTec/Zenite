@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
+import Swal from 'sweetalert2';
 
 import {
   Container,
@@ -82,10 +83,15 @@ export default function CadastroAdmin(props) {
       }
 
     } else {
-      alert("Senhas não batem. Redigite a senha");
+      Swal.fire({
+        position: 'flex-end',
+        icon: 'warning',
+        title: 'As senhas devem ser iguais',
+        showConfirmButton: false,
+        timer: 2000
+      });
     }
   };
-
     const editar = async () => {
       const dados = {
         id,
@@ -113,7 +119,13 @@ export default function CadastroAdmin(props) {
           alert("Ocorreu um erro. Tente de novo.");
         }
       } else {
-        alert("Senhas não batem. Redigite a senha");
+        Swal.fire({
+          position: 'flex-end',
+          icon: 'warning',
+          title: 'As senhas devem ser iguais',
+          showConfirmButton: false,
+          timer: 2000
+        });
       }
     };
 

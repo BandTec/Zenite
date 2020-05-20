@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import api from "../../services/api";
+import Swal from 'sweetalert2';
 
 import { Container, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 import BotaoForm from '../../components/BotaoForm';
@@ -37,33 +38,52 @@ export default function CadastroOnibus(props) {
 
       if (response.status === 201) {
         props.history.push("/onibus");
+        Swal.fire({
+          position: 'flex-end',
+          icon: 'success',
+          title: 'Cadastrado com Sucesso',
+          showConfirmButton: false,
+          timer: 2000
+        });
       } 
     } catch (e) {
-      alert("Ocorreu um erro. Tente de novo.");
+      Swal.fire({
+        title:'Tente novamente',
+        text:'Ocorreu um imprevisto, por gentileza tente novamente.',
+        icon:'error',
+        showConfirmButton: false,
+         });
     }
   }
 
   useEffect(() => {
     async function consultarEdicao() {
+    
       try {
+      
         const token = localStorage.getItem("token");
-
         const response = await api.get(`/api/onibus/${id}`, {
           headers: { Authorization: token },
         });
-
+        
         const dados = response.data;
-
+       
         setNumero(dados.numero);
         setCodigo(dados.dispositivo.codigo);
         setIdDispositivo(dados.dispositivo.id);
+
       } catch (e) {
-        alert("Ocorreu um erro. Tente de novo.");
+        Swal.fire({
+          title:'Tente novamente',
+          text:'Ocorreu um imprevisto, por gentileza tente novamente.',
+          icon:'error',
+          showConfirmButton: false,
+           });;
       }
     }
-
-    consultarEdicao();
+    if(id) consultarEdicao();
   }, [id]);
+  
 
   const editar= async () => {
     let corpo = {
@@ -78,6 +98,18 @@ export default function CadastroOnibus(props) {
       } 
     };
     console.log(corpo);
+
+    Swal.fire({
+      title: 'Aviso',
+      text: 'Deseja realmente excluir este dado? ',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText:'Sim, desejo',
+      cancelButtonText: 'Não',
+    })
+    
     try {
       const token = await localStorage.getItem("token");
 
@@ -87,9 +119,23 @@ export default function CadastroOnibus(props) {
 
       if (response.status === 200) {
         props.history.push("/onibus");
-      } 
+        Swal.fire({
+          position: 'flex-end',
+          icon: 'success',
+          title: 'Alterado com Sucesso',
+          showConfirmButton: false,
+        });    
+        window.location.reload();
+      } else {
+        alert("Ocorreu um erro. Tente de novo");
+      }
     } catch (e) {
-      alert("Ocorreu um erro. Tente de novo.");
+      Swal.fire({
+        title:'Tente novamente',
+        text:'Ocorreu um imprevisto, por gentileza tente novamente.',
+        icon:'error',
+        showConfirmButton: false,
+         });
     }
   }
 
@@ -135,4 +181,6 @@ export default function CadastroOnibus(props) {
       </CorpoPagina>
     </Container>
   );
-}
+  }
+
+
