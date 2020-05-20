@@ -83,6 +83,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .hasAnyRole("ADMIN", "GERENTE", "FISCAL", "MOTORISTA", "PASSAGEIRO")
                 .antMatchers("/api/pontofinal/**")
                     .hasAnyRole("ADMIN", "GERENTE", "FISCAL", "MOTORISTA", "PASSAGEIRO")
+                .antMatchers("/logado**")
+                    .hasAnyRole("ADMIN", "GERENTE", "FISCAL", "MOTORISTA", "PASSAGEIRO")
                 .antMatchers("/autentica/**")
                     .permitAll()
             .and()

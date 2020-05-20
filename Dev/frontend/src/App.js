@@ -11,14 +11,17 @@ import Dashboard from "./pages/Dashboard";
 import DetalhesFiscal from "./pages/DetalhesFiscal";
 import DetalhesMotorista from "./pages/DetalhesMotorista"
 import DetalhesLinha from "./pages/DetalhesLinhas";
+import DetalhesGerente from "./pages/DetalhesGerente";
 import CadastroFiscal from "./pages/CadastroFiscal";
 import CadastroMotorista from "./pages/CadastroMotorista";
 import CadastroGerente from "./pages/CadastroGerente";
 import CadastroAdmin from "./pages/CadastroAdmin";
 import ConsultaAdmin from "./pages/VisualizaAdmin";
+import ConsultaGerente from "./pages/VisualizaGerente";
 import CadastroParadaLinha from "./pages/CadastroParadaLinha";
 import CadastroOnibus from "./pages/CadastroOnibus";
 import VisualizaOnibus from "./pages/VisualizaOnibus";
+import Perfil from "./pages/PerfilGerente";
 import MenuLateral from "./components/MenuLateral";
 
 const App = () => {
@@ -53,9 +56,9 @@ const App = () => {
 
         {/* GERENTE */}
 
-        {/* <Route exact path="/gerente" component={} /> */}
+        <Route exact path="/gerente" component={ConsultaGerente} />
 
-        {/* <Route path="/gerente/detalhes/:id" component={} /> */}
+        <Route path="/gerente/detalhes/:id" component={DetalhesGerente} />
 
         <Route path="/gerente/editar/:id" component={CadastroGerente} />
 
@@ -86,6 +89,11 @@ const App = () => {
         <Route path="/onibus/editar/:id" component={CadastroOnibus} />
 
         <Route path="/onibus/cadastro" component={CadastroOnibus} />
+
+        {/* Perfil */}
+
+        <Route path="/perfil" component={Perfil} />
+
       </div>
     </Router>
   );
