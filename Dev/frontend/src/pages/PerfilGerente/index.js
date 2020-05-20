@@ -76,7 +76,6 @@ export default function Perfil(props) {
     const token = await localStorage.getItem("token");
     try {
       if (validacaoSenha){
-        console.log(dados);
            const response = await api.put(`/api/${rota}/${idUsuario}`, dados, {
              headers: { Authorization: token },
            });
