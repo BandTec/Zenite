@@ -1,10 +1,18 @@
 import React, {useState} from 'react';
 import api from '../../services/api';
 
-import { Container } from './styles';
-import Form from '../../components/Form';
+import {
+  Container,
+  Form,
+  LogoZenite,
+  RecuperarSenha,
+  OpcoesAdicionais,
+  Background,
+} from "./styles";
+
 import Botao from './Botao';
 import Input from '../../components/InputComRotulo';
+import Logo from "../../assets/logos/logo4.png";
 
 export default function Login(props) {
   const [email, setEmail] = useState('');
@@ -22,11 +30,29 @@ export default function Login(props) {
   
   return (
     <Container>
-      <Form handleSubmit={handleSubmit}>
-        <Input texto="Email" value={email} tamanho={330} onChange={event => setEmail(event.target.value)}/>
-        <Input texto="Senha" value={senha} type="password" tamanho={330} onChange ={event => setSenha(event.target.value)}/>
-        <Botao descricao="Entrar" estiloEscuro={true} tamanho={330}/>
+      <Form onSubmit={handleSubmit}>
+        <LogoZenite src={Logo} />
+        <Input
+          texto="Email"
+          value={email}
+          tamanho={330}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <Input
+          texto="Senha"
+          value={senha}
+          type="password"
+          tamanho={330}
+          onChange={(event) => setSenha(event.target.value)}
+        />
+        <Botao descricao="Entrar" estiloEscuro={true} tamanho={330} />
+        <OpcoesAdicionais>
+          <input type="checkbox" /> Lembrar-se de mim
+          <RecuperarSenha>Esqueceu a senha?</RecuperarSenha>
+        </OpcoesAdicionais>
       </Form>
+
+      <Background/>
     </Container>
   );
 }

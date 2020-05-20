@@ -2,8 +2,8 @@ package orion.zenite.repositorios;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import orion.zenite.entidades.Carro;
 import orion.zenite.entidades.CarroLinha;
+import orion.zenite.entidades.FiscalLinha;
 
 import java.util.List;
 

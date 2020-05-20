@@ -14,6 +14,7 @@ import BotaoForm from "./../../components/BotaoForm";
 import InputComRotulo from "./../../components/InputComRotulo";
 
 export default function CadastroAdmin(props) {
+  const [idConta, setIdConta] = useState("")
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");
   const [validacaoSenha, setValidacaoSenha] = useState("");
@@ -44,6 +45,7 @@ export default function CadastroAdmin(props) {
           const dados = response.data;
 
           setNome(dados.nome);
+          setIdConta(dados.conta.idConta)
           setEmail(dados.conta.email);
         } catch (e) {
           alert("Ocorreu um erro. Tente de novo.");
@@ -88,9 +90,9 @@ export default function CadastroAdmin(props) {
 
     const editar = async () => {
       const dados = {
-        id,
         nome: nome,
         conta: {
+          idConta: idConta,
           senha: valorSenha,
           email: email,
           nivel: {
@@ -102,7 +104,7 @@ export default function CadastroAdmin(props) {
     if (validacaoSenha) {
       try {
         const token = await localStorage.getItem("token");
-        const response = await api.put("/api/administrador", dados, {
+        const response = await api.put(`/api/administrador/${id}`, dados, {
           headers: { Authorization: token },
         });
         console.log(response);

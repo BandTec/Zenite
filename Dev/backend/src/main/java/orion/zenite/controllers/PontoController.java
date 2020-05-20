@@ -11,6 +11,8 @@ import orion.zenite.repositorios.PontoFinalRepository;
 
 import java.util.Optional;
 
+import static org.springframework.http.ResponseEntity.*;
+
 @Api(description = "Operações relacionadas ao ponto final", tags = "ponto final")
 @RestController
 @RequestMapping("/api/pontofinal")
@@ -24,9 +26,9 @@ public class PontoController {
     public ResponseEntity consultarPonto() {
 
         if (this.repository.count() > 0) {
-            return ResponseEntity.ok(this.repository.findAll());
+            return ok(this.repository.findAll());
         } else {
-            return ResponseEntity.noContent().build();
+            return noContent().build();
         }
 
     }
@@ -37,9 +39,9 @@ public class PontoController {
         Optional<PontoFinal> consultaPonto = this.repository.findById(id);
 
         if (consultaPonto.isPresent()) {
-             return ResponseEntity.ok(consultaPonto.get());
+             return ok(consultaPonto.get());
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -50,18 +52,20 @@ public class PontoController {
     public ResponseEntity criarPonto(@RequestBody PontoFinal novoPonto) {
         this.repository.save(novoPonto);
 
-        return ResponseEntity.created(null).build();
+        return created(null).build();
 
     }
 
     @ApiOperation("Atualizar Pontos")
-    @PutMapping
-    public ResponseEntity atualizarPonto( @RequestBody  PontoFinal ponto){
-        if (this.repository.existsById(ponto.getId())) {
+    @PutMapping("{id}")
+    public ResponseEntity atualizarPonto( @RequestBody  PontoFinal ponto,
+                                          @PathVariable Integer id){
+        if (this.repository.existsById(id)) {
+            ponto.setId(id);
             this.repository.save(ponto);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -69,9 +73,9 @@ public class PontoController {
     public ResponseEntity excluirPonto(@PathVariable ("id") Integer id) {
         if (this.repository.existsById(id)) {
             this.repository.deleteById(id);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
 
     }

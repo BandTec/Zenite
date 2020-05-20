@@ -41,7 +41,7 @@ export default function DetalhesLinha(props) {
 
     consultar();
     consultarOnibus(); 
-  }, []);
+  }, [id]);
 
     function criaDados(id, numero, dispositivo) {
       return { id, numero, dispositivo };

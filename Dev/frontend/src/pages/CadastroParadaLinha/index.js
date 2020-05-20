@@ -74,7 +74,7 @@ export default function CadastroLinha(props) {
       }
     }
 
-      consultarEdicao();
+      id && consultarEdicao();
   }, [id])
 
   const cadastrar = async () => {
@@ -105,7 +105,6 @@ export default function CadastroLinha(props) {
     let ida = novaParadaIda ? { nome: paradaIda } : { id: idParadaIda };
     let volta = novaParadaVolta ? { nome: paradaVolta } : { id: idParadaVolta };
     let dados = {
-      id: id,
       numero: linhaNumero,
       pontoIda: ida,
       pontoVolta: volta,
@@ -113,7 +112,7 @@ export default function CadastroLinha(props) {
 
     try {
       const token = await localStorage.getItem("token");
-      const response = await api.put("/api/linha", dados, {
+      const response = await api.put(`/api/linha/${id}`, dados, {
         headers: { Authorization: token },
       });
       console.log(response);

@@ -12,24 +12,20 @@ export default function ConsultaMotorista() {
   const [corpo, setCorpo] = useState([]);
 
   useEffect( ()=> {
-  async function dadosCorpos() {
-    //Essa linha de baixo pega o token de autenticação do localStorage
-    const token = localStorage.getItem('token');
-    
-    //Essa de baixo, faz a chamada GET pra rota /api/linha, passando o token como cabeçalho e passa pra 
-    //uma variavel response
-    const response = await api.get('/api/motorista',{
-      headers: {'Authorization': token}
-    })
+    async function dadosCorpos() {
+      //Essa linha de baixo pega o token de autenticação do localStorage
+      const token = localStorage.getItem('token');
 
-    
-    //aqui pego do response.data que é onde tá os dados da linha e passo pra uma variavel tbm
-    let dados = response.data;
+      //Essa de baixo, faz a chamada GET pra rota /api/linha, passando o token como cabeçalho e passa pra 
+      //uma variavel response
+      const response = await api.get('/api/motorista',{
+        headers: {'Authorization': token}
+      })
 
-    let temp = [];
-
-    
-    dados.forEach( item => {
+      //aqui pego do response.data que é onde tá os dados da linha e passo pra uma variavel tbm
+      let dados = response.data;
+      let temp = [];
+      dados.forEach( item => {
         temp.push(
           criaDados(
             item.id,
@@ -41,12 +37,12 @@ export default function ConsultaMotorista() {
         );
       });
       setCorpo(temp);
-   }
+    }
  
    dadosCorpos();
   }, []);
 
-   function criaDados(id, nome,numeroTelefone, cpf, cnh){
+  function criaDados(id, nome,numeroTelefone, cpf, cnh){
     return {id, nome,numeroTelefone, cpf, cnh}
   }
 
@@ -77,6 +73,6 @@ export default function ConsultaMotorista() {
       <Row>
         <Paginacao />
       </Row>
-  </Container>
+    </Container>
   );
 }
