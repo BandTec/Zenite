@@ -7,6 +7,10 @@ export const Row = styled.div`
   width: 100%;
 `;
 
+export const RowBetween = styled(Row)`
+  justify-content: space-between;
+`;
+
 export const Col = styled.div`
   width: 45%;
   padding-right: ${(props) => (props.start ? 20 : 0)}px;
@@ -38,4 +42,8 @@ export const Rotulo = styled.p`
   color: #223f61;
   margin-bottom: 10px;
   text-transform: uppercase;
+`;
+
+export const Img = styled.img`
+  width: 20px;
 `;

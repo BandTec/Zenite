@@ -7,6 +7,7 @@ import Botao from "../../components/Botao";
 import Tabela from "../../components/Tabela2";
 import Titulo from "../../components/Titulo";
 import Paginacao from "../../components/Paginacao";
+import Swal from "sweetalert2";
 
 export default function ConsultaParada() {
   const [corpo, setCorpo] = useState([]);
@@ -35,13 +36,7 @@ export default function ConsultaParada() {
       let temp = [];
 
       dados.lista.forEach((item) => {
-        temp.push(
-          criaDados(
-            item.id,
-            item.nome,
-            item.totalLinhas
-          )
-        );
+        temp.push(criaDados(item.id, item.nome, item.totalLinhas));
       });
       setCorpo(temp);
     }
@@ -53,13 +48,68 @@ export default function ConsultaParada() {
     return { id, nome, totalLinhas };
   }
 
-  const nova = () => {
-    // abrir modal sweet alert e criar nova parada
-  }
+  const nova = async () => {
+    let result = await Swal.fire({
+      title: "Nome da nova parada",
+      input: "text",
+      showCancelButton: true,
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Cadastrar",
+    });
 
-  const editar = () => {
-    // abrir modal sweet alert e criar nova parada
-    alert("asdf");
+    if (result.value) {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await api.post(
+          `/api/pontofinal`,
+          { nome: result.value },
+          {
+            headers: { Authorization: token },
+          }
+        );
+
+        if (response.status === 201) {
+          Swal.fire("Sucesso!", "A nova parada foi cadastrada.", "success");
+          window.location.reload();
+        } else {
+          Swal.fire("Erro!", "Tente novamente.", "error");
+        }
+      } catch (e) {
+        Swal.fire("Erro!", "Tente novamente.", "error");
+      }
+    }
+  };
+
+  const editar = async (id) => {
+    let result = await Swal.fire({
+      title: "Edição da Parada",
+      input: "text",
+      showCancelButton: true,
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Alterar",
+    });
+
+    if (result.value) {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await api.put(
+          `/api/pontofinal/${id}`,
+          { nome: result.value },
+          {
+            headers: { Authorization: token },
+          }
+        );
+
+        if (response.status === 200) {
+          Swal.fire("Sucesso!", "A parada foi alterada.", "success");
+          window.location.reload();
+        } else {
+          Swal.fire("Erro!", "Tente novamente.", "error");
+        }
+      } catch (e) {
+        Swal.fire("Erro!", "Tente novamente.", "error");
+      }
+    }
   };
 
   return (
@@ -75,7 +125,12 @@ export default function ConsultaParada() {
       </Acoes>
 
       <Row>
-        <Tabela tipo="pontofinal" dados={corpo} detalhes={false} editarFuncao={editar} />
+        <Tabela
+          tipo="pontofinal"
+          dados={corpo}
+          detalhes={false}
+          editarFuncao={editar}
+        />
       </Row>
 
       <Row>

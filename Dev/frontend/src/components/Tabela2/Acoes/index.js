@@ -35,7 +35,7 @@ export default function Acoes({ id, tipo, detalhes = true, editarFuncao }) {
         )}
 
         {editarFuncao ? (
-          <button onClick={editarFuncao}>
+          <button onClick={() => editarFuncao(id)}>
             <Img src={EditarIcon} title="Editar" />
           </button>
         ) : (

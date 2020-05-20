@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/api";
 import AsyncSelect from "react-select/async";
-
+import Swal from "sweetalert2";
 import {
   Container,
   Nav,
@@ -42,8 +42,10 @@ export default function Alocacao() {
   const promiseOptions = async (inputValue, rota) => {
     const token = localStorage.getItem("token");
     let url = rota.toLowerCase();
-    
-    if(url === "ônibus") {url = "onibus"};
+
+    if (url === "ônibus") {
+      url = "onibus";
+    }
     const response = await api.get(`/api/${url}?q=${inputValue}`, {
       headers: { Authorization: token },
     });
@@ -73,57 +75,56 @@ export default function Alocacao() {
         url = "/api/fiscal/linhas";
         corpo_requisicao = {
           idFiscal: alocar.dados.id,
-          idLinha: local.dados.id
-        }
+          idLinha: local.dados.id,
+        };
         break;
       case "Motorista":
         url = "/api/motorista/onibus";
         corpo_requisicao = {
           idMotorista: alocar.dados.id,
-          idCarro: local.dados.id
-        }
+          idCarro: local.dados.id,
+        };
         break;
       case "Ônibus":
         url = "/api/onibus/linhas";
         corpo_requisicao = {
           idLinha: local.dados.id,
-          idCarro: alocar.dados.id
-        }
+          idCarro: alocar.dados.id,
+        };
         break;
       default:
         alert("Escolha!");
         return;
     }
-console.log(alocar);
-console.log(local);
-   console.log(url);
-    console.log(corpo_requisicao);
-    if(!!url && !!corpo_requisicao){
-    
-      try{
-         const token = localStorage.getItem("token");
-    
+    // console.log(alocar);
+    // console.log(local);
+    //    console.log(url);
+    //     console.log(corpo_requisicao);
+    if (!!url && !!corpo_requisicao) {
+      try {
+        const token = localStorage.getItem("token");
+
         const response = await api.post(url, corpo_requisicao, {
           headers: { Authorization: token },
         });
 
-        if(response.status === 201){
-          alert("Sucesso");
+        if (response.status === 201) {
+          Swal.fire("Sucesso!", "Alocado com sucesso.", "success");
         } else {
-          alert("Erro")
+          Swal.fire("Erro!", "Tente novamente.", "error");
         }
-      } catch (erro){
-        alert("Erro durante cadastro");
+      } catch (erro) {
+        Swal.fire("Erro!", "Tente novamente.", "error");
       }
     }
   };
 
-  const encurtarNome =(e) => {
-    if(e.length > 15) {
+  const encurtarNome = (e) => {
+    if (e.length > 15) {
       return e.substring(0, e.indexOf(" "));
     }
     return e;
-  }
+  };
 
   return (
     <Container>

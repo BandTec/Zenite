@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
-import AsyncSelect from "react-select/async";
+
 
 import {
   Container,

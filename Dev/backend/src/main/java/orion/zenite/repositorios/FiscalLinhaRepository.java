@@ -11,8 +11,14 @@ public interface FiscalLinhaRepository extends JpaRepository<FiscalLinha, Intege
     @Query(value = "select max(fl.id) from FiscalLinha fl")
     int lastId();
 
-    List<FiscalLinha> findByIdLinha(int id);
+    List<FiscalLinha> findByIdLinha(Integer id);
 
-    List<FiscalLinha> findByIdFiscal(int id);
+    FiscalLinha findByIdFiscalAndIdLinha(Integer idFiscal, Integer idLinha);
+
+    List<FiscalLinha> findByIdFiscal(Integer id);
+
+
+
+
 
 }

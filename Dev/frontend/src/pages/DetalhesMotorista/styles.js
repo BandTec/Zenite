@@ -24,7 +24,7 @@ export const CorpoRelatorio = styled.div`
 `;
 
 export const CaixaDados = styled.div`
-  margin-right: 20%
+  margin-right: 20%;
 `;
 
 export const CaixaTabela = styled.div`

@@ -161,6 +161,19 @@ public class FiscalController {
         return linhas.isEmpty() ? notFound().build() : ok(linhas);
     }
 
+    @ApiOperation("Exibe as linhas que o fiscal trabalha")
+    @DeleteMapping("{idFiscal}/linhas/{idLinha}")
+    public ResponseEntity deletarRelacionamentoFiscalLinha(@PathVariable Integer idFiscal, @PathVariable Integer idLinha){
+        FiscalLinha fiscalLinha = fiscalLinhaRepository.findByIdFiscalAndIdLinha(idFiscal, idLinha);
+
+        if(fiscalLinha != null){
+            fiscalLinhaRepository.delete(fiscalLinha);
+            return ok().build();
+        }
+
+        return notFound().build();
+    }
+
     @ApiOperation("Cadastra a linhas que o fiscal trabalha")
     @PostMapping("/linhas")
     @Transactional

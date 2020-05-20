@@ -75,7 +75,8 @@ export default function Perfil(props) {
   const editar = async () => {
     const token = await localStorage.getItem("token");
     try {
-      if (validacaoSenha){
+      // if (validacaoSenha){
+        console.log(dados);
           const response = await api.put(`/api/${rota}`, dados, {
             headers: { Authorization: token },
           });
@@ -85,9 +86,9 @@ export default function Perfil(props) {
         } else {
           alert("Ocorreu um erro. Tente de novo");
         }
-      }else {
-          alert("Senha diferente, tente novamente.");
-      }
+      // }else {
+      //     alert("Senha diferente, tente novamente.");
+      // }
 
     }catch(e) {
       alert("Ocorreu um erro. Tente de novo.");

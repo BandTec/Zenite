@@ -23,6 +23,7 @@ import orion.zenite.repositorios.CarroRepository;
 import orion.zenite.repositorios.MotoristaCarroRepository;
 import orion.zenite.repositorios.MotoristaRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -163,13 +164,21 @@ public class MotoristaController {
     }
 
     @ApiOperation("Listar quais ônibus estão com quais motoristas")
-    @GetMapping("/onibus")
-    public ResponseEntity consultarRelacionamento() {
-        if (this.repository.count() > 0) {
-            return ok(this.repository.findAll());
-        } else {
-            return noContent().build();
+    @GetMapping("/{id}/onibus")
+    public ResponseEntity consultarRelacionamento(@PathVariable("id") Integer id) {
+        if(motoristaBD.existsById(id)) {
+            if (this.repository.count() > 0) {
+                List<MotoristaCarro> consulta = this.repository.findByIdMotorista(id);
+                ArrayList<Carro> carros = new ArrayList<>();
+                for (MotoristaCarro mc : consulta){
+                    carros.add(mc.getCarro());
+                }
+                return ok(carros);
+            } else {
+                return noContent().build();
+            }
         }
+        return noContent().build();
     }
 
 }
