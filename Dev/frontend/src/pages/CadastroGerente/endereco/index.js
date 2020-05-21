@@ -13,7 +13,7 @@ export default function DadosEndereco({ mudarPagina, tipoPagina }) {
   const [valorCep, setValorCep] = useState("");
 
   const mascararCep = (e) => {
-    setValorCep(cepMask(e.target.value));
+    setValorCep(e.target.value);
   }
 
   return (
