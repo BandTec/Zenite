@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 
@@ -6,39 +6,64 @@ import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
 import InputComRotulo from './../../../components/InputComRotulo';
 
-export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados }) {
+export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados, dados, validarSenha }) {
 
   const [codDispositivo, setCodDispositivo] = useState("");
   const [email, setEmail] = useState("");
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");
-  const [validacaoSenha, setValidacaoSenha] = useState("");
 
   const verificarSenha = () => {
-      // verificao
-    setValidacaoSenha(valorSenha === valorConfirmarSenha ? true : false);
-    console.log(validacaoSenha);
-    console.log(valorSenha);
-    console.log(valorConfirmarSenha);
-  } 
-
-  const criarJson = () => {
-      adicionarDados({
-        "conta": {
-          "senha":valorSenha,
-          email,
-          "nivel": {
-            "id": 3
-          }
-        },
-        "dispositivo": {
-          "codigo": codDispositivo,
-          "tipoDispositivo":{
-            "id": 1
-          }
-        },
-      })
+    if (valorSenha.length >= 8) {
+      validarSenha(valorSenha === valorConfirmarSenha);
+    }
   }
+  
+  useEffect(() => {
+    if (Object.keys(dados).length !== 0 && tipoPagina === "Edição") {
+      setEmail(dados.conta.email);
+      setCodDispositivo(dados.dispositivo.codigo);
+    }
+  }, []); 
+
+  useEffect(()=> {
+    if(tipoPagina === "Edição"){
+      adicionarDados({
+        conta: {
+          idConta: dados.conta.idConta,
+          senha: valorSenha,
+          email,
+          nivel: {
+            id: 3
+          }
+        },
+        dispositivo:{
+          id: dados.dispositivo.id,
+          codigo: codDispositivo,
+          tipoDispositivo: {
+            id: 1
+          }
+        }
+      });
+    }else{
+      adicionarDados({
+        conta: {
+          senha: valorSenha,
+          email,
+          nivel: {
+            id: 3
+          }
+        },
+        dispositivo:{
+          codigo: codDispositivo,
+          tipoDispositivo: {
+            id: 1
+          }
+        }
+      });
+    }
+    verificarSenha();
+  }, [valorSenha, valorConfirmarSenha, email, codDispositivo]);
 
   return (
     <Container>
@@ -115,7 +140,6 @@ export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados })
                 verificarSenha();
               }}
               required
-              invalido={validacaoSenha}
             />
           </Caixa>
 
@@ -123,7 +147,6 @@ export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados })
             texto="Finalizar"
             concluir={true}
             mudarPagina={mudarPagina}
-            criarJson={criarJson}
           />
         </FormContainer>
       </CorpoPagina>
