@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
+import Swal from 'sweetalert2';
 
 import {
   Container,
@@ -70,10 +71,9 @@ export default function CadastroLinha(props) {
 
         setLinhaNumero(dados.numero);
       } catch(e) {
-      alert("Ocorreu um erro. Tente de novo.");
+        alert("Ocorreu um erro. Tente de novo");
       }
     }
-
       id && consultarEdicao();
   }, [id])
 
@@ -93,11 +93,23 @@ export default function CadastroLinha(props) {
       
       if (response.status === 201) {
         props.history.push("/linha");
+        Swal.fire({
+          position: 'flex-end',
+          icon: 'success',
+          title: 'Cadastrado com Sucesso',
+          showConfirmButton: false,
+          timer: 2000
+        });
       } else {
         alert("Ocorreu um erro. Tente de novo");
       }
    }catch(e) {
-      alert("Ocorreu um erro. Tente de novo.");
+    Swal.fire({
+      title:'Tente novamente',
+      text:'Ocorreu um imprevisto, por gentileza tente novamente.',
+      icon:'error',
+      showConfirmButton: false,
+       });
     }
   };
 
@@ -110,6 +122,17 @@ export default function CadastroLinha(props) {
       pontoVolta: volta,
     };
 
+    Swal.fire({
+      title: 'Aviso',
+      text: 'Deseja realmente excluir este dado? ',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText:'Sim, desejo',
+      cancelButtonText: 'Não',
+    })
+
     try {
       const token = await localStorage.getItem("token");
       const response = await api.put(`/api/linha/${id}`, dados, {
@@ -118,11 +141,23 @@ export default function CadastroLinha(props) {
       console.log(response);
       if (response.status === 200) {
         props.history.push("/linha");
+        Swal.fire({
+          position: 'flex-end',
+          icon: 'success',
+          title: 'Alterado com Sucesso',
+          showConfirmButton: false,
+        });    
+        window.location.reload();
       } else {
         alert("Ocorreu um erro. Tente de novo");
       }
     } catch (e) {
-      alert("Ocorreu um erro. Tente de novo.");
+      Swal.fire({
+        title:'Tente novamente',
+        text:'Ocorreu um imprevisto, por gentileza tente novamente.',
+        icon:'error',
+        showConfirmButton: false,
+         });
     }
   };
 

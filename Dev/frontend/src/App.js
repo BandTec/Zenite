@@ -20,8 +20,8 @@ import ConsultaAdmin from "./pages/VisualizaAdmin";
 import ConsultaGerente from "./pages/VisualizaGerente";
 import CadastroParadaLinha from "./pages/CadastroParadaLinha";
 import CadastroOnibus from "./pages/CadastroOnibus";
+import VisualizaOnibus from "./pages/VisualizaOnibus";
 import Perfil from "./pages/PerfilGerente";
-
 import MenuLateral from "./components/MenuLateral";
 
 const App = () => {
@@ -84,11 +84,9 @@ const App = () => {
 
         {/* ONIBUS */}
 
-        {/* <Route exact path="/onibus" component={} /> */}
+        <Route exact path="/onibus" component={VisualizaOnibus} />
 
-        {/* <Route path="/onibus/detalhes/:id" component={} /> */}
-
-        {/* <Route path="/onibus/editar/:id" component={} /> */}
+        <Route path="/onibus/editar/:id" component={CadastroOnibus} />
 
         <Route path="/onibus/cadastro" component={CadastroOnibus} />
 

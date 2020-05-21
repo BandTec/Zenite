@@ -12,6 +12,7 @@ import {
 
 import Botao from './Botao';
 import Input from '../../components/InputComRotulo';
+import Swal from 'sweetalert2';
 import Logo from "../../assets/logos/logo4.png";
 
 export default function Login(props) {
@@ -20,11 +21,27 @@ export default function Login(props) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const response = await api.post('/autentica/login', { email, senha });
-    if(response.status){
-      const { message } = response.data;
-      localStorage.setItem('token', message);
-      props.history.push("/dashboard");
+    try{
+      const response = await api.post('/autentica/login', { email, senha });
+      if(response.status===200){
+        const { message } = response.data;
+        localStorage.setItem('token', message);
+        props.history.push("/dashboard");
+      }else{
+        Swal.fire({
+          title:'Tente novamente',
+          text:`Email ou senha errada.`,
+          icon:'error',
+          showConfirmButton: true,
+        });
+      }
+    }catch(err){
+      Swal.fire({
+        title:'Tente novamente',
+        text:`Email ou senha errada.`,
+        icon:'error',
+        showConfirmButton: true,
+      });
     }
   }
   
