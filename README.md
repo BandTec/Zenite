@@ -42,11 +42,11 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
   - [x] Tela de Login
   - [ ] Tela de Esqueci Minha Senha
   - [x] CRUD Linha
-  - [ ] CRUD Gerente
+  - [x] CRUD Gerente
   * [x] CRUD Administrador
   * [x] CRUD Ônibus
-  - [ ] CRUD Fiscal
-  - [ ] CRUD Motorista
+  - [x] CRUD Fiscal
+  - [x] CRUD Motorista
   - [ ] Dashboard
     - [ ] Gráficos com ChartJS
       - [ ] Gráfico com início e fim de viagem
