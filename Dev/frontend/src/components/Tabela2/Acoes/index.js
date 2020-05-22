@@ -8,7 +8,7 @@ import ExcluirIcon from "./../../../assets/icons/excluir.svg";
 import api from "./../../../services/api";
 import Swal from 'sweetalert2';
 
-export default function Acoes({ id, tipo, detalhes = true }) {
+export default function Acoes({ id, tipo, detalhes = true, editarFuncao }) {
 
   const excluir = async () => {
       Swal.fire({
@@ -61,16 +61,21 @@ export default function Acoes({ id, tipo, detalhes = true }) {
   return (
     <StyledTableCell align="left">
       <Alinhar>
-     {detalhes && 
-      <Link to={`/${tipo}/detalhes/${id}`}>
-          <Img src={DetalhesIcon} title="Ver detalhes" />
-        </Link>
-    }
+        {detalhes && (
+          <Link to={`/${tipo}/detalhes/${id}`}>
+            <Img src={DetalhesIcon} title="Ver detalhes" />
+          </Link>
+        )}
 
-        <Link to={`/${tipo}/editar/${id}`}>
-          <Img src={EditarIcon} title="Editar" />
-        </Link>
-
+        {editarFuncao ? (
+          <button onClick={() => editarFuncao(id)}>
+            <Img src={EditarIcon} title="Editar" />
+          </button>
+        ) : (
+          <Link to={`/${tipo}/editar/${id}`}>
+            <Img src={EditarIcon} title="Editar" />
+          </Link>
+        )}
         <button onClick={excluir}>
           <Img src={ExcluirIcon} title="Excluir dado" />
         </button>

@@ -5,6 +5,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,11 +17,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import orion.zenite.dto.ConsultaPaginada;
 import orion.zenite.entidades.*;
 import orion.zenite.repositorios.CarroRepository;
 import orion.zenite.repositorios.MotoristaCarroRepository;
 import orion.zenite.repositorios.MotoristaRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
@@ -50,13 +56,28 @@ public class MotoristaController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping
-    public ResponseEntity consulta() {
+    public ResponseEntity consultarTodos(
+            @RequestParam(required = false) Integer pagina,
+            @RequestParam(required = false) String q
+    )  {
         if (this.motoristaBD.count() > 0) {
-            return ok(this.motoristaBD.findAll());
+            if(pagina != null) {
+                Pageable pageable = PageRequest.of(pagina, 10);
+                Page<Motorista> page = motoristaBD.findAll(pageable);
+                ConsultaPaginada consulta = new ConsultaPaginada(page);
+                return ok(consulta);
+            }
+            else if(q != null){
+                List<Motorista> consulta = motoristaBD.findAllByNomeContaining(q);
+                return ok(consulta);
+            }
+            else {
+                List<Motorista> consulta = motoristaBD.findAll();
+                return ok(consulta);
+            }
         } else {
             return noContent().build();
         }
-
  }
 
     @ApiOperation("Busca motorista pelo ID")
@@ -143,13 +164,21 @@ public class MotoristaController {
     }
 
     @ApiOperation("Listar quais ônibus estão com quais motoristas")
-    @GetMapping("/onibus")
-    public ResponseEntity consultarRelacionamento() {
-        if (this.repository.count() > 0) {
-            return ok(this.repository.findAll());
-        } else {
-            return noContent().build();
+    @GetMapping("/{id}/onibus")
+    public ResponseEntity consultarRelacionamento(@PathVariable("id") Integer id) {
+        if(motoristaBD.existsById(id)) {
+            if (this.repository.count() > 0) {
+                List<MotoristaCarro> consulta = this.repository.findByIdMotorista(id);
+                ArrayList<Carro> carros = new ArrayList<>();
+                for (MotoristaCarro mc : consulta){
+                    carros.add(mc.getCarro());
+                }
+                return ok(carros);
+            } else {
+                return noContent().build();
+            }
         }
+        return noContent().build();
     }
 
 }

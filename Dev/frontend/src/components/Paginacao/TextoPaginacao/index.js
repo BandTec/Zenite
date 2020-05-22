@@ -1,13 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import { Container } from './styles';
+import { Container } from "./styles";
 
-
-
-export default function TextoPaginacao( {paginaAtual, totalPaginas} ) {
+export default function TextoPaginacao({
+  paginaAtual,
+  totalPaginas,
+  totalItens,
+}) {
   return (
     <Container>
-        {paginaAtual} de {totalPaginas} páginas
+      {paginaAtual} de {totalPaginas} páginas - {totalItens} Itens
     </Container>
   );
 }

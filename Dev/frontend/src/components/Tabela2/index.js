@@ -9,7 +9,7 @@ import TableBody from '@material-ui/core/TableBody';
 import Table from '@material-ui/core/Table';
 import Paper from '@material-ui/core/Paper';
 
-export default function Tabela2({ dados, tipo, temAcoes = true, detalhes }) {
+export default function Tabela2({ dados, tipo, temAcoes = true, detalhes, editarFuncao }) {
     const classes = useStyles();
     const cabecalho = [];
 
@@ -47,7 +47,12 @@ export default function Tabela2({ dados, tipo, temAcoes = true, detalhes }) {
                   </StyledTableCell>
                 ))}
                 {temAcoes && (
-                  <Acoes id={linha.id} tipo={tipo} detalhes={detalhes} />
+                  <Acoes
+                    id={linha.id}
+                    tipo={tipo}
+                    detalhes={detalhes}
+                    editarFuncao={editarFuncao}
+                  />
                 )}
               </StyledTableRow>
             ))}

@@ -3,9 +3,13 @@ package orion.zenite.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import orion.zenite.dto.ConsultaPaginada;
 import orion.zenite.dto.ViagemDto;
 import orion.zenite.entidades.*;
 import orion.zenite.repositorios.*;
@@ -38,14 +42,23 @@ public class ViagemController {
 
     @ApiOperation("Lista todos as viagens")
     @GetMapping
-    public ResponseEntity consulta() {
-
+    public ResponseEntity consulta( @RequestParam(required = false) Integer pagina,
+                                    @RequestParam(required = false) String q
+    )  {
         if (this.repository.count() > 0) {
-            return ok(this.repository.findAll());
+            if(pagina != null) {
+                Pageable pageable = PageRequest.of(pagina, 10);
+                Page<Viagem> page = repository.findAll(pageable);
+                ConsultaPaginada consulta = new ConsultaPaginada(page);
+                return ok(consulta);
+            }
+            else {
+                List<Viagem> consulta = repository.findAll();
+                return ok(consulta);
+            }
         } else {
             return noContent().build();
         }
-
     }
 
     @ApiOperation("Exibe ônibus por id")

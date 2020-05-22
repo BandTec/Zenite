@@ -8,15 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import orion.zenite.dto.ConsultaPaginada;
 import orion.zenite.entidades.*;
 import orion.zenite.repositorios.*;
@@ -26,8 +20,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
-import static org.springframework.http.ResponseEntity.notFound;
-import static org.springframework.http.ResponseEntity.ok;
 
 
 @Api(description = "Operações relacionadas ao linha", tags = "linha")
@@ -61,14 +53,24 @@ public class LinhaController {
     @ApiOperation("Lista todas as linhas de ônibus")
     @GetMapping
     public ResponseEntity consulta(
-            @RequestParam(required = false) Integer pagina
+            @RequestParam(required = false) Integer pagina,
+            @RequestParam(required = false) String q
     ) {
         if (this.linhaBD.count() > 0) {
-            pagina = pagina == null ? 0 : pagina;
-            Pageable pageable = PageRequest.of(pagina, 10);
-            Page<Linha> page= linhaBD.findAll(pageable);
-            ConsultaPaginada consulta = new ConsultaPaginada(page);
-            return ok(consulta);
+            if(pagina != null) {
+                Pageable pageable = PageRequest.of(pagina, 10);
+                Page<Linha> page = linhaBD.findAll(pageable);
+                ConsultaPaginada consulta = new ConsultaPaginada(page);
+                return ok(consulta);
+            }
+            else if(q != null){
+                List<Linha> consulta = linhaBD.findAllByNumeroContaining(q);
+                return ok(consulta);
+            }
+            else {
+                List<Linha> consulta = linhaBD.findAll();
+                return ok(consulta);
+            }
         } else {
             return noContent().build();
         }

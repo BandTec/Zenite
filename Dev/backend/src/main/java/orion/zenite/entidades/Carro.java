@@ -28,7 +28,7 @@ public class Carro {
     private String fabricante;
 
     @Column(name="acessivel")
-    private boolean acessivel;
+    private Boolean acessivel;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fkDispositivo", referencedColumnName = "idDispositivo")
@@ -98,11 +98,11 @@ public class Carro {
         this.fabricante = fabricante;
     }
 
-    public boolean isAcessivel() {
+    public Boolean isAcessivel() {
         return acessivel;
     }
 
-    public void setAcessivel(boolean acessivel) {
+    public void setAcessivel(Boolean acessivel) {
         this.acessivel = acessivel;
     }
 

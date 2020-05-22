@@ -33,7 +33,7 @@ export default function Perfil(props) {
   };
 
  function tipoUsuario(dados) {
-   setIdUsuario(dados.id);
+  setIdUsuario(dados.id);
    const nivel = dados.conta.nivel.id;
    switch (nivel) {
      case 1:

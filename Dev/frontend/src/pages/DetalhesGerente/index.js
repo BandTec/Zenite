@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Container, Row, Cabecalho, CorpoRelatorio, CaixaDados, CaixaTabela } from './styles';
+import { Container, Row, Cabecalho, CorpoRelatorio, CaixaDados } from './styles';
 import Titulo from  '../../components/Titulo';
 import TituloTipoDado from '../../components/TituloTipoDado';
 import TituloDado from '../../components/TituloDado';
@@ -24,7 +24,7 @@ export default function DetalhesGerente(props) {
     }
 
     consultar();
-  }, []);
+  }, [id]);
 
   return (
     <Container>

@@ -5,7 +5,7 @@ import Loading from "./../../assets/img/loading1.gif";
 export default function Loader() {
   return (
     <Center>
-      <img src={Loading} />
+      <img src={Loading} alt="Carregamento" />
     </Center>
   );
 }
