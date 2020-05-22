@@ -28,7 +28,7 @@ export default function MenuLateral(props) {
               descricao="Início"
               iconeNome="dashboard"
               alt="Logo do Software Zenite"
-              url={"/dashboard"}
+              url={"/"}
             />
 
             <BotaoMenu descricao="Fiscal" iconeNome="fiscal" url={"/fiscal"} />
