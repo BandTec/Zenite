@@ -1,0 +1,36 @@
+name: Build and deploy JAR app to Azure Web App - backendzenite
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  AZURE_WEBAPP_NAME_BACKEND: backendzenite
+  AZURE_WEBAPP_PACKAGE_PATH_BACKEND: './Dev/backend'
+  JAVA_VERSION: '8'
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy - backend
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Set up Java ${{ env.JAVA_VERSION }}
+      uses: actions/setup-java@v1
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
+
+    - name: Build with Maven
+      run: |
+        cd ${{ env.AZURE_WEBAPP_PACKAGE_PATH_BACKEND }}
+        mvn clean install
+
+    - name: 'Deploy to Azure Web App - backend'
+      uses: azure/webapps-deploy@v1
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME_BACKEND }}
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_BACKEND }}
+        package: ${{env.AZURE_WEBAPP_PACKAGE_PATH_BACKEND}}/target/*.jar

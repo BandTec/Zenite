@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { cpfMask, telefoneMask, dataMask } from "./../../../functions/Mascaras/mask";
@@ -8,12 +8,13 @@ import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
 import InputComRotulo from './../../../components/InputComRotulo';
 
-  export default function DadosPessoais({ mudarPagina, tipoPagina }){
+  export default function DadosPessoais({ mudarPagina, tipoPagina, adicionarDados, dados }){
 
   const [nome, setNome ] = useState("");  
   const [valorCpf, setValorCpf] = useState("");
   const [valorData, setValorData] = useState("");
   const [valorTelefone, setValorTelefone] = useState("");
+  const [cnh, setValorCnh] = useState("");
 
 
   const mascararCpf = (e) => {
@@ -21,17 +22,36 @@ import InputComRotulo from './../../../components/InputComRotulo';
   }
 
   const mascararData = (e) => {
-    setValorData(dataMask(e.target.value));
+    setValorData((e.target.value));
   }
 
   const mascararTelefone = (e) => {
     setValorTelefone(telefoneMask(e.target.value));
   }
 
+  useEffect(() => {  
+    if (Object.keys(dados).length !== 0 && tipoPagina === "Edição") {
+      setNome(dados.nome);
+      setValorCpf(dados.cpf);
+      setValorData(dados.dataNascimento);
+      setValorTelefone(dados.numeroTelefone);
+      setValorCnh(dados.cnh);
+    }
+  }, []);
+
+  useEffect(() => {
+    adicionarDados({
+      nome,
+      cpf: valorCpf,
+      dataNascimento: valorData,
+      numeroTelefone: valorTelefone,
+      cnh
+    });
+  }, [valorCpf, valorData, valorTelefone, cnh, nome]);
+
   return (
     <Container>
       
-
       <CorpoPagina>
         <CaixaHorizontal center={true}>
           <StatusPage
@@ -80,8 +100,14 @@ import InputComRotulo from './../../../components/InputComRotulo';
               onChange={mascararCpf}
               required
             />
-
-            <InputComRotulo texto="CNH" maxLength="11" required />
+            
+            <InputComRotulo
+              value={cnh}
+              onChange={e => setValorCnh(e.target.value)}
+              texto="CNH do Motorista"
+              maxLength="11"
+              required
+            />
 
             <CaixaHorizontal>
               <InputComRotulo
