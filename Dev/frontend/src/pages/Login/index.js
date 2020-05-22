@@ -26,7 +26,7 @@ export default function Login(props) {
       if(response.status===200){
         const { message } = response.data;
         localStorage.setItem('token', message);
-        props.history.push("/dashboard");
+        props.history.push("/");
       }else{
         Swal.fire({
           title:'Tente novamente',
