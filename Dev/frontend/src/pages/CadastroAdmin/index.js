@@ -139,7 +139,7 @@ export default function CadastroAdmin(props) {
     <Container>
       <CorpoPagina>
         <FormContainer>
-          <Link to="/admin">
+          <Link to="/administrador">
             <BotaoForm texto="VOLTAR" ladoDireito={false} />
           </Link>
 
