@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
-
+import Swal from 'sweetalert2';
+import AsyncSelect from "react-select/async";
 
 import {
   Container,
@@ -12,9 +13,10 @@ import {
   Subtitulo,
   Caixa,
   Select,
+  Rotulo,
 } from "./styles";
-import BotaoForm from "../../components/BotaoForm";
 
+import BotaoForm from "../../components/BotaoForm";
 import InputComRotulo from "../../components/InputComRotulo";
 
 export default function CadastroLinha(props) {
@@ -71,21 +73,43 @@ export default function CadastroLinha(props) {
 
       if (response.status === 201) {
         props.history.push("/linha");
+        Swal.fire({
+          position: 'flex-end',
+          icon: 'success',
+          title: 'Cadastrado com Sucesso',
+          showConfirmButton: false,
+          timer: 2000
+        });
       } else {
         alert("Ocorreu um erro. Tente de novo");
       }
-    } catch (e) {
-      alert("Ocorreu um erro. Tente de novo.");
+   }catch(e) {
+    Swal.fire({
+      title:'Tente novamente',
+      text:'Ocorreu um imprevisto, por gentileza tente novamente.',
+      icon:'error',
+      showConfirmButton: false,
+       });
     }
   };
 
   const editar = async () => {
     let dados = {
-      id: id,
       numero: linhaNumero,
       pontoIda: { id: paradaIda.dados.id },
       pontoVolta: { id: paradaVolta.dados.id },
     };
+
+    Swal.fire({
+      title: 'Aviso',
+      text: 'Deseja realmente editar este dado? ',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText:'Sim, desejo',
+      cancelButtonText: 'Não',
+    })
 
     try {
       const token = await localStorage.getItem("token");
@@ -95,11 +119,23 @@ export default function CadastroLinha(props) {
    
       if (response.status === 200) {
         props.history.push("/linha");
+        Swal.fire({
+          position: 'flex-end',
+          icon: 'success',
+          title: 'Alterado com Sucesso',
+          showConfirmButton: false,
+        });    
+        window.location.reload();
       } else {
         alert("Ocorreu um erro. Tente de novo");
       }
     } catch (e) {
-      alert("Ocorreu um erro. Tente de novo.");
+      Swal.fire({
+        title:'Tente novamente',
+        text:'Ocorreu um imprevisto, por gentileza tente novamente.',
+        icon:'error',
+        showConfirmButton: false,
+         });
     }
   };
 
@@ -146,17 +182,23 @@ export default function CadastroLinha(props) {
             />
 
             <CaixaHorizontal>
-              <Select
-                value={paradaIda}
-                onChange={(e) => setParadaIda(e)}
-                loadOptions={(e) => pesquisa(e)}
-              />
+              <Select>
+                <Rotulo>Parada Ida</Rotulo>
+                <AsyncSelect
+                  value={paradaIda}
+                  onChange={(e) => setParadaIda(e)}
+                  loadOptions={(e) => pesquisa(e)}
+                />
+              </Select>
 
-              <Select
-                value={paradaVolta}
-                onChange={(e) => setParadaVolta(e)}
-                loadOptions={(e) => pesquisa(e)}
-              />
+              <Select>
+                <Rotulo>Parada Volta</Rotulo>
+                <AsyncSelect
+                  value={paradaVolta}
+                  onChange={(e) => setParadaVolta(e)}
+                  loadOptions={(e) => pesquisa(e)}
+                />
+              </Select>
             </CaixaHorizontal>
           </Caixa>
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
+import Swal from 'sweetalert2';
 
 import {
   Container,
@@ -14,6 +15,7 @@ import BotaoForm from "./../../components/BotaoForm";
 import InputComRotulo from "./../../components/InputComRotulo";
 
 export default function CadastroAdmin(props) {
+  const [idConta, setIdConta] = useState("")
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");
   const [validacaoSenha, setValidacaoSenha] = useState("");
@@ -44,6 +46,7 @@ export default function CadastroAdmin(props) {
           const dados = response.data;
 
           setNome(dados.nome);
+          setIdConta(dados.conta.idConta)
           setEmail(dados.conta.email);
         } catch (e) {
           alert("Ocorreu um erro. Tente de novo.");
@@ -82,15 +85,20 @@ export default function CadastroAdmin(props) {
       }
 
     } else {
-      alert("Senhas não batem. Redigite a senha");
+      Swal.fire({
+        position: 'flex-end',
+        icon: 'warning',
+        title: 'As senhas devem ser iguais',
+        showConfirmButton: false,
+        timer: 2000
+      });
     }
   };
-
     const editar = async () => {
       const dados = {
-        id,
         nome: nome,
         conta: {
+          idConta: idConta,
           senha: valorSenha,
           email: email,
           nivel: {
@@ -102,7 +110,7 @@ export default function CadastroAdmin(props) {
     if (validacaoSenha) {
       try {
         const token = await localStorage.getItem("token");
-        const response = await api.put("/api/administrador", dados, {
+        const response = await api.put(`/api/administrador/${id}`, dados, {
           headers: { Authorization: token },
         });
         console.log(response);
@@ -113,7 +121,13 @@ export default function CadastroAdmin(props) {
           alert("Ocorreu um erro. Tente de novo.");
         }
       } else {
-        alert("Senhas não batem. Redigite a senha");
+        Swal.fire({
+          position: 'flex-end',
+          icon: 'warning',
+          title: 'As senhas devem ser iguais',
+          showConfirmButton: false,
+          timer: 2000
+        });
       }
     };
 

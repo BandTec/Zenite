@@ -21,7 +21,7 @@ export default function Perfil(props) {
   const [dados, setDados] = useState({});
   const [pagina, setPagina] = useState(0);
   const [validacaoSenha, setValidacaoSenha] = useState(false);
-  // const [idUsuario, setIdUsuario] = useState(0);
+  const [idUsuario, setIdUsuario] = useState(0);
   const [rota, setRota] = useState("");
 
   const mudarPagina = (isProximo) => {
@@ -33,7 +33,7 @@ export default function Perfil(props) {
   };
 
  function tipoUsuario(dados) {
-  //  setIdUsuario(dados.id);
+  setIdUsuario(dados.id);
    const nivel = dados.conta.nivel.id;
    switch (nivel) {
      case 1:
@@ -76,12 +76,12 @@ export default function Perfil(props) {
     const token = await localStorage.getItem("token");
     try {
       if (validacaoSenha){
-           const response = await api.put(`/api/${rota}/${idUsuario}`, dados, {
-             headers: { Authorization: token },
-           });
+          const response = await api.put(`/api/${rota}/${idUsuario}`, dados, {
+            headers: { Authorization: token },
+          });
       
-        if (response.status === 204) {
-          props.history.push("/login");
+        if (response.status === 200) {
+          props.history.push("/dashboard");
         } else {
           alert("Ocorreu um erro. Tente de novo");
         }

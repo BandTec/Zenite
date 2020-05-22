@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - './Dev/frontend'
 
 env:
   AZURE_WEBAPP_NAME_FRONTEND: zenite
@@ -28,7 +30,7 @@ jobs:
         npm ci
 
     - name: 'Deploy to Azure WebApp - frontend'
-      uses: azure/webapps-deploy@v1
+      uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME_FRONTEND }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_FRONTEND }}

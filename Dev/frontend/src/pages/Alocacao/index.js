@@ -9,9 +9,7 @@ import {
   Col,
   Titulo,
   Subtitulo,
-  Rotulo,
   Texto,
-  InfoBlock,
   InfoTitle,
 } from "./styles";
 import Botao from "../../components/Botao";

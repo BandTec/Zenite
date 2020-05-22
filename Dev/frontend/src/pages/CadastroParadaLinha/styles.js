@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import AsyncSelect from "react-select/async";
 
-export const Select = styled(AsyncSelect)`
+export const Select = styled.div`
   width: 45%;
 `;
 
@@ -9,6 +8,17 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
+export const Rotulo = styled.label`
+  display: block;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  color: #223f61;
+  margin: 10px 0px;
+  text-transform: uppercase;
+`;
+
+
 
 export const CorpoPagina = styled.article`
   padding: 40px;
