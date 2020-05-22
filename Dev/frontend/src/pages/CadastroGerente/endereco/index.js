@@ -13,7 +13,7 @@ export default function DadosEndereco({ mudarPagina, tipoPagina }) {
   const [valorCep, setValorCep] = useState("");
 
   const mascararCep = (e) => {
-    setValorCep(cepMask(e.target.value));
+    setValorCep(e.target.value);
   }
 
   return (
@@ -52,7 +52,7 @@ export default function DadosEndereco({ mudarPagina, tipoPagina }) {
 
             <InputComRotulo
               texto="CEP"
-              maxLength="9"
+              maxLength="8"
               name="cep"
               value={valorCep}
               onChange={mascararCep}

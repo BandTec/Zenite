@@ -28,33 +28,30 @@ export default function CadastroAdmin(props) {
    const tipoPagina = isEdicao ? "Edição" : "Cadastro";
 
   const verificarSenha = () => {
-
     if(valorSenha.length >= 8){
       setValidacaoSenha(valorSenha === valorConfirmarSenha);
     }
   };
 
-    useEffect(() => {
-      async function consultarEdicao() {
-        try {
-          const token = localStorage.getItem("token");
-
-          const response = await api.get(`/api/administrador/${id}`, {
-            headers: { Authorization: token },
-          });
-
-          const dados = response.data;
-
-          setNome(dados.nome);
-          setIdConta(dados.conta.idConta)
-          setEmail(dados.conta.email);
-        } catch (e) {
-          alert("Ocorreu um erro. Tente de novo.");
-        }
+  useEffect(() => {
+    async function consultarEdicao() {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await api.get(`/api/administrador/${id}`, {
+          headers: { Authorization: token },
+        });
+        const dados = response.data;
+        setNome(dados.nome);
+        setIdConta(dados.conta.idConta)
+        setEmail(dados.conta.email);
+      } catch (e) {
+        alert("Ocorreu um erro. Tente de novo.");
       }
-
+    }
+    if(isEdicao){
       consultarEdicao();
-    }, [id]);
+    }
+  }, [id]);
 
   const cadastrar = async () => {
     const dados = {
