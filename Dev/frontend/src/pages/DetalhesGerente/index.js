@@ -6,6 +6,7 @@ import TituloTipoDado from '../../components/TituloTipoDado';
 import TituloDado from '../../components/TituloDado';
 import Botao from '../../components/Botao';
 import api from "../../services/api";
+import Loader from "./../../components/Loader";
 
 export default function DetalhesGerente(props) {
   const id = props.match.params.id;
@@ -20,13 +21,15 @@ export default function DetalhesGerente(props) {
       });
 
       setDados(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     }
 
     consultar();
   }, [id]);
 
-  return (
+  return !dados.conta ? (
+    <Loader />
+  ) : (
     <Container>
       <Row>
         <Cabecalho>

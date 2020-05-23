@@ -1,3 +1,4 @@
+/* eslint react-hooks/exhaustive-deps: 0 */
 import React, { useState, useEffect } from "react";
 import { cpfMask, telefoneMask, dataMask, reformatarData, formatarData } from "./../../../functions/Mascaras/mask";
 import { CaixaHorizontal, Titulo} from './../styles';

@@ -7,6 +7,8 @@ import TituloDado from '../../components/TituloDado';
 import Botao from '../../components/Botao';
 import Tabela from "../../components/Tabela2";
 import api from "../../services/api";
+import Loader from "./../../components/Loader";
+
 
 export default function DetalhesFiscal(props) {
     const id = props.match.params.id;
@@ -22,7 +24,6 @@ export default function DetalhesFiscal(props) {
       });
 
       setDados(response.data);
-      console.log(response.data);
     }
 
     async function consultarOnibus() {
@@ -43,12 +44,14 @@ export default function DetalhesFiscal(props) {
     consultarOnibus();
   }, [id]);
 
-  function criaDados(id, numero, pontoIda, pontoVolta) {
-    return { id, numero, pontoIda, pontoVolta };
+  function criaDados(id, numero, parada_inicial, parada_final) {
+    return { id, numero, parada_inicial, parada_final };
   }
 
 
-  return (
+  return corpo.length <= 0 ? (
+    <Loader />
+  ) : (
     <Container>
       <Row>
         <Cabecalho>
@@ -62,50 +65,61 @@ export default function DetalhesFiscal(props) {
       </Row>
 
       <Row>
-         { dados.conta && <CorpoRelatorio> 
-          <CaixaDados>
-            <TituloTipoDado texto="Dados Pessoais" />
+        {dados.conta && (
+          <CorpoRelatorio>
+            <CaixaDados>
+              <TituloTipoDado texto="Dados Pessoais" />
 
-            <TituloDado
-              tipo="Registro Fiscal"
-              descricao={dados.registroFiscal}
-            />
+              <TituloDado
+                tipo="Registro Fiscal"
+                descricao={dados.registroFiscal}
+              />
 
-            <TituloDado tipo="Nome" descricao={dados.nome} />
+              <TituloDado tipo="Nome" descricao={dados.nome} />
 
-            <TituloDado
-              tipo="Data de Nascimento"
-              descricao={dados.dataNascimento}
-            />
+              <TituloDado
+                tipo="Data de Nascimento"
+                descricao={dados.dataNascimento}
+              />
 
-            <TituloDado tipo="Telefone" descricao={dados.numeroTelefone} />
+              <TituloDado tipo="Telefone" descricao={dados.numeroTelefone} />
 
-            <TituloDado tipo="cpf" descricao={dados.cpf} />
+              <TituloDado tipo="cpf" descricao={dados.cpf} />
 
-            <TituloDado tipo="Email" descricao={dados.conta.email} />
-          </CaixaDados>
+              <TituloDado tipo="Email" descricao={dados.conta.email} />
+            </CaixaDados>
 
-          <CaixaDados>
-            <TituloTipoDado texto="Endereço" />
+            <CaixaDados>
+              <TituloTipoDado texto="Endereço" />
 
-            <TituloDado tipo="Cep" descricao={dados.endereco.cep} />
-            <TituloDado tipo="Logradouro" descricao={dados.endereco.logradouro} />
-            <TituloDado tipo="Numero" descricao={dados.endereco.numero} />
-            <TituloDado tipo="Complemento" descricao={dados.endereco.complemento} />
-            <TituloDado tipo="Cidade" descricao={dados.endereco.cidade} />
-            <TituloDado tipo="Estado" descricao={dados.endereco.estado} />
-          </CaixaDados>
+              <TituloDado tipo="Cep" descricao={dados.endereco.cep} />
+              <TituloDado
+                tipo="Logradouro"
+                descricao={dados.endereco.logradouro}
+              />
+              <TituloDado tipo="Numero" descricao={dados.endereco.numero} />
+              <TituloDado
+                tipo="Complemento"
+                descricao={dados.endereco.complemento}
+              />
+              <TituloDado tipo="Cidade" descricao={dados.endereco.cidade} />
+              <TituloDado tipo="Estado" descricao={dados.endereco.estado} />
+            </CaixaDados>
 
-          <CaixaDados>
-            <TituloTipoDado texto="Linhas Gerenciadas" />
+            <CaixaDados>
+              <TituloTipoDado texto="Linhas Gerenciadas" />
 
-            <CaixaTabela>
-              <Tabela tipo="fiscal" dados={corpo} temAcoes={false} />
-              <p>{corpo.length === 0 ? "Fiscal não está associado a nenhuma linha." : ""}</p>
-            </CaixaTabela>
-          </CaixaDados>
-        </CorpoRelatorio>
-}
+              <CaixaTabela>
+                <Tabela tipo="fiscal" dados={corpo} temAcoes={false} />
+                <p>
+                  {corpo.length === 0
+                    ? "Fiscal não está associado a nenhuma linha."
+                    : ""}
+                </p>
+              </CaixaTabela>
+            </CaixaDados>
+          </CorpoRelatorio>
+        )}
       </Row>
     </Container>
   );

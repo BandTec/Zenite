@@ -6,6 +6,7 @@ import Botao from "../../components/Botao";
 import Tabela from "../../components/Tabela2";
 import Titulo from "../../components/Titulo";
 import Paginacao from "../../components/Paginacao";
+import Loader from "./../../components/Loader";
 
 export default function VisualizaGerente() {
   const [corpo, setCorpo] = useState([]);
@@ -38,7 +39,9 @@ export default function VisualizaGerente() {
     return { id, nome, telefone, cpf };
   }
 
-  return (
+  return corpo.length <= 0 ? (
+    <Loader />
+  ) : (
     <Container>
       <Row>
         <Titulo textoMenor="consulta do gerente" textoMaior="" />

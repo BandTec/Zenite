@@ -1,3 +1,4 @@
+/* eslint react-hooks/exhaustive-deps: 0 */
 import React, { useState, useEffect } from "react";
 import InputComRotulo from "../../../components/InputComRotulo";
 

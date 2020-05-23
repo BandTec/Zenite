@@ -13,7 +13,7 @@ import TituloTipoDado from "../../components/TituloTipoDado";
 import TituloDado from "../../components/TituloDado";
 import Botao from "../../components/Botao";
 import api from "../../services/api";
-
+import Loader from "./../../components/Loader";
 import Tabela from "../../components/Tabela2";
 
 export default function DetalhesMotorista(props) {
@@ -60,7 +60,9 @@ export default function DetalhesMotorista(props) {
    }
 
 
-  return (
+  return corpo.length <= 0 ? (
+    <Loader />
+  ) : (
     <Container>
       <Row>
         <Cabecalho>

@@ -8,6 +8,7 @@ import Tabela from "../../components/Tabela2";
 import Titulo from "../../components/Titulo";
 import Paginacao from "../../components/Paginacao";
 import Swal from "sweetalert2";
+import Loader from "./../../components/Loader";
 
 export default function ConsultaParada() {
   const [corpo, setCorpo] = useState([]);
@@ -44,8 +45,8 @@ export default function ConsultaParada() {
     dadosCorpos();
   }, [pagina]);
 
-  function criaDados(id, nome, totalLinhas) {
-    return { id, nome, totalLinhas };
+  function criaDados(id, nome, total_de_linhas) {
+    return { id, nome, total_de_linhas };
   }
 
   const nova = async () => {
@@ -112,7 +113,9 @@ export default function ConsultaParada() {
     }
   };
 
-  return (
+  return corpo.length <= 0 ? (
+    <Loader />
+  ) : (
     <Container>
       <Row>
         <Titulo textoMenor="consulta de Parada" textoMaior="" />

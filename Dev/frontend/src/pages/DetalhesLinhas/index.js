@@ -1,18 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 
-import { Container, Row, Cabecalho, CaixaDados, CaixaTabela } from './styles';
-import Titulo from  '../../components/Titulo';
-import TituloTipoDado from '../../components/TituloTipoDado';
-import TituloDado from '../../components/TituloDado';
-import Botao from '../../components/Botao';
-import Tabela from '../../components/Tabela2';
+import { Container, Row, Cabecalho, CaixaDados, CaixaTabela } from "./styles";
+import Titulo from "../../components/Titulo";
+import TituloTipoDado from "../../components/TituloTipoDado";
+import TituloDado from "../../components/TituloDado";
+import Botao from "../../components/Botao";
+import Tabela from "../../components/Tabela2";
 import api from "../../services/api";
-
+import Loader from "./../../components/Loader";
 
 export default function DetalhesLinha(props) {
-   const id = props.match.params.id;
-   const [dados, setDados] = useState({});
-   const [corpo, setCorpo] = useState([]);
+  const id = props.match.params.id;
+  const [dados, setDados] = useState({});
+  const [corpo, setCorpo] = useState([]);
 
   useEffect(() => {
     async function consultar() {
@@ -25,29 +25,50 @@ export default function DetalhesLinha(props) {
       setDados(response.data);
     }
 
-      async function consultarOnibus() {
-        const token = localStorage.getItem("token");
-        const response = await api.get(`/api/linha/${id}/onibus`, {
-          headers: { Authorization: token },
-        });
+    async function consultarOnibus() {
+      const token = localStorage.getItem("token");
+      const response = await api.get(`/api/linha/${id}/onibus`, {
+        headers: { Authorization: token },
+      });
 
-       let temp = [];
-       let dados = response.data;
-       dados.forEach((item) => {
-         temp.push(criaDados(item.id, item.numero, item.dispositivo.codigo));
-       });
-       setCorpo(temp);
-      }
-
-    consultar();
-    consultarOnibus(); 
-  }, [id]);
-
-    function criaDados(id, numero, dispositivo) {
-      return { id, numero, dispositivo };
+      let temp = [];
+      let dados = response.data;
+      dados.forEach((item) => {
+        let acessivel = item.acessivel ? "Sim" : "Não";
+        temp.push(
+          criaDados(
+            item.id,
+            item.numero,
+            item.placa,
+            item.modelo,
+            item.fabricante,
+            acessivel,
+            item.dispositivo.codigo
+          )
+        );
+      });
+      setCorpo(temp);
     }
 
-  return (
+    consultar();
+    consultarOnibus();
+  }, [id]);
+
+  function criaDados(
+    id,
+    numero,
+    placa,
+    modelo,
+    fabricante,
+    acessivel,
+    dispositivo
+  ) {
+    return { id, numero, placa, modelo, fabricante, acessivel, dispositivo };
+  }
+
+  return corpo.length <= 0 ? (
+    <Loader />
+  ) : (
     <Container>
       <Cabecalho>
         <Titulo textoMenor="Detalhes" textoMaior="Linha" />

@@ -7,6 +7,7 @@ import Botao from "../../components/Botao";
 import Tabela from "./../../components/Tabela2";
 import Titulo from "../../components/Titulo";
 import Paginacao from "../../components/Paginacao";
+import Loader from "./../../components/Loader";
 
 export default function ConsultaLinha() {
   const [corpo, setCorpo] = useState([]);
@@ -51,11 +52,19 @@ export default function ConsultaLinha() {
     dadosCorpos();
   }, [pagina]);
 
-  function criaDados(id, numero, pontoIda, pontoVolta, qtdonibus) {
-    return { id, numero, pontoIda, pontoVolta, qtdonibus };
+  function criaDados(
+    id,
+    numero,
+    parada_inicial,
+    parada_final,
+    quantidade_de_onibus
+  ) {
+    return { id, numero, parada_inicial, parada_final, quantidade_de_onibus };
   }
 
-  return (
+  return corpo.length <= 0 ? (
+    <Loader />
+  ) : (
     <Container>
       <Row>
         <Titulo textoMenor="consulta de linha" textoMaior="" />

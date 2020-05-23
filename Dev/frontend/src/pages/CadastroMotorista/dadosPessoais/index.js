@@ -1,7 +1,14 @@
+/* eslint react-hooks/exhaustive-deps: 0 */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { cpfMask, telefoneMask, dataMask } from "./../../../functions/Mascaras/mask";
+import {
+  cpfMask,
+  telefoneMask,
+  dataMask,
+  reformatarData,
+  formatarData,
+} from "./../../../functions/Mascaras/mask";
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 
 import BotaoForm from './../../../components/BotaoForm';
@@ -22,7 +29,7 @@ import InputComRotulo from './../../../components/InputComRotulo';
   }
 
   const mascararData = (e) => {
-    setValorData((e.target.value));
+    setValorData(dataMask(e.target.value));
   }
 
   const mascararTelefone = (e) => {
@@ -33,7 +40,7 @@ import InputComRotulo from './../../../components/InputComRotulo';
     if (Object.keys(dados).length !== 0 && tipoPagina === "Edição") {
       setNome(dados.nome);
       setValorCpf(dados.cpf);
-      setValorData(dados.dataNascimento);
+      setValorData(reformatarData(dados.dataNascimento));
       setValorTelefone(dados.numeroTelefone);
       setValorCnh(dados.cnh);
     }
@@ -43,9 +50,9 @@ import InputComRotulo from './../../../components/InputComRotulo';
     adicionarDados({
       nome,
       cpf: valorCpf,
-      dataNascimento: valorData,
+      dataNascimento: formatarData(valorData),
       numeroTelefone: valorTelefone,
-      cnh
+      cnh,
     });
   }, [valorCpf, valorData, valorTelefone, cnh, nome]);
 

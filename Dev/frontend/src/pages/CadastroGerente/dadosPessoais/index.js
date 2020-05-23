@@ -1,7 +1,14 @@
+/* eslint react-hooks/exhaustive-deps: 0 */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { cpfMask, telefoneMask, dataMask } from "../../../functions/Mascaras/mask";
+import {
+  cpfMask,
+  telefoneMask,
+  dataMask,
+  reformatarData,
+  formatarData,
+} from "./../../../functions/Mascaras/mask";
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 
 import BotaoForm from '../../../components/BotaoForm';
@@ -21,7 +28,7 @@ export default function DadosPessoais({ mudarPagina, tipoPagina, adicionarDados,
   }
 
   const mascararData = (e) => {
-    setValorData((e.target.value));
+    setValorData(dataMask(e.target.value));
   }
 
   const mascararTelefone = (e) => {
@@ -32,7 +39,7 @@ export default function DadosPessoais({ mudarPagina, tipoPagina, adicionarDados,
     if (Object.keys(dados).length !== 0 && tipoPagina === "Edição") {
       setNome(dados.nome);
       setValorCpf(dados.cpf);
-      setValorData(dados.dataNascimento);
+      setValorData(reformatarData(dados.dataNascimento));
       setValorTelefone(dados.numeroTelefone);
     }
   }, []);
@@ -41,8 +48,8 @@ export default function DadosPessoais({ mudarPagina, tipoPagina, adicionarDados,
     adicionarDados({
       nome,
       cpf: valorCpf,
-      dataNascimento: valorData,
-      numeroTelefone: valorTelefone
+      dataNascimento: formatarData(valorData),
+      numeroTelefone: valorTelefone,
     });
   }, [valorCpf, valorData, valorTelefone, nome]);
 

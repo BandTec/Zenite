@@ -1,10 +1,10 @@
+/* eslint react-hooks/exhaustive-deps: 0 */
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import { Container, MainMenu } from "./styles";
-
 import BotaoMenu from "./BotaoMenu";
 import BotaoExpande from "./BotaoExpande";
+import { Container, MainMenu } from "./styles";
 
 export default function MenuLateral(props) {
   const { pathname, state } = useLocation();
@@ -14,15 +14,13 @@ export default function MenuLateral(props) {
     { texto: "Alocar", url: "/alocacao" },
   ];
 
-  const outrosConfig = [
-    { texto: "Perfil", url: "/perfil" }
-  ];
+  const outrosConfig = [{ texto: "Perfil", url: "/perfil" }];
 
   let nivelStorage = localStorage.getItem("nivel");
 
   useEffect(() => {
     if (state) {
-      setNivel(state.nivel);
+      setNivel(Number(state.nivel));
     } else if (nivelStorage) {
       nivelStorage = Number(nivelStorage);
       setNivel(nivelStorage);
@@ -41,7 +39,7 @@ export default function MenuLateral(props) {
 
   return (
     <>
-      {nivel != 0 && (
+      {nivel !== 0 && (
         <Container>
           <MainMenu>
             <BotaoMenu
@@ -59,18 +57,18 @@ export default function MenuLateral(props) {
               />
             )}
 
-            {nivel != 4 && (
+            {nivel !== 4 && (
               <BotaoExpande
                 principal="Linha"
                 btnEscondidos={[
-                  {texto: "Linha", url: "/linha"},
-                  {texto: "Parada", url: "/parada"}
+                  { texto: "Linha", url: "/linha" },
+                  { texto: "Parada", url: "/parada" },
                 ]}
                 iconeNome="linha"
               />
             )}
 
-            {nivel != 4 && (
+            {nivel !== 4 && (
               <BotaoMenu
                 descricao="Motorista"
                 iconeNome="motorista"
@@ -78,7 +76,7 @@ export default function MenuLateral(props) {
               />
             )}
 
-            {nivel != 4 && (
+            {nivel !== 4 && (
               <BotaoMenu
                 descricao="Ônibus"
                 iconeNome="onibus"
@@ -94,10 +92,10 @@ export default function MenuLateral(props) {
               />
             )}
 
-            {nivel != 1 && (
+            {nivel !== 1 && (
               <BotaoExpande
                 principal="Configuração"
-                btnEscondidos={nivel == 2 ? gerenteConfig : outrosConfig}
+                btnEscondidos={nivel === 2 ? gerenteConfig : outrosConfig}
                 iconeNome="config"
               />
             )}

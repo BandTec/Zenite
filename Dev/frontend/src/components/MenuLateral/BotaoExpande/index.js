@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Onibus from "../../../assets/icons/onibus.svg";
 import Linha from "../../../assets/icons/linha.svg";
@@ -14,7 +14,8 @@ import Seta from "../../../assets/icons/chevron-down-solid.svg";
 import {
   Botao,
   SetaIcone,
-  Container, Icone,
+  Container,
+  Icone,
   Texto,
   Nav,
 } from "../BotaoMenu/styles";
@@ -43,15 +44,9 @@ export default function BotaoMenu({
     return urlCaminho === iconeNome;
   };
 
-  const [abre, setAbre] = useState(false);
-  const abrir = () => {
-    setAbre(abre ? false : true);
-    console.log(abre);
-  };
-
   return (
     <Container>
-      <Botao >  
+      <Botao>
         <Icone src={iconesLib[iconeNome]} alt={alt} />
         <Texto>
           {principal}
@@ -64,7 +59,7 @@ export default function BotaoMenu({
           exact
           activeClassName="activeLink"
           isActive={linkEstaAtivo}
-          key={item}
+          key={item.texto}
         >
           <Botao>
             <Texto>{item.texto}</Texto>
