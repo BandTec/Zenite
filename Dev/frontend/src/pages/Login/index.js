@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import api from '../../services/api';
+import React, { useState } from "react";
+import api from "../../services/api";
 
 import {
   Container,
@@ -10,41 +10,60 @@ import {
   Background,
 } from "./styles";
 
-import Botao from './Botao';
-import Input from '../../components/InputComRotulo';
-import Swal from 'sweetalert2';
+import Botao from "./Botao";
+import Input from "../../components/InputComRotulo";
+import Swal from "sweetalert2";
 import Logo from "../../assets/logos/logo4.png";
 
 export default function Login(props) {
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
 
   async function handleSubmit(event) {
     event.preventDefault();
-    try{
-      const response = await api.post('/autentica/login', { email, senha });
-      if(response.status===200){
+    Swal.fire({
+      title: "Aguarde um momento",
+      timer: 2500,
+      showConfirmButton: false,
+      timerProgressBar: true,
+    });
+    try {
+      const response = await api.post("/autentica/login", { email, senha });
+      if (response.status === 200) {
         const { message } = response.data;
-        localStorage.setItem('token', message);
-        props.history.push("/");
-      }else{
+        localStorage.setItem("token", message);
+
+        const userLogado = await api.get(`/logado`, {
+          headers: { Authorization: message },
+        });
+
+        if (userLogado.status === 200) {
+          localStorage.setItem("nivel", userLogado.data.conta.nivel.id);
+          localStorage.setItem("nome", userLogado.data.nome);
+
+          props.history.push({
+            pathname: "/",
+            state: { nivel: userLogado.data.conta.nivel.id },
+          });
+        }
+      } else {
         Swal.fire({
-          title:'Tente novamente',
-          text:`Email ou senha errada.`,
-          icon:'error',
+          title: "Tente novamente",
+          text: `Email ou senha errada.`,
+          icon: "error",
           showConfirmButton: true,
         });
       }
-    }catch(err){
+    } catch (err) {
       Swal.fire({
-        title:'Tente novamente',
-        text:`Email ou senha errada.`,
-        icon:'error',
+        title: "Tente novamente",
+        text: `Email ou senha errada.`,
+        icon: "error",
         showConfirmButton: true,
       });
     }
   }
-  
+
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
@@ -69,7 +88,7 @@ export default function Login(props) {
         </OpcoesAdicionais>
       </Form>
 
-      <Background/>
+      <Background />
     </Container>
   );
 }
