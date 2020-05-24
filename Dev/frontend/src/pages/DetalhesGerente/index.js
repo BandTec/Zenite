@@ -7,7 +7,7 @@ import TituloDado from '../../components/TituloDado';
 import Botao from '../../components/Botao';
 import api from "../../services/api";
 import Loader from "./../../components/Loader";
-
+import { reformatarData } from "./../../functions/Mascaras/mask";
 export default function DetalhesGerente(props) {
   const id = props.match.params.id;
   const [dados, setDados] = useState({});
@@ -52,7 +52,7 @@ export default function DetalhesGerente(props) {
 
               <TituloDado
                 tipo="Data de Nascimento"
-                descricao={dados.dataNascimento}
+                descricao={reformatarData(dados.dataNascimento)}
               />
 
               <TituloDado tipo="Telefone" descricao={dados.numeroTelefone} />

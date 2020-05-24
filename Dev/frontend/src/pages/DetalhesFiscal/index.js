@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from "react";
 
-import { Container, Row, Cabecalho, CorpoRelatorio, CaixaDados, CaixaTabela } from './styles';
-import Titulo from  '../../components/Titulo';
-import TituloTipoDado from '../../components/TituloTipoDado';
-import TituloDado from '../../components/TituloDado';
-import Botao from '../../components/Botao';
+import {
+  Container,
+  Row,
+  Cabecalho,
+  CorpoRelatorio,
+  CaixaDados,
+  CaixaTabela,
+} from "./styles";
+import Titulo from "../../components/Titulo";
+import TituloTipoDado from "../../components/TituloTipoDado";
+import TituloDado from "../../components/TituloDado";
+import Botao from "../../components/Botao";
 import Tabela from "../../components/Tabela2";
 import api from "../../services/api";
 import Loader from "./../../components/Loader";
-
+import { reformatarData } from "./../../functions/Mascaras/mask";
 
 export default function DetalhesFiscal(props) {
-    const id = props.match.params.id;
+  const id = props.match.params.id;
   const [dados, setDados] = useState({});
   const [corpo, setCorpo] = useState([]);
 
@@ -35,7 +42,14 @@ export default function DetalhesFiscal(props) {
       let temp = [];
       let dados = response.data;
       dados.forEach((item) => {
-        temp.push(criaDados(item.id, item.numero, item.pontoIda.nome, item.pontoVolta.nome));
+        temp.push(
+          criaDados(
+            item.id,
+            item.numero,
+            item.pontoIda.nome,
+            item.pontoVolta.nome
+          )
+        );
       });
       setCorpo(temp);
     }
@@ -47,7 +61,6 @@ export default function DetalhesFiscal(props) {
   function criaDados(id, numero, parada_inicial, parada_final) {
     return { id, numero, parada_inicial, parada_final };
   }
-
 
   return corpo.length <= 0 ? (
     <Loader />
@@ -79,7 +92,7 @@ export default function DetalhesFiscal(props) {
 
               <TituloDado
                 tipo="Data de Nascimento"
-                descricao={dados.dataNascimento}
+                descricao={reformatarData(dados.dataNascimento)}
               />
 
               <TituloDado tipo="Telefone" descricao={dados.numeroTelefone} />

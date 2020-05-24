@@ -15,7 +15,7 @@ import Botao from "../../components/Botao";
 import api from "../../services/api";
 import Loader from "./../../components/Loader";
 import Tabela from "../../components/Tabela2";
-
+import { reformatarData } from "./../../functions/Mascaras/mask";
 export default function DetalhesMotorista(props) {
   const id = props.match.params.id;
   const [dados, setDados] = useState({});
@@ -85,7 +85,7 @@ export default function DetalhesMotorista(props) {
 
               <TituloDado
                 tipo="Data de Nascimento"
-                descricao={dados.dataNascimento}
+                descricao={reformatarData(dados.dataNascimento)}
               />
 
               <TituloDado tipo="Telefone" descricao={dados.numeroTelefone} />
