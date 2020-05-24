@@ -4,10 +4,13 @@ on:
   push:
     branches:
       - master
+    paths:
+      - './Dev/frontend'
+
 
 env:
   AZURE_WEBAPP_NAME_BACKEND: backendzenite
-  AZURE_WEBAPP_PACKAGE_PATH_BACKEND: './Dev/backend'
+  AZURE_WEBAPP_PACKAGE_PATH_BACKEND: Dev/backend
   JAVA_VERSION: '8'
 
 jobs:
@@ -24,7 +27,7 @@ jobs:
 
     - name: Build with Maven
       run: |
-        cd ./Dev/backend
+        cd ${{env.AZURE_WEBAPP_PACKAGE_PATH_BACKEND}}
         mvn clean package
 
     - name: 'Deploy to Azure Web App - backend'
