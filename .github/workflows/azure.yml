@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - './Dev/frontend'
+      - /Dev/frontend
 
 env:
   AZURE_WEBAPP_NAME_FRONTEND: zenite
