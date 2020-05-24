@@ -26,7 +26,6 @@ jobs:
       run: |
         cd ./Dev/backend
         mvn clean package
-        dir
 
     - name: 'Deploy to Azure Web App - backend'
       uses: azure/webapps-deploy@v2
