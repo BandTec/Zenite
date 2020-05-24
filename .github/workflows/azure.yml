@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - './Dev/frontend'
 
 env:
   AZURE_WEBAPP_NAME_FRONTEND: zenite
