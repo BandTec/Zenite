@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>orion</groupId>
-	<artifactId>zenite</artifactId>
+	<artifactId>backendzenite</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>zenite</name>
+	<name>backendzenite</name>
 	<description>API Zênite</description>
 
 	<properties>
@@ -90,6 +90,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.microsoft.azure</groupId>
+				<artifactId>azure-webapp-maven-plugin</artifactId>
+				<version>1.9.1</version>
 			</plugin>
 		</plugins>
 	</build>

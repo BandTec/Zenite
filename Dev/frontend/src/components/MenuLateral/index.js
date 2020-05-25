@@ -19,13 +19,15 @@ export default function MenuLateral(props) {
   let nivelStorage = localStorage.getItem("nivel");
 
   useEffect(() => {
-    if (state) {
-      setNivel(Number(state.nivel));
-    } else if (nivelStorage) {
-      nivelStorage = Number(nivelStorage);
-      setNivel(nivelStorage);
-    } else if (pathname === "/login") {
+    if (pathname === "/") {
       setNivel(0);
+    } else {
+      if (state) {
+        setNivel(Number(state.nivel));
+      } else if (nivelStorage) {
+        nivelStorage = Number(nivelStorage);
+        setNivel(nivelStorage);
+      }
     }
   }, [pathname, nivelStorage]);
 
@@ -34,7 +36,7 @@ export default function MenuLateral(props) {
     localStorage.removeItem("nivel");
     localStorage.removeItem("nome");
 
-    window.location = "/login";
+    window.location = "/";
   }
 
   return (
@@ -46,7 +48,7 @@ export default function MenuLateral(props) {
               descricao="Início"
               iconeNome="dashboard"
               alt="Logo do Software Zenite"
-              url={"/"}
+              url={"/dashboard"}
             />
 
             {nivel < 3 && (

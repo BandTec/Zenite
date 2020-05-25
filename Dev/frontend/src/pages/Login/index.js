@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import api from "../../services/api";
+import React, {useState} from 'react';
+import api from '../../services/api';
+import { isAuthenticated } from '../../services/auth';
 
 import {
   Container,
@@ -16,9 +17,12 @@ import Swal from "sweetalert2";
 import Logo from "../../assets/logos/logo4.png";
 
 export default function Login(props) {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-
+  
+  
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  
+  
   async function handleSubmit(event) {
     event.preventDefault();
     Swal.fire({
@@ -31,6 +35,7 @@ export default function Login(props) {
       const response = await api.post("/autentica/login", { email, senha });
       if (response.status === 200) {
         const { message } = response.data;
+
         localStorage.setItem("token", message);
 
         const userLogado = await api.get(`/logado`, {
@@ -42,11 +47,12 @@ export default function Login(props) {
           localStorage.setItem("nome", userLogado.data.nome);
 
           props.history.push({
-            pathname: "/",
+            pathname: "/dashboard",
             state: { nivel: userLogado.data.conta.nivel.id },
           });
         }
       } else {
+
         Swal.fire({
           title: "Tente novamente",
           text: `Email ou senha errada.`,
