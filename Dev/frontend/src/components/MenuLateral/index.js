@@ -11,12 +11,12 @@ import BotaoMenu from './BotaoMenu';
 
 export default function MenuLateral(props) {
   const {pathname} = useLocation();
-  const mostrar = pathname === "/login" ? false : true;
+  const mostrar = pathname === "/" ? false : true;
 
   function logout() {
     localStorage.removeItem("token");
 
-    window.location ="/login";
+    window.location ="/";
   }
 
   return (
@@ -28,7 +28,7 @@ export default function MenuLateral(props) {
               descricao="Início"
               iconeNome="dashboard"
               alt="Logo do Software Zenite"
-              url={"/"}
+              url={"/dashboard"}
             />
 
             <BotaoMenu descricao="Fiscal" iconeNome="fiscal" url={"/fiscal"} />

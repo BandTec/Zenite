@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import api from '../../services/api';
+import { isAuthenticated } from '../../services/auth';
 
 import {
   Container,
@@ -16,9 +17,12 @@ import Swal from 'sweetalert2';
 import Logo from "../../assets/logos/logo4.png";
 
 export default function Login(props) {
+  
+  
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-
+  
+  
   async function handleSubmit(event) {
     event.preventDefault();
     try{
@@ -26,7 +30,7 @@ export default function Login(props) {
       if(response.status===200){
         const { message } = response.data;
         localStorage.setItem('token', message);
-        props.history.push("/");
+        props.history.push("/dashboard");
       }else{
         Swal.fire({
           title:'Tente novamente',
