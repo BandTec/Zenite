@@ -47,9 +47,9 @@ export default function CadastroOnibus(props) {
           id: 2,
         },
       },
-      gerente: gerente.dados
+      gerente: {id: gerente.dados.id}
     };
-
+   
     try {
       const token = await localStorage.getItem("token");
 
@@ -60,14 +60,16 @@ export default function CadastroOnibus(props) {
       if (response.status === 201) {
         props.history.push("/onibus");
         Swal.fire({
-          position: "flex-end",
           icon: "success",
           title: "Cadastrado com Sucesso",
           showConfirmButton: false,
           timer: 2000,
         });
+      }else {
+        console.log(response);  
       }
     } catch (e) {
+      console.log(e);
       Swal.fire({
         title: "Tente novamente",
         text: "Ocorreu um imprevisto, por gentileza tente novamente.",
@@ -130,7 +132,7 @@ export default function CadastroOnibus(props) {
           id: 2,
         },
       },
-      gerente: gerente.dados,
+      gerente: {id: gerente.dados.id}
     };
 
     Swal.fire({

@@ -1,8 +1,7 @@
+/* eslint react-hooks/exhaustive-deps: 0 */
 import React, { useState, useEffect } from 'react';
 
-// import { cepMask } from "./../../../functions/Mascaras/mask";
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
-
 import BotaoForm from '../../../components/BotaoForm';
 import StatusPage from '../../../components/StatusPage';
 import InputComRotulo from '../../../components/InputComRotulo';

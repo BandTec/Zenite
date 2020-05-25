@@ -6,6 +6,7 @@ import Botao from '../../components/Botao';
 import Tabela from "./../../components/Tabela2";
 import Titulo from '../../components/Titulo';
 import Paginacao from '../../components/Paginacao';
+import Loader from "./../../components/Loader";
 
 export default function ConsultaMotorista() {
    
@@ -43,11 +44,13 @@ export default function ConsultaMotorista() {
     dadosCorpos();
   }, [pagina]);
 
-  function criaDados(id, nome,numeroTelefone, cpf, cnh){
-    return {id, nome,numeroTelefone, cpf, cnh}
+  function criaDados(id, nome, telefone, cpf, cnh){
+    return {id, nome, telefone, cpf, cnh}
   }
 
-  return (
+  return corpo.length <= 0 ? (
+    <Loader />
+  ) : (
     <Container>
       <Row>
         <Titulo textoMenor="consulta de motorista" textoMaior="" />

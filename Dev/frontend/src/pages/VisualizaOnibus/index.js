@@ -7,6 +7,7 @@ import Botao from "../../components/Botao";
 import Tabela from "./../../components/Tabela2";
 import Titulo from "../../components/Titulo";
 import Paginacao from "../../components/Paginacao";
+import Loader from "./../../components/Loader";
 
 export default function ConsultaOnibus() {
   const [corpo, setCorpo] = useState([]);
@@ -36,7 +37,7 @@ export default function ConsultaOnibus() {
       let temp = [];
 
       dados.lista.forEach((item) => {
-        let acessivel = item.acessivel ? "sim" : "não";
+        let acessivel = item.acessivel ? "Sim" : "Não";
         temp.push(criaDados(
           item.id, 
           item.numero, 
@@ -58,7 +59,9 @@ export default function ConsultaOnibus() {
     return { id, numero, placa, modelo, fabricante, acessivel, dispositivo, gerente };
   }
 
-  return (
+  return corpo.length <= 0 ? (
+    <Loader />
+  ) : (
     <Container>
       <Row>
         <Titulo textoMenor="consulta de ônibus" textoMaior="" />

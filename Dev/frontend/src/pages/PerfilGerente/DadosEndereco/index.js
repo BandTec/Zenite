@@ -1,8 +1,9 @@
+/* eslint react-hooks/exhaustive-deps: 0 */
 import React, { useState, useEffect } from "react";
 
 // import { cepMask } from "./../../../functions/Mascaras/mask";
-import { CaixaHorizontal, Titulo } from './../styles';
-import InputComRotulo from './../../../components/InputComRotulo';
+import { CaixaHorizontal, Titulo } from "./../styles";
+import InputComRotulo from "./../../../components/InputComRotulo";
 
 export default function DadosEndereco({ adicionarDados, dados }) {
   const [valorCep, setValorCep] = useState("");
@@ -12,12 +13,11 @@ export default function DadosEndereco({ adicionarDados, dados }) {
   const [cidade, setCidade] = useState("");
   const [estado, setEstado] = useState("");
 
-  const mascararCep = e => {
+  const mascararCep = (e) => {
     setValorCep(e.target.value);
-  }
+  };
 
   useEffect(() => {
-
     if (Object.keys(dados).length !== 0) {
       setValorCep(dados.endereco.cep);
       setLogradouro(dados.endereco.logradouro);
@@ -29,7 +29,6 @@ export default function DadosEndereco({ adicionarDados, dados }) {
   }, []);
 
   useEffect(() => {
-
     adicionarDados({
       endereco: {
         id: dados.endereco.id,

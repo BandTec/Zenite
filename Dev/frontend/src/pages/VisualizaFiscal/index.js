@@ -6,6 +6,7 @@ import Botao from "../../components/Botao";
 import Tabela from "../../components/Tabela2";
 import Titulo from "../../components/Titulo";
 import Paginacao from "../../components/Paginacao";
+import Loader from "./../../components/Loader";
 
 export default function VisualizaFiscal() {
   const [corpo, setCorpo] = useState([]);
@@ -47,7 +48,9 @@ export default function VisualizaFiscal() {
     return { id, registro, nome, telefone, cpf };
   }
 
-  return (
+  return corpo.length <= 0 ? (
+    <Loader />
+  ) : (
     <Container>
       <Row>
         <Titulo textoMenor="consulta do fiscal" textoMaior="" />

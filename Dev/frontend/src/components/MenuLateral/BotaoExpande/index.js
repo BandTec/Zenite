@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 import Onibus from "../../../assets/icons/onibus.svg";
 import Linha from "../../../assets/icons/linha.svg";
@@ -10,16 +9,29 @@ import Logout from "../../../assets/icons/logout.svg";
 import LogoIcone from "../../../assets/logos/favicon4.png";
 import Gerente from "../../../assets/icons/adm1.svg";
 import Adm from "../../../assets/icons/adm2.svg";
+import Seta from "../../../assets/icons/chevron-down-solid.svg";
 
-import { Botao, Icone, Texto } from "./styles";
+import {
+  Botao,
+  SetaIcone,
+  Container,
+  Icone,
+  Texto,
+  Nav,
+} from "../BotaoMenu/styles";
 
-export default function BotaoExpande({ iconeNome, descricao, url, alt, onclick }) {
+export default function BotaoMenu({
+  iconeNome,
+  principal,
+  btnEscondidos,
+  alt,
+}) {
   const iconesLib = {
     onibus: Onibus,
     linha: Linha,
     fiscal: Fiscal,
     motorista: Motorista,
-    perfil: Perfil,
+    config: Perfil,
     logout: Logout,
     dashboard: LogoIcone,
     admin: Adm,
@@ -32,22 +44,28 @@ export default function BotaoExpande({ iconeNome, descricao, url, alt, onclick }
     return urlCaminho === iconeNome;
   };
 
-  return url ? (
-    <NavLink
-      to={url}
-      exact
-      activeClassName="activeLink"
-      isActive={linkEstaAtivo}
-    >
+  return (
+    <Container>
       <Botao>
         <Icone src={iconesLib[iconeNome]} alt={alt} />
-        <Texto>{descricao}</Texto>
+        <Texto>
+          {principal}
+          <SetaIcone src={Seta} alt="seta" />
+        </Texto>
       </Botao>
-    </NavLink>
-  ) : (
-    <Botao onClick={onclick}>
-      <Icone src={iconesLib[iconeNome]} alt={alt} />
-      <Texto>{descricao}</Texto>
-    </Botao>
+      {btnEscondidos.map((item) => (
+        <Nav
+          to={item.url}
+          exact
+          activeClassName="activeLink"
+          isActive={linkEstaAtivo}
+          key={item.texto}
+        >
+          <Botao>
+            <Texto>{item.texto}</Texto>
+          </Botao>
+        </Nav>
+      ))}
+    </Container>
   );
 }

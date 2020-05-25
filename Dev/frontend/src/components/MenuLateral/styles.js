@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-import {Texto} from './BotaoMenu/styles';
+import styled from "styled-components";
+import { Texto } from "./BotaoMenu/styles";
 
 export const Container = styled.div`
   position: fixed;
   background-color: var(--azulMenu);
   height: 100vh;
   width: 70px;
-  display:flex;
+  display: flex;
   flex-direction: column;
   /* align-items: center; */
   justify-content: space-between;
@@ -15,11 +15,14 @@ export const Container = styled.div`
   z-index: 10;
 
   :hover {
-    width: 200px;
+    width: 230px;
   }
 
   :hover ${Texto} {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     padding-left: 25px;
   }
 `;
@@ -30,4 +33,3 @@ export const MainMenu = styled.div`
   justify-content: space-between;
   width: 100%;
 `;
-

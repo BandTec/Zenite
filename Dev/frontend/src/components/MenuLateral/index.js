@@ -1,27 +1,47 @@
-import React from 'react';
+/* eslint react-hooks/exhaustive-deps: 0 */
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-import { useLocation } from 'react-router-dom';
-
-import {
-  Container,
-  MainMenu
-} from './styles';
-
-import BotaoMenu from './BotaoMenu';
+import BotaoMenu from "./BotaoMenu";
+import BotaoExpande from "./BotaoExpande";
+import { Container, MainMenu } from "./styles";
 
 export default function MenuLateral(props) {
-  const {pathname} = useLocation();
-  const mostrar = pathname === "/" ? false : true;
+  const { pathname, state } = useLocation();
+  const [nivel, setNivel] = useState(0);
+  const gerenteConfig = [
+    { texto: "Perfil", url: "/perfil" },
+    { texto: "Alocar", url: "/alocacao" },
+  ];
+
+  const outrosConfig = [{ texto: "Perfil", url: "/perfil" }];
+
+  let nivelStorage = localStorage.getItem("nivel");
+
+  useEffect(() => {
+    if (pathname === "/") {
+      setNivel(0);
+    } else {
+      if (state) {
+        setNivel(Number(state.nivel));
+      } else if (nivelStorage) {
+        nivelStorage = Number(nivelStorage);
+        setNivel(nivelStorage);
+      }
+    }
+  }, [pathname, nivelStorage]);
 
   function logout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("nivel");
+    localStorage.removeItem("nome");
 
-    window.location ="/";
+    window.location = "/";
   }
 
   return (
     <>
-      {mostrar && (
+      {nivel !== 0 && (
         <Container>
           <MainMenu>
             <BotaoMenu
@@ -31,31 +51,64 @@ export default function MenuLateral(props) {
               url={"/dashboard"}
             />
 
-            <BotaoMenu descricao="Fiscal" iconeNome="fiscal" url={"/fiscal"} />
+            {nivel < 3 && (
+              <BotaoMenu
+                descricao="Fiscal"
+                iconeNome="fiscal"
+                url={"/fiscal"}
+              />
+            )}
 
-            <BotaoMenu descricao="Linha" iconeNome="linha" url={"/linha"} />
+            {nivel !== 4 && (
+              <BotaoExpande
+                principal="Linha"
+                btnEscondidos={[
+                  { texto: "Linha", url: "/linha" },
+                  { texto: "Parada", url: "/parada" },
+                ]}
+                iconeNome="linha"
+              />
+            )}
 
-            <BotaoMenu
-              descricao="Motorista"
-              iconeNome="motorista"
-              url={"/motorista"}
-            />
+            {nivel !== 4 && (
+              <BotaoMenu
+                descricao="Motorista"
+                iconeNome="motorista"
+                url={"/motorista"}
+              />
+            )}
 
-            <BotaoMenu descricao="Ônibus" iconeNome="onibus" url={"/onibus"} />
+            {nivel !== 4 && (
+              <BotaoMenu
+                descricao="Ônibus"
+                iconeNome="onibus"
+                url={"/onibus"}
+              />
+            )}
 
-            <BotaoMenu descricao="Perfil" url={"/perfil"} iconeNome="perfil" />
+            {nivel === 1 && (
+              <BotaoMenu
+                descricao="Admin"
+                url={"/administrador"}
+                iconeNome="admin"
+              />
+            )}
 
-            <BotaoMenu
-              descricao="Admin"
-              url={"/administrador"}
-              iconeNome="admin"
-            />
+            {nivel !== 1 && (
+              <BotaoExpande
+                principal="Configuração"
+                btnEscondidos={nivel === 2 ? gerenteConfig : outrosConfig}
+                iconeNome="config"
+              />
+            )}
 
-            <BotaoMenu
-              descricao="Gerente"
-              url={"/gerente"}
-              iconeNome="admin"
-            />
+            {nivel <= 2 && (
+              <BotaoMenu
+                descricao="Gerente"
+                url={"/gerente"}
+                iconeNome="gerente"
+              />
+            )}
           </MainMenu>
 
           <BotaoMenu descricao="Sair" iconeNome="logout" onclick={logout} />

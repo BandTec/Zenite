@@ -46,7 +46,7 @@ public class Carro {
     @OneToMany(mappedBy = "carro", cascade = CascadeType.REMOVE)
     private List<Viagem> viagem;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name = "fkGerente")
     private Gerente gerente;
 
