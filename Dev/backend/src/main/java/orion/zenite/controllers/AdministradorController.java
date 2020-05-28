@@ -3,15 +3,22 @@ package orion.zenite.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import orion.zenite.dto.ConsultaPaginada;
 import orion.zenite.entidades.Administrador;
+import orion.zenite.entidades.Carro;
 import orion.zenite.entidades.Conta;
 import orion.zenite.repositorios.AdministradorRepository;
 
 import java.util.Optional;
+
+import static org.springframework.http.ResponseEntity.*;
 
 /*
  * Todas as rotas que começam com /api/alguma-coisa
@@ -42,40 +49,50 @@ public class AdministradorController {
 
     @ApiOperation("Lista todos os administradores")
     @GetMapping
-    public ResponseEntity consultar(){
+    public ResponseEntity consultarTodos(@RequestParam(required = false) Integer pagina){
         if (this.repository.count() > 0) {
-            return ResponseEntity.ok(this.repository.findAll());
+            if (pagina != null) {
+                Pageable pageable = PageRequest.of(pagina, 10);
+                Page<Administrador> page = repository.findAll(pageable);
+                ConsultaPaginada consulta = new ConsultaPaginada(page);
+                return ok(consulta);
+            } else {
+                return ok(this.repository.findAll());
+            }
         } else {
-            return ResponseEntity.noContent().build();
+            return noContent().build();
         }
     }
 
     @ApiOperation("Buscar um administrador por seu id")
     @GetMapping("{id}")
-    public ResponseEntity consultar(@PathVariable("id") int id){
+    public ResponseEntity consultar(@PathVariable("id") Integer id){
         Optional<Administrador> adm = this.repository.findById(id);
         if (adm.isPresent()) {
-            return ResponseEntity.ok(adm);
+            return ok(adm);
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
     @ApiOperation("Deleta um administrador por seu id")
     @DeleteMapping("{id}")
-    public ResponseEntity deletar(@PathVariable("id") int id){
+    public ResponseEntity deletar(@PathVariable("id") Integer id){
         if (this.repository.existsById(id)) {
             this.repository.deleteById(id);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
     @ApiOperation("Altera um administrador")
-    @PutMapping
-    public ResponseEntity alterar(@RequestBody Administrador administrador){
-        if (this.repository.existsById(administrador.getId())) {
+    @PutMapping("{id}")
+    @Transactional
+    public ResponseEntity alterar(@RequestBody Administrador administrador,
+                                  @PathVariable Integer id){
+        if (this.repository.existsById(id)) {
+            administrador.setId(id);
             // encriptar senha
             Conta conta = administrador.getConta();
             String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
@@ -84,9 +101,9 @@ public class AdministradorController {
 
             // altera adm
             this.repository.save(administrador);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -104,6 +121,6 @@ public class AdministradorController {
         // salvar adm
         this.repository.save(administrador);
 
-        return ResponseEntity.created(null).build();
+        return created(null).build();
     }
 }

@@ -3,13 +3,21 @@ package orion.zenite.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import orion.zenite.dto.ConsultaPaginada;
+import orion.zenite.entidades.Fiscal;
 import orion.zenite.entidades.PontoFinal;
 import orion.zenite.repositorios.PontoFinalRepository;
 
+import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.http.ResponseEntity.*;
 
 @Api(description = "Operações relacionadas ao ponto final", tags = "ponto final")
 @RestController
@@ -21,14 +29,27 @@ public class PontoController {
 
     @ApiOperation("Lista todos os pontos de ônibus")
     @GetMapping
-    public ResponseEntity consultarPonto() {
-
+    public ResponseEntity consultarPonto( @RequestParam(required = false) Integer pagina,
+                                          @RequestParam(required = false) String q
+    )  {
         if (this.repository.count() > 0) {
-            return ResponseEntity.ok(this.repository.findAll());
+            if(pagina != null) {
+                Pageable pageable = PageRequest.of(pagina, 10);
+                Page<PontoFinal> page = repository.findAll(pageable);
+                ConsultaPaginada consulta = new ConsultaPaginada(page);
+                return ok(consulta);
+            }
+            else if(q != null){
+                List<PontoFinal> consulta = repository.findAllByNomeContaining(q);
+                return ok(consulta);
+            }
+            else {
+                List<PontoFinal> consulta = repository.findAll();
+                return ok(consulta);
+            }
         } else {
-            return ResponseEntity.noContent().build();
+            return noContent().build();
         }
-
     }
 
     @ApiOperation("Exibe pontos por id")
@@ -37,9 +58,9 @@ public class PontoController {
         Optional<PontoFinal> consultaPonto = this.repository.findById(id);
 
         if (consultaPonto.isPresent()) {
-             return ResponseEntity.ok(consultaPonto.get());
+             return ok(consultaPonto.get());
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -50,18 +71,20 @@ public class PontoController {
     public ResponseEntity criarPonto(@RequestBody PontoFinal novoPonto) {
         this.repository.save(novoPonto);
 
-        return ResponseEntity.created(null).build();
+        return created(null).build();
 
     }
 
     @ApiOperation("Atualizar Pontos")
-    @PutMapping
-    public ResponseEntity atualizarPonto( @RequestBody  PontoFinal ponto){
-        if (this.repository.existsById(ponto.getId())) {
+    @PutMapping("{id}")
+    public ResponseEntity atualizarPonto( @RequestBody  PontoFinal ponto,
+                                          @PathVariable Integer id){
+        if (this.repository.existsById(id)) {
+            ponto.setId(id);
             this.repository.save(ponto);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -69,9 +92,9 @@ public class PontoController {
     public ResponseEntity excluirPonto(@PathVariable ("id") Integer id) {
         if (this.repository.existsById(id)) {
             this.repository.deleteById(id);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
 
     }

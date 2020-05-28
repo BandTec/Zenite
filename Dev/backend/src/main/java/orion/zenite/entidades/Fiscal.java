@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -47,6 +48,10 @@ public class Fiscal  {
     @JsonIgnore
     @OneToMany(mappedBy = "fiscal", cascade = CascadeType.REMOVE)
     private List<Viagem> viagem;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "fiscal", cascade = CascadeType.REMOVE)
+    private List<FiscalLinha> fiscalLinha;
 
     public Conta getConta() {
         return conta;
@@ -118,5 +123,23 @@ public class Fiscal  {
 
     public void setDispositivo(Dispositivo dispositivo) {
         this.dispositivo = dispositivo;
+    }
+
+  /*  public List getLinhasId() {
+        ArrayList linhasId = new ArrayList();
+        for (FiscalLinha linha : fiscalLinha) {
+            linhasId.add(linha.getIdLinha());
+        }
+        return linhasId;
+    }
+
+   */
+
+    public List getLinhas() {
+        ArrayList linhas = new ArrayList();
+        for (FiscalLinha linha : fiscalLinha) {
+            linhas.add(linha.getLinha());
+        }
+        return linhas;
     }
 }

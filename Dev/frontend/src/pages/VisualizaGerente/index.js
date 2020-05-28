@@ -1,45 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import api from '../../services/api';
+import React, { useEffect, useState } from "react";
+import api from "../../services/api";
 
-import { Container, Row, Acoes } from './styles';
-import Botao from '../../components/Botao';
-import Tabela from '../../components/Tabela2'
-import Titulo from '../../components/Titulo';
-import Paginacao from '../../components/Paginacao';
+import { Container, Row, Acoes } from "./styles";
+import Botao from "../../components/Botao";
+import Tabela from "../../components/Tabela2";
+import Titulo from "../../components/Titulo";
+import Paginacao from "../../components/Paginacao";
+import Loader from "./../../components/Loader";
 
 export default function VisualizaGerente() {
   const [corpo, setCorpo] = useState([]);
-  
+  const [pagina, setPagina] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [atual, setAtual] = useState(0);
+  const [totalItens, setTotalItens] = useState(0);
+
   useEffect(() => {
     async function dadosCorpos() {
       const token = localStorage.getItem("token");
 
-      const response = await api.get("/api/gerente", {
+      const response = await api.get(`/api/gerente?pagina=${pagina}`, {
         headers: { Authorization: token },
       });
       let dados = response.data;
-
+      setAtual(dados.paginaAtual);
+      setTotal(dados.totalPaginas);
+      setTotalItens(dados.totalItens);
       let temp = [];
-      dados.forEach((item) => {
-          temp.push(
-            criaDados(
-              item.id,
-              item.nome,
-              item.numeroTelefone,
-              item.cpf
-            )
-          );
+      dados.lista.forEach((item) => {
+        temp.push(criaDados(item.id, item.nome, item.numeroTelefone, item.cpf));
       });
       setCorpo(temp);
-  }
+    }
     dadosCorpos();
-  }, []);
-  
-  function criaDados(id, nome, telefone, cpf){
-    return {id, nome, telefone, cpf}
+  }, [pagina]);
+
+  function criaDados(id, nome, telefone, cpf) {
+    return { id, nome, telefone, cpf };
   }
 
-  return (
+  return corpo.length <= 0 ? (
+    <Loader />
+  ) : (
     <Container>
       <Row>
         <Titulo textoMenor="consulta do gerente" textoMaior="" />
@@ -60,7 +62,13 @@ export default function VisualizaGerente() {
       </Row>
 
       <Row>
-        <Paginacao />
+        <Paginacao
+          pgAtual={atual}
+          totalPg={total}
+          voltar={() => setPagina(pagina - 1)}
+          proximo={() => setPagina(pagina + 1)}
+          totalItens={totalItens}
+        />
       </Row>
     </Container>
   );

@@ -6,6 +6,9 @@
 
 O sistema Zênite é um automatizador e gerenciador do processo de fiscalização de transporte urbano realizado pela empresa Órion.
 
+- [Site Institucional Órion](https://bandtec.github.io/Zenite/)
+- [Aplicação Zenite](https://zenite.azurewebsites.net)
+
 ---
 
 ## Índice
@@ -18,6 +21,8 @@ O sistema Zênite é um automatizador e gerenciador do processo de fiscalizaçã
 * StoryBoard
 * Jornada do Usuário
 * Banco de Dados
+* Diagrama de Arquitetura de Software
+* Mockups de Alta Fidelidade
 * Equipe
 
 ---
@@ -32,17 +37,16 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
 
 ## Metas - Requisitos
 
-
-- [ ] Site Institucional
+* [x] Site Institucional
 - [ ] Aplicação
   - [x] Tela de Login
   - [ ] Tela de Esqueci Minha Senha
   - [x] CRUD Linha
-  - [ ] CRUD Gerente
-  - [ ] CRUD Administrador
-  - [ ] CRUD Ônibus
-  - [ ] CRUD Fiscal
-  - [ ] CRUD Motorista
+  - [x] CRUD Gerente
+  * [x] CRUD Administrador
+  * [x] CRUD Ônibus
+  - [x] CRUD Fiscal
+  - [x] CRUD Motorista
   - [ ] Dashboard
     - [ ] Gráficos com ChartJS
       - [ ] Gráfico com início e fim de viagem
@@ -54,13 +58,14 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
     - [ ] Filtros no dashboard
     - [ ] Gerar relatórios a partir dos dados da dashboard
     - [ ] Gerar relatórios com dados escolhidos pelo usuário
-  - [ ] Perfil
+  * [x] Perfil
   - [ ] Ícone de HelDesk
   - [ ] Logoff
 - [ ] IOT
   - [x] Módulo RFID (RC522) para transportar dados das viagens.
   - [ ] Case para o equipamento do arduíno
 - [x] Banco de dados hospedados na nuvem AZURE
+
 
   
 ---
@@ -117,6 +122,20 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
 ## Banco de Dados
 
 <img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint1/Banco%20de%20dados/MER.png" width="60%">
+
+---
+
+## Diagrama de Arquitetura de Software
+
+![imagem do diagrama de arquitetura de software](https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint2/Arquitetura%20Software.png)
+
+---
+
+# Mockups de Alta Fidelidade
+
+Mais mockups podem ser vistos na seguinte pasta: [`/Documentação/Sprint2/Mockups Alta Fidelidade`](https://github.com/BandTec/Zenite/tree/master/Documentacao/Sprint2/Mockups%20Alta%20Fidelidade)
+
+![mockup de alta fidelidade da consulta do fiscal](https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint2/Mockups%20Alta%20Fidelidade/visualizar-fiscal.png)
 
 ---
 

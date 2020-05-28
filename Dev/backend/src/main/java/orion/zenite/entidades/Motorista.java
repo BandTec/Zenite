@@ -114,11 +114,11 @@ public class Motorista {
         this.cnh = cnh;
     }
 
-    public List getCarrosId() {
-        ArrayList carrosId = new ArrayList();
+    public List getCarros() {
+        ArrayList carros = new ArrayList();
         for (MotoristaCarro carro : motoristaCarroList) {
-            carrosId.add(carro.getIdCarro());
+            carros.add(carro.getCarro());
         }
-        return carrosId;
+        return carros;
     }
 }

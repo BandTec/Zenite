@@ -3,18 +3,22 @@ package orion.zenite.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.entidades.Carro;
-import orion.zenite.entidades.CarroLinha;
-import orion.zenite.entidades.Dispositivo;
-import orion.zenite.entidades.MotoristaCarro;
+import orion.zenite.dto.ConsultaPaginada;
+import orion.zenite.entidades.*;
 import orion.zenite.repositorios.CarroLinhaRepository;
 import orion.zenite.repositorios.CarroRepository;
 import orion.zenite.repositorios.DispositivoRepository;
 
+import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.http.ResponseEntity.*;
 
 @Api(description = "Operações relacionadas ao ônibus", tags = "ônibus")
 @RestController
@@ -32,14 +36,26 @@ public class CarroController {
 
     @ApiOperation("Listar todos os ônibus")
     @GetMapping
-    public ResponseEntity consulta() {
-
+    public ResponseEntity consultarTodos(
+            @RequestParam(required = false) Integer pagina,
+            @RequestParam(required = false) String q
+    ) {
         if (this.repository.count() > 0) {
-            return ResponseEntity.ok(this.repository.findAll());
+            if (pagina != null) {
+                Pageable pageable = PageRequest.of(pagina, 10);
+                Page<Carro> page = repository.findAll(pageable);
+                ConsultaPaginada consulta = new ConsultaPaginada(page);
+                return ok(consulta);
+            } else if (q != null) {
+                List<Carro> consulta = repository.findAllByNumeroContaining(q);
+                return ok(consulta);
+            } else {
+                List<Carro> consulta = repository.findAll();
+                return ok(consulta);
+            }
         } else {
-            return ResponseEntity.noContent().build();
+            return noContent().build();
         }
-
     }
 
     @ApiOperation("Exibe ônibus por id")
@@ -48,9 +64,9 @@ public class CarroController {
         Optional<Carro> consultaCarro = this.repository.findById(id);
 
         if (consultaCarro.isPresent()) {
-          return   ResponseEntity.ok(consultaCarro);
+          return   ok(consultaCarro);
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
 
     }
@@ -62,10 +78,10 @@ public class CarroController {
         if(dispositivo.isPresent()){
             Optional<Carro> consultaCarro = this.repository.findByDispositivo(dispositivo.get());
             if (consultaCarro.isPresent()) {
-                return ResponseEntity.ok(consultaCarro);
+                return ok(consultaCarro);
             }
         }
-        return ResponseEntity.notFound().build();
+        return notFound().build();
     }
 
     @ApiOperation("Inserir ônibus")
@@ -73,19 +89,21 @@ public class CarroController {
     @Transactional
     public ResponseEntity criarCarro(@RequestBody Carro onibus) {
         this.repository.save(onibus);
-        return ResponseEntity.created(null).build();
+        return created(null).build();
 
     }
 
 
     @ApiOperation("Atualizar ônibus")
-    @PutMapping
-    public ResponseEntity atualizarCarro(@RequestBody Carro onibus) {
-        if (this.repository.existsById(onibus.getId())) {
+    @PutMapping("{id}")
+    public ResponseEntity atualizarCarro(@RequestBody Carro onibus,
+                                         @PathVariable Integer id) {
+        if (this.repository.existsById(id)) {
+            onibus.setId(id);
             this.repository.save(onibus);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -94,9 +112,9 @@ public class CarroController {
     public ResponseEntity excluirCarro(@PathVariable Integer id) {
         if (this.repository.existsById(id)) {
             this.repository.deleteById(id);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -106,16 +124,16 @@ public class CarroController {
     @Transactional
     public ResponseEntity relacionar(@RequestBody CarroLinha novoRelacionamento) {
         this.carroLinhaRepository.save(novoRelacionamento);
-        return ResponseEntity.created(null).build();
+        return created(null).build();
     }
 
     @ApiOperation("Listar quais ônibus estão em quais linhas")
     @GetMapping("/linhas")
     public ResponseEntity consultarRelacionamento() {
         if (this.repository.count() > 0) {
-            return ResponseEntity.ok(this.carroLinhaRepository.findAll());
+            return ok(this.carroLinhaRepository.findAll());
         } else {
-            return ResponseEntity.noContent().build();
+            return noContent().build();
         }
     }
 

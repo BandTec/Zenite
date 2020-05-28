@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
+/* eslint react-hooks/exhaustive-deps: 0 */
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { cpfMask, telefoneMask, /* dataMask */ } from "./../../../functions/Mascaras/mask";
+import { cpfMask, telefoneMask, dataMask, reformatarData, formatarData } from "./../../../functions/Mascaras/mask";
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 
 import BotaoForm from './../../../components/BotaoForm';
 import StatusPage from './../../../components/StatusPage';
 import InputComRotulo from './../../../components/InputComRotulo';
 
-export default function DadosPessoais({ mudarPagina, tipoPagina, adicionarDados }) {
+export default function DadosPessoais({ mudarPagina, tipoPagina, adicionarDados, dados }) {
   
   const [nome, setNome ] = useState("");
   const [valorCpf, setValorCpf] = useState("");
@@ -21,22 +22,33 @@ export default function DadosPessoais({ mudarPagina, tipoPagina, adicionarDados 
   }
 
   const mascararData = e => {
-    setValorData(e.target.value);
+    setValorData(dataMask(e.target.value));
   }
 
   const mascararTelefone = e => {
     setValorTelefone(telefoneMask(e.target.value));
   }
 
-  const criarJson = () => {
+  useEffect(() => {  
+    if (Object.keys(dados).length !== 0 && tipoPagina === "Edição") {
+      setNome(dados.nome);
+      setValorCpf(dados.cpf);
+      setValorData(reformatarData(dados.dataNascimento));
+      setValorTelefone(dados.numeroTelefone);
+      setRegistro(dados.registroFiscal);
+    }
+  }, []);
+
+  useEffect(() => {
     adicionarDados({
       nome,
-      "cpf": valorCpf,
-      "dataNascimento": valorData,
-      "numeroTelefone": valorTelefone,
-      "registroFiscal": registro,
-    })
-  }
+      cpf: valorCpf,
+      dataNascimento: formatarData(valorData),
+      numeroTelefone: valorTelefone,
+      registroFiscal: registro,
+    });
+  }, [valorCpf, valorData, valorTelefone, registro, nome]);
+
 
   return (
     <Container>
@@ -112,7 +124,7 @@ export default function DadosPessoais({ mudarPagina, tipoPagina, adicionarDados 
               />
             </CaixaHorizontal>
           </Caixa>
-          <BotaoForm texto="Próximo" mudarPagina={mudarPagina} criarJson={criarJson}/>
+          <BotaoForm texto="Próximo" mudarPagina={mudarPagina}/>
         </FormContainer>
       </CorpoPagina>
     </Container>

@@ -5,6 +5,15 @@ export const Container = styled.div`
     flex-direction: row;
 `;
 
+export const Rotulo = styled.label`
+  display: block;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  color: #223F61;
+  margin: 10px 0px;
+  text-transform: uppercase;
+`;
+
 export const CorpoPagina = styled.article`
      
     padding: 40px;

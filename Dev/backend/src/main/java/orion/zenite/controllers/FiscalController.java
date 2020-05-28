@@ -2,19 +2,23 @@ package orion.zenite.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.repositorios.DispositivoRepository;
-import orion.zenite.repositorios.FiscalRepository;
+import orion.zenite.dto.ConsultaPaginada;
+import orion.zenite.repositorios.*;
 import orion.zenite.entidades.*;
-import orion.zenite.repositorios.ViagemRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.http.ResponseEntity.*;
 
 
 @Api(description = "Operações relacionadas ao fiscal", tags = "fiscal")
@@ -35,50 +39,56 @@ public class FiscalController {
     @Autowired
     private DispositivoRepository dispositivoRepository;
 
+    @Autowired
+    private LinhaRepository linhaRepository;
+
+    @Autowired
+    private FiscalLinhaRepository fiscalLinhaRepository;
+
     @ApiOperation("Lista todos os fiscais")
     @GetMapping
-    public ResponseEntity consulta() {
-
+    public ResponseEntity  consultarTodos(
+            @RequestParam(required = false) Integer pagina,
+            @RequestParam(required = false) String q
+    )  {
         if (this.repository.count() > 0) {
-            return ResponseEntity.ok(this.repository.findAll());
-        } else {
-            return ResponseEntity.noContent().build();
-        }
-
-    }
-
-    @ApiOperation("Lista as linhas de um fiscal")
-    @GetMapping("{id}/linhas")
-    public ResponseEntity consultaLinha(@PathVariable("id") int id) {
-        Optional<Fiscal> fiscal = this.repository.findById(id);
-        if (fiscal.isPresent()) {
-            List<Viagem> viagem = viagemRepository.findByFiscal(fiscal.get());
-            List<Linha> linha = new ArrayList<>();
-            for(Viagem v : viagem){
-                linha.add(v.getLinha());
+            if(pagina != null) {
+                Pageable pageable = PageRequest.of(pagina, 10);
+                Page<Fiscal> page = repository.findAll(pageable);
+                ConsultaPaginada consulta = new ConsultaPaginada(page);
+                return ok(consulta);
             }
-            return ResponseEntity.ok(linha);
+            else if(q != null){
+                List<Fiscal> consulta = repository.findAllByNomeContaining(q);
+                return ok(consulta);
+            }
+            else {
+                List<Fiscal> consulta = repository.findAll();
+                return ok(consulta);
+            }
         } else {
-            return ResponseEntity.notFound().build();
+            return noContent().build();
         }
-
     }
 
     @ApiOperation("Buscar um fiscal por seu id")
     @GetMapping("{id}")
-    public ResponseEntity consulta(@PathVariable("id") int id) {
+    public ResponseEntity consulta(@PathVariable("id") Integer id) {
         Optional<Fiscal> fiscal = this.repository.findById(id);
         if (fiscal.isPresent()) {
-            return ResponseEntity.ok(fiscal);
+            return ok(fiscal);
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
     @ApiOperation("Altera um fiscal")
-    @PutMapping
-    public ResponseEntity alterar(@RequestBody Fiscal novoFiscal) {
-        if (this.repository.existsById(novoFiscal.getId())) {
+    @PutMapping("{id}")
+    @Transactional
+    public ResponseEntity alterar(@RequestBody Fiscal novoFiscal,
+                                  @PathVariable Integer id) {
+        if (this.repository.existsById(id)) {
+            novoFiscal.setId(id);
             // Encriptar senha
             Conta conta = novoFiscal.getConta();
             String senhaCriptografada = passwordEncoder.encode(conta.getSenha());
@@ -87,20 +97,20 @@ public class FiscalController {
 
             // alterar fiscal
             this.repository.save(novoFiscal);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
     @ApiOperation("Deleta um fiscal por seu id")
     @DeleteMapping("{id}")
-    public ResponseEntity deletar(@PathVariable("id") int id) {
+    public ResponseEntity deletar(@PathVariable("id") Integer id) {
         if (this.repository.existsById(id)) {
             this.repository.deleteById(id);
-            return ResponseEntity.ok().build();
+            return ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            return notFound().build();
         }
     }
 
@@ -119,7 +129,7 @@ public class FiscalController {
         this.repository.save(novoFiscal);
         novoFiscal.setId(repository.lastId());
 
-        return ResponseEntity.created(null).build();
+        return created(null).build();
     }
 
     @ApiOperation("Exibe fiscal pelo código do dispositivo")
@@ -129,10 +139,47 @@ public class FiscalController {
         if(dispositivo.isPresent()){
             Optional<Fiscal> fiscal = this.repository.findByDispositivo(dispositivo.get());
             if (fiscal.isPresent()) {
-                return ResponseEntity.ok(fiscal);
+                return ok(fiscal);
             }
         }
-        return ResponseEntity.notFound().build();
+        return notFound().build();
     }
 
+    @ApiOperation("Exibe as linhas que o fiscal trabalha")
+    @GetMapping("{id}/linhas")
+    public ResponseEntity consultarLinhasPorFiscal(@PathVariable Integer id){
+        List<FiscalLinha> fiscalLinha = fiscalLinhaRepository.findByIdFiscal(id);
+        List<Linha> linhas = new ArrayList<>();
+
+        for(FiscalLinha f : fiscalLinha){
+            Optional<Linha> linha = linhaRepository.findById(f.getIdLinha());
+            if(linha.isPresent()){
+                linhas.add(linha.get());
+            }
+        }
+
+        return linhas.isEmpty() ? notFound().build() : ok(linhas);
+    }
+
+    @ApiOperation("Exibe as linhas que o fiscal trabalha")
+    @DeleteMapping("{idFiscal}/linhas/{idLinha}")
+    public ResponseEntity deletarRelacionamentoFiscalLinha(@PathVariable Integer idFiscal, @PathVariable Integer idLinha){
+        FiscalLinha fiscalLinha = fiscalLinhaRepository.findByIdFiscalAndIdLinha(idFiscal, idLinha);
+
+        if(fiscalLinha != null){
+            fiscalLinhaRepository.delete(fiscalLinha);
+            return ok().build();
+        }
+
+        return notFound().build();
+    }
+
+    @ApiOperation("Cadastra a linhas que o fiscal trabalha")
+    @PostMapping("/linhas")
+    @Transactional
+    public ResponseEntity consultarLinhasPorFiscal(@RequestBody FiscalLinha fl){
+
+        fiscalLinhaRepository.save(fl);
+        return created(null).build();
+    }
 }

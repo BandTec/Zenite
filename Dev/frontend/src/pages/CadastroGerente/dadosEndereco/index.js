@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+/* eslint react-hooks/exhaustive-deps: 0 */
+import React, { useState, useEffect } from 'react';
 
-// import { cepMask } from "./../../../functions/Mascaras/mask";
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
+import BotaoForm from '../../../components/BotaoForm';
+import StatusPage from '../../../components/StatusPage';
+import InputComRotulo from '../../../components/InputComRotulo';
 
-import BotaoForm from './../../../components/BotaoForm';
-import StatusPage from './../../../components/StatusPage';
-import InputComRotulo from './../../../components/InputComRotulo';
+export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados, dados }) {
 
-export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados }) {
   const [valorCep, setValorCep] = useState("");
   const [logradouro, setLogradouro] = useState("");
   const [numero, setNumero] = useState("");
@@ -15,26 +15,50 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados 
   const [cidade, setCidade] = useState("");
   const [estado, setEstado] = useState("");
 
-  const mascararCep = e => {
+  const mascararCep = (e) => {
     setValorCep(e.target.value);
   }
 
-  const criarJson = () => {
-    adicionarDados({
-      "endereco": {
-      "cep": valorCep,
-      logradouro,
-      numero,
-      complemento,
-      cidade,
-      estado
+  useEffect(() => {
+    if (Object.keys(dados).length !== 0 && tipoPagina === "Edição") {
+      setValorCep(dados.endereco.cep);
+      setLogradouro(dados.endereco.logradouro);
+      setNumero(dados.endereco.numero);
+      setComplemento(dados.endereco.complemento);
+      setCidade(dados.endereco.cidade);
+      setEstado(dados.endereco.estado);
     }
-    })
-  }
+  }, []);
+
+  useEffect(() => {
+    if(tipoPagina === "Edição"){
+      adicionarDados({
+        endereco: {
+          id: dados.endereco.id,
+          cep: valorCep,
+          logradouro,
+          numero,
+          complemento,
+          cidade,
+          estado,
+        },
+      });
+    }else{
+      adicionarDados({
+        endereco: {
+          cep: valorCep,
+          logradouro,
+          numero,
+          complemento,
+          cidade,
+          estado,
+        },
+      });
+    }
+  }, [valorCep, logradouro, numero, complemento, cidade, estado]);
 
   return (
     <Container>
-
       <CorpoPagina>
         <CaixaHorizontal center={true}>
           <StatusPage
@@ -43,11 +67,9 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados 
             temProximoPasso={true}
           />
 
-          <StatusPage 
-            ativo={true} 
-            texto="Endereço" 
-            temProximoPasso={true} 
-          />
+          <StatusPage ativo={true}
+           texto="Endereço" 
+           temProximoPasso={true} />
 
           <StatusPage
             ativo={false}
@@ -64,7 +86,7 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados 
           />
 
           <Caixa>
-            <Subtitulo>{tipoPagina} DO FISCAL</Subtitulo>
+            <Subtitulo>{tipoPagina} DO MOTORISTA</Subtitulo>
             <Titulo>Endereço</Titulo>
 
             <InputComRotulo
@@ -91,8 +113,8 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados 
                 texto="Número"
                 maxLength="16"
                 name="numero"
-                value={numero}
-                onChange={event => setNumero(event.target.value)}
+               value={numero}
+               onChange={event => setNumero(event.target.value)}
                 required
               />
 
@@ -101,8 +123,8 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados 
                 pequeno={true}
                 maxLength="60"
                 name="complemento"
-                value={complemento}
-                onChange={event => setComplemento(event.target.value)}
+               value={complemento}
+               onChange={event => setComplemento(event.target.value)}
               />
             </CaixaHorizontal>
 
@@ -112,8 +134,8 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados 
                 texto="Cidade"
                 maxLength="40"
                 name="cidade"
-                value={cidade}
-                onChange={event => setCidade(event.target.value)}
+               value={cidade}
+               onChange={event => setCidade(event.target.value)}
               />
 
               <InputComRotulo
@@ -121,13 +143,14 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados 
                 pequeno={true}
                 maxLength="2"
                 name="estado"
-                value={estado}
-                onChange={event => setEstado(event.target.value)}
+               value={estado}
+               onChange={event => setEstado(event.target.value)}
               />
             </CaixaHorizontal>
           </Caixa>
 
-          <BotaoForm texto="Próximo" mudarPagina={mudarPagina} criarJson={criarJson}/>
+          <BotaoForm texto="Próximo" mudarPagina={mudarPagina} /> 
+          
         </FormContainer>
       </CorpoPagina>
     </Container>

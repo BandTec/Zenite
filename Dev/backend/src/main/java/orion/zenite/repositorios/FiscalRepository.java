@@ -5,7 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import orion.zenite.entidades.Conta;
 import orion.zenite.entidades.Dispositivo;
 import orion.zenite.entidades.Fiscal;
+import orion.zenite.entidades.Linha;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface FiscalRepository extends JpaRepository<Fiscal, Integer> {
@@ -14,6 +16,8 @@ public interface FiscalRepository extends JpaRepository<Fiscal, Integer> {
     int lastId();
 
     Optional<Fiscal> findByDispositivo(Dispositivo dispositivo);
+
+    List<Fiscal> findAllByNomeContaining(String nome);
 
     Optional<Fiscal> findByConta(Conta conta);
 

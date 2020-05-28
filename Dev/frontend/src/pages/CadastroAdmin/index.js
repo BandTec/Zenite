@@ -1,6 +1,8 @@
+/* eslint react-hooks/exhaustive-deps: 0 */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
+import Swal from "sweetalert2";
 
 import {
   Container,
@@ -14,44 +16,55 @@ import BotaoForm from "./../../components/BotaoForm";
 import InputComRotulo from "./../../components/InputComRotulo";
 
 export default function CadastroAdmin(props) {
+  const [idConta, setIdConta] = useState("");
   const [valorSenha, setValorSenha] = useState("");
   const [valorConfirmarSenha, setValorConfirmarSenha] = useState("");
-  const [validacaoSenha, setValidacaoSenha] = useState("");
+  const [validacaoSenha, setValidacaoSenha] = useState(false);
   const [email, setEmail] = useState("");
   const [nome, setNome] = useState("");
 
-   const caminho = props.match.path;
-   const id = props.match.params.id;
-   const isEdicao = caminho.includes("editar");
-   const tipoPagina = isEdicao ? "Edição" : "Cadastro";
+  const caminho = props.match.path;
+  const id = props.match.params.id;
+  const isEdicao = caminho.includes("editar");
+  const tipoPagina = isEdicao ? "Edição" : "Cadastro";
 
   const verificarSenha = () => {
-
-    if(valorSenha.length >= 8){
+    if (valorSenha.length >= 8) {
       setValidacaoSenha(valorSenha === valorConfirmarSenha);
     }
   };
 
-    useEffect(() => {
-      async function consultarEdicao() {
-        try {
-          const token = localStorage.getItem("token");
+  const mostrarErro = (mensagemCustomizada) => {
+    let mensagemPadrao =
+      "Ocorreu um imprevisto, por gentileza tente novamente.";
+    let mensagem = mensagemCustomizada ? mensagemCustomizada : mensagemPadrao;
+    Swal.fire({
+      title: "Tente novamente",
+      text: mensagem,
+      icon: "error",
+      showConfirmButton: false,
+    });
+  };
 
-          const response = await api.get(`/api/administrador/${id}`, {
-            headers: { Authorization: token },
-          });
-
-          const dados = response.data;
-
-          setNome(dados.nome);
-          setEmail(dados.conta.email);
-        } catch (e) {
-          alert("Ocorreu um erro. Tente de novo.");
-        }
+  useEffect(() => {
+    async function consultarEdicao() {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await api.get(`/api/administrador/${id}`, {
+          headers: { Authorization: token },
+        });
+        const dados = response.data;
+        setNome(dados.nome);
+        setIdConta(dados.conta.idConta);
+        setEmail(dados.conta.email);
+      } catch (e) {
+        mostrarErro();
       }
-
+    }
+    if (isEdicao) {
       consultarEdicao();
-    }, [id]);
+    }
+  }, [id]);
 
   const cadastrar = async () => {
     const dados = {
@@ -76,56 +89,57 @@ export default function CadastroAdmin(props) {
 
         if (response.status === 201) {
           props.history.push("/administrador");
-        } 
+        }
       } catch (e) {
-        alert("Ocorreu um erro. Tente de novo.");
+        mostrarErro();
       }
-
     } else {
-      alert("Senhas não batem. Redigite a senha");
+    mostrarErro("As senhas devem ser iguais");
     }
   };
 
-    const editar = async () => {
-      const dados = {
-        id,
-        nome: nome,
-        conta: {
-          senha: valorSenha,
-          email: email,
-          nivel: {
-            id: 1,
-          },
+  const editar = async () => {
+    const dados = {
+      nome: nome,
+      conta: {
+        idConta: idConta,
+        senha: valorSenha,
+        email: email,
+        nivel: {
+          id: 1,
         },
-      };
-       verificarSenha();
+      },
+    };
+    verificarSenha();
     if (validacaoSenha) {
       try {
         const token = await localStorage.getItem("token");
-        const response = await api.put("/api/administrador", dados, {
+        const response = await api.put(`/api/administrador/${id}`, dados, {
           headers: { Authorization: token },
         });
-        console.log(response);
-          if (response.status === 200) {
-            props.history.push("/administrador");
-          }
-        } catch (e) {
-          alert("Ocorreu um erro. Tente de novo.");
-        }
-      } else {
-        alert("Senhas não batem. Redigite a senha");
-      }
-    };
 
-    const concluir = () => {
-      isEdicao ? editar() : cadastrar();
-    };
+        if (response.status === 200) {
+          props.history.push("/administrador");
+        } else {
+          mostrarErro();
+        }
+      } catch (e) {
+        mostrarErro();
+      }
+    } else {
+      mostrarErro("As senhas devem ser iguais");
+    }
+  };
+
+  const concluir = () => {
+    isEdicao ? editar() : cadastrar();
+  };
 
   return (
     <Container>
       <CorpoPagina>
         <FormContainer>
-          <Link to="/admin">
+          <Link to="/administrador">
             <BotaoForm texto="VOLTAR" ladoDireito={false} />
           </Link>
 

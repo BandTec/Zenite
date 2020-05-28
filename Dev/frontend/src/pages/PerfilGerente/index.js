@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/api";
+import Swal from "sweetalert2";
 
 import {
   Container,
@@ -7,14 +8,14 @@ import {
   FormContainer,
   Subtitulo,
   Caixa,
-  CaixaHorizontal
+  CaixaHorizontal,
 } from "./styles";
 
 import Loader from "./../../components/Loader";
 import BotaoForm from "./../../components/BotaoForm";
-import Acesso from './Acesso';
+import Acesso from "./Acesso";
 import Endereco from "./DadosEndereco";
-import Pessoais from './DadosPessoais';
+import Pessoais from "./DadosPessoais";
 import StatusPage from "./../../components/StatusPage";
 
 export default function Perfil(props) {
@@ -32,27 +33,39 @@ export default function Perfil(props) {
     setDados({ ...dados, ...novoDado });
   };
 
- function tipoUsuario(dados) {
-   setIdUsuario(dados.id);
-   const nivel = dados.conta.nivel.id;
-   switch (nivel) {
-     case 1:
-       setRota("administrador");
-       break;
-     case 2:
-       setRota("gerente");
-       break;
-     case 3:
-       setRota("fiscal");
-       break;
-     case 4:
-       setRota("motorista");
-       break;
-       default:
-         setRota("");
-         break;
-   }
- }
+  const mostrarErro = (mensagemCustomizada) => {
+    let mensagemPadrao =
+      "Ocorreu um imprevisto, por gentileza tente novamente.";
+    let mensagem = mensagemCustomizada ? mensagemCustomizada : mensagemPadrao;
+    Swal.fire({
+      title: "Tente novamente",
+      text: mensagem,
+      icon: "error",
+      showConfirmButton: false,
+    });
+  };
+
+  function tipoUsuario(dados) {
+    setIdUsuario(dados.id);
+    const nivel = dados.conta.nivel.id;
+    switch (nivel) {
+      case 1:
+        setRota("administrador");
+        break;
+      case 2:
+        setRota("gerente");
+        break;
+      case 3:
+        setRota("fiscal");
+        break;
+      case 4:
+        setRota("motorista");
+        break;
+      default:
+        setRota("");
+        break;
+    }
+  }
 
   useEffect(() => {
     async function consultarEdicao() {
@@ -61,10 +74,9 @@ export default function Perfil(props) {
       const response = await api.get(`/logado`, {
         headers: { Authorization: token },
       });
-      
-      
+
       let dadosConsulta = response.data;
-      setDados({...dadosConsulta});
+      setDados({ ...dadosConsulta });
       tipoUsuario(dadosConsulta);
       setPagina(1);
     }
@@ -75,26 +87,23 @@ export default function Perfil(props) {
   const editar = async () => {
     const token = await localStorage.getItem("token");
     try {
-      if (validacaoSenha){
-          const response = await api.put(`/api/${rota}`, dados, {
-            headers: { Authorization: token },
-          });
-      
-        if (response.status === 204) {
-          props.history.push("/login");
+      if (validacaoSenha) {
+        const response = await api.put(`/api/${rota}/${idUsuario}`, dados, {
+          headers: { Authorization: token },
+        });
+
+        if (response.status === 200) {
+          props.history.push("/dashboard");
         } else {
-          alert("Ocorreu um erro. Tente de novo");
+          mostrarErro();
         }
-      }else {
-          alert("Senha diferente, tente novamente.");
+      } else {
+        mostrarErro("Senha diferente, tente novamente.");
       }
-
-    }catch(e) {
-      alert("Ocorreu um erro. Tente de novo.");
+    } catch (e) {
+      mostrarErro();
     }
-    
   };
-
 
   return (
     <Container>

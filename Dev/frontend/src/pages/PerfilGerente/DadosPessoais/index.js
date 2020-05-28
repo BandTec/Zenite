@@ -1,5 +1,6 @@
+/* eslint react-hooks/exhaustive-deps: 0 */
 import React, { useState, useEffect } from "react";
-import { cpfMask, telefoneMask, /* dataMask */ } from "./../../../functions/Mascaras/mask";
+import { cpfMask, telefoneMask, dataMask, reformatarData, formatarData } from "./../../../functions/Mascaras/mask";
 import { CaixaHorizontal, Titulo} from './../styles';
 import InputComRotulo from './../../../components/InputComRotulo';
 
@@ -17,7 +18,7 @@ export default function DadosPessoais({ adicionarDados, dados }) {
   }
 
   const mascararData = e => {
-    setValorData(e.target.value);
+    setValorData(dataMask(e.target.value));
   }
 
   const mascararTelefone = e => {
@@ -29,7 +30,7 @@ export default function DadosPessoais({ adicionarDados, dados }) {
       if (Object.keys(dados).length !== 0) {
         setValorCpf(dados.cpf);
         setNome(dados.nome);
-        setValorData(dados.dataNascimento);
+        setValorData(reformatarData(dados.dataNascimento));
         setValorTelefone(dados.numeroTelefone);
         dados.registroFiscal && setRegistro(dados.registroFiscal);
         dados.cnh && setCnh(dados.cnh);
@@ -40,7 +41,7 @@ export default function DadosPessoais({ adicionarDados, dados }) {
    adicionarDados({
      nome,
      cpf: valorCpf,
-     dataNascimento: valorData,
+     dataNascimento: formatarData(valorData),
      numeroTelefone: valorTelefone,
    });
  }, [valorCpf, valorData, valorTelefone, nome]);

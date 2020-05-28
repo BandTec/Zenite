@@ -1,37 +1,133 @@
-import React, { useState } from 'react';
+/* eslint react-hooks/exhaustive-deps: 0 */
+import React, { useState, useEffect } from "react";
+import api from "../../services/api";
+import Swal from "sweetalert2";
 
-import { Container } from './styles';
-import DadosPessoais from './dadosPessoais';
-import DadosEndereco from './endereco';
-import DadosAcesso from './dadosAcesso';
+import { Container } from "./styles";
+import DadosPessoais from "./dadosPessoais";
+import DadosEndereco from "./dadosEndereco";
+import DadosAcesso from "./dadosAcesso";
+import Loader from "./../../components/Loader";
 
 export default function CadastroMotorista(props) {
-    
-    const [pagina, setPagina] = useState(1);
-    const caminho = props.match.path;
-    const tipoPagina = caminho.includes("editar") ? "Edição" : "Cadastro";
-    
-    const mudarPagina = isProximo => {
-        isProximo ? setPagina(pagina+1) : setPagina(pagina-1);
-    }
+  const [validacaoSenha, setValidacaoSenha] = useState(false);
+  const [pagina, setPagina] = useState(1);
+  const [dados, setDados] = useState({});
+  const caminho = props.match.path;
+  const id = props.match.params.id;
+  const isEdicao = caminho.includes("editar");
+  const tipoPagina = isEdicao ? "Edição" : "Cadastro";
 
-    const cadastrar = () =>{
-        console.log("Aqui vai o cadastro do Motorista")
-    }
+  const mudarPagina = (isProximo) => {
+    isProximo ? setPagina(pagina + 1) : setPagina(pagina - 1);
+  };
 
-    return (
-        <Container>
-            
-            {   pagina === 1 ?
-                <DadosPessoais mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
-                : pagina === 2 ?
-                <DadosEndereco mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
-                : pagina === 3 ?
-                <DadosAcesso mudarPagina={mudarPagina} tipoPagina={tipoPagina} />
-                : pagina === 4 ?
-                cadastrar()
-                : <h1>Pagina não encontrada</h1>
-            }
-        </Container>
-    );
+  const adicionarDados = (novoDado) => {
+    setDados({ ...dados, ...novoDado });
+  };
+
+  const mostrarErro = (mensagemCustomizada) => {
+    let mensagemPadrao =
+      "Ocorreu um imprevisto, por gentileza tente novamente.";
+    let mensagem = mensagemCustomizada ? mensagemCustomizada : mensagemPadrao;
+    Swal.fire({
+      title: "Tente novamente",
+      text: mensagem,
+      icon: "error",
+      showConfirmButton: false,
+    });
+  };
+
+  useEffect(() => {
+    async function consultarEdicao() {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await api.get(`/api/motorista/${id}`, {
+          headers: { Authorization: token },
+        });
+        const dadosConsulta = response.data;
+        delete dadosConsulta["carros"];
+        setDados({ ...dadosConsulta });
+      } catch (e) {
+        mostrarErro();
+      }
+    }
+    if (isEdicao) {
+      consultarEdicao();
+    }
+  }, [id]);
+
+  const cadastrar = async () => {
+    try {
+      const token = await localStorage.getItem("token");
+
+      const response = await api.post("/api/motorista", dados, {
+        headers: { Authorization: token },
+      });
+
+      if (response.status === 201) {
+        props.history.push("/motorista");
+      }
+    } catch (e) {
+      alert("Ocorreu um erro. Tente de novo.");
+    }
+  };
+
+  const editar = async () => {
+    const token = await localStorage.getItem("token");
+    try {
+      if (validacaoSenha) {
+        const response = await api.put(`/api/motorista/${id}`, dados, {
+          headers: { Authorization: token },
+        });
+
+        if (response.status === 200) {
+          props.history.push("/motorista");
+        } else {
+          mostrarErro();
+        }
+      } else {
+        mostrarErro("Senha diferente, tente novamente.");
+      }
+    } catch (e) {
+      mostrarErro();
+    }
+  };
+
+  const chamada = () => {
+    isEdicao ? editar() : cadastrar();
+  };
+
+  return (
+    <Container>
+      {isEdicao && Object.keys(dados).length === 0 ? (
+        <Loader />
+      ) : pagina === 1 ? (
+        <DadosPessoais
+          mudarPagina={mudarPagina}
+          tipoPagina={tipoPagina}
+          adicionarDados={adicionarDados}
+          dados={dados}
+        />
+      ) : pagina === 2 ? (
+        <DadosEndereco
+          mudarPagina={mudarPagina}
+          tipoPagina={tipoPagina}
+          adicionarDados={adicionarDados}
+          dados={dados}
+        />
+      ) : (
+        <>
+          <DadosAcesso
+            mudarPagina={mudarPagina}
+            tipoPagina={tipoPagina}
+            adicionarDados={adicionarDados}
+            dados={dados}
+            validarSenha={setValidacaoSenha}
+          />
+          {pagina === 4 && chamada()}
+        </>
+      )}
+    </Container>
+  );
 }

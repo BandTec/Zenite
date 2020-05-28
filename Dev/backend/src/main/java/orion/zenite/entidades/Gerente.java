@@ -90,4 +90,6 @@ public class Gerente{
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
+
 }
