@@ -37,10 +37,10 @@ export default function Alocacao() {
     }
   }, [selecionado]);
 
-  const promiseOptions = async (inputValue, rota) => {
+  const pesquisarOpcoes = async (inputValue, rota) => {
     const token = localStorage.getItem("token");
     let url = rota.toLowerCase();
-
+    
     if (url === "ônibus") {
       url = "onibus";
     }
@@ -58,14 +58,14 @@ export default function Alocacao() {
   };
 
   const salvar = async () => {
-    if (!alocar.dados) {
-      alert("Escolha");
+    if (!alocar.dados || !local.dados) {
+       Swal.fire({
+         title: "Por favor escolha os dados a serem alocados",
+         confirmButtonText: "Ok",
+       });
       return;
     }
-    if (!local.dados) {
-      alert("Escolha");
-      return;
-    }
+
     let url = "";
     let corpo_requisicao = {};
     switch (selecionado) {
@@ -91,13 +91,13 @@ export default function Alocacao() {
         };
         break;
       default:
-        alert("Escolha!");
+        Swal.fire({
+          title: "Por favor escolha os dados a serem alocados",
+          confirmButtonText: "Ok",
+        });
         return;
     }
-    // console.log(alocar);
-    // console.log(local);
-    //    console.log(url);
-    //     console.log(corpo_requisicao);
+
     if (!!url && !!corpo_requisicao) {
       try {
         const token = localStorage.getItem("token");
@@ -108,10 +108,36 @@ export default function Alocacao() {
 
         if (response.status === 201) {
           Swal.fire("Sucesso!", "Alocado com sucesso.", "success");
+          switch (selecionado) {
+            case "Fiscal":
+                let linhas = alocar.dados.linhas;
+                linhas.push(local.dados);
+                setAlocar({...alocar, dados: {...alocar.dados, linhas: linhas}})        
+              break;
+            case "Motorista":
+             let carros = alocar.dados.carros;
+             carros.push(local.dados);
+             setAlocar({
+               ...alocar,
+               dados: { ...alocar.dados, carros: carros },
+             });        
+              break;
+            case "Ônibus":
+               let linhasOnibus = alocar.dados.linhasId;
+               linhasOnibus.push(alocar.dados.id);
+               setAlocar({
+                 ...alocar,
+                 dados: { ...alocar.dados, linhasId: linhasOnibus },
+               });  
+              break;
+            default:
+             
+          }
         } else {
           Swal.fire("Erro!", "Tente novamente.", "error");
         }
       } catch (erro) {
+        console.log(erro);
         Swal.fire("Erro!", "Tente novamente.", "error");
       }
     }
@@ -147,16 +173,17 @@ export default function Alocacao() {
           <Titulo>{alocacao}</Titulo>
           <InfoTitle>{local.label}</InfoTitle>
         </div>
-        <Botao descricao="Concluir" onClick={salvar} />
+        <Botao descricao="Alocar" onClick={salvar} />
       </Nav>
 
       {selecionado && (
         <Row>
           <Col>
             <AsyncSelect
+              placeholder="Digite aqui o termo de sua pesquisa..."
               value={alocar}
               onChange={(e) => setAlocar(e)}
-              loadOptions={(e) => promiseOptions(e, selecionado)}
+              loadOptions={(e) => pesquisarOpcoes(e, selecionado)}
             />
 
             {!!alocar && <Detalhes tipo={selecionado} objeto={alocar} />}
@@ -164,11 +191,12 @@ export default function Alocacao() {
 
           <Col>
             <AsyncSelect
+              placeholder="Digite aqui o termo de sua pesquisa..."
               value={local}
               onChange={(e) => setLocal(e)}
-              loadOptions={(e) => promiseOptions(e, alocacao)}
+              loadOptions={(e) => pesquisarOpcoes(e, alocacao)}
             />
-            {!!local && <Detalhes tipo={alocacao} objeto={local} />}
+            {!!local && <Detalhes tipo={alocacao} objeto={local} /> }
           </Col>
         </Row>
       )}

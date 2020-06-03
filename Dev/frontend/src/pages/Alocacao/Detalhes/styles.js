@@ -40,7 +40,7 @@ export const Rotulo = styled.p`
   font-size: 15px;
   letter-spacing: 0.05em;
   color: #223f61;
-  margin-bottom: 10px;
+  margin: 10px 0px;
   text-transform: uppercase;
 `;
 
