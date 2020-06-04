@@ -1,5 +1,10 @@
 import styled from "styled-components";
 import Check from "../../assets/icons/check.png";
+import AsyncSelect from "react-select/async";
+
+export const CustomSelect = styled(AsyncSelect)`
+  width: 100%;
+`;
 
 export const Container = styled.article`
   padding: 20px 50px;

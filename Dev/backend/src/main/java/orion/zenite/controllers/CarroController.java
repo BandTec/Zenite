@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.dto.ConsultaPaginada;
+import orion.zenite.modelos.ConsultaPaginada;
 import orion.zenite.entidades.*;
 import orion.zenite.repositorios.CarroLinhaRepository;
 import orion.zenite.repositorios.CarroRepository;
@@ -47,7 +47,7 @@ public class CarroController {
                 ConsultaPaginada consulta = new ConsultaPaginada(page);
                 return ok(consulta);
             } else if (q != null) {
-                List<Carro> consulta = repository.findAllByNumeroContaining(q);
+                List<Carro> consulta = repository.findAllByNumeroContainingIgnoreCase(q);
                 return ok(consulta);
             } else {
                 List<Carro> consulta = repository.findAll();
@@ -123,8 +123,20 @@ public class CarroController {
     @PostMapping("/linhas")
     @Transactional
     public ResponseEntity relacionar(@RequestBody CarroLinha novoRelacionamento) {
-        this.carroLinhaRepository.save(novoRelacionamento);
-        return created(null).build();
+
+        CarroLinha pesquisa = carroLinhaRepository.findByIdLinhaAndIdCarro(novoRelacionamento.getIdLinha(), novoRelacionamento.getIdCarro());
+        if(pesquisa == null) {
+            List<CarroLinha> jaTemLinha = carroLinhaRepository.findByIdCarro(novoRelacionamento.getIdCarro());
+            if (!jaTemLinha.isEmpty()){
+                for(CarroLinha relacionamento : jaTemLinha){
+                    carroLinhaRepository.delete(relacionamento);
+                }
+            }
+            carroLinhaRepository.save(novoRelacionamento);
+            return created(null).build();
+        }
+
+        return noContent().build();
     }
 
     @ApiOperation("Listar quais ônibus estão em quais linhas")

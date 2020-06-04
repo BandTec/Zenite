@@ -12,5 +12,9 @@ public interface CarroLinhaRepository extends JpaRepository<CarroLinha, Integer>
     @Query(value = "select max(c.id) from CarroLinha c")
     int lastId();
 
-    List<CarroLinha> findByIdLinha(int id);
+    List<CarroLinha> findByIdLinha(Integer id);
+
+    List<CarroLinha> findByIdCarro(Integer id);
+
+    CarroLinha findByIdLinhaAndIdCarro(Integer idLinha, Integer idCarro);
 }

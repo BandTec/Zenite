@@ -28,19 +28,21 @@ export const InfoTitle = styled.h4`
   color: #0066ac;
 `;
 
-export const InfoDetalhe = styled.h5`
+export const InfoDetalhe = styled.p`
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 24px;
   color: #223f61;
 `;
 
-export const Rotulo = styled.p`
-  display: block;
+export const Rotulo = styled.span`
+  /* display: block; */
   font-size: 15px;
   letter-spacing: 0.05em;
   color: #223f61;
-  margin: 10px 0px;
+  /* margin: 10px 0px; */
+  line-height: 3em;
+  font-weight: 700;
   text-transform: uppercase;
 `;
 

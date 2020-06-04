@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://backendzenite.azurewebsites.net',
-})
+  // baseURL: "http://localhost:8080",
+  baseURL: "https://backendzenite.azurewebsites.net",
+});
 
 export default api;

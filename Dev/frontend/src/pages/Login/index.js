@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import api from '../../services/api';
-import { isAuthenticated } from '../../services/auth';
+// import { isAuthenticated } from '../../services/auth';
 
 import {
   Container,

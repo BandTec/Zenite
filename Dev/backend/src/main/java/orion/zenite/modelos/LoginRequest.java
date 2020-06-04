@@ -1,4 +1,4 @@
-package orion.zenite.dto;
+package orion.zenite.modelos;
 
 /*
     * Classe usada para ser o padrão do corpo da requisição da rota /autentica/login

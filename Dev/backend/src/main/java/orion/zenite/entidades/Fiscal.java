@@ -137,8 +137,9 @@ public class Fiscal  {
 
     public List getLinhas() {
         ArrayList linhas = new ArrayList();
-        for (FiscalLinha linha : fiscalLinha) {
-            linhas.add(linha.getLinha());
+        for (FiscalLinha fl : fiscalLinha) {
+            Linha linha = fl.getLinha();
+            linhas.add(linha);
         }
         return linhas;
     }

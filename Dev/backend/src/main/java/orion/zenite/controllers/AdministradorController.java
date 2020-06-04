@@ -10,9 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.dto.ConsultaPaginada;
+import orion.zenite.modelos.ConsultaPaginada;
 import orion.zenite.entidades.Administrador;
-import orion.zenite.entidades.Carro;
 import orion.zenite.entidades.Conta;
 import orion.zenite.repositorios.AdministradorRepository;
 

@@ -10,12 +10,12 @@ export default function ComboBoxComRotulo(props) {
     textoAlerta,
     conteudoCombo,
     onchange,
-    stateSelecionado
+    stateSelecionado,
   } = props;
 
   return (
     <Container>
-      <Rotulo>{texto}</Rotulo>
+      {texto && <Rotulo>{texto}</Rotulo>}
       {textoAlerta && <TextoAlerta>{textoAlerta}</TextoAlerta>}
       <ComboBox
         value={stateSelecionado}

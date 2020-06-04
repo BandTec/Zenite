@@ -1,4 +1,4 @@
-package orion.zenite.dto;
+package orion.zenite.modelos;
 
 /*
     * Classe utilizada para retornar ao usuário da api
