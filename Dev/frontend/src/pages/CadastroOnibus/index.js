@@ -26,6 +26,8 @@ export default function CadastroOnibus(props) {
   const [modelo, setModelo] = useState("");
   const [fabricante, setFabricante] = useState("");
   const [acessivel, setAcessivel] = useState("");
+  const [qtdPassageirosSentados, setQtdPassageirosSentados] = useState("");
+  const [qtdPassageirosEmPe, setQtdPassageirosEmPe] = useState("");
   const [gerente, setGerente] = useState("");
   const [idDispositivo, setIdDispositivo] = useState("");
 
@@ -41,6 +43,8 @@ export default function CadastroOnibus(props) {
       modelo: modelo,
       fabricante: fabricante,
       acessivel: acessivel === 1 ? true : false,
+      qtdPassageirosSentados: qtdPassageirosSentados,
+      qtdPassageirosEmPe: qtdPassageirosEmPe,
       dispositivo: {
         codigo: codigo,
         tipoDispositivo: {
@@ -95,6 +99,8 @@ export default function CadastroOnibus(props) {
         setModelo(dados.modelo);
         setFabricante(dados.fabricante);
         setAcessivel(dados.acessivel ? 1 : 2);
+        setQtdPassageirosSentados(dados.qtdPassageirosSentados);
+        setQtdPassageirosEmPe(dados.qtdPassageirosEmPe);
         setIdDispositivo(dados.dispositivo.id);
         if(dados.gerente) {setGerente(option(dados.gerente))};
       } catch (e) {
@@ -125,6 +131,8 @@ export default function CadastroOnibus(props) {
       modelo: modelo,
       fabricante: fabricante,
       acessivel: acessivel === 1 ? true : false,
+      qtdPassageirosSentados: qtdPassageirosSentados,
+      qtdPassageirosEmPe: qtdPassageirosEmPe,
       dispositivo: {
         id: idDispositivo,
         codigo: codigo,
@@ -255,6 +263,28 @@ export default function CadastroOnibus(props) {
                 pequeno={true}
                 stateSelecionado={acessivel}
                 onchange={(e) => setAcessivel(e.target.value)}
+              />
+            </CaixaHorizontal>
+
+            <CaixaHorizontal>
+            <InputComRotulo
+                type="number"
+                pequeno={true}
+                texto="Passageiros Sentados"
+                value={qtdPassageirosSentados}
+                min="2"
+                max="3"
+                onChange={(e) => setQtdPassageirosSentados(e.target.value)}
+              />
+
+              <InputComRotulo
+                type="number"
+                pequeno={true}
+                texto="Passageiros em Pé"
+                value={qtdPassageirosEmPe}
+                min="2"
+                max="3"
+                onChange={(e) => setQtdPassageirosEmPe(e.target.value)}
               />
             </CaixaHorizontal>
 
