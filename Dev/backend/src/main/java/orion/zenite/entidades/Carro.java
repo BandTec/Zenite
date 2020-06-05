@@ -30,6 +30,12 @@ public class Carro {
     @Column(name="acessivel")
     private Boolean acessivel;
 
+    @Column(name="qtdPassageirosSentados")
+    private Integer qtdPassageirosSentados;
+
+    @Column(name="qtdPassageirosEmPe")
+    private Integer qtdPassageirosEmPe;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fkDispositivo", referencedColumnName = "idDispositivo")
     private Dispositivo dispositivo;
@@ -104,6 +110,22 @@ public class Carro {
 
     public void setAcessivel(Boolean acessivel) {
         this.acessivel = acessivel;
+    }
+
+    public Integer getQtdPassageirosSentados() {
+        return qtdPassageirosSentados;
+    }
+
+    public void setQtdPassageirosSentados(Integer qtdPassageirosSentados) {
+        this.qtdPassageirosSentados = qtdPassageirosSentados;
+    }
+
+    public Integer getQtdPassageirosEmPe() {
+        return qtdPassageirosEmPe;
+    }
+
+    public void setQtdPassageirosEmPe(Integer qtdPassageirosEmPe) {
+        this.qtdPassageirosEmPe = qtdPassageirosEmPe;
     }
 
     public Integer getLinhaId() {

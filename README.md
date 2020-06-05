@@ -8,6 +8,7 @@ O sistema Zênite é um automatizador e gerenciador do processo de fiscalizaçã
 
 - [Site Institucional Órion](https://bandtec.github.io/Zenite/)
 - [Aplicação Zenite](https://zenite.azurewebsites.net)
+- [Swagger da API Zenite](https://backendzenite.azurewebsites.net/swagger-ui.html#/)
 
 ---
 
@@ -38,7 +39,7 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
 ## Metas - Requisitos
 
 * [x] Site Institucional
-- [ ] Aplicação
+- [x] Aplicação
   - [x] Tela de Login
   - [ ] Tela de Esqueci Minha Senha
   - [x] CRUD Linha
@@ -60,10 +61,10 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
     - [ ] Gerar relatórios com dados escolhidos pelo usuário
   * [x] Perfil
   - [ ] Ícone de HelDesk
-  - [ ] Logoff
-- [ ] IOT
+  - [x] Logoff
+- [x] IOT
   - [x] Módulo RFID (RC522) para transportar dados das viagens.
-  - [ ] Case para o equipamento do arduíno
+  - [x] Case para o equipamento do arduíno
 - [x] Banco de dados hospedados na nuvem AZURE
 
 
