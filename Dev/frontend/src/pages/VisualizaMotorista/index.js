@@ -35,7 +35,7 @@ export default function ConsultaMotorista() {
       let temp = [];
       dados.lista.forEach((item) => {
         temp.push(
-          criaDados(item.id, item.nome, item.numeroTelefone, item.cpf, item.cnh)
+          criaDados(item.id, item.nome, item.numeroTelefone, item.cpf, item.cnh, item.carro ? item.carro.numero : "Não")
         );
       });
       setCorpo(temp);
@@ -44,8 +44,8 @@ export default function ConsultaMotorista() {
     dadosCorpos();
   }, [pagina]);
 
-  function criaDados(id, nome, telefone, cpf, cnh){
-    return {id, nome, telefone, cpf, cnh}
+  function criaDados(id, nome, telefone, cpf, cnh, alocado_a_onibus){
+    return { id, nome, telefone, cpf, cnh, alocado_a_onibus };
   }
 
   return corpo.length <= 0 ? (

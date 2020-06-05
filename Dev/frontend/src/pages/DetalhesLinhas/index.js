@@ -41,9 +41,8 @@ export default function DetalhesLinha(props) {
             item.numero,
             item.placa,
             item.modelo,
-            item.fabricante,
             acessivel,
-            item.dispositivo.codigo
+            item.motorista
           )
         );
       });
@@ -59,17 +58,17 @@ export default function DetalhesLinha(props) {
     numero,
     placa,
     modelo,
-    fabricante,
     acessivel,
-    dispositivo
+    motorista
   ) {
-    return { id, numero, placa, modelo, fabricante, acessivel, dispositivo };
+    return { id, numero, placa, modelo, acessivel, motorista };
   }
 
   return corpo.length <= 0 ? (
     <Loader />
   ) : (
     <Container>
+      
       <Cabecalho>
         <Titulo textoMenor="Detalhes" textoMaior="Linha" />
         <Botao
@@ -89,6 +88,10 @@ export default function DetalhesLinha(props) {
               <TituloDado
                 tipo="Parada Volta"
                 descricao={dados.pontoVolta.nome}
+              />
+              <TituloDado
+                tipo="Fiscal"
+                descricao={dados.fiscal}
               />
             </>
           )}
