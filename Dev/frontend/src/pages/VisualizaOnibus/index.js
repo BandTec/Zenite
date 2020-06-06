@@ -48,7 +48,7 @@ export default function ConsultaOnibus() {
             acessivel,
             // item.dispositivo.codigo,
             // item.gerente ? item.gerente.nome : "Sem gerente",
-            item.motorista || "Sem gerente",
+            item.motorista || "Sem motorista",
             item.linha || "Sem linha"
           )
         );
