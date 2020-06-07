@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/api";
-import AsyncSelect from "react-select/async";
+
 import Swal from "sweetalert2";
 import {
   Container,
@@ -10,9 +10,11 @@ import {
   Titulo,
   Subtitulo,
   Texto,
+  CustomSelect,
   InfoTitle,
 } from "./styles";
 import Botao from "../../components/Botao";
+import ComboBoxComRotulo from "../../components/ComboBoxComRotulo";
 import Detalhes from "./Detalhes";
 
 export default function Alocacao() {
@@ -20,6 +22,16 @@ export default function Alocacao() {
   const [alocacao, setAlocacao] = useState("Escolha");
   const [alocar, setAlocar] = useState("");
   const [local, setLocal] = useState("");
+  const [tipoPesquisa, setTipoPesquisa] = useState("");
+  let url = "";
+  let corpo_requisicao = {};
+
+  const comboLinha = [
+    { texto: "Pesquisar por:", value: 0 },
+    { texto: "Número da Linha", value: 1 },
+    { texto: "Parada Inicial", value: 2 },
+    { texto: "Parada Final", value: 3 },
+  ];
 
   const trocarAlocacao = (e) => {
     setSelecionado(e.target.value);
@@ -37,37 +49,59 @@ export default function Alocacao() {
     }
   }, [selecionado]);
 
-  const promiseOptions = async (inputValue, rota) => {
+  const pesquisarOpcoes = async (inputValue, rota) => {
     const token = localStorage.getItem("token");
     let url = rota.toLowerCase();
+    let rotaAPI = "";
 
     if (url === "ônibus") {
       url = "onibus";
     }
-    const response = await api.get(`/api/${url}?q=${inputValue}`, {
+
+    rotaAPI = `/api/${url}?q=${inputValue}`;
+
+    if (rota === "Linha") {
+      let tipo = "";
+
+      switch (tipoPesquisa) {
+        case "1":
+          tipo = "numero";
+          break;
+        case "2":
+          tipo = "paradaInicial";
+          console.log(tipo);
+          break;
+        case "3":
+          tipo = "paradaFinal";
+          break;
+        default:
+          tipo = "numero";
+          break;
+      }
+
+      rotaAPI = `/api/${url}?${tipo}=${inputValue}`;
+    }
+
+    const response = await api.get(rotaAPI, {
       headers: { Authorization: token },
     });
 
-    let options = response.data.map((item) => ({
-      value: item.id,
-      label: item.numero || item.nome,
-      dados: item,
-    }));
+    let options = response.data.map((item) => {
+      let label = item.numero || item.nome;
+      if (rota === "Linha") {
+        label = `${item.numero} - ${item.pontoIda.nome} / ${item.pontoVolta.nome}`;
+      }
+      return {
+        value: item.id,
+        label: label,
+        dados: item,
+      };
+    });
 
     return options;
   };
 
-  const salvar = async () => {
-    if (!alocar.dados) {
-      alert("Escolha");
-      return;
-    }
-    if (!local.dados) {
-      alert("Escolha");
-      return;
-    }
-    let url = "";
-    let corpo_requisicao = {};
+  const configurar = () => {
     switch (selecionado) {
       case "Fiscal":
         url = "/api/fiscal/linhas";
@@ -91,13 +125,25 @@ export default function Alocacao() {
         };
         break;
       default:
-        alert("Escolha!");
+        Swal.fire({
+          title: "Por favor escolha os dados a serem alocados",
+          confirmButtonText: "Ok",
+        });
         return;
     }
-    // console.log(alocar);
-    // console.log(local);
-    //    console.log(url);
-    //     console.log(corpo_requisicao);
+  };
+
+  const salvar = async () => {
+    if (!alocar.dados || !local.dados) {
+      Swal.fire({
+        title: "Por favor escolha os dados a serem alocados",
+        confirmButtonText: "Ok",
+      });
+      return;
+    }
+
+    configurar();
+
     if (!!url && !!corpo_requisicao) {
       try {
         const token = localStorage.getItem("token");
@@ -108,10 +154,12 @@ export default function Alocacao() {
 
         if (response.status === 201) {
           Swal.fire("Sucesso!", "Alocado com sucesso.", "success");
+          atualizar();
         } else {
           Swal.fire("Erro!", "Tente novamente.", "error");
         }
       } catch (erro) {
+        console.log(erro);
         Swal.fire("Erro!", "Tente novamente.", "error");
       }
     }
@@ -123,6 +171,65 @@ export default function Alocacao() {
     }
     return e;
   };
+
+  const atualizar = () => {
+    switch (selecionado) {
+      case "Fiscal":
+        let linhas = alocar.dados.linhas;
+        linhas.push(local.dados);
+        setAlocar({ ...alocar, dados: { ...alocar.dados, linhas: linhas } });
+
+        setLocal({
+          ...local,
+          dados: { ...local.dados, fiscal: alocar.dados.nome },
+        });
+        break;
+      case "Motorista":
+        setAlocar({
+          ...alocar,
+          dados: { ...alocar.dados, carro: local.dados },
+        });
+
+         setLocal({
+           ...local,
+           dados: { ...local.dados, motorista: alocar.dados.nome },
+         });
+        break;
+      case "Ônibus":
+        let linhaAtrelado = `${local.dados.numero} - ${local.dados.pontoIda.nome} / ${local.dados.pontoVolta.nome}`;
+        setAlocar({
+          ...alocar,
+          dados: { 
+            ...alocar.dados, 
+            linha: linhaAtrelado
+          },
+        });
+
+        let carrosLista = local.dados.carros;
+        carrosLista.push(alocar.dados.numero + " - " + alocar.dados.placa);
+        setLocal({
+          ...local,
+          dados: { ...local.dados, carros: carrosLista },
+        });
+        break;
+        default:
+          break;
+    }
+  };
+
+  const atualizarDado = (index) => {
+    let linhas = alocar.dados.linhas;
+    let linhaid = linhas[index].id;
+    linhas.pop(index);
+    setAlocar({ ...alocar, dados: { ...alocar.dados, linhas: linhas } });
+
+    if(local.dados.id === linhaid){
+     setLocal({
+       ...local,
+       dados: { ...local.dados, fiscal: "" },
+     });
+    }
+  }
 
   return (
     <Container>
@@ -145,30 +252,55 @@ export default function Alocacao() {
           <Texto>A um{alocacao === "Linha" ? "a" : ""}</Texto>
 
           <Titulo>{alocacao}</Titulo>
-          <InfoTitle>{local.label}</InfoTitle>
+          <InfoTitle>{local.label && encurtarNome(local.label)}</InfoTitle>
         </div>
-        <Botao descricao="Concluir" onClick={salvar} />
+        <Botao descricao="Alocar" onClick={salvar} />
       </Nav>
 
       {selecionado && (
         <Row>
           <Col>
-            <AsyncSelect
+            <CustomSelect
+              placeholder="Digite aqui o termo de sua pesquisa..."
               value={alocar}
               onChange={(e) => setAlocar(e)}
-              loadOptions={(e) => promiseOptions(e, selecionado)}
+              loadOptions={(e) => pesquisarOpcoes(e, selecionado)}
             />
 
-            {!!alocar && <Detalhes tipo={selecionado} objeto={alocar} />}
+            {!!alocar && (
+              <Detalhes
+                tipo={selecionado}
+                objeto={alocar.dados}
+                atualizarDado={atualizarDado}
+              />
+            )}
           </Col>
 
           <Col>
-            <AsyncSelect
-              value={local}
-              onChange={(e) => setLocal(e)}
-              loadOptions={(e) => promiseOptions(e, alocacao)}
-            />
-            {!!local && <Detalhes tipo={alocacao} objeto={local} />}
+            <Row>
+              {alocacao === "Linha" && (
+                <ComboBoxComRotulo
+                  conteudoCombo={comboLinha}
+                  stateSelecionado={tipoPesquisa}
+                  pequeno={true}
+                  onchange={(e) => setTipoPesquisa(e.target.value)}
+                />
+              )}
+              <CustomSelect
+                placeholder="Digite aqui o termo de sua pesquisa..."
+                value={local}
+                onChange={(e) => setLocal(e)}
+                loadOptions={(e) => pesquisarOpcoes(e, alocacao)}
+              />
+            </Row>
+
+            {!!local && (
+              <Detalhes
+                tipo={alocacao}
+                objeto={local.dados}
+                atualizarDado={atualizarDado}
+              />
+            )}
           </Col>
         </Row>
       )}

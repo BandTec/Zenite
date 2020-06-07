@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.dto.ConsultaPaginada;
+import orion.zenite.modelos.ConsultaPaginada;
 import orion.zenite.entidades.*;
 import orion.zenite.repositorios.*;
 
@@ -54,7 +54,9 @@ public class LinhaController {
     @GetMapping
     public ResponseEntity consulta(
             @RequestParam(required = false) Integer pagina,
-            @RequestParam(required = false) String q
+            @RequestParam(required = false) String numero,
+            @RequestParam(required = false) String paradaInicial,
+            @RequestParam(required = false) String paradaFinal
     ) {
         if (this.linhaBD.count() > 0) {
             if(pagina != null) {
@@ -63,8 +65,16 @@ public class LinhaController {
                 ConsultaPaginada consulta = new ConsultaPaginada(page);
                 return ok(consulta);
             }
-            else if(q != null){
-                List<Linha> consulta = linhaBD.findAllByNumeroContaining(q);
+            else if(numero != null){
+                List<Linha> consulta = linhaBD.findByNumeroIgnoreCaseContaining(numero);
+                return ok(consulta);
+            }
+            else if(paradaInicial != null){
+                List<Linha> consulta = linhaBD.findAllByPontoIdaNomeIgnoreCaseContaining(paradaInicial);
+                return ok(consulta);
+            }
+            else if(paradaFinal != null){
+                List<Linha> consulta = linhaBD.findAllByPontoVoltaNomeIgnoreCaseContaining(paradaFinal);
                 return ok(consulta);
             }
             else {

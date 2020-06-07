@@ -13,10 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import orion.zenite.dto.ConsultaPaginada;
+import orion.zenite.modelos.ConsultaPaginada;
 import orion.zenite.entidades.Conta;
-import orion.zenite.entidades.Fiscal;
 import orion.zenite.entidades.Gerente;
 import orion.zenite.repositorios.GerenteRepository;
 

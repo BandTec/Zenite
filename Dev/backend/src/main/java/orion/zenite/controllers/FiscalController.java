@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.dto.ConsultaPaginada;
+import orion.zenite.modelos.ConsultaPaginada;
 import orion.zenite.repositorios.*;
 import orion.zenite.entidades.*;
 
@@ -59,7 +59,7 @@ public class FiscalController {
                 return ok(consulta);
             }
             else if(q != null){
-                List<Fiscal> consulta = repository.findAllByNomeContaining(q);
+                List<Fiscal> consulta = repository.findAllByNomeIgnoreCaseContaining(q);
                 return ok(consulta);
             }
             else {
@@ -161,7 +161,7 @@ public class FiscalController {
         return linhas.isEmpty() ? notFound().build() : ok(linhas);
     }
 
-    @ApiOperation("Exibe as linhas que o fiscal trabalha")
+    @ApiOperation("Deleta as linhas que o fiscal trabalha")
     @DeleteMapping("{idFiscal}/linhas/{idLinha}")
     public ResponseEntity deletarRelacionamentoFiscalLinha(@PathVariable Integer idFiscal, @PathVariable Integer idLinha){
         FiscalLinha fiscalLinha = fiscalLinhaRepository.findByIdFiscalAndIdLinha(idFiscal, idLinha);
@@ -179,7 +179,18 @@ public class FiscalController {
     @Transactional
     public ResponseEntity consultarLinhasPorFiscal(@RequestBody FiscalLinha fl){
 
-        fiscalLinhaRepository.save(fl);
-        return created(null).build();
+        FiscalLinha pesquisa = fiscalLinhaRepository.findByIdFiscalAndIdLinha(fl.getIdFiscal(), fl.getIdLinha());
+        if(pesquisa == null) {
+            List<FiscalLinha> jaTemFiscal = fiscalLinhaRepository.findByIdLinha(fl.getIdLinha());
+            if (!jaTemFiscal.isEmpty()){
+                for(FiscalLinha relacionamento : jaTemFiscal){
+                    fiscalLinhaRepository.delete(relacionamento);
+                }
+            }
+            fiscalLinhaRepository.save(fl);
+            return created(null).build();
+        }
+
+        return noContent().build();
     }
 }

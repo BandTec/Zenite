@@ -6,20 +6,22 @@ import {
   Cabecalho,
   CorpoRelatorio,
   CaixaDados,
-  CaixaTabela,
+  // CaixaTabela,
 } from "./styles";
+
 import Titulo from "../../components/Titulo";
 import TituloTipoDado from "../../components/TituloTipoDado";
 import TituloDado from "../../components/TituloDado";
 import Botao from "../../components/Botao";
 import api from "../../services/api";
 import Loader from "./../../components/Loader";
-import Tabela from "../../components/Tabela2";
+// import Tabela from "../../components/Tabela2";
 import { reformatarData } from "./../../functions/Mascaras/mask";
+
 export default function DetalhesMotorista(props) {
   const id = props.match.params.id;
   const [dados, setDados] = useState({});
-  const [corpo, setCorpo] = useState([]);
+  // const [corpo, setCorpo] = useState([]);
   useEffect(() => {
     async function consultar() {
       const token = localStorage.getItem("token");
@@ -31,36 +33,36 @@ export default function DetalhesMotorista(props) {
       setDados(response.data);
     }
 
-    async function consultarCarro() {
-      const token = localStorage.getItem("token");
-      const response = await api.get(`/api/motorista/${id}/onibus`, {
-        headers: { Authorization: token },
-      });
+    // async function consultarCarro() {
+    //   const token = localStorage.getItem("token");
+    //   const response = await api.get(`/api/motorista/${id}/onibus`, {
+    //     headers: { Authorization: token },
+    //   });
 
-      let temp = [];
-      let dados = response.data;
-      dados.forEach((item) => {
-        temp.push(
-          criaDados(
-            item.id,
-            item.numero,
-            item.placa,
-            item.modelo
-          )
-        );
-      });
-      setCorpo(temp);
-    }
-    consultarCarro();
+    //   let temp = [];
+    //   let dados = response.data;
+    //   dados.forEach((item) => {
+    //     temp.push(
+    //       criaDados(
+    //         item.id,
+    //         item.numero,
+    //         item.placa,
+    //         item.modelo
+    //       )
+    //     );
+    //   });
+    //   setCorpo(temp);
+    // }
+    // consultarCarro();
     consultar();
   }, [id]);
 
-   function criaDados(id, numero, placa, modelo) {
-     return { id, numero, placa, modelo };
-   }
+  //  function criaDados(id, numero, placa, modelo) {
+  //    return { id, numero, placa, modelo };
+  //  }
 
 
-  return corpo.length <= 0 ? (
+  return !dados.conta ? (
     <Loader />
   ) : (
     <Container>
@@ -113,16 +115,34 @@ export default function DetalhesMotorista(props) {
             </CaixaDados>
 
             <CaixaDados>
-              <TituloTipoDado texto="Ônibus Alocados" />
+              <TituloTipoDado texto="Ônibus Alocado" />
 
-              <CaixaTabela>
+              <TituloDado tipo="Número" descricao={dados.carro.numero} />
+
+              <TituloDado tipo="Placa" descricao={dados.carro.placa} />
+
+              <TituloDado tipo="Modelo" descricao={dados.carro.modelo} />
+              <TituloDado
+                tipo="acessível"
+                descricao={dados.carro.acessivel ? "Sim" : "Não"}
+              />
+              <TituloDado
+                tipo="dispositivo"
+                descricao={dados.carro.dispositivo.codigo}
+              />
+
+              <TituloDado
+                tipo="Linha"
+                descricao={dados.carro.linha || "Sem linha"}
+              />
+              {/* <CaixaTabela>
                 <Tabela tipo="onibus" dados={corpo} temAcoes={false} />
                 <p>
                   {corpo.length === 0
                     ? "Motorista não está associado a nenhum ônibus."
                     : ""}
                 </p>
-              </CaixaTabela>
+              </CaixaTabela> */}
             </CaixaDados>
           </CorpoRelatorio>
         )}

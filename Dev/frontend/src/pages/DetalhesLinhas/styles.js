@@ -15,6 +15,7 @@ export const Row = styled.div`
 export const Cabecalho = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 40px;
 `;
 
 export const CorpoRelatorio = styled.div`

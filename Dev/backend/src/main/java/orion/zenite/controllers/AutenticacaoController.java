@@ -9,9 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import orion.zenite.exceptions.SenhaInvalidaExcepton;
-import orion.zenite.dto.LoginRequest;
+import orion.zenite.modelos.LoginRequest;
 import orion.zenite.repositorios.ContaRepository;
-import orion.zenite.dto.ResponstaApi;
+import orion.zenite.modelos.ResponstaApi;
 import orion.zenite.config.security.JwtService;
 import orion.zenite.config.security.LoginService;
 

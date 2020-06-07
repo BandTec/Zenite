@@ -38,16 +38,20 @@ export default function ConsultaOnibus() {
 
       dados.lista.forEach((item) => {
         let acessivel = item.acessivel ? "Sim" : "Não";
-        temp.push(criaDados(
-          item.id, 
-          item.numero, 
-          item.placa,
-          item.modelo,
-          item.fabricante,
-          acessivel,
-          item.dispositivo.codigo,
-          item.gerente ? item.gerente.nome : "Sem gerente"
-          ));
+        temp.push(
+          criaDados(
+            item.id,
+            item.numero,
+            item.placa,
+            item.modelo,
+            // item.fabricante,
+            acessivel,
+            // item.dispositivo.codigo,
+            // item.gerente ? item.gerente.nome : "Sem gerente",
+            item.motorista || "Sem motorista",
+            item.linha || "Sem linha"
+          )
+        );
       });
       setCorpo(temp);
     }
@@ -55,8 +59,8 @@ export default function ConsultaOnibus() {
     dadosCorpos();
   }, [pagina]);
 
-  function criaDados(id, numero, placa, modelo, fabricante, acessivel, dispositivo, gerente) {
-    return { id, numero, placa, modelo, fabricante, acessivel, dispositivo, gerente };
+  function criaDados(id, numero, placa, modelo, acessivel, motorista, linha) {
+    return { id, numero, placa, modelo, acessivel, motorista, linha };
   }
 
   return corpo.length <= 0 ? (
@@ -78,7 +82,7 @@ export default function ConsultaOnibus() {
       </Acoes>
 
       <Row>
-        <Tabela tipo="onibus" dados={corpo} detalhes={false} />
+        <Tabela tipo="onibus" dados={corpo} />
       </Row>
 
       <Row>

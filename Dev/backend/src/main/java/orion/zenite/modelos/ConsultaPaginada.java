@@ -1,6 +1,5 @@
-package orion.zenite.dto;
+package orion.zenite.modelos;
 
-import io.swagger.models.auth.In;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

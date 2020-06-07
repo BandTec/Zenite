@@ -36,7 +36,7 @@ public class SwaggerConfig {
 
     private Contact contato() {
         return new Contact("Orion", "" +
-                "http://orionazurewebsites.net",
+                "https://bandtec.github.io/Zenite/",
                 "contato@orion.com.br"
         );
     }

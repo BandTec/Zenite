@@ -20,11 +20,10 @@ export const Cabecalho = styled.div`
 
 export const CorpoRelatorio = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
 `;
 
 export const CaixaDados = styled.div`
-  margin-right: 10%;
 `;
 
 export const CaixaTabela = styled.div`

@@ -21,7 +21,11 @@ public interface LinhaRepository extends JpaRepository<Linha, Integer> {
 
     List<Linha> findAllByPontoVolta(PontoFinal pontoVolta);
 
-    Linha findByNumeroIgnoreCase(String numero);
+    List<Linha> findByNumeroIgnoreCaseContaining(String numero);
+
+    List<Linha> findAllByPontoIdaNomeIgnoreCaseContaining(String nome);
+
+    List<Linha> findAllByPontoVoltaNomeIgnoreCaseContaining(String nome);
 
     boolean existsByNumero(String numero);
 }

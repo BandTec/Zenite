@@ -12,12 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import orion.zenite.dto.ConsultaPaginada;
+import orion.zenite.modelos.ConsultaPaginada;
 import orion.zenite.entidades.*;
 import orion.zenite.repositorios.CarroRepository;
 import orion.zenite.repositorios.MotoristaCarroRepository;
@@ -159,8 +158,20 @@ public class MotoristaController {
     @PostMapping("/onibus")
     @Transactional
     public ResponseEntity relacionar(@RequestBody MotoristaCarro novoRelacionamento) {
-        this.repository.save(novoRelacionamento);
-        return created(null).build();
+
+        MotoristaCarro pesquisa = repository.findByIdMotoristaAndIdCarro(novoRelacionamento.getIdMotorista(), novoRelacionamento.getIdCarro());
+        if(pesquisa == null) {
+            List<MotoristaCarro> jaTemCarro = repository.findByIdMotorista(novoRelacionamento.getIdMotorista());
+            if (!jaTemCarro.isEmpty()){
+                for(MotoristaCarro relacionamento : jaTemCarro){
+                    repository.delete(relacionamento);
+                }
+            }
+            repository.save(novoRelacionamento);
+            return created(null).build();
+        }
+
+        return noContent().build();
     }
 
     @ApiOperation("Listar quais ônibus estão com quais motoristas")

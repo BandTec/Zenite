@@ -17,7 +17,7 @@ public interface FiscalRepository extends JpaRepository<Fiscal, Integer> {
 
     Optional<Fiscal> findByDispositivo(Dispositivo dispositivo);
 
-    List<Fiscal> findAllByNomeContaining(String nome);
+    List<Fiscal> findAllByNomeIgnoreCaseContaining(String nome);
 
     Optional<Fiscal> findByConta(Conta conta);
 

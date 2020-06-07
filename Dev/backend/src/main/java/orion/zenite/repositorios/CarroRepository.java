@@ -14,7 +14,7 @@ public interface CarroRepository extends JpaRepository<Carro, Integer> {
     @Query(value = "select max(c.id) from Carro c")
     int lastId();
 
-    List<Carro> findAllByNumeroContaining(String numero);
+    List<Carro> findAllByNumeroContainingIgnoreCase(String numero);
 
     Optional<Carro> findByDispositivo(Dispositivo dispositivo);
 

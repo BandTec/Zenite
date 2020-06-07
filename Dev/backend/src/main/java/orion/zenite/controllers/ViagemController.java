@@ -9,8 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.dto.ConsultaPaginada;
-import orion.zenite.dto.ViagemDto;
+import orion.zenite.modelos.ConsultaPaginada;
+import orion.zenite.modelos.ViagemDto;
 import orion.zenite.entidades.*;
 import orion.zenite.repositorios.*;
 

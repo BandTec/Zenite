@@ -128,12 +128,29 @@ public class Carro {
         this.qtdPassageirosEmPe = qtdPassageirosEmPe;
     }
 
-    public List getLinhasId() {
-        ArrayList linhasId = new ArrayList();
-        for (CarroLinha carro : carroLinhas) {
-            linhasId.add(carro.getIdLinha());
+    public Integer getLinhaId() {
+        if(carroLinhas.isEmpty()){
+            return null;
         }
-        return linhasId;
+        return carroLinhas.get(0).getIdLinha();
+    }
+
+    public String getLinha() {
+        if(carroLinhas.isEmpty()){
+            return null;
+        }
+        Linha linha = carroLinhas.get(0).getLinha();
+        String nome = String.format("%s - %s / %s",
+                    linha.getNumero(), linha.getPontoIda().getNome(), linha.getPontoVolta().getNome());
+
+        return nome;
+    }
+
+    public String getMotorista() {
+        if(motoristaCarro.isEmpty()){
+            return null;
+        }
+        return motoristaCarro.get(0).getMotorista().getNome();
     }
 
     public Gerente getGerente() {

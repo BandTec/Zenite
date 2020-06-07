@@ -71,6 +71,21 @@ public class Linha {
         this.id = id;
     }
 
+    public Integer getFiscalId(){
+        if(fiscalLinha.isEmpty()){
+            return null;
+        }
+        return fiscalLinha.get(0).getIdFiscal();
+    }
+
+    public String getFiscal(){
+        if(fiscalLinha.isEmpty()){
+            return null;
+        }
+        Fiscal f = fiscalLinha.get(0).getFiscal();
+        return f.getNome();
+    }
+
     public List getCarrosId() {
         ArrayList carrosId = new ArrayList();
         for (CarroLinha carro : carroLinhas) {
@@ -79,11 +94,15 @@ public class Linha {
         return carrosId;
     }
 
-    public List getFiscalId(){
-        ArrayList fiscalId = new ArrayList();
-        for(FiscalLinha fiscalLinha : fiscalLinha){
-            fiscalId.add(fiscalLinha.getIdFiscal());
+    public List getCarros() {
+        ArrayList carros = new ArrayList();
+        for (CarroLinha carro : carroLinhas) {
+            Carro onibus = carro.getCarro();
+            String nome = String.format("%s - %s",
+                    onibus.getNumero(), onibus.getPlaca()
+            );
+            carros.add(nome);
         }
-        return fiscalId;
+        return carros;
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import orion.zenite.exceptions.SenhaInvalidaExcepton;
 import orion.zenite.entidades.Conta;
 import orion.zenite.entidades.Nivel;
-import orion.zenite.dto.LoginRequest;
+import orion.zenite.modelos.LoginRequest;
 import orion.zenite.repositorios.ContaRepository;
 
 /*
