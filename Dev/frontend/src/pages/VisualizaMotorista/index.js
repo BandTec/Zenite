@@ -34,7 +34,7 @@ export default function ConsultaMotorista() {
       let temp = [];
       dados.lista.forEach((item) => {
         temp.push(
-          criaDados(item.id, item.nome, item.numeroTelefone, item.cpf, item.cnh, item.carro ? item.carro.numero : "Não")
+          criaDados(item.id, item.nome, item.numeroTelefone, item.cpf, item.cnh, item.carro ? item.carro.numero : "Sem ônibus")
         );
       });
       setCorpo(temp);
