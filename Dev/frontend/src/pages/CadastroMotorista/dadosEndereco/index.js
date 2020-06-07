@@ -5,6 +5,7 @@ import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitu
 import BotaoForm from '../../../components/BotaoForm';
 import StatusPage from '../../../components/StatusPage';
 import InputComRotulo from '../../../components/InputComRotulo';
+import { viacep } from "../../../functions/viacep";
 
 export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados, dados }) {
   const [valorCep, setValorCep] = useState("");
@@ -56,6 +57,16 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados,
     }
   }, [valorCep, logradouro, numero, complemento, cidade, estado]);
 
+  async function handleCep(){
+    const resposta = await viacep(valorCep);
+    console.log("Resposta "+resposta);
+    if(!resposta.erro){
+      setLogradouro(resposta.logradouro);
+      setCidade(resposta.localidade);
+      setEstado(resposta.uf);
+    }
+  }
+
   return (
     <Container>
 
@@ -96,6 +107,7 @@ export default function DadosEndereco({ mudarPagina, tipoPagina, adicionarDados,
               name="cep"
               value={valorCep}
               onChange={mascararCep}
+              onBlur={handleCep}
               required
             />
 
