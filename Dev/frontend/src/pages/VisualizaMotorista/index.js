@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 
-import { Container, Row, Acoes} from './styles';
-import Botao from '../../components/Botao';
+import { Container, Row} from './styles';
 import Tabela from "./../../components/Tabela2";
-import Titulo from '../../components/Titulo';
 import Paginacao from '../../components/Paginacao';
 import Loader from "./../../components/Loader";
+import CabecalhoConsulta from "../../components/CabecalhoConsulta";
 
 export default function ConsultaMotorista() {
    
@@ -52,19 +51,12 @@ export default function ConsultaMotorista() {
     <Loader />
   ) : (
     <Container>
-      <Row>
-        <Titulo textoMenor="consulta de motorista" textoMaior="" />
-      </Row>
-
-      <Acoes>
-        <Botao
-          descricao="Novo Motorista"
-          estiloEscuro={true}
-          url="/motorista/cadastro"
-        />
-
-        <Botao descricao="relatório" url="/motorista" />
-      </Acoes>
+      <CabecalhoConsulta
+        botaoTitulo="Novo Motorista"
+        titulo="Motorista"
+        url="motorista"
+        totalItens={totalItens}
+      />
 
       <Row>
         <Tabela tipo="motorista" dados={corpo} />

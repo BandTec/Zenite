@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 export const BotaoContainer = styled.button`
   background: ${(props) =>
@@ -17,4 +17,13 @@ export const BotaoContainer = styled.button`
 
   padding: 0px 35px;
   margin: 20px 0px;
+  transition: all ease-in-out .3s;
+
+  :hover {
+    opacity: 0.9;
+    ${props => !props.estiloEscuro && css`
+      color:#0285C0;
+      border-color: #0285C0;
+  `}
+  }
 `;
