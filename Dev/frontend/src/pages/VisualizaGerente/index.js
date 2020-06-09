@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 
-import { Container, Row, Acoes } from "./styles";
-import Botao from "../../components/Botao";
+import { Container, Row } from "./styles";
 import Tabela from "../../components/Tabela2";
-import Titulo from "../../components/Titulo";
 import Paginacao from "../../components/Paginacao";
 import Loader from "./../../components/Loader";
+import CabecalhoConsulta from "../../components/CabecalhoConsulta";
 
 export default function VisualizaGerente() {
   const [corpo, setCorpo] = useState([]);
@@ -43,19 +42,12 @@ export default function VisualizaGerente() {
     <Loader />
   ) : (
     <Container>
-      <Row>
-        <Titulo textoMenor="consulta do gerente" textoMaior="" />
-      </Row>
-
-      <Acoes>
-        <Botao
-          descricao="Novo Gerente"
-          estiloEscuro={true}
-          url="/gerente/cadastro"
-        />
-
-        <Botao descricao="relatório" url="/gerente" />
-      </Acoes>
+      <CabecalhoConsulta
+        botaoTitulo="Novo gerente"
+        titulo="Gerente"
+        url="gerente"
+        totalItens={totalItens}
+      />
 
       <Row>
         <Tabela dados={corpo} tipo="gerente" />

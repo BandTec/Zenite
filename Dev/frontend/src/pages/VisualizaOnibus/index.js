@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 //Então, é que agora tá basicamente "pronta"
 
-import { Container, Row, Acoes } from "./styles";
-import Botao from "../../components/Botao";
+import { Container, Row } from "./styles";
+
 import Tabela from "./../../components/Tabela2";
-import Titulo from "../../components/Titulo";
 import Paginacao from "../../components/Paginacao";
 import Loader from "./../../components/Loader";
+import CabecalhoConsulta from "../../components/CabecalhoConsulta";
 
 export default function ConsultaOnibus() {
   const [corpo, setCorpo] = useState([]);
@@ -67,19 +67,12 @@ export default function ConsultaOnibus() {
     <Loader />
   ) : (
     <Container>
-      <Row>
-        <Titulo textoMenor="consulta de ônibus" textoMaior="" />
-      </Row>
-
-      <Acoes>
-        <Botao
-          descricao="Novo Ônibus"
-          estiloEscuro={true}
-          url="/onibus/cadastro"
-        />
-
-        <Botao descricao="relatório" url="/onibus" />
-      </Acoes>
+      <CabecalhoConsulta
+        botaoTitulo="Novo Ônibus"
+        titulo="Ônibus"
+        url="onibus"
+        totalItens={totalItens}
+      />
 
       <Row>
         <Tabela tipo="onibus" dados={corpo} />

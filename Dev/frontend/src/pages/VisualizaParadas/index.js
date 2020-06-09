@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 //Então, é que agora tá basicamente "pronta"
 
-import { Container, Row, Acoes } from "./styles";
-import Botao from "../../components/Botao";
+import { Container, Row } from "./styles";
 import Tabela from "../../components/Tabela2";
-import Titulo from "../../components/Titulo";
 import Paginacao from "../../components/Paginacao";
 import Swal from "sweetalert2";
 import Loader from "./../../components/Loader";
+import CabecalhoConsulta from "../../components/CabecalhoConsulta";
 
 export default function ConsultaParada() {
   const [corpo, setCorpo] = useState([]);
@@ -117,15 +116,12 @@ export default function ConsultaParada() {
     <Loader />
   ) : (
     <Container>
-      <Row>
-        <Titulo textoMenor="consulta de Parada" textoMaior="" />
-      </Row>
-
-      <Acoes>
-        <Botao descricao="Nova Parada" estiloEscuro={true} onClick={nova} />
-
-        {/* <Botao descricao="relatório" url="/parada" /> */}
-      </Acoes>
+      <CabecalhoConsulta
+        titulo="Paradas"
+        onClick={nova}
+        totalItens={totalItens}
+        botaoTitulo="Nova parada"
+      />
 
       <Row>
         <Tabela
