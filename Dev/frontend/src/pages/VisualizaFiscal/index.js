@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 
-import { Container, Row, Acoes } from "./styles";
-import Botao from "../../components/Botao";
+import { Container, Row } from "./styles";
 import Tabela from "../../components/Tabela2";
-import Titulo from "../../components/Titulo";
 import Paginacao from "../../components/Paginacao";
 import Loader from "./../../components/Loader";
+import CabecalhoConsulta from "../../components/CabecalhoConsulta";
 
 export default function VisualizaFiscal() {
   const [corpo, setCorpo] = useState([]);
@@ -52,19 +51,12 @@ export default function VisualizaFiscal() {
     <Loader />
   ) : (
     <Container>
-      <Row>
-        <Titulo textoMenor="consulta do fiscal" textoMaior="" />
-      </Row>
-
-      <Acoes>
-        <Botao
-          descricao="Novo Fiscal"
-          estiloEscuro={true}
-          url="/fiscal/cadastro"
-        />
-
-        <Botao descricao="relatório" url="/fiscal" />
-      </Acoes>
+      <CabecalhoConsulta
+        botaoTitulo="Novo Fiscal"
+        titulo="Fiscal"
+        url="fiscal"
+        totalItens={totalItens}
+      />
 
       <Row>
         <Tabela dados={corpo} tipo="fiscal" />

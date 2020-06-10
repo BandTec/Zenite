@@ -9,7 +9,7 @@ export default function TextoPaginacao({
 }) {
   return (
     <Container>
-      {paginaAtual} de {totalPaginas} páginas - {totalItens} Itens
+      {paginaAtual} de {totalPaginas} páginas
     </Container>
   );
 }

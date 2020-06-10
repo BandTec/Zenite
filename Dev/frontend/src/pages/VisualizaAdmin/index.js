@@ -2,12 +2,11 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 
-import { Container, Row, Acoes } from "./styles";
-import Botao from "../../components/Botao";
+import { Container, Row } from "./styles";
 import Tabela from "../../components/Tabela2";
-import Titulo from "../../components/Titulo";
 import Paginacao from "../../components/Paginacao";
 import Loader from "./../../components/Loader";
+import CabecalhoConsulta from "../../components/CabecalhoConsulta";
 
 export default function ConsultaAdmin() {
   const [corpo, setCorpo] = useState([]);
@@ -52,19 +51,12 @@ export default function ConsultaAdmin() {
     <Loader />
   ) : (
     <Container>
-      <Row>
-        <Titulo textoMenor="consulta de administradores" textoMaior="" />
-      </Row>
-
-      <Acoes>
-        <Botao
-          descricao="Novo Administrador"
-          estiloEscuro={true}
-          url="/administrador/cadastro"
-        />
-
-        <Botao descricao="relatório" url="/administrador" />
-      </Acoes>
+      <CabecalhoConsulta
+        botaoTitulo="Novo Administrador"
+        titulo="administradores"
+        url="administrador"
+        totalItens={totalItens}
+      />
 
       <Row>
         <Tabela tipo="administrador" dados={corpo} detalhes={false} />
