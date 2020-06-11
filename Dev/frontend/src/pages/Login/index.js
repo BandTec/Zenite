@@ -69,7 +69,33 @@ export default function Login(props) {
       });
     }
   }
-
+       
+  async function recuperar() {
+    const { value: email } = await Swal.fire({
+        title: 'Informe seu e-mail cadastrado.',
+        text: 'Enviaremos um e-mail para você !',
+        input: 'email',
+    })
+    const response = await api.get("/esqueci-senha/{email}");
+    console.log(response);
+    if (response.status === 200) {
+        if (email) {
+            Swal.fire({
+                title: "E-mail enviado com sucesso para : ",
+                text: `email: ${email}`,
+                icon: "success'",
+                showConfirmButton: true,
+            });
+        } else {
+            Swal.fire({
+                title: "Tente novamente",
+                text: `Email inválido ! Digite Novamente`,
+                icon: "warning",
+                showConfirmButton: true,
+            });
+        }
+    }
+}
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
@@ -90,7 +116,7 @@ export default function Login(props) {
         <Botao descricao="Entrar" estiloEscuro={true} tamanho={330} />
         <OpcoesAdicionais>
           <input type="checkbox" /> Lembrar-se de mim
-          <RecuperarSenha>Esqueceu a senha?</RecuperarSenha>
+          <RecuperarSenha onClick= {recuperar}>Esqueceu a senha?</RecuperarSenha>
         </OpcoesAdicionais>
       </Form>
 
