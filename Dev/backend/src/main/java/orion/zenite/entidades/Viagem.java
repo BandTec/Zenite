@@ -105,5 +105,17 @@ public class Viagem {
     public void setQtdPassageiros(int qtdPassageiros) {
         this.qtdPassageiros = qtdPassageiros;
     }
+
+    public Fiscal getFiscalVolta() {
+        return fiscalVolta;
+    }
+
+    public void setFiscalVolta(Fiscal fiscalVolta) {
+        this.fiscalVolta = fiscalVolta;
+    }
+
+    public void setQtdPassageiros(Integer qtdPassageiros) {
+        this.qtdPassageiros = qtdPassageiros;
+    }
 }
 
