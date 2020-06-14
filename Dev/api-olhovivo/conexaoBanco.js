@@ -1,7 +1,7 @@
 const sql = require('mssql');
 
 const configBanco = {
-    server: "svzenite.database.windows.net",
+    server: "zenite.database.windows.net",
     user: "zeniteadmin",
     password: "#Gfgrupo7",
     database: "bdZenite",
