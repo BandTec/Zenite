@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  AZURE_WEBAPP_NAME_BACKEND: backendzenite
+  AZURE_WEBAPP_NAME_BACKEND: zenitebackend
   AZURE_WEBAPP_PACKAGE_PATH_BACKEND: Dev/backend
   JAVA_VERSION: '8'
 
