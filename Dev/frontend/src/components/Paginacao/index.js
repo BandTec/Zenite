@@ -6,7 +6,6 @@ import Botao from '../Botao';
 
 
 export default function Paginacao({pgAtual, totalPg, voltar, proximo, totalItens}) {
-  const fim = totalPg - 1;
   return (
     <Container>
       <Botao
@@ -24,7 +23,7 @@ export default function Paginacao({pgAtual, totalPg, voltar, proximo, totalItens
         descricao="Próximo"
         estiloEscuro={false}
         onClick={proximo}
-        disabled={pgAtual === fim}
+        disabled={pgAtual === totalPg}
       />
     </Container>
   );
