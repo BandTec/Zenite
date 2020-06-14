@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  AZURE_WEBAPP_NAME_FRONTEND: zenite
+  AZURE_WEBAPP_NAME_FRONTEND: zeniteapp
   AZURE_WEBAPP_PACKAGE_PATH_FRONTEND: './Dev/frontend'
   NODE_VERSION: '12.x'
 
