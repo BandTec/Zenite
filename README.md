@@ -7,8 +7,8 @@
 O sistema Zênite é um automatizador e gerenciador do processo de fiscalização de transporte urbano realizado pela empresa Órion.
 
 - [Site Institucional Órion](https://bandtec.github.io/Zenite/)
-- [Aplicação Zenite](https://zenite.azurewebsites.net)
-- [Swagger da API Zenite](https://backendzenite.azurewebsites.net/swagger-ui.html#/)
+- [Aplicação Zenite](https://zeniteapp.azurewebsites.net)
+- [Swagger da API Zenite](https://zenitebackend.azurewebsites.net/swagger-ui.html#)
 
 ---
 
