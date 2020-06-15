@@ -41,7 +41,7 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
 * [x] Site Institucional
 - [x] Aplicação
   - [x] Tela de Login
-  - [ ] Tela de Esqueci Minha Senha
+  - [x] Tela de Esqueci Minha Senha
   - [x] CRUD Linha
   - [x] CRUD Gerente
   * [x] CRUD Administrador
