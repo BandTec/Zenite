@@ -35,7 +35,7 @@ export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados, d
           senha: valorSenha,
           email,
           nivel: {
-            id: 3
+            id: 4
           }
         },
         dispositivo:{
@@ -52,7 +52,7 @@ export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados, d
           senha: valorSenha,
           email,
           nivel: {
-            id: 3
+            id:4
           }
         },
         dispositivo:{
