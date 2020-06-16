@@ -3,7 +3,7 @@ import React from 'react';
 import { Container, Titulo, Busca, Tabela } from './styles';
 
 function Table({titulo = "Tabela", placeholder="Pesquise...", dados}) {
-    
+    console.log(dados)
     return (
       <Container>
           <Titulo>{titulo}</Titulo>

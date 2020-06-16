@@ -19,14 +19,14 @@ export const Perfil = styled.a`
 export const Corpo = styled.section`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(9, 20vh);
+  grid-template-rows: repeat(6, 20vh);
   grid-gap: 15px;
 `;
 
 export const CorpoLinha = styled.section`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(8, 20vh);
+  grid-template-rows: repeat(5, 20vh);
   grid-gap: 15px;
 `;
 

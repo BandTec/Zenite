@@ -42,6 +42,18 @@ export const Tabela = styled.table`
         }
         td, th {
             margin-right: 15px;
+            color: #fff;
         }
+    }
+    thead, tbody tr{
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    tbody{
+        display: block;
+        height: 110px;
+        overflow: auto;
     }
 `;
