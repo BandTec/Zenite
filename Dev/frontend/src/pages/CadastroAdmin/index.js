@@ -73,7 +73,7 @@ export default function CadastroAdmin(props) {
         senha: valorSenha,
         email: email,
         nivel: {
-          id: 1,
+          id: 2,
         },
       },
     };
@@ -106,7 +106,7 @@ export default function CadastroAdmin(props) {
         senha: valorSenha,
         email: email,
         nivel: {
-          id: 1,
+          id: 2,
         },
       },
     };

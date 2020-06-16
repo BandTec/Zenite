@@ -115,7 +115,7 @@ export default function Login(props) {
         />
         <Botao descricao="Entrar" estiloEscuro={true} tamanho={330} />
         <OpcoesAdicionais>
-          <input type="checkbox" /> Lembrar-se de mim
+          {/* <input type="checkbox" /> Lembrar-se de mim */}
           <RecuperarSenha onClick= {recuperar}>Esqueceu a senha?</RecuperarSenha>
         </OpcoesAdicionais>
       </Form>

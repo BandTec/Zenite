@@ -33,7 +33,7 @@ export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados, d
           senha: valorSenha,
           email,
           nivel: {
-            "id": 2
+            "id": 3
           }
         }
       });
@@ -43,7 +43,7 @@ export default function DadosAcesso({ mudarPagina, tipoPagina, adicionarDados, d
           senha: valorSenha,
           email,
           nivel: {
-            "id": 2
+            "id": 3
           }
         }
       });
