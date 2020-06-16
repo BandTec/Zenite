@@ -25,6 +25,17 @@ public class DadosLinha {
     @Column(name = "qtd_carros_circulando")
     private Integer qtdCarrosCirculando;
 
+    @Column(name = "qtd_motorista")
+    private Integer qtdMotorista;
+
+    public Integer getQtdMotorista() {
+        return qtdMotorista;
+    }
+
+    public void setQtdMotorista(Integer qtdMotorista) {
+        this.qtdMotorista = qtdMotorista;
+    }
+
     public String getNumeroLinha() {
         return numeroLinha;
     }

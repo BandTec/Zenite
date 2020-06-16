@@ -59,10 +59,12 @@ public class DashboardController {
     public ResponseEntity getDadosLinha(@PathVariable("idLinha") Integer idLinha){
         List<ViagemMotorista> viagemMotorista = viagemMotoristaRepository.findViagemMotorista(idLinha);
         List<OnibusCirculando> onibusCirculando = onibusCirculandoRepository.findOnibusCirculando(idLinha);
+        List<DadosLinha> dadosLinhas = dadosLinhaRepository.findDadosLinhaLinha(idLinha);
         Dashboard dashboard = new Dashboard();
 
         dashboard.setViagemMotorista(viagemMotorista);
         dashboard.setOnibusCirculando(onibusCirculando);
+        dashboard.setDadosLinha(dadosLinhas);
 
         return ok(dashboard);
 
