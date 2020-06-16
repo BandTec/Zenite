@@ -97,7 +97,7 @@ export default function MenuLateral(props) {
             {nivel !== 2 && (
               <BotaoExpande
                 principal="Configuração"
-                btnEscondidos={nivel === 2 ? gerenteConfig : outrosConfig}
+                btnEscondidos={nivel === 3 ? gerenteConfig : outrosConfig}
                 iconeNome="config"
               />
             )}
