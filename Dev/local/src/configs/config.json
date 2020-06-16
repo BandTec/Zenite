@@ -1,7 +1,7 @@
 {
 	"user": "zeniteadmin",
 	"password": "#Gfgrupo7",
-	"server": "svzenite.database.windows.net",
+	"server": "zenite.database.windows.net",
 	"database": "bdZenite",
 	"options": {
 		"encrypt": true
