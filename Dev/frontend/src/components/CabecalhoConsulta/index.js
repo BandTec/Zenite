@@ -4,7 +4,7 @@ import { Row } from './styles';
 import Botao from "../Botao";
 import Titulo from "../Titulo";
 
-function CabecalhoConsulta({ titulo, botaoTitulo, url, totalItens, onClick, exportarTitle, exportarOnclick }) {
+function CabecalhoConsulta({ titulo, botaoTitulo, url, totalItens, onClick, importarTitle, importarOnclick, exportarTitle, exportarOnclick }) {
   return (
     <Row>
       <Titulo
@@ -27,6 +27,14 @@ function CabecalhoConsulta({ titulo, botaoTitulo, url, totalItens, onClick, expo
             descricao={botaoTitulo}
             estiloEscuro={true}
             onClick={onClick}
+          />
+        )}
+
+        {importarOnclick && (
+          <Botao
+            descricao={importarTitle}
+            estiloEscuro={true}
+            onClick={importarOnclick}
           />
         )}
 

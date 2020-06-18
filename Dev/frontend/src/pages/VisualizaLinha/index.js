@@ -65,8 +65,22 @@ const exportarDados = async () => {
   document.body.appendChild(link);
   link.click();
 
-  console.log("asdfds"); 
-  }
+  console.log("asdfds");  
+}
+
+const importarDados = async () => {
+  console.log("hello");
+  var formData = new FormData();    //<--Dai tem aqui o formData, só precisa colocar o file aqui
+  const token = localStorage.getItem("token");     //cade o bt         
+  const response = await api.post(`/api/importacao/linha`, formData, {
+    headers: { Authorization: token,
+      'Content-Type':'multipart/form-data'
+    },
+  });
+
+  console.log(response);
+  console.log("asdfds");  
+}
 
   function criaDados(
     id,
@@ -87,9 +101,11 @@ const exportarDados = async () => {
         titulo="Linha"
         url="linha"
         totalItens={totalItens}
-        exportarOnclick={exportarDados}
+        importarOnclick={importarDados}   //então, como estamos usando react tem o componente do botão já feito
+        importarTitle={"Importar dados"}  //porem, como precisamos de um botão de upload, talvez seja preciso um
+        exportarOnclick={exportarDados}   //novo tipo de botão, tlg?
         exportarTitle={"Exportar dados"}
-      />
+      />                               
 
       <Row>
         <Tabela tipo="linha" dados={corpo} />
@@ -103,7 +119,7 @@ const exportarDados = async () => {
           proximo={() => setPagina(pagina + 1)}
           totalItens={totalItens}
         />
-      </Row>
+      </Row> 
     </Container>
   );
 }
