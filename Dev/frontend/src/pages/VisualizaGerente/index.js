@@ -11,7 +11,6 @@ export default function VisualizaGerente() {
   const [corpo, setCorpo] = useState([]);
   const [pagina, setPagina] = useState(0);
   const [total, setTotal] = useState(0);
-  const [atual, setAtual] = useState(0);
   const [totalItens, setTotalItens] = useState(0);
 
   useEffect(() => {
@@ -22,7 +21,6 @@ export default function VisualizaGerente() {
         headers: { Authorization: token },
       });
       let dados = response.data;
-      setAtual(dados.paginaAtual);
       setTotal(dados.totalPaginas);
       setTotalItens(dados.totalItens);
       let temp = [];
@@ -55,10 +53,9 @@ export default function VisualizaGerente() {
 
       <Row>
         <Paginacao
-          pgAtual={atual}
+          pgAtual={pagina}
           totalPg={total}
-          voltar={() => setPagina(pagina - 1)}
-          proximo={() => setPagina(pagina + 1)}
+          mudarPag={(p) => setPagina(p)}
           totalItens={totalItens}
         />
       </Row>
