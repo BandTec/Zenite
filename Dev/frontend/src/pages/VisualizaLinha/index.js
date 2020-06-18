@@ -8,6 +8,8 @@ import Paginacao from "../../components/Paginacao";
 import Loader from "./../../components/Loader";
 import CabecalhoConsulta from "../../components/CabecalhoConsulta";
 
+  
+
 export default function ConsultaLinha() {
   const [corpo, setCorpo] = useState([]);
   const [pagina, setPagina] = useState(0);
@@ -53,7 +55,6 @@ export default function ConsultaLinha() {
 
 
 const exportarDados = async () => {
-  console.log("hello");
   const token = localStorage.getItem("token");
   const response = await api.get(`/api/exportacao/linha`, {
     headers: { Authorization: token },
@@ -65,21 +66,32 @@ const exportarDados = async () => {
   document.body.appendChild(link);
   link.click();
 
-  console.log("asdfds");  
 }
 
 const importarDados = async () => {
-  console.log("hello");
-  var formData = new FormData();    //<--Dai tem aqui o formData, só precisa colocar o file aqui
-  const token = localStorage.getItem("token");     //cade o bt         
-  const response = await api.post(`/api/importacao/linha`, formData, {
-    headers: { Authorization: token,
-      'Content-Type':'multipart/form-data'
-    },
+  const inputId = document.getElementById('inputFileB')
+  inputId.click();
+}
+
+const importarFile = event => {
+  const token = localStorage.getItem("token");
+  const teste = event.target.files[0];
+  
+  const formData = new FormData();
+
+  formData.append(
+    "txt",
+    teste
+  )
+
+  api.post(`/api/importacao/linha`, formData, {
+    headers: { 
+      Authorization: token,
+      'Content-Type': 'multipart/form-data'
+    }
   });
 
-  console.log(response);
-  console.log("asdfds");  
+  console.log(teste);
 }
 
   function criaDados(
@@ -101,9 +113,10 @@ const importarDados = async () => {
         titulo="Linha"
         url="linha"
         totalItens={totalItens}
-        importarOnclick={importarDados}   //então, como estamos usando react tem o componente do botão já feito
-        importarTitle={"Importar dados"}  //porem, como precisamos de um botão de upload, talvez seja preciso um
-        exportarOnclick={exportarDados}   //novo tipo de botão, tlg?
+        importarFile={importarFile}
+        importarOnClick={importarDados}
+        importarTitle={"Importar dados"}
+        exportarOnclick={exportarDados}
         exportarTitle={"Exportar dados"}
       />                               
 

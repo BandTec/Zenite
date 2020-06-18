@@ -98,6 +98,7 @@ public class ImportacaoController {
 
     public void salvarArquivo(MultipartFile txt){
         String caminhoRaiz = "src/main/resources";
+        //String caminhoRaiz = "C:\\Users\\Ultim\\Desktop\\BandTec\\PI\\SM ULTIMATE\\git\\OrionConecta\\Dev\\backend\\src\\main\\resources";
         Path diretorioPath = Paths.get(caminhoRaiz);
         Path arquivoPath = diretorioPath.resolve(txt.getOriginalFilename());
 
