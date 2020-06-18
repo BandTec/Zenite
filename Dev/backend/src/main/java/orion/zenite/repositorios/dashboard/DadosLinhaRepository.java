@@ -13,6 +13,6 @@ public interface DadosLinhaRepository extends JpaRepository<DadosLinha, String> 
     List<DadosLinha> findDadosLinha();
 
     @Query(nativeQuery = true, value = "SELECT * FROM vwDadosLinha where id_linha=:idLinha")
-    List<DadosLinha> findDadosLinhaLinha(@Param("idLinha") Integer idLinha);
+    DadosLinha findDadosLinhaLinha(@Param("idLinha") Integer idLinha);
 
 }

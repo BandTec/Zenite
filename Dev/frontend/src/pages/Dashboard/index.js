@@ -21,16 +21,36 @@ export default function Dashboard() {
   const [tempoMedioViagemPeriodo, setTempoMedioViagemPeriodo] = useState({});
   const [viagemMotorista, setViagemMotorista] = useState({});
   const [tbDadosLinha, setTbDadosLinha] = useState();
+  const [qtdCarrosCirculando, setQtdCarrosCirculando] = useState();
+  const [onibusCirculando, setOnibusCirculando] = useState();
+  const [viagemPeriodoLinha, setViagemPeriodoLinha] = useState();
+  const [tempoMedioViagemDiaDaSemana, setTempoMedioViagemDiaDaSemana] = useState();
+  const [numeroLinha, setNumeroLinha] = useState();
+  const [motoristasAlocados, setMotoriostasAlocados] = useState();
+  const [fiscalResponsavel, setFiscalResponsavel] = useState();
+  const [horaAtual, setHoraAtual] = useState("");
+
+  const linhasComMaiorAtraso = {
+    labels: ["4051-10", "3033-10", "407M-10", "7245-10", "3766-10", "4001-10", "3754-10", "3686-10", "407T-10", "312N-10"],
+    data: [49, 20, 25, 39, 25, 27, 43, 29, 25,58]
+  }
 
   async function loadDados(){
     const response = await api.get("/api/dashboard");
     setDados(response.data);
+    setHoraAtual(`${data.getHours()}:${data.getMinutes()}`)
   }
 
   async function loadDadosLinha(){
     const response = await api.get("/api/dashboard/2");
     setDadosLinha(response.data);
+    setHoraAtual(`${data.getHours()}:${data.getMinutes()}`)
   }
+
+  setInterval(() =>{
+    loadDados();
+    loadDadosLinha(); 
+  }, 300000)
   
   useEffect(()=>{
     setNome(localStorage.getItem("nome"));
@@ -63,15 +83,17 @@ export default function Dashboard() {
       auxDado = []
     }
     if(dados.dadosLinha){
-      for (const [key, ] of Object.entries(dados.dadosLinha[0])) {
-        aux.push(key)
-      }
+      aux = ["Linha", "Fiscal", "Circulando", "Motoristas", "Viagem"]
       for(let elem of dados.dadosLinha){
-        let dadoTabela = []
-        for (const [, value] of Object.entries(elem)) {
-          dadoTabela.push(value)
-        }
-        auxDado.push(dadoTabela)
+        const fiscalCompleto = elem["fiscalIda"].split(" ")
+        const fiscal = fiscalCompleto[0]+" "+fiscalCompleto[fiscalCompleto.length-1]
+        auxDado.push([
+          elem["numeroLinha"], 
+          fiscal,
+          elem["qtdCarrosCirculando"], 
+          elem["qtdMotorista"],
+          elem["mediaViagem"]
+        ])
       }
       setTbDadosLinha({header: aux, body: auxDado})
       aux = []
@@ -91,6 +113,38 @@ export default function Dashboard() {
       aux = []
       auxDado = []
     }
+    if(dadosLinha.onibusCirculando){
+      for(let elem of dadosLinha.onibusCirculando){
+        aux.push(elem['periodo'])
+        auxDado.push(elem['qtdCarros'])
+      }
+      setOnibusCirculando({labels: aux, data: auxDado})
+      aux = []
+      auxDado = []
+    }
+    if(dadosLinha.viagemPeriodoLinha){
+      for(let elem of dadosLinha.viagemPeriodoLinha){
+        aux.push(elem['periodo'])
+        auxDado.push(elem['tempoViagemPeriodo'])
+      }
+      setViagemPeriodoLinha({labels: aux, data: auxDado})
+      aux = []
+      auxDado = []
+    }
+    if(dadosLinha.tempoMedioViagemDiaDaSemana){
+      for(let elem of dadosLinha.tempoMedioViagemDiaDaSemana){
+        aux.push(elem['diaSemana'])
+        auxDado.push(elem['tempoViagemPeriodo'])
+      }
+      setTempoMedioViagemDiaDaSemana({labels: aux, data: auxDado})
+      aux = []
+      auxDado = []
+    }
+    if(dadosLinha.numeroLinha) setNumeroLinha(dadosLinha.numeroLinha);
+    if(dadosLinha.onibusAlocados) setQtdCarrosCirculando(dadosLinha.onibusAlocados);
+    if(dadosLinha.motoristasAlocados) setMotoriostasAlocados(dadosLinha.motoristasAlocados);
+    if(dadosLinha.fiscalResponsavel) setFiscalResponsavel(dadosLinha.fiscalResponsavel);
+
   },[dadosLinha])
 
   const handlePage = newPage => setPage(newPage)
@@ -100,7 +154,7 @@ export default function Dashboard() {
       <Tela>
         <Row>
           <Titulo
-            textoMenor={`Atualizado em ${data.getHours()}:${data.getMinutes()}`}
+            textoMenor={`Atualizado em ${horaAtual}`}
             textoMaior="Dashboard"
           />
           <Perfil>Olá, {nome}</Perfil>
@@ -130,6 +184,7 @@ export default function Dashboard() {
             >
               <Bar 
                 titulo="Linhas com maior atraso"
+                dados={linhasComMaiorAtraso}
               />
             </Card>
             <Card 
@@ -139,7 +194,7 @@ export default function Dashboard() {
             >
               <Texto 
                 titulo="Atraso médio (por viagem)" 
-                valor="50 min"
+                valor="15 min"
               />
             </Card>
             <Card 
@@ -191,7 +246,7 @@ export default function Dashboard() {
             >
               <Texto 
                 titulo="Linha" 
-                valor="4051-10"
+                valor={numeroLinha}
               />
             </Card>
             <Card 
@@ -211,7 +266,7 @@ export default function Dashboard() {
             >
               <Quadrado 
                 titulo="Ônibus alocados" 
-                valor="30" 
+                valor={qtdCarrosCirculando}
                 cor="suave"
               />
             </Card>
@@ -222,7 +277,7 @@ export default function Dashboard() {
             >
               <Quadrado 
                 titulo="Motoristas alocados"
-                valor="15" 
+                valor={motoristasAlocados} 
                 cor="claro"
               />
             </Card>
@@ -233,7 +288,7 @@ export default function Dashboard() {
             >
               <Texto 
                 titulo="Fiscal responsável" 
-                valor="Claúdio Silva"
+                valor={fiscalResponsavel}
               />
             </Card>
             <Card 
@@ -243,6 +298,7 @@ export default function Dashboard() {
             >
               <Bar 
                 titulo="Tempo médio de vigem (por dia da semana)"
+                dados={tempoMedioViagemDiaDaSemana}
               />
             </Card>
             <Card 
@@ -252,6 +308,7 @@ export default function Dashboard() {
             >
               <Line 
                 titulo="Quantidade de ônibus circulando (por período)"
+                dados={onibusCirculando}
               />
             </Card>
             <Card 
@@ -261,6 +318,7 @@ export default function Dashboard() {
             >
               <Bar 
                 titulo="Tempo de viagem (por período)"
+                dados={viagemPeriodoLinha}
               />
             </Card>
           </CorpoLinha>

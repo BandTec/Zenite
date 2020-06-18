@@ -43,17 +43,25 @@ export const Tabela = styled.table`
         td, th {
             margin-right: 15px;
             color: #fff;
+            width: 20%;
+            display: flex;
+            justify-content: center;
         }
-    }
-    thead, tbody tr{
-        display: table;
-        width: 100%;
-        table-layout: fixed;
     }
 
     tbody{
         display: block;
         height: 110px;
         overflow: auto;
+        ::-webkit-scrollbar {
+            width: 5px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb{
+            width: 4px;
+            background-color: #CCC;
+            border-radius: 5px;
+        }
     }
 `;
