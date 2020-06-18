@@ -143,17 +143,18 @@ export default function CadastroOnibus(props) {
       gerente: {id: gerente.dados.id}
     };
 
-    Swal.fire({
-      title: "Aviso",
-      text: "Deseja realmente editar este dado? ",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Sim, desejo",
-      cancelButtonText: "Não",
-    });
+   let result = await Swal.fire({
+     title: "Aviso",
+     text: "Deseja realmente editar este dado? ",
+     icon: "warning",
+     showCancelButton: true,
+     confirmButtonColor: "#3085d6",
+     cancelButtonColor: "#d33",
+     confirmButtonText: "Sim, desejo",
+     cancelButtonText: "Não",
+   });
 
+    if (result.value) {
     try {
       const token = await localStorage.getItem("token");
 
@@ -181,6 +182,7 @@ export default function CadastroOnibus(props) {
         showConfirmButton: false,
       });
     }
+  }
   };
 
   const pesquisa = async (inputValue) => {

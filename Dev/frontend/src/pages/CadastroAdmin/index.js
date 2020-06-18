@@ -73,7 +73,7 @@ export default function CadastroAdmin(props) {
         senha: valorSenha,
         email: email,
         nivel: {
-          id: 1,
+          id: 2,
         },
       },
     };
@@ -106,28 +106,41 @@ export default function CadastroAdmin(props) {
         senha: valorSenha,
         email: email,
         nivel: {
-          id: 1,
+          id: 2,
         },
       },
     };
     verificarSenha();
-    if (validacaoSenha) {
-      try {
-        const token = await localStorage.getItem("token");
-        const response = await api.put(`/api/administrador/${id}`, dados, {
-          headers: { Authorization: token },
-        });
+     let result = await Swal.fire({
+      title: "Aviso",
+      text: "Deseja realmente editar este dado? ",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, desejo",
+      cancelButtonText: "Não",
+    });
 
-        if (response.status === 200) {
-          props.history.push("/administrador");
-        } else {
+    if (result.value) {
+      if (validacaoSenha) {
+        try {
+          const token = await localStorage.getItem("token");
+          const response = await api.put(`/api/administrador/${id}`, dados, {
+            headers: { Authorization: token },
+          });
+
+          if (response.status === 200) {
+            props.history.push("/administrador");
+          } else {
+            mostrarErro();
+          }
+        } catch (e) {
           mostrarErro();
         }
-      } catch (e) {
-        mostrarErro();
+      } else {
+        mostrarErro("As senhas devem ser iguais");
       }
-    } else {
-      mostrarErro("As senhas devem ser iguais");
     }
   };
 

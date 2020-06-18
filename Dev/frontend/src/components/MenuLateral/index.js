@@ -51,7 +51,7 @@ export default function MenuLateral(props) {
               url={"/dashboard"}
             />
 
-            {nivel < 3 && (
+            {nivel < 4 && (
               <BotaoMenu
                 descricao="Fiscal"
                 iconeNome="fiscal"
@@ -59,7 +59,7 @@ export default function MenuLateral(props) {
               />
             )}
 
-            {nivel !== 4 && (
+            {nivel !== 5 && (
               <BotaoExpande
                 principal="Linha"
                 btnEscondidos={[
@@ -70,7 +70,7 @@ export default function MenuLateral(props) {
               />
             )}
 
-            {nivel !== 4 && (
+            {nivel !== 5 && (
               <BotaoMenu
                 descricao="Motorista"
                 iconeNome="motorista"
@@ -78,7 +78,7 @@ export default function MenuLateral(props) {
               />
             )}
 
-            {nivel !== 4 && (
+            {nivel !== 5 && (
               <BotaoMenu
                 descricao="Ônibus"
                 iconeNome="onibus"
@@ -86,7 +86,7 @@ export default function MenuLateral(props) {
               />
             )}
 
-            {nivel === 1 && (
+            {nivel === 2 && (
               <BotaoMenu
                 descricao="Admin"
                 url={"/administrador"}
@@ -94,15 +94,15 @@ export default function MenuLateral(props) {
               />
             )}
 
-            {nivel !== 1 && (
+            {nivel !== 2 && (
               <BotaoExpande
                 principal="Configuração"
-                btnEscondidos={nivel === 2 ? gerenteConfig : outrosConfig}
+                btnEscondidos={nivel === 3 ? gerenteConfig : outrosConfig}
                 iconeNome="config"
               />
             )}
 
-            {nivel <= 2 && (
+            {nivel <= 3 && (
               <BotaoMenu
                 descricao="Gerente"
                 url={"/gerente"}

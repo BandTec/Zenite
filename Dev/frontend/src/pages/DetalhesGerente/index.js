@@ -71,10 +71,12 @@ export default function DetalhesGerente(props) {
                 descricao={dados.endereco.logradouro}
               />
               <TituloDado tipo="Numero" descricao={dados.endereco.numero} />
-              <TituloDado
+              
+              {dados.endereco.complemento && <TituloDado
                 tipo="Complemento"
                 descricao={dados.endereco.complemento}
-              />
+              />}
+              
               <TituloDado tipo="Cidade" descricao={dados.endereco.cidade} />
               <TituloDado tipo="Estado" descricao={dados.endereco.estado} />
             </CaixaDados>

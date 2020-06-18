@@ -14,7 +14,6 @@ export default function ConsultaOnibus() {
   const [pagina, setPagina] = useState(0);
   const [total, setTotal] = useState(0);
   const [totalItens, setTotalItens] = useState(0);
-  const [atual, setAtual] = useState(0);
 
   useEffect(() => {
     async function dadosCorpos() {
@@ -29,8 +28,6 @@ export default function ConsultaOnibus() {
 
       //aqui pego do response.data que é onde tá os dados do onibus e passo pra uma variavel tbm
       let dados = response.data;
-
-      setAtual(dados.paginaAtual);
       setTotal(dados.totalPaginas);
       setTotalItens(dados.totalItens);
 
@@ -80,10 +77,9 @@ export default function ConsultaOnibus() {
 
       <Row>
         <Paginacao
-          pgAtual={atual}
+          pgAtual={pagina}
           totalPg={total}
-          voltar={() => setPagina(pagina - 1)}
-          proximo={() => setPagina(pagina + 1)}
+          mudarPag={(p) => setPagina(p)}
           totalItens={totalItens}
         />
       </Row>
