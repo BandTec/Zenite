@@ -77,6 +77,18 @@ export default function CadastroFiscal(props) {
 
   const editar = async () => {
     const token = await localStorage.getItem("token");
+    let result = await Swal.fire({
+    title: "Aviso",
+    text: "Deseja realmente editar este dado? ",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sim, desejo",
+    cancelButtonText: "Não",
+  });
+
+  if (result.value) {
     try {
       if (validacaoSenha) {
         const response = await api.put(`/api/fiscal/${id}`, dados, {
@@ -94,6 +106,7 @@ export default function CadastroFiscal(props) {
     } catch (e) {
       mostrarErro();
     }
+  }
   };
 
   const chamada = () => {
@@ -127,7 +140,7 @@ export default function CadastroFiscal(props) {
             dados={dados}
             validarSenha={setValidacaoSenha}
           />
-          {pagina === 4 && chamada()}
+          {pagina >= 4 && chamada()}
         </>
       )}
     </Container>
