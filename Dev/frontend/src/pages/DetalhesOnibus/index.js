@@ -54,15 +54,20 @@ export default function DetalhesOnibus(props) {
           <CorpoRelatorio>
             <CaixaDados>
               <TituloTipoDado texto="Dados Veículo" />
-
               <TituloDado tipo="Número" descricao={dados.numero} />
-
               <TituloDado tipo="Placa" descricao={dados.placa} />
-
               <TituloDado tipo="Modelo" descricao={dados.modelo} />
               <TituloDado
                 tipo="acessível"
                 descricao={dados.acessivel ? "Sim" : "Não"}
+              />
+              <TituloDado
+                tipo="Quantidade de Passageiros Sentados"
+                descricao={dados.qtdPassageirosSentados}
+              />
+              <TituloDado
+                tipo="Quantidade de Passageiros em Pé"
+                descricao={dados.qtdPassageirosEmPe}
               />
               <TituloDado
                 tipo="dispositivo"

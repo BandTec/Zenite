@@ -77,23 +77,36 @@ export default function CadastroGerente(props) {
 
   const editar = async () => {
     const token = await localStorage.getItem("token");
-    try {
-      if (validacaoSenha) {
-        const response = await api.put(`/api/gerente/${id}`, dados, {
-          headers: { Authorization: token },
-        });
+    let result = await Swal.fire({
+      title: "Aviso",
+      text: "Deseja realmente editar este dado? ",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, desejo",
+      cancelButtonText: "Não",
+    });
 
-        if (response.status === 200) {
-          props.history.push("/gerente");
+    if (result.value) {
+      try {
+        if (validacaoSenha) {
+          const response = await api.put(`/api/gerente/${id}`, dados, {
+            headers: { Authorization: token },
+          });
+
+          if (response.status === 200) {
+            props.history.push("/gerente");
+          } else {
+            mostrarErro();
+          }
         } else {
-          mostrarErro();
+          mostrarErro("Senha diferente, tente novamente.");
         }
-      } else {
-        mostrarErro("Senha diferente, tente novamente.");
+      } catch (e) {
+        mostrarErro();
+        console.log("Erro na edicao:" + e.message);
       }
-    } catch (e) {
-      mostrarErro();
-      console.log("Erro na edicao:" + e.message);
     }
   };
 
@@ -128,7 +141,7 @@ export default function CadastroGerente(props) {
             dados={dados}
             validarSenha={setValidacaoSenha}
           />
-          {pagina === 4 && chamada()}
+          {pagina >= 4 && chamada()}
         </>
       )}
     </Container>
