@@ -13,7 +13,7 @@ export default function ConsultaMotorista() {
   const [pagina, setPagina] = useState(0);
   const [total, setTotal] = useState(0);
   const [totalItens, setTotalItens] = useState(0);
-  const [atual, setAtual] = useState(0);
+
 
   useEffect(() => {
     async function dadosCorpos() {
@@ -28,7 +28,6 @@ export default function ConsultaMotorista() {
 
       //aqui pego do response.data que é onde tá os dados da linha e passo pra uma variavel tbm
       let dados = response.data;
-      setAtual(dados.paginaAtual);
       setTotal(dados.totalPaginas);
       setTotalItens(dados.totalItens);
       let temp = [];
@@ -64,10 +63,9 @@ export default function ConsultaMotorista() {
 
       <Row>
         <Paginacao
-          pgAtual={atual}
+          pgAtual={pagina}
           totalPg={total}
-          voltar={() => setPagina(pagina - 1)}
-          proximo={() => setPagina(pagina + 1)}
+          mudarPag={(p) => setPagina(p)}
           totalItens={totalItens}
         />
       </Row>

@@ -106,15 +106,17 @@ export default function DetalhesMotorista(props) {
                 descricao={dados.endereco.logradouro}
               />
               <TituloDado tipo="Numero" descricao={dados.endereco.numero} />
-              <TituloDado
+              
+              {dados.endereco.complemento && <TituloDado
                 tipo="Complemento"
                 descricao={dados.endereco.complemento}
-              />
+              />}
+              
               <TituloDado tipo="Cidade" descricao={dados.endereco.cidade} />
               <TituloDado tipo="Estado" descricao={dados.endereco.estado} />
             </CaixaDados>
 
-            <CaixaDados>
+           {dados.carro && <CaixaDados>
               <TituloTipoDado texto="Ônibus Alocado" />
 
               <TituloDado tipo="Número" descricao={dados.carro.numero} />
@@ -144,6 +146,7 @@ export default function DetalhesMotorista(props) {
                 </p>
               </CaixaTabela> */}
             </CaixaDados>
+          }
           </CorpoRelatorio>
         )}
       </Row>
