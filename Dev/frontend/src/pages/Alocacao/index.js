@@ -69,7 +69,6 @@ export default function Alocacao() {
           break;
         case "2":
           tipo = "paradaInicial";
-          console.log(tipo);
           break;
         case "3":
           tipo = "paradaFinal";

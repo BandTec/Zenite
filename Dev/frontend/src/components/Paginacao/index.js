@@ -29,7 +29,7 @@ export default function Paginacao({pgAtual, totalPg, totalItens, mudarPag}) {
         descricao="Próximo"
         estiloEscuro={false}
         onClick={() => mudarPag(pgAtual + 1)}
-        disabled={pgAtual === totalPg}
+        disabled={(pgAtual + 1) === totalPg}
       />
       <Botao
         descricao="Última"

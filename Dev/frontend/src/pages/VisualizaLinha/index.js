@@ -49,6 +49,23 @@ export default function ConsultaLinha() {
     dadosCorpos();
   }, [pagina]);
 
+
+const exportarDados = async () => {
+  console.log("hello");
+  const token = localStorage.getItem("token");
+  const response = await api.get(`/api/exportacao/linha`, {
+    headers: { Authorization: token },
+  });
+  const url = window.URL.createObjectURL(new Blob([response.data]));
+  const link = document.createElement('a');
+  link.href = url;
+  link.setAttribute('download', 'zenite_linhas.txt');
+  document.body.appendChild(link);
+  link.click();
+
+  console.log("asdfds"); 
+  }
+
   function criaDados(
     id,
     numero,
@@ -68,6 +85,8 @@ export default function ConsultaLinha() {
         titulo="Linha"
         url="linha"
         totalItens={totalItens}
+        exportarOnclick={exportarDados}
+        exportarTitle={"Exportar dados"}
       />
 
       <Row>
