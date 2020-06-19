@@ -78,6 +78,7 @@ public class DashboardController {
         dashboardLinha.setMotoristasAlocados(dadosLinha.getQtdMotorista());
         dashboardLinha.setFiscalResponsavel(dadosLinha.getFiscalIda());
         dashboardLinha.setNumeroLinha(dadosLinha.getNumeroLinha());
+        dashboardLinha.setIdLinha(dadosLinha.getIdLinha());
 
         return ok(dashboardLinha);
 

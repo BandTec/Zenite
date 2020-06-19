@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Container, Titulo, Valor } from './styles';
 
-function Texto({ titulo = '', valor = ''}) {
+function Texto({ titulo = '', valor = '', children}) {
   return (
     <Container>
         <Titulo>{titulo}</Titulo>
-        <Valor>{valor}</Valor>
+        <Valor>{valor || children}</Valor>
     </Container>
   )
 }

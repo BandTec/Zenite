@@ -13,6 +13,9 @@ public class DadosLinha {
     @Column(name = "numero_da_linha")
     private String numeroLinha;
 
+    @Column(name = "id_linha")
+    private Integer idLinha;
+
     @Column(name = "fiscal_ida")
     private String fiscalIda;
 
@@ -27,6 +30,14 @@ public class DadosLinha {
 
     @Column(name = "qtd_motorista")
     private Integer qtdMotorista;
+
+    public Integer getIdLinha() {
+        return idLinha;
+    }
+
+    public void setIdLinha(Integer idLinha) {
+        this.idLinha = idLinha;
+    }
 
     public Integer getQtdMotorista() {
         return qtdMotorista;

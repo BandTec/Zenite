@@ -12,6 +12,15 @@ public class DashboardLinha {
     private Integer motoristasAlocados;
     private String fiscalResponsavel;
     private String numeroLinha;
+    private Integer idLinha;
+
+    public Integer getIdLinha() {
+        return idLinha;
+    }
+
+    public void setIdLinha(Integer idLinha) {
+        this.idLinha = idLinha;
+    }
 
     public List<ViagemMotorista> getViagemMotorista() {
         return viagemMotorista;

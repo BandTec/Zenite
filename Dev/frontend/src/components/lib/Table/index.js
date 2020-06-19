@@ -14,7 +14,7 @@ function Table({titulo = "Tabela", placeholder="Pesquise...", dados = {header: [
         if(event.target.value){
             for(const body of dados.body)
                 for(const dado of body)
-                    if(typeof dado === 'string' && dado.indexOf(event.target.value) != -1)
+                    if(typeof dado === 'string' && dado.indexOf(event.target.value) !== -1)
                         aux.push(body)
             setDadosTabela({header: dadosTabela.header, body: aux})
             aux = []

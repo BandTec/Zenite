@@ -28,6 +28,18 @@ export const CorpoLinha = styled.section`
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 20vh);
   grid-gap: 15px;
+  select {
+    background-color: transparent;
+    cursor: pointer;
+    width: 200px;
+    font-size: 25px;
+    color: #fff;
+    option{
+      background-color: transparent;
+      font-size: 25px;
+      color: #0066AC;
+    }
+  }
 `;
 
 export const Cabecalho = styled.header`

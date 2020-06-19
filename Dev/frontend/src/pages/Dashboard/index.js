@@ -25,10 +25,10 @@ export default function Dashboard() {
   const [onibusCirculando, setOnibusCirculando] = useState();
   const [viagemPeriodoLinha, setViagemPeriodoLinha] = useState();
   const [tempoMedioViagemDiaDaSemana, setTempoMedioViagemDiaDaSemana] = useState();
-  const [numeroLinha, setNumeroLinha] = useState();
   const [motoristasAlocados, setMotoriostasAlocados] = useState();
   const [fiscalResponsavel, setFiscalResponsavel] = useState();
   const [horaAtual, setHoraAtual] = useState("");
+  const [linhas, setLinhas] = useState([]);
 
   const linhasComMaiorAtraso = {
     labels: ["4051-10", "3033-10", "407M-10", "7245-10", "3766-10", "4001-10", "3754-10", "3686-10", "407T-10", "312N-10"],
@@ -41,16 +41,16 @@ export default function Dashboard() {
     setHoraAtual(`${data.getHours()}:${data.getMinutes()}`)
   }
 
-  async function loadDadosLinha(){
-    const response = await api.get("/api/dashboard/2");
+  async function loadDadosLinha(idLinha){
+    const response = await api.get(`/api/dashboard/${idLinha}`);
     setDadosLinha(response.data);
     setHoraAtual(`${data.getHours()}:${data.getMinutes()}`)
   }
 
-  setInterval(() =>{
-    loadDados();
-    loadDadosLinha(); 
-  }, 300000)
+  // setInterval(() =>{
+  //   loadDados();
+  //   loadDadosLinha(); 
+  // }, 300000)
   
   useEffect(()=>{
     setNome(localStorage.getItem("nome"));
@@ -84,9 +84,11 @@ export default function Dashboard() {
     }
     if(dados.dadosLinha){
       aux = ["Linha", "Fiscal", "Circulando", "Motoristas", "Viagem"]
+      const auxLinhas = []
       for(let elem of dados.dadosLinha){
         const fiscalCompleto = elem["fiscalIda"].split(" ")
         const fiscal = fiscalCompleto[0]+" "+fiscalCompleto[fiscalCompleto.length-1]
+        auxLinhas.push({idLinha: elem["idLinha"], numero: elem["numeroLinha"]});
         auxDado.push([
           elem["numeroLinha"], 
           fiscal,
@@ -96,6 +98,7 @@ export default function Dashboard() {
         ])
       }
       setTbDadosLinha({header: aux, body: auxDado})
+      setLinhas(auxLinhas)
       aux = []
       auxDado = []
     }
@@ -140,7 +143,6 @@ export default function Dashboard() {
       aux = []
       auxDado = []
     }
-    if(dadosLinha.numeroLinha) setNumeroLinha(dadosLinha.numeroLinha);
     if(dadosLinha.onibusAlocados) setQtdCarrosCirculando(dadosLinha.onibusAlocados);
     if(dadosLinha.motoristasAlocados) setMotoriostasAlocados(dadosLinha.motoristasAlocados);
     if(dadosLinha.fiscalResponsavel) setFiscalResponsavel(dadosLinha.fiscalResponsavel);
@@ -245,9 +247,15 @@ export default function Dashboard() {
               cor="escuro"
             >
               <Texto 
-                titulo="Linha" 
-                valor={numeroLinha}
-              />
+                titulo="Linha"
+              >
+                <select onChange={e => loadDadosLinha(e.target.value)}>
+                  <option value="0">Escolha</option>
+                  {
+                    linhas.map(linha => <option value={linha.idLinha}>{linha.numero}</option>)
+                  }
+                </select>
+              </Texto>
             </Card>
             <Card 
               column={"3 / 5"} 
