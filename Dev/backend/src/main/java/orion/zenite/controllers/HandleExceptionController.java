@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import orion.zenite.exceptions.ApiErros;
 
-// CLASSE PARA DAR UMA RESPONSTA FORMATADA PARA OS ERROS INTERNO
+// CLASSE PARA DAR UMA RESPOSTA FORMATADA PARA OS ERROS INTERNO
 
 @RestControllerAdvice
 
