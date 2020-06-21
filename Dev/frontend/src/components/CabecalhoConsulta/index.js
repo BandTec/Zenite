@@ -53,7 +53,7 @@ function CabecalhoConsulta({ titulo, botaoTitulo, url, totalItens, onClick, impo
           />
         )}
 
-        <Botao descricao="relatório" url={`/${url}`} />
+        {/* <Botao descricao="relatório" url={`/${url}`} /> */}
       </div>
     </Row>
   );
