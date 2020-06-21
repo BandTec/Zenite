@@ -239,14 +239,14 @@ app.get("/cadastrarlinhas", async (req, res) => {
         //Filtra os terminais para que não tenha duplicatas
         let pontos = auxiliar.filter(verificarDuplicatasPontos)
         
-        // await insertPontos(pontos);
+        //await insertPontos(pontos);
 
         //Procura as FKs dos pontos no Banco de dados
         let pontosComFKBanco = await procurarForeignKeys(pontos)
         //Verifica qual FK condiz com os pontos que a linha tem
         await acharFK(filtroLinha, pontosComFKBanco);
         //Insere a linha com as FK de seus pontos
-        await insertLinhas(filtroLinha);
+        //await insertLinhas(filtroLinha);
 
         res.status(200).json({filtroLinha,linhas,pontos});
     }catch(err){

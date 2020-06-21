@@ -36,6 +36,12 @@ public class DashboardController {
     @Autowired
     OnibusCirculandoRepository onibusCirculandoRepository;
 
+    @Autowired
+    ViagemPeriodoLinhaRepository viagemPeriodoLinhaRepository;
+
+    @Autowired
+    TempoMedioViagemDiaDaSemanaRepository tempoMedioViagemDiaDaSemanaRepository;
+
     @GetMapping
     public ResponseEntity getDadosGeral(){
         Optional<OperandoParado> operandoParado = operandoParadoRepository.findOnibusCirculando();
@@ -44,29 +50,38 @@ public class DashboardController {
         Optional<Integer> tempoMedioViagemHora = dashboardRepository.findTempoMedioViagemHora();
         List<ViagemPeriodo> tempoMedioViagemPeriodo = viagemPeriodoRepository.findTempoMedioViagemHora();
 
-        Dashboard dashboard = new Dashboard();
+        DashboardGeral dashboardGeral = new DashboardGeral();
 
-        dashboard.setOperandoParado(operandoParado);
-        dashboard.setDadosLinha(dadosLinhas);
-        dashboard.setCarrosNaoAlocados(carrosNaoAlocados);
-        dashboard.setTempoMedioViagemHora(tempoMedioViagemHora);
-        dashboard.setTempoMedioViagemPeriodo(tempoMedioViagemPeriodo);
+        dashboardGeral.setOperandoParado(operandoParado);
+        dashboardGeral.setDadosLinha(dadosLinhas);
+        dashboardGeral.setCarrosNaoAlocados(carrosNaoAlocados);
+        dashboardGeral.setTempoMedioViagemHora(tempoMedioViagemHora);
+        dashboardGeral.setTempoMedioViagemPeriodo(tempoMedioViagemPeriodo);
 
-        return ok(dashboard);
+        return ok(dashboardGeral);
+
     }
 
     @GetMapping("{idLinha}")
     public ResponseEntity getDadosLinha(@PathVariable("idLinha") Integer idLinha){
         List<ViagemMotorista> viagemMotorista = viagemMotoristaRepository.findViagemMotorista(idLinha);
         List<OnibusCirculando> onibusCirculando = onibusCirculandoRepository.findOnibusCirculando(idLinha);
-        List<DadosLinha> dadosLinhas = dadosLinhaRepository.findDadosLinhaLinha(idLinha);
-        Dashboard dashboard = new Dashboard();
+        List<ViagemPeriodoLinha> viagemPeriodoLinha = viagemPeriodoLinhaRepository.findViagemPeriodoLinha(idLinha);
+        List<TempoMedioViagemDiaDaSemana> tempoMedioViagemDiaDaSemana = tempoMedioViagemDiaDaSemanaRepository.findTempoMedioViagemDiaDaSemana(idLinha);
+        DadosLinha dadosLinha = dadosLinhaRepository.findDadosLinhaLinha(idLinha);
+        DashboardLinha dashboardLinha = new DashboardLinha();
 
-        dashboard.setViagemMotorista(viagemMotorista);
-        dashboard.setOnibusCirculando(onibusCirculando);
-        dashboard.setDadosLinha(dadosLinhas);
+        dashboardLinha.setViagemMotorista(viagemMotorista);
+        dashboardLinha.setOnibusCirculando(onibusCirculando);
+        dashboardLinha.setViagemPeriodoLinha(viagemPeriodoLinha);
+        dashboardLinha.setTempoMedioViagemDiaDaSemana(tempoMedioViagemDiaDaSemana);
+        dashboardLinha.setOnibusAlocados(dadosLinha.getQtdCarrosCirculando());
+        dashboardLinha.setMotoristasAlocados(dadosLinha.getQtdMotorista());
+        dashboardLinha.setFiscalResponsavel(dadosLinha.getFiscalIda());
+        dashboardLinha.setNumeroLinha(dadosLinha.getNumeroLinha());
+        dashboardLinha.setIdLinha(dadosLinha.getIdLinha());
 
-        return ok(dashboard);
+        return ok(dashboardLinha);
 
     }
 }

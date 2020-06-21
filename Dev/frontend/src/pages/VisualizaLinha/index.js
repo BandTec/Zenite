@@ -117,7 +117,6 @@ const importarFile = event => {
         exportarOnclick={exportarDados}
         exportarTitle={"Exportar dados"}
       />                               
-
       <Row>
         <Tabela tipo="linha" dados={corpo} />
       </Row>
