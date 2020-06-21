@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import orion.zenite.entidades.*;
+import orion.zenite.modelos.FilaObj;
 import orion.zenite.repositorios.LinhaRepository;
 import orion.zenite.repositorios.ViagemRepository;
 
@@ -37,6 +38,12 @@ public class ExportacaoController {
         String caminhoDoArquivo = "src/main/resources/txt.txt";
         List<Linha> consulta = linhaBD.findAll();
 
+        FilaObj<Linha> filaConsulta = new FilaObj<>(consulta.size());
+
+        for(Linha linha: consulta){
+            filaConsulta.insert(linha);
+        }
+
         File file = new File(caminhoDoArquivo);
 
         try(Writer writer = new BufferedWriter(new FileWriter(file))){
@@ -53,7 +60,9 @@ public class ExportacaoController {
 
             int qtdRegistros = 0;
 
-            for(Linha l : consulta){
+            while(!filaConsulta.isEmpty()){
+                Linha l = filaConsulta.poll();
+
                 PontoFinal pontoIda = l.getPontoIda();
                 PontoFinal pontoVolta = l.getPontoVolta();
 
@@ -63,8 +72,19 @@ public class ExportacaoController {
                 escreverCorpo(pontoVolta.getNome(), writer, 80, true);
 
                 qtdRegistros++;
-
             }
+
+            /*for(Linha l : consulta){
+                PontoFinal pontoIda = l.getPontoIda();
+                PontoFinal pontoVolta = l.getPontoVolta();
+
+                escreverCorpo("L10", writer, 3, false);
+                escreverCorpo(l.getNumero(), writer, 7, false);
+                escreverCorpo(pontoIda.getNome(), writer, 80, false);
+                escreverCorpo(pontoVolta.getNome(), writer, 80, true);
+
+                qtdRegistros++;
+            }*/
 
             escreverFooter("L90", qtdRegistros, writer);
 
@@ -91,6 +111,12 @@ public class ExportacaoController {
         String caminhoDoArquivo = "src/main/resources/txt.txt";
         List<Viagem> viagem = viagemRepository.findAll();
 
+        FilaObj<Viagem> filaViagem = new FilaObj<>(viagem.size());
+
+        for(Viagem v: viagem){
+            filaViagem.insert(v);
+        }
+
         File file = new File(caminhoDoArquivo);
 
         try(Writer writer = new BufferedWriter(new FileWriter(file))){
@@ -107,7 +133,9 @@ public class ExportacaoController {
 
             int qtdRegistros = 0;
 
-            for(Viagem v : viagem){
+            while(!filaViagem.isEmpty()){
+                Viagem v = filaViagem.poll();
+
                 Carro carro = v.getCarro();
                 Fiscal fiscalIda = v.getFiscal();
                 Fiscal fiscalVolta = v.getFiscalVolta();
@@ -128,6 +156,28 @@ public class ExportacaoController {
 
                 qtdRegistros++;
             }
+
+            /*for(Viagem v : viagem){
+                Carro carro = v.getCarro();
+                Fiscal fiscalIda = v.getFiscal();
+                Fiscal fiscalVolta = v.getFiscalVolta();
+                Linha linha = v.getLinha();
+                Motorista motorista = v.getMotorista();
+                escreverCorpo("V10", writer, 3, false);
+                escreverCorpo(""+v.getId(), writer, 6, false);
+                String horaChegada = v.getHoraChegada().toString().replace("T", " ");
+                String horaSaida = v.getHoraSaida().toString().replace("T", " ");
+                escreverCorpo(horaChegada.substring(0,18), writer, 19, false);
+                escreverCorpo(horaSaida.substring(0,18), writer, 19, false);
+                escreverCorpo(""+v.getQtdPassageiros(), writer, 3, false);
+                escreverCorpo(carro.getNumero(), writer, 8, false);
+                escreverCorpo(fiscalIda.getNome(), writer, 50, false);
+                escreverCorpo(linha.getNumero(), writer, 7, false);
+                escreverCorpo(motorista.getNome(), writer, 50, false);
+                escreverCorpo(fiscalVolta.getNome(), writer, 50, true);
+
+                qtdRegistros++;
+            }*/
 
             escreverFooter("V90", qtdRegistros, writer);
 
