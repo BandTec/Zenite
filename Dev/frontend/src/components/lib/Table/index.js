@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Container, Titulo, Busca, Tabela } from './styles';
+
 import { useState, useEffect } from 'react';
 
 function Table({titulo = "Tabela", placeholder="Pesquise...", dados = {header: [], body: []}}) {
@@ -37,6 +38,7 @@ function Table({titulo = "Tabela", placeholder="Pesquise...", dados = {header: [
                     </tr>
                 </thead>
                 <tbody>
+
                     {dadosTabela.body.map(linha => 
                         <tr>{
                             linha.map(coluna => 

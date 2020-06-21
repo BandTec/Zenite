@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Container, Titulo, Valor } from './styles';
 
+
 function Texto({ titulo = '', valor = '', children}) {
   return (
     <Container>

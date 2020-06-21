@@ -21,6 +21,7 @@ export default function Dashboard() {
   const [tempoMedioViagemPeriodo, setTempoMedioViagemPeriodo] = useState({});
   const [viagemMotorista, setViagemMotorista] = useState({});
   const [tbDadosLinha, setTbDadosLinha] = useState();
+
   const [qtdCarrosCirculando, setQtdCarrosCirculando] = useState();
   const [onibusCirculando, setOnibusCirculando] = useState();
   const [viagemPeriodoLinha, setViagemPeriodoLinha] = useState();
@@ -38,6 +39,7 @@ export default function Dashboard() {
   async function loadDados(){
     const response = await api.get("/api/dashboard");
     setDados(response.data);
+
     setHoraAtual(`${data.getHours()}:${data.getMinutes()}`)
   }
 
@@ -83,6 +85,7 @@ export default function Dashboard() {
       auxDado = []
     }
     if(dados.dadosLinha){
+
       aux = ["Linha", "Fiscal", "Circulando", "Motoristas", "Viagem"]
       const auxLinhas = []
       for(let elem of dados.dadosLinha){

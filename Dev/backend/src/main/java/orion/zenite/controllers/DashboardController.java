@@ -59,6 +59,7 @@ public class DashboardController {
         dashboardGeral.setTempoMedioViagemPeriodo(tempoMedioViagemPeriodo);
 
         return ok(dashboardGeral);
+
     }
 
     @GetMapping("{idLinha}")

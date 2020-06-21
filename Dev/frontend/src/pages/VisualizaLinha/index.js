@@ -8,6 +8,8 @@ import Paginacao from "../../components/Paginacao";
 import Loader from "./../../components/Loader";
 import CabecalhoConsulta from "../../components/CabecalhoConsulta";
 
+  
+
 export default function ConsultaLinha() {
   const [corpo, setCorpo] = useState([]);
   const [pagina, setPagina] = useState(0);
@@ -51,7 +53,6 @@ export default function ConsultaLinha() {
 
 
 const exportarDados = async () => {
-  console.log("hello");
   const token = localStorage.getItem("token");
   const response = await api.get(`/api/exportacao/linha`, {
     headers: { Authorization: token },
@@ -63,8 +64,33 @@ const exportarDados = async () => {
   document.body.appendChild(link);
   link.click();
 
-  console.log("asdfds"); 
-  }
+}
+
+const importarDados = async () => {
+  const inputId = document.getElementById('inputFileB')
+  inputId.click();
+}
+
+const importarFile = event => {
+  const token = localStorage.getItem("token");
+  const teste = event.target.files[0];
+  
+  const formData = new FormData();
+
+  formData.append(
+    "txt",
+    teste
+  )
+
+  api.post(`/api/importacao/linha`, formData, {
+    headers: { 
+      Authorization: token,
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+
+  console.log(teste);
+}
 
   function criaDados(
     id,
@@ -85,10 +111,12 @@ const exportarDados = async () => {
         titulo="Linha"
         url="linha"
         totalItens={totalItens}
+        importarFile={importarFile}
+        importarOnClick={importarDados}
+        importarTitle={"Importar dados"}
         exportarOnclick={exportarDados}
         exportarTitle={"Exportar dados"}
-      />
-
+      />                               
       <Row>
         <Tabela tipo="linha" dados={corpo} />
       </Row>
@@ -100,7 +128,7 @@ const exportarDados = async () => {
           mudarPag={(p) => setPagina(p)}
           totalItens={totalItens}
         />
-      </Row>
+      </Row> 
     </Container>
   );
 }
