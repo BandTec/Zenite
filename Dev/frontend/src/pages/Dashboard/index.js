@@ -156,182 +156,120 @@ export default function Dashboard() {
     <Container>
       <Tela>
         <Row>
-          <Titulo
-            textoMenor={`Atualizado em ${horaAtual}`}
-            textoMaior="Dashboard"
-          />
+          <Cabecalho>
+            <Titulo
+              textoMenor={`Atualizado em ${horaAtual}`}
+              textoMaior="Dashboard"
+            />
+            <Filtro
+              selected={page === "Geral"}
+              titulo="Geral"
+              handlePage={handlePage}
+            />
+            <Filtro
+              selected={page === "Linha"}
+              titulo="Linha"
+              handlePage={handlePage}
+            />
+          </Cabecalho>
           <Perfil>Olá, {nome}</Perfil>
         </Row>
-        <Cabecalho>
-          <Filtro selected={page==='Geral'} titulo="Geral" handlePage={handlePage}/>
-          <Filtro selected={page==='Linha'} titulo="Linha" handlePage={handlePage}/>
-        </Cabecalho>
-        { page === 'Geral' && dados ?
+        {page === "Geral" && dados ? (
           <Corpo>
-            <Card 
-              column={"1 / 3"} 
-              row={"1 / 2"}  
-              cor="claro"
-            >
-              <Quadrado 
-                titulo="Tempo médio" 
-                subTitulo="(ULTIMA 1 HORA)" 
-                valor={dados.tempoMedioViagemHora} 
+            <Card column={"1 / 3"} row={"1 / 2"} cor="claro">
+              <Quadrado
+                titulo="Tempo médio"
+                subTitulo="(ULTIMA 1 HORA)"
+                valor={dados.tempoMedioViagemHora}
                 cor="claro"
               />
             </Card>
-            <Card 
-              column={"1 / 3"} 
-              row={"2 / 4"} 
-              cor="suave"
-            >
-              <Bar 
+            <Card column={"1 / 3"} row={"2 / 4"} cor="suave">
+              <Bar
                 titulo="Linhas com maior atraso"
                 dados={linhasComMaiorAtraso}
               />
             </Card>
-            <Card 
-              column={"1 / 3"} 
-              row={"4 / 5"} 
-              cor="claro"
-            >
-              <Texto 
-                titulo="Atraso médio (por viagem)" 
-                valor="38 min"
-              />
+            <Card column={"1 / 3"} row={"4 / 5"} cor="claro">
+              <Texto titulo="Atraso médio (por viagem)" valor="38 min" />
             </Card>
-            <Card 
-              column={"1 / 3"} 
-              row={"5 / 7"} 
-              cor="claro"
-            >
-              <Line 
+            <Card column={"1 / 3"} row={"5 / 7"} cor="claro">
+              <Line
                 titulo="Tempo médio de viagem (por período)"
                 dados={tempoMedioViagemPeriodo}
               />
             </Card>
-            <Card 
-              column={"3 / 5"}
-              row={"1 / 4"}
-              cor="suave"
-              >
-                <Pie 
-                  titulo="Ônibus operando x Ônibus parado"
-                  dados={dadosOperandoParado}
-                />
-              </Card>
-            <Card 
-              column={"3 / 5"} 
-              row={"4 / 5"} 
-              cor="escuro"
-            >
-              <Texto 
-                titulo="Quantidade de ônibus não alocados" 
+            <Card column={"3 / 5"} row={"1 / 4"} cor="suave">
+              <Pie
+                titulo="Ônibus operando x Ônibus parado"
+                dados={dadosOperandoParado}
+              />
+            </Card>
+            <Card column={"3 / 5"} row={"4 / 5"} cor="escuro">
+              <Texto
+                titulo="Quantidade de ônibus não alocados"
                 valor={dados.carrosNaoAlocados}
               />
             </Card>
-            <Card 
-              column={"3 / 5"} 
-              row={"5 / 7"} 
-              cor="claro"
-            >
-              <Table 
-                titulo="Linha"
-                dados={ tbDadosLinha }
-              />
+            <Card column={"3 / 5"} row={"5 / 7"} cor="claro">
+              <Table titulo="Linha" dados={tbDadosLinha} />
             </Card>
-          </Corpo> 
-          : <CorpoLinha>
-            <Card 
-              column={"1 / 3"} 
-              row={"1 / 2"} 
-              cor="escuro"
-            >
-              <Texto 
-                titulo="Linha"
-              >
-                <select onChange={e => loadDadosLinha(e.target.value)}>
+          </Corpo>
+        ) : (
+          <CorpoLinha>
+            <Card column={"1 / 3"} row={"1 / 2"} cor="escuro">
+              <Texto titulo="Linha">
+                <select onChange={(e) => loadDadosLinha(e.target.value)}>
                   <option value="0">Escolha</option>
-                  {
-                    linhas.map(linha => <option value={linha.idLinha}>{linha.numero}</option>)
-                  }
+                  {linhas.map((linha) => (
+                    <option value={linha.idLinha}>{linha.numero}</option>
+                  ))}
                 </select>
               </Texto>
             </Card>
-            <Card 
-              column={"3 / 5"} 
-              row={"1 / 3"} 
-              cor="claro"
-            >
-              <Radar 
+            <Card column={"3 / 5"} row={"1 / 3"} cor="claro">
+              <Radar
                 titulo="Tempo médio de viagem (por motorista)"
                 dados={viagemMotorista}
               />
             </Card>
-            <Card 
-              column={"1 / 2"} 
-              row={"2 / 3"} 
-              cor="suave"
-            >
-              <Quadrado 
-                titulo="Ônibus alocados" 
+            <Card column={"1 / 2"} row={"2 / 3"} cor="suave">
+              <Quadrado
+                titulo="Ônibus alocados"
                 valor={qtdCarrosCirculando}
                 cor="suave"
               />
             </Card>
-            <Card 
-              column={"2 / 3"} 
-              row={"2 / 3"} 
-              cor="claro"
-            >
-              <Quadrado 
+            <Card column={"2 / 3"} row={"2 / 3"} cor="claro">
+              <Quadrado
                 titulo="Motoristas alocados"
-                valor={motoristasAlocados} 
+                valor={motoristasAlocados}
                 cor="claro"
               />
             </Card>
-            <Card 
-              column={"1 / 3"} 
-              row={"3 / 4"} 
-              cor="claro"
-            >
-              <Texto 
-                titulo="Fiscal responsável" 
-                valor={fiscalResponsavel}
-              />
+            <Card column={"1 / 3"} row={"3 / 4"} cor="claro">
+              <Texto titulo="Fiscal responsável" valor={fiscalResponsavel} />
             </Card>
-            <Card 
-              column={"3 / 5"} 
-              row={"3 / 4"} 
-              cor="suave"
-            >
-              <Bar 
+            <Card column={"3 / 5"} row={"3 / 4"} cor="suave">
+              <Bar
                 titulo="Tempo médio de viagem (por dia da semana)"
                 dados={tempoMedioViagemDiaDaSemana}
               />
             </Card>
-            <Card 
-              column={"1 / 3"} 
-              row={"4 / 6"} 
-              cor="suave"
-            >
-              <Line 
+            <Card column={"1 / 3"} row={"4 / 6"} cor="suave">
+              <Line
                 titulo="Quantidade de ônibus circulando (por período)"
                 dados={onibusCirculando}
               />
             </Card>
-            <Card 
-              column={"3 / 5"} 
-              row={"4 / 6"} 
-              cor="claro"
-            >
-              <Bar 
+            <Card column={"3 / 5"} row={"4 / 6"} cor="claro">
+              <Bar
                 titulo="Tempo de viagem (por período)"
                 dados={viagemPeriodoLinha}
               />
             </Card>
           </CorpoLinha>
-        }
+        )}
       </Tela>
     </Container>
   );

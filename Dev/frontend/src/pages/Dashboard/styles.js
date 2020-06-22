@@ -53,4 +53,5 @@ export const Cabecalho = styled.header`
   margin: 20px 0px;
   display: flex;
   justify-content: space-around;
+  align-items: flex-end;
 `;
