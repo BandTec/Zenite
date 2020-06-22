@@ -10,7 +10,7 @@ export const Container = styled.div`
     border-radius: 5px;
 `;
 
-export const Titulo = styled.div`
+export const Titulo = styled.h3`
     display: flex;
     width: 100%; height: 20%;
     color: #0066AC;

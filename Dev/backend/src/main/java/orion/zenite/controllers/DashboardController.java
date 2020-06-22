@@ -48,7 +48,7 @@ public class DashboardController {
         List<DadosLinha> dadosLinhas = dadosLinhaRepository.findDadosLinha();
         Optional<Integer> carrosNaoAlocados = dashboardRepository.findCarrosNaoAlocados();
         Optional<Integer> tempoMedioViagemHora = dashboardRepository.findTempoMedioViagemHora();
-        List<ViagemPeriodo> tempoMedioViagemPeriodo = viagemPeriodoRepository.findTempoMedioViagemHora();
+        List<ViagemPeriodo> tempoMedioViagemPeriodo = viagemPeriodoRepository.findTempoMedioViagemPeriodo();
 
         DashboardGeral dashboardGeral = new DashboardGeral();
 
@@ -68,6 +68,8 @@ public class DashboardController {
         List<OnibusCirculando> onibusCirculando = onibusCirculandoRepository.findOnibusCirculando(idLinha);
         List<ViagemPeriodoLinha> viagemPeriodoLinha = viagemPeriodoLinhaRepository.findViagemPeriodoLinha(idLinha);
         List<TempoMedioViagemDiaDaSemana> tempoMedioViagemDiaDaSemana = tempoMedioViagemDiaDaSemanaRepository.findTempoMedioViagemDiaDaSemana(idLinha);
+        Integer onibusAlocados = viagemMotoristaRepository.findOnibusAlocados(idLinha);
+        Integer motoristasAlocados = viagemMotoristaRepository.findMotoristasAlocados(idLinha);
         DadosLinha dadosLinha = dadosLinhaRepository.findDadosLinhaLinha(idLinha);
         DashboardLinha dashboardLinha = new DashboardLinha();
 
@@ -75,8 +77,8 @@ public class DashboardController {
         dashboardLinha.setOnibusCirculando(onibusCirculando);
         dashboardLinha.setViagemPeriodoLinha(viagemPeriodoLinha);
         dashboardLinha.setTempoMedioViagemDiaDaSemana(tempoMedioViagemDiaDaSemana);
-        dashboardLinha.setOnibusAlocados(dadosLinha.getQtdCarrosCirculando());
-        dashboardLinha.setMotoristasAlocados(dadosLinha.getQtdMotorista());
+        dashboardLinha.setOnibusAlocados(onibusAlocados);
+        dashboardLinha.setMotoristasAlocados(motoristasAlocados);
         dashboardLinha.setFiscalResponsavel(dadosLinha.getFiscalIda());
         dashboardLinha.setNumeroLinha(dadosLinha.getNumeroLinha());
         dashboardLinha.setIdLinha(dadosLinha.getIdLinha());

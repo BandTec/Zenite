@@ -9,6 +9,6 @@ import java.util.List;
 public interface ViagemPeriodoRepository extends JpaRepository<ViagemPeriodo, Integer> {
 
     @Query(nativeQuery = true, value = "select * from vwTempoMedioViagemPeriodo")
-    List<ViagemPeriodo> findTempoMedioViagemHora();
+    List<ViagemPeriodo> findTempoMedioViagemPeriodo();
 
 }

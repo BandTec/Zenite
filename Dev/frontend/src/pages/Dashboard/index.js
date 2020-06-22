@@ -32,8 +32,8 @@ export default function Dashboard() {
   const [linhas, setLinhas] = useState([]);
 
   const linhasComMaiorAtraso = {
-    labels: ["4051-10", "3033-10", "407M-10", "7245-10", "3766-10", "4001-10", "3754-10", "3686-10", "407T-10", "312N-10"],
-    data: [49, 20, 25, 39, 25, 27, 43, 29, 25,58]
+    labels: ["3686-10", "2022-10", "312N-10", "233C-10", "7245-10", "4001-10", "2734-10", "253F-10", "2022-10", "354M-10"],
+    data: [30, 46, 35, 55, 36, 49, 55, 47, 46, 41]
   }
 
   async function loadDados(){
@@ -48,11 +48,6 @@ export default function Dashboard() {
     setDadosLinha(response.data);
     setHoraAtual(`${data.getHours()}:${data.getMinutes()}`)
   }
-
-  // setInterval(() =>{
-  //   loadDados();
-  //   loadDadosLinha(); 
-  // }, 300000)
   
   useEffect(()=>{
     setNome(localStorage.getItem("nome"));
@@ -60,7 +55,6 @@ export default function Dashboard() {
   },[])
   useEffect( () => {
     loadDados()
-    loadDadosLinha()
   }, [page]);  
 
   useEffect(() => {
@@ -148,7 +142,11 @@ export default function Dashboard() {
     }
     if(dadosLinha.onibusAlocados) setQtdCarrosCirculando(dadosLinha.onibusAlocados);
     if(dadosLinha.motoristasAlocados) setMotoriostasAlocados(dadosLinha.motoristasAlocados);
-    if(dadosLinha.fiscalResponsavel) setFiscalResponsavel(dadosLinha.fiscalResponsavel);
+    if(dadosLinha.fiscalResponsavel) {
+      const fiscalSplit = dadosLinha.fiscalResponsavel.split(" ")
+      const fiscalFinal = fiscalSplit[0]+" "+fiscalSplit[fiscalSplit.length-1]
+      setFiscalResponsavel(fiscalFinal);
+    }
 
   },[dadosLinha])
 
@@ -199,7 +197,7 @@ export default function Dashboard() {
             >
               <Texto 
                 titulo="Atraso médio (por viagem)" 
-                valor="15 min"
+                valor="38 min"
               />
             </Card>
             <Card 
@@ -308,7 +306,7 @@ export default function Dashboard() {
               cor="suave"
             >
               <Bar 
-                titulo="Tempo médio de vigem (por dia da semana)"
+                titulo="Tempo médio de viagem (por dia da semana)"
                 dados={tempoMedioViagemDiaDaSemana}
               />
             </Card>
