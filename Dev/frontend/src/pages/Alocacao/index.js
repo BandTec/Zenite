@@ -234,7 +234,7 @@ export default function Alocacao() {
     <Container>
       <div>
         <Subtitulo>Cadastro</Subtitulo>
-        <Titulo>Alocacao</Titulo>
+        <Titulo>Alocação</Titulo>
       </div>
       <Nav>
         <div>
