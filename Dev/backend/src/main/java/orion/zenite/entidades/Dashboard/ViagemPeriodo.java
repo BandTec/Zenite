@@ -10,11 +10,16 @@ import javax.persistence.Table;
 public class ViagemPeriodo {
 
     @Id
+    @Column(name = "id")
+    private String Id;
+
     @Column(name = "tempoMedioViagemPeriodo")
     private Integer tempoMedio;
 
     @Column(name = "periodo")
     private String periodo;
+
+
 
     public Integer getTempoMedio() {
         return tempoMedio;
