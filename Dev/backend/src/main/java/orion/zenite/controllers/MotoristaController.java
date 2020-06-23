@@ -31,7 +31,7 @@ import static org.springframework.http.ResponseEntity.notFound;
 import static org.springframework.http.ResponseEntity.ok;
 
 
-@Api(description = "Operações relacionadas ao motorista", tags = "motorista")
+@Api(description = "Operações relacionadas ao motorista", tags = "Motorista")
 @RestController
 @RequestMapping("/api/motorista")
 public class MotoristaController {
@@ -79,7 +79,7 @@ public class MotoristaController {
         }
  }
 
-    @ApiOperation("Busca motorista pelo ID")
+    @ApiOperation("Busca motorista pelo id")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
             @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),

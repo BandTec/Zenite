@@ -20,7 +20,7 @@ import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
 
-@Api(description = "Operações relacionadas ao ônibus", tags = "ônibus")
+@Api(description = "Operações relacionadas ao ônibus", tags = "Ônibus")
 @RestController
 @RequestMapping("/api/onibus")
 public class CarroController {

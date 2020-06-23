@@ -27,7 +27,7 @@ import static org.springframework.http.ResponseEntity.*;
  *
  * a decodificação ocorre na classe config/security/JwtFilter
  */
-@Api(description = "Operações relacionados ao administrador", tags = "administrador")
+@Api(description = "Operações relacionados ao administrador", tags = "Administrador")
 @RestController
 @RequestMapping("/api/administrador")
 public class AdministradorController {

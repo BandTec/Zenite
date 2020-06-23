@@ -1,6 +1,7 @@
 package orion.zenite.controllers;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,7 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-@Api(description = "Operações ligadas a exportação de arquivos")
+@Api(description = "Operações ligadas a exportação de arquivos", tags = "Exportação")
 @RestController
 @RequestMapping("/api/exportacao")
 public class ExportacaoController {
@@ -32,6 +33,7 @@ public class ExportacaoController {
     @Autowired
     private ViagemRepository viagemRepository;
 
+    @ApiOperation("Exporta dados das linhas no formato .txt")
     //Exporta um arquivo TXT com os dados de linha de acordo com o Leiaute de arquivo v1 do Zenite
     @GetMapping("/linha")
     public HttpEntity<byte[]> exportarLinha(){
@@ -105,6 +107,7 @@ public class ExportacaoController {
 
     }
 
+    @ApiOperation("Exporta dados das viagens no formato .txt")
     //Exporta um arquivo TXT com os dados de viagens de acordo com o Leiaute de arquivo v1 do Zenite
     @GetMapping("/viagem")
     public HttpEntity<byte[]> exportarViagem(){

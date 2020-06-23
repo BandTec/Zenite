@@ -18,7 +18,7 @@ import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
 
-@Api(description = "Operações relacionadas ao ponto final", tags = "ponto final")
+@Api(description = "Operações relacionadas ao ponto final", tags = "Ponto Final")
 @RestController
 @RequestMapping("/api/pontofinal")
 public class PontoController {
@@ -51,7 +51,7 @@ public class PontoController {
         }
     }
 
-    @ApiOperation("Exibe pontos por id")
+    @ApiOperation("Exibe ponto por id")
     @GetMapping("{id}")
     public ResponseEntity getPontoFinal (@PathVariable ("id")Integer id) {
         Optional<PontoFinal> consultaPonto = this.repository.findById(id);
@@ -74,7 +74,7 @@ public class PontoController {
 
     }
 
-    @ApiOperation("Atualizar Pontos")
+    @ApiOperation("Atualiza ponto")
     @PutMapping("{id}")
     public ResponseEntity atualizarPonto( @RequestBody  PontoFinal ponto,
                                           @PathVariable Integer id){
@@ -87,6 +87,7 @@ public class PontoController {
         }
     }
 
+    @ApiOperation("Exclui um ponto")
     @DeleteMapping("/{id}")
     public ResponseEntity excluirPonto(@PathVariable ("id") Integer id) {
         if (this.repository.existsById(id)) {
