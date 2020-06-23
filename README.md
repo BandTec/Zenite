@@ -48,19 +48,17 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
   * [x] CRUD Ônibus
   - [x] CRUD Fiscal
   - [x] CRUD Motorista
-  - [ ] Dashboard
-    - [ ] Gráficos com ChartJS
-      - [ ] Gráfico com início e fim de viagem
-      - [ ] Gráfico mostrando tempo percorrido na viagem
-      - [ ] Gráfico com média de tempo de viagem por linha
-      - [ ] Gráfico com horários dos dias em que as linhas mais demoram em suas viagens
-      - [ ] Gráfico mostrando quantidade de ônibus circulando por linha em um determinado período
-      - [ ] Gráfico com outliers
-    - [ ] Filtros no dashboard
-    - [ ] Gerar relatórios a partir dos dados da dashboard
-    - [ ] Gerar relatórios com dados escolhidos pelo usuário
+  - [x] Dashboard
+    - [x] Gráficos com ChartJS
+      - [x] Gráfico com início e fim de viagem
+      - [x] Gráfico mostrando tempo percorrido na viagem
+      - [x] Gráfico com média de tempo de viagem por linha
+      - [x] Gráfico com horários dos dias em que as linhas mais demoram em suas viagens
+      - [x] Gráfico mostrando quantidade de ônibus circulando por linha em um determinado período
+      - [x] Gráfico com outliers
+    - [x] Filtros no dashboard
   * [x] Perfil
-  - [ ] Ícone de HelDesk
+  - [x] Ícone de HelDesk
   - [x] Logoff
 - [x] IOT
   - [x] Módulo RFID (RC522) para transportar dados das viagens.
@@ -116,7 +114,7 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
 
 ## Jornada do Usuário 
 
-<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint1/Mapa%20de%20Empatia/Jornada%20do%20Usu%C3%A1rio.png">
+<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint1/Mapa%20de%20Empatia/JornadaZenite.jpg">
 
 ---
 
