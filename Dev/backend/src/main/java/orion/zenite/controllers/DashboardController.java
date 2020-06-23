@@ -1,5 +1,7 @@
 package orion.zenite.controllers;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
 
+@Api(description = "Operações relacionadas ao analytics da dashboard", tags = "Dashboard")
 @RestController
 @RequestMapping("/api/dashboard")
 public class DashboardController {
@@ -42,6 +45,7 @@ public class DashboardController {
     @Autowired
     TempoMedioViagemDiaDaSemanaRepository tempoMedioViagemDiaDaSemanaRepository;
 
+    @ApiOperation("Retorna dados gerais de todas as linhas e onibus")
     @GetMapping
     public ResponseEntity getDadosGeral(){
         Optional<OperandoParado> operandoParado = operandoParadoRepository.findOnibusCirculando();
@@ -62,6 +66,7 @@ public class DashboardController {
 
     }
 
+    @ApiOperation("Retorna dados de uma linha no momento atual")
     @GetMapping("{idLinha}")
     public ResponseEntity getDadosLinha(@PathVariable("idLinha") Integer idLinha){
         List<ViagemMotorista> viagemMotorista = viagemMotoristaRepository.findViagemMotorista(idLinha);

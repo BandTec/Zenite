@@ -22,7 +22,7 @@ import java.util.Optional;
 import static org.springframework.http.ResponseEntity.*;
 
 
-@Api(description = "Operações relacionadas ao linha", tags = "linha")
+@Api(description = "Operações relacionadas ao linha", tags = "Linha")
 @RestController
 @RequestMapping("/api/linha")
 public class LinhaController {

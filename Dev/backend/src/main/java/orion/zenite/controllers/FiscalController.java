@@ -21,7 +21,7 @@ import java.util.Optional;
 import static org.springframework.http.ResponseEntity.*;
 
 
-@Api(description = "Operações relacionadas ao fiscal", tags = "fiscal")
+@Api(description = "Operações relacionadas ao fiscal", tags = "Fiscal")
 @RestController
 @RequestMapping("/api/fiscal")
 public class FiscalController {
@@ -161,7 +161,7 @@ public class FiscalController {
         return linhas.isEmpty() ? notFound().build() : ok(linhas);
     }
 
-    @ApiOperation("Deleta as linhas que o fiscal trabalha")
+    @ApiOperation("Remove fiscal de uma linha")
     @DeleteMapping("{idFiscal}/linhas/{idLinha}")
     public ResponseEntity deletarRelacionamentoFiscalLinha(@PathVariable Integer idFiscal, @PathVariable Integer idLinha){
         FiscalLinha fiscalLinha = fiscalLinhaRepository.findByIdFiscalAndIdLinha(idFiscal, idLinha);
@@ -174,7 +174,7 @@ public class FiscalController {
         return notFound().build();
     }
 
-    @ApiOperation("Cadastra a linhas que o fiscal trabalha")
+    @ApiOperation("Cadastra o fiscal em uma linha")
     @PostMapping("/linhas")
     @Transactional
     public ResponseEntity consultarLinhasPorFiscal(@RequestBody FiscalLinha fl){

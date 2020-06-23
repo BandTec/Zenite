@@ -23,7 +23,7 @@ import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
 
-@Api(description = "Operações relacionadas ao gerente", tags = "gerente")
+@Api(description = "Operações relacionadas ao gerente", tags = "Gerente")
 @RestController
 @RequestMapping("/api/gerente")
 public class GerenteController {
@@ -121,7 +121,7 @@ public class GerenteController {
         }
     }
 
-    @ApiOperation("Cadastra um Motorista")
+    @ApiOperation("Cadastra um gerente")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
             @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),

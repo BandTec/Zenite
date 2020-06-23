@@ -1,5 +1,7 @@
 package orion.zenite.controllers;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,6 +22,7 @@ import java.util.Random;
 
 import static org.springframework.http.ResponseEntity.*;
 
+@Api(description = "Reset de senha", tags = "Email")
 @RestController
 public class EmailController {
     @Autowired private JavaMailSender mailSender;
@@ -28,6 +31,7 @@ public class EmailController {
 
     @Autowired private PasswordEncoder passwordEncoder;
 
+    @ApiOperation("Envio de senha aleatoria para o email do usuário")
     @GetMapping("/esqueci-senha/{email}")
     @Transactional
     public ResponseEntity enviarEmail(@PathVariable String email){

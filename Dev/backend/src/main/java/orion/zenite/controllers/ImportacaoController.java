@@ -1,6 +1,7 @@
 package orion.zenite.controllers;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-@Api(description = "Operações ligadas a importação de arquivos")
+@Api(description = "Operações ligadas a importação de arquivos",  tags = "Importacao")
 @RestController
 @RequestMapping("/api/importacao")
 public class ImportacaoController {
@@ -36,6 +37,7 @@ public class ImportacaoController {
     @Autowired
     private ViagemRepository viagemRepository;
 
+    @ApiOperation("Importação de linhas por arquivo .txt")
     @PostMapping("/linha")
     public ResponseEntity importarLinha(@RequestParam MultipartFile txt){
         String caminhoRaiz = "src/main/resources/zenite_linhas.txt";

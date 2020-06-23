@@ -19,7 +19,7 @@ import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
 
-@Api(description = "Operações relacionadas a viagem", tags = "viagem")
+@Api(description = "Operações relacionadas a viagem", tags = "Viagem")
 @RestController
 @RequestMapping("/api/viagem")
 public class ViagemController {
@@ -61,7 +61,18 @@ public class ViagemController {
         }
     }
 
-    @ApiOperation("Exibe ônibus por id")
+    @ApiOperation("Exclui uma viagem por sua id")
+    @DeleteMapping("/{id}")
+    public ResponseEntity excluirViagem(@PathVariable("id") Integer id) {
+        if (this.repository.existsById(id)) {
+            this.repository.deleteById(id);
+            return ok().build();
+        } else {
+            return notFound().build();
+        }
+    }
+
+    @ApiOperation("Exibe viagem por sua id")
     @GetMapping("{id}")
     public ResponseEntity consultar(@PathVariable("id") Integer id) {
         Optional<Viagem> consultaViagem = this.repository.findById(id);
@@ -74,25 +85,7 @@ public class ViagemController {
 
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity excluirViagem(@PathVariable("id") Integer id) {
-        if (this.repository.existsById(id)) {
-            this.repository.deleteById(id);
-            return ok().build();
-        } else {
-            return notFound().build();
-        }
-    }
-
-    /*Gráfico com início e fim de viagem
-    Gráfico mostrando tempo percorrido na viagem
-    Gráfico com média de tempo de viagem por linha
-    Gráfico com horários dos dias em que as linhas mais demoram em suas viagens
-    Gráfico mostrando quantidade de ônibus circulando por linha em um determinado período
-
-     */
-
-    @ApiOperation("Pesquisar viagem pelo id da linha")
+    @ApiOperation("Exibe viagens de uma linha")
     @GetMapping("/linha/{id}")
     public ResponseEntity consultarPorLinha(@PathVariable("id") Integer id) {
         Optional<Linha> linha = linhaRepository.findById(id);
@@ -106,7 +99,7 @@ public class ViagemController {
         return notFound().build();
     }
 
-    @ApiOperation("Pesquisar viagem pelo id do ônibus")
+    @ApiOperation("Exibe viagens de um ônibus")
     @GetMapping("/onibus/{id}")
     public ResponseEntity consultarPorOnibus(@PathVariable("id") Integer id) {
         Optional<Carro> carro = carroRepository.findById(id);
@@ -120,7 +113,7 @@ public class ViagemController {
         return notFound().build();
     }
 
-    @ApiOperation("Pesquisar viagem pelo id do motorista")
+    @ApiOperation("Exibe viagens de um motorista")
     @GetMapping("/motorista/{id}")
     public ResponseEntity consultarPorMotorista(@PathVariable("id") Integer id) {
         Optional<Motorista> motorista = motoristaRepository.findById(id);

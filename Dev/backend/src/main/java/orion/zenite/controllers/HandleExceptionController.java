@@ -1,5 +1,7 @@
 package orion.zenite.controllers;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,9 +12,10 @@ import orion.zenite.exceptions.ApiErros;
 // CLASSE PARA DAR UMA RESPOSTA FORMATADA PARA OS ERROS INTERNO
 
 @RestControllerAdvice
-
+@Api(description = "Classe que lida com as exceções nas controllers", tags = "Tratamento de Exceção")
 public class HandleExceptionController {
 
+    @ApiOperation("Retorno de erro para o usuário da api")
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErros handleSqlException(ConstraintViolationException ex){

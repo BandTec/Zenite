@@ -1,6 +1,7 @@
 package orion.zenite.controllers;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -15,7 +16,7 @@ import orion.zenite.repositorios.*;
 import javax.management.relation.Role;
 import java.util.Optional;
 
-@Api(description = "Retorna informações do usuário logado")
+@Api(description = "Retorna informações do usuário logado",  tags = "Dados do usuário logado")
 @RestController
 @RequestMapping("/logado")
 public class LogadoController {
@@ -35,6 +36,7 @@ public class LogadoController {
     @Autowired
     private ContaRepository contaRepository;
 
+    @ApiOperation("Retorna dados do usuário logado a quem pertence o jwt token")
     @GetMapping
     public ResponseEntity consulta() {
         // PEGANDO INFORMAÇÕES DO USUÁRIO LOGADO
