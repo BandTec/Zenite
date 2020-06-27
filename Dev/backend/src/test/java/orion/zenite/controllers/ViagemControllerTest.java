@@ -74,7 +74,7 @@ class ViagemControllerTest {
 
         Class classe = ViagemController.class;
 
-        //verificando métodos da classe @RequestController e @RequestMapping
+        //verificando métodos da classe @RestController e @RequestMapping
         assertTrue(classe.isAnnotationPresent(RestController.class),"A classe deverá  ter a anotação " +
                 "  @RestController");
 
