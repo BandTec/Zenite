@@ -26,6 +26,17 @@ export default function CadastroGerente(props) {
     setDados({ ...dados, ...novoDado });
   };
 
+  const mostrarSucesso = (mensagemCustomizada) => {
+    let mensagemPadrao = "Registrado com sucesso";
+    let mensagem = mensagemCustomizada ? mensagemCustomizada : mensagemPadrao;
+    Swal.fire({
+      title: "Sucesso!",
+      text: mensagem,
+      icon: "success",
+      showConfirmButton: true,
+    });
+  };
+
   const mostrarErro = (mensagemCustomizada) => {
     let mensagemPadrao =
       "Ocorreu um imprevisto, por gentileza tente novamente.";
@@ -65,6 +76,7 @@ export default function CadastroGerente(props) {
       });
 
       if (response.status === 201) {
+        mostrarSucesso("Gerente cadastrado com sucesso!")
         props.history.push("/gerente");
       } else {
         mostrarErro();
@@ -96,6 +108,7 @@ export default function CadastroGerente(props) {
           });
 
           if (response.status === 200) {
+            mostrarSucesso("Gerente editado com sucesso!")
             props.history.push("/gerente");
           } else {
             mostrarErro();

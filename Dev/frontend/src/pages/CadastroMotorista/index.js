@@ -26,6 +26,17 @@ export default function CadastroMotorista(props) {
     setDados({ ...dados, ...novoDado });
   };
 
+  const mostrarSucesso = (mensagemCustomizada) => {
+    let mensagemPadrao = "Registrado com sucesso";
+    let mensagem = mensagemCustomizada ? mensagemCustomizada : mensagemPadrao;
+    Swal.fire({
+      title: "Sucesso!",
+      text: mensagem,
+      icon: "success",
+      showConfirmButton: true,
+    });
+  };
+
   const mostrarErro = (mensagemCustomizada) => {
     let mensagemPadrao =
       "Ocorreu um imprevisto, por gentileza tente novamente.";
@@ -66,6 +77,7 @@ export default function CadastroMotorista(props) {
       });
 
       if (response.status === 201) {
+        mostrarSucesso("Motorista cadastrado com sucesso!")
         props.history.push("/motorista");
       }
     } catch (e) {
@@ -94,6 +106,7 @@ export default function CadastroMotorista(props) {
           });
 
           if (response.status === 200) {
+            mostrarSucesso("Motorista editado com sucesso!")
             props.history.push("/motorista");
           } else {
             mostrarErro();

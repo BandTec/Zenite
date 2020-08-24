@@ -119,7 +119,7 @@ export default function DadosPessoais({ mudarPagina, tipoPagina, adicionarDados,
               <InputComRotulo
                 texto="Telefone"
                 pequeno={true}
-                maxLength="10"
+                maxLength="15"
                 name="telefone"
                 value={valorTelefone}
                 onChange={mascararTelefone}

@@ -34,6 +34,17 @@ export default function CadastroAdmin(props) {
     }
   };
 
+  const mostrarSucesso = (mensagemCustomizada) => {
+    let mensagemPadrao = "Registrado com sucesso";
+    let mensagem = mensagemCustomizada ? mensagemCustomizada : mensagemPadrao;
+    Swal.fire({
+      title: "Sucesso!",
+      text: mensagem,
+      icon: "success",
+      showConfirmButton: true,
+    });
+  };
+
   const mostrarErro = (mensagemCustomizada) => {
     let mensagemPadrao =
       "Ocorreu um imprevisto, por gentileza tente novamente.";
@@ -88,6 +99,7 @@ export default function CadastroAdmin(props) {
         });
 
         if (response.status === 201) {
+          mostrarSucesso("Adiministrador cadastrado com sucesso")
           props.history.push("/administrador");
         }
       } catch (e) {
@@ -131,6 +143,7 @@ export default function CadastroAdmin(props) {
           });
 
           if (response.status === 200) {
+            mostrarSucesso("Administrador editado com sucesso!")
             props.history.push("/administrador");
           } else {
             mostrarErro();

@@ -27,7 +27,7 @@ public class Fiscal  {
     @Column(name = "dtNasc", nullable = false)
     private LocalDate dataNascimento;
 
-    @Column(name = "telefone", length = 11, nullable = false)
+    @Column(name = "telefone", length = 15, nullable = false)
     private String numeroTelefone;
 
     @ManyToOne(cascade = CascadeType.ALL)

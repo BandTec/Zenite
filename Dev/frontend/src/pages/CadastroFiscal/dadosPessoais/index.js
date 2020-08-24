@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { cpfMask, telefoneMask, dataMask, reformatarData, formatarData } from "./../../../functions/Mascaras/mask";
+import { validarCPF } from "../../../functions/Validadores/validators"
 import { Container, CaixaHorizontal, CorpoPagina, FormContainer, Titulo, Subtitulo, Caixa } from './styles';
 
 import BotaoForm from './../../../components/BotaoForm';
@@ -13,12 +14,14 @@ export default function DadosPessoais({ mudarPagina, tipoPagina, adicionarDados,
   
   const [nome, setNome ] = useState("");
   const [valorCpf, setValorCpf] = useState("");
+  const [cpfValido, setCpfValido] = useState("");
   const [registro, setRegistro] = useState("");
   const [valorData, setValorData] = useState("");
   const [valorTelefone, setValorTelefone] = useState("");
 
   const mascararCpf = e => {
     setValorCpf(cpfMask(e.target.value));
+    validarCPF(valorCpf) ? setCpfValido(null) : setCpfValido("CPF inválido")
   }
 
   const mascararData = e => {
@@ -94,6 +97,7 @@ export default function DadosPessoais({ mudarPagina, tipoPagina, adicionarDados,
               name="cpf"
               value={valorCpf}
               onChange={mascararCpf}
+              invalido={cpfValido}
               required
             />
             <InputComRotulo 
@@ -116,7 +120,7 @@ export default function DadosPessoais({ mudarPagina, tipoPagina, adicionarDados,
               <InputComRotulo
                 texto="Telefone"
                 pequeno={true}
-                maxLength="10"
+                maxLength="15"
                 name="telefone"
                 value={valorTelefone}
                 onChange={mascararTelefone}

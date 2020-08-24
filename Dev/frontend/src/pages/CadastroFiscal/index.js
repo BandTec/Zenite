@@ -37,6 +37,17 @@ export default function CadastroFiscal(props) {
     });
   };
 
+  const mostrarSucesso = (mensagemCustomizada) => {
+    let mensagemPadrao = "Registrado com sucesso";
+    let mensagem = mensagemCustomizada ? mensagemCustomizada : mensagemPadrao;
+    Swal.fire({
+      title: "Sucesso!",
+      text: mensagem,
+      icon: "success",
+      showConfirmButton: true,
+    });
+  };
+
   useEffect(() => {
     async function consultarEdicao() {
       try {
@@ -66,6 +77,7 @@ export default function CadastroFiscal(props) {
       });
 
       if (response.status === 201) {
+        mostrarSucesso("Fiscal cadastrado com sucesso!")
         props.history.push("/fiscal");
       } else {
         mostrarErro();
@@ -96,6 +108,7 @@ export default function CadastroFiscal(props) {
         });
 
         if (response.status === 200) {
+          mostrarSucesso("Fiscal editado com sucesso!");
           props.history.push("/fiscal");
         } else {
           mostrarErro();
