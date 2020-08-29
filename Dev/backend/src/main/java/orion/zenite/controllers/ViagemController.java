@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import orion.zenite.modelos.ConsultaPaginada;
 import orion.zenite.modelos.ViagemDto;
 import orion.zenite.entidades.*;
+import orion.zenite.modelos.ViagemPassageiros;
 import orion.zenite.repositorios.*;
 
 import java.util.List;
@@ -154,6 +155,24 @@ public class ViagemController {
             return badRequest().build();
         } else {
             this.repository.save(novaViagem);
+            return ok().build();
+        }
+    }
+
+    @ApiOperation("Altera uma viagem")
+    @PutMapping("{id}/qtdPassageiros")
+    public ResponseEntity addQuantidadePassageiros(
+            @RequestBody ViagemPassageiros passageiros,
+            @PathVariable Integer id
+    ) {
+        Optional<Viagem> consultaViagem = this.repository.findById(id);
+
+        if (consultaViagem == null || !consultaViagem.isPresent()) {
+            return badRequest().build();
+        } else {
+            Viagem viagem = consultaViagem.get();
+            viagem.setQtdPassageiros(passageiros.getQtdPassageiros());
+            this.repository.save(viagem);
             return ok().build();
         }
     }
