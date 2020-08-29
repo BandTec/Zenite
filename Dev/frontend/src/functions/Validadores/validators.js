@@ -1,6 +1,6 @@
 export const validarCPF = (cpf) => {	
 	cpf = cpf.replace(/[^\d]+/g,'');	
-	if(cpf === '') return false;	
+	if(cpf === '' || cpf === undefined || cpf === null) return false;	
 	// Elimina CPFs invalidos conhecidos	
 	if (cpf.length !== 11 || 
 		cpf === "00000000000" || 
