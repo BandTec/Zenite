@@ -14,7 +14,7 @@ import {
 import Botao from "./Botao";
 import Input from "../../components/InputComRotulo";
 import Swal from "sweetalert2";
-import Logo from "../../assets/logos/logo4.png";
+import Logo from "assets/logos/logo4.png";
 
 export default function Login(props) {
   
@@ -45,7 +45,7 @@ export default function Login(props) {
         if (userLogado.status === 200) {
           localStorage.setItem("nivel", userLogado.data.conta.nivel.id);
           localStorage.setItem("nome", userLogado.data.nome);
-
+          localStorage.setItem("id", userLogado.data.conta.nivel.id); 
           props.history.push({
             pathname: "/dashboard",
             state: { nivel: userLogado.data.conta.nivel.id },
