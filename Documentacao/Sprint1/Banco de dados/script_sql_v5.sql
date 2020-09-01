@@ -1,34 +1,34 @@
 --------------------------------------------------------------------INICIO TABELAS--------------------------------------------------------------------
-DROP TABLE IF EXISTS tblNivel
+DROP TABLE IF EXISTS tbl_Nivel
 GO
 CREATE TABLE tblNivel (
-	idNivel int primary key IDENTITY,
+	id_Nivel int primary key IDENTITY,
 	descricao varchar(100) not null
 )
 
-DROP TABLE IF EXISTS tblConta
+DROP TABLE IF EXISTS tbl_Conta
 GO
-CREATE TABLE tblConta (
-	idConta int primary key identity,
+CREATE TABLE tbl_Conta (
+	id_Conta int primary key identity,
 	email varchar(60) not null,
 	senha varchar(255) not null,
-	fkNivel int foreign key references tblNivel(idNivel)
+	fk_Nivel int foreign key references tbl_Nivel(id_Nivel)
 )
 
-DROP TABLE IF EXISTS tblTipoDispositivo
-GO
-CREATE TABLE tblTipoDispositivo(
-	idTipoDispositivo int primary key IDENTITY,
-	descricao varchar(10) not null
-)
+--DROP TABLE IF EXISTS tbl_Tipo_Dispositivo
+--GO
+--CREATE TABLE tbl_Tipo_Dispositivo(
+--	id_Tipo_Dispositivo int primary key IDENTITY,
+--	descricao varchar(10) not null
+--)
 
-DROP TABLE IF EXISTS tblDispositivo
-GO
-CREATE TABLE tblDispositivo (
-	idDispositivo int primary key IDENTITY,
-	codigoDispositivo varchar(20) not null,
-	fkTipo int foreign key references tblTipoDispositivo(idTipoDispositivo)
-)
+--DROP TABLE IF EXISTS tbl_Dispositivo
+--GO
+--CREATE TABLE tbl_Dispositivo (
+--	id_Dispositivo int primary key IDENTITY,
+--	codigo_Dispositivo varchar(20) not null,
+--	fk_Tipo int foreign key references tbl_Tipo_Dispositivo(id_Tipo_Dispositivo)
+--)
 
 --DROP TABLE IF EXISTS tblCargo
 --GO
@@ -44,10 +44,10 @@ CREATE TABLE tblDispositivo (
 --	numero varchar(12) not null
 --)
 
-DROP TABLE IF EXISTS tblEndereco
+DROP TABLE IF EXISTS tbl_Endereco
 GO
-CREATE TABLE tblEndereco (
-	idEndereco int primary key IDENTITY,
+CREATE TABLE tbl_Endereco (
+	id_Endereco int primary key IDENTITY,
 	CEP varchar(8) not null,
 	logradouro varchar(120) not null,
 	numero varchar(16) not null,
@@ -56,52 +56,52 @@ CREATE TABLE tblEndereco (
 	estado varchar(2)
 )
 
-DROP TABLE IF EXISTS tblAdmin
+DROP TABLE IF EXISTS tbl_Admin
 GO
-CREATE TABLE tblAdmin(
-	idAdmin int primary key IDENTITY,
+CREATE TABLE tbl_Admin(
+	id_Admin int primary key IDENTITY,
 	nome varchar(100) not null,
-	fkConta int foreign key references tblConta(idConta)
+	fk_Conta int foreign key references tbl_Conta(id_Conta)
 )
 
-DROP TABLE IF EXISTS tblMotorista
+DROP TABLE IF EXISTS tbl_Motorista
 GO
-CREATE TABLE tblMotorista(
-	idMotorista int primary key IDENTITY,
-	nomeMotorista varchar(100) not null,
+CREATE TABLE tbl_Motorista(
+	id_Motorista int primary key IDENTITY,
+	nome_Motorista varchar(100) not null,
 	cpf varchar(14) not null unique,
 	cnh varchar(11) not null unique,
-	dtNasc date not null,
+	dt_Nasc date not null,
 	telefone varchar(11) not null,
 	--fkRFID int foreign key references tblDispositivo(idDispositivo),
-	fkConta int foreign key references tblConta(idConta),
-	fkEndereco int foreign key references tblEndereco(idEndereco)
+	fk_Conta int foreign key references tbl_Conta(id_Conta),
+	fk_Endereco int foreign key references tbl_Endereco(id_Endereco)
 )
 
-DROP TABLE IF EXISTS tblFiscal
+DROP TABLE IF EXISTS tbl_Fiscal
 GO
-CREATE TABLE tblFiscal(
-	idFiscal int primary key IDENTITY,
-	nomeFiscal varchar(100) not null,
+CREATE TABLE tbl_Fiscal(
+	id_Fiscal int primary key IDENTITY,
+	nome_Fiscal varchar(100) not null,
 	cpf varchar(14) not null unique,
-	registroFiscal varchar(20) not null unique,
-	dtNasc date not null,
+	registro_Fiscal varchar(20) not null unique,
+	dt_Nasc date not null,
 	telefone varchar(11) not null,
-	fkConta int foreign key references tblConta(idConta),
-	fkEndereco int foreign key references tblEndereco(idEndereco),
-	fkDispositivo int foreign key references tblDispositivo(idDispositivo)
+	fk_Conta int foreign key references tbl_Conta(id_Conta),
+	fk_Endereco int foreign key references tbl_Endereco(id_Endereco),
+	--fkDispositivo int foreign key references tblDispositivo(idDispositivo)
 )
 
-DROP TABLE IF EXISTS tblGerente
+DROP TABLE IF EXISTS tbl_Gerente
 GO
-CREATE TABLE tblGerente(
-	idGerente int primary key IDENTITY,
-	nomeGerente varchar(100) not null,
+CREATE TABLE tbl_Gerente(
+	id_Gerente int primary key IDENTITY,
+	nome_Gerente varchar(100) not null,
 	cpf varchar(14) not null unique,
-	dtNasc date not null,
+	dt_Nasc date not null,
 	telefone varchar(11) not null,
-	fkConta int foreign key references tblConta(idConta),
-	fkEndereco int foreign key references tblEndereco(idEndereco)
+	fk_Conta int foreign key references tbl_Conta(id_Conta),
+	fk_Endereco int foreign key references tbl_Endereco(id_Endereco)
 )
 
 --N�o estamos mais de um telefone mais caso isso seja preciso essa ser� a estrutura da tabela de associa��o
@@ -113,57 +113,78 @@ CREATE TABLE tblGerente(
 --	cargoFunc int not null
 --)
 
-DROP TABLE IF EXISTS tblPontoFinal
+DROP TABLE IF EXISTS tbl_Ponto_Final
 GO
-CREATE TABLE tblPontoFinal (
-	idPontoFinal int primary key IDENTITY,
-	nomeTerminal varchar(80) not null
+CREATE TABLE tbl_Ponto_Final (
+	id_Ponto_Final int primary key IDENTITY,
+	nome_Terminal varchar(80) not null
 )
 
-DROP TABLE IF EXISTS tblLinha
+DROP TABLE IF EXISTS tbl_Linha
 GO
-CREATE TABLE tblLinha (
-	idLinha int primary key IDENTITY,
-	numeroLinha varchar(7) not null,
-	fkPontoIda int foreign key REFERENCES tblPontoFinal(idPontoFinal),
-	fkPontoVolta int foreign key REFERENCES tblPontoFinal(idPontoFinal)
+CREATE TABLE tbl_Linha (
+	id_Linha int primary key IDENTITY,
+	numero_Linha varchar(7) not null,
+	fk_Ponto_Ida int foreign key REFERENCES tbl_Ponto_Final(id_Ponto_Final),
+	fk_Ponto_Volta int foreign key REFERENCES tbl_Ponto_Final(id_Ponto_Final)
 )
 
-DROP TABLE IF EXISTS tblCarro
+DROP TABLE IF EXISTS tbl_Carro
 GO
-CREATE TABLE tblCarro(
-	idCarro int primary key IDENTITY,
-	numeroCarro varchar(10) not null unique,
-	fkDispositivo int foreign key references tblDispositivo(idDispositivo)	
+CREATE TABLE tbl_Carro(
+	id_Carro int primary key IDENTITY,
+	numero_Carro varchar(10) not null unique,
+	--fk_Dispositivo int foreign key references tbl_Dispositivo(idDispositivo)	
 )
 
-DROP TABLE IF EXISTS tblMotorista_Carro
+DROP TABLE IF EXISTS tbl_Motorista_Carro
 GO
-CREATE TABLE tblMotorista_Carro(
-	idMotorista int foreign key references tblMotorista(idMotorista),
-	idCarro int foreign key references tblCarro(idCarro),
-	primary key(idMotorista, idCarro)
+CREATE TABLE tbl_Motorista_Carro(
+	id_Motorista int foreign key references tbl_motorista(id_Motorista),
+	id_Carro int foreign key references tbl_carro(id_Carro),
+	primary key(id_Motorista, id_Carro)
 )
 
-DROP TABLE IF EXISTS tblCarro_Linha
+DROP TABLE IF EXISTS tbl_Carro_Linha
 GO
-CREATE TABLE tblCarro_Linha(
-	idCarro int foreign key references tblCarro(idCarro),
-	idLinha int foreign key references tblLinha(idLinha),
-	primary key(idCarro, idLinha)
+CREATE TABLE tbl_Carro_Linha(
+	id_Carro int foreign key references tbl_Carro(id_Carro),
+	id_Linha int foreign key references tbl_Linha(id_Linha),
+	primary key(id_Carro, id_Linha)
 )
 
-DROP TABLE IF EXISTS tblDadosViagem
+DROP TABLE IF EXISTS tbl_fiscal_linha
 GO
-CREATE TABLE tblDadosViagem(
-	idDadosViagem int primary key IDENTITY(1000,1),
-	idCarro int foreign key references tblCarro(idCarro),
-	idLinha int foreign key references tblLinha(idLinha),
-	idMotorista int foreign key references tblMotorista(idMotorista),
-	idFiscal int foreign key references tblFiscal(idFiscal),
-	horaSaida datetime not null,
-	horaChegada datetime,
-	qtdPassageiros int
+CREATE TABLE tbl_fiscal_linha(
+	id_fiscal int foreign key references tbl_fiscal(id_fiscal),
+	id_Linha int foreign key references tbl_Linha(id_Linha),
+	primary key(id_fiscal, id_Linha)
+)
+
+DROP TABLE IF EXISTS tbl_Dados_Viagem
+GO
+CREATE TABLE tbl_Dados_Viagem(
+	id_Dados_Viagem int primary key IDENTITY(1000,1),
+	id_Carro int foreign key references tbl_Carro(id_Carro),
+	id_Linha int foreign key references tbl_Linha(id_Linha),
+	id_Motorista int foreign key references tbl_Motorista(id_Motorista),
+	id_Fiscal int foreign key references tbl_Fiscal(id_Fiscal),
+	hora_Saida datetime not null,
+	hora_Chegada datetime,
+	qtd_Passageiros int
+)
+
+DROP TABLE IF EXISTS tbl_cronograma
+GO
+CREATE TABLE tbl_cronograma(
+	id_cronograma int primary key IDENTITY,
+	fk_motorista int foreign key references tbl_motorista(id_motorista),
+	fk_linha int foreign key references tbl_linha(id_linha),
+	hora_prevista_saida datetime,
+	hora_prevista_chegada datetime,
+	data_cronograma date not null,
+	fk_fiscal int foreign key references tbl_fiscal(id_fiscal),
+	viagem_status int -- 1 = aguardando, 2 = andamento, 3 = finalizada
 )
 
 ---Pensar na tabela de organiza��o por arduino/rfid/dados viagem....
