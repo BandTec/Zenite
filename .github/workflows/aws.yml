@@ -10,7 +10,6 @@
 #    For example, follow the Getting Started guide on the ECS console:
 #      https://us-east-2.console.aws.amazon.com/ecs/home?region=us-east-1#/firstRun
 #    Replace the values for `service` and `cluster` in the workflow below with your service and cluster names.
-#
 # 3. Store your ECS task definition as a JSON file in your repository.
 #    The format should follow the output of `aws ecs register-task-definition --generate-cli-skeleton`.
 #    Replace the value of `task-definition` in the workflow below with your JSON file's name.
