@@ -1,6 +1,9 @@
 DROP PROCEDURE IF EXISTS sp_RegistraViagem_i
 GO
 
+--BEGIN TRAN
+--COMMIT
+--ROLLBACK
 CREATE PROCEDURE sp_RegistraViagem_i (
 	@arduinoSerial varchar(60),
 	@codigoDispositivo varchar(40)
@@ -13,10 +16,13 @@ CREATE PROCEDURE sp_RegistraViagem_i (
 ||				  AJUSTE PARA ÔNIBUS CIRCULARES E NORMAIS (11/05/2020)
 ||				  AJUSTE PARA USAR SOMENTE FISCAIS QUE TRABALHAM COM DETERMINADAS LINHAS (13/05/2020)
 ||	
-||	EXEMPLO: EXEC sp_RegistraViagem_i @arduinoSerial = '986555', @codigoDispositivo = '565-332'
+||	EXEMPLO: EXEC sp_RegistraViagem_i @arduinoSerial = '741QWIKJ', @codigoDispositivo = 'T1DWPY4U'
 */
 AS
 BEGIN
+	--declare @arduinoSerial varchar(60) = '757353230303511120E11'
+	--declare @codigoDispositivo varchar(40) = '69 BE 4A B8'
+
 	DECLARE @ID_CARRO INT
 	DECLARE @ID_FISCAL INT
 	DECLARE @ID_LINHA INT
@@ -42,6 +48,12 @@ BEGIN
 	SELECT @EXISTE_FISCAL_LINHA = @ID_FISCAL FROM tbl_fiscal_linha
 	WHERE ID_LINHA = @ID_LINHA AND ID_FISCAL = @ID_FISCAL
 
+	--SELECT @ID_CARRO ,
+	--	   @ID_FISCAL,
+	--	   @ID_LINHA ,
+	--	   @ID_MOTORISTA
+
+
 	IF (@EXISTE_FISCAL_LINHA IS NULL)
 	BEGIN
 		SELECT 'Este fiscal não faz parte dessa linha, então ele não pode iniciar/finalizar a corrida!' AS RESPOSTA
@@ -56,12 +68,15 @@ BEGIN
 	--and DV.id_fiscal = @ID_FISCAL
 	and DV.id_linha = @ID_LINHA
 	AND DV.id_motorista = @ID_MOTORISTA
+	AND DV.hora_chegada IS NULL
 	
+	--select @ID_VIAGEM
+
 	IF (@ID_VIAGEM IS NULL)
 	BEGIN
 		BEGIN TRY
 			INSERT INTO tbl_dados_viagem values (
-				null, SWITCHOFFSET (SYSDATETIMEOFFSET(), '-03:00'), NULL, @ID_CARRO, @ID_FISCAL, @ID_LINHA, @ID_MOTORISTA, NULL
+				null, SWITCHOFFSET (SYSDATETIMEOFFSET(), '-03:00'), NULL, @ID_CARRO, @ID_FISCAL, NULL, @ID_LINHA, @ID_MOTORISTA
 			)
 			SELECT 'Viagem Iniciada' as Resposta
 		END TRY
