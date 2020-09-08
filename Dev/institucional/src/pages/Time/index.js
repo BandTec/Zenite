@@ -7,15 +7,23 @@ export default function Header() {
     nome: "Alex Buarque",
     cargo: "Desenvolvedor",
     github: "https://github.com/alexbuarque",
-    linkedin: "https://github.com/alexbuarque",
+    linkedin: "https://www.linkedin.com/in/alex-buarque-118945171/",
     img: "rover",
+  };
+
+  const fabi = {
+    nome: "Fabí Canedo",
+    cargo: "Desenvolvedor",
+    github: "https://github.com/Fabicaneyu",
+    linkedin: "https://www.linkedin.com/in/fabicanedo/",
+    img: "espaconave",
   };
 
   const fernanda = {
     nome: "Fernanda Esteves",
     cargo: "Desenvolvedor",
     github: "https://github.com/esteves-esta",
-    linkedin: "https://github.com/esteves-esta",
+    linkedin: "https://www.linkedin.com/in/fernanda-e-48086a182/",
     img: "cometa",
   };
 
@@ -23,7 +31,7 @@ export default function Header() {
     nome: "João Soares",
     cargo: "Desenvolvedor",
     github: "https://github.com/jPedroSoares",
-    linkedin: "https://github.com/jPedroSoares",
+    linkedin: "https://www.linkedin.com/in/jpedrosoares1/",
     img: "marte",
   };
 
@@ -31,7 +39,7 @@ export default function Header() {
     nome: "Lais Silva",
     cargo: "Desenvolvedor",
     github: "https://github.com/Laissilvaa",
-    linkedin: "https://github.com/Laissilvaa",
+    linkedin: "https://www.linkedin.com/in/laissilvaa/",
     img: "telescopio",
   };
 
@@ -39,7 +47,7 @@ export default function Header() {
     nome: "Raissa Arantes",
     cargo: "Desenvolvedor",
     github: "https://github.com/Rayssawoods",
-    linkedin: "https://github.com/Rayssawoods",
+    linkedin: "https://www.linkedin.com/in/raissa-arantes-a49264118/",
     img: "venus",
   };
 
@@ -47,7 +55,7 @@ export default function Header() {
     nome: "Vitor Silva",
     cargo: "Desenvolvedor",
     github: "https://github.com/vitorsilv",
-    linkedin: "https://github.com/vitorsilv",
+    linkedin: "https://www.linkedin.com/in/vitorsilv/",
     img: "foguete",
   };
 
@@ -63,6 +71,8 @@ export default function Header() {
 
       <section>
         <Membro informacao={alex} />
+
+        <Membro informacao={fabi} />
 
         <Membro informacao={fernanda} />
 

@@ -7,6 +7,8 @@ import Telescopio from "../../assets/img/tele.png";
 import Venus from "../../assets/img/venus.png";
 import Foguete from "../../assets/img/space.png";
 import Astronauta from "../../assets/img/astronaut.png";
+import Lua from "../../assets/img/moon.png";
+import Espaco from "../../assets/img/space(2).png";
 import Rover from "../../assets/img/lander.png";
 import Github from "../../assets/img/github.svg";
 import Linkedin from "../../assets/img/linkedin.svg";
@@ -22,6 +24,8 @@ export default function Membro({informacao}) {
     foguete: Foguete,
     astronauta: Astronauta,
     rover: Rover,
+    lua: Lua,
+    espaconave: Espaco
   }
   return (
     <Container>
