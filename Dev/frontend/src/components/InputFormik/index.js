@@ -2,7 +2,7 @@ import React from "react";
 import { useField } from "formik";
 import { Container, Rotulo, Input, TextoAlerta, ErrorMessage } from "./styles";
 
-export default function InputComRotulo(props) {
+export default function InputFormik(props) {
   const { texto, pequeno, invalido, textoAlerta, required, mask } = props;
 
   const [field, meta] = useField(props.name);
