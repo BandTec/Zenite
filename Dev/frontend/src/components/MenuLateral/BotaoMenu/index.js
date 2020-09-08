@@ -24,6 +24,7 @@ export default function BotaoExpande({ iconeNome, descricao, url, alt, onclick }
     dashboard: LogoIcone,
     admin: Adm,
     gerente: Gerente,
+    viagem: Onibus,
   };
 
   const linkEstaAtivo = (match, location) => {

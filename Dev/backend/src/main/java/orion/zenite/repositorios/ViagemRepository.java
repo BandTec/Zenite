@@ -1,5 +1,7 @@
 package orion.zenite.repositorios;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import orion.zenite.entidades.*;
@@ -14,12 +16,16 @@ public interface ViagemRepository extends JpaRepository<Viagem, Integer> {
     int lastId();
 
     List<Viagem> findByLinha(Linha linha);
+    Page<Viagem> findByLinha(Pageable var1, Linha linha);
 
     List<Viagem> findByCarro(Carro carro);
+    Page<Viagem> findByCarro(Pageable var1, Carro carro);
 
     List<Viagem> findByMotorista(Motorista motorista);
+    Page<Viagem> findByMotorista(Pageable var1, Motorista motorista);
 
     List<Viagem> findByFiscal(Fiscal fiscal);
+    Page<Viagem> findByFiscal(Pageable var1, Fiscal fiscal);
 
     List<Viagem> findByHoraSaidaBetween(LocalDateTime horaComeco, LocalDateTime horaFim);
 

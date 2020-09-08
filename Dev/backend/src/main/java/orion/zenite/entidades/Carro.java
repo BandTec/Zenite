@@ -36,10 +36,6 @@ public class Carro {
     @Column(name="qtdPassageirosEmPe")
     private Integer qtdPassageirosEmPe;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="fkDispositivo", referencedColumnName = "idDispositivo")
-    private Dispositivo dispositivo;
-
     @JsonIgnore
     @OneToMany(mappedBy = "carro", cascade = CascadeType.REMOVE)
     private List<CarroLinha> carroLinhas;
@@ -70,14 +66,6 @@ public class Carro {
 
     public void setNumero(String numero) {
         this.numero = numero;
-    }
-
-    public Dispositivo getDispositivo() {
-        return dispositivo;
-    }
-
-    public void setDispositivo(Dispositivo dispositivo) {
-        this.dispositivo = dispositivo;
     }
 
     public String getPlaca() {

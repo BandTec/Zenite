@@ -37,9 +37,6 @@ public class FiscalController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private DispositivoRepository dispositivoRepository;
-
-    @Autowired
     private LinhaRepository linhaRepository;
 
     @Autowired
@@ -130,19 +127,6 @@ public class FiscalController {
         novoFiscal.setId(repository.lastId());
 
         return created(null).build();
-    }
-
-    @ApiOperation("Exibe fiscal pelo código do dispositivo")
-    @GetMapping("/dispositivo/{codigo}")
-    public ResponseEntity consultarPorDispositivo(@PathVariable String codigo) {
-        Optional<Dispositivo> dispositivo = dispositivoRepository.findByCodigo(codigo);
-        if(dispositivo.isPresent()){
-            Optional<Fiscal> fiscal = this.repository.findByDispositivo(dispositivo.get());
-            if (fiscal.isPresent()) {
-                return ok(fiscal);
-            }
-        }
-        return notFound().build();
     }
 
     @ApiOperation("Exibe as linhas que o fiscal trabalha")

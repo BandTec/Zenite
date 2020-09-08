@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import orion.zenite.modelos.ConsultaPaginada;
 import orion.zenite.modelos.ViagemDto;
 import orion.zenite.entidades.*;
+import orion.zenite.modelos.ViagemPassageiros;
 import orion.zenite.repositorios.*;
 
 import java.util.List;
@@ -115,12 +116,26 @@ public class ViagemController {
 
     @ApiOperation("Exibe viagens de um motorista")
     @GetMapping("/motorista/{id}")
-    public ResponseEntity consultarPorMotorista(@PathVariable("id") Integer id) {
+    public ResponseEntity consultarPorMotorista(@PathVariable("id") Integer id,
+                                                @RequestParam(required = false) Integer pagina,
+                                                @RequestParam(required = false) String q) {
         Optional<Motorista> motorista = motoristaRepository.findById(id);
         if (motorista.isPresent()) {
-            List<Viagem> consultaViagem = this.repository.findByMotorista(motorista.get());
-            if (!consultaViagem.isEmpty()) {
-                return ok(consultaViagem);
+            if (this.repository.count() > 0) {
+                if(pagina != null) {
+                    Pageable pageable = PageRequest.of(pagina, 10);
+                    Page<Viagem> page = repository.findByMotorista(pageable, motorista.get());
+                    ConsultaPaginada consulta = new ConsultaPaginada(page);
+                    return ok(consulta);
+                }
+                else {
+                    List<Viagem> consultaViagem = this.repository.findByMotorista(motorista.get());
+                    if (!consultaViagem.isEmpty()) {
+                        return ok(consultaViagem);
+                    }
+                }
+            } else {
+                return noContent().build();
             }
         }
 
@@ -140,6 +155,24 @@ public class ViagemController {
             return badRequest().build();
         } else {
             this.repository.save(novaViagem);
+            return ok().build();
+        }
+    }
+
+    @ApiOperation("Altera uma viagem")
+    @PutMapping("{id}/qtdPassageiros")
+    public ResponseEntity addQuantidadePassageiros(
+            @RequestBody ViagemPassageiros passageiros,
+            @PathVariable Integer id
+    ) {
+        Optional<Viagem> consultaViagem = this.repository.findById(id);
+
+        if (consultaViagem == null || !consultaViagem.isPresent()) {
+            return badRequest().build();
+        } else {
+            Viagem viagem = consultaViagem.get();
+            viagem.setQtdPassageiros(passageiros.getQtdPassageiros());
+            this.repository.save(viagem);
             return ok().build();
         }
     }
