@@ -2,7 +2,6 @@
 # and then will deploy a new task definition to Amazon ECS, when a release is created
 #
 # To use this workflow, you will need to complete the following set-up steps:
-#
 # 1. Create an ECR repository to store your images.
 #    For example: `aws ecr create-repository --repository-name my-ecr-repo --region us-east-1`.
 #    Replace the value of `ECR_REPOSITORY` in the workflow below with your repository's name.
