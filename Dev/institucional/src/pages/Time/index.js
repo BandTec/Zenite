@@ -16,7 +16,7 @@ export default function Header() {
     cargo: "Desenvolvedor",
     github: "https://github.com/Fabicaneyu",
     linkedin: "https://www.linkedin.com/in/fabicanedo/",
-    img: "astronauta",
+    img: "espaconave",
   };
 
   const fernanda = {
