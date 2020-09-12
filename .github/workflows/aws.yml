@@ -61,7 +61,7 @@ jobs:
         # be deployed to ECS.
         cd ${{env.AZURE_WEBAPP_PACKAGE_PATH_BACKEND}}
         mvn clean package
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ${{env.AZURE_WEBAPP_PACKAGE_PATH_BACKEND}}
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
