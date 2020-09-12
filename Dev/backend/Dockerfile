@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine
 
-RUN mvn clean package && java -jar target/*-0.1.0.jar
+RUN java -jar target/*-0.1.0.jar
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
