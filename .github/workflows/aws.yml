@@ -70,7 +70,7 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: Dev/backend/task-definition.json
-        container-name: zenite-app
+        container-name: zenite-container
         image: ${{ steps.build-image.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
