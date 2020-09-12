@@ -71,17 +71,17 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
 
 ## Diagrama de Arquitetura
 
-![imagem do diagrama de arquitetura](https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint1/Diagramas/Desenho_Solucao.png)
+![imagem do diagrama de arquitetura](https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint1/Diagramas/Desenho_Solucao.png)
 
 ---
 
 ## ProtoPersona
 
 <div style="display: flex; flex-direction: row;">
-<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint1/ProtoPersonas/ProtoPersonaFiscal.png" width="40%">
+<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint1/ProtoPersonas/ProtoPersonaFiscal.png" width="40%">
 
 
-<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint1/ProtoPersonas/ProtoPersonaGerente.png" width="40%">
+<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint1/ProtoPersonas/ProtoPersonaGerente.png" width="40%">
 </div>
 
 ---
@@ -108,25 +108,25 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
 
 ## StoryBoard
 
-<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint2/storyboard/storyboard-fiscal.jpg" width="70%">
+<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint2/storyboard/storyboard-fiscal.jpg" width="70%">
 
 ---
 
 ## Jornada do Usuário 
 
-<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint1/Mapa%20de%20Empatia/JornadaZenite.jpg">
+<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint1/Mapa%20de%20Empatia/JornadaZenite.jpg">
 
 ---
 
 ## Banco de Dados
 
-<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint1/Banco%20de%20dados/MER.png" width="60%">
+<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint1/Banco%20de%20dados/MER.png" width="60%">
 
 ---
 
 ## Diagrama de Arquitetura de Software
 
-![imagem do diagrama de arquitetura de software](https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint2/Arquitetura%20Software.png)
+![imagem do diagrama de arquitetura de software](https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint2/Arquitetura%20Software.png)
 
 ---
 
@@ -134,7 +134,7 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
 
 Mais mockups podem ser vistos na seguinte pasta: [`/Documentação/Sprint2/Mockups Alta Fidelidade`](https://github.com/BandTec/Zenite/tree/master/Documentacao/Sprint2/Mockups%20Alta%20Fidelidade)
 
-![mockup de alta fidelidade da consulta do fiscal](https://github.com/BandTec/Zenite/blob/master/Documentacao/Sprint2/Mockups%20Alta%20Fidelidade/visualizar-fiscal.png)
+![mockup de alta fidelidade da consulta do fiscal](https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint2/Mockups%20Alta%20Fidelidade/visualizar-fiscal.png)
 
 ---
 

@@ -14,7 +14,7 @@
                     "containerPort": "3000",
                     "protocol": "tcp"
                 }
-                
+
             ]
         }
     ],
@@ -22,7 +22,7 @@
     "networkMode": "awsvpc",
     "memory": "512",
     "cpu": "256",
-    "executionRoleArn": "arn:aws:iam::<YOUR_AWS_ACCOUNT_ID>:role/ecs-devops-sandbox-execution-role",
+    "executionRoleArn": "arn:aws:iam::ASIASGIR7G5WPCNTJCQP:role/ecs-devops-sandbox-execution-role",
     "family": "ecs-devops-sandbox-task-definition",
     "taskRoleArn": "",
     "placementConstraints": []

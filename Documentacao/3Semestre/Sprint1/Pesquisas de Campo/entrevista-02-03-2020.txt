@@ -1,0 +1,59 @@
+# Entrevista no Terminal
+## Fiscal de Micrôonibus
+
+1. Gabriel.
+2 .24
+3. Fiscal 
+4. 3 anos
+5. Fiscaliza 4 linhas
+6. Carga horária de 7h ~ 8h
+7. Intervalo depende do horário de pico e do clima, entre outros fatores.
+10. Horário de pico pode ocorrer atraso de 40min até 1 hora.
+11. Relação com motoristas e passageiros sem nenhum conflito.
+12. Não organiza ou lida com os passageiros.
+14. Se há atrasos dos ônibús é realizado um relatório de ocorrência
+17. Marcar o horário de entrada e saída dos ônibus e verificar a catraca.
+
+x. Fiscalização do ônibus ocorre somente no ponto final, no destino do ônibus.
+18. Não ocorre troca de linha.
+13. Importância para controlar os horários.
+15. Coordenador da linha.
+9. Registros dos horários das viagems no final do dia vão para a garagem do onibus. 
+19. Se organiza para não ficar ausente, como conhece os horários, eles tem um horário programado das viagens, consegue se programar para não ficar ausente. O horário programado vem da garagem, o horário inicial e final vem da SPTrans.
+
+---
+
+# Entrevista no Terminal
+## Fiscal de Onibus
+
+1. José Carlos.
+2. 43
+3. Fiscal
+4. 4 anos em outra empresa como fiscal / 3 meses na empresa atual
+5. Fiscaliza de 2 a 3 linhas
+6. Carga horária de 8h a 10h -> intervalo de 1h de almoço
+7. Intervalo depende, 10m normal / 6min em horário de pico.Intervalo depende do porte da linha se for uma linha pequena, com pouco fluxo o intervalo pode ser de até 45min.
+11. Relação boa com os motoristas e passageiros.
+9. A tabela é preprogramada pela SPTrans com o fluxo do motorista, então ele tem a função de verificar se existe atraso, anota-lo (com uma caneta vermelha no caso deste fiscal, anotando também se há falta do motorista), e verificando com o motorista, se atrasado, quanto irá demorar, pois se o atraso for grande ele precisa realizar um remanejamento dos horários e reprogramar para dar conta do fluxo. No final do dia os registros são mandados para a SPTrans.
+
+Através destes registros a SPTrans/garagem verificam se é necessário aumentar a frota da linha, remanejar horário, realizar as tomadas de decisão.
+
+14. Em caso de atraso o COC da garagem, que realiza o monitoramento constante dos onibus por GPS liga para o fiscal para avisar, por exemplo, se motorista se envolveu em atropelamento e não irá retornar ao ponto inicial. Dessa forma permitindo o fiscal realizar de forma mais assertiva o remanejamento da frota restante ativa.
+
+x. A checagem dos veículos é realizada quando o ônibus vem da garagem e são verificadas, por exemplo, rampas e elevadores.
+
+19. No caso de ausência do fiscal o motorista possue sua própria tabela que possue os horários que eles deve realizar e que depois será comparada com os registros do fiscal.
+
+13. 100% de importância o cumprimento dos horários, pois se há muito atraso a empresa recebe multa.
+
+x. O que mudaria no processo que existe atualmente? Atualmente parece que irão trocar as planilhas físicas de papel por tablet, porém há uma preocupação por conta do fiscal pela segurança nos pontos finais.
+
+x. Cartão de bordo -> para realizar a abertura da catraca, se o cobrado esquece o fiscal possue o cartão e pode abrir para ele.
+Cartão de meia viagem -> Não pode deixar com o cobrador. O cartão de meia viagem é um para cada frota de onibus, pelo número da lataria do ônibus.
+O cartão também permite o fiscal configurar de qual linha o ônibus pertence, e o COC monitora essas mudanças.
+
+
+x. Cada ponto final tem tipo uma 'cerca eletrônica', perimetro do sinal, e se o ônibus não entrar nesse perimêtro para passar o cartão de bordo ele não é válidado e a viagem não é contabilidada, perdendo-a.
+
+
+

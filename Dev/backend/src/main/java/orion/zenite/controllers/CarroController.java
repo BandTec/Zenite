@@ -13,7 +13,6 @@ import orion.zenite.modelos.ConsultaPaginada;
 import orion.zenite.entidades.*;
 import orion.zenite.repositorios.CarroLinhaRepository;
 import orion.zenite.repositorios.CarroRepository;
-import orion.zenite.repositorios.DispositivoRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,9 +29,6 @@ public class CarroController {
 
     @Autowired
     private CarroLinhaRepository carroLinhaRepository;
-
-    @Autowired
-    private DispositivoRepository dispositivoRepository;
 
     @ApiOperation("Listar todos os ônibus")
     @GetMapping
@@ -69,19 +65,6 @@ public class CarroController {
             return notFound().build();
         }
 
-    }
-
-    @ApiOperation("Exibe ônibus pelo código do dispositivo")
-    @GetMapping("/dispositivo/{codigo}")
-    public ResponseEntity consultarPorDispositivo(@PathVariable String codigo) {
-        Optional<Dispositivo> dispositivo = dispositivoRepository.findByCodigo(codigo);
-        if(dispositivo.isPresent()){
-            Optional<Carro> consultaCarro = this.repository.findByDispositivo(dispositivo.get());
-            if (consultaCarro.isPresent()) {
-                return ok(consultaCarro);
-            }
-        }
-        return notFound().build();
     }
 
     @ApiOperation("Inserir ônibus")
