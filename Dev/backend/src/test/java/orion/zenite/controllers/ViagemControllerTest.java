@@ -102,9 +102,9 @@ class ViagemControllerTest {
         assertTrue(consultarPorOnibus.isAnnotationPresent(GetMapping.class),"O método consultarPorOnibus() deve " +
                 " estar anotado com @GetMapping");
 
-        Method consultarPorMotorista = classe.getDeclaredMethod("consultarPorMotorista", Integer.class);
-        assertTrue(consultarPorMotorista.isAnnotationPresent(GetMapping.class),"O método consultarPorMotorista()" +
-                " deve estar com @GetMapping");
+        // Method consultarPorMotorista = classe.getDeclaredMethod("consultarPorMotorista", Integer.class);
+        // assertTrue(consultarPorMotorista.isAnnotationPresent(GetMapping.class),"O método consultarPorMotorista()" +
+        //         " deve estar com @GetMapping");
 
         Method alterar = classe.getDeclaredMethod("alterar", ViagemDto.class, Integer.class);
         assertTrue(alterar.isAnnotationPresent(PutMapping.class),"O método alterar() deve estar anotado " +
@@ -138,10 +138,10 @@ class ViagemControllerTest {
         assertEquals(uriEsperada4,consultarPorOnibus.getDeclaredAnnotation(GetMapping.class).value()[0],"A URI " +
                 "de consultarPorOnibus deve ser "+uriEsperada4);
 
-        // consultaPorMotorista
-        String uriEsperada5 = "/motorista/{id}";
-        assertEquals(uriEsperada5,consultarPorMotorista.getDeclaredAnnotation(GetMapping.class).value()[0]," A " +
-                "URI de consultaPorMotorista deve ser "+uriEsperada5);
+        // // consultaPorMotorista
+        // String uriEsperada5 = "/motorista/{id}";
+        // assertEquals(uriEsperada5,consultarPorMotorista.getDeclaredAnnotation(GetMapping.class).value()[0]," A " +
+        //         "URI de consultaPorMotorista deve ser "+uriEsperada5);
 
         //alterar
         String uriEsperado6 = "{id}";
