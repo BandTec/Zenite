@@ -21,8 +21,6 @@ Nessa segunda fase/versão do projeto refatoramos alguns pontos de nossa aplica�
 * Diagrama de Arquitetura
 * ProtoPersona
 * UserStories
-* StoryBoard
-* Jornada do Usuário
 * Banco de Dados
 * Diagrama de Arquitetura de Software
 * Mockups de Alta Fidelidade
@@ -78,7 +76,7 @@ Agora na segunda fase do projeto temos os seguintes requisitos:
 
 ## Diagrama de Arquitetura
 
-![imagem do diagrama de arquitetura](https://github.com/BandTec/Zenite/blob/master/Documentacao/4Semestre/Sprint1/V1Desenho_Solucao_LLD.png)
+![imagem do diagrama de arquitetura](https://raw.githubusercontent.com/BandTec/Zenite/master/Documentacao/4Semestre/Sprint1/Desenho_Solucao_LLD.png)
 
 ---
 
@@ -115,7 +113,7 @@ Agora na segunda fase do projeto temos os seguintes requisitos:
 
 ## Banco de Dados
 
-<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint1/Banco%20de%20dados/MER.png" width="60%">
+<img src="https://raw.githubusercontent.com/BandTec/Zenite/master/Documentacao/4Semestre/Sprint1/BD.png" width="60%">
 
 ---
 
@@ -129,7 +127,7 @@ Agora na segunda fase do projeto temos os seguintes requisitos:
 
 Todos os mockups foram feitos com a aplicação web Figma e podem ser vistos na pasta : [`/Documentação/4Semestre/Sprint1/Mockups`](https://github.com/BandTec/Zenite/tree/master/Documentacao/4Semestre/Sprint1/Mockups)
 
-![mockup de alta fidelidade da consulta do fiscal](https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint2/Mockups%20Alta%20Fidelidade/visualizar-fiscal.png)
+![mockup de alta fidelidade do módulo do fiscal](https://github.com/BandTec/Zenite/blob/master/Documentacao/4Semestre/Sprint1/Mockups/modulo-fiscal.gif)
 
 ---
 
