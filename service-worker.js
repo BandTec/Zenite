@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Zenite/precache-manifest.add952a9806c679dd8b638e1720690a7.js"
+  "/Zenite/precache-manifest.a538741a0dfceabe2d543f7a786f8a4e.js"
 );
 
 self.addEventListener('message', (event) => {

@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/Zenite/static/css/main.8e739cba.chunk.css",
-    "main.js": "/Zenite/static/js/main.4b781be5.chunk.js",
-    "main.js.map": "/Zenite/static/js/main.4b781be5.chunk.js.map",
-    "runtime-main.js": "/Zenite/static/js/runtime-main.7eaf21c2.js",
-    "runtime-main.js.map": "/Zenite/static/js/runtime-main.7eaf21c2.js.map",
-    "static/js/2.9c00d8ef.chunk.js": "/Zenite/static/js/2.9c00d8ef.chunk.js",
-    "static/js/2.9c00d8ef.chunk.js.map": "/Zenite/static/js/2.9c00d8ef.chunk.js.map",
+    "main.js": "/Zenite/static/js/main.1c5bdae0.chunk.js",
+    "main.js.map": "/Zenite/static/js/main.1c5bdae0.chunk.js.map",
+    "runtime-main.js": "/Zenite/static/js/runtime-main.ec528dac.js",
+    "runtime-main.js.map": "/Zenite/static/js/runtime-main.ec528dac.js.map",
+    "static/js/2.7b734ba9.chunk.js": "/Zenite/static/js/2.7b734ba9.chunk.js",
+    "static/js/2.7b734ba9.chunk.js.map": "/Zenite/static/js/2.7b734ba9.chunk.js.map",
     "index.html": "/Zenite/index.html",
-    "precache-manifest.add952a9806c679dd8b638e1720690a7.js": "/Zenite/precache-manifest.add952a9806c679dd8b638e1720690a7.js",
+    "precache-manifest.a538741a0dfceabe2d543f7a786f8a4e.js": "/Zenite/precache-manifest.a538741a0dfceabe2d543f7a786f8a4e.js",
     "service-worker.js": "/Zenite/service-worker.js",
     "static/css/main.8e739cba.chunk.css.map": "/Zenite/static/css/main.8e739cba.chunk.css.map",
-    "static/js/2.9c00d8ef.chunk.js.LICENSE.txt": "/Zenite/static/js/2.9c00d8ef.chunk.js.LICENSE.txt",
+    "static/js/2.7b734ba9.chunk.js.LICENSE.txt": "/Zenite/static/js/2.7b734ba9.chunk.js.LICENSE.txt",
     "static/media/astronaut.png": "/Zenite/static/media/astronaut.7ca4c015.png",
     "static/media/clientes.svg": "/Zenite/static/media/clientes.1116f857.svg",
     "static/media/github.svg": "/Zenite/static/media/github.57cf4271.svg",
@@ -19,15 +19,16 @@
     "static/media/linkedin.svg": "/Zenite/static/media/linkedin.f5ca26e6.svg",
     "static/media/map.png": "/Zenite/static/media/map.00010ef7.png",
     "static/media/marte.png": "/Zenite/static/media/marte.674de013.png",
+    "static/media/moon.png": "/Zenite/static/media/moon.d03b9f65.png",
     "static/media/robustez.svg": "/Zenite/static/media/robustez.25c34d20.svg",
     "static/media/tecnologias.svg": "/Zenite/static/media/tecnologias.357dc737.svg",
     "static/media/tele.png": "/Zenite/static/media/tele.d2b43177.png",
     "static/media/venus.png": "/Zenite/static/media/venus.06531ce3.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.7eaf21c2.js",
-    "static/js/2.9c00d8ef.chunk.js",
+    "static/js/runtime-main.ec528dac.js",
+    "static/js/2.7b734ba9.chunk.js",
     "static/css/main.8e739cba.chunk.css",
-    "static/js/main.4b781be5.chunk.js"
+    "static/js/main.1c5bdae0.chunk.js"
   ]
 }

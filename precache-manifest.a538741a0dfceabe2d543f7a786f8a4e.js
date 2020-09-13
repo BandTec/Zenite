@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8f5fcd356d779225fb29603a2aa834fa",
+    "revision": "42ef502a42170222def1f2672ad63514",
     "url": "/Zenite/index.html"
   },
   {
-    "revision": "bbdf3b3e093203684c5f",
+    "revision": "c2147e218c292c571b5f",
     "url": "/Zenite/static/css/main.8e739cba.chunk.css"
   },
   {
-    "revision": "c9dc790b00504d5da363",
-    "url": "/Zenite/static/js/2.9c00d8ef.chunk.js"
+    "revision": "55f4bcc5a50f00d23621",
+    "url": "/Zenite/static/js/2.7b734ba9.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/Zenite/static/js/2.9c00d8ef.chunk.js.LICENSE.txt"
+    "url": "/Zenite/static/js/2.7b734ba9.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "bbdf3b3e093203684c5f",
-    "url": "/Zenite/static/js/main.4b781be5.chunk.js"
+    "revision": "c2147e218c292c571b5f",
+    "url": "/Zenite/static/js/main.1c5bdae0.chunk.js"
   },
   {
-    "revision": "418c38104824727d954b",
-    "url": "/Zenite/static/js/runtime-main.7eaf21c2.js"
+    "revision": "78084a4a58ff8ab36b21",
+    "url": "/Zenite/static/js/runtime-main.ec528dac.js"
   },
   {
     "revision": "7ca4c015a9c62a85cc1581ed4634c2eb",
@@ -50,6 +50,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "674de013331eb32fcf35b3b1b192da42",
     "url": "/Zenite/static/media/marte.674de013.png"
+  },
+  {
+    "revision": "d03b9f65277bfc3a5ef8a2762882caf1",
+    "url": "/Zenite/static/media/moon.d03b9f65.png"
   },
   {
     "revision": "25c34d205df4874e992757f06c92f1d3",
