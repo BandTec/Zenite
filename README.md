@@ -2,9 +2,11 @@
 
 [![YARN](https://img.shields.io/badge/Yarn-1.21.1-blue)](https://classic.yarnpkg.com/en/docs/install#windows-stable)    [![JAVA](https://img.shields.io/badge/Java-1.8-red)](https://www.java.com/pt_BR/download/)
 
-**Projeto acadêmico para o 3º semestre do curso de Análise e Desenvolvimento de Sistemas na Faculdade Bandtec**
+**Projeto acadêmico para o 3º e 4º semestre do curso de Análise e Desenvolvimento de Sistemas na Faculdade Bandtec**
 
 O sistema Zênite é um automatizador e gerenciador do processo de fiscalização de transporte urbano realizado pela empresa Órion.
+Para ver a primeira versão do projeto feita para o 3º semestre finalizado em Junho de 2020 [clique aqui](https://github.com/BandTec/Zenite/tree/1.0.1).
+Nessa segunda fase/versão do projeto refatoramos alguns pontos de nossa aplicação e removemos da nossa arquitetura o dispositio Arduíno e substituimos por um aplicativo realizado em Kotlin. 
 
 - [Site Institucional Órion](https://bandtec.github.io/Zenite/)
 - [Aplicação Zenite](https://zeniteapp.azurewebsites.net)
@@ -38,40 +40,45 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
 
 ## Metas - Requisitos
 
+Na primeira fase do projeto os requisitos do projeto foram os abaixo: 
 * [x] Site Institucional
 - [x] Aplicação
-  - [x] Tela de Login
-  - [x] Tela de Esqueci Minha Senha
-  - [x] CRUD Linha
-  - [x] CRUD Gerente
-  * [x] CRUD Administrador
-  * [x] CRUD Ônibus
-  - [x] CRUD Fiscal
-  - [x] CRUD Motorista
-  - [x] Dashboard
-    - [x] Gráficos com ChartJS
-      - [x] Gráfico com início e fim de viagem
-      - [x] Gráfico mostrando tempo percorrido na viagem
-      - [x] Gráfico com média de tempo de viagem por linha
-      - [x] Gráfico com horários dos dias em que as linhas mais demoram em suas viagens
-      - [x] Gráfico mostrando quantidade de ônibus circulando por linha em um determinado período
-      - [x] Gráfico com outliers
-    - [x] Filtros no dashboard
-  * [x] Perfil
-  - [x] Ícone de HelDesk
-  - [x] Logoff
-- [x] IOT
-  - [x] Módulo RFID (RC522) para transportar dados das viagens.
-  - [x] Case para o equipamento do arduíno
-- [x] Banco de dados hospedados na nuvem AZURE
+- [x] IOT Arduíno e Módulo RFID (RC522)
+- [x] Hospedagem da aplicação e banco de dados no AZURE
 
-
+Agora na segunda fase do projeto temos os seguintes requisitos:
   
+* [ ] *Backend do projeto no AWS*
+  - [ ] Configuração de ambiente de alta disponibilidade e segurança
+  - [ ] Configuração de Balanceamento de carga
+  - [ ] CD/CI com Jenkins
+  - [ ] Stress Tests
+* [ ] *Aplicação Web*
+  - [ ] Tela para adicionar cronograma da linha
+  - [ ] Tela para visualizar cronograma da linha
+* [ ] *Aplicativo Android Kotlin*
+  - [ ] Aplicativo salvando dados offline
+  - [ ] Login e Logout
+  - [ ] Esqueci minha senha
+  - [ ] Módulo Fiscal
+    - [ ] Leitor de QrCode para iniciar e finalizar uma viagem (Lendo o QrCode do Motorista)
+      - [ ] Opção de adicionar quantidade de passageiros ao finalizar viagem.
+    - [ ] Cronograma diário das viagens
+      - [ ] Opção de alterar intervalo de saída dos ônibus (assim alterando o cronograma)
+    - [ ] Lista das linhas fiscalizadas pelo fiscal
+      - [ ] Lista de ônibus da linha
+      - [ ] Lista de motorista da linha
+  - [ ] Módulo Motorista
+    - [ ] Tela contendo QrCode que identifica o Motorista
+    - [ ] Tela com dados da viagem atual / ou próxima viagem, dados do ônibus que esta alocado e fiscal de sua linha
+    - [ ] Históricos de viagens (diário / semanal)
+
+
 ---
 
 ## Diagrama de Arquitetura
 
-![imagem do diagrama de arquitetura](https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint1/Diagramas/Desenho_Solucao.png)
+![imagem do diagrama de arquitetura](https://github.com/BandTec/Zenite/blob/master/Documentacao/4Semestre/Sprint1/V1Desenho_Solucao_LLD.png)
 
 ---
 
@@ -106,18 +113,6 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
 
 ---
 
-## StoryBoard
-
-<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint2/storyboard/storyboard-fiscal.jpg" width="70%">
-
----
-
-## Jornada do Usuário 
-
-<img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint1/Mapa%20de%20Empatia/JornadaZenite.jpg">
-
----
-
 ## Banco de Dados
 
 <img src="https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint1/Banco%20de%20dados/MER.png" width="60%">
@@ -126,13 +121,13 @@ Partindo deste contexto planejamos nosso sistema de gerenciamento de transporte 
 
 ## Diagrama de Arquitetura de Software
 
-![imagem do diagrama de arquitetura de software](https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint2/Arquitetura%20Software.png)
+![imagem do diagrama de arquitetura de software](https://github.com/BandTec/Zenite/blob/master/Documentacao/4Semestre/Sprint1/V3Diagrama%20Arquitetura%20de%20Software.png)
 
 ---
 
 # Mockups de Alta Fidelidade
 
-Mais mockups podem ser vistos na seguinte pasta: [`/Documentação/Sprint2/Mockups Alta Fidelidade`](https://github.com/BandTec/Zenite/tree/master/Documentacao/Sprint2/Mockups%20Alta%20Fidelidade)
+Todos os mockups foram feitos com a aplicação web Figma e podem ser vistos na pasta : [`/Documentação/4Semestre/Sprint1/Mockups`](https://github.com/BandTec/Zenite/tree/master/Documentacao/4Semestre/Sprint1/Mockups)
 
 ![mockup de alta fidelidade da consulta do fiscal](https://github.com/BandTec/Zenite/blob/master/Documentacao/3Semestre/Sprint2/Mockups%20Alta%20Fidelidade/visualizar-fiscal.png)
 
@@ -140,5 +135,5 @@ Mais mockups podem ser vistos na seguinte pasta: [`/Documentação/Sprint2/Mocku
 
 ### Equipe
 
-| [**Alex Buarque**](https://github.com/alexbuarque) | [**Fernanda Esteves**](https://github.com/esteves-esta) | [**João Pedro Soares**](https://github.com/jPedroSoares) | [**Lais Silva**](https://github.com/Laissilvaa) | [**Raissa Arantes**](https://github.com/Rayssawoods) | [**Vitor Silva**](https://github.com/vitorsilv) |
+| [**Alex Buarque**](https://github.com/alexbuarque) | [**Fernanda Esteves**](https://github.com/esteves-esta) | [**João Pedro Soares**](https://github.com/jPedroSoares) | [**Lais Silva**](https://github.com/Laissilvaa) | [**Raissa Arantes**](https://github.com/Rayssawoods) | [**Vitor Silva**](https://github.com/vitorsilv) | [**Fábiola Canedo**](https://github.com/Fabicaneyu) |
 
