@@ -2,10 +2,11 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="corFundo">#E1EEF5</color>
+    <color name="azulClaro">#E1EEF5</color>
     <color name="gradiente1">#223F61</color>
     <color name="gradiente2">#0285C0</color>
-    <color name="corTitulo">#005391</color>
-    <color name="corTextos">#2E2E2E</color>
+    <color name="corPrimaria">#005391</color>
+    <color name="preto">#2E2E2E</color>
     <color name="cinzaClaro">#C4C4C4</color>
+    <color name="azulMedio">#0066AC</color>
 </resources>

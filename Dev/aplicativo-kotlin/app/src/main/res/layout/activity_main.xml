@@ -1,83 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    tools:ignore="MissingConstraints">
+    android:orientation="vertical">
+
+<!--    https://material.io/develop/android/components/app-bars-top -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:backgroundTint="@color/azulClaro">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_logo_zenite"
+            android:scaleType="fitEnd"
+            android:padding="25dp"
+            android:fitsSystemWindows="true"
+            android:contentDescription="asdf"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
         style="@style/Titulo"
         android:id="@+id/titulo"
-        android:text="Estilo do Titulo!"
+        android:text="Oi! Tudo certo?"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        style="@style/Texto"
-        android:id="@+id/textoNormal"
-        android:text="Texto Normal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        app:layout_constraintTop_toBottomOf="@id/titulo" />
-
-    <TextView
-        style="@style/TextoBold"
-        android:id="@+id/textoBold"
-        android:text="Texto Bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        app:layout_constraintTop_toBottomOf="@id/textoNormal" />
-
-    <TextView
-        style="@style/TextoItalico"
-        android:id="@+id/textoItalico"
-        android:text="Texto Italico"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        app:layout_constraintTop_toBottomOf="@id/textoBold" />
-
-    <TextView
-        style="@style/Label"
-        android:id="@+id/label1"
-        android:text="Label do campo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textoItalico" />
-
-    <EditText
-        style="@style/Input"
-        android:id="@+id/campoTexto"
-        app:layout_constraintTop_toBottomOf="@id/label1"
-        />
+        android:layout_marginHorizontal="25dp" />
 
     <TextView
         style="@style/Label"
         android:id="@+id/label2"
-        android:text="Label do campo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/campoTexto" />
+        android:text="Escreva abaixo 'fiscal' ou 'motorista'"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <EditText
         style="@style/Input"
-        android:id="@+id/campoTexto2"
-        app:layout_constraintTop_toBottomOf="@id/label2"
+        android:id="@+id/entrar"
         />
 
-
+    <!--    https://material.io/develop/android/components/buttons -->
     <Button
-        style="@style/Botao"
-        android:id="@+id/botao"
-        android:text="botão super legal"
-        app:layout_constraintTop_toBottomOf="@id/campoTexto2"
+        android:onClick="goDash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnEntrar"
+        android:text="entrar"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="15dp"
         />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.button.MaterialButton
+        android:onClick="testeOutraTela"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:id="@+id/botao"
+        android:text="ir para outra tela"
+        android:layout_marginHorizontal="25dp"
+        />
+</LinearLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fiscal.MainFiscal">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:backgroundTint="@color/azulClaro"
+        app:titleTextColor="@color/corPrimaria"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="Zenite"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/azulClaro"
+        app:itemIconSize="24dp"
+        app:itemIconTint="@color/corPrimaria"
+        app:itemTextColor="@color/corPrimaria"
+
+        app:elevation="2dp"
+        app:menu="@menu/fiscal"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_container"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="55dp"
+        />
+
+</RelativeLayout>

@@ -1,17 +1,44 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:targetApi="o">
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/corFundo</item>
-        <item name="colorPrimaryDark">@color/corTitulo</item>
-        <item name="colorAccent">@color/corTitulo</item>
-        <item name="titleTextColor">@color/corTitulo</item>
+    <!-- https://material.io/develop/android/components/buttons -->
+    <!-- https://medium.com/over-engineering/setting-up-a-material-components-theme-for-android-fbf7774da739 -->
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- CUSTOMIZAÇÃO DO TEMA MATERIAL DESIGN INCLUIDO NO GRADLE (Module: app) -->
+        <item name="colorPrimary">@color/corPrimaria</item>
+        <item name="colorPrimaryDark">@color/corPrimaria</item>
+        <item name="colorAccent">@color/gradiente1</item>
+        <item name="titleTextColor">@color/corPrimaria</item>
+        <item name="textAppearanceButton">@style/TextAppearance.App.Button</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
+        <item name="materialButtonStyle">@style/Widget.App.Button</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.App.OutlineButton</item>
+    </style>
+
+    <!--   ESTILOS CUSTOMIZADOS DO MATERIAL DESIGN  -->
+    <!--   BOTÃO MATERIAL DESIGN ARREDONDADO E COM A FONTE OPEN SANS -->
+    <style name="TextAppearance.App.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/open_sans_bold</item>
+        <item name="android:fontFamily">@font/open_sans_bold</item>
+    </style>
+
+    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50dp</item>
+    </style>
+
+    <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:padding">20dp</item>
+    </style>
+
+    <style name="Widget.App.OutlineButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:padding">20dp</item>
     </style>
 
     <!--   ESTILOS CUSTOMIZADOS ZENITE  -->
     <!--  TEXTOS  -->
     <style name="Titulo" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/corTitulo</item>
+        <item name="android:textColor">@color/corPrimaria</item>
         <item name="android:textSize">22sp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
@@ -20,7 +47,7 @@
     </style>
 
     <style name="Texto" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/corTextos</item>
+        <item name="android:textColor">@color/preto</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/open_sans</item>
@@ -28,7 +55,7 @@
     </style>
 
     <style name="TextoItalico" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/corTextos</item>
+        <item name="android:textColor">@color/preto</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">italic</item>
         <item name="android:fontFamily">@font/open_sans_italic</item>
@@ -36,48 +63,38 @@
     </style>
 
     <style name="TextoBold" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/corTextos</item>
+        <item name="android:textColor">@color/preto</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/open_sans_bold</item>
         <item name="android:layout_marginTop">10dp</item>
     </style>
 
+
     <!--  BOTAO  -->
     <style name="Botao">
         <item name="android:textColor">#fff</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/open_sans_bold</item>
-
-        <item name="android:padding">20sp</item>
-
+        <item name="android:padding">20dp</item>
         <item name="android:background">@drawable/botao_customizado</item>
-
-        <item name="android:layout_marginStart">25dp</item>
-        <item name="android:layout_marginEnd">25dp</item>
         <item name="android:layout_marginTop">20dp</item>
-
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
     </style>
 
     <!--  CAMPO DE TEXTO  -->
     <!--    https://www.youtube.com/watch?v=BO5iCL7U6Lc -->
     <style name="Input">
-        <item name="android:textColor">@color/corTextos</item>
+        <item name="android:textColor">@color/preto</item>
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/open_sans</item>
-
         <item name="android:padding">15sp</item>
-
         <item name="android:background">@drawable/custom_input</item>
-
         <item name="android:layout_marginStart">25dp</item>
         <item name="android:layout_marginEnd">25dp</item>
         <item name="android:layout_marginTop">20dp</item>
-
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
     </style>
@@ -86,11 +103,18 @@
     <style name="Label" parent="TextoBold">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-
-        <item name="android:textColor">@color/corTitulo</item>
-
+        <item name="android:textColor">@color/corPrimaria</item>
         <item name="android:layout_marginStart">25dp</item>
         <item name="android:layout_marginTop">20dp</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
