@@ -10,14 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".fiscal.FiscalLinhas"></activity>
-        <activity android:name=".fiscal.MainFiscalLinha" />
-        <activity
-            android:name=".motorista.ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".motorista.MainMotorista" />
         <activity android:name=".fiscal.MainFiscal" />
-        <activity android:name=".fiscal.FiscalMain" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
