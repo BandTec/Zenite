@@ -38,10 +38,6 @@ public class Fiscal  {
     private String registroFiscal;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="fkDispositivo")
-    private Dispositivo dispositivo;
-
-    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fkConta")
     private Conta conta;
 
@@ -115,14 +111,6 @@ public class Fiscal  {
 
     public void setRegistroFiscal(String registroFiscal) {
         this.registroFiscal = registroFiscal;
-    }
-
-    public Dispositivo getDispositivo() {
-        return dispositivo;
-    }
-
-    public void setDispositivo(Dispositivo dispositivo) {
-        this.dispositivo = dispositivo;
     }
 
   /*  public List getLinhasId() {

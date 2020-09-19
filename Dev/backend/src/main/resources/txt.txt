@@ -1,0 +1,754 @@
+L00Linha06202022/06/2020 22:41:50v1    
+L104093-10TERM. CID. TIRADENTES                                                           TERM. CID. TIRADENTES                                                           
+L10N437-11CPTM GUAIANAZES                                                                 CPTM GUAIANAZES                                                                 
+L103013-10TERM. CID. TIRADENTES                                                           TERM. CID. TIRADENTES                                                           
+L103019-10TERM. CID. TIRADENTES                                                           TERM. CID. TIRADENTES                                                           
+L103064-10CPTM GUAIANAZES                                                                 CID. TIRADENTES                                                                 
+L103064-41TERM. CID. TIRADENTES                                                           TERM. CID. TIRADENTES                                                           
+L10312N-10SÃO MIGUEL PAULISTA                                                             TERM. CID. TIRADENTES                                                           
+L103539-10METRÔ BRESSER                                                                   CID. TIRADENTES                                                                 
+L103787-10METRÔ ITAQUERA                                                                  CID. TIRADENTES                                                                 
+L103789-10METRÔ ITAQUERA                                                                  CID. TIRADENTES                                                                 
+L104004-10TERM. CID. TIRADENTES                                                           TERM. CID. TIRADENTES                                                           
+L104005-10TERM. CID. TIRADENTES                                                           TERM. CID. TIRADENTES                                                           
+L10407N-10METRÔ PENHA                                                                     TERM. CID. TIRADENTES                                                           
+L10407P-10METRÔ TATUAPÉ                                                                   TERM. CID. TIRADENTES                                                           
+L104086-10TERM. CID. TIRADENTES                                                           TERM. CID. TIRADENTES                                                           
+L104092-10TERM. CID. TIRADENTES                                                           TERM. CID. TIRADENTES                                                           
+L104210-10TERM. PQ. D. PEDRO II                                                           TERM. CID. TIRADENTES                                                           
+L104313-10TERM. PQ. D. PEDRO II                                                           TERM. CID. TIRADENTES                                                           
+L10N403-11METRÔ ITAQUERA                                                                  TERM. CID. TIRADENTES                                                           
+L10N406-11TERM. SÃO MATEUS                                                                TERM. CID. TIRADENTES                                                           
+L10N435-11TERM. CID. TIRADENTES                                                           TERM. CID. TIRADENTES                                                           
+L10N436-11TERM. CID. TIRADENTES                                                           TERM. CID. TIRADENTES                                                           
+L10N441-11TERM. CID. TIRADENTES                                                           TERM. CID. TIRADENTES                                                           
+L102522-10METRÔ ITAQUERA                                                                  JD. STO. ANTÔNIO                                                                
+L102703-10METRÔ ITAQUERA                                                                  JD. ETELVINA                                                                    
+L102703-21METRÔ ITAQUERA                                                                  JD. ETELVINA                                                                    
+L102703-22METRÔ ITAQUERA                                                                  JD. GIANETTI                                                                    
+L102704-10METRÔ ITAQUERA                                                                  JD. ROBRU                                                                       
+L102705-10METRÔ ITAQUERA                                                                  JD. FANGANIELO                                                                  
+L102707-10METRÔ ITAQUERA                                                                  CHABILÂNDIA                                                                     
+L102707-31METRÔ ITAQUERA                                                                  CHABILÂNDIA                                                                     
+L102708-10METRÔ ITAQUERA                                                                  JD. LAJEADO                                                                     
+L102712-10JD. SÃO NICOLAU                                                                 JD. SÃO NICOLAU                                                                 
+L102721-10METRÔ ITAQUERA                                                                  JD. NAZARÉ                                                                      
+L102723-10METRÔ ITAQUERA                                                                  UNIÃO DE VL. NOVA                                                               
+L102731-10METRÔ ITAQUERA                                                                  VL. PROGRESSO                                                                   
+L102733-10METRÔ ITAQUERA                                                                  PQ. GUARANI                                                                     
+L102734-10METRÔ ITAQUERA                                                                  JD. CAMPOS                                                                      
+L10273F-10METRÔ ITAQUERA                                                                  VL. MARA                                                                        
+L10273R-42METRÔ ITAQUERA                                                                  JD. ROBRU                                                                       
+L102766-10METRÔ ITAQUERA                                                                  JD. CAMARGO VELHO                                                               
+L102766-41METRÔ ITAQUERA                                                                  JD. INDAIÁ                                                                      
+L102780-10METRÔ ITAQUERA                                                                  JD. CAMARGO NOVO                                                                
+L103031-10METRÔ ITAQUERA                                                                  JD. ALTO PAULISTANO                                                             
+L103712-10METRÔ ITAQUERA                                                                  JD. SÃO JOÃO                                                                    
+L103712-51METRÔ ITAQUERA                                                                  VL. COSMOPOLITA                                                                 
+L103721-41METRÔ ITAQUERA                                                                  SHOP. ARICANDUVA                                                                
+L103732-10METRÔ ITAQUERA                                                                  CPTM JOSÉ BONIFÁCIO                                                             
+L103738-10METRÔ ITAQUERA                                                                  COHAB JUSCELINO                                                                 
+L103739-10METRÔ ITAQUERA                                                                  RECANTO VERDE SOL                                                               
+L10373L-10METRÔ ITAQUERA                                                                  JD. LIMOEIRO                                                                    
+L103741-10METRÔ ITAQUERA                                                                  CPTM D. BOSCO                                                                   
+L103742-10METRÔ ITAQUERA                                                                  JD. LARANJEIRA                                                                  
+L103743-10METRÔ ITAQUERA                                                                  SÃO MATEUS                                                                      
+L10374M-10METRÔ ITAQUERA                                                                  CPTM ERMELINO MATARAZZO                                                         
+L10374V-10METRÔ ITAQUERA                                                                  JD. SANTANA                                                                     
+L103751-10METRÔ ITAQUERA                                                                  COHAB PRESTES MAIA                                                              
+L103754-10METRÔ ITAQUERA                                                                  INÁCIO MONTEIRO                                                                 
+L103756-10METRÔ ITAQUERA                                                                  BARRO BRANCO                                                                    
+L103766-10METRÔ ITAQUERA                                                                  COHAB II                                                                        
+L103785-10METRÔ ITAQUERA                                                                  COHAB BARRO BRANCO                                                              
+L103795-10METRÔ ITAQUERA                                                                  JD. SÃO CARLOS                                                                  
+L103796-10METRÔ ITAQUERA                                                                  GLEBA DO PESSEGO                                                                
+L104019-10METRÔ ITAQUERA                                                                  METRÔ ITAQUERA                                                                  
+L104021-10METRÔ ITAQUERA                                                                  METRÔ ITAQUERA                                                                  
+L104052-10METRÔ ITAQUERA                                                                  CPTM GUAIANAZES                                                                 
+L10407H-10METRÔ ITAQUERA                                                                  JD. SÃO FRANCISCO                                                               
+L10407T-10METRÔ ITAQUERA                                                                  JD. REDIL                                                                       
+L104085-10METRÔ ITAQUERA                                                                  COHAB FAZENDA DO CARMO                                                          
+L10N306-11METRÔ ITAQUERA                                                                  TERM. SÃO MIGUEL                                                                
+L10N308-11TERM. PQ. D. PEDRO II                                                           METRÔ ITAQUERA                                                                  
+L10N339-11METRÔ ITAQUERA                                                                  METRÔ ITAQUERA                                                                  
+L10N340-11METRÔ ITAQUERA                                                                  METRÔ ITAQUERA                                                                  
+L10N343-11TERM. A. E. CARVALHO                                                            TERM. A. E. CARVALHO                                                            
+L10N402-11TERM. VL. CARRÃO                                                                METRÔ ITAQUERA                                                                  
+L10N405-11METRÔ ITAQUERA                                                                  TERM. VL. CARRÃO                                                                
+L10N438-11METRÔ ITAQUERA                                                                  METRÔ ITAQUERA                                                                  
+L10N439-11METRÔ ITAQUERA                                                                  METRÔ ITAQUERA                                                                  
+L101024-10CONEXÃO PETRÔNIO PORTELA                                                        JD. CAROMBÉ                                                                     
+L101025-10CONEXÃO PETRÔNIO PORTELA                                                        JD. CAROMBÉ                                                                     
+L109785-51TERM. CACHOEIRINHA                                                              JD. CAROMBÉ                                                                     
+L10N141-11TERM. CACHOEIRINHA                                                              TERM. CACHOEIRINHA                                                              
+L108013-22TERM. JD. BRITÂNIA                                                              JD. ROSINHA                                                                     
+L101012-10JD. MONTE BELO                                                                  TERM. JD. BRITANIA                                                              
+L101015-10TERM. JD. BRITÂNIA                                                              TERM. JD. BRITÂNIA                                                              
+L108013-10LAPA                                                                            TERM. JD. BRITANIA                                                              
+L108013-41TERM. JD. BRITANIA                                                              TERM. JD. BRITANIA                                                              
+L101019-10TERM. PIRITUBA                                                                  SOL NASCENTE                                                                    
+L101021-10TERM. PIRITUBA                                                                  COHAB BRASILÂNDIA                                                               
+L108006-10TERM. PIRITUBA                                                                  JD. DONÁRIA                                                                     
+L108007-10TERM. PIRITUBA                                                                  HAB. TURÍSTICA                                                                  
+L108008-10TERM. PIRITUBA                                                                  STA. MÔNICA                                                                     
+L108009-10TERM. PIRITUBA                                                                  CID. D'ABRIL 3ª GLEBA                                                           
+L108009-31TERM. PIRITUBA                                                                  CID. D'ABRIL 3ª GLEBA                                                           
+L108015-10TERM. PIRITUBA                                                                  CEM. DE PERUS                                                                   
+L108016-10TERM. PIRITUBA                                                                  JD. RINCÃO                                                                      
+L108017-10TERM. PIRITUBA                                                                  CPTM VL. AURORA                                                                 
+L10848L-10TERM. PIRITUBA                                                                  RECANTO DOS HUMILDES                                                            
+L109015-10TERM. PIRITUBA                                                                  VL. ZATT                                                                        
+L109018-10TERM. PIRITUBA                                                                  VL. MIRANTE                                                                     
+L109019-10TERM. PIRITUBA                                                                  JD. PAULISTANO                                                                  
+L109020-10TERM. PIRITUBA                                                                  VL. MIRANTE                                                                     
+L109023-10TERM. PIRITUBA                                                                  PQ. DE TAIPAS                                                                   
+L108002-10TERM. LAPA                                                                      TERM. PIRITUBA                                                                  
+L108100-10TERM. LAPA                                                                      TERM. PIRITUBA                                                                  
+L108199-10CEM. VL. NOVA CACHOEIRINHA                                                      PIRITUBA                                                                        
+L108200-10TERM. LAPA                                                                      TERM. PIRITUBA                                                                  
+L108300-1 TERM. LAPA                                                                      TERM. PIRITUBA                                                                  
+L108300-10TERM. LAPA                                                                      TERM. PIRITUBA                                                                  
+L108400-10PÇA. RAMOS DE AZEVEDO                                                           TERM. PIRITUBA                                                                  
+L10847P-10VL. OLÍMPIA                                                                     TERM. PIRITUBA                                                                  
+L108500-10METRÔ BARRA FUNDA                                                               TERM. PIRITUBA                                                                  
+L108594-21PÇA. RAMOS DE AZEVEDO                                                           CID. PIRITUBA                                                                   
+L108600-10LGO. DO PAISSANDÚ                                                               TERM. PIRITUBA                                                                  
+L10917H-10METRÔ VL. MARIANA                                                               TERM. PIRITUBA                                                                  
+L10N103-11TERM. LAPA                                                                      TERM. PIRITUBA                                                                  
+L10N104-11TERM. LAPA                                                                      TERM. PIRITUBA                                                                  
+L10N132-11TERM. PIRITUBA                                                                  TERM. PIRITUBA                                                                  
+L10N133-11TERM. PIRITUBA                                                                  TERM. PIRITUBA                                                                  
+L10N135-11TERM. PIRITUBA                                                                  TERM. PIRITUBA                                                                  
+L10N137-11TERM. PIRITUBA                                                                  TERM. PIRITUBA                                                                  
+L10N139-11TERM. PIRITUBA                                                                  TERM. PIRITUBA                                                                  
+L10N140-11TERM. PIRITUBA                                                                  TERM. PIRITUBA                                                                  
+L10N142-11TERM. PIRITUBA                                                                  TERM. PIRITUBA                                                                  
+L109090-10TERM. CASA VERDE                                                                PQ. TIETÊ                                                                       
+L109162-10VL. PENTEADO                                                                    VL. PENTEADO                                                                    
+L109300-10TERM. PQ. D. PEDRO II                                                           TERM. CASA VERDE                                                                
+L109301-10PÇA. DO CORREIO                                                                 TERM. CASA VERDE                                                                
+L10N207-11TERM. PQ. D. PEDRO II                                                           TERM. CASA VERDE                                                                
+L102013-10CACHOEIRINHA                                                                    COHAB ANTÁRTICA                                                                 
+L108194-10TERM. CACHOEIRINHA                                                              PERUS                                                                           
+L109002-10TERM. CACHOEIRINHA                                                              JD. PERY ALTO                                                                   
+L109004-10TERM. CACHOEIRINHA                                                              JD. ELISA MARIA                                                                 
+L109005-10TERM. CACHOEIRINHA                                                              JD. PRINCESA                                                                    
+L109005-41TERM. CACHOEIRINHA                                                              JD. VISTA ALEGRE                                                                
+L109005-42TERM. CACHOEIRINHA                                                              SÍTIO DOS FRANCOS                                                               
+L109006-10TERM. CACHOEIRINHA                                                              VL. PENTEADO                                                                    
+L109008-10TERM. CACHOEIRINHA                                                              PQ. DE TAIPAS                                                                   
+L109008-41TERM. CACHOEIRINHA                                                              ESTÂNCIA JARAGUÁ                                                                
+L109009-10TERM. CACHOEIRINHA                                                              COHAB BRASILÂNDIA                                                               
+L109011-10TERM. CACHOEIRINHA                                                              CPTM JARAGUÁ                                                                    
+L109032-10TERM. CACHOEIRINHA                                                              JD. DAMASCENO                                                                   
+L109032-21TERM. CACHOEIRINHA                                                              JD. DAMASCENO                                                                   
+L109166-10JD. STA. CRUZ                                                                   JD. STA. CRUZ                                                                   
+L101745-10SHOP. CENTER NORTE                                                              VL.NOVA CACHOEIRINHA                                                            
+L10209P-1 TERM. PINHEIROS                                                                 CACHOEIRINHA                                                                    
+L10209P-10TERM. PINHEIROS                                                                 CACHOEIRINHA                                                                    
+L109354-10PÇA. DO CORREIO                                                                 TERM. CACHOEIRINHA                                                              
+L10938L-10LAPA                                                                            TERM. CACHOEIRINHA                                                              
+L109500-10PÇA. DO CORREIO                                                                 TERM. CACHOEIRINHA                                                              
+L109501-10LGO. DO PAISSANDÚ                                                               TERM. CACHOEIRINHA                                                              
+L109701-10METRÔ SANTANA                                                                   HOSP. CACHOEIRINHA                                                              
+L10971X-10METRÔ SANTANA                                                                   TERM. CACHOEIRINHA                                                              
+L10978A-10METRÔ BARRA FUNDA                                                               TERM. CACHOEIRINHA                                                              
+L10978L-10TERM. PRINC. ISABEL                                                             TERM. CACHOEIRINHA                                                              
+L10N105-11TERM. LAPA                                                                      TERM. CACHOEIRINHA                                                              
+L10N134-11TERM. CACHOEIRINHA                                                              TERM. CACHOEIRINHA                                                              
+L10N138-11TERM. CACHOEIRINHA                                                              TERM. CACHOEIRINHA                                                              
+L10N205-11TERM. PINHEIROS                                                                 TERM. CACHOEIRINHA                                                              
+L10N209-11METRÔ SANTANA                                                                   TERM. CACHOEIRINHA                                                              
+L10N231-11TERM. CACHOEIRINHA                                                              TERM. CACHOEIRINHA                                                              
+L102031-10TERM. A. E. CARVALHO                                                            CID. KEMEL II                                                                   
+L102088-10TERM. A. E. CARVALHO                                                            CONJ. ENCOSTA NORTE                                                             
+L102523-10TERM. A. E. CARVALHO                                                            VL. PROGRESSO                                                                   
+L102710-31METRÔ PATRIARCA                                                                 METRÔ PATRIARCA                                                                 
+L102727-10METRÔ ARTUR ALVIM                                                               METRÔ ARTUR ALVIM                                                               
+L103010-10TERM. A. E. CARVALHO                                                            CEM. DA SAUDADE                                                                 
+L103051-10TERM. A. E. CARVALHO                                                            ERMELINO MATARAZZO                                                              
+L101177-10LUZ                                                                             TERM. A. E. CARVALHO                                                            
+L101177-31LUZ                                                                             TERM. A. E. CARVALHO                                                            
+L102060-10TERM. A. E. CARVALHO                                                            TERM. A. E. CARVALHO                                                            
+L10208V-10TERM. PQ. D. PEDRO II                                                           TERM. A. E. CARVALHO                                                            
+L10233C-10CERET                                                                           TERM. A. E. CARVALHO                                                            
+L10253F-10TERM. SÃO MATEUS                                                                TERM. A. E. CARVALHO                                                            
+L102551-10TERM. PQ. D. PEDRO II                                                           TERM. A. E. CARVALHO                                                            
+L10N301-11TERM. PQ. D. PEDRO II                                                           TERM. A. E. CARVALHO                                                            
+L10N302-11TERM. PQ. D. PEDRO II                                                           TERM. A. E. CARVALHO                                                            
+L10N303-11TERM. ARICANDUVA                                                                TERM. A. E. CARVALHO                                                            
+L10N331-11TERM. A. E. CARVALHO                                                            TERM. A. E. CARVALHO                                                            
+L10N332-11TERM. A. E. CARVALHO                                                            TERM. A. E. CARVALHO                                                            
+L10N334-11TERM. A. E. CARVALHO                                                            TERM. A. E. CARVALHO                                                            
+L102080-10TERM. ARICANDUVA                                                                CID. KEMEL                                                                      
+L102435-10TERM. ARICANDUVA                                                                JD. COIMBRA                                                                     
+L102451-10TERM. ARICANDUVA                                                                VL. SÃO FRANCISCO                                                               
+L102583-10TERM. ARICANDUVA                                                                VL. CURUÇÁ                                                                      
+L103020-10SHOP. ARICANDUVA                                                                COHAB JOSÉ BONIFÁCIO                                                            
+L103027-10SHOP. ARICANDUVA                                                                CPTM GUAIANAZES                                                                 
+L103098-10SHOP. ARICANDUVA                                                                JD. SÃO FRANCISCO                                                               
+L10364A-10SHOP. ARICANDUVA                                                                HOSP. IPIRANGA                                                                  
+L103725-41METRÔ VL. MATILDE                                                               METRÔ VL. MATILDE                                                               
+L104030-10SHOP. ARICANDUVA                                                                FAZENDA DA JUTA                                                                 
+L10524M-10SHOP. ARICANDUVA                                                                MASCARENHAS DE MORAIS                                                           
+L10N304-11TERM. ARICANDUVA                                                                TERM. SÃO MIGUEL                                                                
+L103023-10PQ. SÃO RAFAEL                                                                  SHOP. ARICANDUVA                                                                
+L103134-10METRÔ TAMANDUATEÍ                                                               SHOP. ARICANDUVA                                                                
+L103721-10METRÔ ARTUR ALVIM                                                               SHOP. ARICANDUVA                                                                
+L103729-10METRÔ CARRÃO                                                                    SHOP. ARICANDUVA                                                                
+L103731-10METRÔ VL. MATILDE                                                               SHOP. ARICANDUVA                                                                
+L103737-10METRÔ GUILHERMINA/ESPERANÇA                                                     SHOP. ARICANDUVA                                                                
+L103791-10METRÔ ARTUR ALVIM                                                               SHOP. ARICANDUVA                                                                
+L10407A-10LGO. DA CONCÓRDIA                                                               SHOP. ARICANDUVA                                                                
+L10407A-21METRÔ BELÉM                                                                     SHOP. ARICANDUVA                                                                
+L102019-10SHOP. PENHA                                                                     PQ. PAINEIRAS                                                                   
+L102076-10TERM. PENHA                                                                     JD. DAS OLIVEIRAS                                                               
+L10211V-10VL. PARANAGUÁ                                                                   VL. PARANAGUÁ                                                                   
+L102203-10SHOP. PENHA                                                                     BURGO PAULISTA                                                                  
+L102716-10METRÔ PENHA                                                                     CHÁC. CRUZ. DO SUL                                                              
+L102718-10METRÔ PENHA                                                                     VL. SÍLVIA                                                                      
+L102726-10METRÔ PENHA                                                                     LIMOEIRO                                                                        
+L102728-10METRÔ PENHA                                                                     JD. DO CASTELO                                                                  
+L102735-10METRÔ PENHA                                                                     JD. KERALUX                                                                     
+L102735-21METRÔ PENHA                                                                     JD. SÃO FRANCISCO                                                               
+L10273J-10METRÔ PENHA                                                                     JD. ROMANO                                                                      
+L10273V-10METRÔ PENHA                                                                     PARADA XV DE NOVEMBRO                                                           
+L102755-10METRÔ PENHA                                                                     GUAIANAZES                                                                      
+L102772-10METRÔ PENHA                                                                     JD. NAZARÉ                                                                      
+L10278A-10PENHA                                                                           METRÔ SANTANA                                                                   
+L10342M-10TERM. PENHA                                                                     TERM. SÃO MATEUS                                                                
+L103901-10METRÔ PENHA                                                                     JD. DANFER                                                                      
+L10403A-10TERM. PENHA                                                                     CPTM JOSÉ BONIFÁCIO                                                             
+L10407N-21METRÔ PENHA                                                                     JD. ROSELI                                                                      
+L10N404-11TERM. PENHA                                                                     TERM. SÃO MATEUS                                                                
+L102713-10METRÔ PENHA                                                                     METRÔ PENHA                                                                     
+L10271A-10METRÔ SANTANA                                                                   TERM. PENHA                                                                     
+L103206-10METRÔ PENHA                                                                     METRÔ PENHA                                                                     
+L10390E-10TERM. PQ. D. PEDRO II                                                           TERM. PENHA                                                                     
+L10N335-11TERM. PENHA                                                                     TERM. PENHA                                                                     
+L10N342-11TERM. PENHA                                                                     TERM. PENHA                                                                     
+L10N344-11TERM. PENHA                                                                     TERM. PENHA                                                                     
+L105031-21TERM. SACOMÃ                                                                    VL. CDE. DO PINHAL                                                              
+L10573A-10METRÔ BRESSER                                                                   METRÔ BRESSER                                                                   
+L103069-10TERM. SÃO MATEUS                                                                JD. RECANTO VERDE SOL                                                           
+L103054-10HOSP. SAPOPEMBA                                                                 JD. PALANQUE                                                                    
+L10425E-10TERM. SAPOPEMBA                                                                 JD. ESTER                                                                       
+L10573T-21TERM. SAPOPEMBA                                                                 JD. TIETÊ                                                                       
+L10507T-10METRÔ CARRÃO                                                                    TERM. SAPOPEMBA                                                                 
+L105141-10PÇA. DO CORREIO                                                                 TERM. SAPOPEMBA                                                                 
+L105142-10TERM. PQ. D. PEDRO II                                                           TERM. SAPOPEMBA                                                                 
+L105143-10TERM. PQ. D. PEDRO II                                                           TERM. SAPOPEMBA                                                                 
+L105143-31TERM. PQ. D. PEDRO II                                                           TERM. SAPOPEMBA                                                                 
+L105144-10TERM. PRINC. ISABEL                                                             TERM. SAPOPEMBA                                                                 
+L105145-10PÇA. ALMEIDA JR.                                                                TERM. SAPOPEMBA                                                                 
+L10573H-10METRÔ BRESSER                                                                   HOSP. SAPOPEMBA                                                                 
+L10573T-10METRÔ CARRÃO                                                                    TERM. SAPOPEMBA                                                                 
+L10573T-31METRÔ CARRÃO                                                                    TERM. SAPOPEMBA                                                                 
+L10574R-10METRÔ BELÉM                                                                     TERM. SAPOPEMBA                                                                 
+L10N531-11TERM. SAPOPEMBA                                                                 TERM. SAPOPEMBA                                                                 
+L10N532-11TERM. SAPOPEMBA                                                                 TERM. SAPOPEMBA                                                                 
+L10N540-11TERM. SAPOPEMBA                                                                 TERM. SAPOPEMBA                                                                 
+L105362-21PÇA. DA SÉ                                                                      GRAJAÚ                                                                          
+L105630-10METRÔ BRÁS                                                                      TERM. GRAJAÚ                                                                    
+L106003-10TERM. VARGINHA                                                                  TERM. GRAJAÚ                                                                    
+L106016-10TERM. GRAJAÚ                                                                    JD. NORONHA                                                                     
+L106016-41TERM. GRAJAÚ                                                                    JD. PORTO VELHO                                                                 
+L106031-10TERM. GRAJAÚ                                                                    JD. SÃO BERNARDO                                                                
+L106034-10TERM. GRAJAÚ                                                                    PQ. RES. COCAIA                                                                 
+L106050-10TERM. GRAJAÚ                                                                    PQ. COCAIA                                                                      
+L106053-10TERM. GRAJAÚ                                                                    JD. ELLUS                                                                       
+L106056-10TERM. GRAJAÚ                                                                    PQ. STA. CECÍLIA                                                                
+L106056-41TERM. GRAJAÚ                                                                    VL. NATAL                                                                       
+L106057-10TERM. GRAJAÚ                                                                    VL. NATAL                                                                       
+L106061-10TERM. GRAJAÚ                                                                    JD. MARILDA                                                                     
+L106062-10TERM. GRAJAÚ                                                                    JD. CASTRO ALVES                                                                
+L10607M-10TERM. ÁGUA ESPRAIADA                                                            TERM. GRAJAÚ                                                                    
+L106083-10TERM. GRAJAÚ                                                                    JD. ELIANA                                                                      
+L106092-10TERM. GRAJAÚ                                                                    JD. DAS PEDRAS                                                                  
+L106093-10TERM. GRAJAÚ                                                                    VARGEM GRANDE                                                                   
+L106099-10TERM. GRAJAÚ                                                                    TERM. GRAJAÚ                                                                    
+L106115-10TERM. GRAJAÚ                                                                    CANTINHO DO CÉU                                                                 
+L106115-41TERM. GRAJAÚ                                                                    PQ. RES. DOS LAGOS                                                              
+L106116-10TERM. GRAJAÚ                                                                    JD. PRAINHA                                                                     
+L106120-10TERM. GRAJAÚ                                                                    JD. LUCÉLIA                                                                     
+L10637G-10PINHEIROS                                                                       GRAJAÚ                                                                          
+L106726-10TERM. GRAJAÚ                                                                    JD. GAIVOTAS                                                                    
+L10675R-10METRÔ JABAQUARA                                                                 GRAJAÚ                                                                          
+L10675X-10TERM. GRAJAÚ                                                                    TERM. GRAJAÚ                                                                    
+L10677V-10JD. ALPINO                                                                      JD. ALPINO                                                                      
+L106970-10TERM. STO. AMARO                                                                TERM. GRAJAÚ                                                                    
+L106L11-10TERM. GRAJAÚ                                                                    ILHA DO BORORÉ                                                                  
+L10N601-11TERM. PQ. D. PEDRO II                                                           TERM. GRAJAÚ                                                                    
+L10N602-11TERM. GRAJAÚ                                                                    TERM. GRAJAÚ                                                                    
+L10N631-11TERM. STO. AMARO                                                                TERM. GRAJAÚ                                                                    
+L10N632-11TERM. STO. AMARO                                                                TERM. GRAJAÚ                                                                    
+L10N635-11TERM. GRAJAÚ                                                                    TERM. GRAJAÚ                                                                    
+L10N636-11TERM. GRAJAÚ                                                                    TERM. GRAJAÚ                                                                    
+L10N638-11TERM. GRAJAÚ                                                                    TERM. GRAJAÚ                                                                    
+L10N639-11TERM. GRAJAÚ                                                                    TERM. GRAJAÚ                                                                    
+L106020-10CHÁC. BOSQUE DO SOL                                                             CHÁC. BOSQUE DO SOL                                                             
+L106020-51ESTR. DO JUSA                                                                   ESTR. DO JUSA                                                                   
+L106L02-10TERM. PARELHEIROS                                                               JD. EUCALIPTOS                                                                  
+L106L03-10TERM. PARELHEIROS                                                               CIPÓ DO MEIO                                                                    
+L106L04-10TERM. PARELHEIROS                                                               JD. ORIENTAL/FONTES                                                             
+L106L04-41TERM. PARELHEIROS                                                               JD. DAS FONTES                                                                  
+L106L04-42TERM. PARELHEIROS                                                               JD. ORIENTAL                                                                    
+L106L05-10TERM. PARELHEIROS                                                               BARRAGEM                                                                        
+L106L05-21TERM. PARELHEIROS                                                               CID. NOVA AMÉRICA                                                               
+L106L08-10JD. SÃO NICOLAU                                                                 JD. SÃO NICOLAU                                                                 
+L106000-10TERM. STO. AMARO                                                                TERM. PARELHEIROS                                                               
+L10695Y-10METRÔ VL. MARIANA                                                               TERM. PARELHEIROS                                                               
+L10695Y-21CPTM AUTÓDROMO                                                                  TERM. PARELHEIROS                                                               
+L10695Y-22BORBA GATO                                                                      TERM. PARELHEIROS                                                               
+L10695Y-41COL. STA. MARIA                                                                 TERM. PARELHEIROS                                                               
+L106051-10TERM. VARGINHA                                                                  JD. ITAJAÍ                                                                      
+L106051-31TERM. VARGINHA                                                                  JD. ITAJAÍ                                                                      
+L106052-10TERM. VARGINHA                                                                  JD. SETE DE SETEMBRO                                                            
+L106052-31TERM. VARGINHA                                                                  JD. ALMEIDA PRADO                                                               
+L106058-10TERM. VARGINHA                                                                  JD. NORONHA                                                                     
+L106063-10TERM. VARGINHA                                                                  JD. VARGINHA                                                                    
+L106063-41TERM. VARGINHA                                                                  JD. NOVO MARILDA                                                                
+L106063-42TERM. VARGINHA                                                                  CHÁC. STO. AMARO                                                                
+L106063-43TERM. VARGINHA                                                                  VL. DA PAZ                                                                      
+L106072-10TERM. VARGINHA                                                                  JD. SÃO NICOLAU                                                                 
+L106072-21TERM. VARGINHA                                                                  JD. IPORÃ                                                                       
+L106072-22TERM. VARGINHA                                                                  JD. MANACÁ DA SERRA                                                             
+L106073-10TERM. VARGINHA                                                                  JD. STA. TEREZINHA                                                              
+L106073-21TERM. VARGINHA                                                                  JD. SILVEIRA                                                                    
+L106075-10TERM. VARGINHA                                                                  JD. REC. CAMPO BELO                                                             
+L106075-41TERM. VARGINHA                                                                  JD. ALMEIDA                                                                     
+L106084-10TERM. VARGINHA                                                                  JD. CHÁC. DO SOL                                                                
+L106084-21TERM. VARGINHA                                                                  JD. MORAES PRADO                                                                
+L106L01-10TERM. VARGINHA                                                                  MARSILAC                                                                        
+L106L01-22TERM. VARGINHA                                                                  VL. PROGRESSO                                                                   
+L106L01-23TERM. VARGINHA                                                                  EMBURA                                                                          
+L106L07-10TERM. VARGINHA                                                                  JD. STA. FÉ                                                                     
+L106L10-41TERM. VARGINHA                                                                  MESSIÂNICA                                                                      
+L105370-10LGO. SÃO FRANCISCO                                                              TERM. VARGINHA                                                                  
+L105370-21PQ. IBIRAPUERA                                                                  TERM. VARGINHA                                                                  
+L105370-22BORBA GATO                                                                      TERM. VARGINHA                                                                  
+L106021-10TERM. VARGINHA                                                                  TERM. VARGINHA                                                                  
+L106072-23TERM. VARGINHA                                                                  TERM. VARGINHA                                                                  
+L106913-10TERM. BANDEIRA                                                                  TERM. VARGINHA                                                                  
+L106913-21TERM. VARGINHA                                                                  TERM. VARGINHA                                                                  
+L10695X-10METRÔ JABAQUARA                                                                 TERM. VARGINHA                                                                  
+L10695X-22SHOP. INTERLAGOS                                                                TERM. VARGINHA                                                                  
+L106960-10TERM. STO. AMARO                                                                TERM. VARGINHA                                                                  
+L106960-21E.T. VITOR MANZINI                                                              TERM. VARGINHA                                                                  
+L106L10-10TERM. VARGINHA                                                                  TERM. VARGINHA                                                                  
+L105106-21TERM. ÁGUA ESPRAIADA                                                            JD. SELMA                                                                       
+L10517J-10TERM. ÁGUA ESPRAIADA                                                            JD. SELMA                                                                       
+L10677Y-10TERM. ÁGUA ESPRAIADA                                                            JD. GUARUJÁ                                                                     
+L10709A-10METRÔ ANA ROSA                                                                  TERM. ÁGUA ESPRAIADA                                                            
+L107245-21TERM. ÁGUA ESPRAIADA                                                            TERM. ÁGUA ESPRAIADA                                                            
+L10756A-10TERM. ÁGUA ESPRAIADA                                                            JD. PAULO VI                                                                    
+L106042-22TERM. CAPELINHA                                                                 JD. VAZ DE LIMA                                                                 
+L106045-21VALO VELHO                                                                      VALO VELHO                                                                      
+L106813-10TERM. CAPELINHA                                                                 JD. LÍDIA                                                                       
+L106815-10TERM. CAPELINHA                                                                 JD. COMERCIAL                                                                   
+L106816-10TERM. CAPELINHA                                                                 JD. MITSUTANI                                                                   
+L106816-31TERM. CAPELINHA                                                                 JD. MITSUTANI                                                                   
+L106817-10TERM. CAPELINHA                                                                 JD. SÃO BENTO                                                                   
+L106818-10TERM. CAPELINHA                                                                 JD. VALE DAS VIRTUDES                                                           
+L106820-10TERM. CAPELINHA                                                                 JD. DAS ROSAS                                                                   
+L106820-31TERM. CAPELINHA                                                                 JD. DAS ROSAS                                                                   
+L106821-10TERM. CAPELINHA                                                                 JD. JANGADEIRO                                                                  
+L106822-10TERM. CAPELINHA                                                                 JD. MACEDÔNIA                                                                   
+L106823-10TERM. CAPELINHA                                                                 JD. GUARUJÁ                                                                     
+L106824-10TERM. CAPELINHA                                                                 PQ. FERNANDA                                                                    
+L106825-10TERM. CAPELINHA                                                                 VALO VELHO                                                                      
+L106826-10TERM. CAPELINHA                                                                 JD. D. JOSÉ                                                                     
+L106835-10TERM. CAPELINHA                                                                 VALO VELHO                                                                      
+L106835-31TERM. CAPELINHA                                                                 VALO VELHO                                                                      
+L106837-10TERM. CAPELINHA                                                                 SHOP. PORTAL                                                                    
+L106840-10TERM. CAPELINHA                                                                 TERM. JD. JACIRA                                                                
+L105119-10LGO. SÃO FRANCISCO                                                              TERM. CAPELINHA                                                                 
+L106001-10TERM. STO. AMARO                                                                TERM. CAPELINHA                                                                 
+L106007-10TERM. STO. AMARO                                                                TERM. CAPELINHA                                                                 
+L106039-21TERM. CAPELINHA                                                                 TERM. CAPELINHA                                                                 
+L106042-21CEU CAPÃO REDONDO                                                               TERM. CAPELINHA                                                                 
+L106043-10TERM. STO. AMARO                                                                JD. CAPELINHA                                                                   
+L106450-10TERM. BANDEIRA                                                                  TERM. CAPELINHA                                                                 
+L106450-21ITAIM BIBI                                                                      TERM. CAPELINHA                                                                 
+L106451-10TERM. BANDEIRA                                                                  TERM. CAPELINHA                                                                 
+L106451-21PÇA. 14 BIS                                                                     TERM. CAPELINHA                                                                 
+L106455-10LGO. SÃO FRANCISCO                                                              TERM. CAPELINHA                                                                 
+L106455-21IBIRAPUERA                                                                      TERM. CAPELINHA                                                                 
+L10648P-10TERM. PINHEIROS                                                                 TERM. CAPELINHA                                                                 
+L10648P-21ITAIM BIBI                                                                      TERM. CAPELINHA                                                                 
+L106803-10TERM. JOÃO DIAS                                                                 JD. CAPELINHA                                                                   
+L106805-10TERM. JOÃO DIAS                                                                 TERM. CAPELINHA                                                                 
+L106805-31TERM. JOÃO DIAS                                                                 TERM. CAPELINHA                                                                 
+L10695T-10METRÔ VL. MARIANA                                                               TERM. CAPELINHA                                                                 
+L10695T-51METRÔ VL. MARIANA                                                               TERM. CAPELINHA                                                                 
+L10695V-10METRÔ ANA ROSA                                                                  TERM. CAPELINHA                                                                 
+L10N704-11TERM. STO. AMARO                                                                TERM. CAPELINHA                                                                 
+L10N731-11TERM. STO. AMARO                                                                TERM. CAPELINHA                                                                 
+L10N734-11TERM. CAPELINHA                                                                 TERM. CAPELINHA                                                                 
+L10N735-11TERM. CAPELINHA                                                                 TERM. CAPELINHA                                                                 
+L10N739-11TERM. CAPELINHA                                                                 TERM. CAPELINHA                                                                 
+L10N741-11TERM. CAPELINHA                                                                 TERM. CAPELINHA                                                                 
+L10N745-11TERM. CAMPO LIMPO                                                               TERM. CAPELINHA                                                                 
+L10N843-11TERM. CAPELINHA                                                                 TERM. CAPELINHA                                                                 
+L105129-10TERM. GUARAPIRANGA                                                              JD. MIRIAM                                                                      
+L106010-10TERM. GUARAPIRANGA                                                              CHÁC. STA. MARIA                                                                
+L106035-21TERM. GUARAPIRANGA                                                              VL. GILDA                                                                       
+L107012-10TERM. GUARAPIRANGA                                                              PQ. DO LAGO                                                                     
+L107017-10TERM. GUARAPIRANGA                                                              JD. GUARUJÁ                                                                     
+L105185-10TERM. PQ. D. PEDRO II                                                           TERM. GUARAPIRANGA                                                              
+L105391-21LGO. SÃO FRANCISCO                                                              TERM. GUARAPIRANGA                                                              
+L106019-10TERM. GUARAPIRANGA                                                              TERM. GUARAPIRANGA                                                              
+L10637A-26TERM. PINHEIROS                                                                 TERM. GUARAPIRANGA                                                              
+L106505-10TERM. BANDEIRA                                                                  TERM. GUARAPIRANGA                                                              
+L10707K-10METRÔ JABAQUARA                                                                 TERM. GUARAPIRANGA                                                              
+L10709G-10TERM. GUARAPIRANGA                                                              TERM. GUARAPIRANGA                                                              
+L10N738-11TERM. GUARAPIRANGA                                                              TERM. GUARAPIRANGA                                                              
+L105119-22LGO. SÃO FRANCISCO                                                              TERM. JOÃO DIAS                                                                 
+L105119-23TERM. JOÃO DIAS                                                                 TERM. JOÃO DIAS                                                                 
+L106041-21TERM. JOÃO DIAS                                                                 TERM. JOÃO DIAS                                                                 
+L106400-10TERM. BANDEIRA                                                                  TERM. JOÃO DIAS                                                                 
+L106403-10TERM. PQ. D. PEDRO II                                                           TERM. JOÃO DIAS                                                                 
+L10675I-10METRÔ SÃO JUDAS                                                                 TERM. JOÃO DIAS                                                                 
+L106801-10TERM. JOÃO DIAS                                                                 JD. IBIRAPUERA                                                                  
+L106801-51TERM. JOÃO DIAS                                                                 JD. IBIRAPUERA                                                                  
+L106804-10TERM. JOÃO DIAS                                                                 JD. INGÁ                                                                        
+L106806-10TERM. JOÃO DIAS                                                                 JD. NOVO ORIENTE                                                                
+L106836-10TERM. JOÃO DIAS                                                                 CAPÃO REDONDO                                                                   
+L107021-10TERM. JOÃO DIAS                                                                 JD. MARACÁ                                                                      
+L10N742-11TERM. PINHEIROS                                                                 TERM. JOÃO DIAS                                                                 
+L10N743-11TERM. JOÃO DIAS                                                                 TERM. JOÃO DIAS                                                                 
+L10N744-11TERM. JOÃO DIAS                                                                 TERM. JOÃO DIAS                                                                 
+L10N837-11TERM. JOÃO DIAS                                                                 TERM. JOÃO DIAS                                                                 
+L10476A-10TERM. STO. AMARO                                                                IPIRANGA                                                                        
+L105010-10STO. AMARO                                                                      JABAQUARA                                                                       
+L105011-10STO. AMARO                                                                      ELDORADO                                                                        
+L105013-10STO. AMARO                                                                      JD. LUSO                                                                        
+L105013-31STO. AMARO                                                                      JD. MIRIAM                                                                      
+L105024-10STO. AMARO                                                                      MISSIONÁRIA                                                                     
+L105024-31STO. AMARO                                                                      MISSIONÁRIA                                                                     
+L105129-41STO. AMARO                                                                      JD. MIRIAM                                                                      
+L10527R-10TERM. STO. AMARO                                                                VL. IMPÉRIO                                                                     
+L10546A-10STO. AMARO                                                                      JD. APURÁ                                                                       
+L10546A-31STO. AMARO                                                                      JD. APURÁ                                                                       
+L10546J-10STO. AMARO                                                                      JD. SELMA                                                                       
+L10546J-31STO. AMARO                                                                      JD. SELMA                                                                       
+L10546L-10TERM. STO. AMARO                                                                JD. LUSO                                                                        
+L10546T-10TERM. STO. AMARO                                                                VL. GUACURI                                                                     
+L10576C-10TERM. STO. AMARO                                                                METRÔ JABAQUARA                                                                 
+L106008-10TERM. STO. AMARO                                                                JD. PLANALTO                                                                    
+L106008-21TERM. STO. AMARO                                                                PQ. EUROPA                                                                      
+L106012-10STO. AMARO                                                                      PQ. INDEPENDÊNCIA                                                               
+L106013-10TERM. STO. AMARO                                                                JD. NAKAMURA                                                                    
+L106014-10TERM. STO. AMARO                                                                TERM. JD. JACIRA                                                                
+L106015-10STO. AMARO                                                                      VL. CALÚ                                                                        
+L106017-10STO. AMARO                                                                      JD. NAKAMURA                                                                    
+L106022-10STO. AMARO                                                                      PQ. CEREJEIRA                                                                   
+L106026-10TERM. STO. AMARO                                                                JD. ICARAÍ                                                                      
+L106026-31TERM. STO. AMARO                                                                JD. ICARAÍ                                                                      
+L106027-10TERM. STO. AMARO                                                                JD. GRAUNA                                                                      
+L106028-10TERM. STO. AMARO                                                                RIVIERA                                                                         
+L106030-10TERM. STO. AMARO                                                                UNISA-CAMPUS 1                                                                  
+L106035-10STO. AMARO                                                                      VL. GILDA                                                                       
+L106036-10STO. AMARO                                                                      JD. MACEDÔNIA                                                                   
+L106037-10STO. AMARO                                                                      JD. MITSUTANI                                                                   
+L106038-10STO. AMARO                                                                      JD. DAS ROSAS                                                                   
+L106039-10STO. AMARO                                                                      VALO VELHO                                                                      
+L106041-10STO. AMARO                                                                      JD. JANGADEIRO                                                                  
+L106042-10STO. AMARO                                                                      JD. TRÊS ESTRELAS                                                               
+L106044-10TERM. STO. AMARO                                                                JD. D. JOSÉ                                                                     
+L106045-10STO. AMARO                                                                      VALO VELHO                                                                      
+L106046-10STO. AMARO                                                                      JD. SÃO BENTO NOVO                                                              
+L106047-10STO. AMARO                                                                      JD. LÍDIA                                                                       
+L106048-10STO. AMARO                                                                      CAPÃO REDONDO                                                                   
+L106049-10STO. AMARO                                                                      VALO VELHO                                                                      
+L106059-10STO. AMARO                                                                      JD. UNIVERSAL                                                                   
+L106062-51TERM. STO. AMARO                                                                JD. CASTRO ALVES                                                                
+L106069-10TERM. STO. AMARO                                                                JD. SÃO BERNARDO                                                                
+L106071-10TERM. STO. AMARO                                                                JD. ORION                                                                       
+L106076-10TERM. STO. AMARO                                                                JD. PROGRESSO                                                                   
+L106076-41TERM. STO. AMARO                                                                JD. SATÉLITE II                                                                 
+L106091-10TERM. STO. AMARO                                                                VARGEM GRANDE                                                                   
+L106091-21TERM. STO. AMARO                                                                JD. SILVEIRA                                                                    
+L106091-51TERM. STO. AMARO                                                                COLÔNIA                                                                         
+L106118-10TERM. STO. AMARO                                                                JD. ICARAÍ                                                                      
+L106258-10TERM. STO. AMARO                                                                JD. SÃO FRANCISCO                                                               
+L10637R-10TERM. STO. AMARO                                                                JD. ARACATI                                                                     
+L10637V-10TERM. STO. AMARO                                                                PQ. AMÉRICA                                                                     
+L106812-10STO. AMARO                                                                      JD. CAPELA                                                                      
+L10695H-10TERM. STO. AMARO                                                                JD. HERPLIN                                                                     
+L107016-10TERM. STO. AMARO                                                                JD. ÂNGELA                                                                      
+L107016-21TERM. STO. AMARO                                                                VL. STA. LÚCIA                                                                  
+L107022-10TERM. STO. AMARO                                                                JD. CAIÇARA                                                                     
+L107023-10TERM. STO. AMARO                                                                JD. NAKAMURA                                                                    
+L10736I-10STO. AMARO                                                                      JD. INGÁ                                                                        
+L10737A-10TERM. STO. AMARO                                                                TERM. JD. ÂNGELA                                                                
+L10746C-10STO. AMARO                                                                      JD. TABOÃO                                                                      
+L10746H-10STO. AMARO                                                                      JD. JAQUELINE                                                                   
+L10746P-10STO. AMARO                                                                      PARAISÓPOLIS                                                                    
+L10746R-10REAL PQ.                                                                        REAL PQ.                                                                        
+L10807A-10TERM. STO. AMARO                                                                TERM. CAMPO LIMPO                                                               
+L10807P-10PARAISÓPOLIS                                                                    PARAISÓPOLIS                                                                    
+L10N703-11TERM. STO. AMARO                                                                TERM. JD. ÂNGELA                                                                
+L105111-10TERM. PQ. D. PEDRO II                                                           TERM. STO. AMARO                                                                
+L105154-10TERM. PRINC. ISABEL                                                             TERM. STO. AMARO                                                                
+L105300-10TERM. PQ. D. PEDRO II                                                           TERM. STO. AMARO                                                                
+L106200-10TERM. BANDEIRA                                                                  TERM. STO. AMARO                                                                
+L10637P-10TERM. PINHEIROS                                                                 TERM. STO. AMARO                                                                
+L106500-10TERM. BANDEIRA                                                                  TERM. STO. AMARO                                                                
+L10669A-10TERM. PRINC. ISABEL                                                             TERM. STO. AMARO                                                                
+L10675L-10METRÔ STA. CRUZ                                                                 TERM. STO. AMARO                                                                
+L10675N-10METRÔ ANA ROSA                                                                  TERM. STO. AMARO                                                                
+L10709M-10TERM. PINHEIROS                                                                 TERM. STO. AMARO                                                                
+L107245-10HOSP. DAS CLÍNICAS                                                              TERM. STO. AMARO                                                                
+L107550-10METRÔ STA. CECÍLIA                                                              TERM. STO. AMARO                                                                
+L10N634-11TERM. STO. AMARO                                                                TERM. STO. AMARO                                                                
+L10N640-11TERM. STO. AMARO                                                                TERM. STO. AMARO                                                                
+L10N701-11TERM. PQ. D. PEDRO II                                                           TERM. STO. AMARO                                                                
+L10N702-11TERM. PQ. D. PEDRO II                                                           TERM. STO. AMARO                                                                
+L10N705-11TERM. PINHEIROS                                                                 TERM. STO. AMARO                                                                
+L107004-10EST. STO. AMARO/GUIDO CALOI                                                     TERM. JD. JACIRA                                                                
+L10709P-10TERM. PINHEIROS                                                                 EST. STO. AMARO/GUIDO CALOI                                                     
+L107049-10TERM. CAMPO LIMPO                                                               PQ. DO LAGO                                                                     
+L107050-10TERM. CAMPO LIMPO                                                               JD. DAS ROSAS                                                                   
+L107051-10TERM. CAMPO LIMPO                                                               JD. ROSANA                                                                      
+L107052-10TERM. CAMPO LIMPO                                                               JD. HELGA                                                                       
+L107053-10TERM. CAMPO LIMPO                                                               JD. MACEDÔNIA                                                                   
+L107053-21TERM. CAMPO LIMPO                                                               JD. MARIA SAMPAIO                                                               
+L107053-22TERM. CAMPO LIMPO                                                               JD. MARIA SAMPAIO                                                               
+L107054-10TERM. CAMPO LIMPO                                                               JD. MACEDÔNIA                                                                   
+L107055-10TERM. CAMPO LIMPO                                                               JD. GUARUJÁ                                                                     
+L107057-10TERM. CAMPO LIMPO                                                               JD. MITSUTANI                                                                   
+L107059-10TERM. CAMPO LIMPO                                                               PQ. DO ENGENHO                                                                  
+L107060-10TERM. CAMPO LIMPO                                                               VALO VELHO                                                                      
+L107062-10TERM. CAMPO LIMPO                                                               INOCOOP CAMPO LIMPO                                                             
+L107062-31TERM. CAMPO LIMPO                                                               CAMPO LIMPO                                                                     
+L107063-10TERM. CAMPO LIMPO                                                               JD. MACEDÔNIA                                                                   
+L10746V-10JD. REBOUÇAS                                                                    JD. REBOUÇAS                                                                    
+L108078-10JD. DAS PALMAS                                                                  JD. DAS PALMAS                                                                  
+L108078-31JD. DAS PALMAS                                                                  JD. DAS PALMAS                                                                  
+L108700-22TERM. CAMPO LIMPO                                                               HOSP. DAS CLÍNICAS                                                              
+L10N242-11METRÔ SANTANA                                                                   METRÔ SANTANA                                                                   
+L101788-51METRÔ SANTANA                                                                   JD. CAMPO LIMPO                                                                 
+L106291-10TERM. BANDEIRA                                                                  INOCOOP CAMPO LIMPO                                                             
+L107062-41METRÔ CAMPO LIMPO                                                               METRÔ CAMPO LIMPO                                                               
+L10745M-10SHOP. SP MARKET                                                                 CAMPO LIMPO                                                                     
+L10745M-21CAMPO LIMPO                                                                     CAMPO LIMPO                                                                     
+L108075-10METRÔ BUTANTÃ                                                                   TERM. CAMPO LIMPO                                                               
+L108075-21TERM. MORUMBI                                                                   TERM. CAMPO LIMPO                                                               
+L10807J-10SHOP. MORUMBI                                                                   TERM. CAMPO LIMPO                                                               
+L10807M-10SHOP. MORUMBI                                                                   TERM. CAMPO LIMPO                                                               
+L10809L-10LAPA                                                                            CAMPO LIMPO                                                                     
+L10809P-10TERM. PINHEIROS                                                                 TERM. CAMPO LIMPO                                                               
+L10857A-10METRÔ STA. CRUZ                                                                 TERM. CAMPO LIMPO                                                               
+L10857C-10METRÔ CONCEIÇÃO                                                                 TERM. CAMPO LIMPO                                                               
+L10857P-10PARAÍSO                                                                         TERM. CAMPO LIMPO                                                               
+L10857P-21PARAISO                                                                         CAMPO LIMPO                                                                     
+L10857R-10ACLIMAÇÃO                                                                       TERM. CAMPO LIMPO                                                               
+L108605-10TERM. BANDEIRA                                                                  TERM. CAMPO LIMPO                                                               
+L108700-1 PÇA. RAMOS DE AZEVEDO                                                           TERM. CAMPO LIMPO                                                               
+L108700-10PÇA. RAMOS DE AZEVEDO                                                           TERM. CAMPO LIMPO                                                               
+L10N706-11TERM. PINHEIROS                                                                 TERM. CAMPO LIMPO                                                               
+L10N746-11TERM. CAMPO LIMPO                                                               TERM. CAMPO LIMPO                                                               
+L10118C-10TERM. AMARAL GURGEL                                                             JD. PERY ALTO                                                                   
+L101732-10TERM. AMARAL GURGEL                                                             VL. SABRINA                                                                     
+L10475M-10TERM. AMARAL GURGEL                                                             JD. DA SAÚDE                                                                    
+L102002-10TERM. PQ. D. PEDRO II                                                           TERM. PQ. D. PEDRO II                                                           
+L106250-10TERM. BANDEIRA                                                                  JD. JAQUELINE                                                                   
+L106262-10TERM. BANDEIRA                                                                  CEASA                                                                           
+L106358-10TERM. BANDEIRA                                                                  JD. LUSO                                                                        
+L106414-10TERM. BANDEIRA                                                                  SOCORRO                                                                         
+L106422-10TERM. BANDEIRA                                                                  VL. CRUZEIRO                                                                    
+L106450-51TERM. BANDEIRA                                                                  VALO VELHO                                                                      
+L106475-10TERM. BANDEIRA                                                                  JD. VAZ DE LIMA                                                                 
+L108610-10TERM. BANDEIRA                                                                  JD. PAULO VI                                                                    
+L102021-10CPTM GUAIANAZES                                                                 JD. BANDEIRANTES                                                                
+L10118Y-10LAPA                                                                            LAUZANE PAULISTA                                                                
+L10119L-1 TERM. LAPA                                                                      VL. SULINA                                                                      
+L10119L-10TERM. LAPA                                                                      VL. SULINA                                                                      
+L10128Y-10LAPA                                                                            JD. PERY ALTO                                                                   
+L10139A-10LAPA                                                                            VL. IÓRIO                                                                       
+L10148L-10LAPA                                                                            COHAB ANTÁRTICA                                                                 
+L10178A-10LAPA                                                                            METRÔ SANTANA                                                                   
+L10189L-10LAPA                                                                            CONEXÃO VL. IÓRIO                                                               
+L10211L-10LAPA                                                                            MANDAQUI                                                                        
+L10748A-10LAPA                                                                            JD. D'ABRIL                                                                     
+L10748A-41LAPA                                                                            JD. PERI PERI                                                                   
+L107725-10TERM. LAPA                                                                      RIO PEQUENO                                                                     
+L108001-10TERM. LAPA                                                                      VL. PIAUÍ                                                                       
+L108003-10TERM. LAPA                                                                      REMÉDIOS                                                                        
+L108004-10TERM. LAPA                                                                      STA. MÔNICA                                                                     
+L108010-10LAPA                                                                            PERUS                                                                           
+L108038-10LAPA                                                                            PQ. CONTINENTAL                                                                 
+L108040-10TERM. LAPA                                                                      SOL NASCENTE                                                                    
+L108043-10LAPA                                                                            HAB. TURÍSTICA                                                                  
+L108047-10LAPA                                                                            JARAGUÁ                                                                         
+L108047-51LAPA                                                                            JARAGUÁ                                                                         
+L108050-10LAPA                                                                            PQ. MORRO DOCE                                                                  
+L108050-21LAPA                                                                            ANHANGUERA                                                                      
+L108050-31LAPA                                                                            PQ. MORRO DOCE                                                                  
+L108055-10LAPA                                                                            PERUS                                                                           
+L108060-10TERM. LAPA                                                                      VL. PIAUÍ                                                                       
+L108062-10PQ. SÃO DOMINGOS                                                                PQ. SÃO DOMINGOS                                                                
+L108065-10LAPA                                                                            VL. CLARICE                                                                     
+L10809H-10LAPA                                                                            JD. BOA VISTA                                                                   
+L10809N-10LAPA                                                                            VL. DALVA                                                                       
+L10809T-10LAPA                                                                            COHAB RAPOSO TAVARES                                                            
+L108252-10METRÔ BARRA FUNDA                                                               METRÔ BARRA FUNDA                                                               
+L10847J-21LAPA                                                                            CITY JARAGUA                                                                    
+L108542-21TERM. LAPA                                                                      BRASILÂNDIA                                                                     
+L108548-10TERM. LAPA                                                                      JD. DOS CUNHAS                                                                  
+L108686-21MANGALOT                                                                        MANGALOT                                                                        
+L10874T-10LAPA                                                                            IPIRANGA                                                                        
+L109012-10TERM. LAPA                                                                      ITABERABA                                                                       
+L109014-10TERM. LAPA                                                                      MORRO GRANDE                                                                    
+L109014-42TERM. LAPA                                                                      JD. IRACEMA                                                                     
+L109047-10LAPA                                                                            JD. PAULISTANO                                                                  
+L109181-10LAPA                                                                            VL. TEREZINHA                                                                   
+L109188-10LAPA                                                                            CAPELA DA LAGOA                                                                 
+L10938C-21TERM. LAPA                                                                      COHAB TAIPAS                                                                    
+L10N831-11TERM. LAPA                                                                      TERM. LAPA                                                                      
+L107272-10MERCADO DA LAPA                                                                 MERCADO DA LAPA                                                                 
+L107281-10LAPA                                                                            LAPA                                                                            
+L108000-1 PÇA. RAMOS DE AZEVEDO                                                           TERM. LAPA                                                                      
+L108000-10PÇA. RAMOS DE AZEVEDO                                                           TERM. LAPA                                                                      
+L10817C-10LAPA                                                                            LAPA                                                                            
+L10856R-10SOCORRO                                                                         LAPA                                                                            
+L108615-10TERM. PQ. D. PEDRO II                                                           PQ. DA LAPA                                                                     
+L10875C-1 METRÔ STA. CRUZ                                                                 TERM. LAPA                                                                      
+L10875C-10METRÔ STA. CRUZ                                                                 TERM. LAPA                                                                      
+L10875H-10METRÔ VL. MARIANA                                                               TERM. LAPA                                                                      
+L109050-10TERM. LAPA                                                                      TERM. LAPA                                                                      
+L109051-10TERM. PINHEIROS                                                                 LAPA                                                                            
+L10N101-11TERM. PQ. D. PEDRO II                                                           TERM. LAPA                                                                      
+L10N102-11TERM. PQ. D. PEDRO II                                                           TERM. LAPA                                                                      
+L10N131-11TERM. LAPA                                                                      TERM. LAPA                                                                      
+L10N136-11TERM. LAPA                                                                      TERM. LAPA                                                                      
+L10N832-11TERM. LAPA                                                                      TERM. LAPA                                                                      
+L10N834-11TERM. LAPA                                                                      TERM. LAPA                                                                      
+L105105-10TERM. MERCADO                                                                   TERM. SACOMÃ                                                                    
+L105109-10TERM. MERCADO                                                                   TERM. VL. PRUDENTE                                                              
+L105110-10TERM. MERCADO                                                                   TERM. SÃO MATEUS                                                                
+L105110-21TERM. MERCADO                                                                   SÃO MATEUS                                                                      
+L105110-22TERM. MERCADO                                                                   FAZENDA DA JUTA                                                                 
+L105110-23TERM. MERCADO                                                                   JD. PLANALTO                                                                    
+L102100-21TERM. PQ. D. PEDRO II                                                           TERM. VL. CARRÃO                                                                
+L102104-10TERM. PQ. D. PEDRO II                                                           METRÔ SANTANA                                                                   
+L102175-10TERM. PQ. D. PEDRO II                                                           PQ. EDU CHAVES                                                                  
+L102290-10TERM. PQ. D. PEDRO II                                                           TERM. SÃO MATEUS                                                                
+L102290-21TERM. PQ. D. PEDRO II                                                           SÃO MATEUS                                                                      
+L102363-10TERM. PQ. D. PEDRO II                                                           JD. DANFER                                                                      
+L102552-10TERM. PQ. D. PEDRO II                                                           VL. MARA                                                                        
+L102552-41TERM. PQ. D. PEDRO II                                                           JD. SÃO MARTINHO                                                                
+L102582-10TERM. PQ. D. PEDRO II                                                           VL. NOVA CURUÇÁ                                                                 
+L102582-21TERM. PQ. D. PEDRO II                                                           CID. PEDRO JOSÉ NUNES                                                           
+L102626-10TERM. PQ. D. PEDRO II                                                           JD. NAZARÉ                                                                      
+L102666-10TERM. PQ. D. PEDRO II                                                           JD. CAMARGO VELHO                                                               
+L102666-21TERM. PQ. D. PEDRO II                                                           JD. CAMARGO VELHO                                                               
+L102678-10TERM. PQ. D. PEDRO II                                                           OLIVEIRINHA                                                                     
+L102678-41TERM. PQ. D. PEDRO II                                                           JD. CAMARGO NOVO                                                                
+L103141-10TERM. PQ. D. PEDRO II                                                           SÃO MATEUS                                                                      
+L103160-10TERM. PQ. D. PEDRO II                                                           TERM. VL. PRUDENTE                                                              
+L103161-10TERM. PQ. D. PEDRO II                                                           JD. COLORADO                                                                    
+L103301-10TERM. PQ. D. PEDRO II                                                           TERM. SÃO MIGUEL                                                                
+L103390-10TERM. PQ. D. PEDRO II                                                           SÃO MATEUS                                                                      
+L103414-10TERM. PQ. D. PEDRO II                                                           VL. DALILA                                                                      
+L103459-10TERM. PQ. D. PEDRO II                                                           ITAIM PAULISTA                                                                  
+L103459-21TERM. PQ. D. PEDRO II                                                           CEM. DA SAUDADE                                                                 
+L103459-24TERM. PQ. D. PEDRO II                                                           ITAIM PAULISTA                                                                  
+L103686-10TERM. PQ. D. PEDRO II                                                           JD. SÃO PAULO                                                                   
+L104114-10TERM. PQ. D. PEDRO II                                                           VL. GUMERCINDO                                                                  
+L104221-10TERM. PQ. D. PEDRO II                                                           JD. PLANALTO                                                                    
+L104288-10TERM. PQ. D. PEDRO II                                                           PQ. SANTA MADALENA                                                              
+L104310-10TERM. PQ. D. PEDRO II                                                           E.T. ITAQUERA                                                                   
+L104310-21TERM. PQ. D. PEDRO II                                                           ARTUR ALVIM                                                                     
+L104311-10TERM. PQ. D. PEDRO II                                                           TERM. SÃO MATEUS                                                                
+L104312-10TERM. PQ. D. PEDRO II                                                           JD. MARÍLIA                                                                     
+L104314-10TERM. PQ. D. PEDRO II                                                           INÁCIO MONTEIRO                                                                 
+L104315-10TERM. PQ. D. PEDRO II                                                           TERM. VL. CARRÃO                                                                
+L104491-10TERM. PQ. D. PEDRO II                                                           ZOOLÓGICO                                                                       
+L10475R-10TERM. PQ. D. PEDRO II                                                           JD. SÃO SAVÉRIO                                                                 
+L105100-10TERM. PQ. D. PEDRO II                                                           TERM. PINHEIROS                                                                 
+L105108-10TERM. PQ. D. PEDRO II                                                           JD. CELESTE                                                                     
+L105290-10TERM. PQ. D. PEDRO II                                                           DIV. DIADEMA                                                                    
+L10702U-10TERM. PQ. D. PEDRO II                                                           CID. UNIVERSITÁRIA                                                              
+L10909T-1 TERM. PQ. D. PEDRO II                                                           TERM. PINHEIROS                                                                 
+L10909T-10TERM. PQ. D. PEDRO II                                                           TERM. PINHEIROS                                                                 
+L10N201-11TERM. PQ. D. PEDRO II                                                           METRÔ TUCURUVI                                                                  
+L10N203-11TERM. PQ. D. PEDRO II                                                           METRÔ TUCURUVI                                                                  
+L10N204-11TERM. PQ. D. PEDRO II                                                           METRÔ TUCURUVI                                                                  
+L10N401-11TERM. PQ. D. PEDRO II                                                           TERM. VL. CARRÃO                                                                
+L10N501-11TERM. PQ. D. PEDRO II                                                           TERM. SÃO MATEUS                                                                
+L10N502-11TERM. PQ. D. PEDRO II                                                           TERM. SACOMÃ                                                                    
+L10N503-11TERM. PQ. D. PEDRO II                                                           TERM. SÃO MATEUS                                                                
+L10N504-11TERM. PQ. D. PEDRO II                                                           TERM. VL. PRUDENTE                                                              
+L10N508-11TERM. PQ. D. PEDRO II                                                           TERM. SACOMÃ                                                                    
+L10N604-11TERM. PQ. D. PEDRO II                                                           METRÔ JABAQUARA                                                                 
+L10N801-11TERM. PQ. D. PEDRO II                                                           METRÔ BUTANTÃ                                                                   
+L10N802-11TERM. PQ. D. PEDRO II                                                           TERM. PINHEIROS                                                                 
+L10908T-10TERM. PQ. D. PEDRO II                                                           TERM. PQ. D. PEDRO II                                                           
+L10930P-10TERM. PINHEIROS                                                                 TERM. PQ. D. PEDRO II                                                           
+L10N106-11METRÔ BARRA FUNDA                                                               TERM. PQ. D. PEDRO II                                                           
+L10N307-11TERM. PINHEIROS                                                                 TERM. PQ. D. PEDRO II                                                           
+L10107T-10TERM. PINHEIROS                                                                 METRÔ TUCURUVI                                                                  
+L10177H-21PINHEIROS                                                                       METRÔ SANTANA                                                                   
+L10177Y-10PINHEIROS                                                                       METRÔ BARRA FUNDA                                                               
+L10199D-10TERM. PINHEIROS                                                                 CONEXÃO VL. IÓRIO                                                               
+L10208M-10TERM. PINHEIROS                                                                 METRÔ SANTANA                                                                   
+L10477A-10TERM. PINHEIROS                                                                 SACOMÃ                                                                          
+L10576M-10PINHEIROS                                                                       VL. CLARA                                                                       
+L10637A-10TERM. PINHEIROS                                                                 TERM. JD. ÂNGELA                                                                
+L10637A-21TERM. PINHEIROS                                                                 VL. REMO                                                                        
+L10637A-25TERM. PINHEIROS                                                                 PIRAPORINHA                                                                     
+L10637G-51PINHEIROS                                                                       JD. ELIANA                                                                      
+L10637J-10PINHEIROS                                                                       VL. SÃO JOSÉ                                                                    
+L10647A-10PINHEIROS                                                                       VALO VELHO                                                                      
+L10647P-10TERM. PINHEIROS                                                                 COHAB ADVENTISTA                                                                
+L107013-10PINHEIROS                                                                       PQ. ARARIBA                                                                     
+L107040-10PINHEIROS                                                                       PARAISÓPOLIS                                                                    
+L107040-21PINHEIROS                                                                       PARAISÓPOLIS                                                                    
+L10771P-10JD. JOÃO XXIII                                                                  JD. JOÃO XXIII                                                                  
+L10775A-10JD. ADALGIZA                                                                    JD. ADALGIZA                                                                    
+L10809A-10TERM. PINHEIROS                                                                 JD. D'ABRIL                                                                     
+L10809D-10TERM. PINHEIROS                                                                 COHAB EDUCANDÁRIO                                                               
+L10809R-10RIO PEQUENO                                                                     RIO PEQUENO                                                                     
+L10846M-10TERM. PINHEIROS                                                                 VL. PIAUÍ                                                                       
+L10967A-10PINHEIROS                                                                       IMIRIM                                                                          
+L10N202-11TERM. PINHEIROS                                                                 METRÔ SANTANA                                                                   
+L10N238-11METRÔ SANTANA                                                                   METRÔ SANTANA                                                                   
+L10N505-11TERM. PINHEIROS                                                                 TERM. SACOMÃ                                                                    
+L10N603-11TERM. PINHEIROS                                                                 METRÔ JABAQUARA                                                                 
+L101726-10METRÔ SANTANA                                                                   CEM. PQ. DOS PINHEIROS                                                          
+L10172U-10MOOCA                                                                           CEM. PQ. DOS PINHEIROS                                                          
+L101773-10MANDAQUI                                                                        CEM. PQ. DOS PINHEIROS                                                          
+L10719P-10TERM. PRINC. ISABEL                                                             TERM. PINHEIROS                                                                 
+L10N833-11TERM. PINHEIROS                                                                 TERM. PINHEIROS                                                                 
+L10N835-11TERM. PINHEIROS                                                                 TERM. PINHEIROS                                                                 
+L10N836-11TERM. PINHEIROS                                                                 TERM. PINHEIROS                                                                 
+L10N842-11TERM. PINHEIROS                                                                 TERM. PINHEIROS                                                                 
+L106232-10METRÔ BARRA FUNDA                                                               PINHEIROS/VILA IDA                                                              
+L10119C-10TERM. PRINC. ISABEL                                                             PQ. EDU CHAVES                                                                  
+L10271C-10TERM. PRINC. ISABEL                                                             PQ. VL. MARIA                                                                   
+L10509M-10TERM. PRINC. ISABEL                                                             JD. MIRIAM                                                                      
+L10609F-10TERM. PRINC. ISABEL                                                             CHÁC. SANTANA                                                                   
+L107181-10TERM. PRINC. ISABEL                                                             CID. UNIVERSITÁRIA                                                              
+L10778R-10TERM. PRINC. ISABEL                                                             COHAB RAPOSO TAVARES                                                            
+L10778R-21TERM. PRINC. ISABEL                                                             COHAB RAPOSO TAVARES                                                            
+L108707-10TERM. PRINC. ISABEL                                                             RIO PEQUENO                                                                     
+L10938C-10TERM. PRINC. ISABEL                                                             COHAB TAIPAS                                                                    
+L10978J-10TERM. PRINC. ISABEL                                                             VOITH                                                                           
+L10508L-10TERM. PRINC. ISABEL                                                             TERM. PRINC. ISABEL                                                             
+L10805L-10TERM. PRINC. ISABEL                                                             TERM. PRINC. ISABEL                                                             
+L102101-41PÇA. SILVIO ROMERO                                                              PÇA. SILVIO ROMERO                                                              
+L103021-10TERM. VL PRUDENTE                                                               PQ. BANCÁRIO                                                                    
+L103024-10TERM. VL PRUDENTE                                                               VL. INDUSTRIAL                                                                  
+L104029-10TERM. VL PRUDENTE                                                               SÃO MATEUS                                                                      
+L10407Y-10PQ. SAVOY CITY                                                                  PQ. SAVOY CITY                                                                  
+L104284-10TERM. VL. PRUDENTE                                                              VL. CALIFÓRNIA                                                                  
+L104286-10TERM. VL PRUDENTE                                                               VL. INDUSTRIAL                                                                  
+L105110-24TERM. VL. PRUDENTE                                                              SÃO MATEUS                                                                      
+L10514T-21TERM. VL. PRUDENTE                                                              JD. COLORADO                                                                    
+L10514T-22TERM. VL. PRUDENTE                                                              JD. ITÁPOLIS                                                                    
+L10N537-11METRÔ VL. MARIANA                                                               METRÔ VL. MARIANA                                                               
+L10N507-11METRÔ SANTANA                                                                   TERM. VL. PRUDENTE                                                              
+L10N533-11TERM. VL. PRUDENTE                                                              TERM. VL. PRUDENTE                                                              
+L90752  
