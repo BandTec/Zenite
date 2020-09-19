@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+<!--    https://material.io/develop/android/components/app-bars-top -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:backgroundTint="@color/azulClaro">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_logo_zenite"
+            android:scaleType="fitEnd"
+            android:padding="25dp"
+            android:fitsSystemWindows="true"
+            android:contentDescription="asdf"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        style="@style/Titulo"
+        android:id="@+id/titulo"
+        android:text="Oi! Tudo certo?"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp" />
+
+    <TextView
+        style="@style/Label"
+        android:id="@+id/label2"
+        android:text="Escreva abaixo 'fiscal' ou 'motorista'"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        style="@style/Input"
+        android:id="@+id/entrar"
+        />
+
+    <!--    https://material.io/develop/android/components/buttons -->
+    <Button
+        android:onClick="goDash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnEntrar"
+        android:text="entrar"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="15dp"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:onClick="testeOutraTela"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:id="@+id/botao"
+        android:text="ir para outra tela"
+        android:layout_marginHorizontal="25dp"
+        />
+</LinearLayout>

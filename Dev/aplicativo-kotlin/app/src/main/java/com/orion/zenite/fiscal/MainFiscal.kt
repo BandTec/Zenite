@@ -1,0 +1,44 @@
+package com.orion.zenite.fiscal
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
+import com.orion.zenite.R
+import kotlinx.android.synthetic.main.activity_main_fiscal.*
+
+// tutorial barra de navegação
+// https://www.youtube.com/watch?v=v8MbOjBCu0o
+// https://thesimplycoder.com/289/bottom-navigation-bar-android-using-kotlin/
+//https://medium.com/over-engineering/setting-up-a-material-components-theme-for-android-fbf7774da739
+
+class MainFiscal : AppCompatActivity() {
+    private val dash = FiscalDashboard()
+    private val camera = FiscalCamera()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main_fiscal)
+        replaceFragment(dash, "Dashboard")
+
+        bottomNav.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.home -> replaceFragment(dash, "Dashboard")
+                R.id.camera -> replaceFragment(camera, "Escaneie o código qr")
+            }
+            true
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment, nomeTela: String){
+        if(fragment != null){
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, fragment)
+            transaction.commit()
+            val header = topAppBar;
+            header.title = nomeTela
+        }
+    }
+
+}
