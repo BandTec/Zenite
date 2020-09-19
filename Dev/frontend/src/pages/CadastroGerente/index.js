@@ -1,12 +1,16 @@
 /* eslint react-hooks/exhaustive-deps: 0 */
 import React, { useState, useEffect } from "react";
-import { validationStep1, validationStep2, validationStep3 } from "src/functions/Validadores/gerenteValidacao";
-import {cadastrar, editar, consultarEdicao } from "src/services/gerente";
-import {useHistory} from "react-router-dom";
+import {
+  validationStep1,
+  validationStep2,
+  validationStep3,
+} from "../../functions/Validadores/gerenteValidacao";
+import { cadastrar, editar, consultarEdicao } from "../../services/metodos";
+import { useHistory } from "react-router-dom";
 
-import MultiStepForm from "src/components/MultiStepForm";
-import Loader from "src/components/Loader";
-import InputFormik from "src/components/InputFormik";
+import MultiStepForm from "../../components/MultiStepForm";
+import Loader from "../../components/Loader";
+import InputFormik from "../../components/InputFormik";
 import { Container, CaixaHorizontal } from "./styles";
 
 export default function CadastroFiscal(props) {
@@ -16,10 +20,14 @@ export default function CadastroFiscal(props) {
   const isEdicao = caminho.includes("editar");
   const tipoPagina = isEdicao ? "Edição" : "Cadastro";
   const history = useHistory();
+  const url = "/api/gerente";
+  const urlEdicao = `${url}/${id}`;
 
   useEffect(() => {
     async function consulta() {
-      const retorno = await consultarEdicao(id);
+      const retorno = await consultarEdicao(urlEdicao);
+      delete retorno["linhas"];
+      retorno.conta.senha = "";
       setDados(retorno);
     }
     if (isEdicao) {
@@ -27,13 +35,14 @@ export default function CadastroFiscal(props) {
     }
   }, [id]);
 
-
   const onSubmit = (values) => {
-    isEdicao ? editar(values, history, id) : cadastrar(values, history);
+    isEdicao
+      ? editar(urlEdicao, values, history)
+      : cadastrar(url, values, history);
   };
 
   const Step = ({ children }) => children;
- 
+
   return (
     <Container>
       {isEdicao && Object.keys(dados).length === 0 ? (

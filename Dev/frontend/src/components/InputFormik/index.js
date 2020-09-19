@@ -24,7 +24,7 @@ export default function InputFormik(props) {
         {...field}
         mask={mask}
         onFocus={handleFocus}
-        feedback={showFeedback ? !!meta.error : false}
+        feedback={showFeedback ? (!!meta.error ? 1 : 0) : 0}
         pequeno={pequeno}
         invalido={invalido}
       />

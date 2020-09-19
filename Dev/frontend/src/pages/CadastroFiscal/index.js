@@ -1,12 +1,16 @@
 /* eslint react-hooks/exhaustive-deps: 0 */
 import React, { useState, useEffect } from "react";
-import { validationStep1, validationStep2, validationStep3 } from "src/functions/Validadores/fiscalValidacao";
-import {cadastrar, editar, consultarEdicao } from "src/services/fiscal";
-import {useHistory} from "react-router-dom";
+import {
+  validationStep1,
+  validationStep2,
+  validationStep3,
+} from "../../functions/Validadores/fiscalValidacao";
+import { cadastrar, editar, consultarEdicao } from "../../services/metodos";
+import { useHistory } from "react-router-dom";
 
-import MultiStepForm from "src/components/MultiStepForm";
-import Loader from "src/components/Loader";
-import InputFormik from "src/components/InputFormik";
+import MultiStepForm from "../../components/MultiStepForm";
+import Loader from "../../components/Loader";
+import InputFormik from "../../components/InputFormik";
 import { Container, CaixaHorizontal } from "./styles";
 
 export default function CadastroFiscal(props) {
@@ -16,10 +20,14 @@ export default function CadastroFiscal(props) {
   const isEdicao = caminho.includes("editar");
   const tipoPagina = isEdicao ? "Edição" : "Cadastro";
   const history = useHistory();
+  const url = "/api/fiscal";
+  let urlEdicao = `${url}/${id}`;
 
   useEffect(() => {
     async function consulta() {
-      const retorno = await consultarEdicao(id);
+      const retorno = await consultarEdicao(urlEdicao);
+      delete retorno["linhas"];
+      retorno.conta.senha = "";
       setDados(retorno);
     }
     if (isEdicao) {
@@ -27,13 +35,14 @@ export default function CadastroFiscal(props) {
     }
   }, [id]);
 
-
   const onSubmit = (values) => {
-    isEdicao ? editar(values, history, id) : cadastrar(values, history);
+    isEdicao
+      ? editar(urlEdicao, values, history)
+      : cadastrar(url, values, history);
   };
 
   const Step = ({ children }) => children;
- 
+
   return (
     <Container>
       {isEdicao && Object.keys(dados).length === 0 ? (
@@ -45,26 +54,15 @@ export default function CadastroFiscal(props) {
           onSubmit={onSubmit}
         >
           <Step titulo="DADOS CADASTRAIS" validationSchema={validationStep1}>
-            <InputFormik texto="Nome" name="nome" maxLength="100" required />
-            <InputFormik
-              texto="CPF"
-              mask="999.999.999-99"
-              name="cpf"
-              required
-            />
-            <InputFormik
-              texto="Registro Fiscal"
-              name="registroFiscal"
-              maxLength="20"
-              required
-            />
+            <InputFormik texto="Nome" name="nome" maxLength="100" />
+            <InputFormik texto="CPF" mask="999.999.999-99" name="cpf" />
+
             <CaixaHorizontal>
               <InputFormik
                 pequeno={true}
                 texto="Data de Nascimento"
                 type="date"
                 name="dataNascimento"
-                required
               />
               <InputFormik
                 texto="Celular"
@@ -72,24 +70,17 @@ export default function CadastroFiscal(props) {
                 // mask="(99) 9 9999-9999"
                 pequeno={true}
                 maxLength="15"
-                required
               />
             </CaixaHorizontal>
           </Step>
 
           <Step titulo="Endereço" validationSchema={validationStep2}>
-            <InputFormik
-              texto="CEP"
-              name="endereco.cep"
-              mask="99999-999"
-              required
-            />
+            <InputFormik texto="CEP" name="endereco.cep" mask="99999-99" />
 
             <InputFormik
               texto="Logradouro"
               maxLength="120"
               name="endereco.logradouro"
-              required
             />
 
             <CaixaHorizontal>
@@ -98,7 +89,6 @@ export default function CadastroFiscal(props) {
                 texto="Número"
                 maxLength="16"
                 name="endereco.numero"
-                required
               />
 
               <InputFormik
@@ -127,18 +117,7 @@ export default function CadastroFiscal(props) {
           </Step>
 
           <Step titulo="DADOS DE ACESSO" validationSchema={validationStep3}>
-            <InputFormik
-              texto="Código do Dispositivo"
-              name="dispositivo.codigo"
-              required
-            />
-
-            <InputFormik
-              texto="Email"
-              name="conta.email"
-              type="email"
-              required
-            />
+            <InputFormik texto="Email" name="conta.email" type="email" />
 
             <InputFormik
               texto="Senha"
@@ -146,7 +125,6 @@ export default function CadastroFiscal(props) {
               name="conta.senha"
               type="password"
               textoAlerta="Sua senha deve conter no mínimo 8 letras."
-              required
             />
 
             <InputFormik
@@ -154,7 +132,6 @@ export default function CadastroFiscal(props) {
               maxLength="255"
               name="confirmarSenha"
               type="password"
-              required
             />
           </Step>
         </MultiStepForm>

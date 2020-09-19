@@ -6,7 +6,6 @@ import orion.zenite.entidades.Cronograma;
 
 public interface CronogramaRepository extends JpaRepository<Cronograma, Integer> {
 
-    @Query(value = "select max(c.id) from cronograma c")
-    int lastId();
+
 
 }

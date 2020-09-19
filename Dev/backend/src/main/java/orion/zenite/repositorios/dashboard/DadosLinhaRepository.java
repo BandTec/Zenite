@@ -9,10 +9,10 @@ import orion.zenite.entidades.Dashboard.ViagemMotorista;
 import java.util.List;
 
 public interface DadosLinhaRepository extends JpaRepository<DadosLinha, String> {
-    @Query(nativeQuery = true, value = "SELECT * FROM vwDadosLinha ")
+    @Query(nativeQuery = true, value = "SELECT * FROM vw_dados_linha ")
     List<DadosLinha> findDadosLinha();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM vwDadosLinha where id_linha=:idLinha")
+    @Query(nativeQuery = true, value = "SELECT * FROM vw_dados_linha where id_linha=:idLinha")
     DadosLinha findDadosLinhaLinha(@Param("idLinha") Integer idLinha);
 
 }

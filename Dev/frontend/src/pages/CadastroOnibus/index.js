@@ -21,7 +21,6 @@ import InputComRotulo from "../../components/InputComRotulo";
 
 export default function CadastroOnibus(props) {
   const [numero, setNumero] = useState("");
-  const [codigo, setCodigo] = useState("");
   const [placa, setPlaca] = useState("");
   const [modelo, setModelo] = useState("");
   const [fabricante, setFabricante] = useState("");
@@ -29,7 +28,6 @@ export default function CadastroOnibus(props) {
   const [qtdPassageirosSentados, setQtdPassageirosSentados] = useState("");
   const [qtdPassageirosEmPe, setQtdPassageirosEmPe] = useState("");
   const [gerente, setGerente] = useState("");
-  const [idDispositivo, setIdDispositivo] = useState("");
 
   const caminho = props.match.path;
   const id = props.match.params.id;
@@ -45,15 +43,9 @@ export default function CadastroOnibus(props) {
       acessivel: acessivel === 1 ? true : false,
       qtdPassageirosSentados: qtdPassageirosSentados,
       qtdPassageirosEmPe: qtdPassageirosEmPe,
-      dispositivo: {
-        codigo: codigo,
-        tipoDispositivo: {
-          id: 2,
-        },
-      },
-      gerente: {id: gerente.dados.id}
+      gerente: { id: gerente.dados.id },
     };
-   
+
     try {
       const token = await localStorage.getItem("token");
 
@@ -69,8 +61,8 @@ export default function CadastroOnibus(props) {
           showConfirmButton: false,
           timer: 2000,
         });
-      }else {
-        console.log(response);  
+      } else {
+        console.log(response);
       }
     } catch (e) {
       console.log(e);
@@ -94,15 +86,15 @@ export default function CadastroOnibus(props) {
         const dados = response.data;
 
         setNumero(dados.numero);
-        setCodigo(dados.dispositivo.codigo);
         setPlaca(dados.placa);
         setModelo(dados.modelo);
         setFabricante(dados.fabricante);
         setAcessivel(dados.acessivel ? 1 : 2);
         setQtdPassageirosSentados(dados.qtdPassageirosSentados);
         setQtdPassageirosEmPe(dados.qtdPassageirosEmPe);
-        setIdDispositivo(dados.dispositivo.id);
-        if(dados.gerente) {setGerente(option(dados.gerente))};
+        if (dados.gerente) {
+          setGerente(option(dados.gerente));
+        }
       } catch (e) {
         Swal.fire({
           title: "Tente novamente",
@@ -115,13 +107,13 @@ export default function CadastroOnibus(props) {
     if (id) consultarEdicao();
   }, [id]);
 
-    const option = (e) => {
-      return {
-        value: e.id,
-        label: e.nome,
-        dados: e,
-      };
+  const option = (e) => {
+    return {
+      value: e.id,
+      label: e.nome,
+      dados: e,
     };
+  };
 
   const editar = async () => {
     let corpo = {
@@ -133,56 +125,49 @@ export default function CadastroOnibus(props) {
       acessivel: acessivel === 1 ? true : false,
       qtdPassageirosSentados: qtdPassageirosSentados,
       qtdPassageirosEmPe: qtdPassageirosEmPe,
-      dispositivo: {
-        id: idDispositivo,
-        codigo: codigo,
-        tipoDispositivo: {
-          id: 2,
-        },
-      },
-      gerente: {id: gerente.dados.id}
+      gerente: { id: gerente.dados.id },
     };
 
-   let result = await Swal.fire({
-     title: "Aviso",
-     text: "Deseja realmente editar este dado? ",
-     icon: "warning",
-     showCancelButton: true,
-     confirmButtonColor: "#3085d6",
-     cancelButtonColor: "#d33",
-     confirmButtonText: "Sim, desejo",
-     cancelButtonText: "Não",
-   });
+    let result = await Swal.fire({
+      title: "Aviso",
+      text: "Deseja realmente editar este dado? ",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, desejo",
+      cancelButtonText: "Não",
+    });
 
     if (result.value) {
-    try {
-      const token = await localStorage.getItem("token");
+      try {
+        const token = await localStorage.getItem("token");
 
-      const response = await api.put(`/api/onibus/${id}`, corpo, {
-        headers: { Authorization: token },
-      });
+        const response = await api.put(`/api/onibus/${id}`, corpo, {
+          headers: { Authorization: token },
+        });
 
-      if (response.status === 200) {
-        props.history.push("/onibus");
+        if (response.status === 200) {
+          props.history.push("/onibus");
+          Swal.fire({
+            position: "flex-end",
+            icon: "success",
+            title: "Alterado com Sucesso",
+            showConfirmButton: false,
+          });
+          window.location.reload();
+        } else {
+          alert("Ocorreu um erro. Tente de novo");
+        }
+      } catch (e) {
         Swal.fire({
-          position: "flex-end",
-          icon: "success",
-          title: "Alterado com Sucesso",
+          title: "Tente novamente",
+          text: "Ocorreu um imprevisto, por gentileza tente novamente.",
+          icon: "error",
           showConfirmButton: false,
         });
-        window.location.reload();
-      } else {
-        alert("Ocorreu um erro. Tente de novo");
       }
-    } catch (e) {
-      Swal.fire({
-        title: "Tente novamente",
-        text: "Ocorreu um imprevisto, por gentileza tente novamente.",
-        icon: "error",
-        showConfirmButton: false,
-      });
     }
-  }
   };
 
   const pesquisa = async (inputValue) => {
@@ -269,7 +254,7 @@ export default function CadastroOnibus(props) {
             </CaixaHorizontal>
 
             <CaixaHorizontal>
-            <InputComRotulo
+              <InputComRotulo
                 type="number"
                 pequeno={true}
                 texto="Passageiros Sentados"
@@ -289,15 +274,6 @@ export default function CadastroOnibus(props) {
                 onChange={(e) => setQtdPassageirosEmPe(e.target.value)}
               />
             </CaixaHorizontal>
-
-            <InputComRotulo
-              texto="Código do Dispositivo"
-              maxLength="20"
-              name="codigoDispositivo"
-              value={codigo}
-              onChange={(e) => setCodigo(e.target.value)}
-              required
-            />
 
             <Rotulo>Gerente</Rotulo>
             <AsyncSelect

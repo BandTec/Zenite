@@ -9,7 +9,6 @@ export const validationStep1 = yup.object({
     .test("cpf-validation", "CPF inválido", (value) => validarCPF(value)),
   dataNascimento: yup.date().required(),
   numeroTelefone: yup.string().required(),
-  registroFiscal: yup.string().required(),
 });
 
 export const validationStep2 = yup.object({
@@ -24,9 +23,6 @@ export const validationStep2 = yup.object({
 });
 
 export const validationStep3 = yup.object({
-  dispositivo: yup.object().shape({
-    codigo: yup.string().required(),
-  }),
   conta: yup.object().shape({
     email: yup.string().email().required(),
     senha: yup.string().required(),

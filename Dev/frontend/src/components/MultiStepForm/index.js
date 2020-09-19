@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Formik } from "formik";
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   Container,
   CaixaHorizontal,
@@ -11,7 +11,7 @@ import {
   Caixa,
 } from "./styles";
 import Button from "./Button";
-import StatusPage from "src/components/StatusPage";
+import StatusPage from "../../components/StatusPage";
 
 const MultiStepForm = ({ children, initialValues, onSubmit, titulo }) => {
   const [stepNumber, setStepNumber] = useState(0);
@@ -24,7 +24,7 @@ const MultiStepForm = ({ children, initialValues, onSubmit, titulo }) => {
   const history = useHistory();
   const goBack = () => {
     history.goBack();
-  }
+  };
 
   const next = (values) => {
     setSnapshot(values);
@@ -51,25 +51,27 @@ const MultiStepForm = ({ children, initialValues, onSubmit, titulo }) => {
   return (
     <Container>
       <CorpoPagina>
-        <CaixaHorizontal center={true}>
-          <StatusPage
-            ativo={stepNumber === 0}
-            texto="Dados Pessoais"
-            temProximoPasso={true}
-          />
+        {totalSteps > 1 && (
+          <CaixaHorizontal center={true}>
+            <StatusPage
+              ativo={stepNumber === 0}
+              texto="Dados Pessoais"
+              temProximoPasso={true}
+            />
 
-          <StatusPage
-            ativo={stepNumber === 1}
-            texto="Endereço"
-            temProximoPasso={true}
-          />
+            <StatusPage
+              ativo={stepNumber === 1}
+              texto="Endereço"
+              temProximoPasso={true}
+            />
 
-          <StatusPage
-            ativo={isLastStep}
-            texto="Dados de Acesso"
-            temProximoPasso={false}
-          />
-        </CaixaHorizontal>
+            <StatusPage
+              ativo={isLastStep}
+              texto="Dados de Acesso"
+              temProximoPasso={false}
+            />
+          </CaixaHorizontal>
+        )}
 
         <Formik
           initialValues={snapshot}
@@ -80,7 +82,9 @@ const MultiStepForm = ({ children, initialValues, onSubmit, titulo }) => {
             <Form>
               <FormContainer>
                 <Button
-                  onClick={() => step === 0 ? goBack() : previous(formik.values)}
+                  onClick={() =>
+                    step === 0 ? goBack() : previous(formik.values)
+                  }
                   type="button"
                   texto="Voltar"
                   ladoDireito={false}

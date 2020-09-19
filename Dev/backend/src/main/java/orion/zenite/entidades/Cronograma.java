@@ -10,8 +10,7 @@ public class Cronograma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idCronograma")
-    private int idCronograma;
+    private Integer idCronograma;
 
     @ManyToOne
     @JoinColumn(name="fkMotorista")
@@ -21,20 +20,16 @@ public class Cronograma {
     @JoinColumn(name="fkLinha")
     private Linha linha;
 
-    @Column(name="hora_prevista_saida")
     private LocalDateTime horaPrevistaSaida;
 
-    @Column(name="hora_prevista_chegada")
     private LocalDateTime horaPrevistaChegada;
 
-    @Column(name="data_cronograma")
     private LocalDate dataCronograma;
 
     @ManyToOne
     @JoinColumn(name="fkFiscal")
     private Fiscal fiscal;
 
-    @Column(name="viagem_status")
     private int viagemStatus;
 
     public int getIdCronograma() {
