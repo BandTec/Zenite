@@ -1,7 +1,7 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./services/privateRoute";
-
+import yup from "./yupConfig";
 import Fiscal from "./pages/VisualizaFiscal";
 import Linha from "./pages/VisualizaLinha";
 import Motorista from "./pages/VisualizaMotorista";
