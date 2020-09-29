@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     fun goDash(view: View){
         val campoTexto = entrar.text;
         if(campoTexto.isNotEmpty()){
-            if(campoTexto.toString().toLowerCase().equals("motorista")){
+            if(campoTexto.toString().toLowerCase().equals("m")){
                 val intent = Intent(this@MainActivity, MainMotorista::class.java)
                 startActivity(intent)
             }else {
