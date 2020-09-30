@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fiscal.FiscalLinhas"></activity>
+        <activity android:name=".login.Login"></activity>
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity android:name=".fiscal.FiscalLinhas" />
         <activity android:name=".motorista.MainMotorista" />
         <activity android:name=".fiscal.MainFiscal" />
         <activity android:name=".MainActivity">

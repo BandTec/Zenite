@@ -12,24 +12,24 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:backgroundTint="@color/azulClaro">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_logo_zenite"
-            android:scaleType="fitEnd"
-            android:padding="25dp"
-            android:fitsSystemWindows="true"
             android:contentDescription="asdf"
-            />
+            android:fitsSystemWindows="true"
+            android:padding="25dp"
+            android:scaleType="fitEnd"
+            android:src="@drawable/ic_logo_zenite" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        style="@style/Titulo"
         android:id="@+id/titulo"
-        android:text="Oi! Tudo certo?"
+        style="@style/Titulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp" />
+        android:layout_marginHorizontal="25dp"
+        android:text="Oi! Tudo certo?" />
 
     <TextView
         style="@style/Label"
@@ -55,12 +55,20 @@
         />
 
     <com.google.android.material.button.MaterialButton
-        android:onClick="testeOutraTela"
+        android:id="@+id/botao"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:id="@+id/botao"
-        android:text="ir para outra tela"
         android:layout_marginHorizontal="25dp"
-        />
+        android:onClick="testeOutraTela"
+        android:text="ir para outra tela" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/botao2"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:onClick="irTelaLogin"
+        android:text="ir para LOGIN" />
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.orion.zenite.fiscal.FiscalLinhas
 import com.orion.zenite.fiscal.MainFiscal
+import com.orion.zenite.login.Login
 import com.orion.zenite.motorista.MainMotorista
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -31,5 +32,11 @@ class MainActivity : AppCompatActivity() {
     fun testeOutraTela(view: View) {
         val intent = Intent(this@MainActivity, FiscalLinhas::class.java)
         startActivity(intent)
+    }
+
+    fun irTelaLogin(view: View){
+        val LoginActivity = Intent(this@MainActivity, Login::class.java)
+
+        startActivity(LoginActivity)
     }
 }

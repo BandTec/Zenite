@@ -26,14 +26,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-3dp"
         android:background="@color/azulClaro"
+        app:elevation="2dp"
         app:itemIconSize="24dp"
+
         app:itemIconTint="@color/corPrimaria"
         app:itemTextColor="@color/corPrimaria"
-
-        app:elevation="2dp"
-        app:menu="@menu/fiscal"
-        />
+        app:menu="@menu/fiscal" />
 
     <FrameLayout
         android:layout_width="match_parent"
