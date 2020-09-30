@@ -178,13 +178,35 @@ DROP TABLE IF EXISTS tbl_cronograma
 GO
 CREATE TABLE tbl_cronograma(
 	id_cronograma int primary key IDENTITY,
+	--fk_motorista int foreign key references tbl_motorista(id_motorista),
+	--fk_linha int foreign key references tbl_linha(id_linha),
+	--hora_prevista_saida datetime,
+	--hora_prevista_chegada datetime,
+	data_cronograma date not null,
+	fk_fiscal int foreign key references tbl_fiscal(id_fiscal),
+	--viagem_status int -- 1 = aguardando, 2 = andamento, 3 = finalizada
+)
+
+DROP TABLE IF EXISTS tbl_cronograma_horarios
+GO
+CREATE TABLE tbl_cronograma_horarios(
+	id_cronograma_horarios int primary key IDENTITY,
 	fk_motorista int foreign key references tbl_motorista(id_motorista),
+	fk_carro int foreign key references tbl_carro(id_carro),
 	fk_linha int foreign key references tbl_linha(id_linha),
 	hora_prevista_saida datetime,
 	hora_prevista_chegada datetime,
-	data_cronograma date not null,
-	fk_fiscal int foreign key references tbl_fiscal(id_fiscal),
-	viagem_status int -- 1 = aguardando, 2 = andamento, 3 = finalizada
+	viagem_status int default 1, -- 1 = aguardando, 2 = andamento, 3 = finalizada
+	fk_cronograma int foreign key references tbl_cronograma(id_cronograma)
+)
+
+DROP TABLE IF EXISTS tbl_cronograma_horarios_alterados
+GO
+CREATE TABLE tbl_cronograma_horarios_alterados(
+	id_cronograma_horarios_alterados int primary key IDENTITY,
+	nova_hora_prevista_saida datetime,
+	nova_hora_prevista_chegada datetime,
+	fk_cronograma_horarios int foreign key references tbl_cronograma_horarios(id_cronograma_horarios)
 )
 
 ---Pensar na tabela de organiza��o por arduino/rfid/dados viagem....
