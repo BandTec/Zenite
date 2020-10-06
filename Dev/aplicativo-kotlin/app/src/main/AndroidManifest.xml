@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fiscal.FiscalLinhas"></activity>
+        <activity android:name=".fiscal.Linha"></activity>
+        <activity android:name=".fiscal.CronogramaLinha" />
+        <activity android:name=".fiscal.FiscalLinhas" />
         <activity android:name=".motorista.MainMotorista" />
         <activity android:name=".fiscal.MainFiscal" />
         <activity android:name=".MainActivity">

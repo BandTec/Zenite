@@ -1,5 +1,6 @@
 package com.orion.zenite.fiscal.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,13 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.orion.zenite.fiscal.CronogramaLinha
 import com.orion.zenite.R
 import com.orion.zenite.listAdapters.CronogramaGeralAdapter
-import com.orion.zenite.listAdapters.HistoricoAdapter
 import com.orion.zenite.model.Cronograma
 import com.orion.zenite.model.CronogramaGeral
-import com.orion.zenite.model.HistoricoViagens
-import com.orion.zenite.model.Viagens
 
 class CronogramaGeral : Fragment() {
 
@@ -48,11 +47,18 @@ class CronogramaGeral : Fragment() {
         lista = view.findViewById(R.id.listCronograma) as RecyclerView
         lista!!.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = CronogramaGeralAdapter(dadosTemporarios)
+            adapter = CronogramaGeralAdapter(dadosTemporarios) { cronograma: CronogramaGeral -> onItemClick(cronograma)}
         }
 
         return view
     }
 
+    private fun onItemClick(cronograma: CronogramaGeral) {
+        // Toast.makeText(activity, "Você clicou em: ${cronograma.nomeLinha}", Toast.LENGTH_SHORT).show()
+
+        val intent = Intent(activity, CronogramaLinha::class.java)
+        intent.putExtra("nomeLinha", cronograma.nomeLinha)
+        startActivity(intent)
+    }
 
 }

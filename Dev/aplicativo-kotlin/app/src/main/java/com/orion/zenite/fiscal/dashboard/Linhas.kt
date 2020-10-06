@@ -1,13 +1,17 @@
 package com.orion.zenite.fiscal.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.orion.zenite.R
+import com.orion.zenite.fiscal.FiscalLinhas
+import com.orion.zenite.fiscal.Linha
 import com.orion.zenite.listAdapters.HistoricoAdapter
 import com.orion.zenite.listAdapters.LinhasAdapter
 import com.orion.zenite.listAdapters.ViagensAdapter
@@ -39,11 +43,18 @@ class Linhas : Fragment() {
         lista = view.findViewById(R.id.listaLinhas) as RecyclerView
         lista!!.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = LinhasAdapter(dadosTemporarios)
+            adapter = LinhasAdapter(dadosTemporarios) { string: String -> onItemClick(string)}
         }
 
-
         return view
+    }
+
+    private fun onItemClick(item: String) {
+        //Toast.makeText(activity, "Você clicou em: $item", Toast.LENGTH_SHORT).show()
+
+        val intent = Intent(activity, Linha::class.java)
+        intent.putExtra("linha", item)
+        startActivity(intent)
     }
 
 }
