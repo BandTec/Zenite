@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:contentPadding="20dp"
+        app:contentPaddingTop="10dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/TextoBold"
+                android:textColor="@color/corPrimaria"
+                android:id="@+id/nome_linha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Linha"
+                android:textAllCaps="true"
+                android:layout_alignParentLeft="true"/>
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_ir"
+                android:id="@+id/icone"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="12dp"
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
