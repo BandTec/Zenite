@@ -29,12 +29,6 @@ public class QRController {
     @Autowired
     private MotoristaRepository motoristaBD;
 
-    @Autowired
-    private MotoristaCarroRepository repository;
-
-    @Autowired
-    private CarroRepository repositoryCarro;
-
 
     @GetMapping(path = "{id}",produces=MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity gerarQr(@PathVariable("id") Integer id){
