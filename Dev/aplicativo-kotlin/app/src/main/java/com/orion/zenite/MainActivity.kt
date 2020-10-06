@@ -19,17 +19,17 @@ class MainActivity : AppCompatActivity() {
         val campoTexto = entrar.text;
         if(campoTexto.isNotEmpty()){
             if(campoTexto.toString().toLowerCase().equals("m")){
-                val intent = Intent(this@MainActivity, MainMotorista::class.java)
+                val intent = Intent(this, MainMotorista::class.java)
                 startActivity(intent)
             }else {
-                val intent = Intent(this@MainActivity, MainFiscal::class.java)
+                val intent = Intent(this, MainFiscal::class.java)
                 startActivity(intent)
             }
         }
     }
 
     fun testeOutraTela(view: View) {
-        val intent = Intent(this@MainActivity, FiscalLinhas::class.java)
+        val intent = Intent(this, FiscalLinhas::class.java)
         startActivity(intent)
     }
 }

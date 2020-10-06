@@ -10,9 +10,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_grid"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="36dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         app:contentPadding="15dp"
+        app:contentPaddingTop="0dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="10dp"
         android:layout_marginHorizontal="25dp"
@@ -26,7 +27,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="5dp">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="15dp"
@@ -46,7 +47,7 @@
 
             <GridLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="wrap_content">
                 <TextView
                     style="@style/TextoBold"
                     android:id="@+id/tdexto"
@@ -55,6 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_row="0"
                     android:layout_column="0"
+                    android:textColor="@color/corPrimaria"
                     />
 
                 <TextView
@@ -66,6 +68,7 @@
                     android:layout_row="0"
                     android:layout_column="3"
                     android:layout_gravity="end"
+                    android:textColor="@color/corPrimaria"
                     />
 
                 <TextView
@@ -96,6 +99,22 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        style="@style/TextoBold"
+        android:textColor="@color/corPrimaria"
+        android:id="@+id/tituloLista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Viagens de Hoje"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="20dp"
+        />
 
+<!--    https://androidwave.com/recyclerview-kotlin-tutorial/-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listViagens"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="25dp"/>
 
 </LinearLayout>
