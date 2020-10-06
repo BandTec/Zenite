@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
     <!--tools:context=""-->
 
@@ -15,50 +15,51 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_logo_zenite"
+            android:fitsSystemWindows="true"
             android:padding="25dp"
             android:scaleType="fitEnd"
-            android:fitsSystemWindows="true" />
+            android:src="@drawable/ic_logo_zenite" />
 
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        style="@style/Titulo"
         android:id="@+id/titulo"
+        style="@style/Titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:text="BEM VINDO" />
 
     <TextView
-        style="@style/Texto"
-        android:textColor="@color/corPrimaria"
         android:id="@+id/lbEmail"
+        style="@style/Texto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
-        android:text="EMAIL" />
+        android:text="EMAIL"
+        android:textColor="@color/corPrimaria" />
 
     <EditText
-        style="@style/Input"
         android:id="@+id/inputEmail"
-        android:hint="Email"/>
+        style="@style/Input"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
 
     <TextView
-        style="@style/Texto"
-        android:textColor="@color/corPrimaria"
         android:id="@+id/lbSenha"
+        style="@style/Texto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
-        android:text="SENHA" />
+        android:text="SENHA"
+        android:textColor="@color/corPrimaria" />
 
     <EditText
-        style="@style/Input"
         android:id="@+id/inputSenha"
-        android:inputType="textPassword"
-        android:hint="Senha"/>
+        style="@style/Input"
+        android:hint="Senha"
+        android:inputType="textPassword" />
 
 
     <Button
@@ -70,6 +71,16 @@
         android:onClick="AuthLogin"
         android:text="LOGIN" />
 
+    <TextView
+        android:id="@+id/EsqueceuSenha"
+        style="@style/TextoBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:onClick="irRecuperarSenha"
+        android:text="Esqueceu sua senha?"
+        android:textAlignment="center"
+        android:textColor="@color/gradiente2" />
 
 
 </LinearLayout>
