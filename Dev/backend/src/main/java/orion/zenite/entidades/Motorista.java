@@ -50,6 +50,19 @@ public class Motorista {
     @OneToMany(mappedBy = "motorista", cascade = CascadeType.REMOVE)
     private List<Viagem> viagem;
 
+    @Override
+    public String toString() {
+        return "Motorista{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", numeroTelefone='" + numeroTelefone + '\'' +
+                ", cnh='" + cnh + '\'' +
+                ", motoristaCarroList=" + motoristaCarroList +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
