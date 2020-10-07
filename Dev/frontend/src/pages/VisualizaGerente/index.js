@@ -1,42 +1,38 @@
 import React, { useEffect, useState } from "react";
-import api from "../../services/api";
 
 import { Container, Row } from "./styles";
 import Tabela from "../../components/Tabela2";
 import Paginacao from "../../components/Paginacao";
 import Loader from "./../../components/Loader";
 import CabecalhoConsulta from "../../components/CabecalhoConsulta";
+import consultar from "../../services/metodos/consultar";
 
 export default function VisualizaGerente() {
   const [corpo, setCorpo] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [pagina, setPagina] = useState(0);
   const [total, setTotal] = useState(0);
   const [totalItens, setTotalItens] = useState(0);
 
   useEffect(() => {
-    async function dadosCorpos() {
-      const token = localStorage.getItem("token");
-
-      const response = await api.get(`/api/gerente?pagina=${pagina}`, {
-        headers: { Authorization: token },
-      });
-      let dados = response.data;
-      setTotal(dados.totalPaginas);
-      setTotalItens(dados.totalItens);
-      let temp = [];
-      dados.lista.forEach((item) => {
-        temp.push(criaDados(item.id, item.nome, item.numeroTelefone, item.cpf));
-      });
-      setCorpo(temp);
+    async function consultarGerentes() {
+      const url = `/api/gerente?pagina=${pagina}`;
+      const resultado = await consultar(url, criaDados);
+      setCorpo(resultado.dados);
+      setTotal(resultado.totalPaginas);
+      setTotalItens(resultado.totalItens);
+      setLoading(false);
     }
-    dadosCorpos();
+
+    consultarGerentes();
   }, [pagina]);
 
-  function criaDados(id, nome, telefone, cpf) {
-    return { id, nome, telefone, cpf };
+  function criaDados(item) {
+    const { id, nome, numeroTelefone, cpf } = item;
+    return { id, nome, telefone: numeroTelefone, cpf };
   }
 
-  return corpo.length <= 0 ? (
+  return corpo.length <= 0 && loading ? (
     <Loader />
   ) : (
     <Container>

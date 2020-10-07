@@ -1,51 +1,37 @@
 import React, { useEffect, useState } from "react";
-import api from "../../services/api";
-
 import { Container, Row } from "./styles";
 import Tabela from "../../components/Tabela2";
 import Paginacao from "../../components/Paginacao";
 import Loader from "./../../components/Loader";
 import CabecalhoConsulta from "../../components/CabecalhoConsulta";
+import consultar from "../../services/metodos/consultar";
 
 export default function VisualizaFiscal() {
   const [corpo, setCorpo] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [pagina, setPagina] = useState(0);
   const [total, setTotal] = useState(0);
-    const [totalItens, setTotalItens] = useState(0);
+  const [totalItens, setTotalItens] = useState(0);
 
   useEffect(() => {
-    async function dadosCorpos() {
-      const token = localStorage.getItem("token");
-
-      const response = await api.get(`/api/fiscal?pagina=${pagina}`, {
-        headers: { Authorization: token },
-      });
-      let dados = response.data;
-      setTotal(dados.totalPaginas);
-      setTotalItens(dados.totalItens);
-
-      let temp = [];
-      dados.lista.forEach((item) => {
-        temp.push(
-          criaDados(
-            item.id,
-            item.registroFiscal,
-            item.nome,
-            item.numeroTelefone,
-            item.cpf
-          )
-        );
-      });
-      setCorpo(temp);
+    async function consultarFiscais() {
+      const url = `/api/fiscal?pagina=${pagina}`;
+      const resultado = await consultar(url, criaDados);
+      setCorpo(resultado.dados);
+      setTotal(resultado.totalPaginas);
+      setTotalItens(resultado.totalItens);
+      setLoading(false);
     }
-    dadosCorpos();
+
+    consultarFiscais();
   }, [pagina]);
 
-  function criaDados(id, registro, nome, telefone, cpf) {
+  function criaDados(item) {
+    const { id, registro, nome, telefone, cpf } = item;
     return { id, registro, nome, telefone, cpf };
   }
 
-  return corpo.length <= 0 ? (
+  return corpo.length <= 0 && loading ? (
     <Loader />
   ) : (
     <Container>

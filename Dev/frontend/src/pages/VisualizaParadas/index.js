@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import consultar from "../../services/metodos/consultar";
+
 import api from "../../services/api";
-//Então, é que agora tá basicamente "pronta"
 
 import { Container, Row } from "./styles";
 import Tabela from "../../components/Tabela2";
@@ -11,39 +12,27 @@ import CabecalhoConsulta from "../../components/CabecalhoConsulta";
 
 export default function ConsultaParada() {
   const [corpo, setCorpo] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [pagina, setPagina] = useState(0);
   const [total, setTotal] = useState(0);
   const [totalItens, setTotalItens] = useState(0);
 
   useEffect(() => {
-    async function dadosCorpos() {
-      //Essa linha de baixo pega o token de autenticação do localStorage
-      const token = localStorage.getItem("token");
-
-      //Essa de baixo, faz a chamada GET pra rota /api/linha, passando o token como cabeçalho e passa pra
-      //uma variavel response
-      const response = await api.get(`/api/pontofinal?pagina=${pagina}`, {
-        headers: { Authorization: token },
-      });
-
-      //aqui pego do response.data que é onde tá os dados da linha e passo pra uma variavel tbm
-      let dados = response.data;
-      setTotal(dados.totalPaginas);
-      setTotalItens(dados.totalItens);
-
-      let temp = [];
-
-      dados.lista.forEach((item) => {
-        temp.push(criaDados(item.id, item.nome, item.totalLinhas));
-      });
-      setCorpo(temp);
+    async function consultarParadas() {
+      const url = `/api/pontofinal?pagina=${pagina}`;
+      const resultado = await consultar(url, criaDados);
+      setCorpo(resultado.dados);
+      setTotal(resultado.totalPaginas);
+      setTotalItens(resultado.totalItens);
+      setLoading(false);
     }
 
-    dadosCorpos();
+    consultarParadas();
   }, [pagina]);
 
-  function criaDados(id, nome, total_de_linhas) {
-    return { id, nome, total_de_linhas };
+  function criaDados(item) {
+    const { id, nome, totalLinhas } = item;
+    return { id, nome, total_de_linhas: totalLinhas };
   }
 
   const nova = async () => {
@@ -110,7 +99,7 @@ export default function ConsultaParada() {
     }
   };
 
-  return corpo.length <= 0 ? (
+  return corpo.length <= 0 && loading ? (
     <Loader />
   ) : (
     <Container>
