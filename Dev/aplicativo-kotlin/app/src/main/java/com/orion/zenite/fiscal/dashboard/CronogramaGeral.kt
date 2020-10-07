@@ -44,6 +44,10 @@ class CronogramaGeral : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_cronograma_geral, container, false)
 
+        // o componente recycler view é utilizado para gerar a lista
+        // ele precisa de uma classe customizada para adaptar os dados em sua lista para o layout criado,
+        // também pode-se passar uma função para ser utilizada no clique dos items da lista
+
         lista = view.findViewById(R.id.listCronograma) as RecyclerView
         lista!!.apply {
             layoutManager = LinearLayoutManager(activity)

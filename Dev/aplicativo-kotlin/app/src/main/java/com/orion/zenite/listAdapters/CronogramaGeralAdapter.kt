@@ -16,6 +16,9 @@ import kotlinx.android.synthetic.main.list_item_cronograma_parent.view.*
 import kotlinx.android.synthetic.main.list_item_historico_parent.view.*
 import kotlinx.android.synthetic.main.list_item_historico_parent.view.listViagens
 
+// essa classe adapta uma lista de cronograma de linhas
+// neste caso essa lista tem como item outras listas
+// e esta classe recebe uma função para ser utilizada no clique de cada item -> clickListener
 class CronogramaGeralAdapter (var list: List<CronogramaGeral>, var clickListener: (CronogramaGeral) -> Unit) :
     RecyclerView.Adapter<CronogramaGeralAdapter.ViewHolder>() {
 
@@ -31,6 +34,7 @@ class CronogramaGeralAdapter (var list: List<CronogramaGeral>, var clickListener
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val parent = list[position]
 
+        // passa a função clickListener para a classe que passa os dados de cada item para o layout
         holder.bind(parent, clickListener, viewPool)
     }
 
@@ -42,10 +46,12 @@ class CronogramaGeralAdapter (var list: List<CronogramaGeral>, var clickListener
         fun bind(cronograma: CronogramaGeral, clickListener: (CronogramaGeral) -> Unit, viewPool: RecyclerView.RecycledViewPool) {
             nome_linha.text = cronograma.nomeLinha
 
+            // acesso o btn que existe no layout e o conecto a função clickListener
             btn.setOnClickListener{
                 clickListener(cronograma)
             }
 
+            // passo a lista interna para seu próprio recycler view que utiliza outro adapter
             val childLayoutManager = LinearLayoutManager(
                 lista.context, RecyclerView.VERTICAL, false)
             childLayoutManager.initialPrefetchItemCount = 4

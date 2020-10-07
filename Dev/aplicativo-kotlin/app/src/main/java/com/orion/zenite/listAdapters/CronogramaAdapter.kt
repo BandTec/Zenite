@@ -11,10 +11,14 @@ import com.orion.zenite.R
 import com.orion.zenite.model.Cronograma
 import kotlinx.android.synthetic.main.list_item_cronograma.view.*
 
+// essa classe adapta uma lista de cronogramas
+// adicionando seus itens corretamente ao layout do item criado em res/layout/list_item_cronograma
 class CronogramaAdapter (var list: List<Cronograma>) :
     RecyclerView.Adapter<CronogramaAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int)=
+        // AQUI ALTERA O LAYOUT DO ITEM DA LISTA
+        // NO CASO list_item_cronograma
         ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.list_item_cronograma, parent, false)
         )
@@ -26,6 +30,7 @@ class CronogramaAdapter (var list: List<Cronograma>) :
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        // AQUI SALVA OS ITENS DO LAYOUT DO ITEM DA LISTA EM UMA VARIAVEL
         private val antigo_tv = view.horario_antigo
         private val atual_tv = view.horario_atual
         private val motorista_tv = view.motorista_nome
@@ -33,6 +38,7 @@ class CronogramaAdapter (var list: List<Cronograma>) :
         private val chegada_tv = view.chegada
 
         fun bind(cronograma: Cronograma) {
+            // NESTE PONTO ADICIONA OS DADOS DA CLASSE AOS ITENS DO LAYOUT
             antigo_tv.text = cronograma.horarioAntigo
             atual_tv.text = cronograma.horario
             motorista_tv.text = cronograma.nomeMotorista
