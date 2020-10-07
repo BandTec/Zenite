@@ -7,5 +7,7 @@ data class Cronograma (
 
     val nomeMotorista: String,
 
-    val status: String
+    val horarioChegada: String,
+
+    val atrasado: Boolean
 )

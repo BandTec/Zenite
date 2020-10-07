@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.orion.zenite.fiscal.CronogramaLinha
+import com.orion.zenite.fiscal.LinhaCronograma
 import com.orion.zenite.R
 import com.orion.zenite.listAdapters.CronogramaGeralAdapter
 import com.orion.zenite.model.Cronograma
@@ -26,9 +26,9 @@ class CronogramaGeral : Fragment() {
     private var lista: RecyclerView? = null
 
     private val horarios = listOf(
-        Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "em viagem"),
-        Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "em viagem"),
-        Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "em viagem")
+        Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "", false),
+        Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "", false),
+        Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "", false)
     )
 
     private val dadosTemporarios = listOf(
@@ -56,7 +56,7 @@ class CronogramaGeral : Fragment() {
     private fun onItemClick(cronograma: CronogramaGeral) {
         // Toast.makeText(activity, "Você clicou em: ${cronograma.nomeLinha}", Toast.LENGTH_SHORT).show()
 
-        val intent = Intent(activity, CronogramaLinha::class.java)
+        val intent = Intent(activity, LinhaCronograma::class.java)
         intent.putExtra("nomeLinha", cronograma.nomeLinha)
         startActivity(intent)
     }

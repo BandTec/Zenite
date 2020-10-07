@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fiscal.LinhaMotorista"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/top_bar_motorista"
+            android:backgroundTint="@color/azulClaro"
+            app:titleTextColor="@color/corPrimaria"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_voltar"
+            app:title="Linha"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        style="@style/Titulo"
+        android:textColor="@color/corPrimaria"
+        android:id="@+id/linha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Motoristas"
+        android:textAllCaps="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginHorizontal="25dp" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listaMotorista"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="25dp"/>
+</LinearLayout>

@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.orion.zenite.R
-import kotlinx.android.synthetic.main.activity_cronograma_linha.*
 import kotlinx.android.synthetic.main.activity_cronograma_linha.topAppBar
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main_fiscal.*
+import kotlinx.android.synthetic.main.activity_linha.*
 
 class Linha : AppCompatActivity() {
     var nomeLinha: String = "";
@@ -26,15 +24,14 @@ class Linha : AppCompatActivity() {
     }
 
     fun irCronograma(view: View){
-        val intent = Intent(this, CronogramaLinha::class.java)
+        val intent = Intent(this, LinhaCronograma::class.java)
         intent.putExtra("nomeLinha", nomeLinha)
         startActivity(intent)
     }
 
     fun irMotorista(view: View){
-        Toast.makeText(this, "Você clicou em OLá", Toast.LENGTH_SHORT).show()
-//        val intent = Intent(this, CronogramaLinha::class.java)
-//        intent.putExtra("nomeLinha", nomeLinha)
-//        startActivity(intent)
+        val intent = Intent(this, LinhaMotorista::class.java)
+        intent.putExtra("nomeLinha", nomeLinha)
+        startActivity(intent)
     }
 }
