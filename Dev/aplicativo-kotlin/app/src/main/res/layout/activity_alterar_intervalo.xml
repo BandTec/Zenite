@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fiscal.AlterarIntervalo">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+
+            android:id="@+id/topAppBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:backgroundTint="@color/azulClaro"
+            app:navigationIcon="@drawable/ic_voltar"
+            app:title="8004-10 TERM. LAPA"
+            app:titleTextColor="@color/corPrimaria" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <TextView
+        android:id="@+id/titulo"
+        style="@style/Titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25sp"
+        android:text="ALTERAR INTERVALO"
+        />
+
+    <TextView
+        android:id="@+id/lbEmail"
+        style="@style/Texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25sp"
+        android:text="Digite o novo intervalo de tempo entre a saída do ônibus"
+        android:textColor="@color/preto" />
+
+
+    <EditText
+        android:id="@+id/inputEmail"
+        style="@style/Input"
+        android:layout_marginHorizontal="20sp"
+        android:hint="Digite o intervalo de tempo"
+        android:inputType="time" />
+
+
+    <Button
+        android:id="@+id/btnAlterarIntervalo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:onClick="alterarIntervalo"
+        android:text="Alterar" />
+
+
+</LinearLayout>

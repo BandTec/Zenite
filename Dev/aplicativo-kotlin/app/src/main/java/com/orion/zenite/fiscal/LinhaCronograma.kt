@@ -1,5 +1,6 @@
 package com.orion.zenite.fiscal
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_cronograma_linha.topAppBar
 class LinhaCronograma : AppCompatActivity() {
 
     private var lista: RecyclerView? = null
+    private var nomeLinha: String? = "";
 
     private val horarios = listOf(
         Cronograma("22:10 - 22:40", "22:50 - 23:50", "Nicole Brito", "22:50 - 23:48", true),
@@ -27,7 +29,7 @@ class LinhaCronograma : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cronograma_linha)
 
-        val nomeLinha = intent.extras?.getString("nomeLinha")
+        nomeLinha = intent.extras?.getString("nomeLinha")
         topAppBar.title = nomeLinha
         // titulo_tela.text = nomeLinha
 
@@ -50,9 +52,8 @@ class LinhaCronograma : AppCompatActivity() {
     }
 
     fun alterarIntervalo(view: View){
-        Toast.makeText(this, "Você clicou em OLá", Toast.LENGTH_SHORT).show()
-//        val intent = Intent(this, CronogramaLinha::class.java)
-//        intent.putExtra("nomeLinha", nomeLinha)
-//        startActivity(intent)
+        val intent = Intent(this, AlterarIntervalo::class.java)
+        intent.putExtra("nomeLinha", nomeLinha)
+        startActivity(intent)
     }
 }

@@ -11,13 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fiscal.LinhaMotorista"></activity>
+        <activity android:name=".fiscal.AlterarIntervalo" />
+        <activity android:name=".autenticacao.RecuperarSenha" />
+        <activity android:name=".fiscal.LinhaMotorista" />
         <activity android:name=".fiscal.Linha" />
         <activity android:name=".fiscal.LinhaCronograma" />
         <activity android:name=".fiscal.FiscalLinhas" />
         <activity android:name=".motorista.MainMotorista" />
         <activity android:name=".fiscal.MainFiscal" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".autenticacao.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

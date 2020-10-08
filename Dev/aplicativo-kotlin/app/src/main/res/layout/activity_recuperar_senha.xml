@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".autenticacao.RecuperarSenha"
+    android:orientation="vertical">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:backgroundTint="@color/azulClaro">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:padding="25dp"
+            android:scaleType="fitEnd"
+            android:src="@drawable/ic_logo_zenite" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginVertical="25dp">
+
+    <ImageView
+        android:id="@+id/icVoltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:fitsSystemWindows="true"
+        android:onClick="onBackPressed"
+        android:paddingHorizontal="25dp"
+        android:scaleType="fitEnd"
+        android:layout_marginVertical="5dp"
+        android:src="@drawable/ic_voltar"
+         />
+
+    <TextView
+        android:id="@+id/titulo"
+        style="@style/Titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="0dp"
+        android:text="ESQUECEU SUA SENHA?" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lbEmail"
+        style="@style/Texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25sp"
+        android:text="Digite seu email no campo abaixo e você recebera um email para renovar sua senha."
+        android:textColor="@color/preto" />
+
+    <EditText
+        android:id="@+id/inputRecuperarSenha"
+        style="@style/Input"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+
+    <Button
+        android:id="@+id/btnEnviarEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="15dp"
+        android:onClick="enviarEmailRecuperacao"
+        android:text="Enviar" />
+
+
+</LinearLayout>
