@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import orion.zenite.entidades.*;
 import orion.zenite.repositorios.CronogramaRepository;
 import orion.zenite.repositorios.FiscalRepository;
-import orion.zenite.repositorios.LinhaRepository;
-import orion.zenite.repositorios.MotoristaRepository;
 
 import java.util.Optional;
 
@@ -27,13 +25,7 @@ public class CronogramaController {
     private CronogramaRepository repository;
 
     @Autowired
-    private MotoristaRepository motoristaRepository;
-
-    @Autowired
     private FiscalRepository fiscalRepository;
-
-    @Autowired
-    private LinhaRepository linhaRepository;
 
     @ApiOperation("Busca cronograma pelo ID do fiscal")
     @ApiResponses({
@@ -42,7 +34,7 @@ public class CronogramaController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("/fiscal/{id}")
-    public ResponseEntity consultaPorPontoIda(@PathVariable("id") Integer id){
+    public ResponseEntity consultaPorFiscal(@PathVariable("id") Integer id){
         Fiscal f = new Fiscal();
         f.setId(id);
         Optional<Fiscal> listaCronograma = fiscalRepository.findById(f.getId());
@@ -51,6 +43,8 @@ public class CronogramaController {
         }
         return notFound().build();
     }
+
+    //Não coloquei o update por imaginar não ser necessário, fazer o update de um registro pai de cronograma
 
     @ApiOperation("Deleta um cronograma por seu ID")
     @ApiResponses({
@@ -68,6 +62,7 @@ public class CronogramaController {
         }
     }
 
+    //Primeiro passo de cadastro de um cronograma, é cadastrar cronograma PAI
     @ApiOperation("Cadastra um cronograma")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
@@ -78,12 +73,8 @@ public class CronogramaController {
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
     public ResponseEntity cadastro(@RequestBody Cronograma cronograma){
         Fiscal fiscal = cronograma.getFiscal();
-        Motorista motorista = cronograma.getMotorista();
-        Linha linha = cronograma.getLinha();
 
         cronograma.setFiscal(fiscal);
-        cronograma.setMotorista(motorista);
-        cronograma.setLinha(linha);
 
         repository.save(cronograma);
 

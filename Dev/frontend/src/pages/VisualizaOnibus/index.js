@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import api from "../../services/api";
-//Então, é que agora tá basicamente "pronta"
+import consultar from "../../services/metodos/consultar";
 
 import { Container, Row } from "./styles";
-
 import Tabela from "./../../components/Tabela2";
 import Paginacao from "../../components/Paginacao";
 import Loader from "./../../components/Loader";
@@ -11,56 +9,39 @@ import CabecalhoConsulta from "../../components/CabecalhoConsulta";
 
 export default function ConsultaOnibus() {
   const [corpo, setCorpo] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [pagina, setPagina] = useState(0);
   const [total, setTotal] = useState(0);
   const [totalItens, setTotalItens] = useState(0);
 
   useEffect(() => {
-    async function dadosCorpos() {
-      //Essa linha de baixo pega o token de autenticação do localStorage
-      const token = localStorage.getItem("token");
-
-      //Essa de baixo, faz a chamada GET pra rota /api/onibus, passando o token como cabeçalho e passa pra
-      //uma variavel response
-      const response = await api.get(`/api/onibus?pagina=${pagina}`, {
-        headers: { Authorization: token },
-      });
-
-      //aqui pego do response.data que é onde tá os dados do onibus e passo pra uma variavel tbm
-      let dados = response.data;
-      setTotal(dados.totalPaginas);
-      setTotalItens(dados.totalItens);
-
-      let temp = [];
-
-      dados.lista.forEach((item) => {
-        let acessivel = item.acessivel ? "Sim" : "Não";
-        temp.push(
-          criaDados(
-            item.id,
-            item.numero,
-            item.placa,
-            item.modelo,
-            // item.fabricante,
-            acessivel,
-            // item.dispositivo.codigo,
-            // item.gerente ? item.gerente.nome : "Sem gerente",
-            item.motorista || "Sem motorista",
-            item.linha || "Sem linha"
-          )
-        );
-      });
-      setCorpo(temp);
+    async function consultarOnibus() {
+      const url = `/api/onibus?pagina=${pagina}`;
+      const resultado = await consultar(url, criaDados);
+      setCorpo(resultado.dados);
+      setTotal(resultado.totalPaginas);
+      setTotalItens(resultado.totalItens);
+      setLoading(false);
     }
 
-    dadosCorpos();
+    consultarOnibus();
   }, [pagina]);
 
-  function criaDados(id, numero, placa, modelo, acessivel, motorista, linha) {
-    return { id, numero, placa, modelo, acessivel, motorista, linha };
+  function criaDados(item) {
+    let acessivel = item.acessivel ? "Sim" : "Não";
+    const { id, numero, placa, modelo, motorista, linha } = item;
+    return {
+      id,
+      numero,
+      placa,
+      modelo,
+      acessivel: acessivel,
+      motorista: motorista || "Sem motorista",
+      linha: linha || "Sem linha",
+    };
   }
 
-  return corpo.length <= 0 ? (
+  return corpo.length <= 0 && loading ? (
     <Loader />
   ) : (
     <Container>

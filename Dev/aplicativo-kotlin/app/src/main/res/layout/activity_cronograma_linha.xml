@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fiscal.LinhaCronograma"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:backgroundTint="@color/azulClaro"
+            app:titleTextColor="@color/corPrimaria"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_voltar"
+            app:title="Cronograma"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        style="@style/Titulo"
+        android:textColor="@color/corPrimaria"
+        android:id="@+id/titulo_tela"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CRONOGRAMA"
+        android:textAllCaps="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="25dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:onClick="alterarIntervalo"
+        app:strokeColor="@color/corPrimaria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:id="@+id/botao"
+        android:text="Alterar intervalo de tempo"
+        android:layout_marginHorizontal="25dp"
+        />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            style="@style/TextoBold"
+            android:textColor="@color/corPrimaria"
+            android:id="@+id/header1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PREVISTO"
+            android:textSize="12dp"
+            android:textAllCaps="true"
+            android:layout_marginEnd="60dp"
+            android:layout_row="0"
+            android:layout_column="0"/>
+
+        <TextView
+            style="@style/TextoBold"
+            android:textColor="@color/corPrimaria"
+            android:id="@+id/header2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="motorista"
+            android:textSize="12dp"
+            android:textAllCaps="true"
+            android:layout_row="0"
+            android:layout_column="1"/>
+
+        <TextView
+            style="@style/TextoBold"
+            android:textColor="@color/corPrimaria"
+            android:id="@+id/header3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="status"
+            android:textSize="12dp"
+            android:textAllCaps="true"
+            android:layout_row="0"
+            android:layout_column="3"/>
+    </GridLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listViagens"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginHorizontal="25dp"
+        />
+</LinearLayout>

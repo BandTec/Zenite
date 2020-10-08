@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/nome_motorista"
+        style="@style/TextoBold"
+        android:textColor="@color/corPrimaria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="0"
+        tools:text="Andrea Helena" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    <TextView
+        android:id="@+id/titulo_tel"
+        style="@style/TextoBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:text="Telefone"/>
+
+    <TextView
+        android:id="@+id/telefone"
+        android:text="9 9856-6548"
+        style="@style/Texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="0"
+        />
+
+    <TextView
+        android:id="@+id/titulo_onibus"
+        style="@style/TextoBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="3"
+        android:text="Placa do Ônibus"/>
+
+    <TextView
+        android:id="@+id/onibus"
+        android:text="BMJ-4578"
+        style="@style/Texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="3"
+        />
+
+    </GridLayout>
+</LinearLayout>

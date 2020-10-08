@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".autenticacao.RecuperarSenha"
     android:orientation="vertical">
-
-    <!--tools:context=""-->
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -23,7 +23,12 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!--Ajustar Icone e função VOLTAR-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginVertical="25dp">
+
     <ImageView
         android:id="@+id/icVoltar"
         android:layout_width="wrap_content"
@@ -31,27 +36,28 @@
         android:layout_alignParentBottom="true"
         android:fitsSystemWindows="true"
         android:onClick="onBackPressed"
-        android:padding="25dp"
+        android:paddingHorizontal="25dp"
         android:scaleType="fitEnd"
+        android:layout_marginVertical="5dp"
         android:src="@drawable/ic_voltar"
-        android:visibility="gone" />
+         />
 
     <TextView
         android:id="@+id/titulo"
         style="@style/Titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/background"
-        android:layout_marginHorizontal="20sp"
+        android:layout_marginVertical="0dp"
         android:text="ESQUECEU SUA SENHA?" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/lbEmail"
-        style="@style/TextoBold"
+        style="@style/Texto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16sp"
-        android:text="Digite seu email no campo abaixo e voce recebera um email para renovar sua senha."
+        android:layout_marginHorizontal="25sp"
+        android:text="Digite seu email no campo abaixo e você recebera um email para renovar sua senha."
         android:textColor="@color/preto" />
 
     <EditText

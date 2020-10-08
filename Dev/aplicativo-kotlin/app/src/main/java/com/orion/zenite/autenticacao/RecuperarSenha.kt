@@ -14,9 +14,8 @@ class RecuperarSenha : AppCompatActivity() {
         setContentView(R.layout.activity_recuperar_senha)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-
+    fun onBackPressed(view: View) {
+        this.finish()
     }
 
     fun enviarEmailRecuperacao(component: View){

@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.orion.zenite.R
+import com.orion.zenite.fiscal.MainFiscal
+import com.orion.zenite.motorista.MainMotorista
 import kotlinx.android.synthetic.main.activity_login.*
 
 class Login : AppCompatActivity() {
@@ -24,10 +26,14 @@ class Login : AppCompatActivity() {
         }
         Toast.makeText(this, "Vai para Home", Toast.LENGTH_SHORT).show()
         //Autenticação de Login
+        val fiscal = Intent(this@Login, MainFiscal::class.java)
+
+        val motorista = Intent(this@Login, MainMotorista::class.java)
+        startActivity(fiscal)
     }
 
     fun irRecuperarSenha(view: View) {
-        val RecuperarSenhaActivity = Intent(this@Login, RecuperarSenha::class.java)
-        startActivity(RecuperarSenhaActivity)
+        val recuperarSenhaActivity = Intent(this@Login, RecuperarSenha::class.java)
+        startActivity(recuperarSenhaActivity)
     }
 }

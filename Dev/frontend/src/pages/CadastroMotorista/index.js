@@ -1,145 +1,160 @@
-/* eslint react-hooks/exhaustive-deps: 0 */
 import React, { useState, useEffect } from "react";
-import api from "../../services/api";
-import Swal from "sweetalert2";
+import {
+  validationStep1,
+  validationStep2,
+  validationStep3,
+} from "../../functions/Validadores/motoristaValidacao";
+import { cadastrar, editar, consultarEdicao } from "../../services/metodos";
+import { useHistory } from "react-router-dom";
 
-import { Container } from "./styles";
-import DadosPessoais from "./dadosPessoais";
-import DadosEndereco from "./dadosEndereco";
-import DadosAcesso from "./dadosAcesso";
-import Loader from "./../../components/Loader";
+import MultiStepForm from "../../components/MultiStepForm";
+import Loader from "../../components/Loader";
+import InputFormik from "../../components/InputFormik";
+import { Container, CaixaHorizontal } from "./styles";
 
 export default function CadastroMotorista(props) {
-  const [validacaoSenha, setValidacaoSenha] = useState(false);
-  const [pagina, setPagina] = useState(1);
   const [dados, setDados] = useState({});
   const caminho = props.match.path;
   const id = props.match.params.id;
   const isEdicao = caminho.includes("editar");
   const tipoPagina = isEdicao ? "Edição" : "Cadastro";
-
-  const mudarPagina = (isProximo) => {
-    isProximo ? setPagina(pagina + 1) : setPagina(pagina - 1);
-  };
-
-  const adicionarDados = (novoDado) => {
-    setDados({ ...dados, ...novoDado });
-  };
-
-  const mostrarErro = (mensagemCustomizada) => {
-    let mensagemPadrao =
-      "Ocorreu um imprevisto, por gentileza tente novamente.";
-    let mensagem = mensagemCustomizada ? mensagemCustomizada : mensagemPadrao;
-    Swal.fire({
-      title: "Tente novamente",
-      text: mensagem,
-      icon: "error",
-      showConfirmButton: false,
-    });
-  };
+  const history = useHistory();
+  const url = "/api/motorista";
+  const urlEdicao = `${url}/${id}`;
 
   useEffect(() => {
-    async function consultarEdicao() {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await api.get(`/api/motorista/${id}`, {
-          headers: { Authorization: token },
-        });
-        const dadosConsulta = response.data;
-        delete dadosConsulta["carros"];
-        setDados({ ...dadosConsulta });
-      } catch (e) {
-        mostrarErro();
-      }
+    async function consulta() {
+      const retorno = await consultarEdicao(urlEdicao);
+      delete retorno["linhas"];
+      retorno.conta.senha = "";
+      setDados(retorno);
     }
     if (isEdicao) {
-      consultarEdicao();
+      consulta();
     }
   }, [id]);
 
-  const cadastrar = async () => {
-    try {
-      const token = await localStorage.getItem("token");
-
-      const response = await api.post("/api/motorista", dados, {
-        headers: { Authorization: token },
-      });
-
-      if (response.status === 201) {
-        props.history.push("/motorista");
-      }
-    } catch (e) {
-      alert("Ocorreu um erro. Tente de novo.");
-    }
+  const onSubmit = (values) => {
+    isEdicao
+      ? editar(urlEdicao, values, history)
+      : cadastrar(url, values, history);
   };
 
-  const editar = async () => {
-    const token = await localStorage.getItem("token");
-    let result = await Swal.fire({
-      title: "Aviso",
-      text: "Deseja realmente editar este dado? ",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Sim, desejo",
-      cancelButtonText: "Não",
-    });
-
-    if (result.value) {
-      try {
-        if (validacaoSenha) {
-          const response = await api.put(`/api/motorista/${id}`, dados, {
-            headers: { Authorization: token },
-          });
-
-          if (response.status === 200) {
-            props.history.push("/motorista");
-          } else {
-            mostrarErro();
-          }
-        } else {
-          mostrarErro("Senha diferente, tente novamente.");
-        }
-      } catch (e) {
-        mostrarErro();
-      }
-    }
-  };
-
-  const chamada = () => {
-    isEdicao ? editar() : cadastrar();
-  };
+  const Step = ({ children }) => children;
 
   return (
     <Container>
       {isEdicao && Object.keys(dados).length === 0 ? (
         <Loader />
-      ) : pagina === 1 ? (
-        <DadosPessoais
-          mudarPagina={mudarPagina}
-          tipoPagina={tipoPagina}
-          adicionarDados={adicionarDados}
-          dados={dados}
-        />
-      ) : pagina === 2 ? (
-        <DadosEndereco
-          mudarPagina={mudarPagina}
-          tipoPagina={tipoPagina}
-          adicionarDados={adicionarDados}
-          dados={dados}
-        />
       ) : (
-        <>
-          <DadosAcesso
-            mudarPagina={mudarPagina}
-            tipoPagina={tipoPagina}
-            adicionarDados={adicionarDados}
-            dados={dados}
-            validarSenha={setValidacaoSenha}
-          />
-          {pagina >= 4 && chamada()}
-        </>
+        <MultiStepForm
+          titulo={`${tipoPagina} do motorista`}
+          initialValues={dados}
+          onSubmit={onSubmit}
+        >
+          <Step titulo="DADOS CADASTRAIS" validationSchema={validationStep1}>
+            <InputFormik texto="Nome" name="nome" maxLength="100" required />
+            <InputFormik
+              texto="CPF"
+              mask="999.999.999-99"
+              name="cpf"
+              required
+            />
+            <InputFormik texto="CNH" name="cnh" required />
+            <CaixaHorizontal>
+              <InputFormik
+                pequeno={true}
+                texto="Data de Nascimento"
+                type="date"
+                name="dataNascimento"
+                required
+              />
+              <InputFormik
+                texto="Celular"
+                name="numeroTelefone"
+                // mask="(99) 9 9999-9999"
+                pequeno={true}
+                maxLength="15"
+                required
+              />
+            </CaixaHorizontal>
+          </Step>
+
+          <Step titulo="Endereço" validationSchema={validationStep2}>
+            <InputFormik
+              texto="CEP"
+              name="endereco.cep"
+              mask="99999-999"
+              required
+            />
+
+            <InputFormik
+              texto="Logradouro"
+              maxLength="120"
+              name="endereco.logradouro"
+              required
+            />
+
+            <CaixaHorizontal>
+              <InputFormik
+                pequeno={true}
+                texto="Número"
+                maxLength="16"
+                name="endereco.numero"
+                required
+              />
+
+              <InputFormik
+                texto="Complemento"
+                pequeno={true}
+                maxLength="60"
+                name="endereco.complemento"
+              />
+            </CaixaHorizontal>
+
+            <CaixaHorizontal>
+              <InputFormik
+                pequeno={true}
+                texto="Cidade"
+                maxLength="40"
+                name="endereco.cidade"
+              />
+
+              <InputFormik
+                texto="Estado"
+                pequeno={true}
+                maxLength="2"
+                name="endereco.estado"
+              />
+            </CaixaHorizontal>
+          </Step>
+
+          <Step titulo="DADOS DE ACESSO" validationSchema={validationStep3}>
+            <InputFormik
+              texto="Email"
+              name="conta.email"
+              type="email"
+              required
+            />
+
+            <InputFormik
+              texto="Senha"
+              maxLength="255"
+              name="conta.senha"
+              type="password"
+              textoAlerta="Sua senha deve conter no mínimo 8 letras."
+              required
+            />
+
+            <InputFormik
+              texto="Confirmar Senha"
+              maxLength="255"
+              name="confirmarSenha"
+              type="password"
+              required
+            />
+          </Step>
+        </MultiStepForm>
       )}
     </Container>
   );

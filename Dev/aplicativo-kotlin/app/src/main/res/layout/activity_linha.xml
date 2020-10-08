@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fiscal.Linha"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:backgroundTint="@color/azulClaro"
+            app:titleTextColor="@color/corPrimaria"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_voltar"
+            app:title="Linha"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        style="@style/Titulo"
+        android:textColor="@color/corPrimaria"
+        android:id="@+id/linha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Linha"
+        android:textAllCaps="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="35dp"/>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:onClick="irCronograma"
+        android:clickable="true"
+        android:background="#fff"
+        android:id="@+id/cardCronograma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="25dp"
+        app:contentPadding="20dp"
+        app:contentPaddingTop="10dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/TextoBold"
+                android:textColor="@color/corPrimaria"
+                android:id="@+id/cronograma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cronograma"
+                android:textAllCaps="true"
+                android:layout_alignParentLeft="true"/>
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_ir"
+                android:id="@+id/icone4"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="12dp"
+                />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:onClick="irMotorista"
+        android:clickable="true"
+        android:background="#fff"
+        android:id="@+id/cardMotorista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="25dp"
+        app:contentPadding="20dp"
+        app:contentPaddingTop="10dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/TextoBold"
+                android:textColor="@color/corPrimaria"
+                android:id="@+id/motorista"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Motorista"
+                android:textAllCaps="true"
+                android:layout_alignParentLeft="true"/>
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_ir"
+                android:id="@+id/icone"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="12dp"
+                />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
