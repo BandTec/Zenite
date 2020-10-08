@@ -1,79 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <!--tools:context=""-->
 
 
     <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
         android:id="@+id/background"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
         android:backgroundTint="@color/azulClaro">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_logo_zenite"
+            android:fitsSystemWindows="true"
             android:padding="25dp"
             android:scaleType="fitEnd"
-            android:fitsSystemWindows="true" />
+            android:src="@drawable/ic_logo_zenite" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-
+    <!--Ajustar Icone e função VOLTAR-->
     <ImageView
+        android:id="@+id/icVoltar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_voltar"
+        android:layout_alignParentBottom="true"
+        android:fitsSystemWindows="true"
+        android:onClick="onBackPressed"
         android:padding="25dp"
         android:scaleType="fitEnd"
-        android:fitsSystemWindows="true"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/icVoltar"/>
+        android:src="@drawable/ic_voltar"
+        android:visibility="gone" />
 
     <TextView
-        style="@style/Titulo"
         android:id="@+id/titulo"
+        style="@style/Titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20sp"
         android:layout_alignBottom="@id/background"
-
-
-        android:text="ESQUECEU SUA SENHA?"
-
-        />
+        android:layout_marginHorizontal="20sp"
+        android:text="ESQUECEU SUA SENHA?" />
 
     <TextView
-        style="@style/TextoBold"
-        android:textColor="@color/preto"
         android:id="@+id/lbEmail"
+        style="@style/TextoBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16sp"
         android:text="Digite seu email no campo abaixo e voce recebera um email para renovar sua senha."
-        />
+        android:textColor="@color/preto" />
 
     <EditText
+        android:id="@+id/inputRecuperarSenha"
         style="@style/Input"
-        android:inputType="textEmailAddress"
-        android:id="@+id/inputEmail"
-        android:hint="Email"/>
-
-
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
 
 
     <Button
-        android:id="@+id/btnEntrar2"
+        android:id="@+id/btnEnviarEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="15dp"
-        android:onClick="EnviarEmailRecuperacao"
+        android:onClick="enviarEmailRecuperacao"
         android:text="Enviar" />
 
 
-</RelativeLayout>
+</LinearLayout>
