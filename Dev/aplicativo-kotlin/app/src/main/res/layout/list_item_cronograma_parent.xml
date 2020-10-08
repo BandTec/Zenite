@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/TextoBold"
+            android:textSize="20sp"
+            android:textColor="@color/corPrimaria"
+            android:id="@+id/nome_linha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Linha"
+            android:textAllCaps="true"
+            android:layout_alignParentLeft="true"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:id="@+id/botao_ver_tudo"
+            app:icon="@drawable/ic_ir"
+            app:iconSize="12dp"
+            app:iconGravity="end"
+            android:textColor="@color/azulMedio"
+            android:text="ver tudo"
+            android:padding="0dp"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/TextoBold"
+            android:textColor="@color/corPrimaria"
+            android:id="@+id/header1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PREVISTO"
+            android:textSize="12dp"
+            android:textAllCaps="true"
+            android:layout_marginEnd="60dp"
+            android:layout_row="0"
+            android:layout_column="0"/>
+
+        <TextView
+            style="@style/TextoBold"
+            android:textColor="@color/corPrimaria"
+            android:id="@+id/header2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="motorista"
+            android:textSize="12dp"
+            android:textAllCaps="true"
+            android:layout_row="0"
+            android:layout_column="1"/>
+
+        <TextView
+            style="@style/TextoBold"
+            android:textColor="@color/corPrimaria"
+            android:id="@+id/header3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="status"
+            android:textSize="12dp"
+            android:textAllCaps="true"
+            android:layout_row="0"
+            android:layout_column="3"/>
+    </GridLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listViagens"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        />
+
+</LinearLayout>
