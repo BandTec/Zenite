@@ -38,6 +38,8 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
+    implementation "com.google.android.gms:play-services-vision:19.0.0"
+    implementation 'com.budiyev.android:code-scanner:2.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

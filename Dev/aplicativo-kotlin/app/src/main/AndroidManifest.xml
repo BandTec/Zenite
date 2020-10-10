@@ -3,6 +3,7 @@
     package="com.orion.zenite">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".fiscal.QrcodeScanner"></activity>
         <activity android:name=".fiscal.AlterarIntervalo" />
         <activity android:name=".autenticacao.RecuperarSenha" />
         <activity android:name=".fiscal.LinhaMotorista" />
@@ -31,7 +33,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
-
 
 </manifest>
