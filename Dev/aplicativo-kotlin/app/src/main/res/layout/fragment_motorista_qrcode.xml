@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".motorista.MotoristaQrcode">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.card.MaterialCardView
+
+        android:id="@+id/cardleituraqrcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="10dp"
+        android:background="#fff"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
+        app:contentPadding="20dp"
+        app:contentPaddingTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/cronograma"
+                style="@style/TextoBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="Esse codigo identifica você e seu ônibus.
+Através dele que o fiscal irá marcar o
+início e final de sua viagem."
+                android:textColor="@color/corPrimaria" />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:background="@color/azulMedio" />
+
+</LinearLayout>
