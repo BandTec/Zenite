@@ -2,7 +2,6 @@ package com.orion.zenite.fiscal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import com.orion.zenite.R
 import kotlinx.android.synthetic.main.activity_main_fiscal.*
 
