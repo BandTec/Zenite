@@ -3,18 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".motorista.MotoristaDashboard"
     android:orientation="vertical"
-    android:paddingHorizontal="25dp">
+    android:paddingHorizontal="25dp"
+    android:paddingBottom="25dp">
 
     <TextView
         style="@style/Texto"
         android:id="@+id/textoNormal"
+        android:layout_marginTop="25dp"
         android:text="Olá, Carlos Marinho você está alocado na linha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -24,6 +26,7 @@
         android:id="@+id/numeroOnibus"
         android:text="917H-10"
         android:textAllCaps="false"
+        android:layout_marginBottom="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -33,6 +36,7 @@
         android:id="@+id/nomeOnibus"
         android:text="Vila Mariana - Term. Pirituba"
         android:textAllCaps="false"
+        android:layout_marginTop="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/numeroOnibus"

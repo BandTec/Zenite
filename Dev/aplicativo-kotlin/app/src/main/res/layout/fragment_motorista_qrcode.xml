@@ -7,26 +7,10 @@
     android:orientation="vertical"
     tools:context=".motorista.MotoristaQrcode">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <com.google.android.material.card.MaterialCardView
-
-        android:id="@+id/cardleituraqrcode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginVertical="10dp"
-        android:background="#fff"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp"
-        app:contentPadding="20dp"
-        app:contentPaddingTop="10dp">
-
         <RelativeLayout
+            android:background="@color/azulClaro"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="35dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -36,13 +20,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="Esse codigo identifica você e seu ônibus.
+                android:text="Esse código identifica você e seu ônibus.
 Através dele que o fiscal irá marcar o
-início e final de sua viagem."
+começo e o final de sua viagem."
                 android:textColor="@color/corPrimaria" />
         </RelativeLayout>
-    </com.google.android.material.card.MaterialCardView>
-
 
     <ImageView
         android:layout_width="180dp"

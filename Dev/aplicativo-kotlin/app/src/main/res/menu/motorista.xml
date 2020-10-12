@@ -15,4 +15,9 @@
         android:id="@+id/viagens"
         android:icon="@drawable/ic_calendar"
         android:title="viagens" />
+
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_config"
+        android:title="logout" />
 </menu>

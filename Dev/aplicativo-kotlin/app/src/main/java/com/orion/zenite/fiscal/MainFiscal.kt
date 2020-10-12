@@ -1,10 +1,9 @@
 package com.orion.zenite.fiscal
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.Fragment
+import com.orion.zenite.LogoutFragment
 import com.orion.zenite.R
 import kotlinx.android.synthetic.main.activity_main_fiscal.*
 
@@ -16,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main_fiscal.*
 class MainFiscal : AppCompatActivity() {
     private val dash = FiscalDashboard()
     private val camera = FiscalCamera()
+    private val logout = LogoutFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +26,7 @@ class MainFiscal : AppCompatActivity() {
             when (it.itemId) {
                 R.id.home -> replaceFragment(dash, "Dashboard")
                 R.id.camera -> replaceFragment(camera, "Escaneie o código qr")
+                R.id.logout -> replaceFragment(logout, "Zênite")
             }
             true
         }
