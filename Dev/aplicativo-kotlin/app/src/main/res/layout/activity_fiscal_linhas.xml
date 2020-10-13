@@ -1,25 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fiscal.MainFiscal">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!--Acrescentar onclick -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
+            android:clickable="true"
+
             android:backgroundTint="@color/azulClaro"
             app:titleTextColor="@color/corPrimaria"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_voltar"
-            app:title="Teste header com botao voltar"
+            app:title="FECHAR VIAGEM"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             />
     </com.google.android.material.appbar.AppBarLayout>
 
-</RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/lbPassageiros"
+        style="@style/TextoBold"
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:text="QUANTIDADE DE PASSAGEIROS"
+        android:textColor="@color/corPrimaria"
+        android:layout_marginTop="50dp"
+        />
+
+    <EditText
+        android:id="@+id/inputQuantidade"
+        style="@style/Input"
+        android:hint="quantidade"
+        android:inputType="number"
+        android:textSize="15sp"
+        />
+
+    <!--Acrescentar onclick -->
+    <Button
+        android:id="@+id/btnFinalizar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="15dp"
+
+        android:text="FINALIZAR" />
+
+
+
+</LinearLayout>
