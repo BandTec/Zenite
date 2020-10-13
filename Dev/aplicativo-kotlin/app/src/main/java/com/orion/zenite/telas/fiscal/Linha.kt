@@ -1,10 +1,9 @@
-package com.orion.zenite.fiscal
+package com.orion.zenite.telas.fiscal
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.orion.zenite.R
 import kotlinx.android.synthetic.main.activity_cronograma_linha.topAppBar
 import kotlinx.android.synthetic.main.activity_linha.*

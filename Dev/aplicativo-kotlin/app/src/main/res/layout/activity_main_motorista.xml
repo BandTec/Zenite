@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".motorista.MainMotorista">
+    tools:context=".telas.motorista.MainMotorista">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -31,8 +31,7 @@
         app:itemIconTint="@color/corPrimaria"
         app:itemTextColor="@color/corPrimaria"
         app:elevation="2dp"
-        app:menu="@menu/motorista"
-        />
+        app:menu="@menu/motorista" />
 
     <FrameLayout
         android:layout_width="match_parent"

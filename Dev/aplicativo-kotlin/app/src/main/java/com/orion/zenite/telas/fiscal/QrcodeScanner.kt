@@ -1,4 +1,4 @@
-package com.orion.zenite.fiscal
+package com.orion.zenite.telas.fiscal
 
 import android.Manifest
 import android.content.Intent
@@ -58,7 +58,7 @@ class QrcodeScanner : AppCompatActivity() {
                 // TODO: ADICIONAR LOGICA PARA PEGAR DADOS DO QRCODE PARA ENVIAR PARA A API
 
                 // TODO: MUDAR AQUI PARA TELA DE ADICIONAR QUANTIDADE DE PASSAGEIROS
-                val intent = Intent(this, AlterarIntervalo::class.java)
+                val intent = Intent(this, QtdPassageiros::class.java)
                 startActivity(intent)
             }
         }

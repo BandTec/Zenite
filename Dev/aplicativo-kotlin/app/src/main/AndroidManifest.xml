@@ -12,16 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fiscal.QrcodeScanner"></activity>
-        <activity android:name=".fiscal.AlterarIntervalo" />
-        <activity android:name=".autenticacao.RecuperarSenha" />
-        <activity android:name=".fiscal.LinhaMotorista" />
-        <activity android:name=".fiscal.Linha" />
-        <activity android:name=".fiscal.LinhaCronograma" />
-        <activity android:name=".fiscal.FiscalLinhas" />
-        <activity android:name=".motorista.MainMotorista" />
-        <activity android:name=".fiscal.MainFiscal" />
-        <activity android:name=".autenticacao.Login">
+        <activity android:name="com.orion.zenite.telas.fiscal.QrcodeScanner" />
+        <activity android:name="com.orion.zenite.telas.fiscal.AlterarIntervalo" />
+        <activity android:name="com.orion.zenite.telas.autenticacao.RecuperarSenha" />
+        <activity android:name="com.orion.zenite.telas.fiscal.LinhaMotorista" />
+        <activity android:name="com.orion.zenite.telas.fiscal.Linha" />
+        <activity android:name="com.orion.zenite.telas.fiscal.LinhaCronograma" />
+        <activity android:name="com.orion.zenite.telas.fiscal.QtdPassageiros" />
+        <activity android:name="com.orion.zenite.telas.motorista.MainMotorista" />
+        <activity android:name="com.orion.zenite.telas.fiscal.MainFiscal" />
+        <activity android:name="com.orion.zenite.telas.autenticacao.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

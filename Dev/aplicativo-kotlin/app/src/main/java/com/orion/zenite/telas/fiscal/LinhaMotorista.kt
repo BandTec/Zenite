@@ -1,4 +1,4 @@
-package com.orion.zenite.fiscal
+package com.orion.zenite.telas.fiscal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,11 +6,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.orion.zenite.R
-import com.orion.zenite.listAdapters.CronogramaAdapter
 import com.orion.zenite.listAdapters.MotoristaOnibusAdapter
-import com.orion.zenite.model.Cronograma
 import com.orion.zenite.model.MotoristaOnibus
-import kotlinx.android.synthetic.main.activity_cronograma_linha.*
 import kotlinx.android.synthetic.main.activity_linha_motorista.*
 
 class LinhaMotorista : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.orion.zenite.fiscal.dashboard
+package com.orion.zenite.telas.fiscal.fragments.dashboard
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.orion.zenite.fiscal.LinhaCronograma
+import com.orion.zenite.telas.fiscal.LinhaCronograma
 import com.orion.zenite.R
 import com.orion.zenite.listAdapters.CronogramaGeralAdapter
 import com.orion.zenite.model.Cronograma

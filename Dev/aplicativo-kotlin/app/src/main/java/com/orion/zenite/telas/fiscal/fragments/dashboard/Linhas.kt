@@ -1,4 +1,4 @@
-package com.orion.zenite.fiscal.dashboard
+package com.orion.zenite.telas.fiscal.fragments.dashboard
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,17 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.orion.zenite.R
-import com.orion.zenite.fiscal.FiscalLinhas
-import com.orion.zenite.fiscal.Linha
-import com.orion.zenite.listAdapters.HistoricoAdapter
+import com.orion.zenite.telas.fiscal.Linha
 import com.orion.zenite.listAdapters.LinhasAdapter
-import com.orion.zenite.listAdapters.ViagensAdapter
-import com.orion.zenite.model.Cronograma
-import com.orion.zenite.model.Viagens
 
 class Linhas : Fragment() {
 

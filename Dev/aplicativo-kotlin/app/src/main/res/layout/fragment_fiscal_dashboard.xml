@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".fiscal.FiscalDashboard">
+    tools:context=".telas.fiscal.fragments.FiscalDashboard">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabViagem"

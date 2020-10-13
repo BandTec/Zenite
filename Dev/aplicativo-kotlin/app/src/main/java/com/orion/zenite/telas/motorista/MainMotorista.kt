@@ -1,10 +1,13 @@
-package com.orion.zenite.motorista
+package com.orion.zenite.telas.motorista
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.orion.zenite.LogoutFragment
+import com.orion.zenite.telas.autenticacao.LogoutFragment
 import com.orion.zenite.R
+import com.orion.zenite.telas.motorista.fragments.MotoristaDashboard
+import com.orion.zenite.telas.motorista.fragments.MotoristaQrcode
+import com.orion.zenite.telas.motorista.fragments.MotoristaViagens
 import kotlinx.android.synthetic.main.activity_main_fiscal.*
 
 // tutorial barra de navegação

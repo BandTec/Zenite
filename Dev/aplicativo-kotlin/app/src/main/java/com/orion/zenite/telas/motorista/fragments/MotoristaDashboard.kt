@@ -1,4 +1,4 @@
-package com.orion.zenite.motorista
+package com.orion.zenite.telas.motorista.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import com.orion.zenite.R
 
 
-class MotoristaQrcode : Fragment() {
+class MotoristaDashboard : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_motorista_qrcode, container, false)
+        return inflater.inflate(R.layout.fragment_motorista_dashboard, container, false)
     }
 
 }

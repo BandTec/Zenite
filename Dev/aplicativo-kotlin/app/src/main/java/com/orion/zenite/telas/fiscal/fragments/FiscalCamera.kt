@@ -1,4 +1,4 @@
-package com.orion.zenite.fiscal
+package com.orion.zenite.telas.fiscal.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.recyclerview.widget.RecyclerView
 import com.orion.zenite.R
-import kotlinx.android.synthetic.main.fragment_fiscal_camera.*
+import com.orion.zenite.telas.fiscal.QrcodeScanner
 
 class FiscalCamera : Fragment() {
 

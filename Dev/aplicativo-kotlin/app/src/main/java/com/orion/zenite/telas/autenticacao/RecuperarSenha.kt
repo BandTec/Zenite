@@ -1,4 +1,4 @@
-package com.orion.zenite.autenticacao
+package com.orion.zenite.telas.autenticacao
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

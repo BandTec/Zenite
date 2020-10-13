@@ -1,11 +1,9 @@
-package com.orion.zenite.fiscal
+package com.orion.zenite.telas.fiscal
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.orion.zenite.R
-import com.orion.zenite.autenticacao.RecuperarSenha
 import kotlinx.android.synthetic.main.activity_cronograma_linha.*
 
 class AlterarIntervalo : AppCompatActivity() {

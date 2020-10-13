@@ -5,17 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fiscal.MainFiscal">
+    tools:context=".telas.fiscal.QtdPassageiros">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--Acrescentar onclick -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:clickable="true"
-
             android:backgroundTint="@color/azulClaro"
             app:titleTextColor="@color/corPrimaria"
             android:layout_width="match_parent"
@@ -50,12 +48,12 @@
 
     <!--Acrescentar onclick -->
     <Button
+        android:onClick="voltar"
         android:id="@+id/btnFinalizar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="15dp"
-
         android:text="FINALIZAR" />
 
 

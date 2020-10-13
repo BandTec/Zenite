@@ -1,13 +1,14 @@
-package com.orion.zenite
+package com.orion.zenite.telas.autenticacao
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import com.orion.zenite.R
 
 class LogoutFragment : Fragment() {
     private var btncardSairConta: CardView? = null
@@ -22,12 +23,12 @@ class LogoutFragment : Fragment() {
 
         btncardSairConta = view.findViewById(R.id.cardSairConta) as CardView
         btncardSairConta!!.setOnClickListener{
-            suporte(it)
+            sairConta(it)
         }
 
         btncardSuporte = view.findViewById(R.id.cardSuporte) as CardView
         btncardSuporte!!.setOnClickListener{
-            sairConta(it)
+            suporte(it)
         }
 
         return view;
@@ -36,12 +37,14 @@ class LogoutFragment : Fragment() {
 
 
     fun sairConta(component: View){
-        Toast.makeText(activity, "Olá 1",
-            Toast.LENGTH_LONG).show()
+        // TODO: logica para remover dados gravados do usuario
+        val login = Intent(activity, Login::class.java)
+        startActivity(login)
     }
 
 
     fun suporte(component: View){
+        // TODO: logica para mandar email
         Toast.makeText(activity, "Olá 2",
             Toast.LENGTH_LONG).show()
     }

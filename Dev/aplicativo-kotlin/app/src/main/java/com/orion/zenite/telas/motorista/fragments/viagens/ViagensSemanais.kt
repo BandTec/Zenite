@@ -1,4 +1,4 @@
-package com.orion.zenite.motorista.viagens
+package com.orion.zenite.telas.motorista.fragments.viagens
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -8,12 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.orion.zenite.R
-import com.orion.zenite.fiscal.dashboard.Linhas
 import com.orion.zenite.model.CronogramaGeral
-import com.orion.zenite.model.HistoricoViagens
-import kotlinx.android.synthetic.main.fragment_linhas.view.*
 import kotlinx.android.synthetic.main.list_item_cronograma_parent.view.*
-import kotlinx.android.synthetic.main.list_item_historico_parent.view.*
 import kotlinx.android.synthetic.main.list_item_historico_parent.view.listViagens
 
 // essa classe adapta uma lista de cronograma de linhas
