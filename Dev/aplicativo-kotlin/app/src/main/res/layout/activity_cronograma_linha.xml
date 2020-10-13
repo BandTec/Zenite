@@ -13,14 +13,13 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
-            android:backgroundTint="@color/azulClaro"
-            app:titleTextColor="@color/corPrimaria"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:backgroundTint="@color/azulClaro"
             app:navigationIcon="@drawable/ic_voltar"
             app:title="Cronograma"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
-            />
+            app:titleTextColor="@color/corPrimaria" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView

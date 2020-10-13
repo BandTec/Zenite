@@ -3,6 +3,7 @@ package com.orion.zenite.motorista
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.orion.zenite.LogoutFragment
 import com.orion.zenite.R
 import kotlinx.android.synthetic.main.activity_main_fiscal.*
 
@@ -15,6 +16,7 @@ class MainMotorista : AppCompatActivity() {
     private val dash = MotoristaDashboard()
     private val qrcode = MotoristaQrcode()
     private val viagens = MotoristaViagens()
+    private val logout = LogoutFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +28,7 @@ class MainMotorista : AppCompatActivity() {
                 R.id.home -> replaceFragment(dash, "Dashboard")
                 R.id.qrcode -> replaceFragment(qrcode, "Seu código QR")
                 R.id.viagens -> replaceFragment(viagens, "Histórico de viagens")
+                R.id.logout -> replaceFragment(logout, "Zênite")
             }
             true
         }

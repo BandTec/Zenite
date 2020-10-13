@@ -3,104 +3,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".motorista.MotoristaDashboard"
     android:orientation="vertical"
-    android:paddingHorizontal="25dp">
+    android:paddingHorizontal="25dp"
+    android:paddingBottom="25dp">
 
     <TextView
         style="@style/Texto"
         android:id="@+id/textoNormal"
-        android:text="Olá, pessoa"
+        android:layout_marginTop="25dp"
+        android:text="Olá, Carlos Marinho você está alocado na linha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
         style="@style/Titulo"
-        android:id="@+id/titulo"
-        android:text="Estilo do Titulo!"
+        android:id="@+id/numeroOnibus"
+        android:text="917H-10"
+        android:textAllCaps="false"
+        android:layout_marginBottom="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view_relative"
+
+    <TextView
+        style="@style/Titulo"
+        android:id="@+id/nomeOnibus"
+        android:text="Vila Mariana - Term. Pirituba"
+        android:textAllCaps="false"
+        android:layout_marginTop="0dp"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="36dp"
-        app:contentPadding="15dp"
-        app:cardBackgroundColor="#efefef"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="1dp"
-        >
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/numeroOnibus"
+        />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <TextView
-                style="@style/TextoBold"
-                android:textColor="@color/corPrimaria"
-                android:id="@+id/titulod"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="CARD COM RELATIVE LAYOUT" />
 
-           <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_height="70dp">
-                <TextView
-                    style="@style/TextoBold"
-                    android:id="@+id/texto"
-                    android:text="Titulo 1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    />
-
-                <TextView
-                    style="@style/TextoBold"
-                    android:layout_alignParentLeft="true"
-                    android:id="@+id/odi"
-                    android:text="Titulo 2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-
-                <TextView
-                    style="@style/TextoItalico"
-                    android:id="@+id/textoI"
-                    android:text="conteudo 1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    />
-
-                <TextView
-                    style="@style/Texto"
-                    android:id="@+id/oi"
-                    android:text="conteudo 2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    />
-            </RelativeLayout>
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
+    <!-- Primeiro card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_grid"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginTop="36dp"
         app:contentPadding="15dp"
-
+        android:backgroundTint="@color/azulClaro"
         app:cardBackgroundColor="#efefef"
         app:cardCornerRadius="15dp"
         app:cardElevation="1dp"
@@ -114,20 +65,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="15dp"
-                    android:src="@drawable/ic_qrcode"
                     android:layout_gravity="bottom"
                     android:layout_marginEnd="10dp"
-                />
+                    android:src="@drawable/ic_onibus_lado" />
                 <TextView
                     style="@style/TextoBold"
                     android:textColor="@color/corPrimaria"
-                    android:id="@+id/titdulod"
+                    android:id="@+id/tviagematual"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CARD COM GRID"
+                    android:text="Sua viagem atual"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
 
@@ -136,8 +87,9 @@
                 android:layout_height="100dp">
                 <TextView
                     style="@style/TextoBold"
-                    android:id="@+id/tdexto"
-                    android:text="Titulo 1"
+                    android:id="@+id/tcomeco"
+                    android:text="Começo"
+                    android:textColor="@color/corPrimaria"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_row="0"
@@ -146,8 +98,9 @@
 
                 <TextView
                     style="@style/TextoBold"
-                    android:id="@+id/dodi"
-                    android:text="Titulo 2"
+                    android:id="@+id/tduracao"
+                    android:text="Duração"
+                    android:textColor="@color/corPrimaria"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_row="0"
@@ -156,9 +109,9 @@
                     />
 
                 <TextView
-                    style="@style/TextoItalico"
-                    android:id="@+id/textosI"
-                    android:text="conteudo 1"
+                    style="@style/Texto"
+                    android:id="@+id/horario_inicial"
+                    android:text="14:20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -169,8 +122,190 @@
 
                 <TextView
                     style="@style/Texto"
-                    android:id="@+id/oddi"
-                    android:text="conteudo 2"
+                    android:id="@+id/duracao_prevista"
+                    android:text="00:30:00 MIN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_row="1"
+                    android:layout_column="3"
+                    />
+            </GridLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Segundo card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_onibus_alocado"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="36dp"
+        app:contentPadding="15dp"
+        app:cardBackgroundColor="#efefef"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="1dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_onibus_frente" />
+
+                <TextView
+                    android:id="@+id/onibus_alocado"
+                    style="@style/TextoBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Ônibus alocado"
+                    android:textColor="@color/corPrimaria" />
+            </LinearLayout>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <TextView
+                    style="@style/TextoBold"
+                    android:id="@+id/tplaca"
+                    android:text="Placa"
+                    android:textColor="@color/corPrimaria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    />
+
+                <TextView
+                    style="@style/TextoBold"
+                    android:id="@+id/tmodelo"
+                    android:text="Modelo"
+                    android:textColor="@color/corPrimaria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="3"
+                    android:layout_gravity="end"
+                    />
+
+                <TextView
+                    style="@style/Texto"
+                    android:id="@+id/numero_placa"
+                    android:text="BMJ-1123"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    />
+
+                <TextView
+                    style="@style/Texto"
+                    android:id="@+id/modelo_onibus"
+                    android:text="Millennium BRT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_row="1"
+                    android:layout_column="3"
+                    />
+            </GridLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Terceiro card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_fiscal_linha"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="36dp"
+        app:contentPadding="15dp"
+        app:cardBackgroundColor="#efefef"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="1dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_user" />
+
+                <TextView
+                    android:id="@+id/tfiscal_linha"
+                    style="@style/TextoBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Fiscal da Linha"
+                    android:textColor="@color/corPrimaria" />
+            </LinearLayout>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <TextView
+                    style="@style/TextoBold"
+                    android:id="@+id/tnome"
+                    android:text="Nome"
+                    android:textColor="@color/corPrimaria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    />
+
+                <TextView
+                    style="@style/TextoBold"
+                    android:id="@+id/ttelefone"
+                    android:text="Telefone"
+                    android:textColor="@color/corPrimaria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="3"
+                    android:layout_gravity="end"
+                    />
+
+                <TextView
+                    style="@style/Texto"
+                    android:id="@+id/nome_completo"
+                    android:text="Vitor Davi Francisco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    />
+
+                <TextView
+                    style="@style/Texto"
+                    android:id="@+id/telefone_pessoa"
+                    android:text="11996779851"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -184,44 +319,5 @@
 
     <!-- https://medium.com/@nileshsingh/android-cardview-101-everything-you-should-know-5bbf1c873f5a-->
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="25dp"
-        app:cardCornerRadius="25dp"
-        android:padding="25dp"
-        android:backgroundTint="@color/azulClaro"
->
-        <TextView
-            style="@style/TextoBold"
-            android:id="@+id/textoooo"
-            android:text="MATERIAL DESIGN CARD"
-            android:layout_width="match_parent"
-            android:elevation="3dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp" />
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/carsd"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
-        app:cardCornerRadius="25dp"
-        android:padding="25dp"
-        android:backgroundTint="@color/azulClaro"
-
-        >
-        <TextView
-            style="@style/TextoBold"
-            android:id="@+id/textoodoo"
-            android:text="MATERIAL DESIGN CARD"
-            android:layout_width="match_parent"
-            android:elevation="3dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp" />
-    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>
 </ScrollView>
