@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".telas.fiscal.LinhaMotorista"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".telas.fiscal.LinhaMotorista">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -13,32 +13,46 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/top_bar_motorista"
-            android:backgroundTint="@color/azulClaro"
-            app:titleTextColor="@color/corPrimaria"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:backgroundTint="@color/azulClaro"
             app:navigationIcon="@drawable/ic_voltar"
             app:title="Linha"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
-            />
+            app:titleTextColor="@color/corPrimaria" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        style="@style/Titulo"
-        android:textColor="@color/corPrimaria"
-        android:id="@+id/linha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Motoristas"
-        android:textAllCaps="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginHorizontal="25dp" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listaMotorista"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="25dp"
-        android:layout_marginHorizontal="25dp"/>
+        tools:context=".Lista">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/linha"
+                style="@style/Titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginHorizontal="25dp"
+                android:text="Motoristas"
+                android:textAllCaps="true"
+                android:textColor="@color/corPrimaria" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listaMotorista"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="25dp" />
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

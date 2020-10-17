@@ -8,7 +8,7 @@ import com.orion.zenite.R
 import kotlinx.android.synthetic.main.activity_cronograma_linha.topAppBar
 import kotlinx.android.synthetic.main.activity_linha.*
 
-class Linha : AppCompatActivity() {
+class LinhaDetalhes : AppCompatActivity() {
     var nomeLinha: String = "";
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
