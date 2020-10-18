@@ -16,7 +16,7 @@
         <activity android:name="com.orion.zenite.telas.fiscal.AlterarIntervalo" />
         <activity android:name="com.orion.zenite.telas.autenticacao.RecuperarSenha" />
         <activity android:name="com.orion.zenite.telas.fiscal.LinhaMotorista" />
-        <activity android:name="com.orion.zenite.telas.fiscal.Linha" />
+        <activity android:name="com.orion.zenite.telas.fiscal.LinhaDetalhes" />
         <activity android:name="com.orion.zenite.telas.fiscal.LinhaCronograma" />
         <activity android:name="com.orion.zenite.telas.fiscal.QtdPassageiros" />
         <activity android:name="com.orion.zenite.telas.motorista.MainMotorista" />
