@@ -133,6 +133,7 @@ class Linhas : Fragment() {
     private fun onItemClick(linha: Linha) {
         val intent = Intent(activity, LinhaDetalhes::class.java)
         intent.putExtra("linha", linha.numero)
+        intent.putExtra("idLinha", linha.id)
         startActivity(intent)
     }
 

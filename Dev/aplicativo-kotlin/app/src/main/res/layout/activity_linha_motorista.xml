@@ -1,58 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".telas.fiscal.LinhaMotorista">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/top_bar_motorista"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:backgroundTint="@color/azulClaro"
-            app:navigationIcon="@drawable/ic_voltar"
-            app:title="Linha"
-            app:titleTextColor="@color/corPrimaria" />
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Lista">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/top_bar_motorista"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:backgroundTint="@color/azulClaro"
+                app:navigationIcon="@drawable/ic_voltar"
+                app:titleTextColor="@color/corPrimaria" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <TextView
+            android:id="@+id/linha"
+            style="@style/Titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginHorizontal="25dp"
+            android:text="@string/motoristas"
+            android:textAllCaps="true"
+            android:textColor="@color/corPrimaria" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listaMotorista"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="25dp" />
 
-            <TextView
-                android:id="@+id/linha"
-                style="@style/Titulo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginHorizontal="25dp"
-                android:text="Motoristas"
-                android:textAllCaps="true"
-                android:textColor="@color/corPrimaria" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/list_error"
+            android:visibility="gone"
+            style="@style/Titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:textColor="@color/preto"
+            android:text="@string/mensagem_erro_lista" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/list_empty"
+            android:visibility="gone"
+            style="@style/Titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:textColor="@color/preto"
+            android:text="@string/motorista_empty" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listaMotorista"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="25dp"
-                android:layout_marginTop="25dp" />
-        </LinearLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-</LinearLayout>
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/loading_view"
+            android:layout_width="match_parent"
+            android:layout_marginTop="25dp"
+            android:outlineSpotShadowColor="@color/azulClaro"
+            android:outlineAmbientShadowColor="@color/azulMedio"
+            android:layout_height="45dp" />
+
+    </LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -15,25 +15,6 @@
         android:orientation="vertical"
         >
 
-        <TextView
-            android:id="@+id/nome_usario"
-            style="@style/Texto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="15dp"
-            android:text="Olá, pessoa" />
-
-        <TextView
-            android:id="@+id/titulo"
-            style="@style/Titulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginBottom="10dp"
-            android:text="LINHAS" />
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listaLinhas"
             android:layout_width="match_parent"
@@ -47,12 +28,15 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
             android:textColor="@color/preto"
-            android:text="Ocorreu um erro" />
+            android:text="@string/mensagem_erro_lista" />
 
         <ProgressBar
             android:visibility="gone"
             android:id="@+id/loading_view"
             android:layout_width="match_parent"
-            android:layout_height="55dp" />
+            android:layout_marginTop="25dp"
+            android:outlineSpotShadowColor="@color/azulClaro"
+            android:outlineAmbientShadowColor="@color/azulMedio"
+            android:layout_height="45dp" />
     </LinearLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
