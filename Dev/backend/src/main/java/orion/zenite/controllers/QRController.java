@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import orion.zenite.entidades.Carro;
 import orion.zenite.entidades.Motorista;
 import orion.zenite.entidades.QRGenerator;
+import orion.zenite.entidades.Viagem;
 import orion.zenite.repositorios.CarroRepository;
 import orion.zenite.repositorios.MotoristaCarroRepository;
 import orion.zenite.repositorios.MotoristaRepository;
+import orion.zenite.repositorios.ViagemRepository;
 
 import java.awt.image.BufferedImage;
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
@@ -29,13 +32,25 @@ public class QRController {
     @Autowired
     private MotoristaRepository motoristaBD;
 
+    @Autowired
+    private ViagemRepository repository;
 
     @GetMapping(path = "{id}",produces=MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity gerarQr(@PathVariable("id") Integer id){
         Optional<Motorista> motorista = this.motoristaBD.findById(id);
         try {
             if(motorista.isPresent()){
-                return ok(QRGenerator.generateQRCodeImage(motorista.get().toString()));
+                List<Viagem> viagemList = repository.findByMotorista(motorista.get());
+                Viagem viagem = viagemList.get(viagemList.size() - 1);
+                String qrcodeMessage = "";
+
+                if(viagem.getHoraChegada() == null){
+                    qrcodeMessage = "{id: " + motorista.get().getId() + ", iniciarViagem: false, idViagem:" + viagem.getId()+ "}";
+                } else {
+                    qrcodeMessage = "{id: " + motorista.get().getId() + ", iniciarViagem: true, idViagem: null }";
+                }
+
+                return ok(QRGenerator.generateQRCodeImage(qrcodeMessage));
             }else{
                 return notFound().build();
             }

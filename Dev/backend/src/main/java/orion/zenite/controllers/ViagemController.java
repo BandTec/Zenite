@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import orion.zenite.modelos.ConsultaPaginada;
 import orion.zenite.modelos.ViagemDto;
 import orion.zenite.entidades.*;
+import orion.zenite.modelos.ViagemIniciar;
 import orion.zenite.modelos.ViagemPassageiros;
 import orion.zenite.repositorios.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -142,22 +146,22 @@ public class ViagemController {
         return notFound().build();
     }
 
-    @ApiOperation("Altera uma viagem")
-    @PutMapping("{id}")
-    public ResponseEntity alterar(@RequestBody ViagemDto viagem,
-                                  @PathVariable Integer id) {
-        viagem.setViagemId(id);
-        Viagem novaViagem = montaViagem(viagem);
-        novaViagem.setId(viagem.getViagemId());
-
-        Optional<Viagem> v = repository.findById(viagem.getViagemId());
-        if (novaViagem == null || !v.isPresent()) {
-            return badRequest().build();
-        } else {
-            this.repository.save(novaViagem);
-            return ok().build();
-        }
-    }
+//    @ApiOperation("Altera uma viagem")
+//    @PutMapping("{id}")
+//    public ResponseEntity alterar(@RequestBody ViagemDto viagem,
+//                                  @PathVariable Integer id) {
+//        viagem.setViagemId(id);
+//        Viagem novaViagem = montaViagem(viagem);
+//        novaViagem.setId(viagem.getViagemId());
+//
+//        Optional<Viagem> v = repository.findById(viagem.getViagemId());
+//        if (novaViagem == null || !v.isPresent()) {
+//            return badRequest().build();
+//        } else {
+//            this.repository.save(novaViagem);
+//            return ok().build();
+//        }
+//    }
 
     @ApiOperation("Altera uma viagem")
     @PutMapping("{id}/qtdPassageiros")
@@ -177,10 +181,45 @@ public class ViagemController {
         }
     }
 
-    @ApiOperation("Cadastra uma viagem")
+//    @ApiOperation("Cadastra uma viagem")
+//    @PostMapping
+//    @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
+//    public ResponseEntity cadastrar(@RequestBody ViagemDto viagem) {
+//        Viagem novaViagem = montaViagem(viagem);
+//
+//        if (novaViagem == null) {
+//            return badRequest().build();
+//        } else {
+//            this.repository.save(novaViagem);
+//            return created(null).build();
+//        }
+//    }
+
+    @ApiOperation("Finaliza uma viagem")
+    @PutMapping("{id}/{fiscalId}")
+    public ResponseEntity finalizarViagem(@PathVariable Integer id, @PathVariable Integer fiscalId) {
+        Optional<Fiscal> f = fiscalRepository.findById(fiscalId);
+
+        Optional<Viagem> v = repository.findById(id);
+        if (!v.isPresent() & !f.isPresent()) {
+            return badRequest().build();
+        } else {
+            Fiscal fiscalVolta = f.get();
+            Date date = new Date();
+            Timestamp timestamp = new Timestamp(date.getTime());
+
+            Viagem viagem = v.get();
+            viagem.setHoraChegada(timestamp.toLocalDateTime());
+            viagem.setFiscalVolta(fiscalVolta);
+            this.repository.save(viagem);
+            return ok().build();
+        }
+    }
+
+    @ApiOperation("Inicia uma viagem")
     @PostMapping
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public ResponseEntity cadastrar(@RequestBody ViagemDto viagem) {
+    public ResponseEntity iniciarViagem(@RequestBody ViagemIniciar viagem) {
         Viagem novaViagem = montaViagem(viagem);
 
         if (novaViagem == null) {
@@ -191,34 +230,62 @@ public class ViagemController {
         }
     }
 
-    public Viagem montaViagem(ViagemDto viagem) {
+    public Viagem montaViagem(ViagemIniciar viagem) {
         Viagem novaViagem = new Viagem();
 
         Optional<Fiscal> f = fiscalRepository.findById(viagem.getFiscalId());
-        Fiscal fiscal = f.orElse(null);
-        novaViagem.setFiscal(fiscal);
-
-        Optional<Linha> l = linhaRepository.findById(viagem.getLinhaId());
-        Linha linha = l.orElse(null);
-        novaViagem.setLinha(linha);
-
         Optional<Motorista> m = motoristaRepository.findById(viagem.getMotoristaId());
-        Motorista motorista = m.orElse(null);
-        novaViagem.setMotorista(motorista);
 
-        Optional<Carro> c = carroRepository.findById(viagem.getCarroId());
-        Carro carro = c.orElse(null);
-        novaViagem.setCarro(carro);
+        if(m.isPresent() & f.isPresent()){
+            Fiscal fiscal = f.get();
+            novaViagem.setFiscal(fiscal);
 
-        novaViagem.setHoraChegada(viagem.getHoraChegada());
-        novaViagem.setHoraSaida(viagem.getHoraSaida());
-        novaViagem.setQtdPassageiros(viagem.getQtdPassageiros());
+            Motorista motorista = m.get();
+            novaViagem.setMotorista(motorista);
 
-        if (fiscal == null || linha == null || carro == null || motorista == null) {
-            return null;
-        } else {
+            novaViagem.setCarro(motorista.getCarro());
+            novaViagem.setLinha(motorista.getCarro().pegarLinha());
+
+            Date date = new Date();
+            Timestamp timestamp = new Timestamp(date.getTime());
+            novaViagem.setHoraSaida(timestamp.toLocalDateTime());
+            novaViagem.setQtdPassageiros(0);
+
             return novaViagem;
+        }else {
+            return null;
         }
+
     }
+
+//    public Viagem montaViagem(ViagemDto viagem) {
+//        Viagem novaViagem = new Viagem();
+//
+//        Optional<Fiscal> f = fiscalRepository.findById(viagem.getFiscalId());
+//        Fiscal fiscal = f.orElse(null);
+//        novaViagem.setFiscal(fiscal);
+//
+//        Optional<Linha> l = linhaRepository.findById(viagem.getLinhaId());
+//        Linha linha = l.orElse(null);
+//        novaViagem.setLinha(linha);
+//
+//        Optional<Motorista> m = motoristaRepository.findById(viagem.getMotoristaId());
+//        Motorista motorista = m.orElse(null);
+//        novaViagem.setMotorista(motorista);
+//
+//        Optional<Carro> c = carroRepository.findById(viagem.getCarroId());
+//        Carro carro = c.orElse(null);
+//        novaViagem.setCarro(carro);
+//
+//        novaViagem.setHoraChegada(viagem.getHoraChegada());
+//        novaViagem.setHoraSaida(viagem.getHoraSaida());
+//        novaViagem.setQtdPassageiros(viagem.getQtdPassageiros());
+//
+//        if (fiscal == null || linha == null || carro == null || motorista == null) {
+//            return null;
+//        } else {
+//            return novaViagem;
+//        }
+//    }
 
 }

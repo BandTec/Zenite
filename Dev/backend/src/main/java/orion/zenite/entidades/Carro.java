@@ -134,6 +134,11 @@ public class Carro {
         return nome;
     }
 
+    public Linha pegarLinha() {
+        Linha linha = carroLinhas.get(0).getLinha();
+        return linha;
+    }
+
     public String getMotorista() {
         if(motoristaCarro.isEmpty()){
             return null;
