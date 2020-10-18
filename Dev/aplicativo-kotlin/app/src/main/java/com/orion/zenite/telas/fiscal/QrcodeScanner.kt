@@ -15,7 +15,9 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.google.zxing.BarcodeFormat
+import com.google.zxing.client.result.ResultParser
 import com.orion.zenite.R
+import com.orion.zenite.model.Qrcode
 import kotlinx.android.synthetic.main.activity_cronograma_linha.topAppBar
 
 
@@ -54,12 +56,23 @@ class QrcodeScanner : AppCompatActivity() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
-                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
-                // TODO: ADICIONAR LOGICA PARA PEGAR DADOS DO QRCODE PARA ENVIAR PARA A API
 
-                // TODO: MUDAR AQUI PARA TELA DE ADICIONAR QUANTIDADE DE PASSAGEIROS
-                val intent = Intent(this, QtdPassageiros::class.java)
-                startActivity(intent)
+
+                var parsedResult = ResultParser.parseResult(it) as Qrcode;
+                if (parsedResult != null)
+                {
+                    var id = parsedResult.id;
+                    Toast.makeText(this, id, Toast.LENGTH_LONG).show()
+
+                    // TODO: adicionar dialog se deseja iniciar viagem
+                    // TODO: ADICIONAR LOGICA PARA PEGAR DADOS DO QRCODE PARA ENVIAR PARA A API
+
+                    val intent = Intent(this, QtdPassageiros::class.java)
+                    startActivity(intent)
+
+                }else {
+                    Toast.makeText(this, "Ocorreu um erro, tente novamente", Toast.LENGTH_LONG).show()
+                }
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
