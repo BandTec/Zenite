@@ -86,7 +86,7 @@ class QtdPassageiros : AppCompatActivity() {
     }
 
     private fun adicionar() {
-        // TODO REMOVER DADOS ESTATICOS => IDVIAGEM E JWT TOKEN
+        // TODO REMOVER DADOS ESTATICOS => JWT TOKEN
         val token =
             "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
         val passageiros = inputQuantidade.text.toString().toInt()
