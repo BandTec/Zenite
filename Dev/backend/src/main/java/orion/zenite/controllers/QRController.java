@@ -35,7 +35,7 @@ public class QRController {
         Optional<Motorista> motorista = this.motoristaBD.findById(id);
         try {
             if(motorista.isPresent()){
-                return ok(QRGenerator.generateQRCodeImage(motorista.toString()));
+                return ok(QRGenerator.generateQRCodeImage(motorista.get().toString()));
             }else{
                 return notFound().build();
             }

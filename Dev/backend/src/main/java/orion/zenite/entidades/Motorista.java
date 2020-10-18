@@ -52,16 +52,17 @@ public class Motorista {
 
     @Override
     public String toString() {
-        return "Motorista{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", numeroTelefone='" + numeroTelefone + '\'' +
-                ", cnh='" + cnh + '\'' +
-                ", motoristaCarroList=" + motoristaCarroList +
-                '}';
+        return "{" +
+                "id:" + id +
+                ", nome:" + nome +
+                ", cpf:" + cpf +
+                ", dataNascimento:" + dataNascimento +
+                ", numeroTelefone:" + numeroTelefone +
+                ", cnh:" + cnh +
+                ", motoristaCarroList: [" + motoristaCarroList.get(0).getCarro().getId() +
+                "] }";
     }
+
 
     public int getId() {
         return id;
