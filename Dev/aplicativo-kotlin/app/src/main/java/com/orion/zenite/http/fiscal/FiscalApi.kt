@@ -3,6 +3,7 @@ package com.orion.zenite.http.fiscal
 import com.orion.zenite.model.IniciarViagem
 import com.orion.zenite.model.Linha
 import com.orion.zenite.model.Onibus
+import com.orion.zenite.model.QtdPassageiros
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -18,12 +19,21 @@ interface FiscalApi {
 
     // iniciar viagem
     @POST("/api/viagem")
-    fun iniciarViagem(@Body info: IniciarViagem, @Header("authorization") auth: String)
+    fun iniciarViagem(@Body info: IniciarViagem,
+                      @Header("authorization"
+                      ) auth: String) : Call<Void>
 
     // finalizar viagem
     @PUT("/api/viagem/{idViagem}/{idFiscal}")
     fun finalizarViagem(@Path("idViagem") idViagem: Int,
                         @Path("idFiscal") idFiscal: Int,
-                        @Header("authorization") auth: String)
+                        @Header("authorization"
+                    ) auth: String): Call<Void>
 
+    // ADICIONAR QTD PASSAGEIROS
+    @PUT("/api/viagem/{idViagem}/qtdPassageiros")
+    fun adicionarPassageiros(@Path("idViagem") idViagem: Int,
+                             @Body qtdPassageiros: QtdPassageiros,
+                             @Header("authorization") auth: String
+                            ) : Call<Void>
 }

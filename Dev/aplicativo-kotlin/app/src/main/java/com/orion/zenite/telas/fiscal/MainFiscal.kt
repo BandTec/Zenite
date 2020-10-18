@@ -27,7 +27,7 @@ class MainFiscal : AppCompatActivity() {
         bottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> replaceFragment(dash, "Dashboard")
-                R.id.camera -> replaceFragment(camera, "Escaneie o código qr")
+                R.id.camera -> replaceFragment(camera, "Scanner")
                 R.id.logout -> replaceFragment(logout, "Zênite")
             }
             true
