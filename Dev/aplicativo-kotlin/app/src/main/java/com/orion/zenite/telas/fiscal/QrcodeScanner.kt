@@ -57,14 +57,15 @@ class QrcodeScanner : AppCompatActivity() {
             runOnUiThread {
 
                 Toast.makeText(this, it.text, Toast.LENGTH_LONG).show()
-                // https://www.baeldung.com/kotlin-json-convert-data-class
-                var gson = Gson()
-                var jsonString = gson.fromJson(it.text, Qrcode::class.java)
+
+                try {
+                    // https://www.baeldung.com/kotlin-json-convert-data-class
+                    var gson = Gson()
+                    var jsonString = gson.fromJson(it.text, Qrcode::class.java)
 
 
-                if (jsonString != null)
-                {
-                    Toast.makeText(this, jsonString.id, Toast.LENGTH_LONG).show()
+                    if (jsonString != null) {
+                        Toast.makeText(this, jsonString.id, Toast.LENGTH_LONG).show()
 //                    var id = parsedResult.identifier;
 //                    Toast.makeText(this, id, Toast.LENGTH_LONG).show()
 //
@@ -74,8 +75,13 @@ class QrcodeScanner : AppCompatActivity() {
 //                    val intent = Intent(this, QtdPassageiros::class.java)
 //                    startActivity(intent)
 
-                }else {
-                    Toast.makeText(this, "Ocorreu um erro, tente novamente", Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(this, "Ocorreu um erro, tente novamente", Toast.LENGTH_LONG)
+                            .show()
+                    }
+                } catch(e: Throwable){
+                    Toast.makeText(this, "Ocorreu um erro, tente novamente ${e.message}", Toast.LENGTH_LONG)
+                        .show()
                 }
             }
         }
