@@ -45,9 +45,9 @@ public class QRController {
                 String qrcodeMessage = "";
 
                 if(viagem.getHoraChegada() == null){
-                    qrcodeMessage = "{id: " + motorista.get().getId() + ", iniciarViagem: false, idViagem:" + viagem.getId()+ "}";
+                    qrcodeMessage = "{ \"id\": " + motorista.get().getId() + ", \"iniciarViagem\": false, \"idViagem\":" + viagem.getId()+ "}";
                 } else {
-                    qrcodeMessage = "{id: " + motorista.get().getId() + ", iniciarViagem: true, idViagem: null }";
+                    qrcodeMessage = "{\"id\": " + motorista.get().getId() + ", \"iniciarViagem\": true, \"idViagem\": null }";
                 }
 
                 return ok(QRGenerator.generateQRCodeImage(qrcodeMessage));
