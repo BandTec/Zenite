@@ -14,12 +14,11 @@ import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
+import com.google.gson.Gson
 import com.google.zxing.BarcodeFormat
-import com.google.zxing.client.result.ResultParser
 import com.orion.zenite.R
 import com.orion.zenite.model.Qrcode
 import kotlinx.android.synthetic.main.activity_cronograma_linha.topAppBar
-
 
 class QrcodeScanner : AppCompatActivity() {
 
@@ -57,18 +56,23 @@ class QrcodeScanner : AppCompatActivity() {
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
 
+                Toast.makeText(this, it.text, Toast.LENGTH_LONG).show()
+                // https://www.baeldung.com/kotlin-json-convert-data-class
+                var gson = Gson()
+                var jsonString = gson.fromJson(it.text, Qrcode::class.java)
 
-                var parsedResult = ResultParser.parseResult(it) as Qrcode;
-                if (parsedResult != null)
+
+                if (jsonString != null)
                 {
-                    var id = parsedResult.id;
-                    Toast.makeText(this, id, Toast.LENGTH_LONG).show()
-
-                    // TODO: adicionar dialog se deseja iniciar viagem
-                    // TODO: ADICIONAR LOGICA PARA PEGAR DADOS DO QRCODE PARA ENVIAR PARA A API
-
-                    val intent = Intent(this, QtdPassageiros::class.java)
-                    startActivity(intent)
+                    Toast.makeText(this, jsonString.id, Toast.LENGTH_LONG).show()
+//                    var id = parsedResult.identifier;
+//                    Toast.makeText(this, id, Toast.LENGTH_LONG).show()
+//
+//                    // TODO: adicionar dialog se deseja iniciar viagem
+//                    // TODO: ADICIONAR LOGICA PARA PEGAR DADOS DO QRCODE PARA ENVIAR PARA A API
+//
+//                    val intent = Intent(this, QtdPassageiros::class.java)
+//                    startActivity(intent)
 
                 }else {
                     Toast.makeText(this, "Ocorreu um erro, tente novamente", Toast.LENGTH_LONG).show()
