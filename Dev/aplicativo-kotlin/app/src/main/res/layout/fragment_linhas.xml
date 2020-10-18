@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".telas.fiscal.fragments.dashboard.Linhas"
-    android:orientation="vertical">
+    tools:context=".telas.fiscal.fragments.dashboard.Linhas">
 
-    <TextView
-        style="@style/Texto"
-        android:id="@+id/nome_usario"
-        android:text="Olá, pessoa"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="15dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-    <TextView
-        style="@style/Titulo"
-        android:id="@+id/titulo"
-        android:text="LINHAS"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginBottom="10dp"
-        />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listaLinhas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listaLinhas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/list_error"
+            android:visibility="gone"
+            style="@style/Titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:textColor="@color/preto"
+            android:text="@string/mensagem_erro_lista" />
 
-</LinearLayout>
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/loading_view"
+            android:layout_width="match_parent"
+            android:layout_marginTop="25dp"
+            android:outlineSpotShadowColor="@color/azulClaro"
+            android:outlineAmbientShadowColor="@color/azulMedio"
+            android:layout_height="45dp" />
+    </LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

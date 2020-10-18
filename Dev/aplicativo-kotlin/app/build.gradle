@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -23,6 +24,8 @@ android {
     }
 }
 
+def daggerVersion = '2.13'
+
 // https://maven.google.com/web/index.html?q=com.android.support#com.android.support:recyclerview-v7
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -38,8 +41,22 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
+
     implementation "com.google.android.gms:play-services-vision:19.0.0"
+
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.6.4"
+    implementation "com.squareup.retrofit2:retrofit:2.6.4"
+    implementation "com.squareup.retrofit2:converter-gson:2.6.4"
+
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
     implementation 'com.budiyev.android:code-scanner:2.1.0'
+
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

@@ -5,11 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.orion.zenite.R
+import com.orion.zenite.model.Linha
 import com.orion.zenite.model.MotoristaOnibus
+import com.orion.zenite.model.Onibus
 import kotlinx.android.synthetic.main.list_item_motorista_onibus.view.*
 
-class MotoristaOnibusAdapter  (var list: List<MotoristaOnibus>) :
+class MotoristaOnibusAdapter  (var list: ArrayList<Onibus>) :
     RecyclerView.Adapter<MotoristaOnibusAdapter.ViewHolder>() {
+
+    fun update(new: List<Onibus>) {
+        list.clear()
+        list.addAll(new)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int)=
         ViewHolder(
@@ -27,10 +35,10 @@ class MotoristaOnibusAdapter  (var list: List<MotoristaOnibus>) :
         private val telefone_tv = view.telefone
         private val onibus_tv = view.onibus
 
-        fun bind(viagem: MotoristaOnibus) {
-            nome_motorista_tv.text = viagem.motoristaNome
-            telefone_tv.text = viagem.telefone
-            onibus_tv.text = viagem.placaOnibus
+        fun bind(item: Onibus) {
+            nome_motorista_tv.text = item.motorista
+            telefone_tv.text = item.motoristaTelefone
+            onibus_tv.text = item.placa
         }
     }
 }
