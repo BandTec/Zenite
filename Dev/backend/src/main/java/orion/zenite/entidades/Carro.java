@@ -141,6 +141,13 @@ public class Carro {
         return motoristaCarro.get(0).getMotorista().getNome();
     }
 
+    public String getMotoristaTelefone() {
+        if(motoristaCarro.isEmpty()){
+            return null;
+        }
+        return motoristaCarro.get(0).getMotorista().getNumeroTelefone();
+    }
+
     public Gerente getGerente() {
         return gerente;
     }
