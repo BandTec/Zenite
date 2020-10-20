@@ -85,7 +85,7 @@ class LinhaMotorista : AppCompatActivity() {
     private fun consumirApi() {
         loading.value = true;
 
-        // TODO: REMOVER DADOS ESTATICOS E PEGAR TOKEN DO USUÁRIO LOGADO
+        // TODO: REMOVER DADOS ESTATICOS => JWT TOKEN
         val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
 
         // armazenando id da linha vindo da tela anterior

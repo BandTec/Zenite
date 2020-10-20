@@ -3,15 +3,15 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_home"
-        android:title="dashboard" />
+        android:title="@string/dashboard" />
 
     <item
         android:id="@+id/camera"
         android:icon="@drawable/ic_camera"
-        android:title="camera" />
+        android:title="@string/scanner" />
 
     <item
         android:id="@+id/logout"
         android:icon="@drawable/ic_config"
-        android:title="logout" />
+        android:title="@string/logout" />
 </menu>

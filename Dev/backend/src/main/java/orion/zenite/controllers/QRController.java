@@ -41,6 +41,11 @@ public class QRController {
         try {
             if(motorista.isPresent()){
                 List<Viagem> viagemList = repository.findByMotorista(motorista.get());
+                if(viagemList.isEmpty()){
+                    String message = "{id: " + motorista.get().getId() + ", iniciarViagem: true, idViagem: null }";
+                    return ok(QRGenerator.generateQRCodeImage(message));
+                }
+
                 Viagem viagem = viagemList.get(viagemList.size() - 1);
                 String qrcodeMessage = "";
 
