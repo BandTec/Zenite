@@ -32,7 +32,7 @@
         android:text="BEM VINDO" />
 
     <TextView
-        android:id="@+id/lbEmail"
+        android:id="@+id/lb_email"
         style="@style/Texto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,13 +41,13 @@
         android:textColor="@color/corPrimaria" />
 
     <EditText
-        android:id="@+id/inputEmail"
+        android:id="@+id/input_email"
         style="@style/Input"
         android:hint="Email"
         android:inputType="textEmailAddress" />
 
     <TextView
-        android:id="@+id/lbSenha"
+        android:id="@+id/lb_senha"
         style="@style/Texto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,23 +56,22 @@
         android:textColor="@color/corPrimaria" />
 
     <EditText
-        android:id="@+id/inputSenha"
+        android:id="@+id/input_senha"
         style="@style/Input"
         android:hint="Senha"
         android:inputType="textPassword" />
 
 
     <Button
-        android:id="@+id/btnEntrar2"
+        android:id="@+id/btn_entrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="15dp"
-        android:onClick="authLogin"
         android:text="LOGIN" />
 
     <TextView
-        android:id="@+id/EsqueceuSenha"
+        android:id="@+id/esqueceu_senha"
         style="@style/TextoBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
