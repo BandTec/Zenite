@@ -10,8 +10,7 @@ export default function InputFormik(props) {
 
   const handleFocus = () => setDidFocus(true);
 
-  const showFeedback =
-    (!!didFocus && field?.value?.trim().length > 2) || !!meta.touched;
+  const showFeedback = !!didFocus || !!meta.touched;
 
   return (
     <Container>

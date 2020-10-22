@@ -8,7 +8,13 @@ import ExcluirIcon from "./../../../assets/icons/excluir.svg";
 import api from "./../../../services/api";
 import Swal from "sweetalert2";
 
-export default function Acoes({ id, tipo, detalhes = true, editarFuncao }) {
+export default function Acoes({
+  id,
+  tipo,
+  detalhes = true,
+  editarFuncao,
+  soDetalhes,
+}) {
   const excluir = async () => {
     Swal.fire({
       title: "Aviso",
@@ -55,24 +61,32 @@ export default function Acoes({ id, tipo, detalhes = true, editarFuncao }) {
   return (
     <StyledTableCell align="left">
       <Alinhar>
-        {detalhes && (
+        {soDetalhes === true ? (
           <Link to={`/${tipo}/detalhes/${id}`}>
             <Img src={DetalhesIcon} title="Ver detalhes" />
           </Link>
-        )}
-
-        {editarFuncao ? (
-          <button onClick={() => editarFuncao(id)}>
-            <Img src={EditarIcon} title="Editar" />
-          </button>
         ) : (
-          <Link to={`/${tipo}/editar/${id}`}>
-            <Img src={EditarIcon} title="Editar" />
-          </Link>
+          <>
+            {detalhes && (
+              <Link to={`/${tipo}/detalhes/${id}`}>
+                <Img src={DetalhesIcon} title="Ver detalhes" />
+              </Link>
+            )}
+
+            {editarFuncao ? (
+              <button onClick={() => editarFuncao(id)}>
+                <Img src={EditarIcon} title="Editar" />
+              </button>
+            ) : (
+              <Link to={`/${tipo}/editar/${id}`}>
+                <Img src={EditarIcon} title="Editar" />
+              </Link>
+            )}
+            <button onClick={excluir}>
+              <Img src={ExcluirIcon} title="Excluir dado" />
+            </button>
+          </>
         )}
-        <button onClick={excluir}>
-          <Img src={ExcluirIcon} title="Excluir dado" />
-        </button>
       </Alinhar>
     </StyledTableCell>
   );

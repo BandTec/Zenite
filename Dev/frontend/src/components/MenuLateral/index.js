@@ -86,13 +86,15 @@ export default function MenuLateral(props) {
               />
             )}
 
-            
+            {nivel !== 5 && (
               <BotaoMenu
-                descricao="Viagem"
-                iconeNome="viagem"
-                url={"/viagem"}
+                descricao="Cronograma"
+                iconeNome="onibus"
+                url={"/cronograma"}
               />
-            
+            )}
+
+            <BotaoMenu descricao="Viagem" iconeNome="viagem" url={"/viagem"} />
 
             {nivel === 2 && (
               <BotaoMenu

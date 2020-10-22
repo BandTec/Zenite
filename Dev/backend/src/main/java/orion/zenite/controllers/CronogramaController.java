@@ -5,10 +5,14 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import orion.zenite.entidades.*;
+import orion.zenite.modelos.ConsultaPaginada;
 import orion.zenite.modelos.CronogramaLista;
 import orion.zenite.modelos.Horarios;
 import orion.zenite.repositorios.*;
@@ -66,14 +70,20 @@ public class CronogramaController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping
-    public ResponseEntity consultarTodos() {
-
-        List<Cronograma> listaCronograma = repository.findAll();
-        System.out.println(listaCronograma);
-        if (listaCronograma.isEmpty()) {
-            return notFound().build();
+    public ResponseEntity consultarTodos(@RequestParam(required = false) Integer pagina) {
+        if (this.repository.count() > 0) {
+            if(pagina != null) {
+                Pageable pageable = PageRequest.of(pagina, 10);
+                Page<Cronograma> page = repository.findAll(pageable);
+                ConsultaPaginada consulta = new ConsultaPaginada(page);
+                return ok(consulta);
+            }
+            else {
+                List<Cronograma> listaCronograma = repository.findAll();
+                return ok(listaCronograma);
+            }
         } else {
-            return ok(listaCronograma);
+            return noContent().build();
         }
     }
 
