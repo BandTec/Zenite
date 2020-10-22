@@ -12,7 +12,7 @@ class QtdPassageiros : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qtd_passageiros)
 
-        //        https://material.io/develop/android/components/app-bars-top
+        // https://material.io/develop/android/components/app-bars-top
         topAppBar.setNavigationOnClickListener {
             this.finish()
         }

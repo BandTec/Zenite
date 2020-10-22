@@ -86,6 +86,11 @@ public class Linha {
         return f.getNome();
     }
 
+    public Fiscal pegarFiscal(){
+        Fiscal f = fiscalLinha.get(0).getFiscal();
+        return f;
+    }
+
     public List getCarrosId() {
         ArrayList carrosId = new ArrayList();
         for (CarroLinha carro : carroLinhas) {
@@ -102,6 +107,15 @@ public class Linha {
                     onibus.getNumero(), onibus.getPlaca()
             );
             carros.add(nome);
+        }
+        return carros;
+    }
+
+    public ArrayList getCarrosObjetos() {
+        ArrayList carros = new ArrayList();
+        for (CarroLinha carro : carroLinhas) {
+            Carro onibus = carro.getCarro();
+            carros.add(onibus);
         }
         return carros;
     }

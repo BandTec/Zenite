@@ -1,6 +1,7 @@
 package orion.zenite.entidades;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.models.auth.In;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -144,6 +145,13 @@ public class Carro {
             return null;
         }
         return motoristaCarro.get(0).getMotorista().getNome();
+    }
+
+    public Integer getMotoristaId() {
+        if(motoristaCarro.isEmpty()){
+            return null;
+        }
+        return motoristaCarro.get(0).getMotorista().getId();
     }
 
     public String getMotoristaTelefone() {

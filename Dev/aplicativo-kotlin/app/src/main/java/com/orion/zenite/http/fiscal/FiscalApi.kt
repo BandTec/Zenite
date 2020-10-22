@@ -19,4 +19,6 @@ interface FiscalApi {
 
 
     // TODO => CAMERA => ABRIR E FECHAR VIAGEM
+
+
 }

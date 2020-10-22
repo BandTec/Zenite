@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import orion.zenite.entidades.*;
 import orion.zenite.repositorios.*;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
@@ -42,12 +43,13 @@ public class CronogramaHorariosController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("/cronograma/{id}")
-    public ResponseEntity consultaPorIdCronograma(@PathVariable("id") Integer id){
-        Cronograma c = new Cronograma();
-        c.setIdCronograma(id);
-        Optional<Cronograma> listaCronograma = cronogramaRepository.findById(c.getIdCronograma());
-        if(!listaCronograma.isPresent()){
-            return ok(listaCronograma);
+    public ResponseEntity consultaPorIdCronograma(@PathVariable("id") Integer id) {
+        Optional<Cronograma> cronograma = cronogramaRepository.findById(id);
+        if (cronograma.isPresent()) {
+            List<CronogramaHorarios> listaCronograma = repository.findByCronograma(cronograma.get());
+            if (!listaCronograma.isEmpty()) {
+                return ok(listaCronograma);
+            }
         }
         return notFound().build();
     }
@@ -60,13 +62,15 @@ public class CronogramaHorariosController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("/motorista/{id}")
-    public ResponseEntity consultaPorIdMotorista(@PathVariable("id") Integer id){
-        Motorista m = new Motorista();
-        m.setId(id);
-        Optional<Motorista> listaCronograma = motoristaRepository.findById(m.getId());
-        if(!listaCronograma.isPresent()){
-            return ok(listaCronograma);
+    public ResponseEntity consultaPorIdMotorista(@PathVariable("id") Integer id) {
+        Optional<Motorista> motorista = motoristaRepository.findById(id);
+        if(motorista.isPresent()){
+            List<CronogramaHorarios> listaCronograma = repository.findByMotorista(motorista.get());
+            if (!listaCronograma.isEmpty()) {
+                return ok(listaCronograma);
+            }
         }
+
         return notFound().build();
     }
 
@@ -100,7 +104,7 @@ public class CronogramaHorariosController {
     @PutMapping("/status/{id}")
     @Transactional
     public ResponseEntity alterarStatusViagem(@RequestBody CronogramaHorarios novoStatus,
-                                                @PathVariable Integer id) {
+                                              @PathVariable Integer id) {
         if (this.repository.existsById(id)) {
             // alterar um horario por completo
             this.repository.save(novoStatus);
@@ -118,11 +122,11 @@ public class CronogramaHorariosController {
     })
     @PostMapping()
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public ResponseEntity cadastro(@RequestBody CronogramaHorarios novoHorario){
+    public ResponseEntity cadastro(@RequestBody CronogramaHorarios novoHorario) {
         Motorista motorista = novoHorario.getMotorista();
         Carro carro = novoHorario.getCarro();
         Linha linha = novoHorario.getLinha();
-        Cronograma cronograma = novoHorario.getCronograma();
+        Cronograma cronograma = novoHorario.pegarCronograma();
 
         novoHorario.setMotorista(motorista);
         novoHorario.setCarro(carro);
