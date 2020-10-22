@@ -9,7 +9,7 @@ data class Conta (
 )
 
 data class Nivel(
-    val id: Int,
+    val id: Int?,
     val descricao: String
 )
 

@@ -8,9 +8,8 @@ import android.widget.Toast
 import com.orion.zenite.R
 import com.orion.zenite.http.HttpHelper
 import com.orion.zenite.http.autenticacao.LoginApi
-import com.orion.zenite.model.Conta
-import com.orion.zenite.model.LoginResponse
-import com.orion.zenite.model.Nivel
+import com.orion.zenite.model.Token
+import com.orion.zenite.model.Usuario
 import com.orion.zenite.telas.fiscal.MainFiscal
 import com.orion.zenite.telas.motorista.MainMotorista
 import kotlinx.android.synthetic.main.activity_login.*
@@ -47,38 +46,41 @@ class Login : AppCompatActivity() {
             val requests: LoginApi = HttpHelper().getApiClient()!!.create(LoginApi::class.java)
             //val resultado = requests.getUsuario(idUser, token)
 
-            val usuario = Conta(
-                null,
-                email,
-                senha,
-                Nivel(
-                    1,
-                    "MOTORISTA"
-                )
+            val usuario = Usuario(
+                input_senha.text.toString(),
+                input_email.text.toString()
             )
 
             val fiscalAtv = Intent(this@Login, MainFiscal::class.java)
             val motoristaAtv = Intent(this@Login, MainMotorista::class.java)
 
-            val userLoginRequest = requests.loginRequest(usuario)
+            val userLoginRequest = requests.postloginRequest(usuario)
 
-            userLoginRequest.enqueue(object : Callback<LoginResponse> {
-                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+            userLoginRequest.enqueue(object : Callback<Token> {
+                override fun onFailure(call: Call<Token>, t: Throwable) {
                     Toast.makeText(baseContext, "Deu Ruim mermão  ${t.message}", Toast.LENGTH_SHORT).show()
                 }
 
-                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                override fun onResponse(call: Call<Token>, response: Response<Token>) {
                     //TODO 1 - condição se response não der error
                     //TODO 2 - salvar  dados do usuário logado
                     //TODO 3 - condição para redirecionar p/ tela
                     // de acordo com nível de acesso do Usuario
 
+
+                    val tokenStr = "${response.body()?.message.toString()}"
+                    Toast.makeText(baseContext, "Token  ${tokenStr}", Toast.LENGTH_SHORT).show()
+
+
+
                     //Autenticação de Login
                     /*if (email.toLowerCase().equals("m")) {startActivity(motorista)
                     } else {startActivity(fiscal)}*/
 
-                    motoristaAtv.flags = Intent.FLAG_ACTIVITY_NEW_TASK  or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(motoristaAtv)
+
+
+                    //motoristaAtv.flags = Intent.FLAG_ACTIVITY_NEW_TASK  or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    //startActivity(motoristaAtv)
 
                 }
             })
