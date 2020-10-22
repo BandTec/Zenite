@@ -1,5 +1,6 @@
 package com.orion.zenite.http.autenticacao
 
+import com.orion.zenite.model.Conta
 import com.orion.zenite.model.Token
 import com.orion.zenite.model.Usuario
 import retrofit2.Call
@@ -14,9 +15,9 @@ interface LoginApi {
 
     // BUSCA USUARIO
     @GET("/autentica/login")
-    fun getUsuario(
+    fun getConta(
         @Path("id") id: Int,
         @Header("authorization") auth: String
-    ): Call<Token>
+    ): Call<Conta>
 
 }

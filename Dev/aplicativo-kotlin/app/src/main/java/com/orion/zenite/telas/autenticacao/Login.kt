@@ -25,8 +25,6 @@ class Login : AppCompatActivity() {
 
         btn_entrar.setOnClickListener() {
             //validations
-            val token =
-                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
 
             val email = input_email.text.toString().trim()
             val senha = input_senha.text.toString().trim()
@@ -66,6 +64,7 @@ class Login : AppCompatActivity() {
                     //TODO 2 - salvar  dados do usuário logado
                     //TODO 3 - condição para redirecionar p/ tela
                     // de acordo com nível de acesso do Usuario
+                    //tokenStr = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
 
 
                     val tokenStr = "${response.body()?.message.toString()}"
