@@ -42,10 +42,17 @@ class QrcodeScanner : AppCompatActivity() {
 
     val loading = MutableLiveData<Boolean>()
     val respostaRequisicao = MutableLiveData<Boolean>()
+    var id :Int? = null
+    var token : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qrcode_scanner)
+
+
+        id = intent.extras?.getInt("id")
+        token = intent.extras?.getString("token").toString()
+
 
         // se clicar no botao de voltar fecha tela atual
         topAppBar.setNavigationOnClickListener {
@@ -86,6 +93,9 @@ class QrcodeScanner : AppCompatActivity() {
                             Toast.LENGTH_LONG
                         ).show()
                         val intent = Intent(this, MainFiscal::class.java)
+                        intent.putExtra("idViagem", qrcodeMotorista.idViagem)
+                        intent.putExtra("token", token)
+                        intent.putExtra("id", id)
                         startActivity(intent)
                     } else {
                         Toast.makeText(
@@ -95,6 +105,8 @@ class QrcodeScanner : AppCompatActivity() {
                         ).show()
                         val intent = Intent(this, QtdPassageiros::class.java)
                         intent.putExtra("idViagem", qrcodeMotorista.idViagem)
+                        intent.putExtra("token", token)
+                        intent.putExtra("id", id)
                         startActivity(intent)
                     }
                 } else {
@@ -167,44 +179,22 @@ class QrcodeScanner : AppCompatActivity() {
     }
 
     private fun iniciarViagem() {
-        // TODO REMOVER DADOS ESTATICOS => IDFISCAL E JWT TOKEN
-        val token =
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
-        val fiscalId = 4
+        //  REMOVER DADOS ESTATICOS => IDFISCAL E JWT TOKEN
+      //  val token =
+      //      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
+      //  val fiscalId = 4
 
         val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
-        val viagem = IniciarViagem(fiscalId, qrcodeMotorista.id)
+        if(id !== null) {
+            val viagem = IniciarViagem(id!!, qrcodeMotorista.id)
 
-        val resultado = service.iniciarViagem(viagem, token)
-
-        resultado.enqueue(object : Callback<Void> {
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                respostaRequisicao.value = false
-                loading.value = false
-            }
-
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                respostaRequisicao.value = true
-                loading.value = false
-            }
-        })
-    }
-
-    private fun finalizarViagem() {
-        // TODO REMOVER DADOS ESTATICOS => IDFISCAL E JWT TOKEN
-        val token =
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
-        val fiscalId = 4
-
-        val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
-
-        if (qrcodeMotorista.idViagem != null) {
-            val resultado = service.finalizarViagem(qrcodeMotorista.idViagem!!, fiscalId, token)
+            val resultado = service.iniciarViagem(viagem, token)
 
             resultado.enqueue(object : Callback<Void> {
                 override fun onFailure(call: Call<Void>, t: Throwable) {
                     respostaRequisicao.value = false
                     loading.value = false
+                    println("deu ruim scanner" + t.message)
                 }
 
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
@@ -213,6 +203,37 @@ class QrcodeScanner : AppCompatActivity() {
                 }
             })
         } else {
+            println("deu ruim scanner id do fiscal")
+            respostaRequisicao.value = false
+            loading.value = false
+        }
+    }
+
+    private fun finalizarViagem() {
+        // REMOVER DADOS ESTATICOS => IDFISCAL E JWT TOKEN
+      //  val token =
+    //        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
+     //   val fiscalId = 4
+
+        val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
+
+        if (qrcodeMotorista.idViagem != null && id != null) {
+            val resultado = service.finalizarViagem(qrcodeMotorista.idViagem!!, id!!, token)
+
+            resultado.enqueue(object : Callback<Void> {
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    respostaRequisicao.value = false
+                    loading.value = false
+                    println("deu ruim scanner" + t.message)
+                }
+
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    respostaRequisicao.value = true
+                    loading.value = false
+                }
+            })
+        } else {
+            println("deu ruim scanner id do fiscal")
             respostaRequisicao.value = false
             loading.value = false
         }

@@ -18,6 +18,7 @@ import com.orion.zenite.listAdapters.HistoricoAdapter
 import com.orion.zenite.listAdapters.ViagensAdapter
 import com.orion.zenite.model.HistoricoViagens
 import com.orion.zenite.model.Viagens
+import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.fragment_viagens_diarias.*
 import kotlinx.android.synthetic.main.fragment_viagens_semanais.*
 
@@ -52,10 +53,11 @@ class ViagensSemanais : Fragment() {
     val loadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
     private var swipe: SwipeRefreshLayout? = null
-
+    val empty = MutableLiveData<Boolean>()
     // adapter do recycleview
     private val listaAdapter = HistoricoAdapter(arrayListOf())
-
+    var id :Int? = null
+    var token : String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,8 +72,8 @@ class ViagensSemanais : Fragment() {
             adapter = listaAdapter
         }
 
-        val id = getActivity()?.getIntent()?.extras?.getInt("id")
-        val token = getActivity()?.getIntent()?.extras?.getString("token").toString()
+         id = getActivity()?.getIntent()?.extras?.getInt("id")
+         token = getActivity()?.getIntent()?.extras?.getString("token").toString()
 
         Toast.makeText(activity, "olha esse $token e esse $id", Toast.LENGTH_SHORT).show()
 
@@ -94,7 +96,8 @@ class ViagensSemanais : Fragment() {
         val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
         // TODO ROTA E DESCOMENTAR ABAIXO
 
-//        val listaRemoto: Call<List<Viagens>> = service.getViagensSemanais(idUser, token)
+        if(id != null) {
+//        val listaRemoto: Call<List<Viagens>> = service.getViagensSemanais(id!!, token)
 //
 //        listaRemoto.enqueue(object : Callback<List<Viagens>> {
 //            override fun onFailure(call: Call<List<Viagens>>, t: Throwable) {
@@ -106,13 +109,19 @@ class ViagensSemanais : Fragment() {
 //
 //            override fun onResponse(call: Call<List<Viagens>>, response: Response<List<Viagens>>) {
 //                listaViagens.value = response.body()?.toList()
-                  listaViagens.value = dadosTemporarios;
+            listaViagens.value = dadosTemporarios;
 //                loadError.value = false;
 //                loading.value = false;
-//
+//              if(response.body()?.toList() === null) {
+//                        empty.value = true
+//                    }
 //                println("status code = ${response.code()}")
 //            }
 //        })
+        } else {
+            loadError.value = true;
+            loading.value = false;
+        }
         loading.value = false;
     }
 
@@ -120,9 +129,15 @@ class ViagensSemanais : Fragment() {
     private fun refresh() {
         consumirApi()
 
+        empty.observe(this, Observer { isEmpty ->
+            isEmpty?.let { viagemVazia.visibility = if (it) View.VISIBLE else View.GONE }
+
+        })
+
         listaViagens.observe(this, Observer { linhas ->
             linhas?.let {
                 layout_viagemsSemanais?.visibility = View.VISIBLE
+
                 listaAdapter.update(it)
             }
         })
@@ -137,6 +152,7 @@ class ViagensSemanais : Fragment() {
                 loaderSemanal.visibility = if (it) View.VISIBLE else View.GONE
                 if (it) {
                     erroSemana.visibility = View.GONE
+                    viagemVazia.visibility = View.GONE
                     layout_viagemsSemanais?.visibility = View.GONE
                 }
             }

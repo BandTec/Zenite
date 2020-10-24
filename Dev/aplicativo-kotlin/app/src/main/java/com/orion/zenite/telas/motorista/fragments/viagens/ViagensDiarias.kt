@@ -18,6 +18,7 @@ import com.orion.zenite.listAdapters.LinhasAdapter
 import com.orion.zenite.model.Viagens
 import com.orion.zenite.listAdapters.ViagensAdapter
 import com.orion.zenite.model.Linha
+import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.fragment_linhas.*
 import kotlinx.android.synthetic.main.fragment_viagens_diarias.*
 import retrofit2.Call
@@ -31,7 +32,6 @@ class ViagensDiarias : Fragment() {
     // https://medium.com/@hinchman_amanda/working-with-recyclerview-in-android-kotlin-84a62aef94ec
 
 
-
     private val dadosTemporarios = arrayListOf<Viagens>(
         Viagens("14:00 - 14:30", "30 MIN"),
         Viagens("14:40 - 15:30", "40 MIN"),
@@ -39,17 +39,20 @@ class ViagensDiarias : Fragment() {
         Viagens("16:50 - 17:20", "30 MIN"),
         Viagens("17:30 - 18:10", "30 MIN"),
         Viagens("18:20 - 18:50", "30 MIN")
-        )
+    )
 
     private var lista: RecyclerView? = null
     val listaViagens = MutableLiveData<List<Viagens>>()
     val loadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
     private var swipe: SwipeRefreshLayout? = null
+    val empty = MutableLiveData<Boolean>()
 
     // adapter do recycleview
     private val listaAdapter = ViagensAdapter(arrayListOf())
 
+    var id: Int? = null
+    var token: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,8 +62,8 @@ class ViagensDiarias : Fragment() {
         val view = inflater.inflate(R.layout.fragment_viagens_diarias, container, false)
 
 
-        val id = getActivity()?.getIntent()?.extras?.getInt("id")
-        val token = getActivity()?.getIntent()?.extras?.getString("token").toString()
+        id = getActivity()?.getIntent()?.extras?.getInt("id")
+        token = getActivity()?.getIntent()?.extras?.getString("token").toString()
         // Toast.makeText(activity, "olha esse $token e esse $id", Toast.LENGTH_SHORT).show()
 
         lista = view.findViewById(R.id.listViagens) as RecyclerView
@@ -85,15 +88,11 @@ class ViagensDiarias : Fragment() {
     private fun consumirApi() {
         loading.value = true;
 
-        // TODO: REMOVER DADOS ESTATICOS => IDFISCAL E JWT TOKEN
-        val idUser = 4
-        val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
-
-
         val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
         // TODO ROTA E DESCOMENTAR ABAIXO
 
-//        val listaRemoto: Call<List<Viagens>> = service.getViagensDiarias(idUser, token)
+        if (id != null) {
+//        val listaRemoto: Call<List<Viagens>> = service.getViagensDiarias(id!!, token)
 //
 //        listaRemoto.enqueue(object : Callback<List<Viagens>> {
 //            override fun onFailure(call: Call<List<Viagens>>, t: Throwable) {
@@ -105,13 +104,19 @@ class ViagensDiarias : Fragment() {
 //
 //            override fun onResponse(call: Call<List<Viagens>>, response: Response<List<Viagens>>) {
 //                listaViagens.value = response.body()?.toList()
-                    listaViagens.value = dadosTemporarios;
+            listaViagens.value = dadosTemporarios;
 //                loadError.value = false;
 //                loading.value = false;
-//
+//                  if(response.body()?.toList() === null) {
+//                        empty.value = true
+//                    }
 //                println("status code = ${response.code()}")
 //            }
 //        })
+        } else {
+            loadError.value = true;
+            loading.value = false;
+        }
         loading.value = false;
     }
 
@@ -119,9 +124,15 @@ class ViagensDiarias : Fragment() {
     private fun refresh() {
         consumirApi()
 
+        empty.observe(this, Observer { isEmpty ->
+            isEmpty?.let { viagemVaziaDiaria.visibility = if (it) View.VISIBLE else View.GONE }
+
+        })
+
         listaViagens.observe(this, Observer { linhas ->
             linhas?.let {
                 layout_viagemsDiarias?.visibility = View.VISIBLE
+
                 listaAdapter.update(it)
             }
         })
@@ -136,6 +147,7 @@ class ViagensDiarias : Fragment() {
                 loaderDiario.visibility = if (it) View.VISIBLE else View.GONE
                 if (it) {
                     erro.visibility = View.GONE
+                    viagemVaziaDiaria.visibility = View.GONE
                     layout_viagemsDiarias?.visibility = View.GONE
                 }
             }

@@ -31,4 +31,5 @@
     <string name="sem_acesso">Seu usuário não tem acesso ao aplicativo.</string>
     <string name="erro_ao_carregar">Houve um erro ao carregar seus dados.</string>
     <string name="motorista_welcome">Olá, %1$s você está alocado na linha.</string>
+    <string name="lista_vazia">Não existem dados no banco de dados</string>
 </resources>

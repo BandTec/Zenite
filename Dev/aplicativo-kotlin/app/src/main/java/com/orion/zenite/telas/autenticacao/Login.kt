@@ -93,13 +93,14 @@ class Login : AppCompatActivity() {
             override fun onFailure(call: Call<UserZenite>, t: Throwable) {
                 loading.value = false
                 Toast.makeText(baseContext, getString(R.string.erro_autentificacao), Toast.LENGTH_SHORT).show()
+                println("deu ruim " + t.message)
             }
 
             override fun onResponse(call: Call<UserZenite>, response: Response<UserZenite>) {
                 val motorista = Intent(this@Login, MainMotorista::class.java)
                 val fiscal = Intent(this@Login, MainFiscal::class.java)
                 val usuarioLogado = response.body()
-
+                println("status code" + response.code())
                 if (usuarioLogado?.conta?.nivel?.id !== null) {
 
                     if(usuarioLogado.conta.nivel.id == 4){

@@ -32,6 +32,17 @@
             android:visibility="gone" />
 
 
+        <TextView
+            android:id="@+id/viagemVazia"
+            android:visibility="gone"
+            style="@style/Titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:textColor="@color/preto"
+            android:text="@string/lista_vazia" />
+
+
         <LinearLayout
             android:id="@+id/layout_viagemsSemanais"
             android:layout_width="match_parent"

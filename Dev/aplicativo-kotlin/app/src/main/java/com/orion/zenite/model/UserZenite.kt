@@ -9,7 +9,7 @@ data class UserZenite(
     val endereco: Endereco,
     val registroFiscal: String,
     val conta: Conta,
-    val linhas: List<String>,
+    val linhas: List<Linha>,
     val cnh: String?,
     val carro: Carro?
 )

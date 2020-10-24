@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeCronogramaGeral"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".telas.fiscal.fragments.dashboard.CronogramaGeral"
+    tools:context=".telas.fiscal.fragments.dashboard.CronogramaGeral">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
     android:paddingHorizontal="25dp"
     android:orientation="vertical">
 
@@ -15,9 +23,39 @@
         android:layout_marginVertical="15dp"
         android:text="Na lista abaixo está o cronograma da próxima hora das linhas que você gerencia" />
 
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/erroCronogramaGeral"
+        style="@style/Titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:text="@string/mensagem_erro_lista"
+        android:textColor="@color/preto"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/loaderCroGeral"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="25dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/cronogramaVazio"
+        android:visibility="gone"
+        style="@style/Titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:textColor="@color/preto"
+        android:text="@string/lista_vazia" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listCronograma"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"/>
 </LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
