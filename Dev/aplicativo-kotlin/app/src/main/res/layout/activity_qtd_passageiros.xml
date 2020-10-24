@@ -46,16 +46,22 @@
         android:textSize="15sp"
         />
 
-    <!--Acrescentar onclick -->
+
     <Button
-        android:onClick="voltar"
+        android:onClick="salvarDados"
         android:id="@+id/btnFinalizar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="15dp"
-        android:text="FINALIZAR" />
+        android:text="SALVAR" />
 
-
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/loading_view"
+        android:layout_width="match_parent"
+        android:outlineSpotShadowColor="@color/azulClaro"
+        android:outlineAmbientShadowColor="@color/azulMedio"
+        android:layout_height="45dp" />
 
 </LinearLayout>

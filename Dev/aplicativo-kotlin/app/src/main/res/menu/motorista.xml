@@ -3,21 +3,21 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_home"
-        android:title="dashboard" />
+        android:title="@string/dashboard" />
 
     <item
         android:id="@+id/qrcode"
         android:icon="@drawable/ic_qrcode"
-        android:title="qrcode" />
+        android:title="@string/qr_code" />
 
 
     <item
         android:id="@+id/viagens"
         android:icon="@drawable/ic_calendar"
-        android:title="viagens" />
+        android:title="@string/viagens" />
 
     <item
         android:id="@+id/logout"
         android:icon="@drawable/ic_config"
-        android:title="logout" />
+        android:title="@string/logout" />
 </menu>

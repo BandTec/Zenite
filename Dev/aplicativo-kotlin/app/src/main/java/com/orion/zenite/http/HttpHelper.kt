@@ -1,7 +1,9 @@
 package com.orion.zenite.http
 
+import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class HttpHelper {
 
@@ -9,10 +11,11 @@ class HttpHelper {
     // AWS: "http://3.86.5.222:8080",
     // Azure: "https://zenitebackend.azurewebsites.net",
 
-    private val URL = "https://zenitebackend.azurewebsites.net"
+    private val URL =  "https://zenitebackend.azurewebsites.net"
     var retrofit: Retrofit? = null
 
     fun getApiClient(): Retrofit? {
+
         if (retrofit == null) {
             retrofit = Retrofit.Builder()
                 .baseUrl(URL)
@@ -20,5 +23,7 @@ class HttpHelper {
         }
         return retrofit
     }
+
+
 
 }

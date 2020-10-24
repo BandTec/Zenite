@@ -76,7 +76,7 @@ class Linhas : Fragment() {
     private fun consumirApi() {
         loading.value = true;
 
-        // TODO: REMOVER DADOS ESTATICOS E PEGAR ID E TOKEN DO USUÁRIO LOGADO
+        // TODO: REMOVER DADOS ESTATICOS => IDFISCAL E JWT TOKEN
         val idUser = 4
         val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
 
