@@ -2,9 +2,12 @@ package com.orion.zenite.http.fiscal
 
 import com.orion.zenite.model.Linha
 import com.orion.zenite.model.Onibus
+import okhttp3.MediaType
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Headers
 import retrofit2.http.Path
 
 interface FiscalApi {
@@ -18,5 +21,8 @@ interface FiscalApi {
     fun getLinhaMotoristaOnibus(@Path("id") id: Int, @Header("authorization") auth: String): Call<List<Onibus>>
 
 
-    // TODO => CAMERA => ABRIR E FECHAR VIAGEM
+    @GET("/api/qrcode/{id}")
+    fun getQrcode(@Path("id") id: Int, @Header("authorization") auth: String): Call<ResponseBody>
+
+
 }

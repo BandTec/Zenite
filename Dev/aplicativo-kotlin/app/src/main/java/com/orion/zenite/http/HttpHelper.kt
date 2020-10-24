@@ -1,7 +1,9 @@
 package com.orion.zenite.http
 
+import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class HttpHelper {
 
@@ -13,6 +15,7 @@ class HttpHelper {
     var retrofit: Retrofit? = null
 
     fun getApiClient(): Retrofit? {
+
         if (retrofit == null) {
             retrofit = Retrofit.Builder()
                 .baseUrl(URL)
