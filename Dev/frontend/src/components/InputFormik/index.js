@@ -3,7 +3,15 @@ import { useField } from "formik";
 import { Container, Rotulo, Input, TextoAlerta, ErrorMessage } from "./styles";
 
 export default function InputFormik(props) {
-  const { texto, pequeno, invalido, textoAlerta, required, mask } = props;
+  const {
+    texto,
+    pequeno,
+    tamanho,
+    invalido,
+    textoAlerta,
+    required,
+    mask,
+  } = props;
 
   const [field, meta] = useField(props.name);
   const [didFocus, setDidFocus] = React.useState(false);
@@ -25,6 +33,7 @@ export default function InputFormik(props) {
         onFocus={handleFocus}
         feedback={showFeedback ? (!!meta.error ? 1 : 0) : 0}
         pequeno={pequeno}
+        tamanho={tamanho}
         invalido={invalido}
       />
       {showFeedback
