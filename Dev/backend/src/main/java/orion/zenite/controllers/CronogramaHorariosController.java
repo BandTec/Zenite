@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import orion.zenite.entidades.*;
 import orion.zenite.repositorios.*;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
@@ -132,6 +135,23 @@ public class CronogramaHorariosController {
         repository.save(novoHorario);
 
         return created(null).build();
+    }
+
+    @ApiOperation("Buscar a viagem atual ou a proxima do motorista")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
+    })
+    @GetMapping("/motorista/{id}/viagem")
+    public ResponseEntity consultarViagemAtualOuProxima(@PathVariable("id") Integer id){
+        LocalDateTime dataHoraSP = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
+        Optional<CronogramaHorarios> cronogramaHorarios = repository.findActualOrNextViagem(id, dataHoraSP);
+        System.out.println(cronogramaHorarios);
+        if(cronogramaHorarios.isPresent()){
+            return ok(cronogramaHorarios.get());
+        }
+        return notFound().build();
     }
 
 }
