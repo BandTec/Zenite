@@ -9,16 +9,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import orion.zenite.entidades.*;
+import orion.zenite.modelos.CronogramaFiscal;
+import orion.zenite.modelos.CronogramaHorarioSimples;
+import orion.zenite.modelos.Viagens;
 import orion.zenite.repositorios.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.springframework.http.ResponseEntity.*;
 
@@ -169,7 +169,18 @@ public class CronogramaHorariosController {
         LocalDateTime dataHoraSPFim = dataHoraSPInicio.plusHours(1);
         List<CronogramaHorarios> cronogramaHorarios = repository.getViagensProximaHora(id, dataHoraSPInicio, dataHoraSPFim);
         if(!cronogramaHorarios.isEmpty()){
-            return ok(cronogramaHorarios);
+            ArrayList<CronogramaFiscal> listaViagens = new ArrayList<CronogramaFiscal>();
+
+            cronogramaHorarios.forEach(item -> {
+                CronogramaFiscal nova = new CronogramaFiscal();
+                nova.setChegada(item.getHoraPrevistaChegada().toString());
+                nova.setSaida(item.getHoraPrevistaSaida().toString());
+                nova.setAtrasado(false);
+                nova.setNomeMotorista(item.getMotorista().getNome());
+                listaViagens.add(nova);
+            });
+
+            return ok().body(listaViagens);
         }
         return noContent().build();
     }
@@ -185,7 +196,18 @@ public class CronogramaHorariosController {
         LocalDateTime dataHoraSP = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
         Optional<CronogramaHorarios> cronogramaHorarios = repository.findActualOrNextViagem(id, dataHoraSP);
         if(cronogramaHorarios.isPresent()){
-            return ok(cronogramaHorarios.get());
+
+            ArrayList<Viagens> listaViagens = new ArrayList<Viagens>();
+            Viagens nova = new Viagens();
+            nova.setChegada(cronogramaHorarios.get().getHoraPrevistaChegada().toString());
+            nova.setSaida(cronogramaHorarios.get().getHoraPrevistaSaida().toString());
+            listaViagens.add(nova);
+
+            CronogramaHorarioSimples horarioSimples = new CronogramaHorarioSimples();
+            horarioSimples.setData(cronogramaHorarios.get().getCronograma().getDataCronograma().toString());
+            horarioSimples.setViagens(listaViagens);
+
+            return ok(horarioSimples);
         }
         return notFound().build();
     }
@@ -202,8 +224,23 @@ public class CronogramaHorariosController {
         int viagensRealizadas = repository.getViagensRealizadas(id, dataSP);
         int viagensRestantes = repository.getViagensRestantes(id, dataSP);
         Optional<List<CronogramaHorarios>> viagensDia = repository.getViagensDoDia(id, dataSP);
+
         if(viagensDia.isPresent()){
-            return ok().body(viagensDia.get());
+            List<CronogramaHorarios> lista = viagensDia.get();
+            ArrayList<Viagens> listaViagens = new ArrayList<Viagens>();
+
+            lista.forEach(item -> {
+                Viagens nova = new Viagens();
+                nova.setChegada(item.getHoraPrevistaChegada().toString());
+                nova.setSaida(item.getHoraPrevistaSaida().toString());
+                listaViagens.add(nova);
+            });
+
+            CronogramaHorarioSimples horarioSimples = new CronogramaHorarioSimples();
+            horarioSimples.setData(lista.get(0).getCronograma().getDataCronograma().toString());
+            horarioSimples.setViagens(listaViagens);
+
+            return ok().body(horarioSimples);
         }
         return notFound().build();
     }
