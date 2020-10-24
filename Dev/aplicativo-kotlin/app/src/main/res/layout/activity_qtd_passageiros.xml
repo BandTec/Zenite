@@ -46,7 +46,7 @@
         android:textSize="15sp"
         />
 
-    <!--Acrescentar onclick -->
+
     <Button
         android:onClick="salvarDados"
         android:id="@+id/btnFinalizar"

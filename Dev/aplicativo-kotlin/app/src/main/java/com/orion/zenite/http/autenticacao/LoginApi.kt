@@ -13,9 +13,9 @@ interface LoginApi {
     fun postloginRequest(@Body usuario: Usuario): Call<Token>
 
 
-    // BUSCA USUARIO
-    @GET("/autentica/login")
-    fun getConta(
+    // DADOS DA CONTA
+    @GET("/logado")
+    fun getDadosConta(
         @Path("id") id: Int,
         @Header("authorization") auth: String
     ): Call<Conta>
