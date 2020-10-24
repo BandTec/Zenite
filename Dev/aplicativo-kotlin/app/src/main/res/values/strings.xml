@@ -29,4 +29,6 @@
     <string name="usuario_invalido"> Usuário não encontrado</string>
     <string name="erro_autentificacao">O login não pode ser efetuado, tente novamente.</string>
     <string name="sem_acesso">Seu usuário não tem acesso ao aplicativo.</string>
+    <string name="erro_ao_carregar">Houve um erro ao carregar seus dados.</string>
+    <string name="motorista_welcome">Olá, %1$s você está alocado na linha.</string>
 </resources>

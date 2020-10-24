@@ -10,13 +10,11 @@ import androidx.lifecycle.Observer
 import com.orion.zenite.R
 import com.orion.zenite.http.HttpHelper
 import com.orion.zenite.http.autenticacao.LoginApi
-import com.orion.zenite.model.Conta
-import com.orion.zenite.model.Fiscal
+import com.orion.zenite.model.UserZenite
 import com.orion.zenite.model.Token
 import com.orion.zenite.model.Usuario
 import com.orion.zenite.telas.fiscal.MainFiscal
 import com.orion.zenite.telas.motorista.MainMotorista
-import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -91,26 +89,29 @@ class Login : AppCompatActivity() {
 
         val resultado = requests.getDadosConta(token)
 
-        resultado.enqueue(object : Callback<Fiscal> {
-            override fun onFailure(call: Call<Fiscal>, t: Throwable) {
+        resultado.enqueue(object : Callback<UserZenite> {
+            override fun onFailure(call: Call<UserZenite>, t: Throwable) {
                 loading.value = false
                 Toast.makeText(baseContext, getString(R.string.erro_autentificacao), Toast.LENGTH_SHORT).show()
             }
 
-            override fun onResponse(call: Call<Fiscal>, response: Response<Fiscal>) {
+            override fun onResponse(call: Call<UserZenite>, response: Response<UserZenite>) {
                 val motorista = Intent(this@Login, MainMotorista::class.java)
                 val fiscal = Intent(this@Login, MainFiscal::class.java)
-                val fiscalObj = response.body()
+                val usuarioLogado = response.body()
 
-                if (fiscalObj?.conta?.nivel?.id !== null) {
+                if (usuarioLogado?.conta?.nivel?.id !== null) {
 
-                    if(fiscalObj.conta.nivel.id == 4){
+                    if(usuarioLogado.conta.nivel.id == 4){
                         loading.value = false
+                        fiscal.putExtra("token", token)
+                        fiscal.putExtra("id", usuarioLogado.id)
                         startActivity(fiscal)
-
                     }
-                    else if(fiscalObj.conta.nivel.id == 5) {
+                    else if(usuarioLogado.conta.nivel.id == 5) {
                         loading.value = false
+                        motorista.putExtra("token", token)
+                        motorista.putExtra("id", usuarioLogado.id)
                         startActivity(motorista)
                     } else {
                         loading.value = false
