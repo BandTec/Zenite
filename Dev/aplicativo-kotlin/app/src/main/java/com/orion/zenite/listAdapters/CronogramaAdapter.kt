@@ -9,12 +9,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.orion.zenite.R
 import com.orion.zenite.model.Cronograma
+import com.orion.zenite.model.CronogramaGeral
 import kotlinx.android.synthetic.main.list_item_cronograma.view.*
 
 // essa classe adapta uma lista de cronogramas
 // adicionando seus itens corretamente ao layout do item criado em res/layout/list_item_cronograma
-class CronogramaAdapter (var list: List<Cronograma>) :
+class CronogramaAdapter (var list: ArrayList<Cronograma>) :
     RecyclerView.Adapter<CronogramaAdapter.ViewHolder>() {
+
+    fun update(new: List<Cronograma>) {
+        list.clear()
+        list.addAll(new)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int)=
         // AQUI ALTERA O LAYOUT DO ITEM DA LISTA

@@ -25,13 +25,13 @@ class CronogramaGeral : Fragment() {
 
     private var lista: RecyclerView? = null
 
-    private val horarios = listOf(
+    private val horarios = arrayListOf<Cronograma>(
         Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "", false),
         Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "", false),
         Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "", false)
     )
 
-    private val dadosTemporarios = listOf(
+    private val dadosTemporarios = arrayListOf<CronogramaGeral>(
         CronogramaGeral("8001-10 Term. Piaui", horarios),
         CronogramaGeral("917H-10 Vila Mariana", horarios),
         CronogramaGeral("8004-10 Term. Lapa", horarios)

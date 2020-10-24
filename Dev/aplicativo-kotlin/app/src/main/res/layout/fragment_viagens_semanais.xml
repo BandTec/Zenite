@@ -1,132 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeViagensSemanais"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".telas.motorista.fragments.viagens.ViagensSemanais"
-    android:orientation="vertical">
+    tools:context=".telas.motorista.fragments.viagens.ViagensSemanais">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view_grid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:contentPadding="15dp"
-        app:contentPaddingTop="0dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="10dp"
-        android:layout_marginHorizontal="25dp"
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:src="@drawable/ic_onibus_frente"
-                    android:layout_gravity="bottom"
-                    android:layout_marginEnd="10dp"
-                    />
-                <TextView
-                    style="@style/TextoBold"
-                    android:textColor="@color/corPrimaria"
-                    android:id="@+id/titdulod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SUMÁRIO DAS VIAGENS"
-                    android:layout_gravity="center_vertical"/>
-            </LinearLayout>
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    style="@style/TextoBold"
-                    android:id="@+id/card_titulo1"
-                    android:textColor="@color/corPrimaria"
-                    android:text="Total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="0"
-                    />
-
-                <TextView
-                    style="@style/TextoBold"
-                    android:id="@+id/card_titulo2"
-                    android:textColor="@color/corPrimaria"
-                    android:text="Media de tempo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="2"
-                    android:layout_gravity="center"
-                    />
-
-                <TextView
-                    style="@style/TextoBold"
-                    android:id="@+id/card_titulo3"
-                    android:textColor="@color/corPrimaria"
-                    android:text="Faltas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="3"
-                    />
-
-                <TextView
-                    style="@style/TextoItalico"
-                    android:id="@+id/total_viagens"
-                    android:text="10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_row="1"
-                    android:layout_column="0"
-                    />
-
-                <TextView
-                    style="@style/Texto"
-                    android:id="@+id/media_tempo_viagens"
-                    android:text="2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_row="1"
-                    android:layout_column="2"
-                    android:layout_gravity="center"
-                    />
-
-                <TextView
-                    style="@style/Texto"
-                    android:id="@+id/faltas_viagens"
-                    android:text="2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_row="1"
-                    android:layout_column="3"
-                    />
-            </GridLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listViagens"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="25dp"/>
+        android:orientation="vertical">
 
-</LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/erroSemana"
+            style="@style/Titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:text="@string/mensagem_erro_lista"
+            android:textColor="@color/preto"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/loaderSemanal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="25dp"
+            android:visibility="gone" />
+
+
+        <LinearLayout
+            android:id="@+id/layout_viagemsSemanais"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="15dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:contentPadding="15dp"
+                app:contentPaddingTop="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/ic_onibus_frente" />
+
+                        <TextView
+                            android:id="@+id/titdulod"
+                            style="@style/TextoBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="SUMÁRIO DAS VIAGENS"
+                            android:textColor="@color/corPrimaria" />
+                    </LinearLayout>
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/card_titulo1"
+                            style="@style/TextoBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="0"
+                            android:layout_column="0"
+                            android:text="Total"
+                            android:textColor="@color/corPrimaria" />
+
+                        <TextView
+                            android:id="@+id/card_titulo2"
+                            style="@style/TextoBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="0"
+                            android:layout_column="2"
+                            android:layout_gravity="center"
+                            android:text="Media de tempo"
+                            android:textColor="@color/corPrimaria" />
+
+                        <TextView
+                            android:id="@+id/card_titulo3"
+                            style="@style/TextoBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="0"
+                            android:layout_column="3"
+                            android:text="Faltas"
+                            android:textColor="@color/corPrimaria" />
+
+                        <TextView
+                            android:id="@+id/total_viagens"
+                            style="@style/TextoItalico"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="1"
+                            android:layout_column="0"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="10" />
+
+                        <TextView
+                            android:id="@+id/media_tempo_viagens"
+                            style="@style/Texto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="1"
+                            android:layout_column="2"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_gravity="center"
+                            android:text="2" />
+
+                        <TextView
+                            android:id="@+id/faltas_viagens"
+                            style="@style/Texto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="1"
+                            android:layout_column="3"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="2" />
+                    </GridLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listViagens"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

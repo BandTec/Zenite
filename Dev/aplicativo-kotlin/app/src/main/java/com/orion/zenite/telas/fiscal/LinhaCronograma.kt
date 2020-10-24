@@ -18,7 +18,7 @@ class LinhaCronograma : AppCompatActivity() {
     private var lista: RecyclerView? = null
     private var nomeLinha: String? = "";
 
-    private val horarios = listOf(
+    private val horarios = arrayListOf<Cronograma>(
         Cronograma("22:10 - 22:40", "22:50 - 23:50", "Nicole Brito", "22:50 - 23:48", true),
         Cronograma("22:10 - 22:40", "22:50 - 23:50", "Marias Callas", "22:50 - 23:48", false),
         Cronograma("", "22:50 - 23:50", "Luciano Pavarotti", "", false)
