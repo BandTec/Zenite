@@ -3,24 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".telas.fiscal.fragments.FiscalCamera"
     android:orientation="vertical"
-    android:padding="25dp">
+    android:padding="25dp"
+    tools:context=".telas.fiscal.fragments.FiscalCamera">
 
     <TextView
         android:id="@+id/titulo"
         style="@style/Titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MARCAR VIAGEM"
-        />
+        android:text="@string/scanner_titulo" />
 
     <TextView
         android:id="@+id/descricao"
         style="@style/Texto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clique no botão abaixo para escanear o qrcode do motorista que irá iniciar ou finalizar uma viagem"
+        android:text="@string/scanner_descricao"
         android:textColor="@color/preto" />
 
     <Button
@@ -28,8 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="escanear qrcode" />
-
+        android:text="@string/scanner_botao_texto" />
 
 
 </LinearLayout>
