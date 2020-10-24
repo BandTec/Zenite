@@ -24,4 +24,9 @@
     <string name="scanner_titulo">INICIAR OU FINALIZAR VIAGEM</string>
     <string name="scanner_descricao">Clique no botão abaixo para escanear o QR Code do motorista que fará com que uma viagem seja iniciada ou finalizada.</string>
     <string name="scanner_botao_texto">escanear QR Code</string>
+
+    //Strings de Autenticação
+    <string name="usuario_invalido"> Usuário não encontrado</string>
+    <string name="erro_autentificacao">O login não pode ser efetuado, tente novamente.</string>
+    <string name="sem_acesso">Seu usuário não tem acesso ao aplicativo.</string>
 </resources>
