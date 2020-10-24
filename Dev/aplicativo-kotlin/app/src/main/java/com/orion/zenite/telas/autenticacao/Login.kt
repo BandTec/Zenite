@@ -23,7 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class Login : AppCompatActivity() {
-    val tokenStr = MutableLiveData<Token>()
+
     val loading = MutableLiveData<Boolean>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +52,12 @@ class Login : AppCompatActivity() {
             input_senha.error = "Informe sua senha";
             input_email.requestFocus()
 
+        }else {
+            logar()
         }
+    }
 
+    fun logar() {
         val requests: LoginApi = HttpHelper().getApiClient()!!.create(LoginApi::class.java)
         val usuario = Usuario(
             input_senha.text.toString(),
@@ -62,25 +66,22 @@ class Login : AppCompatActivity() {
 
         val LoginRequest = requests.postloginRequest(usuario)
         loading.value = true;
+
         LoginRequest.enqueue(object : Callback<Token> {
             override fun onFailure(call: Call<Token>, t: Throwable) {
-                Toast.makeText(baseContext, "Deu Ruim mermão  ${t.message}", Toast.LENGTH_SHORT)
-                    .show()
+                loading.value = false
+                Toast.makeText(baseContext, getString(R.string.erro_autentificacao), Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<Token>, response: Response<Token>) {
                 if (response.isSuccessful) {
                     val token = response.body()?.message.toString()
-                    // Toast.makeText(baseContext, "Token  ${token}", Toast.LENGTH_SHORT).show()
-                    Toast.makeText(baseContext, "Login Efetuado", Toast.LENGTH_SHORT).show()
-//                    tokenStr.value = response.body()
                     buscarDadosConta(token)
                 } else {
-                    Toast.makeText(baseContext, "Falha no login", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, getString(R.string.erro_autentificacao), Toast.LENGTH_SHORT).show()
+                    loading.value = false
                 }
             }
-
-
         })
     }
 
@@ -92,14 +93,13 @@ class Login : AppCompatActivity() {
 
         resultado.enqueue(object : Callback<Fiscal> {
             override fun onFailure(call: Call<Fiscal>, t: Throwable) {
-                Toast.makeText(baseContext, "Erro  ${t.message}", Toast.LENGTH_SHORT)
-                    .show()
+                loading.value = false
+                Toast.makeText(baseContext, getString(R.string.erro_autentificacao), Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<Fiscal>, response: Response<Fiscal>) {
                 val motorista = Intent(this@Login, MainMotorista::class.java)
                 val fiscal = Intent(this@Login, MainFiscal::class.java)
-                Toast.makeText(baseContext, "hello", Toast.LENGTH_SHORT).show()
                 val fiscalObj = response.body()
 
                 if (fiscalObj?.conta?.nivel?.id !== null) {
@@ -109,14 +109,16 @@ class Login : AppCompatActivity() {
                         startActivity(fiscal)
 
                     }
-                    if(fiscalObj.conta.nivel.id == 5) {
+                    else if(fiscalObj.conta.nivel.id == 5) {
                         loading.value = false
                         startActivity(motorista)
-
+                    } else {
+                        loading.value = false
+                        Toast.makeText(baseContext, getString(R.string.sem_acesso), Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(baseContext, "Deu Ruim mermão  ${response.code()}", Toast.LENGTH_SHORT)
-                        .show()
+                    loading.value = false
+                    Toast.makeText(baseContext, getString(R.string.erro_autentificacao), Toast.LENGTH_SHORT).show()
                 }
             }
 

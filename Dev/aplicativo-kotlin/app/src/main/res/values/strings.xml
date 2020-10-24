@@ -27,6 +27,6 @@
 
     //Strings de Autenticação
     <string name="usuario_invalido"> Usuário não encontrado</string>
-
-
+    <string name="erro_autentificacao">O login não pode ser efetuado, tente novamente.</string>
+    <string name="sem_acesso">Seu usuário não tem acesso ao aplicativo.</string>
 </resources>
