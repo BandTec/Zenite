@@ -12,8 +12,12 @@ import orion.zenite.entidades.*;
 import orion.zenite.repositorios.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
@@ -143,13 +147,30 @@ public class CronogramaHorariosController {
             @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
-    @GetMapping("/motorista/{id}/viagem")
+    @GetMapping("/motorista/{id}/viagem/atual")
     public ResponseEntity consultarViagemAtualOuProxima(@PathVariable("id") Integer id){
         LocalDateTime dataHoraSP = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
         Optional<CronogramaHorarios> cronogramaHorarios = repository.findActualOrNextViagem(id, dataHoraSP);
-        System.out.println(cronogramaHorarios);
         if(cronogramaHorarios.isPresent()){
             return ok(cronogramaHorarios.get());
+        }
+        return notFound().build();
+    }
+
+    @ApiOperation("Buscar sumário de viagens do dia e viagens do dia do motorista")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
+    })
+    @GetMapping("/motorista/{id}/viagem/dia")
+    public ResponseEntity consultarViagensDia(@PathVariable("id") Integer id){
+        LocalDate dataSP = LocalDate.now();
+        int viagensRealizadas = repository.getViagensRealizadas(id, dataSP);
+        int viagensRestantes = repository.getViagensRestantes(id, dataSP);
+        Optional<List<CronogramaHorarios>> viagensDia = repository.getViagensDoDia(id, dataSP);
+        if(viagensDia.isPresent()){
+            return ok().body(viagensDia.get());
         }
         return notFound().build();
     }
