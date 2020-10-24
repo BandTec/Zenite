@@ -4,6 +4,7 @@ package orion.zenite.repositorios;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import orion.zenite.entidades.CronogramaHorarios;
+import orion.zenite.entidades.Linha;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,4 +30,7 @@ public interface CronogramaHorariosRepository extends JpaRepository<CronogramaHo
     @Query(value = "SELECT ch.* FROM tbl_cronograma c INNER JOIN tbl_cronograma_horarios ch ON c.id_cronograma = ch.id_cronograma  WHERE c.data_cronograma = ?2 AND ch.id_motorista = ?1", nativeQuery = true)
     Optional<List<CronogramaHorarios>> getViagensDoDia(int id, LocalDate data);
 
+    List<CronogramaHorarios> findByLinha(Linha linha);
+    @Query(value = "SELECT ch.* FROM tbl_cronograma_horarios ch INNER JOIN tbl_cronograma c ON c.id_cronograma = ch.id_cronograma INNER JOIN tbl_fiscal f ON f.id_Fiscal = c.fk_fiscal WHERE f.id_Fiscal = ?1 AND c.data_cronograma = '2020-10-24' AND ch.hora_prevista_saida  BETWEEN ?2 AND ?3",nativeQuery = true)
+    List<CronogramaHorarios> getViagensProximaHora(int idFiscal, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim);
 }

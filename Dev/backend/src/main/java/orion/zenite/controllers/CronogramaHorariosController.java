@@ -141,6 +141,39 @@ public class CronogramaHorariosController {
         return created(null).build();
     }
 
+    @ApiOperation("Buscar horarios por id linha ")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 204, message = "Sua requisição não retornou dados.")
+    })
+    @GetMapping("/linha/{id}")
+    public ResponseEntity consultarPorLinha(@PathVariable("id") Integer id){
+        Optional<Linha> linha = linhaRepository.findById(id);
+        List<CronogramaHorarios> horariosLinha = repository.findByLinha(linha.get());
+        if(!horariosLinha.isEmpty()){
+            return ok(horariosLinha);
+        }
+        return noContent().build();
+    }
+
+    @ApiOperation("Buscar os horários da proxima hora de todas as linhas do fiscal ")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 204, message = "Sua requisição não retornou dados.")
+    })
+    @GetMapping("/fiscal/{id}/cronograma/proximahora")
+    public ResponseEntity consultarViagensDaProximaHora(@PathVariable("id") Integer id){
+        LocalDateTime dataHoraSPInicio = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
+        LocalDateTime dataHoraSPFim = dataHoraSPInicio.plusHours(1);
+        List<CronogramaHorarios> cronogramaHorarios = repository.getViagensProximaHora(id, dataHoraSPInicio, dataHoraSPFim);
+        if(!cronogramaHorarios.isEmpty()){
+            return ok(cronogramaHorarios);
+        }
+        return noContent().build();
+    }
+
     @ApiOperation("Buscar a viagem atual ou a proxima do motorista")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
