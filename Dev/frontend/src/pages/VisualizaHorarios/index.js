@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import consultar from "../../services/metodos/consultar";
 
-import { Container, Row } from "./styles";
+import { Container, Row, Detalhes } from "./styles";
 import Tabela from "../../components/Tabela2";
 import Paginacao from "../../components/Paginacao";
 import Loader from "../../components/Loader";
@@ -14,6 +14,8 @@ export default function ConsultaHorarios(props) {
   const [pagina, setPagina] = useState(0);
   const [total, setTotal] = useState(0);
   const [totalItens, setTotalItens] = useState(0);
+  const [dataCronograma, setDataCronograma] = useState("");
+  const [fiscal, setFiscal] = useState(0);
 
   useEffect(() => {
     async function consultarMotorista() {
@@ -23,6 +25,14 @@ export default function ConsultaHorarios(props) {
       setTotal(resultado.totalPaginas);
       setTotalItens(resultado.totalItens);
       setLoading(false);
+      console.log(resultado);
+      setDataCronograma(
+        resultado.rawData[0].horaPrevistaChegada.replace(
+          /(\d{4})-(\d{2})-(\d{2})(.*)/g,
+          "$3/$2/$1"
+        )
+      );
+      setFiscal(resultado.rawData[0].linha.fiscal);
     }
 
     consultarMotorista();
@@ -51,12 +61,13 @@ export default function ConsultaHorarios(props) {
       horaPrevistaChegada,
       viagemStatus,
     } = item;
+
     return {
       id_motorista: motorista.id,
       carro: carro.placa,
       motorista: motorista.nome,
-      saida: horaPrevistaSaida,
-      chegada: horaPrevistaChegada,
+      saida: horaPrevistaSaida.replace(/.*T(..:..)(.*)/g, "$1"),
+      chegada: horaPrevistaChegada.replace(/.*T(..:..)(.*)/g, "$1"),
       status_da_viagem: getStatus(viagemStatus),
     };
   }
@@ -66,6 +77,18 @@ export default function ConsultaHorarios(props) {
   ) : (
     <Container>
       <CabecalhoConsulta titulo="Horarios" totalItens={totalItens} />
+
+      <Detalhes>
+        <div>
+          <h5>Data</h5>
+          <p>{dataCronograma}</p>
+        </div>
+
+        <div>
+          <h5>Fiscal</h5>
+          <p>{fiscal}</p>
+        </div>
+      </Detalhes>
 
       <Row>
         <Tabela tipo="motorista" dados={corpo} temAcoes={false} />

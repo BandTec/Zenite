@@ -22,9 +22,11 @@ export default function InputFormik(props) {
 
   return (
     <Container>
-      <Rotulo>
-        {texto} {required && "*"}
-      </Rotulo>
+      {texto && (
+        <Rotulo>
+          {texto} {required && "*"}
+        </Rotulo>
+      )}
       {textoAlerta && <TextoAlerta>{textoAlerta}</TextoAlerta>}
       <Input
         {...props}

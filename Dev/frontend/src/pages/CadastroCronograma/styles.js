@@ -2,11 +2,45 @@ import styled from "styled-components";
 import AsyncSelect from "react-select/async";
 
 export const CustomSelect = styled(AsyncSelect)`
-  width: 100%;
+  width: 50%;
 `;
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+export const Rotulo = styled.label`
+  margin-top: 25px;
+  display: block;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  color: #223f61;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+`;
+
+export const Table = styled.table`
+  width: 500px;
+  margin-top: 35px;
+
+  thead {
+    td {
+      color: #4f4f4f;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    tr {
+      padding: 10px;
+    }
+  }
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 500px;
+  margin: 25px 0px;
 `;
 
 export const CorpoPagina = styled.article`
