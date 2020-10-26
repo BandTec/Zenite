@@ -59,7 +59,7 @@
             android:textColor="@color/preto"
             android:text="@string/mensagem_erro_lista" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/list_empty"
             android:visibility="gone"
             style="@style/Titulo"

@@ -16,6 +16,7 @@ import com.orion.zenite.http.fiscal.FiscalApi
 import com.orion.zenite.listAdapters.MotoristaOnibusAdapter
 import com.orion.zenite.model.Linha
 import com.orion.zenite.model.Onibus
+import kotlinx.android.synthetic.main.activity_cronograma_linha.*
 import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.activity_linha_motorista.list_error
 import kotlinx.android.synthetic.main.activity_linha_motorista.loading_view
@@ -36,6 +37,8 @@ class LinhaMotorista : AppCompatActivity() {
     val loadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
     val empty = MutableLiveData<Boolean>()
+    var id :Int? = null
+    var token : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +48,10 @@ class LinhaMotorista : AppCompatActivity() {
         top_bar_motorista.setNavigationOnClickListener {
             this.finish()
         }
+
+        id = intent.extras?.getInt("id")
+        token = intent.extras?.getString("token").toString()
+
 
         // pegando nome da linha e colocando na barra de navegação superior
         val nomeLinha = intent.extras?.getString("nomeLinha")
@@ -85,8 +92,8 @@ class LinhaMotorista : AppCompatActivity() {
     private fun consumirApi() {
         loading.value = true;
 
-        // TODO: REMOVER DADOS ESTATICOS => JWT TOKEN
-        val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
+        // : REMOVER DADOS ESTATICOS => JWT TOKEN
+      //  val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
 
         // armazenando id da linha vindo da tela anterior
         val idLinha = intent.extras?.getInt("idLinha")
@@ -148,6 +155,7 @@ class LinhaMotorista : AppCompatActivity() {
             isLoading?.let {
                 loading_view.visibility = if (it) View.VISIBLE else View.GONE
                 if (it) {
+                    list_empty.visibility = View.GONE
                     list_error.visibility = View.GONE
                     lista?.visibility = View.GONE
                 }

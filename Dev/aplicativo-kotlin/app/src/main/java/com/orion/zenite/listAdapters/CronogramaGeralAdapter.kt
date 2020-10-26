@@ -9,14 +9,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.orion.zenite.R
 import com.orion.zenite.model.CronogramaGeral
+import com.orion.zenite.model.Linha
 import kotlinx.android.synthetic.main.list_item_cronograma_parent.view.*
 import kotlinx.android.synthetic.main.list_item_historico_parent.view.listViagens
 
 // essa classe adapta uma lista de cronograma de linhas
 // neste caso essa lista tem como item outras listas
 // e esta classe recebe uma função para ser utilizada no clique de cada item -> clickListener
-class CronogramaGeralAdapter (var list: List<CronogramaGeral>, var clickListener: (CronogramaGeral) -> Unit) :
+class CronogramaGeralAdapter (var list: ArrayList<CronogramaGeral>, var clickListener: (CronogramaGeral) -> Unit) :
     RecyclerView.Adapter<CronogramaGeralAdapter.ViewHolder>() {
+
+    fun update(new: List<CronogramaGeral>) {
+        list.clear()
+        list.addAll(new)
+        notifyDataSetChanged()
+    }
 
     private val viewPool = RecyclerView.RecycledViewPool()
 

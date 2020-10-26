@@ -1,323 +1,324 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
-<LinearLayout
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".telas.motorista.fragments.MotoristaDashboard"
-    android:orientation="vertical"
-    android:paddingHorizontal="25dp"
-    android:paddingBottom="25dp">
+    android:fillViewport="true"
+    tools:context=".telas.motorista.fragments.MotoristaDashboard">
 
-    <TextView
-        style="@style/Texto"
-        android:id="@+id/textoNormal"
-        android:layout_marginTop="25dp"
-        android:text="Olá, Carlos Marinho você está alocado na linha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        style="@style/Titulo"
-        android:id="@+id/numeroOnibus"
-        android:text="917H-10"
-        android:textAllCaps="false"
-        android:layout_marginBottom="0dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
-    <TextView
-        style="@style/Titulo"
-        android:id="@+id/nomeOnibus"
-        android:text="Vila Mariana - Term. Pirituba"
-        android:textAllCaps="false"
-        android:layout_marginTop="0dp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/numeroOnibus"
-        />
+        android:orientation="vertical"
+        android:paddingHorizontal="25dp"
+        android:paddingBottom="25dp">
 
-
-
-    <!-- Primeiro card -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view_grid"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="36dp"
-        app:contentPadding="15dp"
-        android:backgroundTint="@color/azulClaro"
-        app:cardBackgroundColor="#efefef"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="1dp"
-        >
+        <ProgressBar
+            android:id="@+id/loader"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="25dp"
+            android:outlineAmbientShadowColor="@color/azulMedio"
+            android:outlineSpotShadowColor="@color/azulClaro"
+            android:visibility="gone" />
 
         <LinearLayout
+            android:id="@+id/layoutMotorista"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/boasVindas"
+                style="@style/Texto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_onibus_lado" />
-                <TextView
-                    style="@style/TextoBold"
-                    android:textColor="@color/corPrimaria"
-                    android:id="@+id/tviagematual"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sua viagem atual"
-                    android:layout_gravity="center_vertical"/>
-            </LinearLayout>
-
-            <GridLayout
+            <TextView
+                android:id="@+id/numeroLinha"
+                style="@style/Titulo"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
-                <TextView
-                    style="@style/TextoBold"
-                    android:id="@+id/tcomeco"
-                    android:text="Começo"
-                    android:textColor="@color/corPrimaria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="0"
-                    />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:textAllCaps="false" />
 
-                <TextView
-                    style="@style/TextoBold"
-                    android:id="@+id/tduracao"
-                    android:text="Duração"
-                    android:textColor="@color/corPrimaria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="3"
-                    android:layout_gravity="end"
-                    />
 
-                <TextView
-                    style="@style/Texto"
-                    android:id="@+id/horario_inicial"
-                    android:text="14:20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_row="1"
-                    android:layout_column="0"
-                    />
+            <TextView
+                android:id="@+id/nomeLinha"
+                style="@style/Titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:textAllCaps="false"
+                app:layout_constraintTop_toBottomOf="@id/numeroLinha" />
 
-                <TextView
-                    style="@style/Texto"
-                    android:id="@+id/duracao_prevista"
-                    android:text="00:30:00 MIN"
-                    android:layout_width="wrap_content"
+
+            <!-- Primeiro card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_grid"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="36dp"
+                android:backgroundTint="@color/azulClaro"
+                app:cardBackgroundColor="#efefef"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="1dp"
+                app:contentPadding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_row="1"
-                    android:layout_column="3"
-                    />
-            </GridLayout>
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/ic_onibus_lado" />
+
+                        <TextView
+                            android:id="@+id/tviagematual"
+                            style="@style/TextoBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Sua viagem atual"
+                            android:textColor="@color/corPrimaria" />
+                    </LinearLayout>
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp">
+
+                        <TextView
+                            android:id="@+id/tcomeco"
+                            style="@style/TextoBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="0"
+                            android:layout_column="0"
+                            android:text="Começo"
+                            android:textColor="@color/corPrimaria" />
+
+                        <TextView
+                            android:id="@+id/tduracao"
+                            style="@style/TextoBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="0"
+                            android:layout_column="3"
+                            android:layout_gravity="end"
+                            android:text="Duração"
+                            android:textColor="@color/corPrimaria" />
+
+                        <TextView
+                            android:id="@+id/horario_inicial"
+                            style="@style/Texto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="1"
+                            android:layout_column="0"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="14:20" />
+
+                        <TextView
+                            android:id="@+id/duracao_prevista"
+                            style="@style/Texto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="1"
+                            android:layout_column="3"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="00:30:00 MIN" />
+                    </GridLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Segundo card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_onibus_alocado"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="36dp"
+                app:cardBackgroundColor="#efefef"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="1dp"
+                app:contentPadding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/ic_onibus_frente" />
+
+                        <TextView
+                            android:id="@+id/onibus_alocado"
+                            style="@style/TextoBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Ônibus alocado"
+                            android:textColor="@color/corPrimaria" />
+                    </LinearLayout>
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp">
+
+                        <TextView
+                            android:id="@+id/tplaca"
+                            style="@style/TextoBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="0"
+                            android:layout_column="0"
+                            android:text="Placa"
+                            android:textColor="@color/corPrimaria" />
+
+                        <TextView
+                            android:id="@+id/tmodelo"
+                            style="@style/TextoBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="0"
+                            android:layout_column="3"
+                            android:layout_gravity="end"
+                            android:text="Modelo"
+                            android:textColor="@color/corPrimaria" />
+
+                        <TextView
+                            android:id="@+id/numero_placa"
+                            style="@style/Texto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="1"
+                            android:layout_column="0"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="BMJ-1123" />
+
+                        <TextView
+                            android:id="@+id/modelo_onibus"
+                            style="@style/Texto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="1"
+                            android:layout_column="3"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="Millennium BRT" />
+                    </GridLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Terceiro card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_fiscal_linha"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="36dp"
+                app:cardBackgroundColor="#efefef"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="1dp"
+                app:contentPadding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/ic_user" />
+
+                        <TextView
+                            android:id="@+id/tfiscal_linha"
+                            style="@style/TextoBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Fiscal da Linha"
+                            android:textColor="@color/corPrimaria" />
+                    </LinearLayout>
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp">
+
+                        <TextView
+                            android:id="@+id/tnome"
+                            style="@style/TextoBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="0"
+                            android:layout_column="0"
+                            android:text="Nome"
+                            android:textColor="@color/corPrimaria" />
+
+                        <TextView
+                            android:id="@+id/ttelefone"
+                            style="@style/TextoBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="0"
+                            android:layout_column="3"
+                            android:layout_gravity="end"
+                            android:text="Telefone"
+                            android:textColor="@color/corPrimaria" />
+
+                        <TextView
+                            android:id="@+id/nome_completo"
+                            style="@style/Texto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="1"
+                            android:layout_column="0"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="Vitor Davi Francisco" />
+
+                        <TextView
+                            android:id="@+id/telefone_pessoa"
+                            style="@style/Texto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_row="1"
+                            android:layout_column="3"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="11996779851" />
+                    </GridLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- https://medium.com/@nileshsingh/android-cardview-101-everything-you-should-know-5bbf1c873f5a-->
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Segundo card -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_onibus_alocado"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="36dp"
-        app:contentPadding="15dp"
-        app:cardBackgroundColor="#efefef"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="1dp"
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_onibus_frente" />
-
-                <TextView
-                    android:id="@+id/onibus_alocado"
-                    style="@style/TextoBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Ônibus alocado"
-                    android:textColor="@color/corPrimaria" />
-            </LinearLayout>
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp">
-                <TextView
-                    style="@style/TextoBold"
-                    android:id="@+id/tplaca"
-                    android:text="Placa"
-                    android:textColor="@color/corPrimaria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="0"
-                    />
-
-                <TextView
-                    style="@style/TextoBold"
-                    android:id="@+id/tmodelo"
-                    android:text="Modelo"
-                    android:textColor="@color/corPrimaria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="3"
-                    android:layout_gravity="end"
-                    />
-
-                <TextView
-                    style="@style/Texto"
-                    android:id="@+id/numero_placa"
-                    android:text="BMJ-1123"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_row="1"
-                    android:layout_column="0"
-                    />
-
-                <TextView
-                    style="@style/Texto"
-                    android:id="@+id/modelo_onibus"
-                    android:text="Millennium BRT"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_row="1"
-                    android:layout_column="3"
-                    />
-            </GridLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Terceiro card -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_fiscal_linha"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="36dp"
-        app:contentPadding="15dp"
-        app:cardBackgroundColor="#efefef"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="1dp"
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_user" />
-
-                <TextView
-                    android:id="@+id/tfiscal_linha"
-                    style="@style/TextoBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Fiscal da Linha"
-                    android:textColor="@color/corPrimaria" />
-            </LinearLayout>
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp">
-                <TextView
-                    style="@style/TextoBold"
-                    android:id="@+id/tnome"
-                    android:text="Nome"
-                    android:textColor="@color/corPrimaria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="0"
-                    />
-
-                <TextView
-                    style="@style/TextoBold"
-                    android:id="@+id/ttelefone"
-                    android:text="Telefone"
-                    android:textColor="@color/corPrimaria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="3"
-                    android:layout_gravity="end"
-                    />
-
-                <TextView
-                    style="@style/Texto"
-                    android:id="@+id/nome_completo"
-                    android:text="Vitor Davi Francisco"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_row="1"
-                    android:layout_column="0"
-                    />
-
-                <TextView
-                    style="@style/Texto"
-                    android:id="@+id/telefone_pessoa"
-                    android:text="11996779851"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_row="1"
-                    android:layout_column="3"
-                    />
-            </GridLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- https://medium.com/@nileshsingh/android-cardview-101-everything-you-should-know-5bbf1c873f5a-->
-
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>

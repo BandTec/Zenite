@@ -24,10 +24,15 @@ class QtdPassageiros : AppCompatActivity() {
 
     val loading = MutableLiveData<Boolean>()
     val respostaRequisicao = MutableLiveData<Boolean>()
+    var token : String = ""
+    var id :Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qtd_passageiros)
+
+        token = intent.extras?.getString("token").toString()
+        id = intent.extras?.getInt("id")
 
         // https://material.io/develop/android/components/app-bars-top
         topAppBar.setNavigationOnClickListener {
@@ -54,6 +59,8 @@ class QtdPassageiros : AppCompatActivity() {
                     ).show()
 
                     val intent = Intent(this, MainFiscal::class.java)
+                    intent.putExtra("token", token)
+                    intent.putExtra("id", id)
                     startActivity(intent)
                 } else {
                     Toast.makeText(
@@ -86,9 +93,9 @@ class QtdPassageiros : AppCompatActivity() {
     }
 
     private fun adicionar() {
-        // TODO REMOVER DADOS ESTATICOS => JWT TOKEN
-        val token =
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
+        //  REMOVER DADOS ESTATICOS => JWT TOKEN
+       // val token =
+      //      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
         val passageiros = inputQuantidade.text.toString().toInt()
         val body = QtdPassageiros(passageiros)
         val idViagem = intent.extras?.getInt("idViagem")
