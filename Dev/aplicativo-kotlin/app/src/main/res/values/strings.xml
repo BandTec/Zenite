@@ -2,16 +2,16 @@
     <string name="app_name">Zenite</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
+    <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="welcome">Bem vindo</string>
+    <string name="invalid_username">Nome de usuário invaldo</string>
+    <string name="invalid_password">Senha deve ter mais de 5 caracteres</string>
+    <string name="login_failed">Falha no login</string>
     <string name="mensagem_erro_lista">Ocorreu um erro</string>
     <string name="motoristas">Motoristas</string>
     <string name="motorista_empty">Não existem motoristas atrelados a esta linha</string>
@@ -24,6 +24,7 @@
     <string name="scanner_titulo">INICIAR OU FINALIZAR VIAGEM</string>
     <string name="scanner_descricao">Clique no botão abaixo para escanear o QR Code do motorista que fará com que uma viagem seja iniciada ou finalizada.</string>
     <string name="scanner_botao_texto">escanear QR Code</string>
+    <string name="login">Entrar</string>
 
     //Strings de Autenticação
     <string name="usuario_invalido"> Usuário não encontrado</string>
@@ -32,4 +33,10 @@
     <string name="erro_ao_carregar">Houve um erro ao carregar seus dados.</string>
     <string name="motorista_welcome">Olá, %1$s você está alocado na linha.</string>
     <string name="lista_vazia">Não existem dados no banco de dados</string>
+    <string name="bem_vindo">BEM VINDO</string>
+    <string name="esqueceu_senha">Esqueceu sua senha?</string>
+    <string name="senha_titulo">SENHA</string>
+    <string name="senha">Senha</string>
+    <string name="email_titulo">E-MAIL</string>
+    <string name="email">E-mail</string>
 </resources>
