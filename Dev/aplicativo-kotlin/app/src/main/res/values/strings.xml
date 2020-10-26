@@ -39,4 +39,8 @@
     <string name="senha">Senha</string>
     <string name="email_titulo">E-MAIL</string>
     <string name="email">E-mail</string>
+    <string name="bt_enviar">Enviar</string>
+    <string name="erro_informar_email">Informe um e-mail válido!</string>
+    <string name="recuperacao_email_valido">Você receberá um e-mail para recuperação de senha.</string>
+    <string name="mensagem_esqueceu_senha">Digite seu email no campo abaixo e você recebera um email para renovar sua senha.</string>
 </resources>

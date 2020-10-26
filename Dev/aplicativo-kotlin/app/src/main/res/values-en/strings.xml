@@ -38,4 +38,8 @@
     <string name="email">Email</string>
     <string name="senha_titulo">PASSWORD</string>
     <string name="email_titulo">EMAIL</string>
+    <string name="mensagem_esqueceu_senha">Type below your email, then you\'ll receive a message to renew your password.</string>
+    <string name="bt_enviar">Send</string>
+    <string name="erro_informar_email">Type a valid email!</string>
+    <string name="recuperacao_email_valido">You\'ll receive an email to renew your password.</string>
 </resources>

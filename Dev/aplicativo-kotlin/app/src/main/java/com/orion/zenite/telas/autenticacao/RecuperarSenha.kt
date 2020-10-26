@@ -21,10 +21,10 @@ class RecuperarSenha : AppCompatActivity() {
     fun enviarEmailRecuperacao(component: View){
         //enviar email para recuperação
         if (inputRecuperarSenha.text.isBlank()){
-            inputRecuperarSenha.error = "Informe um email válido!"
+            inputRecuperarSenha.error = getString(R.string.erro_informar_email)
             inputRecuperarSenha.requestFocus()
         }else{
-            Toast.makeText(this, "Você receberá um e-mail para recuperação de senha.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.recuperacao_email_valido), Toast.LENGTH_LONG).show()
             inputRecuperarSenha.setText("")
         }
 
