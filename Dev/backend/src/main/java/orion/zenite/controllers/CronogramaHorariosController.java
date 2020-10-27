@@ -12,9 +12,9 @@ import orion.zenite.entidades.*;
 import orion.zenite.modelos.CronogramaFiscal;
 import orion.zenite.modelos.CronogramaHorarioSimples;
 import orion.zenite.modelos.ViagemMotorista;
+import orion.zenite.modelos.CronogramaLinha;
 import orion.zenite.modelos.Viagens;
 import orion.zenite.repositorios.*;
-
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -52,11 +52,11 @@ public class CronogramaHorariosController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("/cronograma/{id}")
-    public ResponseEntity consultaPorIdCronograma(@PathVariable("id") Integer id){
+    public ResponseEntity consultaPorIdCronograma(@PathVariable("id") Integer id) {
         Cronograma c = new Cronograma();
         c.setIdCronograma(id);
         Optional<Cronograma> listaCronograma = cronogramaRepository.findById(c.getIdCronograma());
-        if(!listaCronograma.isPresent()){
+        if (!listaCronograma.isPresent()) {
             return ok(listaCronograma);
         }
         return notFound().build();
@@ -70,11 +70,11 @@ public class CronogramaHorariosController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("/motorista/{id}")
-    public ResponseEntity consultaPorIdMotorista(@PathVariable("id") Integer id){
+    public ResponseEntity consultaPorIdMotorista(@PathVariable("id") Integer id) {
         Motorista m = new Motorista();
         m.setId(id);
         Optional<Motorista> listaCronograma = motoristaRepository.findById(m.getId());
-        if(!listaCronograma.isPresent()){
+        if (!listaCronograma.isPresent()) {
             return ok(listaCronograma);
         }
         return notFound().build();
@@ -110,7 +110,7 @@ public class CronogramaHorariosController {
     @PutMapping("/status/{id}")
     @Transactional
     public ResponseEntity alterarStatusViagem(@RequestBody CronogramaHorarios novoStatus,
-                                                @PathVariable Integer id) {
+                                              @PathVariable Integer id) {
         if (this.repository.existsById(id)) {
             // alterar um horario por completo
             this.repository.save(novoStatus);
@@ -128,7 +128,7 @@ public class CronogramaHorariosController {
     })
     @PostMapping()
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public ResponseEntity cadastro(@RequestBody CronogramaHorarios novoHorario){
+    public ResponseEntity cadastro(@RequestBody CronogramaHorarios novoHorario) {
         Motorista motorista = novoHorario.getMotorista();
         Carro carro = novoHorario.getCarro();
         Linha linha = novoHorario.getLinha();
@@ -151,11 +151,33 @@ public class CronogramaHorariosController {
             @ApiResponse(code = 204, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("/linha/{id}")
-    public ResponseEntity consultarPorLinha(@PathVariable("id") Integer id){
+    public ResponseEntity consultarPorLinha(@PathVariable("id") Integer id) {
         Optional<Linha> linha = linhaRepository.findById(id);
-        List<CronogramaHorarios> horariosLinha = repository.findByLinha(linha.get());
-        if(!horariosLinha.isEmpty()){
-            return ok(horariosLinha);
+
+        LocalDate date = LocalDate.now();
+        List<CronogramaHorarios> horariosLinha = repository.getViagensDoDiaPorLinha(linha.get().getId(), date);
+        if (!horariosLinha.isEmpty()) {
+            ArrayList<CronogramaLinha> lista = new ArrayList<>();
+
+            horariosLinha.forEach(item -> {
+                CronogramaLinha cronograma = new CronogramaLinha();
+
+                // O ATRASADO COMPARARIA O HORARIO DO CRONOGRAMA DE CHEGADA COM O HORARIO DA TABELA DE VIAGEM
+                cronograma.setAtrasado(false);
+
+                // ANTIGO SERIA O HORARIO NA TABELA CRONOGRAMA HORARIO SE HOUVER UM NOVO HORARIO PREVISTO
+                cronograma.setHorarioAntigo("");
+
+                DateTimeFormatter sdf = DateTimeFormatter.ofPattern("HH:mm");
+                cronograma.setHorarioSaida(item.getHoraPrevistaSaida().format(sdf));
+                cronograma.setNomeMotorista(item.getMotorista().getNome());
+
+                //ESSE HORARIO DE CHEGADA NA VERDADE SERIA O HORARIO DE CHEGADA REALIZADO DA TABELA VIAGEM
+                cronograma.setHorarioChegada(item.getHoraPrevistaChegada().format(sdf));
+                lista.add(cronograma);
+            });
+
+            return ok(lista);
         }
         return noContent().build();
     }
@@ -167,24 +189,60 @@ public class CronogramaHorariosController {
             @ApiResponse(code = 204, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("/fiscal/{id}/cronograma/proximahora")
-    public ResponseEntity consultarViagensDaProximaHora(@PathVariable("id") Integer id){
+    public ResponseEntity consultarViagensDaProximaHora(@PathVariable("id") Integer id) {
         LocalDateTime dataHoraSPInicio = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
         LocalDateTime dataHoraSPFim = dataHoraSPInicio.plusHours(1);
-        List<CronogramaHorarios> cronogramaHorarios = repository.getViagensProximaHora(id, dataHoraSPInicio, dataHoraSPFim);
-        if(!cronogramaHorarios.isEmpty()){
+        LocalDate date = LocalDate.now();
+        List<CronogramaHorarios> cronogramaHorarios = repository.getViagensProximaHora(id, dataHoraSPInicio, dataHoraSPFim, date);
+        if (!cronogramaHorarios.isEmpty()) {
             ArrayList<CronogramaFiscal> listaViagens = new ArrayList<CronogramaFiscal>();
+            ArrayList<Integer> linhas = new ArrayList<>();
 
-            cronogramaHorarios.forEach(item -> {
-                CronogramaFiscal nova = new CronogramaFiscal();
-                nova.setChegada(item.getHoraPrevistaChegada().toString());
-                nova.setSaida(item.getHoraPrevistaSaida().toString());
-                nova.setAtrasado(false);
-                nova.setNomeMotorista(item.getMotorista().getNome());
-                listaViagens.add(nova);
+            for (int i = 0; i < cronogramaHorarios.size(); i++) {
+                CronogramaHorarios item = cronogramaHorarios.get(i);
+                int linhaAtual = item.getLinha().getId();
+
+                if (i > 0) {
+                    int anterior = i - 1;
+                    if (cronogramaHorarios.get(anterior).getLinha().getId() != linhaAtual) {
+                        linhas.add(linhaAtual);
+                    }
+                } else {
+                    linhas.add(linhaAtual);
+                }
+            }
+
+            linhas.forEach(linhaId -> {
+                CronogramaFiscal fiscal = new CronogramaFiscal();
+                ArrayList<CronogramaLinha> lista = new ArrayList<>();
+                cronogramaHorarios.forEach(item -> {
+                    if(linhaId == item.getLinha().getId()){
+                        CronogramaLinha cronograma = new CronogramaLinha();
+                        // O ATRASADO COMPARARIA O HORARIO DO CRONOGRAMA DE CHEGADA COM O HORARIO DA TABELA DE VIAGEM
+                        cronograma.setAtrasado(false);
+
+                        // ANTIGO SERIA O HORARIO NA TABELA CRONOGRAMA HORARIO SE HOUVER UM NOVO HORARIO PREVISTO
+                        cronograma.setHorarioAntigo("");
+
+                        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("HH:mm");
+                        cronograma.setHorarioSaida(item.getHoraPrevistaSaida().format(sdf));
+                        cronograma.setNomeMotorista(item.getMotorista().getNome());
+
+                        //ESSE HORARIO DE CHEGADA NA VERDADE SERIA O HORARIO DE CHEGADA REALIZADO DA TABELA VIAGEM
+                        cronograma.setHorarioChegada(item.getHoraPrevistaChegada().format(sdf));
+
+                        lista.add(cronograma);
+                        fiscal.setNomeLinha(item.getLinha().getNumero());
+                        fiscal.setIdLinha(item.getLinha().getId());
+                    }
+                });
+                fiscal.setCronograma(lista);
+                listaViagens.add(fiscal);
             });
 
             return ok().body(listaViagens);
         }
+
         return noContent().build();
     }
 
@@ -195,10 +253,10 @@ public class CronogramaHorariosController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("/motorista/{id}/viagem/atual")
-    public ResponseEntity consultarViagemAtualOuProxima(@PathVariable("id") Integer id){
+    public ResponseEntity consultarViagemAtualOuProxima(@PathVariable("id") Integer id) {
         LocalDateTime dataHoraSP = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
         Optional<CronogramaHorarios> cronogramaHorarios = repository.findActualOrNextViagem(id, dataHoraSP);
-        if(cronogramaHorarios.isPresent()){
+        if (cronogramaHorarios.isPresent()) {
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             long duracaoMin = cronogramaHorarios.get().getHoraPrevistaSaida().until(cronogramaHorarios.get().getHoraPrevistaChegada(), ChronoUnit.MINUTES);
@@ -220,13 +278,13 @@ public class CronogramaHorariosController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("/motorista/{id}/viagem/dia")
-    public ResponseEntity consultarViagensDia(@PathVariable("id") Integer id){
+    public ResponseEntity consultarViagensDia(@PathVariable("id") Integer id) {
         LocalDate dataSP = LocalDate.now();
         int viagensRealizadas = repository.getViagensRealizadas(id, dataSP);
         int viagensRestantes = repository.getViagensRestantes(id, dataSP);
         Optional<List<CronogramaHorarios>> viagensDia = repository.getViagensDoDia(id, dataSP);
 
-        if(viagensDia.isPresent()){
+        if (viagensDia.isPresent()) {
             List<CronogramaHorarios> lista = viagensDia.get();
             ArrayList<Viagens> listaViagens = new ArrayList<Viagens>();
 

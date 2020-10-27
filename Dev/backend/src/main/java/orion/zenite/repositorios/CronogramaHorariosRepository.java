@@ -31,6 +31,10 @@ public interface CronogramaHorariosRepository extends JpaRepository<CronogramaHo
     Optional<List<CronogramaHorarios>> getViagensDoDia(int id, LocalDate data);
 
     List<CronogramaHorarios> findByLinha(Linha linha);
-    @Query(value = "SELECT ch.* FROM tbl_cronograma_horarios ch INNER JOIN tbl_cronograma c ON c.id_cronograma = ch.id_cronograma INNER JOIN tbl_fiscal f ON f.id_Fiscal = c.fk_fiscal WHERE f.id_Fiscal = ?1 AND c.data_cronograma = '2020-10-24' AND ch.hora_prevista_saida  BETWEEN ?2 AND ?3",nativeQuery = true)
-    List<CronogramaHorarios> getViagensProximaHora(int idFiscal, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim);
+
+    @Query(value = "SELECT ch.* FROM tbl_cronograma_horarios ch INNER JOIN tbl_cronograma c ON c.id_cronograma = ch.id_cronograma INNER JOIN tbl_fiscal f ON f.id_Fiscal = c.fk_fiscal WHERE f.id_Fiscal = ?1 AND c.data_cronograma = ?4 AND ch.hora_prevista_saida  BETWEEN ?2 AND ?3",nativeQuery = true)
+    List<CronogramaHorarios> getViagensProximaHora(int idFiscal, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, LocalDate dataAgora);
+
+    @Query(value = "SELECT ch.* FROM tbl_cronograma_horarios ch INNER JOIN tbl_cronograma c ON c.id_cronograma = ch.id_cronograma INNER JOIN tbl_linha l ON l.id_linha = ch.id_linha WHERE l.id_linha = ?1 AND c.data_cronograma = ?2",nativeQuery = true)
+    List<CronogramaHorarios> getViagensDoDiaPorLinha(int idLinha, LocalDate dataAgora);
 }
