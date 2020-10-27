@@ -1,6 +1,7 @@
 package com.orion.zenite.http.motorista
 
 import com.orion.zenite.model.CronogramaHorarioSimples
+import com.orion.zenite.model.ViagemDiaria
 import com.orion.zenite.model.Viagens
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -20,4 +21,10 @@ interface MotoristaApi {
         @Header("authorization") auth: String
     ): Call<Viagens>
 
+    //Consulta viagens do dia
+    @GET("api/horarios/motorista/{id}/viagem/dia")
+    fun consultarViagensDia(
+        @Path("id") id: Int,
+        @Header("authorization") auth: String
+    ): Call<ViagemDiaria>
 }

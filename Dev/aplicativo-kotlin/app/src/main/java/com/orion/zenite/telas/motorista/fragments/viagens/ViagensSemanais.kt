@@ -75,8 +75,6 @@ class ViagensSemanais : Fragment() {
          id = getActivity()?.getIntent()?.extras?.getInt("id")
          token = getActivity()?.getIntent()?.extras?.getString("token").toString()
 
-        Toast.makeText(activity, "olha esse $token e esse $id", Toast.LENGTH_SHORT).show()
-
         // chama api
         refresh()
 

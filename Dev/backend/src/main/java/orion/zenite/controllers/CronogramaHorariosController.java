@@ -9,11 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import orion.zenite.entidades.*;
-import orion.zenite.modelos.CronogramaFiscal;
-import orion.zenite.modelos.CronogramaHorarioSimples;
-import orion.zenite.modelos.ViagemMotorista;
-import orion.zenite.modelos.CronogramaLinha;
-import orion.zenite.modelos.Viagens;
+import orion.zenite.modelos.*;
 import orion.zenite.repositorios.*;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -286,20 +282,22 @@ public class CronogramaHorariosController {
 
         if (viagensDia.isPresent()) {
             List<CronogramaHorarios> lista = viagensDia.get();
-            ArrayList<Viagens> listaViagens = new ArrayList<Viagens>();
+            ArrayList<ViagemMotorista> listaViagens = new ArrayList<>();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
             lista.forEach(item -> {
-                Viagens nova = new Viagens();
-                nova.setChegada(item.getHoraPrevistaChegada().toString());
-                nova.setSaida(item.getHoraPrevistaSaida().toString());
+                ViagemMotorista nova = new ViagemMotorista();
+                long duracaoMin = item.getHoraPrevistaSaida().until(item.getHoraPrevistaChegada(), ChronoUnit.MINUTES);
+                nova.setDuracao(String.format("%d MIN", duracaoMin));
+                nova.setHorario(String.format("%s-%s", item.getHoraPrevistaSaida().format(formatter), item.getHoraPrevistaChegada().format(formatter)));
                 listaViagens.add(nova);
             });
 
-            CronogramaHorarioSimples horarioSimples = new CronogramaHorarioSimples();
-            horarioSimples.setData(lista.get(0).getCronograma().getDataCronograma().toString());
-            horarioSimples.setViagens(listaViagens);
-
-            return ok().body(horarioSimples);
+            ViagemDiaria viagemDiaria = new ViagemDiaria();
+            viagemDiaria.setViagensRealizadas(viagensRealizadas);
+            viagemDiaria.setViagensRestantes(viagensRestantes);
+            viagemDiaria.setListaViagens(listaViagens);
+            return ok().body(viagemDiaria);
         }
         return notFound().build();
     }

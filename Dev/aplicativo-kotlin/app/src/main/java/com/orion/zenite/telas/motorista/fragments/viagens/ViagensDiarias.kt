@@ -14,10 +14,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.orion.zenite.R
 import com.orion.zenite.http.HttpHelper
 import com.orion.zenite.http.fiscal.FiscalApi
+import com.orion.zenite.http.motorista.MotoristaApi
 import com.orion.zenite.listAdapters.LinhasAdapter
 import com.orion.zenite.model.Viagens
 import com.orion.zenite.listAdapters.ViagensAdapter
 import com.orion.zenite.model.Linha
+import com.orion.zenite.model.ViagemDiaria
 import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.fragment_linhas.*
 import kotlinx.android.synthetic.main.fragment_viagens_diarias.*
@@ -88,31 +90,34 @@ class ViagensDiarias : Fragment() {
     private fun consumirApi() {
         loading.value = true;
 
-        val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
+        val service: MotoristaApi = HttpHelper().getApiClient()!!.create(MotoristaApi::class.java)
         // TODO ROTA E DESCOMENTAR ABAIXO
 
         if (id != null) {
-//        val listaRemoto: Call<List<Viagens>> = service.getViagensDiarias(id!!, token)
-//
-//        listaRemoto.enqueue(object : Callback<List<Viagens>> {
-//            override fun onFailure(call: Call<List<Viagens>>, t: Throwable) {
-//                loadError.value = true;
-//                loading.value = false;
-//
-//                println("deu ruim = ${t.message}")
-//            }
-//
-//            override fun onResponse(call: Call<List<Viagens>>, response: Response<List<Viagens>>) {
-//                listaViagens.value = response.body()?.toList()
-            listaViagens.value = dadosTemporarios;
-//                loadError.value = false;
-//                loading.value = false;
-//                  if(response.body()?.toList() === null) {
-//                        empty.value = true
-//                    }
-//                println("status code = ${response.code()}")
-//            }
-//        })
+        val listaRemoto: Call<ViagemDiaria> = service.consultarViagensDia(id!!, token)
+
+        listaRemoto.enqueue(object : Callback<ViagemDiaria> {
+            override fun onFailure(call: Call<ViagemDiaria>, t: Throwable) {
+                loadError.value = true;
+                loading.value = false;
+
+                println("deu ruim = ${t.message}")
+            }
+
+            override fun onResponse(call: Call<ViagemDiaria>, response: Response<ViagemDiaria>) {
+                val resposta = response.body()
+                listaViagens.value = resposta?.listaViagens!!.toList()
+                //listaViagens.value = dadosTemporarios;
+                loadError.value = false;
+                loading.value = false;
+                  if(resposta?.listaViagens!!.toList() === null) {
+                        empty.value = true
+                    }
+                println("status code = ${response.code()}")
+                realizada_valor.text = resposta.viagensRealizadas.toString()
+                restante_valor.text = resposta.viagensRestantes.toString()
+            }
+        })
         } else {
             loadError.value = true;
             loading.value = false;
