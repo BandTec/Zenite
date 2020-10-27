@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import orion.zenite.entidades.*;
 import orion.zenite.modelos.CronogramaFiscal;
 import orion.zenite.modelos.CronogramaHorarioSimples;
+import orion.zenite.modelos.ViagemMotorista;
 import orion.zenite.modelos.Viagens;
 import orion.zenite.repositorios.*;
 
@@ -18,6 +19,8 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import static org.springframework.http.ResponseEntity.*;
@@ -197,17 +200,15 @@ public class CronogramaHorariosController {
         Optional<CronogramaHorarios> cronogramaHorarios = repository.findActualOrNextViagem(id, dataHoraSP);
         if(cronogramaHorarios.isPresent()){
 
-            ArrayList<Viagens> listaViagens = new ArrayList<Viagens>();
-            Viagens nova = new Viagens();
-            nova.setChegada(cronogramaHorarios.get().getHoraPrevistaChegada().toString());
-            nova.setSaida(cronogramaHorarios.get().getHoraPrevistaSaida().toString());
-            listaViagens.add(nova);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            long duracaoMin = cronogramaHorarios.get().getHoraPrevistaSaida().until(cronogramaHorarios.get().getHoraPrevistaChegada(), ChronoUnit.MINUTES);
+            String duracao = String.format("%d MINUTOS", duracaoMin);
 
-            CronogramaHorarioSimples horarioSimples = new CronogramaHorarioSimples();
-            horarioSimples.setData(cronogramaHorarios.get().getCronograma().getDataCronograma().toString());
-            horarioSimples.setViagens(listaViagens);
+            ViagemMotorista viagemMotorista = new ViagemMotorista();
+            viagemMotorista.setDuracao(duracao);
+            viagemMotorista.setHorario(cronogramaHorarios.get().getHoraPrevistaSaida().format(formatter));
 
-            return ok(horarioSimples);
+            return ok(viagemMotorista);
         }
         return notFound().build();
     }

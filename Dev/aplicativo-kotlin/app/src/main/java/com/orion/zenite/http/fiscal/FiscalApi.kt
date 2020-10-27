@@ -29,10 +29,6 @@ interface FiscalApi {
                       @Header("authorization"
                       ) auth: String) : Call<Void>
 
-    @GET("/api/qrcode/{id}")
-    fun getQrcode(@Path("id") id: Int, @Header("authorization") auth: String): Call<ResponseBody>
-
-
     // finalizar viagem
     @PUT("/api/viagem/{idViagem}/{idFiscal}")
     fun finalizarViagem(@Path("idViagem") idViagem: Int,
