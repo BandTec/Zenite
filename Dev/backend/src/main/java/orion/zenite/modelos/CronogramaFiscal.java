@@ -1,59 +1,38 @@
 package orion.zenite.modelos;
 
+import java.util.ArrayList;
+
 public class CronogramaFiscal {
 
-    private String saida;
+    private Integer idLinha;
 
-    private String chegada;
+    private String nomeLinha;
 
-    private String nomeMotorista;
+    private ArrayList<CronogramaLinha> cronograma;
 
-    private Boolean atrasado;
-
-    public String getSaida() {
-        return saida;
+    public Integer getIdLinha() {
+        return idLinha;
     }
 
-    public void setSaida(String saida) {
-        this.saida = saida;
+    public void setIdLinha(Integer idLinha) {
+        this.idLinha = idLinha;
     }
 
-    public String getChegada() {
-        return chegada;
+    public String getNomeLinha() {
+        return nomeLinha;
     }
 
-    public void setChegada(String chegada) {
-        this.chegada = chegada;
+    public void setNomeLinha(String nomeLinha) {
+        this.nomeLinha = nomeLinha;
     }
 
-    public String getNomeMotorista() {
-        return nomeMotorista;
+    public ArrayList<CronogramaLinha> getCronograma() {
+        return cronograma;
     }
 
-    public void setNomeMotorista(String nomeMotorista) {
-        this.nomeMotorista = nomeMotorista;
+    public void setCronograma(ArrayList<CronogramaLinha> cronograma) {
+        this.cronograma = cronograma;
     }
-
-    public Boolean getAtrasado() {
-        return atrasado;
-    }
-
-    public void setAtrasado(Boolean atrasado) {
-        this.atrasado = atrasado;
-    }
-
-    public String getHorarioAntigo() {
-        return horarioAntigo;
-    }
-
-    public void setHorarioAntigo(String horarioAntigo) {
-        this.horarioAntigo = horarioAntigo;
-    }
-
-    private String horarioAntigo;
-
-
-
 
 
 

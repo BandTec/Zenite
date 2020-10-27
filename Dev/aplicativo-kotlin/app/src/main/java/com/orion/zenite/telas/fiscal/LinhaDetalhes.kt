@@ -12,6 +12,7 @@ class LinhaDetalhes : AppCompatActivity() {
     var nomeLinha: String = "";
     var idLinha: Int? = null
     var token: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_linha)
