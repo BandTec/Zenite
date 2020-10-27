@@ -43,4 +43,28 @@
     <string name="erro_informar_email">Informe um e-mail válido!</string>
     <string name="recuperacao_email_valido">Você receberá um e-mail para recuperação de senha.</string>
     <string name="mensagem_esqueceu_senha">Digite seu email no campo abaixo e você recebera um email para renovar sua senha.</string>
+    <string name="login_error_campo">Informe seu email</string>
+    <string name="senha_error_campo">Informe sua senha</string>
+
+    <string name="iniciar_viagem">Iniciar Viagem</string>
+    <string name="finalizar_viagem">Finalizar Viagem</string>
+    <string name="erro_escanear">Ocorreu um erro ao escanear este QR Code, tente novamente</string>
+    <string name="viagem_iniciada">VIAGEM INICIADA!</string>
+    <string name="viagem_finalizada">VIAGEM FINALIZADA!</string>
+    <string name="erro_viagem">Ocorreu um erro ao realizar a ação, tente novamente</string>
+    <string name="acao_erro">A ação não foi realizada</string>
+    <string name="acao_sucesso">Ação realizada com sucesso!</string>
+    <string name="acao_nao_desfeita">Essa ação não pode ser desfeita</string>
+    <string name="permissao_camera_concedida">Permissão da camera concedida</string>
+    <string name="permissao_camera_negada">Permissão da camera negada</string>
+    <string name="mensagem_passageiros_error">Informe a quantidade de passageiros desta viagem</string>
+    <string name="passageiros_titulo">Adicionar a quantidade de passageiros</string>
+    <string name="cronorgrma_geral">Cronograma Geral</string>
+    <string name="linhas_titulo">Linhas</string>
+
+    <string name="seu_qr_code">Seu código QR</string>
+    <string name="historico_viagens">Histórico de viagens</string>
+    <string name="diario">Diário</string>
+    <string name="semanal">Semanal</string>
+    <string name="em_viagem">Em Viagem</string>
 </resources>

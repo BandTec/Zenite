@@ -42,4 +42,28 @@
     <string name="bt_enviar">Send</string>
     <string name="erro_informar_email">Type a valid email!</string>
     <string name="recuperacao_email_valido">You\'ll receive an email to renew your password.</string>
+
+    <string name="iniciar_viagem">Start Travel</string>
+    <string name="finalizar_viagem">Finish Travel</string>
+    <string name="erro_escanear">An error has occurred while scanning QR Code, please try again</string>
+    <string name="login_error_campo">Type your email</string>
+    <string name="senha_error_campo">Type your password</string>
+    <string name="viagem_iniciada">TRAVEL STARTED!</string>
+    <string name="viagem_finalizada">TRAVEL FINISHED!</string>
+    <string name="erro_viagem">An error has occurred, please try again</string>
+    <string name="acao_erro">This action was not performed.</string>
+    <string name="acao_sucesso">Action performed sucessfully!</string>
+    <string name="acao_nao_desfeita">This action can not be undone</string>
+    <string name="permissao_camera_concedida">Camera permission granted</string>
+    <string name="permissao_camera_negada">Camera permission denied</string>
+    <string name="mensagem_passageiros_error">Type the quantity of passengers of the travel</string>
+    <string name="passageiros_titulo">Inform the quantity of passengers</string>
+    <string name="cronorgrma_geral">General Schedule</string>
+    <string name="linhas_titulo">Lines</string>
+
+    <string name="seu_qr_code">Your QR Code</string>
+    <string name="historico_viagens">Travel History</string>
+    <string name="diario">Daily</string>
+    <string name="semanal">Weekly</string>
+    <string name="em_viagem">On travel</string>
 </resources>

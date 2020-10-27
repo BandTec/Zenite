@@ -89,7 +89,7 @@ class QrcodeScanner : AppCompatActivity() {
                     if (qrcodeMotorista.iniciarViagem) {
                         Toast.makeText(
                             this,
-                            "VIAGEM INICIADA!",
+                            getString(R.string.viagem_iniciada),
                             Toast.LENGTH_LONG
                         ).show()
                         val intent = Intent(this, MainFiscal::class.java)
@@ -100,7 +100,7 @@ class QrcodeScanner : AppCompatActivity() {
                     } else {
                         Toast.makeText(
                             this,
-                            "VIAGEM FINALIZADA!",
+                            getString(R.string.viagem_finalizada),
                             Toast.LENGTH_LONG
                         ).show()
                         val intent = Intent(this, QtdPassageiros::class.java)
@@ -112,7 +112,7 @@ class QrcodeScanner : AppCompatActivity() {
                 } else {
                     Toast.makeText(
                         this,
-                        "Ocorreu um erro ao realizar a ação, tente novamente",
+                        getString(R.string.erro_viagem),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -139,10 +139,10 @@ class QrcodeScanner : AppCompatActivity() {
                     qrcodeMotorista = Gson().fromJson(it.text, QrcodeMotorista::class.java)
 
                     // CAIXA DE DIALOGO PARA OBTER CONFIRMAÇÃO DA AÇÃO
-                    alertConfirmarAcao(if (qrcodeMotorista.iniciarViagem) "Iniciar Viagem" else "Finalizar Viagem");
+                    alertConfirmarAcao(if (qrcodeMotorista.iniciarViagem) getString(R.string.iniciar_viagem) else getString(R.string.finalizar_viagem));
                 } catch (e: Throwable) {
                     Toast.makeText(
-                        this, "Ocorreu um erro ao escanear este QR Code, tente novamente.",
+                        this, getString(R.string.erro_escanear),
                         Toast.LENGTH_LONG
                     ).show()
 
@@ -175,7 +175,7 @@ class QrcodeScanner : AppCompatActivity() {
     }
 
     private val cancelarAcao = { dialog: DialogInterface, which: Int ->
-        Toast.makeText(applicationContext, "A ação não foi realizada.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, getString(R.string.acao_erro), Toast.LENGTH_SHORT).show()
     }
 
     private fun iniciarViagem() {
@@ -244,7 +244,7 @@ class QrcodeScanner : AppCompatActivity() {
         with(builder)
         {
             setTitle(titleAlert)
-            setMessage("Essa ação não pode ser desfeita")
+            setMessage(getString(R.string.acao_nao_desfeita))
             setPositiveButton("OK", DialogInterface.OnClickListener(function = confirmarAcao))
             setNegativeButton(android.R.string.no, cancelarAcao)
             show()
@@ -259,10 +259,10 @@ class QrcodeScanner : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 123) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Camera permission granted", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.permissao_camera_concedida), Toast.LENGTH_LONG).show()
                 escanear()
             } else {
-                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.permissao_camera_negada), Toast.LENGTH_LONG).show()
             }
         }
     }
