@@ -7,14 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.orion.zenite.R
 import com.orion.zenite.http.HttpHelper
-import com.orion.zenite.http.fiscal.FiscalApi
-import kotlinx.android.synthetic.main.fragment_linhas.*
+import com.orion.zenite.http.motorista.MotoristaApi
 import kotlinx.android.synthetic.main.fragment_motorista_qrcode.*
 import kotlinx.android.synthetic.main.fragment_motorista_qrcode.list_error
 import kotlinx.android.synthetic.main.fragment_motorista_qrcode.loading_view
@@ -23,7 +21,6 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 
 class MotoristaQrcode : Fragment() {
@@ -83,7 +80,7 @@ class MotoristaQrcode : Fragment() {
         // REMOVER TOKEN ESTATICO
        // val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
 
-        val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
+        val service: MotoristaApi = HttpHelper().getApiClient()!!.create(MotoristaApi::class.java)
         if(id != null) {
             val listaRemoto: Call<ResponseBody> = service.getQrcode(id!!, token)
 

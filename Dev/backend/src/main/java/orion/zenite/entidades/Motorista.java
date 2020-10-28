@@ -134,4 +134,11 @@ public class Motorista {
         }
         return motoristaCarroList.get(0).getCarro();
     }
+
+    public Linha getLinha() {
+        if(motoristaCarroList.isEmpty()){
+            return null;
+        }
+        return motoristaCarroList.get(0).getCarro().pegarLinha();
+    }
 }
