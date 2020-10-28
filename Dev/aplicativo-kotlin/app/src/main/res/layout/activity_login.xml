@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
-        android:text="BEM VINDO" />
+        android:text="@string/bem_vindo" />
 
     <TextView
         android:id="@+id/lb_email"
@@ -38,13 +38,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
-        android:text="EMAIL"
+        android:text="@string/email_titulo"
         android:textColor="@color/corPrimaria" />
 
     <EditText
         android:id="@+id/input_email"
         style="@style/Input"
-        android:hint="Email"
+        android:hint="@string/email_titulo"
         android:inputType="textEmailAddress" />
 
     <TextView
@@ -53,13 +53,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
-        android:text="SENHA"
+        android:text="@string/senha_titulo"
         android:textColor="@color/corPrimaria" />
 
     <EditText
         android:id="@+id/input_senha"
         style="@style/Input"
-        android:hint="Senha"
+        android:hint="@string/senha"
         android:inputType="textPassword" />
 
 
@@ -70,7 +70,7 @@
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="15dp"
         android:onClick="verificarDados"
-        android:text="LOGIN" />
+        android:text="@string/login" />
 
     <TextView
         android:id="@+id/esqueceu_senha"
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:onClick="irRecuperarSenha"
-        android:text="Esqueceu sua senha?"
+        android:text="@string/esqueceu_senha"
         android:textAlignment="center"
         android:textColor="@color/gradiente2" />
 

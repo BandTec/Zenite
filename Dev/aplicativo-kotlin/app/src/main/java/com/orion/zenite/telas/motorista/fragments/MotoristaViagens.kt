@@ -32,8 +32,8 @@ class MotoristaViagens : Fragment() {
         viewPager = view.findViewById(R.id.viewpager_main) as ViewPager
 
         val adapter = TabAdapter(childFragmentManager)
-        adapter.addFragment(ViagensDiarias(), "Diário")
-        adapter.addFragment(ViagensSemanais(), "Semanal")
+        adapter.addFragment(ViagensDiarias(), getString(R.string.diario))
+        adapter.addFragment(ViagensSemanais(), getString(R.string.semanal))
         viewPager!!.adapter = adapter
 
         tabLayout!!.post(Runnable { tabLayout!!.setupWithViewPager(viewPager) })
