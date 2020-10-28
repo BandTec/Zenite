@@ -61,7 +61,6 @@ export default function DetalhesMotorista(props) {
   //    return { id, numero, placa, modelo };
   //  }
 
-
   return !dados.conta ? (
     <Loader />
   ) : (
@@ -106,38 +105,41 @@ export default function DetalhesMotorista(props) {
                 descricao={dados.endereco.logradouro}
               />
               <TituloDado tipo="Numero" descricao={dados.endereco.numero} />
-              
-              {dados.endereco.complemento && <TituloDado
-                tipo="Complemento"
-                descricao={dados.endereco.complemento}
-              />}
-              
+
+              {dados.endereco.complemento && (
+                <TituloDado
+                  tipo="Complemento"
+                  descricao={dados.endereco.complemento}
+                />
+              )}
+
               <TituloDado tipo="Cidade" descricao={dados.endereco.cidade} />
               <TituloDado tipo="Estado" descricao={dados.endereco.estado} />
             </CaixaDados>
 
-           {dados.carro && <CaixaDados>
-              <TituloTipoDado texto="Ônibus Alocado" />
+            {dados.carro && (
+              <CaixaDados>
+                <TituloTipoDado texto="Ônibus Alocado" />
 
-              <TituloDado tipo="Número" descricao={dados.carro.numero} />
+                <TituloDado tipo="Número" descricao={dados.carro.numero} />
 
-              <TituloDado tipo="Placa" descricao={dados.carro.placa} />
+                <TituloDado tipo="Placa" descricao={dados.carro.placa} />
 
-              <TituloDado tipo="Modelo" descricao={dados.carro.modelo} />
-              <TituloDado
-                tipo="acessível"
-                descricao={dados.carro.acessivel ? "Sim" : "Não"}
-              />
-              <TituloDado
+                <TituloDado tipo="Modelo" descricao={dados.carro.modelo} />
+                <TituloDado
+                  tipo="acessível"
+                  descricao={dados.carro.acessivel ? "Sim" : "Não"}
+                />
+                {/* <TituloDado
                 tipo="dispositivo"
                 descricao={dados.carro.dispositivo.codigo}
-              />
+              /> */}
 
-              <TituloDado
-                tipo="Linha"
-                descricao={dados.carro.linha || "Sem linha"}
-              />
-              {/* <CaixaTabela>
+                <TituloDado
+                  tipo="Linha"
+                  descricao={dados.carro.linha || "Sem linha"}
+                />
+                {/* <CaixaTabela>
                 <Tabela tipo="onibus" dados={corpo} temAcoes={false} />
                 <p>
                   {corpo.length === 0
@@ -145,8 +147,8 @@ export default function DetalhesMotorista(props) {
                     : ""}
                 </p>
               </CaixaTabela> */}
-            </CaixaDados>
-          }
+              </CaixaDados>
+            )}
           </CorpoRelatorio>
         )}
       </Row>

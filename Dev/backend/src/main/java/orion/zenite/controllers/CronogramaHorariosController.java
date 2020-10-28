@@ -5,10 +5,18 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import orion.zenite.entidades.*;
+import orion.zenite.modelos.ConsultaPaginada;
+import orion.zenite.repositorios.*;
+
+import java.util.List;
+import java.util.Optional;
 import orion.zenite.modelos.*;
 import orion.zenite.repositorios.*;
 import java.time.Instant;
@@ -48,13 +56,29 @@ public class CronogramaHorariosController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("/cronograma/{id}")
-    public ResponseEntity consultaPorIdCronograma(@PathVariable("id") Integer id) {
-        Cronograma c = new Cronograma();
-        c.setIdCronograma(id);
-        Optional<Cronograma> listaCronograma = cronogramaRepository.findById(c.getIdCronograma());
-        if (!listaCronograma.isPresent()) {
-            return ok(listaCronograma);
+    public ResponseEntity consultaPorIdCronograma(@PathVariable("id") Integer id, @RequestParam(required = false) Integer pagina) {
+        if (this.repository.count() > 0) {
+            if(pagina != null) {
+                Optional<Cronograma> cronograma = cronogramaRepository.findById(id);
+                if (cronograma.isPresent()) {
+                    Pageable pageable = PageRequest.of(pagina, 10);
+                    Page<CronogramaHorarios> listaCronograma = repository.findByCronograma(cronograma.get(), pageable);
+                    ConsultaPaginada consulta = new ConsultaPaginada(listaCronograma);
+                    return ok(consulta);
+                }
+            }
+            else {
+
+                Optional<Cronograma> cronograma = cronogramaRepository.findById(id);
+                if (cronograma.isPresent()) {
+                    List<CronogramaHorarios> listaCronograma = repository.findByCronograma(cronograma.get());
+                    return ok(listaCronograma);
+                }
+            }
+        } else {
+            return noContent().build();
         }
+
         return notFound().build();
     }
 
@@ -67,12 +91,14 @@ public class CronogramaHorariosController {
     })
     @GetMapping("/motorista/{id}")
     public ResponseEntity consultaPorIdMotorista(@PathVariable("id") Integer id) {
-        Motorista m = new Motorista();
-        m.setId(id);
-        Optional<Motorista> listaCronograma = motoristaRepository.findById(m.getId());
-        if (!listaCronograma.isPresent()) {
-            return ok(listaCronograma);
+        Optional<Motorista> motorista = motoristaRepository.findById(id);
+        if(motorista.isPresent()){
+            List<CronogramaHorarios> listaCronograma = repository.findByMotorista(motorista.get());
+            if (!listaCronograma.isEmpty()) {
+                return ok(listaCronograma);
+            }
         }
+
         return notFound().build();
     }
 
@@ -128,7 +154,7 @@ public class CronogramaHorariosController {
         Motorista motorista = novoHorario.getMotorista();
         Carro carro = novoHorario.getCarro();
         Linha linha = novoHorario.getLinha();
-        Cronograma cronograma = novoHorario.getCronograma();
+        Cronograma cronograma = novoHorario.pegarCronograma();
 
         novoHorario.setMotorista(motorista);
         novoHorario.setCarro(carro);

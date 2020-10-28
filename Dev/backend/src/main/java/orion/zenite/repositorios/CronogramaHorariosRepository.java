@@ -1,8 +1,14 @@
 package orion.zenite.repositorios;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import orion.zenite.entidades.*;
+
+import java.util.List;
 import orion.zenite.entidades.CronogramaHorarios;
 import orion.zenite.entidades.Linha;
 
@@ -18,6 +24,13 @@ public interface CronogramaHorariosRepository extends JpaRepository<CronogramaHo
     @Query(value = "select max(e.id) from CronogramaHorarios e")
     int lastId();
 
+    List<CronogramaHorarios> findByMotorista(Motorista motorista);
+
+    List<CronogramaHorarios> findByCronograma(Cronograma cronograma);
+
+    Page<CronogramaHorarios> findByCronograma(Cronograma cronograma, Pageable var1);
+
+    
     @Query(value = "select top 1 * from tbl_cronograma_horarios ch where ch.id_motorista = ?1  and hora_prevista_chegada >= ?2 and (ch.viagem_status = 2 or ch.viagem_status = 1);", nativeQuery = true)
     Optional<CronogramaHorarios> findActualOrNextViagem(int id, LocalDateTime data);
 

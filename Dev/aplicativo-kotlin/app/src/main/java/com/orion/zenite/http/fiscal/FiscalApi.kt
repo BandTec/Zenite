@@ -33,6 +33,9 @@ interface FiscalApi {
                         @Header("authorization"
                     ) auth: String): Call<Void>
 
+    // TODO => CAMERA => ABRIR E FECHAR VIAGEM
+
+
     // ADICIONAR QTD PASSAGEIROS
     @PUT("/api/viagem/{idViagem}/qtdPassageiros")
     fun adicionarPassageiros(@Path("idViagem") idViagem: Int,
