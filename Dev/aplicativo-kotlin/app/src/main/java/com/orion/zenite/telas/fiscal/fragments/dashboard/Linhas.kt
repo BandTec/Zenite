@@ -18,7 +18,13 @@ import com.orion.zenite.http.HttpHelper
 import com.orion.zenite.telas.fiscal.LinhaDetalhes
 import com.orion.zenite.listAdapters.LinhasAdapter
 import com.orion.zenite.model.Linha
+import com.orion.zenite.telas.fiscal.LinhaCronograma
+import kotlinx.android.synthetic.main.activity_cronograma_linha.*
+import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.fragment_linhas.*
+import kotlinx.android.synthetic.main.fragment_linhas.list_error
+import kotlinx.android.synthetic.main.fragment_linhas.loading_view
+import kotlinx.android.synthetic.main.fragment_linhas.swipeRefreshLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,6 +47,10 @@ class Linhas : Fragment() {
     val linhas = MutableLiveData<List<Linha>>()
     val loadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
+    val empty = MutableLiveData<Boolean>()
+
+    var id :Int? = null
+    var token : String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +65,10 @@ class Linhas : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = linhasAdapter
         }
+
+        id = activity?.intent?.extras?.getInt("id")
+        token = activity?.intent?.extras?.getString("token").toString()
+       // Toast.makeText(activity, "olha esse $token e esse $id", Toast.LENGTH_SHORT).show()
 
         // chama api
         refresh()
@@ -76,36 +90,50 @@ class Linhas : Fragment() {
     private fun consumirApi() {
         loading.value = true;
 
-        // TODO: REMOVER DADOS ESTATICOS => IDFISCAL E JWT TOKEN
-        val idUser = 4
-        val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
+        // : REMOVER DADOS ESTATICOS => IDFISCAL E JWT TOKEN
+       // val idUser = 4
+       // val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
 
 
         val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
-        val listaRemoto: Call<List<Linha>> = service.getFiscalLinhas(idUser, token)
 
-        listaRemoto.enqueue(object : Callback<List<Linha>> {
-            override fun onFailure(call: Call<List<Linha>>, t: Throwable) {
-                loadError.value = true;
-                loading.value = false;
+        if (id != null) {
+            val listaRemoto: Call<List<Linha>> = service.getFiscalLinhas(id!!, token)
+            //Toast.makeText(activity, "olha esse $token e esse $id", Toast.LENGTH_SHORT).show()
+            listaRemoto.enqueue(object : Callback<List<Linha>> {
+                override fun onFailure(call: Call<List<Linha>>, t: Throwable) {
+                    loadError.value = true;
+                    loading.value = false;
 
-                println("deu ruim = ${t.message}")
-            }
+                    println("deu ruim = ${t.message}")
+                }
 
-            override fun onResponse(call: Call<List<Linha>>, response: Response<List<Linha>>) {
-                linhas.value = response.body()?.toList()
-                loadError.value = false;
-                loading.value = false;
+                override fun onResponse(call: Call<List<Linha>>, response: Response<List<Linha>>) {
+                    linhas.value = response.body()?.toList()
+                    loadError.value = false;
+                    loading.value = false;
 
-                println("status code = ${response.code()}")
-            }
-        })
+                    if(response.body()?.toList() === null) {
+                        empty.value = true
+                    }
 
+                    println("status code = ${response.code()}")
+                }
+            })
+        } else {
+            loadError.value = true;
+            loading.value = false;
+        }
     }
 
 
     private fun refresh() {
         consumirApi()
+
+        empty.observe(this, Observer { isEmpty ->
+            isEmpty?.let { linhasVazias.visibility = if (it) View.VISIBLE else View.GONE }
+
+        })
 
         linhas.observe(this, Observer { linhas ->
             linhas?.let {
@@ -124,6 +152,7 @@ class Linhas : Fragment() {
                 loading_view.visibility = if (it) View.VISIBLE else View.GONE
                 if (it) {
                     list_error.visibility = View.GONE
+                    linhasVazias.visibility = View.GONE
                     lista?.visibility = View.GONE
                 }
             }
@@ -134,6 +163,9 @@ class Linhas : Fragment() {
         val intent = Intent(activity, LinhaDetalhes::class.java)
         intent.putExtra("linha", linha.numero)
         intent.putExtra("idLinha", linha.id)
+
+        intent.putExtra("token", token)
+        intent.putExtra("id", id)
         startActivity(intent)
     }
 

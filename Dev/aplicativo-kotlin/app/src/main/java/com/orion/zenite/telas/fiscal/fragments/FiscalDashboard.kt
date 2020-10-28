@@ -32,8 +32,8 @@ class FiscalDashboard : Fragment() {
         viewPager = view.findViewById(R.id.viewpager_main) as ViewPager
 
         val adapter = TabAdapter(childFragmentManager)
-        adapter.addFragment(CronogramaGeral(), "Cronograma Geral")
-        adapter.addFragment(Linhas(), "Linhas")
+        adapter.addFragment(CronogramaGeral(), getString(R.string.cronorgrma_geral))
+        adapter.addFragment(Linhas(), getString(R.string.linhas_titulo))
         viewPager!!.adapter = adapter
 
         tabLayout!!.post(Runnable { tabLayout!!.setupWithViewPager(viewPager) })

@@ -5,11 +5,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.orion.zenite.R
+import com.orion.zenite.model.Linha
 import com.orion.zenite.model.Viagens
 import kotlinx.android.synthetic.main.list_item_historico.view.*
 
-class ViagensAdapter (var list: List<Viagens>) :
+class ViagensAdapter (var list: ArrayList<Viagens>) :
     RecyclerView.Adapter<ViagensAdapter.ViewHolder>() {
+
+    fun update(new: List<Viagens>) {
+        list.clear()
+        list.addAll(new)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int)=
         ViewHolder(

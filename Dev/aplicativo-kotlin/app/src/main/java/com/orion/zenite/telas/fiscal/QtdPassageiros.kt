@@ -24,10 +24,15 @@ class QtdPassageiros : AppCompatActivity() {
 
     val loading = MutableLiveData<Boolean>()
     val respostaRequisicao = MutableLiveData<Boolean>()
+    var token : String = ""
+    var id :Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qtd_passageiros)
+
+        token = intent.extras?.getString("token").toString()
+        id = intent.extras?.getInt("id")
 
         // https://material.io/develop/android/components/app-bars-top
         topAppBar.setNavigationOnClickListener {
@@ -49,16 +54,18 @@ class QtdPassageiros : AppCompatActivity() {
 
                     Toast.makeText(
                         this,
-                        "Ação realizada com sucesso!",
+                        getString(R.string.acao_sucesso),
                         Toast.LENGTH_LONG
                     ).show()
 
                     val intent = Intent(this, MainFiscal::class.java)
+                    intent.putExtra("token", token)
+                    intent.putExtra("id", id)
                     startActivity(intent)
                 } else {
                     Toast.makeText(
                         this,
-                        "Ocorreu um erro ao realizar a ação, tente novamente",
+                        getString(R.string.erro_viagem),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -68,7 +75,7 @@ class QtdPassageiros : AppCompatActivity() {
 
     fun salvarDados(view: View) {
         if (inputQuantidade.text.isBlank()) {
-            inputQuantidade.error = "Informe a quantidade de passageiros desta viagem"
+            inputQuantidade.error = getString(R.string.mensagem_passageiros_error)
             inputQuantidade.requestFocus()
         } else {
             alertConfirmarAcao()
@@ -82,13 +89,13 @@ class QtdPassageiros : AppCompatActivity() {
     }
 
     private val cancelarAcao = { dialog: DialogInterface, which: Int ->
-        Toast.makeText(applicationContext, "A ação não foi realizada.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, getString(R.string.acao_erro), Toast.LENGTH_SHORT).show()
     }
 
     private fun adicionar() {
-        // TODO REMOVER DADOS ESTATICOS => JWT TOKEN
-        val token =
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
+        //  REMOVER DADOS ESTATICOS => JWT TOKEN
+       // val token =
+      //      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
         val passageiros = inputQuantidade.text.toString().toInt()
         val body = QtdPassageiros(passageiros)
         val idViagem = intent.extras?.getInt("idViagem")
@@ -118,8 +125,8 @@ class QtdPassageiros : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         with(builder)
         {
-            setTitle("Adicionar a quantidade de passageiros")
-            setMessage("Essa ação não pode ser desfeita")
+            setTitle(getString(R.string.passageiros_titulo))
+            setMessage(getString(R.string.acao_nao_desfeita))
             setPositiveButton("OK", DialogInterface.OnClickListener(function = confirmarAcao))
             setNegativeButton(android.R.string.no, cancelarAcao)
             show()

@@ -9,6 +9,7 @@ data class Linha (
     val pontoIda: PontoFinal,
     val pontoVolta: PontoFinal,
     val fiscal: String,
+    val fiscalNumero: String,
     val fiscalId: Int,
     val carrosId: List<Int>,
     val carros: List<String>

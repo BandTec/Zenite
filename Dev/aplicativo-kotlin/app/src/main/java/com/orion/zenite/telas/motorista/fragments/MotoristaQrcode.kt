@@ -7,14 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.orion.zenite.R
 import com.orion.zenite.http.HttpHelper
-import com.orion.zenite.http.fiscal.FiscalApi
-import kotlinx.android.synthetic.main.fragment_linhas.*
+import com.orion.zenite.http.motorista.MotoristaApi
 import kotlinx.android.synthetic.main.fragment_motorista_qrcode.*
 import kotlinx.android.synthetic.main.fragment_motorista_qrcode.list_error
 import kotlinx.android.synthetic.main.fragment_motorista_qrcode.loading_view
@@ -23,7 +21,6 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 
 class MotoristaQrcode : Fragment() {
@@ -32,6 +29,9 @@ class MotoristaQrcode : Fragment() {
     val loading = MutableLiveData<Boolean>()
     private var swipe: SwipeRefreshLayout? = null
 
+    var id :Int? = null
+    var token : String = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +39,9 @@ class MotoristaQrcode : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_motorista_qrcode, container, false)
 
+
+        id = activity?.intent?.extras?.getInt("id")
+        token = activity?.intent?.extras?.getString("token").toString()
 
         load()
 
@@ -74,37 +77,45 @@ class MotoristaQrcode : Fragment() {
     fun consumir() {
         loading.value = true;
 
-        // TODO REMOVER TOKEN ESTATICO
-        val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
+        // REMOVER TOKEN ESTATICO
+       // val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
 
-        val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
-        val listaRemoto: Call<ResponseBody> = service.getQrcode(19, token)
+        val service: MotoristaApi = HttpHelper().getApiClient()!!.create(MotoristaApi::class.java)
+        if(id != null) {
+            val listaRemoto: Call<ResponseBody> = service.getQrcode(id!!, token)
 
-        listaRemoto.enqueue(object : Callback<ResponseBody> {
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                println("deu ruim = ${t.message}")
-                loadError.value = true;
-                loading.value = false;
-            }
+            listaRemoto.enqueue(object : Callback<ResponseBody> {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    println("deu ruim = ${t.message}")
+                    loadError.value = true;
+                    loading.value = false;
+                }
 
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        val bmp = BitmapFactory . decodeStream (response.body()!!.byteStream());
-                        imageee.setImageBitmap(bmp);
-                        loadError.value = false;
-                        loading.value = false;
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if (response.isSuccessful()) {
+                        if (response.body() != null) {
+                            val bmp = BitmapFactory.decodeStream(response.body()!!.byteStream());
+                            imageee.setImageBitmap(bmp);
+                            loadError.value = false;
+                            loading.value = false;
+                        } else {
+                            loadError.value = true;
+                            loading.value = false;
+                        }
                     } else {
                         loadError.value = true;
                         loading.value = false;
-                    }
-                } else {
-                    loadError.value = true;
-                    loading.value = false;
 
+                    }
                 }
-            }
-        })
+            })
+        } else {
+            loadError.value = true;
+            loading.value = false;
+        }
 
     }
 

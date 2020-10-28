@@ -1,8 +1,6 @@
 package com.orion.zenite.listAdapters
 
 import android.graphics.Color
-import android.graphics.Paint
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +11,14 @@ import kotlinx.android.synthetic.main.list_item_cronograma.view.*
 
 // essa classe adapta uma lista de cronogramas
 // adicionando seus itens corretamente ao layout do item criado em res/layout/list_item_cronograma
-class CronogramaAdapter (var list: List<Cronograma>) :
+class CronogramaAdapter (var list: ArrayList<Cronograma>) :
     RecyclerView.Adapter<CronogramaAdapter.ViewHolder>() {
+
+    fun update(new: List<Cronograma>) {
+        list.clear()
+        list.addAll(new)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int)=
         // AQUI ALTERA O LAYOUT DO ITEM DA LISTA
@@ -40,7 +44,7 @@ class CronogramaAdapter (var list: List<Cronograma>) :
         fun bind(cronograma: Cronograma) {
             // NESTE PONTO ADICIONA OS DADOS DA CLASSE AOS ITENS DO LAYOUT
             antigo_tv.text = cronograma.horarioAntigo
-            atual_tv.text = cronograma.horario
+            atual_tv.text = cronograma.horarioSaida
             motorista_tv.text = cronograma.nomeMotorista
 
             if(cronograma.horarioAntigo.isEmpty()) {

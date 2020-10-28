@@ -90,6 +90,14 @@ public class Linha {
         Fiscal f = fiscalLinha.get(0).getFiscal();
         return f;
     }
+    
+    public String getFiscalNumero(){
+        if(fiscalLinha.isEmpty()){
+            return null;
+        }
+        Fiscal f = fiscalLinha.get(0).getFiscal();
+        return f.getNumeroTelefone();
+    }
 
     public List getCarrosId() {
         ArrayList carrosId = new ArrayList();

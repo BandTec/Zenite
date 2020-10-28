@@ -1,8 +1,6 @@
 package com.orion.zenite.http.fiscal
 
-import com.orion.zenite.model.IniciarViagem
-import com.orion.zenite.model.Linha
-import com.orion.zenite.model.Onibus
+import com.orion.zenite.model.*
 import okhttp3.MediaType
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -10,8 +8,6 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.Path
-import com.orion.zenite.model.QtdPassageiros
-import retrofit2.Call
 import retrofit2.http.*
 
 interface FiscalApi {
@@ -30,10 +26,6 @@ interface FiscalApi {
                       @Header("authorization"
                       ) auth: String) : Call<Void>
 
-    @GET("/api/qrcode/{id}")
-    fun getQrcode(@Path("id") id: Int, @Header("authorization") auth: String): Call<ResponseBody>
-
-
     // finalizar viagem
     @PUT("/api/viagem/{idViagem}/{idFiscal}")
     fun finalizarViagem(@Path("idViagem") idViagem: Int,
@@ -50,4 +42,10 @@ interface FiscalApi {
                              @Body qtdPassageiros: QtdPassageiros,
                              @Header("authorization") auth: String
                             ) : Call<Void>
+
+    @GET("/api/horarios/linha/{id}")
+    fun getLinhaCronograma(@Path("id") id: Int, @Header("authorization") auth: String): Call<List<Cronograma>>
+
+    @GET("/api/horarios/fiscal/{id}/cronograma/proximahora")
+    fun getCronogramaGeral(@Path("id") id: Int, @Header("authorization") auth: String): Call<List<CronogramaGeral>>
 }

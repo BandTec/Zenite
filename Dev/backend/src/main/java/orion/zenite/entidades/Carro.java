@@ -136,6 +136,9 @@ public class Carro {
     }
 
     public Linha pegarLinha() {
+        if(carroLinhas.isEmpty()){
+            return null;
+        }
         Linha linha = carroLinhas.get(0).getLinha();
         return linha;
     }

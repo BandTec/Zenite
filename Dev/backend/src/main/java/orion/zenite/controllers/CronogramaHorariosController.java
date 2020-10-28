@@ -17,6 +17,15 @@ import orion.zenite.repositorios.*;
 
 import java.util.List;
 import java.util.Optional;
+import orion.zenite.modelos.*;
+import orion.zenite.repositorios.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 import static org.springframework.http.ResponseEntity.*;
 
@@ -155,6 +164,168 @@ public class CronogramaHorariosController {
         repository.save(novoHorario);
 
         return created(null).build();
+    }
+
+    @ApiOperation("Buscar horarios por id linha ")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 204, message = "Sua requisição não retornou dados.")
+    })
+    @GetMapping("/linha/{id}")
+    public ResponseEntity consultarPorLinha(@PathVariable("id") Integer id) {
+        Optional<Linha> linha = linhaRepository.findById(id);
+
+        LocalDate date = LocalDate.now();
+        List<CronogramaHorarios> horariosLinha = repository.getViagensDoDiaPorLinha(linha.get().getId(), date);
+        if (!horariosLinha.isEmpty()) {
+            ArrayList<CronogramaLinha> lista = new ArrayList<>();
+
+            horariosLinha.forEach(item -> {
+                CronogramaLinha cronograma = new CronogramaLinha();
+
+                // O ATRASADO COMPARARIA O HORARIO DO CRONOGRAMA DE CHEGADA COM O HORARIO DA TABELA DE VIAGEM
+                cronograma.setAtrasado(false);
+
+                // ANTIGO SERIA O HORARIO NA TABELA CRONOGRAMA HORARIO SE HOUVER UM NOVO HORARIO PREVISTO
+                cronograma.setHorarioAntigo("");
+
+                DateTimeFormatter sdf = DateTimeFormatter.ofPattern("HH:mm");
+                cronograma.setHorarioSaida(item.getHoraPrevistaSaida().format(sdf));
+                cronograma.setNomeMotorista(item.getMotorista().getNome());
+
+                //ESSE HORARIO DE CHEGADA NA VERDADE SERIA O HORARIO DE CHEGADA REALIZADO DA TABELA VIAGEM
+                cronograma.setHorarioChegada(item.getHoraPrevistaChegada().format(sdf));
+                lista.add(cronograma);
+            });
+
+            return ok(lista);
+        }
+        return noContent().build();
+    }
+
+    @ApiOperation("Buscar os horários da proxima hora de todas as linhas do fiscal ")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 204, message = "Sua requisição não retornou dados.")
+    })
+    @GetMapping("/fiscal/{id}/cronograma/proximahora")
+    public ResponseEntity consultarViagensDaProximaHora(@PathVariable("id") Integer id) {
+        LocalDateTime dataHoraSPInicio = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
+        LocalDateTime dataHoraSPFim = dataHoraSPInicio.plusHours(1);
+        LocalDate date = LocalDate.now();
+        List<CronogramaHorarios> cronogramaHorarios = repository.getViagensProximaHora(id, dataHoraSPInicio, dataHoraSPFim, date);
+        if (!cronogramaHorarios.isEmpty()) {
+            ArrayList<CronogramaFiscal> listaViagens = new ArrayList<CronogramaFiscal>();
+            ArrayList<Integer> linhas = new ArrayList<>();
+
+            for (int i = 0; i < cronogramaHorarios.size(); i++) {
+                CronogramaHorarios item = cronogramaHorarios.get(i);
+                int linhaAtual = item.getLinha().getId();
+
+                if (i > 0) {
+                    int anterior = i - 1;
+                    if (cronogramaHorarios.get(anterior).getLinha().getId() != linhaAtual) {
+                        linhas.add(linhaAtual);
+                    }
+                } else {
+                    linhas.add(linhaAtual);
+                }
+            }
+
+            linhas.forEach(linhaId -> {
+                CronogramaFiscal fiscal = new CronogramaFiscal();
+                ArrayList<CronogramaLinha> lista = new ArrayList<>();
+                cronogramaHorarios.forEach(item -> {
+                    if(linhaId == item.getLinha().getId()){
+                        CronogramaLinha cronograma = new CronogramaLinha();
+                        // O ATRASADO COMPARARIA O HORARIO DO CRONOGRAMA DE CHEGADA COM O HORARIO DA TABELA DE VIAGEM
+                        cronograma.setAtrasado(false);
+
+                        // ANTIGO SERIA O HORARIO NA TABELA CRONOGRAMA HORARIO SE HOUVER UM NOVO HORARIO PREVISTO
+                        cronograma.setHorarioAntigo("");
+
+                        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("HH:mm");
+                        cronograma.setHorarioSaida(item.getHoraPrevistaSaida().format(sdf));
+                        cronograma.setNomeMotorista(item.getMotorista().getNome());
+
+                        //ESSE HORARIO DE CHEGADA NA VERDADE SERIA O HORARIO DE CHEGADA REALIZADO DA TABELA VIAGEM
+                        cronograma.setHorarioChegada(item.getHoraPrevistaChegada().format(sdf));
+
+                        lista.add(cronograma);
+                        fiscal.setNomeLinha(item.getLinha().getNumero());
+                        fiscal.setIdLinha(item.getLinha().getId());
+                    }
+                });
+                fiscal.setCronograma(lista);
+                listaViagens.add(fiscal);
+            });
+
+            return ok().body(listaViagens);
+        }
+
+        return noContent().build();
+    }
+
+    @ApiOperation("Buscar a viagem atual ou a proxima do motorista")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
+    })
+    @GetMapping("/motorista/{id}/viagem/atual")
+    public ResponseEntity consultarViagemAtualOuProxima(@PathVariable("id") Integer id) {
+        LocalDateTime dataHoraSP = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
+        Optional<CronogramaHorarios> cronogramaHorarios = repository.findActualOrNextViagem(id, dataHoraSP);
+        if (cronogramaHorarios.isPresent()) {
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            long duracaoMin = cronogramaHorarios.get().getHoraPrevistaSaida().until(cronogramaHorarios.get().getHoraPrevistaChegada(), ChronoUnit.MINUTES);
+            String duracao = String.format("%d MINUTOS", duracaoMin);
+
+            ViagemMotorista viagemMotorista = new ViagemMotorista();
+            viagemMotorista.setDuracao(duracao);
+            viagemMotorista.setHorario(cronogramaHorarios.get().getHoraPrevistaSaida().format(formatter));
+
+            return ok(viagemMotorista);
+        }
+        return notFound().build();
+    }
+
+    @ApiOperation("Buscar sumário de viagens do dia e viagens do dia do motorista")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
+    })
+    @GetMapping("/motorista/{id}/viagem/dia")
+    public ResponseEntity consultarViagensDia(@PathVariable("id") Integer id) {
+        LocalDate dataSP = LocalDate.now();
+        int viagensRealizadas = repository.getViagensRealizadas(id, dataSP);
+        int viagensRestantes = repository.getViagensRestantes(id, dataSP);
+        Optional<List<CronogramaHorarios>> viagensDia = repository.getViagensDoDia(id, dataSP);
+
+        if (viagensDia.isPresent()) {
+            List<CronogramaHorarios> lista = viagensDia.get();
+            ArrayList<ViagemMotorista> listaViagens = new ArrayList<>();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+            lista.forEach(item -> {
+                ViagemMotorista nova = new ViagemMotorista();
+                long duracaoMin = item.getHoraPrevistaSaida().until(item.getHoraPrevistaChegada(), ChronoUnit.MINUTES);
+                nova.setDuracao(String.format("%d MIN", duracaoMin));
+                nova.setHorario(String.format("%s-%s", item.getHoraPrevistaSaida().format(formatter), item.getHoraPrevistaChegada().format(formatter)));
+                listaViagens.add(nova);
+            });
+
+            ViagemDiaria viagemDiaria = new ViagemDiaria();
+            viagemDiaria.setViagensRealizadas(viagensRealizadas);
+            viagemDiaria.setViagensRestantes(viagensRestantes);
+            viagemDiaria.setListaViagens(listaViagens);
+            return ok().body(viagemDiaria);
+        }
+        return notFound().build();
     }
 
 }
