@@ -46,37 +46,43 @@ Na primeira fase do projeto os requisitos do projeto foram os abaixo:
 
 Agora na segunda fase do projeto temos os seguintes requisitos:
   
-* [ ] *Backend do projeto no AWS*
-  - [ ] Configuração de ambiente de alta disponibilidade e segurança
-  - [ ] Configuração de Balanceamento de carga
+* [ x ] *Backend do projeto no AWS*
+  - [ x ] Configuração de ambiente de alta disponibilidade e segurança
+  - [ x ] Configuração de Balanceamento de carga
   - [ ] CD/CI com Jenkins
   - [ ] Stress Tests
-* [ ] *Aplicação Web*
-  - [ ] Tela para adicionar cronograma da linha
-  - [ ] Tela para visualizar cronograma da linha
-* [ ] *Aplicativo Android Kotlin*
+* [ x ] *Aplicação Web*
+  - [ x ] Tela para adicionar cronograma da linha
+  - [ x ] Tela para visualizar cronograma da linha
+* [ x ] *Aplicativo Android Kotlin*
   - [ ] Aplicativo salvando dados offline
-  - [ ] Login e Logout
+  - [ x ] Login e Logout
   - [ ] Esqueci minha senha
-  - [ ] Módulo Fiscal
-    - [ ] Leitor de QrCode para iniciar e finalizar uma viagem (Lendo o QrCode do Motorista)
-      - [ ] Opção de adicionar quantidade de passageiros ao finalizar viagem.
-    - [ ] Cronograma diário das viagens
+  - [ x ] Módulo Fiscal
+    - [ x ] Leitor de QrCode para iniciar e finalizar uma viagem (Lendo o QrCode do Motorista)
+      - [ x ] Opção de adicionar quantidade de passageiros ao finalizar viagem.
+    - [ x ] Cronograma diário das viagens
       - [ ] Opção de alterar intervalo de saída dos ônibus (assim alterando o cronograma)
-    - [ ] Lista das linhas fiscalizadas pelo fiscal
-      - [ ] Lista de ônibus da linha
-      - [ ] Lista de motorista da linha
-  - [ ] Módulo Motorista
-    - [ ] Tela contendo QrCode que identifica o Motorista
-    - [ ] Tela com dados da viagem atual / ou próxima viagem, dados do ônibus que esta alocado e fiscal de sua linha
-    - [ ] Históricos de viagens (diário / semanal)
+    - [ x ] Lista das linhas fiscalizadas pelo fiscal
+      - [ x ] Lista de ônibus da linha
+      - [ x ] Lista de motorista da linha
+  - [ x ] Módulo Motorista
+    - [ x ] Tela contendo QrCode que identifica o Motorista
+    - [ x ] Tela com dados da viagem atual / ou próxima viagem, dados do ônibus que esta alocado e fiscal de sua linha
+    - [ x ] Históricos de viagens (diário / semanal)
 
+
+---
+
+### Aplicativo final
+
+![imagem do diagrama de arquitetura](https://raw.githubusercontent.com/BandTec/Zenite/master/Documentacao/4Semestre/Sprint1/Desenho_Solucao_LLD.png)
 
 ---
 
 ## Diagrama de Arquitetura
 
-![imagem do diagrama de arquitetura](https://raw.githubusercontent.com/BandTec/Zenite/master/Documentacao/4Semestre/Sprint1/Desenho_Solucao_LLD.png)
+![imagem do diagrama de arquitetura](https://github.com/BandTec/Zenite/blob/master/Documentacao/4Semestre/zenite_funcionando.gif)
 
 ---
 
