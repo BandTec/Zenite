@@ -11,7 +11,7 @@ class HttpHelper {
     // AWS: "http://3.86.5.222:8080",
     // Azure: "https://zenitebackend.azurewebsites.net",
 
-    private val URL =  "http://192.168.100.162:8080"
+    private val URL =  "http://192.168.15.13:8080"
     var retrofit: Retrofit? = null
 
     fun getApiClient(): Retrofit? {

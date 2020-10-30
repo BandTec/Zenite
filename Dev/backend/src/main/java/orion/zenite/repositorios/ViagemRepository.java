@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import orion.zenite.entidades.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -36,6 +37,15 @@ public interface ViagemRepository extends JpaRepository<Viagem, Integer> {
     List<Viagem> findByQtdPassageirosGreaterThanEqual(int qtd);
 
     List<Viagem> findByOrderByQtdPassageiros();
+
+    @Query(value = "SELECT dv.* FROM tbl_dados_viagem dv where dv.hora_saida >= ?1 and dv.id_linha = ?2 ",nativeQuery = true)
+    List<Viagem> getViagensDaLinhaDoDia(LocalDate dataHoje, Integer idLinha);
+
+    @Query(value = "SELECT dv.* FROM tbl_dados_viagem dv where dv.hora_saida >= ?1 and dv.id_fiscal = ?2 ",nativeQuery = true)
+    List<Viagem> getViagensDoFiscalDoDia(LocalDateTime dataHoje, Integer idFiscal);
+
+    @Query(value = "SELECT dv.* FROM tbl_dados_viagem dv where dv.hora_saida >= ?1 and dv.id_motorista = ?2 ",nativeQuery = true)
+    List<Viagem> getViagensDoMotoristaDoDia(LocalDateTime dataHoje, Integer idMotorista);
 }
 
 

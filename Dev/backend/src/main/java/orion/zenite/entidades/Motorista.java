@@ -76,6 +76,11 @@ public class Motorista {
         return nome;
     }
 
+    public String getNomeFormatado() {
+        String[] nomeFormatado = nome.split(" ");
+        return nomeFormatado[0] + " " + nomeFormatado[1];
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }

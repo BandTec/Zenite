@@ -147,7 +147,7 @@ public class Carro {
         if(motoristaCarro.isEmpty()){
             return null;
         }
-        return motoristaCarro.get(0).getMotorista().getNome();
+        return motoristaCarro.get(0).getMotorista().getNomeFormatado();
     }
 
     public Integer getMotoristaId() {

@@ -2,9 +2,9 @@ package orion.zenite.modelos;
 
 public class CronogramaLinha {
 
-    private String horarioSaida;
+    private String horarioPrevisto;
 
-    private String horarioChegada;
+    private String horarioRealizado;
 
     private String nomeMotorista;
 
@@ -13,20 +13,20 @@ public class CronogramaLinha {
     private String horarioAntigo;
 
 
-    public String getHorarioSaida() {
-        return horarioSaida;
+    public String getHorarioPrevisto() {
+        return horarioPrevisto;
     }
 
-    public void setHorarioSaida(String horarioSaida) {
-        this.horarioSaida = horarioSaida;
+    public void setHorarioPrevisto(String horarioPrevisto) {
+        this.horarioPrevisto = horarioPrevisto;
     }
 
-    public String getHorarioChegada() {
-        return horarioChegada;
+    public String getHorarioRealizado() {
+        return horarioRealizado;
     }
 
-    public void setHorarioChegada(String horarioChegada) {
-        this.horarioChegada = horarioChegada;
+    public void setHorarioRealizado(String horarioRealizado) {
+        this.horarioRealizado = horarioRealizado;
     }
 
     public String getNomeMotorista() {
