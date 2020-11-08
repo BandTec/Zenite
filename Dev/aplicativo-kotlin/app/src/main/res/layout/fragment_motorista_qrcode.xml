@@ -7,9 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".telas.fiscal.fragments.dashboard.Linhas">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -28,9 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="Esse código identifica você e seu ônibus.
-Através dele que o fiscal irá marcar o
-começo e o final de sua viagem."
+                android:text="@string/qrcode_descricao"
                 android:textColor="@color/corPrimaria" />
         </RelativeLayout>
 
@@ -59,7 +55,6 @@ começo e o final de sua viagem."
             android:layout_height="300dp"
             android:layout_gravity="center"
             android:layout_marginTop="50dp" />
-
 
 
     </LinearLayout>

@@ -1,6 +1,8 @@
 package com.orion.zenite.telas.autenticacao
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -15,6 +17,7 @@ import com.orion.zenite.model.Token
 import com.orion.zenite.model.Usuario
 import com.orion.zenite.telas.fiscal.MainFiscal
 import com.orion.zenite.telas.motorista.MainMotorista
+import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,10 +26,24 @@ import retrofit2.Response
 class Login : AppCompatActivity() {
 
     val loading = MutableLiveData<Boolean>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val token = AppPreferencias.token
+        val id = AppPreferencias.id
+        val nivel = AppPreferencias.nivel
+
+        if (nivel != 0) {
+            if (nivel == 4) {
+                val fiscal = Intent(this@Login, MainFiscal::class.java)
+                startActivity(fiscal)
+            } else {
+                val motorista = Intent(this@Login, MainMotorista::class.java)
+                startActivity(motorista)
+            }
+        }
 
         loading.value = false
         loading.observe(this, Observer { isLoading ->
@@ -50,7 +67,7 @@ class Login : AppCompatActivity() {
             input_senha.error = getString(R.string.senha_error_campo);
             input_email.requestFocus()
 
-        }else {
+        } else {
             logar()
         }
     }
@@ -68,7 +85,11 @@ class Login : AppCompatActivity() {
         LoginRequest.enqueue(object : Callback<Token> {
             override fun onFailure(call: Call<Token>, t: Throwable) {
                 loading.value = false
-                Toast.makeText(baseContext, getString(R.string.erro_autentificacao), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    baseContext,
+                    getString(R.string.erro_autentificacao),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
             override fun onResponse(call: Call<Token>, response: Response<Token>) {
@@ -76,7 +97,11 @@ class Login : AppCompatActivity() {
                     val token = response.body()?.message.toString()
                     buscarDadosConta(token)
                 } else {
-                    Toast.makeText(baseContext, getString(R.string.erro_autentificacao), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext,
+                        getString(R.string.erro_autentificacao),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     loading.value = false
                 }
             }
@@ -92,7 +117,11 @@ class Login : AppCompatActivity() {
         resultado.enqueue(object : Callback<UserZenite> {
             override fun onFailure(call: Call<UserZenite>, t: Throwable) {
                 loading.value = false
-                Toast.makeText(baseContext, getString(R.string.erro_autentificacao), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    baseContext,
+                    getString(R.string.erro_autentificacao),
+                    Toast.LENGTH_SHORT
+                ).show()
                 println("deu ruim " + t.message)
             }
 
@@ -103,24 +132,35 @@ class Login : AppCompatActivity() {
                 println("status code" + response.code())
                 if (usuarioLogado?.conta?.nivel?.id !== null) {
 
-                    if(usuarioLogado.conta.nivel.id == 4){
+                    AppPreferencias.token = token;
+                    AppPreferencias.id = usuarioLogado.id
+
+
+                    if (usuarioLogado.conta.nivel.id == 4) {
+                        AppPreferencias.nivel = 4
+
                         loading.value = false
-                        fiscal.putExtra("token", token)
-                        fiscal.putExtra("id", usuarioLogado.id)
                         startActivity(fiscal)
-                    }
-                    else if(usuarioLogado.conta.nivel.id == 5) {
+                    } else if (usuarioLogado.conta.nivel.id == 5) {
+                        AppPreferencias.nivel = 5
+
                         loading.value = false
-                        motorista.putExtra("token", token)
-                        motorista.putExtra("id", usuarioLogado.id)
                         startActivity(motorista)
                     } else {
                         loading.value = false
-                        Toast.makeText(baseContext, getString(R.string.sem_acesso), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            baseContext,
+                            getString(R.string.sem_acesso),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 } else {
                     loading.value = false
-                    Toast.makeText(baseContext, getString(R.string.erro_autentificacao), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext,
+                        getString(R.string.erro_autentificacao),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 

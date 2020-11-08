@@ -13,6 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.orion.zenite.R
 import com.orion.zenite.http.HttpHelper
 import com.orion.zenite.http.motorista.MotoristaApi
+import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.fragment_motorista_qrcode.*
 import kotlinx.android.synthetic.main.fragment_motorista_qrcode.list_error
 import kotlinx.android.synthetic.main.fragment_motorista_qrcode.loading_view
@@ -40,8 +41,8 @@ class MotoristaQrcode : Fragment() {
         val view = inflater.inflate(R.layout.fragment_motorista_qrcode, container, false)
 
 
-        id = activity?.intent?.extras?.getInt("id")
-        token = activity?.intent?.extras?.getString("token").toString()
+        id = AppPreferencias.id
+        token = AppPreferencias.token
 
         load()
 
@@ -76,9 +77,6 @@ class MotoristaQrcode : Fragment() {
     // https://stackoverflow.com/questions/25462523/retrofit-api-to-retrieve-a-png-image#25463200
     fun consumir() {
         loading.value = true;
-
-        // REMOVER TOKEN ESTATICO
-       // val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
 
         val service: MotoristaApi = HttpHelper().getApiClient()!!.create(MotoristaApi::class.java)
         if(id != null) {

@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
-        android:text="QUANTIDADE DE PASSAGEIROS"
+        android:text="@string/qtd_titulo"
         android:textColor="@color/corPrimaria"
         android:layout_marginTop="50dp"
         />
@@ -41,7 +41,7 @@
     <EditText
         android:id="@+id/inputQuantidade"
         style="@style/Input"
-        android:hint="quantidade"
+        android:hint="@string/quantidade"
         android:inputType="number"
         android:textSize="15sp"
         />
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="15dp"
-        android:text="SALVAR" />
+        android:text="@string/salvar_btn" />
 
     <ProgressBar
         android:visibility="gone"

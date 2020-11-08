@@ -16,8 +16,10 @@ import com.orion.zenite.http.motorista.MotoristaApi
 import com.orion.zenite.model.CronogramaHorarioSimples
 import com.orion.zenite.model.UserZenite
 import com.orion.zenite.model.Viagens
+import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.fragment_linhas.*
 import kotlinx.android.synthetic.main.fragment_motorista_dashboard.*
+import kotlinx.android.synthetic.main.fragment_motorista_qrcode.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,7 +28,7 @@ import retrofit2.Response
 class MotoristaDashboard : Fragment() {
 
     val loading = MutableLiveData<Boolean>()
-
+    private var swipe: SwipeRefreshLayout? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,17 +37,24 @@ class MotoristaDashboard : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_motorista_dashboard, container, false)
 
-        val id = getActivity()?.getIntent()?.extras?.getInt("id")
-        val token = getActivity()?.getIntent()?.extras?.getString("token").toString()
+        val id = AppPreferencias.id
+        val token = AppPreferencias.token
 
-        refresh(token)
-        viagemAtual(id!!, token)
+        refresh(token, id)
+
+        swipe = view.findViewById(R.id.swipeRefresh) as SwipeRefreshLayout
+        swipe!!.setOnRefreshListener {
+            swipeRefresh.isRefreshing = false
+            refresh(token, id)
+        }
 
         return view;
     }
 
-    private fun refresh(token: String) {
+    private fun refresh(token: String, id: Int) {
         buscarDadosConta(token)
+        viagemAtual(id, token)
+
         loading.value = true
         loading.observe(this, Observer { isLoading ->
             isLoading?.let {
@@ -107,8 +116,8 @@ class MotoristaDashboard : Fragment() {
 
         resultado.enqueue(object : Callback<Viagens>{
             override fun onFailure(call: Call<Viagens>, t: Throwable) {
-                Toast.makeText(activity, getString(R.string.erro_ao_carregar), Toast.LENGTH_SHORT)
-                    .show()
+                card_viagem.visibility = View.GONE
+                println("erro na viagem atual: ${t.message}")
             }
 
             override fun onResponse(
@@ -117,15 +126,18 @@ class MotoristaDashboard : Fragment() {
             ) {
                 try {
                     val viagem = response.body()
+                    card_viagem.visibility = View.VISIBLE
                     horario_inicial.text = viagem!!.horario
                     duracao_prevista.text = viagem.duracao
                 }catch (t: Throwable){
-                    Toast.makeText(
-                        activity,
-                        getString(R.string.erro_ao_carregar),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    card_viagem.visibility = View.GONE
+//                    Toast.makeText(
+//                        activity,
+//                        getString(R.string.erro_ao_carregar),
+//                        Toast.LENGTH_SHORT
+//                    ).show()
                 }
+                println("erro na viagem atual: ${response.code()}")
                 loading.value = false
             }
         })
