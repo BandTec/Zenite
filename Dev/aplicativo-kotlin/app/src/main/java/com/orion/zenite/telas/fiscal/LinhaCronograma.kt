@@ -24,6 +24,9 @@ import kotlinx.android.synthetic.main.activity_cronograma_linha.topAppBar
 import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.fragment_viagens_diarias.*
 import kotlinx.android.synthetic.main.fragment_viagens_semanais.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LinhaCronograma : AppCompatActivity() {
 
@@ -46,6 +49,7 @@ class LinhaCronograma : AppCompatActivity() {
     private val listaAdapter = CronogramaAdapter(arrayListOf())
 
     var id: Int? = null
+    var idLinha: Int? = null
     var token: String = ""
 
 
@@ -62,8 +66,9 @@ class LinhaCronograma : AppCompatActivity() {
         }
 
         id = intent.extras?.getInt("id")
+        idLinha = intent.extras?.getInt("idLinha")
         token = intent.extras?.getString("token").toString()
-        Toast.makeText(this, "olha esse $token e esse $id", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "olha esse $token e esse $id", Toast.LENGTH_SHORT).show()
 
 
         lista = listViagens as RecyclerView
@@ -99,38 +104,36 @@ class LinhaCronograma : AppCompatActivity() {
 
     private fun consumirApi() {
         loading.value = true;
-
-        // TODO: REMOVER DADOS ESTATICOS => IDFISCAL E JWT TOKEN
-        val idUser = 4
-        val token =
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
-
+        empty.value = false
 
         val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
         // TODO ROTA E DESCOMENTAR ABAIXO
-        if (id != null) {
-//        val listaRemoto: Call<List<Viagens>> = service.getViagensDiarias(id!!, token)
-//
-//        listaRemoto.enqueue(object : Callback<List<Viagens>> {
-//            override fun onFailure(call: Call<List<Viagens>>, t: Throwable) {
-//                loadError.value = true;
-//                loading.value = false;
-//
-//                println("deu ruim = ${t.message}")
-//            }
-//
-//            override fun onResponse(call: Call<List<Viagens>>, response: Response<List<Viagens>>) {
-//                listaViagens.value = response.body()?.toList()
-            listaCronograma.value = horarios;
-//                loadError.value = false;
-//                loading.value = false;
-//
-//            if(response.body()?.toList() === null) {
-//                empty.value = true
-//            }
-//                println("status code = ${response.code()}")
-//            }
-//        })
+        if (idLinha != null) {
+            val listaRemoto: Call<List<Cronograma>> = service.getLinhaCronograma(idLinha!!, token)
+
+            listaRemoto.enqueue(object : Callback<List<Cronograma>> {
+                override fun onFailure(call: Call<List<Cronograma>>, t: Throwable) {
+                    loadError.value = true;
+                    loading.value = false;
+
+                    println("deu ruim = ${t.message}")
+                }
+
+                override fun onResponse(
+                    call: Call<List<Cronograma>>,
+                    response: Response<List<Cronograma>>
+                ) {
+                    listaCronograma.value = response.body()?.toList()
+
+                    loadError.value = false;
+                    loading.value = false;
+
+                    if (response.body()?.toList() === null) {
+                        empty.value = true
+                    }
+                    println("status code = ${response.code()}")
+                }
+            })
         } else {
             loadError.value = true;
             loading.value = false;

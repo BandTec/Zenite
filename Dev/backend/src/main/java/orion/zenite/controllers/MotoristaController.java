@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import orion.zenite.modelos.ConsultaPaginada;
 import orion.zenite.entidades.*;
 import orion.zenite.repositorios.CarroRepository;
+import orion.zenite.repositorios.LinhaRepository;
 import orion.zenite.repositorios.MotoristaCarroRepository;
 import orion.zenite.repositorios.MotoristaRepository;
 
@@ -44,6 +45,10 @@ public class MotoristaController {
 
     @Autowired
     private CarroRepository repositoryCarro;
+
+    @Autowired
+    private LinhaRepository linhaRepository;
+
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -78,6 +83,28 @@ public class MotoristaController {
             return noContent().build();
         }
  }
+
+    @ApiOperation("Lista todos os motoristas")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
+    })
+    @GetMapping("linha/{linhaId}")
+    public ResponseEntity consultarTodosPorLinha(
+            @PathVariable("linhaId")  Integer linhaId
+    )  {
+        if (this.motoristaBD.count() > 0) {
+                Optional<Linha> consulta = linhaRepository.findById(linhaId);
+                if(consulta.isPresent()){
+                    return ok(consulta.get().getCarrosObjetos());
+                } else {
+                    return noContent().build();
+                }
+        } else {
+            return noContent().build();
+        }
+    }
 
     @ApiOperation("Busca motorista pelo id")
     @ApiResponses({

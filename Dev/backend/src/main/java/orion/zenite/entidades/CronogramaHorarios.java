@@ -92,7 +92,11 @@ public class CronogramaHorarios {
         this.viagemStatus = viagemStatus;
     }
 
-    public Cronograma getCronograma() {
+    public Integer getCronograma() {
+        return cronograma.getIdCronograma();
+    }
+
+    public Cronograma pegarCronograma() {
         return cronograma;
     }
 

@@ -21,6 +21,7 @@ export default function Tabela2({
   temAcoes = true,
   detalhes,
   editarFuncao,
+  soDetalhes,
 }) {
   const classes = useStyles();
   const cabecalho = [];
@@ -65,6 +66,7 @@ export default function Tabela2({
                   tipo={tipo}
                   detalhes={detalhes}
                   editarFuncao={editarFuncao}
+                  soDetalhes={soDetalhes}
                 />
               )}
             </StyledTableRow>

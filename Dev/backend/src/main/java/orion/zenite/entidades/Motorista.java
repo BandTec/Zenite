@@ -76,6 +76,11 @@ public class Motorista {
         return nome;
     }
 
+    public String getNomeFormatado() {
+        String[] nomeFormatado = nome.split(" ");
+        return nomeFormatado[0] + " " + nomeFormatado[1];
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -133,5 +138,16 @@ public class Motorista {
             return null;
         }
         return motoristaCarroList.get(0).getCarro();
+    }
+
+    public Linha getLinha() {
+        if (!motoristaCarroList.isEmpty()) {
+            Linha linha = motoristaCarroList.get(0).getCarro().pegarLinha();
+
+            if (linha != null) {
+                return linha;
+            }
+        }
+        return null;
     }
 }

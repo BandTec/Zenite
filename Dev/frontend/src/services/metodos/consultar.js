@@ -17,6 +17,7 @@ export default async function consultar(url, formatarDados) {
       dados: temp,
       totalPaginas: dados.totalPaginas,
       totalItens: dados.totalItens,
+      rawData: dados.lista,
     };
   } catch (e) {
     console.log(e);

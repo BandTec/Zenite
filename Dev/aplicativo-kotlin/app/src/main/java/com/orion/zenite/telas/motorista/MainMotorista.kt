@@ -29,8 +29,8 @@ class MainMotorista : AppCompatActivity() {
         bottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> replaceFragment(dash, "Dashboard")
-                R.id.qrcode -> replaceFragment(qrcode, "Seu código QR")
-                R.id.viagens -> replaceFragment(viagens, "Histórico de viagens")
+                R.id.qrcode -> replaceFragment(qrcode, getString(R.string.seu_qr_code))
+                R.id.viagens -> replaceFragment(viagens, getString(R.string.historico_viagens))
                 R.id.logout -> replaceFragment(logout, "Zênite")
             }
             true

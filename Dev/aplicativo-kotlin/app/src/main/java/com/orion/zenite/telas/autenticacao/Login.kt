@@ -43,11 +43,11 @@ class Login : AppCompatActivity() {
         val senha = input_senha.text.toString().trim()
 
         if (email.isBlank()) {
-            input_email.error = "Informe seu email"
+            input_email.error = getString(R.string.login_error_campo)
             input_email.requestFocus()
 
         } else if (senha.isBlank()) {
-            input_senha.error = "Informe sua senha";
+            input_senha.error = getString(R.string.senha_error_campo);
             input_email.requestFocus()
 
         }else {

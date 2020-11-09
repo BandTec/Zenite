@@ -11,7 +11,8 @@ data class UserZenite(
     val conta: Conta,
     val linhas: List<Linha>,
     val cnh: String?,
-    val carro: Carro?
+    val carro: Carro?,
+    val linha: Linha?
 )
 
 

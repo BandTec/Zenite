@@ -68,7 +68,7 @@ class Linhas : Fragment() {
 
         id = activity?.intent?.extras?.getInt("id")
         token = activity?.intent?.extras?.getString("token").toString()
-        Toast.makeText(activity, "olha esse $token e esse $id", Toast.LENGTH_SHORT).show()
+       // Toast.makeText(activity, "olha esse $token e esse $id", Toast.LENGTH_SHORT).show()
 
         // chama api
         refresh()

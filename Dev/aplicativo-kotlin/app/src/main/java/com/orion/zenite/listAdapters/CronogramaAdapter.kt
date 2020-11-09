@@ -1,15 +1,12 @@
 package com.orion.zenite.listAdapters
 
 import android.graphics.Color
-import android.graphics.Paint
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.orion.zenite.R
 import com.orion.zenite.model.Cronograma
-import com.orion.zenite.model.CronogramaGeral
 import kotlinx.android.synthetic.main.list_item_cronograma.view.*
 
 // essa classe adapta uma lista de cronogramas
@@ -47,7 +44,7 @@ class CronogramaAdapter (var list: ArrayList<Cronograma>) :
         fun bind(cronograma: Cronograma) {
             // NESTE PONTO ADICIONA OS DADOS DA CLASSE AOS ITENS DO LAYOUT
             antigo_tv.text = cronograma.horarioAntigo
-            atual_tv.text = cronograma.horario
+            atual_tv.text = cronograma.horarioPrevisto
             motorista_tv.text = cronograma.nomeMotorista
 
             if(cronograma.horarioAntigo.isEmpty()) {
@@ -56,12 +53,9 @@ class CronogramaAdapter (var list: ArrayList<Cronograma>) :
                 antigo_tv.visibility = View.VISIBLE
             }
 
-            if(cronograma.horarioChegada.isEmpty()){
-                status_tv.text = "em viagem"
-                status_tv.visibility = View.VISIBLE
-            } else {
-                chegada_tv.text = cronograma.horarioChegada
-                chegada_tv.visibility = View.VISIBLE
+            chegada_tv.text = cronograma.horarioRealizado
+            chegada_tv.visibility = View.VISIBLE
+            if(!cronograma.horarioRealizado.isEmpty()){
                 if(cronograma.atrasado){
                     chegada_tv.setTextColor(Color.RED)
                 } else {

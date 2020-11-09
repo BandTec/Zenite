@@ -24,6 +24,9 @@ import com.orion.zenite.model.Viagens
 import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.fragment_cronograma_geral.*
 import kotlinx.android.synthetic.main.fragment_viagens_diarias.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CronogramaGeral : Fragment() {
 
@@ -33,20 +36,6 @@ class CronogramaGeral : Fragment() {
 
     // nested reclycler view
     // https://android.jlelse.eu/easily-adding-nested-recycler-view-in-android-a7e9f7f04047
-
-
-    private val horarios = arrayListOf<Cronograma>(
-        Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "", false),
-        Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "", false),
-        Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "", false)
-    )
-
-    private val dadosTemporarios = arrayListOf<CronogramaGeral>(
-        CronogramaGeral("8001-10 Term. Piaui", horarios),
-        CronogramaGeral("917H-10 Vila Mariana", horarios),
-        CronogramaGeral("8004-10 Term. Lapa", horarios)
-    )
-
 
     private var lista: RecyclerView? = null
 
@@ -101,6 +90,7 @@ class CronogramaGeral : Fragment() {
 
         val intent = Intent(activity, LinhaCronograma::class.java)
         intent.putExtra("nomeLinha", cronograma.nomeLinha)
+        intent.putExtra("idLinha", cronograma.idLinha)
         intent.putExtra("token", token)
         intent.putExtra("id", id)
         startActivity(intent)
@@ -108,34 +98,33 @@ class CronogramaGeral : Fragment() {
 
 
     private fun consumirApi() {
-        loading.value = true;
-
+        loading.value = true
+        empty.value = false
         val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
         // TODO ROTA E DESCOMENTAR ABAIXO
 
         if(id != null) {
-//        val listaRemoto: Call<List<Viagens>> = service.getViagensDiarias(id!!, token)
-//
-//        listaRemoto.enqueue(object : Callback<List<Viagens>> {
-//            override fun onFailure(call: Call<List<Viagens>>, t: Throwable) {
-//                loadError.value = true;
-//                loading.value = false;
-//
-//                println("deu ruim = ${t.message}")
-//            }
-//
-//            override fun onResponse(call: Call<List<Viagens>>, response: Response<List<Viagens>>) {
-//                listaViagens.value = response.body()?.toList()
-        listaCronograma.value = dadosTemporarios;
-//                loadError.value = false;
-//                loading.value = false;
-//
-//            if(response.body()?.toList() === null) {
-//                empty.value = true
-//            }
-//                println("status code = ${response.code()}")
-//            }
-//        })
+        val listaRemoto: Call<List<CronogramaGeral>> = service.getCronogramaGeral(id!!, token)
+
+        listaRemoto.enqueue(object : Callback<List<CronogramaGeral>> {
+            override fun onFailure(call: Call<List<CronogramaGeral>>, t: Throwable) {
+                loadError.value = true;
+                loading.value = false;
+
+                println("deu ruim = ${t.message}")
+            }
+
+            override fun onResponse(call: Call<List<CronogramaGeral>>, response: Response<List<CronogramaGeral>>) {
+                listaCronograma.value = response.body()?.toList()
+                loadError.value = false;
+                loading.value = false;
+
+                if (response.body()?.toList() === null) {
+                    empty.value = true
+                }
+                println("status code = ${response.code()}")
+            }
+        })
         } else {
             loadError.value = true;
             loading.value = false;
