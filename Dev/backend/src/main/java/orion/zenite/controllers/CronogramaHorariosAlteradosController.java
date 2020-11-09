@@ -65,6 +65,10 @@ public class CronogramaHorariosAlteradosController {
 
         if(!ch.isEmpty()){
             for (CronogramaHorarios ch1 : ch){
+
+                if(ch1.getViagemStatus() == 3)
+                    continue;
+
                 CronogramaHorariosAlterados cha = new CronogramaHorariosAlterados();
                 LocalDateTime novaDataChegada = ch1.getHoraPrevistaChegada();
                 novaDataChegada = novaDataChegada.plusMinutes(Integer.parseInt(novo_intervalo));
