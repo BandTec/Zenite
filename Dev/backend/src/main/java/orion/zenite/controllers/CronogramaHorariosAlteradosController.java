@@ -12,6 +12,8 @@ import orion.zenite.entidades.*;
 import orion.zenite.repositorios.CronogramaHorariosAlteradosRepository;
 import orion.zenite.repositorios.CronogramaHorariosRepository;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
@@ -50,15 +52,34 @@ public class CronogramaHorariosAlteradosController {
             @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
             @ApiResponse(code = 404, message = "Necessário ajustes no corpo da requisição.")
     })
-    @PostMapping()
+    @PostMapping("/cronograma/{idLinha}/{novoIntervalo}")
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public ResponseEntity cadastro(@RequestBody CronogramaHorariosAlterados novoHorarioAlterado){
+    public ResponseEntity cadastro(@PathVariable("idLinha") Integer id, @PathVariable("novoIntervalo") String novo_intervalo){
 
-        CronogramaHorarios ch = novoHorarioAlterado.getCronogramaHorarios();
+        Linha linha = new Linha();
+        CronogramaHorarios cronogramaHorarios = new CronogramaHorarios();
+        linha.setId(id);
+        cronogramaHorarios.setLinha(linha);
 
-        novoHorarioAlterado.setCronogramaHorarios(ch);
+        List<CronogramaHorarios> ch = cronogramaHorariosRepository.findAllByLinha(cronogramaHorarios.getLinha());
 
-        repository.save(novoHorarioAlterado);
+        if(!ch.isEmpty()){
+            for (CronogramaHorarios ch1 : ch){
+                CronogramaHorariosAlterados cha = new CronogramaHorariosAlterados();
+                LocalDateTime novaDataChegada = ch1.getHoraPrevistaChegada();
+                novaDataChegada = novaDataChegada.plusMinutes(Integer.parseInt(novo_intervalo));
+
+                LocalDateTime novaDataSaida = ch1.getHoraPrevistaSaida();
+                novaDataSaida = novaDataSaida.plusMinutes(Integer.parseInt(novo_intervalo));
+
+
+                cha.setCronogramaHorarios(ch1);
+                cha.setNovaHoraPrevistaChegada(novaDataChegada);
+                cha.setNovaHoraPrevistaSaida(novaDataSaida);
+
+                repository.save(cha);
+            }
+        }
 
         return created(null).build();
     }
