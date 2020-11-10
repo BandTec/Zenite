@@ -18,6 +18,7 @@ import com.orion.zenite.listAdapters.HistoricoAdapter
 import com.orion.zenite.listAdapters.ViagensAdapter
 import com.orion.zenite.model.HistoricoViagens
 import com.orion.zenite.model.Viagens
+import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.fragment_viagens_diarias.*
 import kotlinx.android.synthetic.main.fragment_viagens_semanais.*
@@ -54,10 +55,9 @@ class ViagensSemanais : Fragment() {
     val loading = MutableLiveData<Boolean>()
     private var swipe: SwipeRefreshLayout? = null
     val empty = MutableLiveData<Boolean>()
+
     // adapter do recycleview
     private val listaAdapter = HistoricoAdapter(arrayListOf())
-    var id :Int? = null
-    var token : String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,9 +71,6 @@ class ViagensSemanais : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = listaAdapter
         }
-
-         id = getActivity()?.getIntent()?.extras?.getInt("id")
-         token = getActivity()?.getIntent()?.extras?.getString("token").toString()
 
         // chama api
         refresh()
@@ -90,11 +87,12 @@ class ViagensSemanais : Fragment() {
 
     private fun consumirApi() {
         loading.value = true;
-
+        val id = AppPreferencias.id
+        val token = AppPreferencias.token
         val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
         // TODO ROTA E DESCOMENTAR ABAIXO
 
-        if(id != null) {
+
 //        val listaRemoto: Call<List<Viagens>> = service.getViagensSemanais(id!!, token)
 //
 //        listaRemoto.enqueue(object : Callback<List<Viagens>> {
@@ -106,21 +104,26 @@ class ViagensSemanais : Fragment() {
 //            }
 //
 //            override fun onResponse(call: Call<List<Viagens>>, response: Response<List<Viagens>>) {
-//                listaViagens.value = response.body()?.toList()
-            listaViagens.value = dadosTemporarios;
-//                loadError.value = false;
-//                loading.value = false;
-//              if(response.body()?.toList() === null) {
-//                        empty.value = true
-//                    }
+
+//                println("resposta = ${response}")
 //                println("status code = ${response.code()}")
+//        val resposta = response.body()
+//              if(resposta.toList() === null) {
+//                        empty.value = true
+//              }
+//              else {
+//                  listaViagens.value = resposta?.toList()
+//                  loadError.value = false;
+//                  loading.value = false;
+//              }
+
 //            }
 //        })
-        } else {
-            loadError.value = true;
-            loading.value = false;
-        }
+
         loading.value = false;
+
+        // TODO remover essa linha
+        listaViagens.value = dadosTemporarios;
     }
 
 

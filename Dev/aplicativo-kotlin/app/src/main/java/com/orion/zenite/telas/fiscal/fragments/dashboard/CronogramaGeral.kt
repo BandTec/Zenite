@@ -21,6 +21,7 @@ import com.orion.zenite.listAdapters.ViagensAdapter
 import com.orion.zenite.model.Cronograma
 import com.orion.zenite.model.CronogramaGeral
 import com.orion.zenite.model.Viagens
+import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.fragment_cronograma_geral.*
 import kotlinx.android.synthetic.main.fragment_viagens_diarias.*
@@ -46,10 +47,10 @@ class CronogramaGeral : Fragment() {
     private var swipe: SwipeRefreshLayout? = null
 
     // adapter do recycleview
-    private val listaAdapter = CronogramaGeralAdapter(arrayListOf()){ cronograma: CronogramaGeral -> onItemClick(cronograma)}
-    var id :Int? = null
-    var token : String = ""
-
+    private val listaAdapter =
+        CronogramaGeralAdapter(arrayListOf()) { cronograma: CronogramaGeral ->
+            onItemClick(cronograma)
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,10 +58,6 @@ class CronogramaGeral : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_cronograma_geral, container, false)
-
-
-        id = activity?.intent?.extras?.getInt("id")
-        token = activity?.intent?.extras?.getString("token").toString()
 
         // o componente recycler view é utilizado para gerar a lista
         // ele precisa de uma classe customizada para adaptar os dados em sua lista para o layout criado,
@@ -91,8 +88,6 @@ class CronogramaGeral : Fragment() {
         val intent = Intent(activity, LinhaCronograma::class.java)
         intent.putExtra("nomeLinha", cronograma.nomeLinha)
         intent.putExtra("idLinha", cronograma.idLinha)
-        intent.putExtra("token", token)
-        intent.putExtra("id", id)
         startActivity(intent)
     }
 
@@ -100,10 +95,11 @@ class CronogramaGeral : Fragment() {
     private fun consumirApi() {
         loading.value = true
         empty.value = false
-        val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
-        // TODO ROTA E DESCOMENTAR ABAIXO
 
-        if(id != null) {
+        val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
+        val id = AppPreferencias.id
+        val token = AppPreferencias.token
+
         val listaRemoto: Call<List<CronogramaGeral>> = service.getCronogramaGeral(id!!, token)
 
         listaRemoto.enqueue(object : Callback<List<CronogramaGeral>> {
@@ -114,7 +110,10 @@ class CronogramaGeral : Fragment() {
                 println("deu ruim = ${t.message}")
             }
 
-            override fun onResponse(call: Call<List<CronogramaGeral>>, response: Response<List<CronogramaGeral>>) {
+            override fun onResponse(
+                call: Call<List<CronogramaGeral>>,
+                response: Response<List<CronogramaGeral>>
+            ) {
                 listaCronograma.value = response.body()?.toList()
                 loadError.value = false;
                 loading.value = false;
@@ -125,10 +124,7 @@ class CronogramaGeral : Fragment() {
                 println("status code = ${response.code()}")
             }
         })
-        } else {
-            loadError.value = true;
-            loading.value = false;
-        }
+
         loading.value = false;
     }
 

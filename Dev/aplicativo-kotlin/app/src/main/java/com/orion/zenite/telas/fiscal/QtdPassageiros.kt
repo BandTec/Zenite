@@ -13,6 +13,7 @@ import com.orion.zenite.R
 import com.orion.zenite.http.HttpHelper
 import com.orion.zenite.http.fiscal.FiscalApi
 import com.orion.zenite.model.QtdPassageiros
+import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.activity_main_fiscal.topAppBar
 import kotlinx.android.synthetic.main.activity_qrcode_scanner.loading_view
 import kotlinx.android.synthetic.main.activity_qtd_passageiros.*
@@ -24,15 +25,10 @@ class QtdPassageiros : AppCompatActivity() {
 
     val loading = MutableLiveData<Boolean>()
     val respostaRequisicao = MutableLiveData<Boolean>()
-    var token : String = ""
-    var id :Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qtd_passageiros)
-
-        token = intent.extras?.getString("token").toString()
-        id = intent.extras?.getInt("id")
 
         // https://material.io/develop/android/components/app-bars-top
         topAppBar.setNavigationOnClickListener {
@@ -59,8 +55,6 @@ class QtdPassageiros : AppCompatActivity() {
                     ).show()
 
                     val intent = Intent(this, MainFiscal::class.java)
-                    intent.putExtra("token", token)
-                    intent.putExtra("id", id)
                     startActivity(intent)
                 } else {
                     Toast.makeText(
@@ -99,6 +93,7 @@ class QtdPassageiros : AppCompatActivity() {
         val passageiros = inputQuantidade.text.toString().toInt()
         val body = QtdPassageiros(passageiros)
         val idViagem = intent.extras?.getInt("idViagem")
+        val token = AppPreferencias.token
 
         if (idViagem != null) {
             val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)

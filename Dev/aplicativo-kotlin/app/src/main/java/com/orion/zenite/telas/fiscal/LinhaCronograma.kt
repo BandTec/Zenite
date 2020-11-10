@@ -18,6 +18,7 @@ import com.orion.zenite.listAdapters.CronogramaAdapter
 import com.orion.zenite.listAdapters.ViagensAdapter
 import com.orion.zenite.model.Cronograma
 import com.orion.zenite.model.Viagens
+import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.activity_cronograma_linha.*
 import kotlinx.android.synthetic.main.activity_cronograma_linha.listViagens
 import kotlinx.android.synthetic.main.activity_cronograma_linha.topAppBar
@@ -30,28 +31,17 @@ import retrofit2.Response
 
 class LinhaCronograma : AppCompatActivity() {
 
-    private val horarios = arrayListOf<Cronograma>(
-        Cronograma("22:10 - 22:40", "22:50 - 23:50", "Nicole Brito", "22:50 - 23:48", true),
-        Cronograma("22:10 - 22:40", "22:50 - 23:50", "Marias Callas", "22:50 - 23:48", false),
-        Cronograma("", "22:50 - 23:50", "Luciano Pavarotti", "", false)
-    )
-
-
     private var lista: RecyclerView? = null
+    private var swipe: SwipeRefreshLayout? = null
     private var nomeLinha: String? = "";
+
     val listaCronograma = MutableLiveData<List<Cronograma>>()
     val loadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
-    private var swipe: SwipeRefreshLayout? = null
     val empty = MutableLiveData<Boolean>()
 
     // adapter do recycleview
     private val listaAdapter = CronogramaAdapter(arrayListOf())
-
-    var id: Int? = null
-    var idLinha: Int? = null
-    var token: String = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,12 +54,6 @@ class LinhaCronograma : AppCompatActivity() {
         topAppBar.setNavigationOnClickListener {
             this.finish()
         }
-
-        id = intent.extras?.getInt("id")
-        idLinha = intent.extras?.getInt("idLinha")
-        token = intent.extras?.getString("token").toString()
-        //Toast.makeText(this, "olha esse $token e esse $id", Toast.LENGTH_SHORT).show()
-
 
         lista = listViagens as RecyclerView
         lista!!.apply {
@@ -106,10 +90,13 @@ class LinhaCronograma : AppCompatActivity() {
         loading.value = true;
         empty.value = false
 
+        val idLinha = intent.extras?.getInt("idLinha")
+        val token = AppPreferencias.token
+
         val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
-        // TODO ROTA E DESCOMENTAR ABAIXO
+
         if (idLinha != null) {
-            val listaRemoto: Call<List<Cronograma>> = service.getLinhaCronograma(idLinha!!, token)
+            val listaRemoto: Call<List<Cronograma>> = service.getLinhaCronograma(idLinha, token)
 
             listaRemoto.enqueue(object : Callback<List<Cronograma>> {
                 override fun onFailure(call: Call<List<Cronograma>>, t: Throwable) {

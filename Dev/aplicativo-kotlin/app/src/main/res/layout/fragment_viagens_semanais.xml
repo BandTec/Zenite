@@ -84,7 +84,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:text="SUMÁRIO DAS VIAGENS"
+                            android:text="@string/sum_rio_das_viagens"
                             android:textColor="@color/corPrimaria" />
                     </LinearLayout>
 
@@ -99,7 +99,7 @@
                             android:layout_height="wrap_content"
                             android:layout_row="0"
                             android:layout_column="0"
-                            android:text="Total"
+                            android:text="@string/total"
                             android:textColor="@color/corPrimaria" />
 
                         <TextView
@@ -110,7 +110,7 @@
                             android:layout_row="0"
                             android:layout_column="2"
                             android:layout_gravity="center"
-                            android:text="Media de tempo"
+                            android:text="@string/media_de_tempo"
                             android:textColor="@color/corPrimaria" />
 
                         <TextView
@@ -120,7 +120,7 @@
                             android:layout_height="wrap_content"
                             android:layout_row="0"
                             android:layout_column="3"
-                            android:text="Faltas"
+                            android:text="@string/faltas"
                             android:textColor="@color/corPrimaria" />
 
                         <TextView
