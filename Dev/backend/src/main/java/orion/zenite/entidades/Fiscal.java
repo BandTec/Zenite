@@ -71,7 +71,7 @@ public class Fiscal  {
 
     public String getNomeFormatado() {
         String[] nomeFormatado = nome.split(" ");
-        return nomeFormatado[0] + " " + nomeFormatado[1];
+        return nomeFormatado.length > 1 ? nomeFormatado[0] + " " + nomeFormatado[1] : nomeFormatado[0];
     }
 
     public void setNome(String nome) {
