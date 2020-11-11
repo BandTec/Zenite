@@ -53,9 +53,7 @@ export default function ConsultaHorarios(props) {
 
   function criaDados(item) {
     const {
-      idCronogramaHorarios,
       carro,
-      linha,
       motorista,
       horaPrevistaSaida,
       horaPrevistaChegada,

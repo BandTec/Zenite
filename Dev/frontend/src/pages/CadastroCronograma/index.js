@@ -1,7 +1,6 @@
 /* eslint react-hooks/exhaustive-deps: 0 */
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import * as yup from "yup";
 import { cadastrar, editar, consultarEdicao } from "../../services/metodos";
 import api from "../../services/api";
 
@@ -40,12 +39,6 @@ export default function CadastroAdmin(props) {
     { texto: "Parada Inicial", value: 2 },
     { texto: "Parada Final", value: 3 },
   ];
-
-  const validation = yup.object({
-    dataCronograma: yup.date(),
-    linhaId: yup.number().required(),
-    horarios: yup.array(),
-  });
 
   function addHorario() {
     let hora = Object.assign([], horarios);

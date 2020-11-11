@@ -1,9 +1,9 @@
 import React from "react";
 import { Field } from "formik";
-import { Container, Rotulo, ComboBox, TextoAlerta } from "./styles";
+import { Container, Rotulo, ComboBox } from "./styles";
 
 export default function ComboBoxFormik(props) {
-  const { texto, pequeno, conteudoCombo, name } = props;
+  const { texto, conteudoCombo, name } = props;
   return (
     <Container>
       {texto && <Rotulo>{texto}</Rotulo>}
