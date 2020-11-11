@@ -20,6 +20,7 @@ import com.orion.zenite.model.Viagens
 import com.orion.zenite.listAdapters.ViagensAdapter
 import com.orion.zenite.model.Linha
 import com.orion.zenite.model.ViagemDiaria
+import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.fragment_linhas.*
 import kotlinx.android.synthetic.main.fragment_viagens_diarias.*
@@ -33,16 +34,6 @@ class ViagensDiarias : Fragment() {
     // https://androidwave.com/recyclerview-kotlin-tutorial/
     // https://medium.com/@hinchman_amanda/working-with-recyclerview-in-android-kotlin-84a62aef94ec
 
-
-    private val dadosTemporarios = arrayListOf<Viagens>(
-        Viagens("14:00 - 14:30", "30 MIN"),
-        Viagens("14:40 - 15:30", "40 MIN"),
-        Viagens("15:40 - 16:40", "1 H"),
-        Viagens("16:50 - 17:20", "30 MIN"),
-        Viagens("17:30 - 18:10", "30 MIN"),
-        Viagens("18:20 - 18:50", "30 MIN")
-    )
-
     private var lista: RecyclerView? = null
     val listaViagens = MutableLiveData<List<Viagens>>()
     val loadError = MutableLiveData<Boolean>()
@@ -53,20 +44,12 @@ class ViagensDiarias : Fragment() {
     // adapter do recycleview
     private val listaAdapter = ViagensAdapter(arrayListOf())
 
-    var id: Int? = null
-    var token: String = ""
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_viagens_diarias, container, false)
-
-
-        id = getActivity()?.getIntent()?.extras?.getInt("id")
-        token = getActivity()?.getIntent()?.extras?.getString("token").toString()
-        // Toast.makeText(activity, "olha esse $token e esse $id", Toast.LENGTH_SHORT).show()
 
         lista = view.findViewById(R.id.listViagens) as RecyclerView
         lista!!.apply {
@@ -93,8 +76,10 @@ class ViagensDiarias : Fragment() {
         val service: MotoristaApi = HttpHelper().getApiClient()!!.create(MotoristaApi::class.java)
         // TODO ROTA E DESCOMENTAR ABAIXO
 
-        if (id != null) {
-        val listaRemoto: Call<ViagemDiaria> = service.consultarViagensDia(id!!, token)
+        val id = AppPreferencias.id
+        val token = AppPreferencias.token
+
+        val listaRemoto: Call<ViagemDiaria> = service.consultarViagensDia(id, token)
 
         listaRemoto.enqueue(object : Callback<ViagemDiaria> {
             override fun onFailure(call: Call<ViagemDiaria>, t: Throwable) {
@@ -106,22 +91,20 @@ class ViagensDiarias : Fragment() {
 
             override fun onResponse(call: Call<ViagemDiaria>, response: Response<ViagemDiaria>) {
                 val resposta = response.body()
-                listaViagens.value = resposta?.listaViagens!!.toList()
-                //listaViagens.value = dadosTemporarios;
-                loadError.value = false;
-                loading.value = false;
-                  if(resposta?.listaViagens!!.toList() === null) {
-                        empty.value = true
-                    }
                 println("status code = ${response.code()}")
-                realizada_valor.text = resposta.viagensRealizadas.toString()
-                restante_valor.text = resposta.viagensRestantes.toString()
+                println("resposta = ${response}")
+                if(resposta?.listaViagens === null) {
+                    empty.value = true
+                } else {
+                    listaViagens.value = resposta.listaViagens.toList()
+                    loadError.value = false;
+                    loading.value = false;
+                    realizada_valor.text = resposta.viagensRealizadas.toString()
+                    restante_valor.text = resposta.viagensRestantes.toString()
+                }
             }
         })
-        } else {
-            loadError.value = true;
-            loading.value = false;
-        }
+
         loading.value = false;
     }
 

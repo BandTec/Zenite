@@ -19,6 +19,7 @@ import com.orion.zenite.telas.fiscal.LinhaDetalhes
 import com.orion.zenite.listAdapters.LinhasAdapter
 import com.orion.zenite.model.Linha
 import com.orion.zenite.telas.fiscal.LinhaCronograma
+import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.activity_cronograma_linha.*
 import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.fragment_linhas.*
@@ -35,7 +36,6 @@ class Linhas : Fragment() {
     // https://androidwave.com/recyclerview-kotlin-tutorial/
     // https://medium.com/@hinchman_amanda/working-with-recyclerview-in-android-kotlin-84a62aef94ec
 
-
     // componentes do layout
     private var lista: RecyclerView? = null
     private var swipe: SwipeRefreshLayout? = null
@@ -48,9 +48,6 @@ class Linhas : Fragment() {
     val loadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
     val empty = MutableLiveData<Boolean>()
-
-    var id :Int? = null
-    var token : String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,10 +62,6 @@ class Linhas : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = linhasAdapter
         }
-
-        id = activity?.intent?.extras?.getInt("id")
-        token = activity?.intent?.extras?.getString("token").toString()
-       // Toast.makeText(activity, "olha esse $token e esse $id", Toast.LENGTH_SHORT).show()
 
         // chama api
         refresh()
@@ -89,16 +82,12 @@ class Linhas : Fragment() {
 
     private fun consumirApi() {
         loading.value = true;
-
-        // : REMOVER DADOS ESTATICOS => IDFISCAL E JWT TOKEN
-       // val idUser = 4
-       // val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
-
+        val id = AppPreferencias.id
+        val token = AppPreferencias.token
 
         val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
 
-        if (id != null) {
-            val listaRemoto: Call<List<Linha>> = service.getFiscalLinhas(id!!, token)
+            val listaRemoto: Call<List<Linha>> = service.getFiscalLinhas(id, token)
             //Toast.makeText(activity, "olha esse $token e esse $id", Toast.LENGTH_SHORT).show()
             listaRemoto.enqueue(object : Callback<List<Linha>> {
                 override fun onFailure(call: Call<List<Linha>>, t: Throwable) {
@@ -120,10 +109,6 @@ class Linhas : Fragment() {
                     println("status code = ${response.code()}")
                 }
             })
-        } else {
-            loadError.value = true;
-            loading.value = false;
-        }
     }
 
 
@@ -163,9 +148,6 @@ class Linhas : Fragment() {
         val intent = Intent(activity, LinhaDetalhes::class.java)
         intent.putExtra("linha", linha.numero)
         intent.putExtra("idLinha", linha.id)
-
-        intent.putExtra("token", token)
-        intent.putExtra("id", id)
         startActivity(intent)
     }
 

@@ -35,7 +35,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginHorizontal="25dp"
             android:layout_marginVertical="25dp"
-            android:text="CRONOGRAMA"
+            android:text="@string/cronograma_title"
             android:textAllCaps="true"
             android:textColor="@color/corPrimaria" />
 
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
             android:onClick="alterarIntervalo"
-            android:text="Alterar intervalo de tempo"
+            android:text="@string/tempo_btn"
             app:strokeColor="@color/corPrimaria" />
 
         <GridLayout
@@ -64,7 +64,7 @@
                 android:layout_row="0"
                 android:layout_column="0"
                 android:layout_marginEnd="60dp"
-                android:text="PREVISTO"
+                android:text="@string/previsto"
                 android:textAllCaps="true"
                 android:textColor="@color/corPrimaria"
                 android:textSize="12dp" />
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_row="0"
                 android:layout_column="1"
-                android:text="motorista"
+                android:text="@string/motorista"
                 android:textAllCaps="true"
                 android:textColor="@color/corPrimaria"
                 android:textSize="12dp" />
