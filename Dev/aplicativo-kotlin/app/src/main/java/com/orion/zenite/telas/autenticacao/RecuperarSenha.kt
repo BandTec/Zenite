@@ -5,7 +5,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.orion.zenite.R
+import com.orion.zenite.http.HttpHelper
+import com.orion.zenite.http.autenticacao.LoginApi
+import com.orion.zenite.model.EmailRecuperacaoSenha
+import com.orion.zenite.model.RecuperarSenhaResponse
+import com.orion.zenite.model.Token
 import kotlinx.android.synthetic.main.activity_recuperar_senha.*
+import retrofit2.Call
+import retrofit2.Response
+import javax.security.auth.callback.Callback
+import java.lang.Void as Void
 
 
 class RecuperarSenha : AppCompatActivity() {
@@ -18,15 +27,30 @@ class RecuperarSenha : AppCompatActivity() {
         this.finish()
     }
 
-    fun enviarEmailRecuperacao(component: View){
+    fun verificarDados(component: View) {
         //enviar email para recuperação
-        if (inputRecuperarSenha.text.isBlank()){
+        if (inputRecuperarSenha.text.isBlank()) {
             inputRecuperarSenha.error = "Informe um email válido!"
             inputRecuperarSenha.requestFocus()
-        }else{
-            Toast.makeText(this, "Você receberá um e-mail para recuperação de senha.", Toast.LENGTH_LONG).show()
-            inputRecuperarSenha.setText("")
+        } else {
+            enviarEmailRecuperacao()
         }
 
     }
+
+    fun enviarEmailRecuperacao() {
+        val email = inputRecuperarSenha.text.toString()
+        val path = EmailRecuperacaoSenha(email)
+
+        val requests: LoginApi = HttpHelper().getApiClient()!!.create(LoginApi::class.java)
+        val resultado = requests.getEmailRecuperacao(path)
+
+        //resultado.enqueue(object : Callback<Void>){
+
+    }
+    
 }
+
+
+
+
