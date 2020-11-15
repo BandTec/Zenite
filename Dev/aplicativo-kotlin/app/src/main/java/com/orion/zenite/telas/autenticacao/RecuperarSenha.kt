@@ -8,8 +8,6 @@ import com.orion.zenite.R
 import com.orion.zenite.http.HttpHelper
 import com.orion.zenite.http.autenticacao.LoginApi
 import com.orion.zenite.model.EmailRecuperacaoSenha
-import com.orion.zenite.model.RecuperarSenhaResponse
-import com.orion.zenite.model.Token
 import kotlinx.android.synthetic.main.activity_recuperar_senha.*
 import retrofit2.Call
 import retrofit2.Response
@@ -39,16 +37,21 @@ class RecuperarSenha : AppCompatActivity() {
     }
 
     fun enviarEmailRecuperacao() {
-        val email = inputRecuperarSenha.text.toString()
-        val path = EmailRecuperacaoSenha(email)
-
         val requests: LoginApi = HttpHelper().getApiClient()!!.create(LoginApi::class.java)
-        val resultado = requests.getEmailRecuperacao(path)
 
-        //resultado.enqueue(object : Callback<Void>){
+        val email = EmailRecuperacaoSenha(
+            inputRecuperarSenha.text.toString()
+        )
+
+        val resultado = requests.getEmailRecuperacao(email)
+
+        //resultado.enqueue(object :Callback<Void>{
+
+       // }
+
 
     }
-    
+
 }
 
 
