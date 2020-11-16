@@ -107,9 +107,10 @@
 
         <ProgressBar
             android:id="@+id/loaderCro"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
+            android:layout_gravity="start"
             android:visibility="gone" />
 
 

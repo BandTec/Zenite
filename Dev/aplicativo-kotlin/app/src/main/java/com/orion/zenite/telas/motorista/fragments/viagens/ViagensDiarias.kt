@@ -38,7 +38,7 @@ class ViagensDiarias : Fragment() {
     val listaViagens = MutableLiveData<List<Viagens>>()
     val loadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
-    private var swipe: SwipeRefreshLayout? = null
+
     val empty = MutableLiveData<Boolean>()
 
     // adapter do recycleview
@@ -60,21 +60,15 @@ class ViagensDiarias : Fragment() {
         // chama api
         refresh()
 
-        // aplica função de refresh ao componente swipe refresh
-        swipe = view.findViewById(R.id.swipeViagensDiarias) as SwipeRefreshLayout
-        swipe!!.setOnRefreshListener {
-            swipeViagensDiarias.isRefreshing = false
-            refresh()
-        }
         return view
     }
 
 
     private fun consumirApi() {
         loading.value = true;
+        empty.value = false
 
         val service: MotoristaApi = HttpHelper().getApiClient()!!.create(MotoristaApi::class.java)
-        // TODO ROTA E DESCOMENTAR ABAIXO
 
         val id = AppPreferencias.id
         val token = AppPreferencias.token
@@ -93,19 +87,20 @@ class ViagensDiarias : Fragment() {
                 val resposta = response.body()
                 println("status code = ${response.code()}")
                 println("resposta = ${response}")
+                loadError.value = false;
+                loading.value = false;
                 if(resposta?.listaViagens === null) {
-                    empty.value = true
+                    empty.value = true;
+
                 } else {
                     listaViagens.value = resposta.listaViagens.toList()
-                    loadError.value = false;
-                    loading.value = false;
                     realizada_valor.text = resposta.viagensRealizadas.toString()
                     restante_valor.text = resposta.viagensRestantes.toString()
                 }
             }
         })
 
-        loading.value = false;
+
     }
 
 
@@ -120,7 +115,6 @@ class ViagensDiarias : Fragment() {
         listaViagens.observe(this, Observer { linhas ->
             linhas?.let {
                 layout_viagemsDiarias?.visibility = View.VISIBLE
-
                 listaAdapter.update(it)
             }
         })

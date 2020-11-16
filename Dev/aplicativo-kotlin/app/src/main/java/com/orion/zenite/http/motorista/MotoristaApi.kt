@@ -1,6 +1,7 @@
 package com.orion.zenite.http.motorista
 
 import com.orion.zenite.model.CronogramaHorarioSimples
+import com.orion.zenite.model.HistoricoViagens
 import com.orion.zenite.model.ViagemDiaria
 import com.orion.zenite.model.Viagens
 import okhttp3.ResponseBody
@@ -27,4 +28,11 @@ interface MotoristaApi {
         @Path("id") id: Int,
         @Header("authorization") auth: String
     ): Call<ViagemDiaria>
+
+    //Consulta viagens
+    @GET("api/viagem/app/motorista/{id}")
+    fun consultarTodasViagens(
+        @Path("id") id: Int,
+        @Header("authorization") auth: String
+    ): Call<List<HistoricoViagens>>
 }

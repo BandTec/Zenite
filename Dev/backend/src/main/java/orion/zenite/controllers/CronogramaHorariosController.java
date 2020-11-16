@@ -203,8 +203,8 @@ public class CronogramaHorariosController {
                 if (!viagensFeitas.isEmpty()) {
                     if (i < viagensFeitas.size()) {
                         Viagem v = viagensFeitas.get(i);
-                        if(v.getHoraSaida() != null){
-                            if(v.getHoraSaida().isEqual(item.getHoraPrevistaSaida()) || v.getHoraSaida().isAfter(item.getHoraPrevistaSaida())){
+                        if (v.getHoraSaida() != null) {
+                            if (v.getHoraSaida().isEqual(item.getHoraPrevistaSaida()) || v.getHoraSaida().isAfter(item.getHoraPrevistaSaida())) {
                                 cronograma.setHorarioRealizado("em viagem");
                             }
                         }
@@ -281,8 +281,8 @@ public class CronogramaHorariosController {
                         if (!viagensFeitas.isEmpty()) {
                             if (i < viagensFeitas.size()) {
                                 Viagem v = viagensFeitas.get(i);
-                                if(v.getHoraSaida() != null){
-                                    if(v.getHoraSaida().isEqual(item.getHoraPrevistaSaida()) || v.getHoraSaida().isAfter(item.getHoraPrevistaSaida())){
+                                if (v.getHoraSaida() != null) {
+                                    if (v.getHoraSaida().isEqual(item.getHoraPrevistaSaida()) || v.getHoraSaida().isAfter(item.getHoraPrevistaSaida())) {
                                         cronograma.setHorarioRealizado("em viagem");
                                     }
                                 }
@@ -373,5 +373,6 @@ public class CronogramaHorariosController {
         }
         return notFound().build();
     }
+
 
 }

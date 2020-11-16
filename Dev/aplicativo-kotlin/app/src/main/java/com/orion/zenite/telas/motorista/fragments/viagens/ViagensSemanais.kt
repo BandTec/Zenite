@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.orion.zenite.R
 import com.orion.zenite.http.HttpHelper
 import com.orion.zenite.http.fiscal.FiscalApi
+import com.orion.zenite.http.motorista.MotoristaApi
 import com.orion.zenite.listAdapters.HistoricoAdapter
 import com.orion.zenite.listAdapters.ViagensAdapter
 import com.orion.zenite.model.HistoricoViagens
@@ -22,6 +23,9 @@ import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.fragment_viagens_diarias.*
 import kotlinx.android.synthetic.main.fragment_viagens_semanais.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ViagensSemanais : Fragment() {
 
@@ -33,27 +37,11 @@ class ViagensSemanais : Fragment() {
     // https://android.jlelse.eu/easily-adding-nested-recycler-view-in-android-a7e9f7f04047
 
 
-
-    private val viagens = arrayListOf<Viagens>(
-        Viagens("14:00 - 14:30", "30 MIN"),
-        Viagens("14:40 - 15:30", "40 MIN"),
-        Viagens("15:40 - 16:40", "1 H"),
-        Viagens("16:50 - 17:20", "30 MIN"),
-        Viagens("17:30 - 18:10", "30 MIN"),
-        Viagens("18:20 - 18:50", "30 MIN")
-    )
-
-    private val dadosTemporarios = arrayListOf<HistoricoViagens>(
-        HistoricoViagens("23/08/20", viagens),
-        HistoricoViagens("22/08/20", viagens),
-        HistoricoViagens("21/08/20", viagens)
-    )
-
     private var lista: RecyclerView? = null
     val listaViagens = MutableLiveData<List<HistoricoViagens>>()
     val loadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
-    private var swipe: SwipeRefreshLayout? = null
+
     val empty = MutableLiveData<Boolean>()
 
     // adapter do recycleview
@@ -75,55 +63,44 @@ class ViagensSemanais : Fragment() {
         // chama api
         refresh()
 
-        // aplica função de refresh ao componente swipe refresh
-        swipe = view.findViewById(R.id.swipeViagensSemanais) as SwipeRefreshLayout
-        swipe!!.setOnRefreshListener {
-            swipeViagensSemanais.isRefreshing = false
-            refresh()
-        }
-
         return view
     }
 
     private fun consumirApi() {
         loading.value = true;
+        empty.value = false
+        loadError.value = false;
         val id = AppPreferencias.id
         val token = AppPreferencias.token
-        val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
-        // TODO ROTA E DESCOMENTAR ABAIXO
+        val service: MotoristaApi = HttpHelper().getApiClient()!!.create(MotoristaApi::class.java)
+
+        val listaRemoto: Call<List<HistoricoViagens>> = service.consultarTodasViagens(id, token)
+
+        listaRemoto.enqueue(object : Callback<List<HistoricoViagens>> {
+            override fun onFailure(call: Call<List<HistoricoViagens>>, t: Throwable) {
+                loadError.value = true;
+                loading.value = false;
+                println("deu ruim = ${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<List<HistoricoViagens>>,
+                response: Response<List<HistoricoViagens>>
+            ) {
+                println("resposta = ${response}")
+                println("status code = ${response.code()}")
+                val resposta = response.body()
+                if (resposta === null) {
+                    empty.value = true
+                } else {
+                    listaViagens.value = resposta.toList()
+                    total_viagens.text = resposta.toList().size.toString()
+                }
+                loading.value = false;
+            }
+        })
 
 
-//        val listaRemoto: Call<List<Viagens>> = service.getViagensSemanais(id!!, token)
-//
-//        listaRemoto.enqueue(object : Callback<List<Viagens>> {
-//            override fun onFailure(call: Call<List<Viagens>>, t: Throwable) {
-//                loadError.value = true;
-//                loading.value = false;
-//
-//                println("deu ruim = ${t.message}")
-//            }
-//
-//            override fun onResponse(call: Call<List<Viagens>>, response: Response<List<Viagens>>) {
-
-//                println("resposta = ${response}")
-//                println("status code = ${response.code()}")
-//        val resposta = response.body()
-//              if(resposta.toList() === null) {
-//                        empty.value = true
-//              }
-//              else {
-//                  listaViagens.value = resposta?.toList()
-//                  loadError.value = false;
-//                  loading.value = false;
-//              }
-
-//            }
-//        })
-
-        loading.value = false;
-
-        // TODO remover essa linha
-        listaViagens.value = dadosTemporarios;
     }
 
 

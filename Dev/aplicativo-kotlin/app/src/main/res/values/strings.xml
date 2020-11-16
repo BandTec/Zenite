@@ -26,7 +26,7 @@
     <string name="scanner_botao_texto">escanear QR Code</string>
     <string name="login">Entrar</string>
 
-    //Strings de Autenticação
+
     <string name="usuario_invalido"> Usuário não encontrado</string>
     <string name="erro_autentificacao">O login não pode ser efetuado, tente novamente.</string>
     <string name="sem_acesso">Seu usuário não tem acesso ao aplicativo.</string>
@@ -78,7 +78,6 @@
     <string name="sua_viagem_atual">Sua viagem atual</string>
     <string name="placa_do_onibus">Placa do Ônibus</string>
     <string name="ver_tudo">ver tudo</string>
-    <string name="previsto">PREVISTO</string>
     <string name="motorista">motorista</string>
     <string name="status">status</string>
     <string name="sum_rio_das_viagens">SUMÁRIO DAS VIAGENS</string>
@@ -104,11 +103,10 @@
     <string name="salvar_btn">SALVAR</string>
     <string name="linha">Linha</string>
     <string name="cronograma">Cronograma</string>
-    <string name="motoristas">Motoristas</string>
     <string name="cronograma_title">CRONOGRAMA</string>
     <string name="tempo_btn">Alterar intervalo de tempo</string>
     <string name="previsto">PREVISTO</string>
-    <string name="motorista">motorista</string>
+
     <string name="alterar_intervalo_page">ALTERAR INTERVALO</string>
     <string name="alterar_descricao">Digite o novo intervalo de tempo entre a saída do ônibus</string>
     <string name="tempo_hint">Digite o intervalo de tempo</string>
