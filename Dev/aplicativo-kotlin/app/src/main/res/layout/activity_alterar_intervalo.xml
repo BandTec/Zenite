@@ -45,7 +45,7 @@
 
 
     <EditText
-        android:id="@+id/inputEmail"
+        android:id="@+id/input_novo_intervalo"
         style="@style/Input"
         android:layout_marginHorizontal="20sp"
         android:hint="@string/tempo_hint"
