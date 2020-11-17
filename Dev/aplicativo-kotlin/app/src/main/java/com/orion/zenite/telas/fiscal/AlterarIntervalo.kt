@@ -11,6 +11,7 @@ import com.orion.zenite.http.autenticacao.LoginApi
 import com.orion.zenite.http.fiscal.FiscalApi
 import com.orion.zenite.model.NovoIntervalo
 import com.orion.zenite.model.QtdPassageiros
+import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.activity_alterar_intervalo.*
 import kotlinx.android.synthetic.main.activity_cronograma_linha.*
 import kotlinx.android.synthetic.main.activity_cronograma_linha.topAppBar
@@ -50,11 +51,10 @@ class AlterarIntervalo : AppCompatActivity() {
     }
 
     fun alterar() {
-        val token =
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
+
         val intervalo = input_novo_intervalo.text.toString()
         val body = NovoIntervalo(intervalo)
-
+        val token = AppPreferencias.token
         val idLinha = intent.extras?.getInt("idLinha")
 
 
