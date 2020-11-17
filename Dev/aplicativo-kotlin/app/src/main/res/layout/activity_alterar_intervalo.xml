@@ -49,7 +49,7 @@
         style="@style/Input"
         android:layout_marginHorizontal="20sp"
         android:hint="@string/tempo_hint"
-        android:inputType="time" />
+        android:inputType="numberDecimal" />
 
 
     <Button

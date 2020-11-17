@@ -111,4 +111,8 @@
     <string name="alterar_descricao">Digite o novo intervalo de tempo entre a saída do ônibus</string>
     <string name="tempo_hint">Digite o intervalo de tempo</string>
     <string name="alterar_btn">Alterar</string>
+
+
+    <string name="erro_alterar_intervalo">Houve um erro ao alterar o intervalo</string>
+    <string name="input_alterar_vazio">Informe o novo intervalo e tempo!</string>
 </resources>
