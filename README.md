@@ -56,14 +56,14 @@ Agora na segunda fase do projeto temos os seguintes requisitos:
   - [x] Tela para adicionar cronograma da linha
   - [x] Tela para visualizar cronograma da linha
 * [x] *Aplicativo Android Kotlin*
-  - [ ] Aplicativo salvando dados offline
+  - [x] Aplicativo salvando dados offline
   - [x] Login e Logout
-  - [ ] Esqueci minha senha
+  - [x] Esqueci minha senha
   - [x] Módulo Fiscal
     - [x] Leitor de QrCode para iniciar e finalizar uma viagem (Lendo o QrCode do Motorista)
       - [x] Opção de adicionar quantidade de passageiros ao finalizar viagem.
     - [x] Cronograma diário das viagens
-      - [ ] Opção de alterar intervalo de saída dos ônibus (assim alterando o cronograma)
+      - [x] Opção de alterar intervalo de saída dos ônibus (assim alterando o cronograma)
     - [x] Lista das linhas fiscalizadas pelo fiscal
       - [x] Lista de ônibus da linha
       - [x] Lista de motorista da linha
