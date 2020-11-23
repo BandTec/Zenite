@@ -34,7 +34,8 @@ export default function ConsultaViagem() {
 
       const url = `/api/viagem${rota}?pagina=${pagina}`;
       const resultado = await consultar(url, criaDados);
-      setCorpo(resultado.dados);
+      console.log(resultado.dados);
+      setCorpo(resultado.dados.reverse());
       setTotal(resultado.totalPaginas);
       setTotalItens(resultado.totalItens);
       setLoading(false);
@@ -56,15 +57,16 @@ export default function ConsultaViagem() {
     } = item;
     const saida = horaSaida.substring(11, 19);
     const chegada = horaChegada.substring(11, 19);
+    const data = new Date(horaChegada);
     return {
-      carro,
-      linha,
-      motorista,
-      fiscal,
-      fiscalVolta,
-      horaSaida: saida,
-      horaChegada: chegada,
-      qtdPassageiros,
+      data: data.toLocaleDateString("br-PT"),
+      linha: linha.numero,
+      motorista: motorista.nome,
+      fiscal_ida: fiscal.nome,
+      fiscal_volta: fiscalVolta.nome,
+      hora_saida: saida,
+      hora_chegada: chegada,
+      qtd_de_passageiros: qtdPassageiros,
     };
   }
 
@@ -75,7 +77,7 @@ export default function ConsultaViagem() {
       <CabecalhoConsulta titulo="Viagens" totalItens={totalItens} />
 
       <Row>
-        <Tabela tipo="viagem" dados={corpo} detalhes={false} />
+        <Tabela tipo="viagem" dados={corpo} temAcoes={false} />
       </Row>
 
       <Row>
