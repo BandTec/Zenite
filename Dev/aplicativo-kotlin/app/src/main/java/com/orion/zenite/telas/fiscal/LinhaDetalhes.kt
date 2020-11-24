@@ -21,6 +21,7 @@ class LinhaDetalhes : AppCompatActivity() {
         linha.text = nomeLinha
 
         idLinha = intent.extras?.getInt("idLinha")
+        AppPreferencias.idLinha = idLinha!!
 
         topAppBar.setNavigationOnClickListener {
             this.finish()

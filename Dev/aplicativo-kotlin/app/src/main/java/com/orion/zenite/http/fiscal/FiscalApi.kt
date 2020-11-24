@@ -73,10 +73,11 @@ interface FiscalApi {
 
 
     //ALTERAR INTERVALO DE VIAGEM
-    @POST("api/horarios/alterados/cronograma/{idLinha}/novoIntervalo")
+    @POST("api/horarios/alterados/cronograma/{idLinha}/{novoIntervalo}")
     fun alterarIntervaloViagem(
-        @Path("idViagem") idViagem: Int,
-        @Body novoIntervalo: NovoIntervalo,
+        @Path("idLinha") idLinha: Int,
+        @Path("novoIntervalo") novoIntervalo: String,
+        //@Body novoIntervalo: NovoIntervalo,
         @Header("authorization") auth: String
     ): Call<Void>
 

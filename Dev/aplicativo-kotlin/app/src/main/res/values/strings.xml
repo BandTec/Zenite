@@ -115,4 +115,6 @@
 
     <string name="erro_alterar_intervalo">Houve um erro ao alterar o intervalo</string>
     <string name="input_alterar_vazio">Informe o novo intervalo e tempo!</string>
+
+    <string name="alterar_intervalo">Informe o novo intervalo em minutos!</string>
 </resources>
