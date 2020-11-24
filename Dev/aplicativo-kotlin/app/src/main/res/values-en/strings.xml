@@ -68,5 +68,5 @@
     <string name="em_viagem">On travel</string>
 
 
-    <string name="alterar_intervalo">Inform a new interval in minutes!</string>
+    <string name="alterar_intervalo"> This action cannot be undone. Do you want to continue?</string>
 </resources>
