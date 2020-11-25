@@ -30,6 +30,16 @@
             android:textColor="@color/preto"
             android:text="@string/mensagem_erro_lista" />
 
+        <TextView
+            android:id="@+id/linhasVazias"
+            android:visibility="gone"
+            style="@style/Titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:textColor="@color/preto"
+            android:text="@string/lista_vazia" />
+
         <ProgressBar
             android:visibility="gone"
             android:id="@+id/loading_view"

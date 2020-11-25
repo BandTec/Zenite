@@ -45,11 +45,11 @@ export default function ConsultaViagem() {
 
   function criaDados(item) {
     const {
-      onibus,
+      carro,
       linha,
       motorista,
       fiscal,
-      fiscal_volta,
+      fiscalVolta,
       horaSaida,
       horaChegada,
       qtdPassageiros,
@@ -57,11 +57,11 @@ export default function ConsultaViagem() {
     const saida = horaSaida.substring(11, 19);
     const chegada = horaChegada.substring(11, 19);
     return {
-      onibus,
+      carro,
       linha,
       motorista,
       fiscal,
-      fiscal_volta,
+      fiscalVolta,
       horaSaida: saida,
       horaChegada: chegada,
       qtdPassageiros,

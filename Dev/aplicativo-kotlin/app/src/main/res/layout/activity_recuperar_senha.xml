@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="0dp"
-        android:text="ESQUECEU SUA SENHA?" />
+        android:text="@string/esqueceu_senha" />
     </LinearLayout>
 
     <TextView
@@ -57,13 +57,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25sp"
-        android:text="Digite seu email no campo abaixo e você recebera um email para renovar sua senha."
+        android:text="@string/mensagem_esqueceu_senha"
         android:textColor="@color/preto" />
 
     <EditText
         android:id="@+id/inputRecuperarSenha"
         style="@style/Input"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress" />
 
 
@@ -73,8 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="15dp"
-        android:onClick="verificarDados"
-        android:text="Enviar" />
+        android:onClick="enviarEmailRecuperacao"
+        android:text="@string/bt_enviar" />
 
 
 </LinearLayout>

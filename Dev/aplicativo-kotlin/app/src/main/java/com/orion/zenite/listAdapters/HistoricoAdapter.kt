@@ -8,12 +8,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.orion.zenite.R
 import com.orion.zenite.model.HistoricoViagens
+import com.orion.zenite.model.Viagens
 import kotlinx.android.synthetic.main.list_item_historico.view.duracao
 import kotlinx.android.synthetic.main.list_item_historico.view.horario
 import kotlinx.android.synthetic.main.list_item_historico_parent.view.*
 
-class HistoricoAdapter (var list: List<HistoricoViagens>) :
+class HistoricoAdapter (var list: ArrayList<HistoricoViagens>) :
     RecyclerView.Adapter<HistoricoAdapter.ViewHolder>() {
+
+    fun update(new: List<HistoricoViagens>) {
+        list.clear()
+        list.addAll(new)
+        notifyDataSetChanged()
+    }
+
 
     private val viewPool = RecyclerView.RecycledViewPool()
 

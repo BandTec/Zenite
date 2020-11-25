@@ -13,6 +13,7 @@ import com.orion.zenite.telas.fiscal.QrcodeScanner
 class FiscalCamera : Fragment() {
 
     private var btn: Button? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

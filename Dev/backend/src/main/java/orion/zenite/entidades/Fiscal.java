@@ -69,6 +69,11 @@ public class Fiscal  {
         return nome;
     }
 
+    public String getNomeFormatado() {
+        String[] nomeFormatado = nome.split(" ");
+        return nomeFormatado.length > 1 ? nomeFormatado[0] + " " + nomeFormatado[1] : nomeFormatado[0];
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }

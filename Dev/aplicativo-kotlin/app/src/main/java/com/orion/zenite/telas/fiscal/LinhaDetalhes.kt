@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.orion.zenite.R
+import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.activity_cronograma_linha.topAppBar
 import kotlinx.android.synthetic.main.activity_linha.*
 
@@ -30,7 +31,6 @@ class LinhaDetalhes : AppCompatActivity() {
         val intent = Intent(this, LinhaCronograma::class.java)
         intent.putExtra("nomeLinha", nomeLinha)
         intent.putExtra("idLinha", idLinha)
-
         startActivity(intent)
     }
 
@@ -38,7 +38,6 @@ class LinhaDetalhes : AppCompatActivity() {
         val intent = Intent(this, LinhaMotorista::class.java)
         intent.putExtra("nomeLinha", nomeLinha)
         intent.putExtra("idLinha", idLinha)
-
         startActivity(intent)
     }
 }

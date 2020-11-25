@@ -18,15 +18,15 @@
     <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Viagens de hoje"
-        android:text="Diário"
+        android:contentDescription="@string/viagens_diaria_descricao"
+        android:text="@string/viagens_diarias"
         />
 
     <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Viagens antigas"
-        android:text="Semanal"
+        android:contentDescription="@string/viagens_descricao"
+        android:text="@string/viagens_semanal"
         />
     </com.google.android.material.tabs.TabLayout>
 

@@ -16,6 +16,8 @@ import com.orion.zenite.http.fiscal.FiscalApi
 import com.orion.zenite.listAdapters.MotoristaOnibusAdapter
 import com.orion.zenite.model.Linha
 import com.orion.zenite.model.Onibus
+import com.orion.zenite.utils.AppPreferencias
+import kotlinx.android.synthetic.main.activity_cronograma_linha.*
 import kotlinx.android.synthetic.main.activity_linha_motorista.*
 import kotlinx.android.synthetic.main.activity_linha_motorista.list_error
 import kotlinx.android.synthetic.main.activity_linha_motorista.loading_view
@@ -36,6 +38,7 @@ class LinhaMotorista : AppCompatActivity() {
     val loadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
     val empty = MutableLiveData<Boolean>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,10 +87,7 @@ class LinhaMotorista : AppCompatActivity() {
 
     private fun consumirApi() {
         loading.value = true;
-
-        // TODO: REMOVER DADOS ESTATICOS => JWT TOKEN
-        val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
-
+        val token = AppPreferencias.token
         // armazenando id da linha vindo da tela anterior
         val idLinha = intent.extras?.getInt("idLinha")
 
@@ -148,6 +148,7 @@ class LinhaMotorista : AppCompatActivity() {
             isLoading?.let {
                 loading_view.visibility = if (it) View.VISIBLE else View.GONE
                 if (it) {
+                    list_empty.visibility = View.GONE
                     list_error.visibility = View.GONE
                     lista?.visibility = View.GONE
                 }

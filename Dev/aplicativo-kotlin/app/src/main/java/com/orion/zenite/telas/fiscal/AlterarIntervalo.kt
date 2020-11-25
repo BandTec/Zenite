@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.orion.zenite.R
+import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.activity_cronograma_linha.*
 
 class AlterarIntervalo : AppCompatActivity() {
@@ -13,6 +14,9 @@ class AlterarIntervalo : AppCompatActivity() {
 
         val nomeLinha = intent.extras?.getString("nomeLinha")
         topAppBar.title = nomeLinha
+
+        val token = AppPreferencias.token
+        val id = AppPreferencias.id
 
         topAppBar.setNavigationOnClickListener {
             this.finish()

@@ -6,13 +6,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.orion.zenite.telas.fiscal.LinhaCronograma
 import com.orion.zenite.R
+import com.orion.zenite.http.HttpHelper
+import com.orion.zenite.http.fiscal.FiscalApi
 import com.orion.zenite.listAdapters.CronogramaGeralAdapter
+import com.orion.zenite.listAdapters.ViagensAdapter
 import com.orion.zenite.model.Cronograma
 import com.orion.zenite.model.CronogramaGeral
+import com.orion.zenite.model.Viagens
+import com.orion.zenite.utils.AppPreferencias
+import kotlinx.android.synthetic.main.activity_linha_motorista.*
+import kotlinx.android.synthetic.main.fragment_cronograma_geral.*
+import kotlinx.android.synthetic.main.fragment_viagens_diarias.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CronogramaGeral : Fragment() {
 
@@ -25,17 +40,17 @@ class CronogramaGeral : Fragment() {
 
     private var lista: RecyclerView? = null
 
-    private val horarios = listOf(
-        Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "", false),
-        Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "", false),
-        Cronograma("22:10 - 22:40", "22:50 - 23:50", "NicoleBrito", "", false)
-    )
+    val listaCronograma = MutableLiveData<List<CronogramaGeral>>()
+    val loadError = MutableLiveData<Boolean>()
+    val loading = MutableLiveData<Boolean>()
+    val empty = MutableLiveData<Boolean>()
+    private var swipe: SwipeRefreshLayout? = null
 
-    private val dadosTemporarios = listOf(
-        CronogramaGeral("8001-10 Term. Piaui", horarios),
-        CronogramaGeral("917H-10 Vila Mariana", horarios),
-        CronogramaGeral("8004-10 Term. Lapa", horarios)
-    )
+    // adapter do recycleview
+    private val listaAdapter =
+        CronogramaGeralAdapter(arrayListOf()) { cronograma: CronogramaGeral ->
+            onItemClick(cronograma)
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +66,17 @@ class CronogramaGeral : Fragment() {
         lista = view.findViewById(R.id.listCronograma) as RecyclerView
         lista!!.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = CronogramaGeralAdapter(dadosTemporarios) { cronograma: CronogramaGeral -> onItemClick(cronograma)}
+            adapter = listaAdapter
+        }
+
+        // chama api
+        refresh()
+
+        // aplica função de refresh ao componente swipe refresh
+        swipe = view.findViewById(R.id.swipeCronogramaGeral) as SwipeRefreshLayout
+        swipe!!.setOnRefreshListener {
+            swipeCronogramaGeral.isRefreshing = false
+            refresh()
         }
 
         return view
@@ -62,7 +87,77 @@ class CronogramaGeral : Fragment() {
 
         val intent = Intent(activity, LinhaCronograma::class.java)
         intent.putExtra("nomeLinha", cronograma.nomeLinha)
+        intent.putExtra("idLinha", cronograma.idLinha)
         startActivity(intent)
     }
 
+
+    private fun consumirApi() {
+        loading.value = true
+        empty.value = false
+
+        val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
+        val id = AppPreferencias.id
+        val token = AppPreferencias.token
+
+        val listaRemoto: Call<List<CronogramaGeral>> = service.getCronogramaGeral(id!!, token)
+
+        listaRemoto.enqueue(object : Callback<List<CronogramaGeral>> {
+            override fun onFailure(call: Call<List<CronogramaGeral>>, t: Throwable) {
+                loadError.value = true;
+                loading.value = false;
+
+                println("deu ruim = ${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<List<CronogramaGeral>>,
+                response: Response<List<CronogramaGeral>>
+            ) {
+                listaCronograma.value = response.body()?.toList()
+                loadError.value = false;
+                loading.value = false;
+
+                if (response.body()?.toList() === null) {
+                    empty.value = true
+                }
+                println("status code = ${response.code()}")
+            }
+        })
+
+        loading.value = false;
+    }
+
+
+    private fun refresh() {
+        consumirApi()
+
+        empty.observe(this, Observer { isEmpty ->
+            isEmpty?.let { cronogramaVazio.visibility = if (it) View.VISIBLE else View.GONE }
+
+        })
+
+        listaCronograma.observe(this, Observer { linhas ->
+            linhas?.let {
+                listCronograma?.visibility = View.VISIBLE
+                listaAdapter.update(it)
+            }
+        })
+
+        loadError.observe(this, Observer { isError ->
+            isError?.let { erroCronogramaGeral.visibility = if (it) View.VISIBLE else View.GONE }
+
+        })
+
+        loading.observe(this, Observer { isLoading ->
+            isLoading?.let {
+                loaderCroGeral.visibility = if (it) View.VISIBLE else View.GONE
+                if (it) {
+                    erroCronogramaGeral.visibility = View.GONE
+                    listCronograma?.visibility = View.GONE
+                    cronogramaVazio.visibility = View.GONE
+                }
+            }
+        })
+    }
 }

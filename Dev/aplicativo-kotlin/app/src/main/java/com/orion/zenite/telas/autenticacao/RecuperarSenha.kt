@@ -27,11 +27,20 @@ class RecuperarSenha : AppCompatActivity() {
 
     fun verificarDados(component: View) {
         //enviar email para recuperação
+<<<<<<< HEAD
         if (inputRecuperarSenha.text.isBlank()) {
             inputRecuperarSenha.error = "Informe um email válido!"
             inputRecuperarSenha.requestFocus()
         } else {
             enviarEmailRecuperacao()
+=======
+        if (inputRecuperarSenha.text.isBlank()){
+            inputRecuperarSenha.error = getString(R.string.erro_informar_email)
+            inputRecuperarSenha.requestFocus()
+        }else{
+            Toast.makeText(this, getString(R.string.recuperacao_email_valido), Toast.LENGTH_LONG).show()
+            inputRecuperarSenha.setText("")
+>>>>>>> master
         }
 
     }

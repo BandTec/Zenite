@@ -4,13 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.orion.zenite.R
+import com.orion.zenite.http.HttpHelper
+import com.orion.zenite.http.fiscal.FiscalApi
+import com.orion.zenite.http.motorista.MotoristaApi
 import com.orion.zenite.listAdapters.HistoricoAdapter
+import com.orion.zenite.listAdapters.ViagensAdapter
 import com.orion.zenite.model.HistoricoViagens
 import com.orion.zenite.model.Viagens
+import com.orion.zenite.utils.AppPreferencias
+import kotlinx.android.synthetic.main.activity_linha_motorista.*
+import kotlinx.android.synthetic.main.fragment_viagens_diarias.*
+import kotlinx.android.synthetic.main.fragment_viagens_semanais.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ViagensSemanais : Fragment() {
 
@@ -21,22 +36,16 @@ class ViagensSemanais : Fragment() {
     // nested reclycler view
     // https://android.jlelse.eu/easily-adding-nested-recycler-view-in-android-a7e9f7f04047
 
+
     private var lista: RecyclerView? = null
+    val listaViagens = MutableLiveData<List<HistoricoViagens>>()
+    val loadError = MutableLiveData<Boolean>()
+    val loading = MutableLiveData<Boolean>()
 
-    private val viagens = listOf(
-        Viagens("14:00 - 14:30", "30 MIN"),
-        Viagens("14:40 - 15:30", "40 MIN"),
-        Viagens("15:40 - 16:40", "1 H"),
-        Viagens("16:50 - 17:20", "30 MIN"),
-        Viagens("17:30 - 18:10", "30 MIN"),
-        Viagens("18:20 - 18:50", "30 MIN")
-    )
+    val empty = MutableLiveData<Boolean>()
 
-    private val dadosTemporarios = listOf(
-        HistoricoViagens("23/08/20", viagens),
-        HistoricoViagens("22/08/20", viagens),
-        HistoricoViagens("21/08/20", viagens)
-    )
+    // adapter do recycleview
+    private val listaAdapter = HistoricoAdapter(arrayListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,10 +57,84 @@ class ViagensSemanais : Fragment() {
         lista = view.findViewById(R.id.listViagens) as RecyclerView
         lista!!.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = HistoricoAdapter(dadosTemporarios)
+            adapter = listaAdapter
         }
 
+        // chama api
+        refresh()
+
         return view
+    }
+
+    private fun consumirApi() {
+        loading.value = true;
+        empty.value = false
+        loadError.value = false;
+        val id = AppPreferencias.id
+        val token = AppPreferencias.token
+        val service: MotoristaApi = HttpHelper().getApiClient()!!.create(MotoristaApi::class.java)
+
+        val listaRemoto: Call<List<HistoricoViagens>> = service.consultarTodasViagens(id, token)
+
+        listaRemoto.enqueue(object : Callback<List<HistoricoViagens>> {
+            override fun onFailure(call: Call<List<HistoricoViagens>>, t: Throwable) {
+                loadError.value = true;
+                loading.value = false;
+                println("deu ruim = ${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<List<HistoricoViagens>>,
+                response: Response<List<HistoricoViagens>>
+            ) {
+                println("resposta = ${response}")
+                println("status code = ${response.code()}")
+                val resposta = response.body()
+                if (resposta === null) {
+                    empty.value = true
+                } else {
+                    listaViagens.value = resposta.toList()
+                    total_viagens.text = resposta.toList().size.toString()
+                }
+                loading.value = false;
+            }
+        })
+
+
+    }
+
+
+    private fun refresh() {
+        consumirApi()
+
+        empty.observe(this, Observer { isEmpty ->
+            isEmpty?.let { viagemVazia.visibility = if (it) View.VISIBLE else View.GONE }
+
+        })
+
+        listaViagens.observe(this, Observer { linhas ->
+            linhas?.let {
+                layout_viagemsSemanais?.visibility = View.VISIBLE
+
+                listaAdapter.update(it)
+            }
+        })
+
+        loadError.observe(this, Observer { isError ->
+            isError?.let { erroSemana.visibility = if (it) View.VISIBLE else View.GONE }
+
+        })
+
+        loading.observe(this, Observer { isLoading ->
+            isLoading?.let {
+                loaderSemanal.visibility = if (it) View.VISIBLE else View.GONE
+                if (it) {
+                    erroSemana.visibility = View.GONE
+                    viagemVazia.visibility = View.GONE
+                    layout_viagemsSemanais?.visibility = View.GONE
+                }
+            }
+        })
     }
 
 }

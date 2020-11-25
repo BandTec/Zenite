@@ -18,15 +18,15 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="Viagens de hoje"
-            android:text="Cronograma geral"
+            android:contentDescription="@string/cronograma_geral_descricao"
+            android:text="@string/cronograma_geral"
             />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="Viagens antigas"
-            android:text="Linhas"
+            android:contentDescription="@string/linhas_descricao"
+            android:text="@string/linhas"
             />
     </com.google.android.material.tabs.TabLayout>
 

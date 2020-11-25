@@ -13,6 +13,7 @@ import com.orion.zenite.R
 import com.orion.zenite.http.HttpHelper
 import com.orion.zenite.http.fiscal.FiscalApi
 import com.orion.zenite.model.QtdPassageiros
+import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.activity_main_fiscal.topAppBar
 import kotlinx.android.synthetic.main.activity_qrcode_scanner.loading_view
 import kotlinx.android.synthetic.main.activity_qtd_passageiros.*
@@ -49,7 +50,7 @@ class QtdPassageiros : AppCompatActivity() {
 
                     Toast.makeText(
                         this,
-                        "Ação realizada com sucesso!",
+                        getString(R.string.acao_sucesso),
                         Toast.LENGTH_LONG
                     ).show()
 
@@ -58,7 +59,7 @@ class QtdPassageiros : AppCompatActivity() {
                 } else {
                     Toast.makeText(
                         this,
-                        "Ocorreu um erro ao realizar a ação, tente novamente",
+                        getString(R.string.erro_viagem),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -68,7 +69,7 @@ class QtdPassageiros : AppCompatActivity() {
 
     fun salvarDados(view: View) {
         if (inputQuantidade.text.isBlank()) {
-            inputQuantidade.error = "Informe a quantidade de passageiros desta viagem"
+            inputQuantidade.error = getString(R.string.mensagem_passageiros_error)
             inputQuantidade.requestFocus()
         } else {
             alertConfirmarAcao()
@@ -82,16 +83,17 @@ class QtdPassageiros : AppCompatActivity() {
     }
 
     private val cancelarAcao = { dialog: DialogInterface, which: Int ->
-        Toast.makeText(applicationContext, "A ação não foi realizada.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, getString(R.string.acao_erro), Toast.LENGTH_SHORT).show()
     }
 
     private fun adicionar() {
-        // TODO REMOVER DADOS ESTATICOS => JWT TOKEN
-        val token =
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
+        //  REMOVER DADOS ESTATICOS => JWT TOKEN
+       // val token =
+      //      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1AYWRtLmNvbS5iciIsImV4cCI6Mzc4ODAyNTM3MzV9.Tpcmo2fxO4DPaekU-CbXYiH9O95f2RqWHUMd1dcNO6s"
         val passageiros = inputQuantidade.text.toString().toInt()
         val body = QtdPassageiros(passageiros)
         val idViagem = intent.extras?.getInt("idViagem")
+        val token = AppPreferencias.token
 
         if (idViagem != null) {
             val service: FiscalApi = HttpHelper().getApiClient()!!.create(FiscalApi::class.java)
@@ -118,8 +120,8 @@ class QtdPassageiros : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         with(builder)
         {
-            setTitle("Adicionar a quantidade de passageiros")
-            setMessage("Essa ação não pode ser desfeita")
+            setTitle(getString(R.string.passageiros_titulo))
+            setMessage(getString(R.string.acao_nao_desfeita))
             setPositiveButton("OK", DialogInterface.OnClickListener(function = confirmarAcao))
             setNegativeButton(android.R.string.no, cancelarAcao)
             show()

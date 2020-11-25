@@ -29,11 +29,10 @@
         android:layout_height="wrap_content"
         android:layout_row="0"
         android:layout_column="0"
-        android:text="Telefone"/>
+        android:text="@string/telefone"/>
 
     <TextView
         android:id="@+id/telefone"
-        android:text="9 9856-6548"
         style="@style/Texto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,11 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_row="0"
         android:layout_column="3"
-        android:text="Placa do Ônibus"/>
+        android:text="@string/placa_do_onibus"/>
 
     <TextView
         android:id="@+id/onibus"
-        android:text="BMJ-4578"
         style="@style/Texto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

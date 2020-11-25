@@ -2,6 +2,8 @@ package orion.zenite.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,15 +11,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import orion.zenite.modelos.ConsultaPaginada;
-import orion.zenite.modelos.ViagemDto;
+import orion.zenite.modelos.*;
 import orion.zenite.entidades.*;
-import orion.zenite.modelos.ViagemIniciar;
-import orion.zenite.modelos.ViagemPassageiros;
 import orion.zenite.repositorios.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -47,17 +50,16 @@ public class ViagemController {
 
     @ApiOperation("Lista todos as viagens")
     @GetMapping
-    public ResponseEntity consulta( @RequestParam(required = false) Integer pagina,
-                                    @RequestParam(required = false) String q
-    )  {
+    public ResponseEntity consulta(@RequestParam(required = false) Integer pagina,
+                                   @RequestParam(required = false) String q
+    ) {
         if (this.repository.count() > 0) {
-            if(pagina != null) {
+            if (pagina != null) {
                 Pageable pageable = PageRequest.of(pagina, 10);
                 Page<Viagem> page = repository.findAll(pageable);
                 ConsultaPaginada consulta = new ConsultaPaginada(page);
                 return ok(consulta);
-            }
-            else {
+            } else {
                 List<Viagem> consulta = repository.findAll();
                 return ok(consulta);
             }
@@ -126,13 +128,12 @@ public class ViagemController {
         Optional<Motorista> motorista = motoristaRepository.findById(id);
         if (motorista.isPresent()) {
             if (this.repository.count() > 0) {
-                if(pagina != null) {
+                if (pagina != null) {
                     Pageable pageable = PageRequest.of(pagina, 10);
                     Page<Viagem> page = repository.findByMotorista(pageable, motorista.get());
                     ConsultaPaginada consulta = new ConsultaPaginada(page);
                     return ok(consulta);
-                }
-                else {
+                } else {
                     List<Viagem> consultaViagem = this.repository.findByMotorista(motorista.get());
                     if (!consultaViagem.isEmpty()) {
                         return ok(consultaViagem);
@@ -181,7 +182,7 @@ public class ViagemController {
         }
     }
 
-//    @ApiOperation("Cadastra uma viagem")
+    //    @ApiOperation("Cadastra uma viagem")
 //    @PostMapping
 //    @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
 //    public ResponseEntity cadastrar(@RequestBody ViagemDto viagem) {
@@ -194,6 +195,95 @@ public class ViagemController {
 //            return created(null).build();
 //        }
 //    }
+    @ApiOperation("Buscar sumário de todas as viagens do motorista")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Requisição realizada com sucesso."),
+            @ApiResponse(code = 403, message = "Usuário sem nivel de autorização."),
+            @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
+    })
+    @GetMapping("/app/motorista/{id}")
+    public ResponseEntity consultarViagensMotorista(@PathVariable("id") Integer id) {
+        Optional<Motorista> motorista = motoristaRepository.findById(id);
+        if (motorista.isPresent()) {
+            List<Viagem> viagens = repository.findByMotorista(motorista.get());
+
+            if (!viagens.isEmpty()) {
+                ArrayList<ViagensMotorista> viagensDia = new ArrayList<>();
+                DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
+                DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                ArrayList<ViagemMotorista> listaViagens = new ArrayList<>();
+
+                for (int i = 0; i < viagens.size(); i++) {
+                    Viagem atual = viagens.get(i);
+
+                    ViagemMotorista nova = new ViagemMotorista();
+                    long duracaoMin;
+                    if(atual.getHoraChegada() != null){
+                        duracaoMin = atual.getHoraSaida().until(
+                                atual.getHoraChegada(), ChronoUnit.MINUTES);
+                        nova.setHorario(String.format("%s-%s",
+                                atual.getHoraSaida().format(formatterTime),
+                                atual.getHoraChegada().format(formatterTime)));
+                    }else {
+                        duracaoMin = 0;
+                        nova.setHorario(String.format("%s-%s",
+                                atual.getHoraSaida().format(formatterTime),
+                                " "));
+                    }
+                    nova.setDuracao(String.format("%d MIN", duracaoMin));
+
+
+                    if (i != 0) {
+                        // se for diferente da primeira viagem
+                        // verifica se viagem anterior é no
+                        //  mesmo dia da viagem atual
+                        // se sim adicionar a lista de viagens
+                        int anterior = i - 1;
+                        LocalDate viagemAnterior = viagens.get(anterior).getHoraSaida().toLocalDate();
+                        LocalDate viagemAtual = atual.getHoraSaida().toLocalDate();
+
+                        if (viagemAnterior.isEqual(viagemAtual)) {
+                            listaViagens.add(nova);
+                            if(i == viagens.size() - 1){
+                                ViagensMotorista dia = new ViagensMotorista();
+                                dia.setData(viagemAnterior.format(formatterDate));
+                                dia.setViagens(listaViagens);
+                                viagensDia.add(dia);
+                            }
+                        } else {
+                            // salva viagem no dia
+
+                            ViagensMotorista dia = new ViagensMotorista();
+                            dia.setData(viagemAnterior.format(formatterDate));
+                            dia.setViagens(listaViagens);
+                            viagensDia.add(dia);
+
+                            // e limpa lista de viagens e adicionar viagem atual
+
+                            listaViagens = new ArrayList<>();
+                            listaViagens.add(nova);
+
+                            if(i == viagens.size() - 1){
+                                ViagensMotorista diaUltimo = new ViagensMotorista();
+                                diaUltimo.setData(atual.getHoraSaida().format(formatterDate));
+                                diaUltimo.setViagens(listaViagens);
+                                viagensDia.add(diaUltimo);
+                            }
+                        }
+                    } else {
+                        // se for a primeira viagem ja adiciona na lista
+                        listaViagens.add(nova);
+                    }
+
+                }
+
+                return ok().body(viagensDia);
+            }
+        }
+        return notFound().build();
+    }
+
 
     @ApiOperation("Finaliza uma viagem")
     @PutMapping("{id}/{fiscalId}")
@@ -236,7 +326,7 @@ public class ViagemController {
         Optional<Fiscal> f = fiscalRepository.findById(viagem.getFiscalId());
         Optional<Motorista> m = motoristaRepository.findById(viagem.getMotoristaId());
 
-        if(m.isPresent() & f.isPresent()){
+        if (m.isPresent() & f.isPresent()) {
             Fiscal fiscal = f.get();
             novaViagem.setFiscal(fiscal);
 
@@ -252,7 +342,7 @@ public class ViagemController {
             novaViagem.setQtdPassageiros(0);
 
             return novaViagem;
-        }else {
+        } else {
             return null;
         }
 

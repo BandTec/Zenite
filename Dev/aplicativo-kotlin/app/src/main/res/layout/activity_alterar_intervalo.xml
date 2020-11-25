@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25sp"
-        android:text="ALTERAR INTERVALO"
+        android:text="@string/alterar_intervalo_page"
         />
 
     <TextView
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25sp"
-        android:text="Digite o novo intervalo de tempo entre a saída do ônibus"
+        android:text="@string/alterar_descricao"
         android:textColor="@color/preto" />
 
 
@@ -48,7 +48,7 @@
         android:id="@+id/inputEmail"
         style="@style/Input"
         android:layout_marginHorizontal="20sp"
-        android:hint="Digite o intervalo de tempo"
+        android:hint="@string/tempo_hint"
         android:inputType="time" />
 
 
@@ -59,7 +59,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
         android:onClick="alterarIntervalo"
-        android:text="Alterar" />
+        android:text="@string/alterar_btn" />
 
 
 </LinearLayout>

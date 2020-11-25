@@ -29,7 +29,7 @@
         android:id="@+id/linha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Linha"
+        android:text="@string/linha"
         android:textAllCaps="true"
         android:layout_alignParentLeft="true"
         android:layout_marginHorizontal="25dp"
@@ -61,7 +61,7 @@
                 android:id="@+id/cronograma"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cronograma"
+                android:text="@string/cronograma"
                 android:textAllCaps="true"
                 android:layout_alignParentLeft="true"/>
 
@@ -102,7 +102,7 @@
                 android:id="@+id/motorista"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Motorista"
+                android:text="@string/motoristas"
                 android:textAllCaps="true"
                 android:layout_alignParentLeft="true"/>
 

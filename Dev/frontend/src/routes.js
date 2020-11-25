@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./services/privateRoute";
-import yup from "./yupConfig";
+// import yup from "./yupConfig";
 import Fiscal from "./pages/VisualizaFiscal";
 import Linha from "./pages/VisualizaLinha";
 import Motorista from "./pages/VisualizaMotorista";
@@ -22,6 +22,9 @@ import CadastroParadaLinha from "./pages/CadastroParadaLinha";
 import CadastroOnibus from "./pages/CadastroOnibus";
 import VisualizaOnibus from "./pages/VisualizaOnibus";
 import VisualizaViagens from "./pages/VisualizaViagens";
+import VisualizaCronograma from "./pages/VisualizaCronograma";
+import VisualizaHorarios from "./pages/VisualizaHorarios";
+import CadastroCronograma from "./pages/CadastroCronograma";
 import NotFound from "./pages/NotFound";
 
 import Perfil from "./pages/PerfilGerente";
@@ -139,6 +142,24 @@ const Routes = () => (
             exact
             path="/onibus/cadastro"
             component={CadastroOnibus}
+          />
+
+          <PrivateRoute
+            exact
+            path="/cronograma/detalhes/:id"
+            component={VisualizaHorarios}
+          />
+
+          <PrivateRoute
+            exact
+            path="/cronograma/cadastro"
+            component={CadastroCronograma}
+          />
+
+          <PrivateRoute
+            exact
+            path="/cronograma"
+            component={VisualizaCronograma}
           />
 
           <PrivateRoute exact path="/viagem" component={VisualizaViagens} />
