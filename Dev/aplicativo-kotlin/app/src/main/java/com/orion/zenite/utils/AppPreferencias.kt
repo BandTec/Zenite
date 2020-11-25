@@ -14,6 +14,7 @@ object AppPreferencias {
     private val NIVEL = Pair("nivel", 0)
     private val TOKEN = Pair("token", "")
     private val ID = Pair("id", 0)
+    private val IDLINHA = Pair("idLinha", 0)
 
     fun init(context: Context) {
         preferences = context.getSharedPreferences(NAME, MODE)
@@ -49,5 +50,11 @@ object AppPreferencias {
         get() = preferences.getInt(ID.first, ID.second)
         set(value) = preferences.edit {
             it.putInt(ID.first, value)
+        }
+
+    var idLinha: Int
+        get() = preferences.getInt(IDLINHA.first, IDLINHA.second)
+        set(value) = preferences.edit{
+            it.putInt(IDLINHA.first, value)
         }
 }

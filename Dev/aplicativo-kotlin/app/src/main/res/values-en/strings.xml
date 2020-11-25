@@ -66,4 +66,7 @@
     <string name="diario">Daily</string>
     <string name="semanal">Weekly</string>
     <string name="em_viagem">On travel</string>
+
+
+    <string name="alterar_intervalo"> This action cannot be undone. Do you want to continue?</string>
 </resources>
