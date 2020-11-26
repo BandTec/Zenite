@@ -23,7 +23,7 @@ interface LoginApi {
     //ROTA RECUPERAR SENHA
     @GET("/esqueci-senha/{email}")
     fun getEmailRecuperacao(
-        @Path("email") email: EmailRecuperacaoSenha
+        @Path("email") email: String
         //@Header("authorization") auth: String
     ):Call<Void>
 }

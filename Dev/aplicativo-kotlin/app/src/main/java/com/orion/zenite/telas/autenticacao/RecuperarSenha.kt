@@ -11,8 +11,9 @@ import com.orion.zenite.model.EmailRecuperacaoSenha
 import kotlinx.android.synthetic.main.activity_recuperar_senha.*
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
+import retrofit2.Callback
 import java.lang.Void as Void
+
 
 
 class RecuperarSenha : AppCompatActivity() {
@@ -27,20 +28,12 @@ class RecuperarSenha : AppCompatActivity() {
 
     fun verificarDados(component: View) {
         //enviar email para recuperação
-<<<<<<< HEAD
+
         if (inputRecuperarSenha.text.isBlank()) {
-            inputRecuperarSenha.error = "Informe um email válido!"
+            inputRecuperarSenha.error = getString(R.string.erro_informar_email)
             inputRecuperarSenha.requestFocus()
         } else {
             enviarEmailRecuperacao()
-=======
-        if (inputRecuperarSenha.text.isBlank()){
-            inputRecuperarSenha.error = getString(R.string.erro_informar_email)
-            inputRecuperarSenha.requestFocus()
-        }else{
-            Toast.makeText(this, getString(R.string.recuperacao_email_valido), Toast.LENGTH_LONG).show()
-            inputRecuperarSenha.setText("")
->>>>>>> master
         }
 
     }
@@ -48,15 +41,19 @@ class RecuperarSenha : AppCompatActivity() {
     fun enviarEmailRecuperacao() {
         val requests: LoginApi = HttpHelper().getApiClient()!!.create(LoginApi::class.java)
 
-        val email = EmailRecuperacaoSenha(
-            inputRecuperarSenha.text.toString()
-        )
+        val email = inputRecuperarSenha.text.toString()
 
         val resultado = requests.getEmailRecuperacao(email)
 
-        //resultado.enqueue(object :Callback<Void>{
+        resultado.enqueue(object : Callback<Void>{
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(applicationContext, "Falha ao enviar e-mail de recuperação, tente novamente!", Toast.LENGTH_SHORT).show()
+            }
 
-       // }
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                print("Resposta: " + response.code())
+            }
+        })
 
 
     }

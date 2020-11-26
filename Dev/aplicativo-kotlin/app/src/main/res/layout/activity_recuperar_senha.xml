@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="15dp"
-        android:onClick="enviarEmailRecuperacao"
+        android:onClick="verificarDados"
         android:text="@string/bt_enviar" />
 
 

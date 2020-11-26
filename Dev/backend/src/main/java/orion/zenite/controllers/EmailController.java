@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.mail.internet.MimeMessage;
@@ -24,6 +25,7 @@ import static org.springframework.http.ResponseEntity.*;
 
 @Api(description = "Reset de senha", tags = "Email")
 @RestController
+@RequestMapping("/api")
 public class EmailController {
 //    @Autowired private JavaMailSender mailSender;
 
@@ -31,8 +33,13 @@ public class EmailController {
 
     @Autowired private PasswordEncoder passwordEncoder;
 
+    @GetMapping("/qq")
+    public ResponseEntity testeQualquer(){
+        return ok("Teste feito com sucesso");
+    }
+
     @ApiOperation("Envio de senha aleatoria para o email do usuário")
-    @GetMapping("/esqueci-senha/{email}")
+    @GetMapping("/{email}")
     @Transactional
     public ResponseEntity enviarEmail(@PathVariable String email){
 //        try{
