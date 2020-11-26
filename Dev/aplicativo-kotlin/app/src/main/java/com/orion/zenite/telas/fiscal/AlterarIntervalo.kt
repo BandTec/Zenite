@@ -79,7 +79,6 @@ class AlterarIntervalo : AppCompatActivity() {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     respostaRequisicao.value = true
                     loading.value = false
-
                     voltar()
                 }
             })

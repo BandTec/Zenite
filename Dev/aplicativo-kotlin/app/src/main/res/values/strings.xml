@@ -25,8 +25,6 @@
     <string name="scanner_descricao">Clique no botão abaixo para escanear o QR Code do motorista que fará com que uma viagem seja iniciada ou finalizada.</string>
     <string name="scanner_botao_texto">escanear QR Code</string>
     <string name="login">Entrar</string>
-
-
     <string name="usuario_invalido"> Usuário não encontrado</string>
     <string name="erro_autentificacao">O login não pode ser efetuado, tente novamente.</string>
     <string name="sem_acesso">Seu usuário não tem acesso ao aplicativo.</string>
@@ -45,7 +43,6 @@
     <string name="mensagem_esqueceu_senha">Digite seu email no campo abaixo e você recebera um email para renovar sua senha.</string>
     <string name="login_error_campo">Informe seu email</string>
     <string name="senha_error_campo">Informe sua senha</string>
-
     <string name="iniciar_viagem">Iniciar Viagem</string>
     <string name="finalizar_viagem">Finalizar Viagem</string>
     <string name="erro_escanear">Ocorreu um erro ao escanear este QR Code, tente novamente</string>
@@ -61,12 +58,13 @@
     <string name="passageiros_titulo">Adicionar a quantidade de passageiros</string>
     <string name="cronorgrma_geral">Cronograma Geral</string>
     <string name="linhas_titulo">Linhas</string>
-
     <string name="seu_qr_code">Seu código QR</string>
     <string name="historico_viagens">Histórico de viagens</string>
     <string name="diario">Diário</string>
     <string name="semanal">Semanal</string>
     <string name="em_viagem">Em Viagem</string>
+    <string name="alterar_intervalo">Esta ação não pode ser desfeita. Deseja continuar?</string>
+
     <string name="telefone">Telefone</string>
     <string name="nome">Nome</string>
     <string name="fiscal_da_linha">Fiscal da Linha</string>
@@ -106,15 +104,10 @@
     <string name="cronograma_title">CRONOGRAMA</string>
     <string name="tempo_btn">Alterar intervalo de tempo</string>
     <string name="previsto">PREVISTO</string>
-
     <string name="alterar_intervalo_page">ALTERAR INTERVALO</string>
     <string name="alterar_descricao">Digite o novo intervalo de tempo entre a saída do ônibus</string>
     <string name="tempo_hint">Digite o intervalo de tempo</string>
     <string name="alterar_btn">Alterar</string>
-
-
     <string name="erro_alterar_intervalo">Houve um erro ao alterar o intervalo</string>
     <string name="input_alterar_vazio">Informe o novo intervalo em minutos!</string>
-
-    <string name="alterar_intervalo">Esta a��o n�o pode ser desfeita.Deseja continuar?</string>
 </resources>

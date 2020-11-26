@@ -194,26 +194,25 @@ public class CronogramaHorariosController {
                 CronogramaLinha cronograma = new CronogramaLinha();
 
                 Integer idCronograma = cronogramaHorariosAlteradosRepository.findByIdCronograma(item.getIdCronogramaHorarios());
-                Optional<CronogramaHorariosAlterados> cronogramaHorariosAlterados = null;
+                Optional<CronogramaHorariosAlterados> cronogramaHorariosAlterados = Optional.empty();
 
-                if (idCronograma != null)
+                if (idCronograma != null) {
                     cronogramaHorariosAlterados = cronogramaHorariosAlteradosRepository.findById(idCronograma);
+                }
 
                 DateTimeFormatter sdf = DateTimeFormatter.ofPattern("HH:mm");
 
-                if(cronogramaHorariosAlterados != null){
-                    cronograma.setAtrasado(true);
 
+                if(cronogramaHorariosAlterados.isPresent()){
+                    cronograma.setAtrasado(true);
                     // ANTIGO SERIA O HORARIO NA TABELA CRONOGRAMA HORARIO SE HOUVER UM NOVO HORARIO PREVISTO
                     cronograma.setHorarioAntigo(item.getHoraPrevistaSaida().format(sdf) + " - " + item.getHoraPrevistaChegada().format(sdf));
 
-                    CronogramaHorariosAlterados cha = new CronogramaHorariosAlterados();
-
-                    cha = cronogramaHorariosAlterados.get();
+                    CronogramaHorariosAlterados cha = cronogramaHorariosAlterados.get();
                     cronograma.setHorarioPrevisto(cha.getNovaHoraPrevistaSaida().format(sdf) + " - " + cha.getNovaHoraPrevistaChegada().format(sdf));
                 }else{
+                    cronograma.setHorarioAntigo("");
                     cronograma.setAtrasado(false);
-
                     cronograma.setHorarioPrevisto(item.getHoraPrevistaSaida().format(sdf) + " - " + item.getHoraPrevistaChegada().format(sdf));
                 }
 
@@ -233,13 +232,15 @@ public class CronogramaHorariosController {
                             cronograma.setHorarioRealizado(realizado);
 
                             // checa se motorista esta atrasado
-                            cronograma.setAtrasado(v.getHoraChegada().isAfter(item.getHoraPrevistaChegada()));
+                            if(!cronograma.getAtrasado()) {
+                                cronograma.setAtrasado(v.getHoraChegada().isAfter(item.getHoraPrevistaChegada()));
+                            }
                         }
                     }
                 }
                 lista.add(cronograma);
             }
-            ;
+
 
             return ok(lista);
         }
@@ -290,10 +291,27 @@ public class CronogramaHorariosController {
 
                         cronograma.setAtrasado(false);
 
-                        // ANTIGO SERIA O HORARIO NA TABELA CRONOGRAMA HORARIO SE HOUVER UM NOVO HORARIO PREVISTO
-                        cronograma.setHorarioAntigo("");
-
+                        Integer idCronograma = cronogramaHorariosAlteradosRepository.findByIdCronograma(item.getIdCronogramaHorarios());
+                        Optional<CronogramaHorariosAlterados> cronogramaHorariosAlterados = Optional.empty();
                         DateTimeFormatter sdf = DateTimeFormatter.ofPattern("HH:mm");
+                        
+                        if (idCronograma != null) {
+                            cronogramaHorariosAlterados = cronogramaHorariosAlteradosRepository.findById(idCronograma);
+                        }
+                        if(cronogramaHorariosAlterados.isPresent()){
+                            cronograma.setAtrasado(true);
+                            // ANTIGO SERIA O HORARIO NA TABELA CRONOGRAMA HORARIO SE HOUVER UM NOVO HORARIO PREVISTO
+                            cronograma.setHorarioAntigo(item.getHoraPrevistaSaida().format(sdf) + " - " + item.getHoraPrevistaChegada().format(sdf));
+
+                            CronogramaHorariosAlterados cha = cronogramaHorariosAlterados.get();
+                            cronograma.setHorarioPrevisto(cha.getNovaHoraPrevistaSaida().format(sdf) + " - " + cha.getNovaHoraPrevistaChegada().format(sdf));
+                        }else{
+                            cronograma.setHorarioAntigo("");
+                            cronograma.setAtrasado(false);
+                            cronograma.setHorarioPrevisto(item.getHoraPrevistaSaida().format(sdf) + " - " + item.getHoraPrevistaChegada().format(sdf));
+                        }
+
+
                         cronograma.setHorarioPrevisto(item.getHoraPrevistaSaida().format(sdf) + " - " + item.getHoraPrevistaChegada().format(sdf));
                         cronograma.setNomeMotorista(item.getMotorista().getNomeFormatado());
 
@@ -312,7 +330,9 @@ public class CronogramaHorariosController {
                                         cronograma.setHorarioRealizado(realizado);
 
                                         // checa se motorista esta atrasado
-                                        cronograma.setAtrasado(v.getHoraChegada().isAfter(item.getHoraPrevistaChegada()));
+                                        if(!cronograma.getAtrasado()) {
+                                            cronograma.setAtrasado(v.getHoraChegada().isAfter(item.getHoraPrevistaChegada()));
+                                        }
                                     }
                                 }
                             }

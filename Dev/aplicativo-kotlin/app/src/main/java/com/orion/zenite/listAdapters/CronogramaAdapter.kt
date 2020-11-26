@@ -47,6 +47,7 @@ class CronogramaAdapter (var list: ArrayList<Cronograma>) :
             atual_tv.text = cronograma.horarioPrevisto
             motorista_tv.text = cronograma.nomeMotorista
 
+
             if(cronograma.horarioAntigo.isEmpty()) {
                 antigo_tv.visibility = View.GONE
             }else {
