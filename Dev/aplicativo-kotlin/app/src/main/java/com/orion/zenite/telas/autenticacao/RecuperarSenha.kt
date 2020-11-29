@@ -51,7 +51,7 @@ class RecuperarSenha : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                print("Resposta: " + response.code())
+                println("Resposta: " + response.code())
             }
         })
 

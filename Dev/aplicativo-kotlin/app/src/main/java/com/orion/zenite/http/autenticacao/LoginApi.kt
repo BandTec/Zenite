@@ -21,7 +21,7 @@ interface LoginApi {
     ): Call<UserZenite>
 
     //ROTA RECUPERAR SENHA
-    @GET("/esqueci-senha/{email}")
+    @GET("/api/esqueci-senha/{email}")
     fun getEmailRecuperacao(
         @Path("email") email: String
         //@Header("authorization") auth: String

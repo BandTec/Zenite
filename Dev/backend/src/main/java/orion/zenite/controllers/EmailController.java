@@ -39,7 +39,7 @@ public class EmailController {
     }
 
     @ApiOperation("Envio de senha aleatoria para o email do usuário")
-    @GetMapping("/{email}")
+    @GetMapping("/esqueci-senha/{email}")
     @Transactional
     public ResponseEntity enviarEmail(@PathVariable String email){
 //        try{
