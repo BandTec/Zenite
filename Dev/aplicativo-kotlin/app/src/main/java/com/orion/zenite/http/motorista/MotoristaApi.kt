@@ -34,5 +34,5 @@ interface MotoristaApi {
     fun consultarTodasViagens(
         @Path("id") id: Int,
         @Header("authorization") auth: String
-    ): Call<List<HistoricoViagens>>
+    ): Call<HistoricoViagens>
 }

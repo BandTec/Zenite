@@ -16,8 +16,10 @@ import orion.zenite.entidades.*;
 import orion.zenite.repositorios.*;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -47,6 +49,8 @@ public class ViagemController {
     @Autowired
     private LinhaRepository linhaRepository;
 
+    @Autowired
+    private CronogramaHorariosRepository cronogramaHorariosRepository;
 
     @ApiOperation("Lista todos as viagens")
     @GetMapping
@@ -278,7 +282,10 @@ public class ViagemController {
 
                 }
 
-                return ok().body(viagensDia);
+                MotoViagens mv = new MotoViagens();
+                mv.setViagens(viagensDia);
+                mv.setQtd(viagens.size());
+                return ok().body(mv);
             }
         }
         return notFound().build();
@@ -302,6 +309,37 @@ public class ViagemController {
             viagem.setHoraChegada(timestamp.toLocalDateTime());
             viagem.setFiscalVolta(fiscalVolta);
             this.repository.save(viagem);
+
+            LocalDateTime dataHoraSPInicio = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
+
+            List<CronogramaHorarios> cronos = cronogramaHorariosRepository.procurarViagensIniciadas(viagem.getLinha().getId(), dataHoraSPInicio);
+            System.out.println(cronos.size());
+
+            CronogramaHorarios alterar = null;
+            if(!cronos.isEmpty()){
+                for (CronogramaHorarios crono : cronos) {
+                    Boolean horaCerta = crono.getHoraPrevistaSaida().isEqual(dataHoraSPInicio);
+                    Boolean depois = crono.getHoraPrevistaSaida().isAfter(dataHoraSPInicio);
+
+                    if(crono.getMotorista().getId() == viagem.getMotorista().getId()) {
+//                        System.out.println(crono.getHoraPrevistaChegada());
+//                        System.out.println(dataHoraSPInicio);
+//                        System.out.println(horaCerta);
+//                        System.out.println(depois);
+
+                        if (horaCerta || depois) {
+//                            System.out.println("achei");
+                            crono.setViagemStatus(3);
+                            alterar = crono;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(alterar != null){
+                cronogramaHorariosRepository.save(alterar);
+            }
+
             return ok().build();
         }
     }
@@ -315,7 +353,39 @@ public class ViagemController {
         if (novaViagem == null) {
             return badRequest().build();
         } else {
+
             this.repository.save(novaViagem);
+
+            LocalDateTime dataHoraSPInicio = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
+
+            List<CronogramaHorarios> cronos = cronogramaHorariosRepository.procurarViagensNaoIniciadas(novaViagem.getLinha().getId(), dataHoraSPInicio);
+            System.out.println(cronos.size());
+
+            CronogramaHorarios alterar = null;
+            if(!cronos.isEmpty()){
+                for (CronogramaHorarios crono : cronos) {
+                    Boolean horaCerta = crono.getHoraPrevistaSaida().isEqual(dataHoraSPInicio);
+                    Boolean depois = crono.getHoraPrevistaSaida().isAfter(dataHoraSPInicio);
+
+                    if(crono.getMotorista().getId() == novaViagem.getMotorista().getId()) {
+//                        System.out.println(crono.getHoraPrevistaChegada());
+//                        System.out.println(dataHoraSPInicio);
+//                        System.out.println(horaCerta);
+//                        System.out.println(depois);
+
+                        if (horaCerta || depois) {
+//                            System.out.println("achei");
+                            crono.setViagemStatus(2);
+                            alterar = crono;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(alterar != null){
+                cronogramaHorariosRepository.save(alterar);
+            }
+
             return created(null).build();
         }
     }

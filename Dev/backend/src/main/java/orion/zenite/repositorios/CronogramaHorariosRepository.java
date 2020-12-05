@@ -35,6 +35,14 @@ public interface CronogramaHorariosRepository extends JpaRepository<CronogramaHo
 
     List<CronogramaHorarios> findByMotorista(Motorista motorista);
 
+    @Query(value = "select ch.* from tbl_cronograma_horarios ch where ch.id_linha = ?1  and hora_prevista_saida >= ?2 and (ch.viagem_status = 1);", nativeQuery = true)
+    List<CronogramaHorarios> procurarViagensNaoIniciadas(int id, LocalDateTime hora);
+
+    @Query(value = "select ch.* from tbl_cronograma_horarios ch where ch.id_linha = ?1  and hora_prevista_saida >= ?2 and (ch.viagem_status = 2);", nativeQuery = true)
+    List<CronogramaHorarios> procurarViagensIniciadas(int id, LocalDateTime hora);
+
+    List<CronogramaHorarios> findByHoraPrevistaChegada(LocalDateTime hora);
+
     List<CronogramaHorarios> findByCronograma(Cronograma cronograma);
 
     Page<CronogramaHorarios> findByCronograma(Cronograma cronograma, Pageable var1);

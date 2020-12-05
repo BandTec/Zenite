@@ -6,6 +6,8 @@ import orion.zenite.entidades.Cronograma;
 import orion.zenite.entidades.CronogramaHorarios;
 import orion.zenite.entidades.Fiscal;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface CronogramaRepository extends JpaRepository<Cronograma, Integer> {
@@ -16,4 +18,5 @@ public interface CronogramaRepository extends JpaRepository<Cronograma, Integer>
 
     List<Cronograma> findByFiscal(Fiscal fiscal);
 
+    Cronograma findByDataCronograma(LocalDate hora);
 }

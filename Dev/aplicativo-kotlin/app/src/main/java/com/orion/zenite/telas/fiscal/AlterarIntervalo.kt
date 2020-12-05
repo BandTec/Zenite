@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.orion.zenite.R
 import com.orion.zenite.http.HttpHelper
 import com.orion.zenite.http.autenticacao.LoginApi
@@ -19,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_alterar_intervalo.*
 import kotlinx.android.synthetic.main.activity_cronograma_linha.*
 import kotlinx.android.synthetic.main.activity_cronograma_linha.topAppBar
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.fragment_cronograma_geral.*
 import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,6 +40,18 @@ class AlterarIntervalo : AppCompatActivity() {
         topAppBar.setNavigationOnClickListener {
             this.finish()
         }
+
+        respostaRequisicao.observe(this, Observer { isTrue ->
+            if (isTrue) {
+                voltar()
+            } else {
+                Toast.makeText(
+                    baseContext,
+                    getString(R.string.erro_alterar_intervalo),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
     }
 
     fun alterarIntervalo(component: View) {
@@ -73,13 +87,11 @@ class AlterarIntervalo : AppCompatActivity() {
                 override fun onFailure(call: Call<Void>, t: Throwable) {
                     respostaRequisicao.value = false
                     loading.value = false
-                    Toast.makeText(baseContext, getString(R.string.erro_alterar_intervalo), Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     respostaRequisicao.value = true
                     loading.value = false
-                    voltar()
                 }
             })
         } else {

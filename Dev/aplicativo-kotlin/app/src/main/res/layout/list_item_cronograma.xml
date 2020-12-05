@@ -23,6 +23,7 @@
         android:layout_row="1"
         android:layout_column="0"
         tools:text="14:00 - 14:20"
+        android:textSize="16sp"
         android:layout_marginEnd="25dp"/>
 
     <TextView
@@ -32,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_row="1"
+        android:textSize="16sp"
         android:layout_column="1"
         android:layout_gravity="center"
         />
@@ -44,6 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_row="1"
+        android:textSize="16sp"
         android:layout_column="3"
         android:layout_gravity="end"
         />
@@ -57,6 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_row="1"
+        android:textSize="16sp"
         android:layout_column="3"
         android:layout_gravity="end"
         />

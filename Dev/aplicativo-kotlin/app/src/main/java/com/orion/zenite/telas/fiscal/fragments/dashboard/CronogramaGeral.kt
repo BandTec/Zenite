@@ -72,12 +72,12 @@ class CronogramaGeral : Fragment() {
         // chama api
         refresh()
 
-        // aplica função de refresh ao componente swipe refresh
-        swipe = view.findViewById(R.id.swipeCronogramaGeral) as SwipeRefreshLayout
-        swipe!!.setOnRefreshListener {
-            swipeCronogramaGeral.isRefreshing = false
-            refresh()
-        }
+//        // aplica função de refresh ao componente swipe refresh
+//        swipe = view.findViewById(R.id.swipeCronogramaGeral) as SwipeRefreshLayout
+//        swipe!!.setOnRefreshListener {
+//            swipeCronogramaGeral.isRefreshing = false
+//            refresh()
+//        }
 
         return view
     }
@@ -88,6 +88,7 @@ class CronogramaGeral : Fragment() {
         val intent = Intent(activity, LinhaCronograma::class.java)
         intent.putExtra("nomeLinha", cronograma.nomeLinha)
         intent.putExtra("idLinha", cronograma.idLinha)
+        AppPreferencias.idLinha = cronograma.idLinha
         startActivity(intent)
     }
 

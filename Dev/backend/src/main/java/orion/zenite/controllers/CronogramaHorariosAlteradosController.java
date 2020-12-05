@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import orion.zenite.entidades.*;
 import orion.zenite.repositorios.CronogramaHorariosAlteradosRepository;
 import orion.zenite.repositorios.CronogramaHorariosRepository;
+import orion.zenite.repositorios.LinhaRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,6 +28,9 @@ public class CronogramaHorariosAlteradosController {
     private CronogramaHorariosAlteradosRepository repository;
 
     @Autowired
+    private LinhaRepository linhaRepository;
+
+    @Autowired
     private CronogramaHorariosRepository cronogramaHorariosRepository;
 
     @ApiOperation("Busca horarios do cronograma pelo ID do horario cronograma PAI")
@@ -36,11 +40,11 @@ public class CronogramaHorariosAlteradosController {
             @ApiResponse(code = 404, message = "Sua requisição não retornou dados.")
     })
     @GetMapping("/cronograma/{id}")
-    public ResponseEntity consultaPorIdCronograma(@PathVariable("id") Integer id){
+    public ResponseEntity consultaPorIdCronograma(@PathVariable("id") Integer id) {
         CronogramaHorarios ch = new CronogramaHorarios();
         ch.setIdCronogramaHorarios(id);
         Optional<CronogramaHorariosAlterados> listaCronograma = repository.findById(ch.getIdCronogramaHorarios());
-        if(!listaCronograma.isPresent()){
+        if (!listaCronograma.isPresent()) {
             return ok(listaCronograma);
         }
         return notFound().build();
@@ -54,38 +58,41 @@ public class CronogramaHorariosAlteradosController {
     })
     @PostMapping("/cronograma/{idLinha}/{novoIntervalo}")
     @Transactional // se acontece algum error desfaz os outros dados salvos, faz um rollback
-    public ResponseEntity cadastro(@PathVariable("idLinha") Integer id, @PathVariable("novoIntervalo") String novo_intervalo){
+    public ResponseEntity cadastro(@PathVariable("idLinha") Integer id, @PathVariable("novoIntervalo") String novo_intervalo) {
 
-        Linha linha = new Linha();
-        CronogramaHorarios cronogramaHorarios = new CronogramaHorarios();
-        linha.setId(id);
-        cronogramaHorarios.setLinha(linha);
+        Optional<Linha> linha = linhaRepository.findById(id);
+        System.out.println(linha);
+        System.out.println(id);
+        if (linha.isPresent()) {
+            CronogramaHorarios cronogramaHorarios = new CronogramaHorarios();
+            List<CronogramaHorarios> ch = cronogramaHorariosRepository.findAllByLinha(linha.get());
+            System.out.println(ch);
+            if (!ch.isEmpty()) {
+                for (CronogramaHorarios ch1 : ch) {
 
-        List<CronogramaHorarios> ch = cronogramaHorariosRepository.findAllByLinha(cronogramaHorarios.getLinha());
+                    if (ch1.getViagemStatus() == 3)
+                        continue;
 
-        if(!ch.isEmpty()){
-            for (CronogramaHorarios ch1 : ch){
+                    CronogramaHorariosAlterados cha = new CronogramaHorariosAlterados();
+                    LocalDateTime novaDataChegada = ch1.getHoraPrevistaChegada();
+                    novaDataChegada = novaDataChegada.plusMinutes(Integer.parseInt(novo_intervalo));
 
-                if(ch1.getViagemStatus() == 3)
-                    continue;
-
-                CronogramaHorariosAlterados cha = new CronogramaHorariosAlterados();
-                LocalDateTime novaDataChegada = ch1.getHoraPrevistaChegada();
-                novaDataChegada = novaDataChegada.plusMinutes(Integer.parseInt(novo_intervalo));
-
-                LocalDateTime novaDataSaida = ch1.getHoraPrevistaSaida();
-                novaDataSaida = novaDataSaida.plusMinutes(Integer.parseInt(novo_intervalo));
+                    LocalDateTime novaDataSaida = ch1.getHoraPrevistaSaida();
+                    novaDataSaida = novaDataSaida.plusMinutes(Integer.parseInt(novo_intervalo));
 
 
-                cha.setCronogramaHorarios(ch1);
-                cha.setNovaHoraPrevistaChegada(novaDataChegada);
-                cha.setNovaHoraPrevistaSaida(novaDataSaida);
+                    cha.setCronogramaHorarios(ch1);
+                    cha.setNovaHoraPrevistaChegada(novaDataChegada);
+                    cha.setNovaHoraPrevistaSaida(novaDataSaida);
 
-                repository.save(cha);
+                    repository.save(cha);
+                }
             }
-        }
 
-        return created(null).build();
+            return created(null).build();
+        } else {
+            return notFound().build();
+        }
     }
 
 }
