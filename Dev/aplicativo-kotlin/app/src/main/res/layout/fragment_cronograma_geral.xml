@@ -1,19 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--<androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/swipeCronogramaGeral"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".telas.fiscal.fragments.dashboard.CronogramaGeral">-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/swipeCronogramaGeral"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".telas.fiscal.fragments.dashboard.CronogramaGeral">
-
-<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    android:orientation="vertical"
     android:paddingHorizontal="25dp"
-    android:orientation="vertical">
+    tools:context=".telas.fiscal.fragments.dashboard.CronogramaGeral">
 
 
     <TextView
@@ -43,19 +45,18 @@
 
     <TextView
         android:id="@+id/cronogramaVazio"
-        android:visibility="gone"
         style="@style/Titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
+        android:text="@string/lista_vazia"
         android:textColor="@color/preto"
-        android:text="@string/lista_vazia" />
+        android:visibility="gone" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listCronograma"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"/>
-</LinearLayout>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        android:layout_marginTop="10dp" />
+</LinearLayout><!--</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->

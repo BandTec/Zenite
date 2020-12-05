@@ -30,10 +30,10 @@ class LogoutFragment : Fragment() {
             sairConta(it)
         }
 
-        btncardSuporte = view.findViewById(R.id.cardSuporte) as CardView
-        btncardSuporte!!.setOnClickListener{
-            suporte(it)
-        }
+//        btncardSuporte = view.findViewById(R.id.cardSuporte) as CardView
+//        btncardSuporte!!.setOnClickListener{
+//            suporte(it)
+//        }
 
         return view;
     }

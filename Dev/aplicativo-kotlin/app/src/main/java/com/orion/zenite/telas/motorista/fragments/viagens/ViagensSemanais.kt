@@ -18,6 +18,7 @@ import com.orion.zenite.http.motorista.MotoristaApi
 import com.orion.zenite.listAdapters.HistoricoAdapter
 import com.orion.zenite.listAdapters.ViagensAdapter
 import com.orion.zenite.model.HistoricoViagens
+import com.orion.zenite.model.MotoristaViagens
 import com.orion.zenite.model.Viagens
 import com.orion.zenite.utils.AppPreferencias
 import kotlinx.android.synthetic.main.activity_linha_motorista.*
@@ -38,7 +39,7 @@ class ViagensSemanais : Fragment() {
 
 
     private var lista: RecyclerView? = null
-    val listaViagens = MutableLiveData<List<HistoricoViagens>>()
+    val listaViagens = MutableLiveData<List<MotoristaViagens>>()
     val loadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
 
@@ -74,18 +75,18 @@ class ViagensSemanais : Fragment() {
         val token = AppPreferencias.token
         val service: MotoristaApi = HttpHelper().getApiClient()!!.create(MotoristaApi::class.java)
 
-        val listaRemoto: Call<List<HistoricoViagens>> = service.consultarTodasViagens(id, token)
+        val listaRemoto: Call<HistoricoViagens> = service.consultarTodasViagens(id, token)
 
-        listaRemoto.enqueue(object : Callback<List<HistoricoViagens>> {
-            override fun onFailure(call: Call<List<HistoricoViagens>>, t: Throwable) {
+        listaRemoto.enqueue(object : Callback<HistoricoViagens> {
+            override fun onFailure(call: Call<HistoricoViagens>, t: Throwable) {
                 loadError.value = true;
                 loading.value = false;
                 println("deu ruim = ${t.message}")
             }
 
             override fun onResponse(
-                call: Call<List<HistoricoViagens>>,
-                response: Response<List<HistoricoViagens>>
+                call: Call<HistoricoViagens>,
+                response: Response<HistoricoViagens>
             ) {
                 println("resposta = ${response}")
                 println("status code = ${response.code()}")
@@ -93,8 +94,8 @@ class ViagensSemanais : Fragment() {
                 if (resposta === null) {
                     empty.value = true
                 } else {
-                    listaViagens.value = resposta.toList()
-                    total_viagens.text = resposta.toList().size.toString()
+                    listaViagens.value = resposta.viagens
+                    total_viagens.text = resposta.qtd.toString()
                 }
                 loading.value = false;
             }
