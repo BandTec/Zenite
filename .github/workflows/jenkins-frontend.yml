@@ -1,4 +1,4 @@
-name: trigger jenkins job
+name: Call jenkins job (frontend)
 on:
   push:
     branches:
