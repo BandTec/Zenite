@@ -45,7 +45,7 @@ class CronogramaAdapter (var list: ArrayList<Cronograma>) :
             // NESTE PONTO ADICIONA OS DADOS DA CLASSE AOS ITENS DO LAYOUT
             antigo_tv.text = cronograma.horarioAntigo
             atual_tv.text = cronograma.horarioPrevisto
-            motorista_tv.text = cronograma.nomeMotorista
+            motorista_tv.text = cronograma.nomeMotorista.split(" ")[0]
 
 
             if(cronograma.horarioAntigo.isEmpty()) {

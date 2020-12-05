@@ -258,7 +258,7 @@ public class CronogramaHorariosController {
         LocalDateTime dataHoraSPInicio = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
         LocalDateTime dataHoraSPFim = dataHoraSPInicio.plusHours(1);
         LocalDate date = LocalDate.now();
-        System.out.println(dataHoraSPInicio);
+
         List<CronogramaHorarios> cronogramaHorarios = repository.getViagensProximaHora(id, dataHoraSPInicio, dataHoraSPFim, date);
         List<Viagem> viagensFeitas = viagemRepository.getViagensDoFiscalDoDia(dataHoraSPInicio, id);
         if (!cronogramaHorarios.isEmpty()) {
@@ -311,14 +311,15 @@ public class CronogramaHorariosController {
                             cronograma.setHorarioPrevisto(item.getHoraPrevistaSaida().format(sdf) + " - " + item.getHoraPrevistaChegada().format(sdf));
                         }
 
-
                         cronograma.setHorarioPrevisto(item.getHoraPrevistaSaida().format(sdf) + " - " + item.getHoraPrevistaChegada().format(sdf));
                         cronograma.setNomeMotorista(item.getMotorista().getNomeFormatado());
 
                         cronograma.setHorarioRealizado("");
                         if (!viagensFeitas.isEmpty()) {
+
                             if (i < viagensFeitas.size()) {
                                 Viagem v = viagensFeitas.get(i);
+
                                 if (v.getHoraSaida() != null) {
                                     if (v.getHoraSaida().isEqual(item.getHoraPrevistaSaida()) || v.getHoraSaida().isAfter(item.getHoraPrevistaSaida())) {
                                         cronograma.setHorarioRealizado("em viagem");

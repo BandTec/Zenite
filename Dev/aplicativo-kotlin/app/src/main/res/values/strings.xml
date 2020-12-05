@@ -61,7 +61,7 @@
     <string name="seu_qr_code">Seu código QR</string>
     <string name="historico_viagens">Histórico de viagens</string>
     <string name="diario">Diário</string>
-    <string name="semanal">Semanal</string>
+    <string name="semanal">Geral</string>
     <string name="em_viagem">Em Viagem</string>
     <string name="alterar_intervalo">Esta ação não pode ser desfeita. Deseja continuar?</string>
 

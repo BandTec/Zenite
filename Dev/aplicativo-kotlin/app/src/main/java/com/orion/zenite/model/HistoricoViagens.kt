@@ -1,7 +1,9 @@
 package com.orion.zenite.model
 
 data class HistoricoViagens (
-    val data: String,
+    val qtd: Int,
 
-    val viagens: ArrayList<Viagens>
+    val viagens: ArrayList<MotoristaViagens>
 )
+
+
