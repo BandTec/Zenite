@@ -101,7 +101,7 @@ export default function Login(props) {
       <Form onSubmit={handleSubmit}>
         <LogoZenite src={Logo} />
         <Input
-          texto="Email-teste"
+          texto="Email"
           value={email}
           tamanho={330}
           onChange={(event) => setEmail(event.target.value)}
