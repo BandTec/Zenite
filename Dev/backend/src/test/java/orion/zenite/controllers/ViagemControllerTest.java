@@ -41,31 +41,31 @@ class ViagemControllerTest {
     private LinhaRepository linhaRepository;
 
 
-    @Test
-    void excluirViagem() {
-            //Criando um dublê
-            Integer id = 10;
-            List <Viagem> viagemList = new ArrayList<>(Arrays.asList(new Viagem(),new Viagem()));
+//     @Test
+//     void excluirViagem() {
+//             //Criando um dublê
+//             Integer id = 10;
+//             List <Viagem> viagemList = new ArrayList<>(Arrays.asList(new Viagem(),new Viagem()));
 
-            //id Válido
-            Mockito.when(repository.findAll()).thenReturn(viagemList);
+//             //id Válido
+//             Mockito.when(repository.findAll()).thenReturn(viagemList);
 
-            Mockito.when(repository.existsById(id)).thenReturn(true);
+//             Mockito.when(repository.existsById(id)).thenReturn(true);
 
-            Mockito.doAnswer(tente -> viagemList.remove(0)).when(repository).deleteById(id);
+//             Mockito.doAnswer(tente -> viagemList.remove(0)).when(repository).deleteById(id);
 
-            ResponseEntity respostaDelete = controller.excluirViagem(id);
+//             ResponseEntity respostaDelete = controller.excluirViagem(id);
 
-            assertEquals(200,respostaDelete.getStatusCodeValue());
+//             assertEquals(200,respostaDelete.getStatusCodeValue());
 
-            //id Inválido
+//             //id Inválido
 
-            Mockito.when(repository.existsById(id)).thenReturn(false);
+//             Mockito.when(repository.existsById(id)).thenReturn(false);
 
-            respostaDelete = controller.excluirViagem(id);
+//             respostaDelete = controller.excluirViagem(id);
 
-            assertEquals(404,respostaDelete.getStatusCodeValue());
-    }
+//             assertEquals(404,respostaDelete.getStatusCodeValue());
+//     }
 
 
     @Test
