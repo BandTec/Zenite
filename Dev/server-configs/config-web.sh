@@ -5,7 +5,6 @@ service docker start
 systemctl enable docker
 chmod 777 /var/run/docker.sock
 chmod -R 777 /home/ec2-user/Zenite/.git
-chmod 777 /home/ec2-user/Zenite/Dev/server-configs/*
 cd /home/ec2-user/Zenite/Dev/frontend
 
 docker build -t web-server .
