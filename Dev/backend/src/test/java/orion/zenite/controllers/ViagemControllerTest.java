@@ -1,71 +1,71 @@
-package orion.zenite.controllers;
+// package orion.zenite.controllers;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import orion.zenite.entidades.Viagem;
-import orion.zenite.modelos.ViagemDto;
-import orion.zenite.repositorios.*;
+// import org.junit.jupiter.api.DisplayName;
+// import org.junit.jupiter.api.Test;
+// import org.mockito.Mockito;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.boot.test.context.SpringBootTest;
+// import org.springframework.boot.test.mock.mockito.MockBean;
+// import org.springframework.http.ResponseEntity;
+// import org.springframework.web.bind.annotation.*;
+// import orion.zenite.entidades.Viagem;
+// import orion.zenite.modelos.ViagemDto;
+// import orion.zenite.repositorios.*;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+// import java.lang.reflect.Method;
+// import java.util.ArrayList;
+// import java.util.Arrays;
+// import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+// import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest (classes = ViagemController.class)
-class ViagemControllerTest {
+// @SpringBootTest (classes = ViagemController.class)
+// class ViagemControllerTest {
 
-    @Autowired
-    ViagemController controller;
+//     @Autowired
+//     ViagemController controller;
 
-    @MockBean
-    ViagemRepository repository;
+//     @MockBean
+//     ViagemRepository repository;
 
-    @MockBean
-    private FiscalRepository fiscalRepository;
+//     @MockBean
+//     private FiscalRepository fiscalRepository;
 
-    @MockBean
-    private MotoristaRepository motoristaRepository;
+//     @MockBean
+//     private MotoristaRepository motoristaRepository;
 
-    @MockBean
-    private CarroRepository carroRepository;
+//     @MockBean
+//     private CarroRepository carroRepository;
 
-    @MockBean
-    private LinhaRepository linhaRepository;
+//     @MockBean
+//     private LinhaRepository linhaRepository;
 
 
-//     @Test
-//     void excluirViagem() {
-//             //Criando um dublê
-//             Integer id = 10;
-//             List <Viagem> viagemList = new ArrayList<>(Arrays.asList(new Viagem(),new Viagem()));
+// //     @Test
+// //     void excluirViagem() {
+// //             //Criando um dublê
+// //             Integer id = 10;
+// //             List <Viagem> viagemList = new ArrayList<>(Arrays.asList(new Viagem(),new Viagem()));
 
-//             //id Válido
-//             Mockito.when(repository.findAll()).thenReturn(viagemList);
+// //             //id Válido
+// //             Mockito.when(repository.findAll()).thenReturn(viagemList);
 
-//             Mockito.when(repository.existsById(id)).thenReturn(true);
+// //             Mockito.when(repository.existsById(id)).thenReturn(true);
 
-//             Mockito.doAnswer(tente -> viagemList.remove(0)).when(repository).deleteById(id);
+// //             Mockito.doAnswer(tente -> viagemList.remove(0)).when(repository).deleteById(id);
 
-//             ResponseEntity respostaDelete = controller.excluirViagem(id);
+// //             ResponseEntity respostaDelete = controller.excluirViagem(id);
 
-//             assertEquals(200,respostaDelete.getStatusCodeValue());
+// //             assertEquals(200,respostaDelete.getStatusCodeValue());
 
-//             //id Inválido
+// //             //id Inválido
 
-//             Mockito.when(repository.existsById(id)).thenReturn(false);
+// //             Mockito.when(repository.existsById(id)).thenReturn(false);
 
-//             respostaDelete = controller.excluirViagem(id);
+// //             respostaDelete = controller.excluirViagem(id);
 
-//             assertEquals(404,respostaDelete.getStatusCodeValue());
-//     }
+// //             assertEquals(404,respostaDelete.getStatusCodeValue());
+// //     }
 
 
 //     @Test
@@ -143,11 +143,11 @@ class ViagemControllerTest {
 //         assertEquals(uriEsperada5,consultarPorMotorista.getDeclaredAnnotation(GetMapping.class).value()[0]," A " +
 //                 "URI de consultaPorMotorista deve ser "+uriEsperada5);
 
-//         // alterar
+//         alterar
 //         String uriEsperado6 = "{id}";
 //         assertEquals(uriEsperado6,alterar.getDeclaredAnnotation(PutMapping.class).value()[0],"A URI de alterar " +
 //                 "deve ser " +uriEsperado6);
 
-    }
+//     }
 
-    }
+//     }
