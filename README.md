@@ -51,7 +51,7 @@ Agora na segunda fase do projeto temos os seguintes requisitos:
   - [x] Configuração de ambiente de alta disponibilidade e segurança
   - [x] Configuração de Balanceamento de carga
   - [x] CD/CI com Jenkins
-  - [ ] Stress Tests
+  - [x] Stress Tests
 * [x] *Aplicação Web*
   - [x] Tela para adicionar cronograma da linha
   - [x] Tela para visualizar cronograma da linha
