@@ -14,12 +14,18 @@ Nessa segunda fase/versão do projeto refatoramos alguns pontos de nossa aplica�
 
 ---
 
+## Aplicativo final
+
+![imagem do diagrama de arquitetura](https://github.com/BandTec/Zenite/blob/master/Documentacao/4Semestre/zenite_funcionando.gif)
+
+
+---
+
 ## Índice
 
 * Contexto
 * Metas - Requisitos
 * Diagrama de Arquitetura
-* Aplicativo funcionado
 * ProtoPersona
 * UserStories
 * Banco de Dados
@@ -75,15 +81,9 @@ Agora na segunda fase do projeto temos os seguintes requisitos:
 
 ---
 
-### Aplicativo final
+### Diagrama de Arquitetura
 
 ![imagem do diagrama de arquitetura](https://raw.githubusercontent.com/BandTec/Zenite/master/Documentacao/4Semestre/Sprint1/Desenho_Solucao_LLD.png)
-
----
-
-## Diagrama de Arquitetura
-
-![imagem do diagrama de arquitetura](https://github.com/BandTec/Zenite/blob/master/Documentacao/4Semestre/zenite_funcionando.gif)
 
 ---
 
